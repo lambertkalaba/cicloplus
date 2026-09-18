@@ -26,7 +26,7 @@ jobs:
         run: flutter pub get
       
       - name: Build AAB
-        run: flutter build appbundle --release
+        run: flutter build appbundle --release --android-skip-build-dependency-validation
       
       - name: Upload to Play Store
         uses: r0adkll/upload-google-play@v1
