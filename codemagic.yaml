@@ -1,0 +1,35 @@
+workflows:
+  android-build:
+    name: Build Android APK
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+    environment:
+      java: default
+      vars:
+        GRADLE_OPTS: "-Xmx4096m"
+    triggering:
+      events:
+        - push
+      branch:
+        pattern: main
+    scripts:
+      - name: Install dependencies
+        script: |
+          flutter pub get
+          cd android
+          # Limpiar build anterior
+          ./gradlew clean --info 2>&1 | tail -20
+      - name: Build Android APK
+        script: |
+          flutter build apk \
+            --release \
+            --target-platform android-arm64 \
+            --split-per-abi \
+            --verbose 2>&1 | tail -100
+    artifacts:
+      - build/app/outputs/flutter-apk/**/*.apk
+    publishing:
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        submit_as_draft: true
