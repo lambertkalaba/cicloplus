@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CicloPlus Privacy Policy</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+    color: #2b2530;
+    line-height: 1.6;
+    background: #fffafc;
+  }
+  h1 { font-size: 1.9rem; margin-bottom: 4px; color: #1f1a24; }
+  .updated { color: #8a7f8e; font-style: italic; margin-bottom: 8px; font-size: 0.95rem; }
+  .translation-note { color: #8a7f8e; font-size: 0.85rem; margin-bottom: 32px; }
+  h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; color: #9c4dcc; border-bottom: 2px solid #f3d9f7; padding-bottom: 6px; }
+  p { margin: 0 0 14px; text-align: justify; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { color: #1f1a24; }
+  a { color: #9c4dcc; }
+  .contact-box {
+    background: #fbeafd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 8px 0 20px;
+  }
+  footer { margin-top: 56px; font-size: 0.85rem; color: #a89aae; text-align: center; }
+
+  .lang-switcher { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f0e4f2; }
+  .lang-select-wrap { position: relative; display: inline-block; }
+  .lang-select-wrap::after {
+    content: "\25BE";
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #9c4dcc; font-size: 0.8rem; pointer-events: none;
+  }
+  select.lang-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    font-family: inherit; font-size: 0.9rem; font-weight: 600; color: #2b2530;
+    background: #fbeafd; border: 1px solid #f0d9f4; border-radius: 10px;
+    padding: 8px 32px 8px 14px; cursor: pointer;
+  }
+  select.lang-select:hover { background: #f6dcfa; }
+  select.lang-select:focus { outline: 2px solid #9c4dcc; outline-offset: 1px; }
+</style>
+</head>
+<body>
+
+
+<div class="lang-switcher"><span class="lang-select-wrap"><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language / Idioma"><option value="privacidad-es.html">Español</option><option value="privacidad.html" selected>English</option><option value="privacidad-fr.html">Français</option><option value="privacidad-de.html">Deutsch</option><option value="privacidad-pt.html">Português</option><option value="privacidad-ru.html">Русский</option><option value="privacidad-ar.html">العربية</option><option value="privacidad-hi.html">हिन्दी</option><option value="privacidad-bn.html">বাংলা</option></select></span></div>
+<h1>CicloPlus Privacy Policy</h1>
+<p class="updated">Last updated: August 9, 2026</p>
+<p class="translation-note">This is a translation provided for your convenience. The original Spanish version is authoritative in case of any discrepancy.</p>
+
+<p>This Privacy Policy explains what data CicloPlus ("the app", "we") collects, how it is used, where it is stored, and what control you have over it. CicloPlus is a menstrual cycle and fertility tracking application, and it handles the health information you enter with the level of care that this type of data requires.</p>
+<p>By using CicloPlus you accept the practices described in this document. If you do not agree, please do not use the app.</p>
+
+<h2>1. Data controller</h2>
+<p>CicloPlus is developed and operated by an independent developer. For any question about this policy or your data, you can write to:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+
+<h2>2. What data we collect</h2>
+<p><strong>Account data.</strong> To use CicloPlus you create an account with an email address and password, managed through Firebase Authentication (a Google service). We store your email address and the account creation date.</p>
+<p><strong>Cycle and health data that you enter.</strong> Everything you log in the daily calendar: period dates, flow, cervical mucus, basal temperature, symptoms, mood, weight, hours of sleep, water intake, diary notes, sexual activity, contraceptive reminders, medical appointments, and, if you enable pregnancy mode, pregnancy-related data. This is sensitive health data and it is only collected if you choose to enter it: no field is mandatory beyond what is strictly necessary for the calendar to work.</p>
+<p><strong>Attached photos.</strong> If you attach a photo to a diary entry, that image is stored together with your entry.</p>
+<p><strong>Sync with Health/Google Fit (optional).</strong> If you manually enable syncing with Apple Health (HealthKit) or Google Fit (Health Connect) from Settings, the app may read and write weight, sleep, body temperature, and menstrual flow to that native platform on your device. This feature is disabled by default and is only activated if you give explicit permission; you can disable it at any time from Settings or by revoking the permission from your device's own health settings.</p>
+<p><strong>App preferences.</strong> Your chosen language, theme color, PIN code (if you enable PIN lock), and other preferences are stored locally on your device.</p>
+<p>We do not collect location, contacts, advertising identifiers, or social media data. We do not show ads and we do not use third-party analytics or advertising tracking tools.</p>
+
+<h2>3. How your data is stored</h2>
+<p><strong>Cloud storage (Firebase).</strong> Your cycle records are stored in Cloud Firestore, a Google Firebase database, linked only to your account (user identifier). This allows your data to persist if you change devices or reinstall the app.</p>
+<p><strong>Local copy on your device.</strong> The app also keeps a local copy (cache) on your own phone so you can keep viewing your data without an internet connection. This copy is automatically synced with the cloud once your connection is restored.</p>
+<p><strong>Encryption.</strong> Communications between the app and Firebase travel encrypted (HTTPS/TLS). Firebase applies encryption at rest on its servers according to Google Cloud standards.</p>
+
+<h2>4. Who we share data with</h2>
+<p>CicloPlus does not sell your data or share it with advertisers. We share information only with:</p>
+<ul>
+  <li>Google Firebase (Firebase Authentication and Cloud Firestore): acts as our infrastructure provider for authentication and data storage. Google processes this data on our behalf, under its own security and data-protection commitments as a data processor.</li>
+  <li>Apple Health / Google Health Connect: only if you voluntarily enable the sync described in section 2, and only for the data types you authorize.</li>
+</ul>
+<p>We do not share your data with insurers, employers, social networks, or any third party for commercial or advertising purposes. We will not disclose your health data to third parties unless required by law (for example, a valid court order).</p>
+
+<h2>5. Notifications</h2>
+<p>If you enable reminders (for daily logging, contraception, or medical appointments), they are scheduled and shown locally on your device by the operating system. They are not sent through our servers and do not involve sharing your data with third parties.</p>
+
+<h2>6. Your rights and control over your data</h2>
+<ul>
+  <li><strong>Access and edit:</strong> you can view and modify any data you entered directly from the app.</li>
+  <li><strong>Export:</strong> you can export your records to PDF or make a manual backup from Settings.</li>
+  <li><strong>Delete an entry:</strong> you can delete any individual record from the day editor.</li>
+  <li><strong>Delete your account and all your data:</strong> you can request this by writing to <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a>. We will delete your Firebase Authentication account and all your Firestore records within a reasonable timeframe.</li>
+  <li><strong>Revoke Health/Google Fit sync:</strong> disable it in Settings or revoke the permission from your operating system's health settings at any time.</li>
+</ul>
+<p>If you reside in the European Union, the European Economic Area, or a jurisdiction with equivalent data protection laws (such as the GDPR), you also have the right to data portability and to file a complaint with your local data protection authority.</p>
+
+<h2>7. Minors</h2>
+<p>CicloPlus is not directed at children under 13 and we do not knowingly collect data from anyone under that age. If you believe a minor has provided us with data, please contact us at <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a> so we can delete it.</p>
+
+<h2>8. Data retention</h2>
+<p>We retain your data for as long as your account is active. If you delete your account, your cycle and profile data are removed from our servers as described in section 6. The local copy on your device is deleted when you uninstall the app.</p>
+
+<h2>9. Changes to this policy</h2>
+<p>We may update this Privacy Policy from time to time, for example when adding new features. We will publish any changes on this same page with a new "last updated" date. If the change is significant, we will also notify you within the app.</p>
+
+<h2>10. Contact</h2>
+<p>For any question about this policy, your data, or to exercise your rights, write to us at:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+
+<footer>CicloPlus &middot; Privacy Policy</footer>
+
+</body>
+</html>

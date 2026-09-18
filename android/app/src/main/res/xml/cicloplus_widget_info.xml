@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Metadatos del widget real de pantalla de inicio (fase 8). 30 min es
+     el mínimo que Android respeta para updatePeriodMillis igualmente —
+     es solo un refresco de respaldo; el refresco real e inmediato pasa
+     por HomeWidget.updateWidget() desde Dart cada vez que cambian los
+     datos (ver MainTabScreen._syncHomeWidget). -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialLayout="@layout/cicloplus_widget"
+    android:minWidth="180dp"
+    android:minHeight="90dp"
+    android:updatePeriodMillis="1800000"
+    android:resizeMode="horizontal|vertical"
+    android:widgetCategory="home_screen" />

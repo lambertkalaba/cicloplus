@@ -1,0 +1,169 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Permisos para elegir fotos de la galería desde el editor de día
+         (función "Adjuntar foto"). En Android 13+ el selector nativo de
+         fotos no siempre requiere estos permisos, pero declararlos evita
+         problemas en versiones anteriores de Android. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <!-- Cámara para el chat con el socio/pareja (adjuntar una foto tomada
+         en el momento, no solo elegida de la galería) — usada por
+         image_picker en partner_chat_screen.dart. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Necesario en Android 12+ (API 31+) para poder programar alarmas
+         exactas (AndroidScheduleMode.exactAllowWhileIdle en
+         reminder_service.dart y daily_notification_service.dart) — sin
+         esto, zonedSchedule lanza PlatformException
+         "exact_alarms_not_permitted" al intentar activar cualquier
+         recordatorio (Periodo, Ovulación, Días fértiles, anticonceptivo o
+         registro diario). SCHEDULE_EXACT_ALARM se concede automáticamente
+         al instalar para apps de calendario/alarma; no requiere que la
+         usuaria lo apruebe manualmente en un diálogo del sistema. -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Permisos de Health Connect para sincronizar peso, sueño,
+         temperatura basal y flujo menstrual (función "Sincronizar con
+         Apple Salud / Google Fit" en Configuración). Se piden en tiempo
+         de ejecución vía el paquete `health`; declararlos aquí es
+         obligatorio para que el sistema los reconozca. -->
+    <uses-permission android:name="android.permission.health.READ_WEIGHT"/>
+    <uses-permission android:name="android.permission.health.WRITE_WEIGHT"/>
+    <uses-permission android:name="android.permission.health.READ_SLEEP"/>
+    <uses-permission android:name="android.permission.health.WRITE_SLEEP"/>
+    <uses-permission android:name="android.permission.health.READ_BODY_TEMPERATURE"/>
+    <uses-permission android:name="android.permission.health.WRITE_BODY_TEMPERATURE"/>
+    <uses-permission android:name="android.permission.health.READ_MENSTRUATION"/>
+    <uses-permission android:name="android.permission.health.WRITE_MENSTRUATION"/>
+    <!-- Frecuencia cardíaca en reposo y variabilidad (HRV): usadas por las
+         tarjetas "por fase del ciclo" de Estadísticas (ver
+         HealthSyncService._types / PhaseHealthCardsGroup en stats_screen.dart).
+         Sin declarar esto, Health Connect nunca concede el permiso aunque
+         haya un reloj conectado y la usuaria lo acepte — quedaban pidiendo
+         estos dos tipos de dato sin tenerlos declarados aquí. -->
+    <uses-permission android:name="android.permission.health.READ_HEART_RATE_VARIABILITY"/>
+    <uses-permission android:name="android.permission.health.WRITE_HEART_RATE_VARIABILITY"/>
+    <uses-permission android:name="android.permission.health.READ_RESTING_HEART_RATE"/>
+    <uses-permission android:name="android.permission.health.WRITE_RESTING_HEART_RATE"/>
+
+    <application
+        android:label="cicloplus_app"
+        android:name="${applicationName}"
+        android:icon="@mipmap/launcher_icon">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <!-- Specifies an Android theme to apply to this Activity as soon as
+                 the Android process has started. This theme is visible to the user
+                 while the Flutter UI initializes. After that, this theme continues
+                 to determine the Window background behind the Flutter UI. -->
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <!-- Requerido por Health Connect para mostrar la pantalla de
+                 explicación de permisos ("rationale") en Android 14+. -->
+            <intent-filter>
+                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+            </intent-filter>
+            <!-- Enlace de invitación al vincular con un socio/pareja (ver
+                 DeepLinkService e InvitePartnerScreen): al escanear con la
+                 cámara NORMAL del móvil (no una cámara dentro de la app)
+                 el QR "cicloplus://link?code=..." que genera esa pantalla,
+                 Android abre CicloPlus directamente aquí con el código ya
+                 listo para pegar — solo falta tocar "Vincularme". Es un
+                 esquema propio (no un enlace https verificado con un
+                 dominio), así que solo funciona si CicloPlus ya está
+                 instalada en el móvil que escanea. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="cicloplus" android:host="link" />
+            </intent-filter>
+        </activity>
+
+        <!-- Alias de actividad que Health Connect usa para mostrar el
+             enlace a la política de privacidad de la app desde su propia
+             pantalla de permisos. -->
+        <activity-alias
+            android:name="ViewPermissionUsageActivity"
+            android:exported="true"
+            android:targetActivity=".MainActivity"
+            android:permission="android.permission.START_VIEW_PERMISSION_USAGE">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
+                <category android:name="android.intent.category.HEALTH_PERMISSIONS" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Widget real de pantalla de inicio (fase 8, Configuración >
+             Widget) — ver CicloPlusWidgetProvider.kt, actualizado desde
+             Dart vía HomeWidgetService/MainTabScreen._syncHomeWidget. -->
+        <receiver
+            android:name=".CicloPlusWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/cicloplus_widget_info" />
+        </receiver>
+
+        <!-- Don't delete the meta-data below.
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+    <!-- Required to query activities that can process text, see:
+         https://developer.android.com/training/package-visibility and
+         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+
+         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+    <queries>
+        <!-- Requerido en Android 11+ (API 30+) para que url_launcher pueda
+             encontrar el navegador del dispositivo y abrir enlaces https
+             (por ejemplo, "Política de privacidad" y "Términos de uso" en
+             Configuración): sin esta declaración de visibilidad de
+             paquete, launchUrl con LaunchMode.externalApplication no
+             encuentra ninguna actividad que resuelva el intent y devuelve
+             false silenciosamente — el botón parece no hacer nada. -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="http" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+        <!-- Necesario para detectar si la app Health Connect está
+             instalada en el dispositivo. -->
+        <package android:name="com.google.android.apps.healthdata" />
+        <intent>
+            <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+        </intent>
+
+    </queries>
+</manifest>

@@ -1,0 +1,19 @@
+rules_version = '2';
+
+// Reglas de seguridad de Firebase Storage para CicloPlus.
+//
+// Por ahora solo se usa para las fotos que se mandan por el chat privado
+// 1 a 1 entre la dueña de un embarazo y una socia ya vinculada (ver
+// ChatService y firestore.rules > /chats). La protección real vive aquí:
+// aunque alguien manipulara la app, el servidor solo deja leer o subir una
+// foto de chat_photos/{chatId}/... si su propio uid está en la lista de
+// "participants" del documento de Firestore chats/{chatId} — es decir,
+// solo las dos personas de esa conversación.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /chat_photos/{chatId}/{fileName} {
+      allow read, write: if request.auth != null &&
+        request.auth.uid in firestore.get(/databases/(default)/documents/chats/$(chatId)).data.participants;
+    }
+  }
+}

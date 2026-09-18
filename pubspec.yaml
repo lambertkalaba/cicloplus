@@ -1,0 +1,167 @@
+name: cicloplus_app
+description: "CicloPlus — seguimiento de ciclo menstrual con privacidad local."
+publish_to: 'none'
+version: 0.1.2+14
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Traduce al idioma elegido en Configuración los widgets nativos de
+  # Flutter (selector de fecha estilo iOS, etc.) — sin esto siempre
+  # aparecían en inglés sin importar el idioma de la app.
+  flutter_localizations:
+    sdk: flutter
+  shared_preferences: ^2.2.3
+  intl: ^0.20.2
+  cupertino_icons: ^1.0.6
+  flutter_local_notifications: ^17.2.2
+  timezone: ^0.9.4
+  firebase_core: ^3.8.0
+  firebase_auth: ^5.3.3
+  cloud_firestore: ^5.5.0
+  # Fotos del chat con el socio/pareja (ver partner_chat_screen.dart):
+  # firebase_storage sube la imagen, image_picker abre cámara/galería para
+  # elegirla. La protección real de "solo quienes ya están vinculados
+  # pueden ver estas fotos" vive en storage.rules (usa firestore.get()
+  # para comprobar los participantes del chat), no en la app.
+  firebase_storage: ^12.3.7
+  # Llama al Worker de Cloudflare que envía el correo de verificación con
+  # nuestra propia plantilla (botón), ver services/auth_service.dart y
+  # cloudflare-worker/worker.js.
+  http: ^1.2.0
+  image_picker: ^1.1.2
+  image: ^4.2.0
+  share_plus: ^10.1.2
+  file_picker: ^11.0.3
+  path_provider: ^2.1.4
+  pdf: ^3.11.1
+  printing: ^5.13.3
+  # Abre la política de privacidad (URL pública) desde Configuración.
+  # Fijado a 6.2.5 (no ^) a propósito: desde 6.3.0 la implementación
+  # Android (url_launcher_android) sube su dependencia interna de
+  # androidx.browser a una versión que exige AGP 8.9.1+ — y AGP 8.7.3 está
+  # fijado aparte para no romper file_picker/firebase_*/health. 6.2.5 usa
+  # una versión de androidx.browser compatible con AGP 8.7.3.
+  url_launcher: 6.2.5
+  # Fijado a 13.1.4 (no ^) a propósito: desde 13.2.0 el paquete sube su
+  # dependencia interna androidx.health.connect:connect-client a una
+  # versión que exige un Android Gradle Plugin más nuevo que 8.7.3 — y AGP
+  # 8.7.3 está fijado aparte para no romper file_picker/firebase_*. 13.1.4
+  # sigue usando connect-client 1.1.0-alpha11, compatible con AGP 8.7.3.
+  health: 13.1.4
+  # SDK oficial de RevenueCat para gestionar el paywall/suscripciones
+  # (mensual, anual, de por vida). Solo se añade el SDK aquí — la cuenta de
+  # RevenueCat y los product IDs reales los crea el usuario más tarde
+  # (ver TODOs en subscription_service.dart). Si al compilar Android
+  # aparece de nuevo el conflicto de AGP/androidx ya visto con `health` y
+  # `url_launcher` (androidx.browser u otra dependencia transitiva exigiendo
+  # AGP 8.9.1+), añadir aquí el dependency_override correspondiente
+  # siguiendo el mismo patrón documentado más abajo.
+  # Subido de 8.10.5 a 10.x: Play Console exige la Biblioteca de Facturación
+  # de Play (Play Billing Library) 8.0.0 o superior para poder guardar y
+  # publicar versiones nuevas; la 8.10.5 traía internamente la 7.1.1. La
+  # app solo vende suscripciones (Purchases.purchasePackage en
+  # subscription_service.dart), no productos consumibles, así que no le
+  # afecta el cambio de comportamiento de consumibles que trae la 10.0.0.
+  purchases_flutter: ^10.0.0
+  # Inicio de sesión con Google — no requiere revisión externa, se puede
+  # activar de inmediato en cuanto se habilite el proveedor "Google" en
+  # Firebase Auth (consola). No se ha podido compilar en este entorno de
+  # trabajo (Flutter no está instalado aquí) — probar con
+  # `flutter pub get` + `flutter run` y avisar si aparece algún conflicto
+  # de AGP/androidx como los ya documentados arriba con `health`/`url_launcher`.
+  google_sign_in: ^6.2.2
+  # Login de Facebook retirado (ver auth_service.dart y auth_screen.dart) —
+  # Meta exige verificación de empresa que la cuenta no puede completar.
+  # QR de invitación — segundo intento, con otro enfoque para no repetir
+  # el problema anterior. La primera vez (ver historial en
+  # android/app/build.gradle.kts) se probó qr_flutter (mostrar) +
+  # mobile_scanner (escanear con una cámara DENTRO de la app) y el
+  # escáner rompía el arranque; se decidió no volver a arriesgar con la
+  # cámara en la app. Este intento evita esa cámara por completo: el QR
+  # ahora codifica un enlace (cicloplus://link?code=XXXX en vez del
+  # código a secas) que se escanea con la cámara NORMAL del móvil (fuera
+  # de la app) — Android abre CicloPlus directamente si ya está
+  # instalada (ver DeepLinkService y el intent-filter en
+  # AndroidManifest.xml). qr_flutter (dibuja el QR, es puro Dart, sin
+  # dependencias nativas de Android) y app_links (escucha ese enlace) no
+  # tocan androidx.camera para nada, así que no deberían repetir el
+  # conflicto de AGP visto con mobile_scanner. Aviso: al ser un esquema
+  # propio (cicloplus://) y no un enlace https verificado, solo funciona
+  # si CicloPlus ya está instalada en el móvil que escanea.
+  # lib/screens/qr_scan_screen.dart (el escáner con cámara propia, sin
+  # usar) se deja tal cual por si se retoma ese otro enfoque más adelante.
+  qr_flutter: ^4.1.0
+  app_links: ^6.4.1
+  # Widget real de pantalla de inicio (fase 8, Configuración > Widget).
+  # Fijado a 0.7.0+1 (no ^) a propósito, tras probar dos versiones:
+  # - 0.4.1 (sin dependencias androidx propias) NO compila con el Flutter
+  #   instalado aquí: su código interno (home_widget.dart, método
+  #   renderFlutterWidget, que no usamos pero igual se compila) llama a
+  #   ViewConfiguration con un parámetro `size` que el SDK actual de
+  #   Flutter ya no acepta (lo cambiaron por `logicalConstraints`) — error
+  #   real visto en el Run de Android Studio: "No named parameter with
+  #   the name 'size'" en home_widget-0.4.1/lib/home_widget.dart:148.
+  # - Desde la 0.5.0 el paquete añade soporte Jetpack Glance y ARRASTRA
+  #   androidx.glance:glance-appwidget (con Compose) sin poder evitarlo
+  #   aunque no se use Glance (ver android/build.gradle del paquete) —
+  #   justo el tipo de dependencia nativa que ya rompió el build antes con
+  #   `health`/`url_launcher`/mobile_scanner (ver comentarios de arriba y
+  #   en android/app/build.gradle.kts). No hay versión que arregle el
+  #   error de ViewConfiguration SIN traer Glance.
+  # 0.7.0+1 es la primera 0.x tras el fix de ViewConfiguration (0.6.0)
+  # que además corrige un crash real al abrir la app desde el widget en
+  # Android 15 (relevante aquí: compileSdk=36) y sigue sin cambios
+  # importantes respecto a 0.6.0 aparte de ese fix — se usa solo el
+  # HomeWidgetProvider clásico basado en RemoteViews
+  # (ver CicloPlusWidgetProvider.kt), nunca Glance. Si el build vuelve a
+  # fallar por un conflicto de AGP/androidx con Glance, sería la próxima
+  # pista a revisar aquí.
+  home_widget: 0.7.0+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.1
+
+# Fuerza la implementación Android de url_launcher a una versión cuya
+# dependencia interna androidx.browser es compatible con AGP 8.7.3 (fijado
+# aparte, ver comentario junto a `health` arriba). Sin este override, pub
+# resuelve la versión más reciente de url_launcher_android (6.3.x), que
+# exige AGP 8.9.1+ y rompe el build igual que pasaba con `health`.
+dependency_overrides:
+  # 6.3.3 quita el v1 embedding roto de versiones anteriores; desde 6.3.27
+  # sube androidx.browser a 1.9.0, que exige AGP 8.9.1+ (fijado a 8.7.3,
+  # ver comentario junto a `health`). 6.3.7 queda justo en medio: v2
+  # embedding + androidx.browser 1.5.0, compatible con AGP 8.7.3.
+  url_launcher_android: 6.3.7
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icon/
+    - assets/cycle_phases/
+    - assets/decorative/
+    - assets/pregnancy/
+    - assets/pregnancy_days/
+    - assets/pregnancy_days_full/
+    - assets/pregnancy_belly/
+    - assets/pregnancy_belly_black/
+    - assets/garden/
+    - lib/assets/images/
+
+# Configuración del icono de la app (flor de loto, elegida en Configuración
+# > icono). Ejecutar `dart run flutter_launcher_icons` para regenerar los
+# archivos nativos de Android e iOS a partir de assets/icon/icon.png.
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#9775FA"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
+  remove_alpha_ios: true

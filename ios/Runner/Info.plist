@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Cicloplus App</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>cicloplus_app</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(FLUTTER_BUILD_NAME)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<!-- Sincronización con Apple Salud (peso, sueño, temperatura basal,
+	     flujo menstrual) desde Configuración. Requiere además el
+	     capability "HealthKit" habilitado en Xcode (Signing & Capabilities). -->
+	<key>NSHealthShareUsageDescription</key>
+	<string>CicloPlus puede leer tu peso, sueño, temperatura y flujo menstrual desde Salud para completar tu registro automáticamente.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>CicloPlus puede guardar en Salud los datos que registres (peso, sueño, temperatura, flujo menstrual) si activas la sincronización.</string>
+	<!-- Requeridas por `image_picker` (fotos del chat con el socio/pareja,
+	     ver partner_chat_screen.dart) — sin estas dos claves, iOS cierra la
+	     app en el momento de abrir la cámara o la galería en vez de mostrar
+	     el selector, y Apple rechaza la app en revisión por no explicar
+	     para qué se pide el permiso. -->
+	<key>NSCameraUsageDescription</key>
+	<string>CicloPlus necesita acceso a la cámara para que puedas tomar una foto y enviarla en el chat con tu pareja.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>CicloPlus necesita acceso a tus fotos para que puedas elegir una imagen y enviarla en el chat con tu pareja.</string>
+	<!-- Inicio de sesión con Facebook (flutter_facebook_auth) en iOS — mismo
+	     App ID/Client Token reales ya usados en Android (ver
+	     android/app/src/main/res/values/strings.xml y el comentario junto al
+	     bloque de Facebook en AndroidManifest.xml). Sin este bloque, el
+	     botón "Continuar con Facebook" fallaría en iOS con un error de
+	     configuración del SDK aunque en Android ya funcione. -->
+	<key>FacebookAppID</key>
+	<string>1044303078498035</string>
+	<key>FacebookClientToken</key>
+	<string>4c69f8db67d547e0736ead9054abaa5b</string>
+	<key>FacebookDisplayName</key>
+	<string>CicloPlus</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
+	<!-- OJO al añadir Google Sign-In para iOS más adelante (necesita su
+	     propio esquema con el REVERSED_CLIENT_ID que trae
+	     GoogleService-Info.plist, hoy todavía no existe en este proyecto):
+	     hay que AÑADIR un <dict> nuevo dentro de este mismo array, no
+	     reemplazar el que ya está aquí para Facebook. -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1044303078498035</string>
+			</array>
+		</dict>
+	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneClassName</key>
+					<string>UIWindowScene</string>
+					<key>UISceneConfigurationName</key>
+					<string>flutter</string>
+					<key>UISceneDelegateClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+					<key>UISceneStoryboardFile</key>
+					<string>Main</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+</dict>
+</plist>

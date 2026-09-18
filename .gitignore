@@ -1,0 +1,15 @@
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+.env
+*.jks
+*.keystore
+.gradle/
+local.properties
+.idea/
+*.iml
+*.lock
+pubspec.lock
+.vscode/
+.DS_Store

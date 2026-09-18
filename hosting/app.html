@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CicloPlus — Tus datos</title>
+<style>
+  :root {
+    --primary: #d6336c;
+    --primary-dark: #a61e4d;
+    --primary-light: #f8d7e3;
+    --fertile: #a78bfa;
+    --fertile-light: #ede9fe;
+    --ovulation: #7c3aed;
+    --bg: #fff5f7;
+    --card: #ffffff;
+    --text: #3d2436;
+    --muted: #9b8290;
+    --border: #f3d9e2;
+    --error: #b42318;
+    --error-bg: #fff0f0;
+    --error-border: #f3b8b8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  a { color: var(--primary); }
+
+  /* ---- Pantalla de carga ---- */
+  .loading-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid var(--primary-light);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---- Layout general ---- */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  .auth-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .auth-card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--card);
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 4px 24px rgba(214, 51, 108, 0.08);
+  }
+  .logo { text-align: center; font-size: 44px; margin-bottom: 4px; }
+  .brand { text-align: center; font-size: 24px; font-weight: 700; color: var(--primary); margin: 0 0 4px; }
+  .subtitle { text-align: center; color: var(--muted); font-size: 14px; margin: 0 0 24px; }
+
+  label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  input[type=email], input[type=password] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    margin-bottom: 16px;
+    background: #fff;
+    color: var(--text);
+  }
+  input:focus { outline: none; border-color: var(--primary); }
+
+  button.primary {
+    width: 100%;
+    padding: 13px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button.primary:disabled { opacity: 0.6; cursor: default; }
+  button.link {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 0 0;
+    cursor: pointer;
+  }
+
+  .error-box {
+    background: var(--error-bg);
+    border: 1px solid var(--error-border);
+    color: var(--error);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .error-box.show { display: block; }
+
+  .note {
+    font-size: 11.5px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 18px;
+    line-height: 1.5;
+  }
+
+  /* ---- App (después de iniciar sesión) ---- */
+  header.app-header {
+    background: var(--primary-dark);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header.app-header .title { font-weight: 700; font-size: 17px; }
+  header.app-header .title span { font-weight: 400; opacity: 0.85; font-size: 13px; display: block; }
+  header.app-header button {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  main.app-main {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 18px 16px 60px;
+  }
+
+  .banner {
+    background: var(--fertile-light);
+    color: #5b21b6;
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 12px;
+    line-height: 1.45;
+    margin-bottom: 18px;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    border: 1.5px solid var(--border);
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .card h2 { font-size: 15px; margin: 0 0 12px; }
+  .status-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .status-row:last-child { margin-bottom: 0; }
+  .status-label { font-size: 12.5px; color: var(--muted); }
+  .status-value { font-size: 13.5px; font-weight: 600; }
+
+  /* ---- Calendario ---- */
+  .cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .cal-nav button {
+    background: var(--primary-light); border: none; color: var(--primary-dark);
+    width: 30px; height: 30px; border-radius: 8px; font-size: 15px; cursor: pointer;
+  }
+  .cal-nav .month-label { font-weight: 700; font-size: 14px; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-dow { text-align: center; font-size: 10.5px; color: var(--muted); font-weight: 600; padding-bottom: 4px; }
+  .cal-day {
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    font-size: 12.5px;
+    position: relative;
+    color: var(--text);
+  }
+  .cal-day.empty { visibility: hidden; }
+  .cal-day.period { background: var(--primary-dark); color: #fff; font-weight: 700; }
+  .cal-day.predicted { background: var(--primary); color: #fff; opacity: 0.85; }
+  .cal-day.fertile { background: var(--fertile); color: #fff; }
+  .cal-day.ovulation { background: var(--ovulation); color: #fff; font-weight: 700; }
+  .cal-day.today { box-shadow: 0 0 0 1.6px var(--primary) inset; }
+  .cal-day.selected { box-shadow: 0 0 0 2px var(--primary-dark); }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  .legend-item { display: flex; align-items: center; gap: 4px; font-size: 10.5px; color: var(--muted); }
+  .legend-dot { width: 9px; height: 9px; border-radius: 50%; }
+
+  /* ---- Detalle del día seleccionado ---- */
+  #dayDetail { display: none; }
+  #dayDetail.show { display: block; }
+  .detail-date { font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+  .tag {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+    margin: 0 6px 6px 0;
+  }
+  .empty-note { font-size: 12.5px; color: var(--muted); }
+  .note-text { font-size: 12.5px; color: var(--text); background: var(--bg); border-radius: 10px; padding: 10px 12px; margin-top: 8px; white-space: pre-wrap; }
+
+  /* ---- Mi suscripción ---- */
+  .plan-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .plan-badge.trial { background: var(--fertile-light); color: #5b21b6; }
+  .plan-badge.expired { background: var(--error-bg); color: var(--error); }
+  .plan-badge.premium { background: var(--primary-light); color: var(--primary-dark); }
+  .plan-note { font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+  .store-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 12px;
+    padding: 11px;
+    background: var(--text);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div id="loadingScreen" class="loading-screen">
+  <div class="spinner"></div>
+</div>
+
+<!-- ---- Pantalla de inicio de sesión ---- -->
+<div id="authScreen" class="screen">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="logo">🌸</div>
+      <p class="brand">CicloPlus</p>
+      <p class="subtitle">Consulta tus datos desde cualquier dispositivo</p>
+
+      <div id="errorBox" class="error-box"></div>
+
+      <form id="authForm">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" autocomplete="email" required>
+
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" autocomplete="current-password" required>
+
+        <button type="submit" class="primary" id="submitBtn">Iniciar sesión</button>
+      </form>
+
+      <p class="note">
+        Usa el mismo correo y contraseña de tu cuenta en la app CicloPlus.
+        Esta página solo muestra tus datos — no puedes editarlos aquí, usa la app para eso.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ---- Pantalla principal (datos) ---- -->
+<div id="appScreen" class="screen">
+  <header class="app-header">
+    <div class="title">CicloPlus <span id="userEmailLabel"></span></div>
+    <button id="logoutBtn">Cerrar sesión</button>
+  </header>
+
+  <main class="app-main">
+    <div class="banner">
+      Esta página es de <strong>solo lectura</strong>: te permite consultar tu historial si perdiste el teléfono
+      o tienes uno nuevo. Para registrar nuevos días, usa la app CicloPlus.
+    </div>
+
+    <div class="card">
+      <h2>Mi suscripción</h2>
+      <div id="subscriptionContent">
+        <p class="empty-note">Cargando...</p>
+      </div>
+      <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.cicloplus.cicloplus_app" target="_blank" rel="noopener">
+        📲 Descargar CicloPlus en Google Play
+      </a>
+    </div>
+
+    <div class="card">
+      <h2>Estado actual</h2>
+      <div id="statusContent">
+        <p class="empty-note">Cargando...</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Calendario</h2>
+      <div class="cal-nav">
+        <button id="prevMonth">‹</button>
+        <div class="month-label" id="monthLabel"></div>
+        <button id="nextMonth">›</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-dot" style="background:var(--primary-dark)"></span>Período</div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--primary)"></span>Predicción</div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--fertile)"></span>Fértil</div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--ovulation)"></span>Ovulación</div>
+      </div>
+    </div>
+
+    <div class="card" id="dayDetail">
+      <h2>Día seleccionado</h2>
+      <div class="detail-date" id="detailDate"></div>
+      <div id="detailBody"></div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import {
+    getFirestore, collection, getDocs, doc, getDoc
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // Misma configuración que la app de Android (proyecto cicloplus-9a957),
+  // registrada como app web en Firebase.
+  const firebaseConfig = {
+    apiKey: "AIzaSyDIJgB_nQ4Aa3CUrxox9ByEPJq_YSAap9Q",
+    authDomain: "cicloplus-9a957.firebaseapp.com",
+    projectId: "cicloplus-9a957",
+    storageBucket: "cicloplus-9a957.firebasestorage.app",
+    messagingSenderId: "455122663711",
+    appId: "1:455122663711:web:009e1552514f711a02182a"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // ---- Catálogos (equivalentes a day_entry.dart) ----
+  const FLOW_LABEL = { light: '🩸 Ligero', medium: '🩸🩸 Medio', heavy: '🩸🩸🩸 Abundante' };
+  const MUCUS_LABEL = {
+    dry: '🏜️ Seco', sticky: '🔸 Pegajoso', creamy: '🥛 Cremoso',
+    watery: '💧 Acuoso', eggwhite: '🥚 Clara de huevo'
+  };
+  const SYMPTOM_LABEL = {
+    dolor: 'Dolor', animo: 'Ánimo', energia: 'Energía', antojos: 'Antojos',
+    hinchazon: 'Hinchazón', sueno: 'Sueño', acne: 'Acné', dolorcab: 'Cabeza'
+  };
+  const SYMPTOM_EMOJI = {
+    dolor: '😖', animo: '🙂', energia: '⚡', antojos: '🍫',
+    hinchazon: '🫃', sueno: '😴', acne: '🩹', dolorcab: '🧠'
+  };
+
+  // ---- Utilidades de fecha (equivalentes a cycle_predictor.dart) ----
+  function dateKey(d) {
+    const y = d.getFullYear().toString().padStart(4, '0');
+    const m = (d.getMonth() + 1).toString().padStart(2, '0');
+    const day = d.getDate().toString().padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  }
+  function parseKey(key) {
+    const [y, m, d] = key.split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+  function diffDays(a, b) {
+    return (a.getTime() - b.getTime()) / 86400000;
+  }
+
+  let allData = {};       // dateKey -> entry
+  let viewMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+  let selectedDateKey = null;
+  let prediction = null;
+
+  // ---- Predicción (versión simplificada de CyclePredictor) ----
+  function getCycles(data) {
+    const dates = Object.keys(data).filter(k => data[k].flow && data[k].flow !== 'none').sort();
+    const cycles = [];
+    let current = [];
+    for (const key of dates) {
+      if (current.length === 0) { current.push(key); continue; }
+      const prev = parseKey(current[current.length - 1]);
+      const cur = parseKey(key);
+      if (diffDays(cur, prev) <= 1.5) current.push(key);
+      else { cycles.push(current); current = [key]; }
+    }
+    if (current.length) cycles.push(current);
+    return cycles;
+  }
+  function getAvgCycleLength(cycles) {
+    if (cycles.length < 2) return 28;
+    let total = 0, count = 0;
+    for (let i = 1; i < cycles.length; i++) {
+      const d = diffDays(parseKey(cycles[i][0]), parseKey(cycles[i - 1][0]));
+      if (d > 15 && d < 60) { total += d; count++; }
+    }
+    return count > 0 ? Math.round(total / count) : 28;
+  }
+  function getAvgPeriodLength(cycles) {
+    if (cycles.length === 0) return 5;
+    const lens = cycles.map(c => c.length);
+    return Math.round(lens.reduce((a, b) => a + b, 0) / lens.length);
+  }
+  function predict(data) {
+    const cycles = getCycles(data);
+    if (cycles.length === 0) return null;
+    const lastCycle = cycles[cycles.length - 1];
+    const lastStart = parseKey(lastCycle[0]);
+    const cycleLen = getAvgCycleLength(cycles);
+    const periodLen = getAvgPeriodLength(cycles);
+    const next = new Date(lastStart); next.setDate(next.getDate() + cycleLen);
+    const ov = new Date(next); ov.setDate(ov.getDate() - 14);
+
+    const periodDates = new Set();
+    for (let i = 0; i < periodLen; i++) {
+      const d = new Date(next); d.setDate(d.getDate() + i);
+      periodDates.add(dateKey(d));
+    }
+    const fertileDates = new Set();
+    for (let i = -5; i <= 1; i++) {
+      const d = new Date(ov); d.setDate(d.getDate() + i);
+      fertileDates.add(dateKey(d));
+    }
+    return { nextPeriodStart: next, ovulationDate: ov, predictedPeriodDates: periodDates, fertileDates, cycleLen, periodLen };
+  }
+
+  // ---- Auth ----
+  const authForm = document.getElementById('authForm');
+  const errorBox = document.getElementById('errorBox');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
+  function hideError() {
+    errorBox.classList.remove('show');
+  }
+  function mapAuthError(code) {
+    switch (code) {
+      case 'auth/invalid-email': return 'Ese correo no parece válido.';
+      case 'auth/user-not-found':
+      case 'auth/wrong-password':
+      case 'auth/invalid-credential': return 'Correo o contraseña incorrectos.';
+      case 'auth/too-many-requests': return 'Demasiados intentos. Espera un momento e inténtalo de nuevo.';
+      case 'auth/network-request-failed': return 'No hay conexión a internet.';
+      default: return 'Algo salió mal. Inténtalo de nuevo.';
+    }
+  }
+
+  authForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hideError();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Entrando...';
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      showError(mapAuthError(err.code));
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Iniciar sesión';
+    }
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', () => signOut(auth));
+
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('loadingScreen').style.display = 'none';
+    document.getElementById(id).classList.add('active');
+  }
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      document.getElementById('userEmailLabel').textContent = user.email || '';
+      showScreen('appScreen');
+      await loadUserData(user.uid);
+    } else {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Iniciar sesión';
+      showScreen('authScreen');
+    }
+  });
+
+  // ---- Carga de datos ----
+  async function loadUserData(uid) {
+    document.getElementById('statusContent').innerHTML = '<p class="empty-note">Cargando...</p>';
+    try {
+      const snap = await getDocs(collection(db, 'users', uid, 'days'));
+      allData = {};
+      snap.forEach(docSnap => { allData[docSnap.id] = docSnap.data(); });
+      prediction = predict(allData);
+      renderStatus();
+      renderCalendar();
+    } catch (err) {
+      document.getElementById('statusContent').innerHTML =
+        '<p class="empty-note">No se pudieron cargar tus datos. Revisa tu conexión e inténtalo de nuevo.</p>';
+      console.error(err);
+    }
+
+    // Estado de suscripción: se calcula igual que SubscriptionService en la
+    // app (7 días de prueba gratis desde la fecha de registro). RevenueCat
+    // todavía no está conectado del lado del servidor, así que por ahora
+    // esta web no puede confirmar un plan de pago activo — solo el trial.
+    try {
+      const userDoc = await getDoc(doc(db, 'users', uid));
+      renderSubscription(userDoc.exists() ? userDoc.data() : null);
+    } catch (err) {
+      document.getElementById('subscriptionContent').innerHTML =
+        '<p class="empty-note">No se pudo cargar el estado de tu cuenta.</p>';
+      console.error(err);
+    }
+  }
+
+  const TRIAL_DURATION_DAYS = 7;
+
+  function renderSubscription(userData) {
+    const el = document.getElementById('subscriptionContent');
+    if (!userData || !userData.createdAt) {
+      el.innerHTML = '<p class="empty-note">No se pudo determinar tu plan actual.</p>';
+      return;
+    }
+    const createdAt = new Date(userData.createdAt);
+    const trialEndsAt = new Date(createdAt);
+    trialEndsAt.setDate(trialEndsAt.getDate() + TRIAL_DURATION_DAYS);
+    const now = new Date();
+    const fmt = (d) => d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    if (now < trialEndsAt) {
+      const daysLeft = Math.max(0, Math.ceil((trialEndsAt - now) / 86400000));
+      el.innerHTML = `
+        <span class="plan-badge trial">🎁 Prueba gratis</span>
+        <p class="plan-note">Te quedan ${daysLeft} día${daysLeft === 1 ? '' : 's'} de prueba gratis (hasta el ${fmt(trialEndsAt)}).
+        Para seguir con acceso completo después, activa tu suscripción desde la app.</p>
+      `;
+    } else {
+      el.innerHTML = `
+        <span class="plan-badge expired">Prueba gratis finalizada</span>
+        <p class="plan-note">Tu período de prueba terminó el ${fmt(trialEndsAt)}. Abre la app para ver los planes de suscripción disponibles.
+        (Esta web todavía no puede confirmar suscripciones de pago activas — eso se gestiona desde la app.)</p>
+      `;
+    }
+  }
+
+  function renderStatus() {
+    const el = document.getElementById('statusContent');
+    if (!prediction) {
+      el.innerHTML = '<p class="empty-note">Todavía no hay suficientes registros para calcular una predicción. Registra tus días en la app.</p>';
+      return;
+    }
+    const fmt = (d) => d.toLocaleDateString('es', { day: 'numeric', month: 'long' });
+    el.innerHTML = `
+      <div class="status-row"><span class="status-label">Próximo período (estimado)</span><span class="status-value">${fmt(prediction.nextPeriodStart)}</span></div>
+      <div class="status-row"><span class="status-label">Ovulación (estimada)</span><span class="status-value">${fmt(prediction.ovulationDate)}</span></div>
+      <div class="status-row"><span class="status-label">Duración media del ciclo</span><span class="status-value">${prediction.cycleLen} días</span></div>
+      <div class="status-row"><span class="status-label">Duración media del período</span><span class="status-value">${prediction.periodLen} días</span></div>
+    `;
+  }
+
+  const DOW = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+  const MONTH_NAMES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
+  function renderCalendar() {
+    document.getElementById('monthLabel').textContent =
+      `${MONTH_NAMES[viewMonth.getMonth()]} ${viewMonth.getFullYear()}`;
+
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML = '';
+    DOW.forEach(d => {
+      const el = document.createElement('div');
+      el.className = 'cal-dow';
+      el.textContent = d;
+      grid.appendChild(el);
+    });
+
+    const firstOfMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth(), 1);
+    // Lunes = 0 ... Domingo = 6
+    let leadingEmpty = (firstOfMonth.getDay() + 6) % 7;
+    const daysInMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, 0).getDate();
+    const todayKey = dateKey(new Date());
+
+    for (let i = 0; i < leadingEmpty; i++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day empty';
+      grid.appendChild(el);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const d = new Date(viewMonth.getFullYear(), viewMonth.getMonth(), day);
+      const key = dateKey(d);
+      const entry = allData[key];
+      const el = document.createElement('div');
+      el.className = 'cal-day';
+      el.textContent = day;
+
+      const isPeriod = entry && entry.flow && entry.flow !== 'none';
+      const isPredictedPeriod = prediction && prediction.predictedPeriodDates.has(key);
+      const isOvulation = prediction && dateKey(prediction.ovulationDate) === key;
+      const isFertile = prediction && prediction.fertileDates.has(key);
+
+      if (isPeriod) el.classList.add('period');
+      else if (isOvulation) el.classList.add('ovulation');
+      else if (isFertile) el.classList.add('fertile');
+      else if (isPredictedPeriod) el.classList.add('predicted');
+
+      if (key === todayKey) el.classList.add('today');
+      if (key === selectedDateKey) el.classList.add('selected');
+
+      el.addEventListener('click', () => {
+        selectedDateKey = key;
+        renderCalendar();
+        renderDetail(key);
+      });
+
+      grid.appendChild(el);
+    }
+  }
+
+  function renderDetail(key) {
+    const entry = allData[key];
+    const detail = document.getElementById('dayDetail');
+    const d = parseKey(key);
+    document.getElementById('detailDate').textContent =
+      d.toLocaleDateString('es', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+    const body = document.getElementById('detailBody');
+    if (!entry) {
+      body.innerHTML = '<p class="empty-note">Sin registros para este día.</p>';
+      detail.classList.add('show');
+      return;
+    }
+
+    let html = '';
+    if (entry.flow && entry.flow !== 'none' && FLOW_LABEL[entry.flow]) {
+      html += `<span class="tag">${FLOW_LABEL[entry.flow]}</span>`;
+    }
+    if (entry.cervicalMucus && MUCUS_LABEL[entry.cervicalMucus]) {
+      html += `<span class="tag">${MUCUS_LABEL[entry.cervicalMucus]}</span>`;
+    }
+    if (Array.isArray(entry.symptoms)) {
+      entry.symptoms.forEach(s => {
+        if (SYMPTOM_LABEL[s]) {
+          html += `<span class="tag">${SYMPTOM_EMOJI[s] || ''} ${SYMPTOM_LABEL[s]}</span>`;
+        }
+      });
+    }
+    if (entry.sex) html += `<span class="tag">💜 Vida sexual${entry.unprotected ? ' (sin protección)' : ''}</span>`;
+    if (entry.temp) html += `<span class="tag">🌡️ ${entry.temp}°C</span>`;
+    if (entry.water) html += `<span class="tag">💧 ${entry.water} vasos</span>`;
+    if (entry.sleep) html += `<span class="tag">😴 ${entry.sleep} h</span>`;
+    if (entry.weight) html += `<span class="tag">⚖️ ${entry.weight} kg</span>`;
+
+    if (!html) html = '<p class="empty-note">Sin registros para este día.</p>';
+    if (entry.note) html += `<div class="note-text">${entry.note.replace(/</g, '&lt;')}</div>`;
+
+    body.innerHTML = html;
+    detail.classList.add('show');
+  }
+
+  document.getElementById('prevMonth').addEventListener('click', () => {
+    viewMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth() - 1, 1);
+    renderCalendar();
+  });
+  document.getElementById('nextMonth').addEventListener('click', () => {
+    viewMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, 1);
+    renderCalendar();
+  });
+</script>
+</body>
+</html>

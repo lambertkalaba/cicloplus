@@ -1,0 +1,18 @@
+[debug] [2026-09-16T00:05:39.153Z] ----------------------------------------------------------------------
+[debug] [2026-09-16T00:05:39.155Z] Command:       /usr/bin/node /sessions/rcw-014yty4iyfcsww79emitvxr2/.npm/_npx/7750544ccf494d8b/node_modules/.bin/firebase login --no-localhost
+[debug] [2026-09-16T00:05:39.155Z] CLI Version:   15.30.1
+[debug] [2026-09-16T00:05:39.155Z] Platform:      linux
+[debug] [2026-09-16T00:05:39.155Z] Node Version:  v22.23.2
+[debug] [2026-09-16T00:05:39.155Z] Detected Agent: unknown
+[debug] [2026-09-16T00:05:39.155Z] Time:          Wed Sep 16 2026 00:05:39 GMT+0000 (Coordinated Universal Time)
+[debug] [2026-09-16T00:05:39.155Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-09-16T00:05:39.161Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-09-16T00:05:39.312Z] >>> [apiv2][query] POST https://auth.firebase.tools/attest [none]
+[debug] [2026-09-16T00:05:39.313Z] >>> [apiv2][body] POST https://auth.firebase.tools/attest {"session_id":"6971ec3a-4ddd-4136-a6f7-5d04e1f5711f"}
+[debug] [2026-09-16T00:05:39.329Z] *** [apiv2] error from fetch(https://firebase-public.firebaseio.com/cli.json, {"headers":{},"method":"GET","dispatcher":{"_events":{},"_eventsCount":0}}): Error: Request was cancelled.
+[warn] ⚠  Unable to fetch the CLI MOTD and remote config. This is not a fatal error, but may indicate an issue with your network connection. 
+[debug] [2026-09-16T00:05:39.329Z] Failed to fetch MOTD FirebaseError: Failed to make request to https://firebase-public.firebaseio.com/cli.json
+[debug] [2026-09-16T00:05:39.330Z] *** [apiv2] error from fetch(https://auth.firebase.tools/attest, {"headers":{},"method":"POST","dispatcher":{"_events":{},"_eventsCount":0},"body":"{\"session_id\":\"6971ec3a-4ddd-4136-a6f7-5d04e1f5711f\"}"}): Error: Request was cancelled.
+[error] 
+[error] Error: Failed to start login: Failed to make request to https://auth.firebase.tools/attest

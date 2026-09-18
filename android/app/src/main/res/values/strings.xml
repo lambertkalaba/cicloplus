@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nombre de la app, usado por Android en el label del ícono del
+         launcher y referenciado explícitamente por el label de
+         FacebookActivity en AndroidManifest.xml (@string/app_name). Antes
+         de crear este strings.xml no existía como recurso propio — hacía
+         falta declararlo aquí para que compile. -->
+    <string name="app_name">cicloplus_app</string>
+
+    <!-- Recursos para el SDK de Facebook (flutter_facebook_auth). Ver el
+         comentario junto al bloque de Facebook en AndroidManifest.xml para
+         contexto completo. -->
+
+    <!-- App ID real de la app "CicloPlus" en developers.facebook.com. -->
+    <string name="facebook_app_id">1044303078498035</string>
+
+    <!-- Client Token real, obtenido en Meta for Developers → Configuración
+         → Opciones avanzadas → Seguridad → "Identificador de acceso del
+         cliente" (así traduce la interfaz en español lo que en inglés se
+         llama "Client token" — es el mismo campo, no uno distinto; de ahí
+         la confusión al buscarlo). -->
+    <string name="facebook_client_token">4c69f8db67d547e0736ead9054abaa5b</string>
+
+    <!-- Esquema de protocolo estándar del SDK de Facebook: siempre
+         "fb" + App ID, sin excepciones. -->
+    <string name="fb_login_protocol_scheme">fb1044303078498035</string>
+</resources>

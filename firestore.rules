@@ -1,0 +1,304 @@
+rules_version = '2';
+
+// Reglas de seguridad de Firestore para CicloPlus.
+//
+// Regla general: cada persona solo puede leer y escribir sus PROPIOS datos
+// privados (perfil, días de ciclo). La única excepción es el embarazo, y
+// solo si la persona lo compartió activamente vinculando a un socio/pareja
+// desde "Invitar a un socio" (Configuración): en ese caso, la persona
+// vinculada puede LEER (nunca escribir) el estado del embarazo
+// compartido. Esta protección de "solo lectura" se aplica aquí, del lado
+// del servidor — no solo ocultando botones en la app — así que es la
+// protección real, aunque alguien manipulara la app no podría escribir.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{userId} {
+      // Solo el dueño de la cuenta puede leer o escribir su propio
+      // documento de usuario (correo, fecha de registro, código de
+      // invitación activo).
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      // Registros diarios de ciclo (flujo, síntomas, diario, etc.) —
+      // privados, solo el dueño puede leerlos o escribirlos. Nunca se
+      // comparten con un socio, ni siquiera en modo lectura.
+      match /days/{dayId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+
+      // Estado del embarazo que esta persona decide compartir con su
+      // socio/pareja vinculado (activado, fecha de última regla,
+      // apariencia de las fotos, y si quiere compartir las fotos del
+      // bebé). El dueño puede leer y escribir siempre; un socio ya
+      // vinculado (existe su documento en /partners) solo puede LEER —
+      // y solo si además esa socia concreta tiene shareTracking activado
+      // (ver el interruptor de "compartir seguimiento" por socio en
+      // /partners/{partnerUid} más abajo). Se usa .get('shareTracking',
+      // true) para que los vínculos viejos, creados antes de que este
+      // campo existiera, sigan compartiendo por defecto (mismo
+      // comportamiento de siempre) hasta que la dueña lo desactive.
+      match /pregnancy/{docId} {
+        allow read: if request.auth != null && (
+          request.auth.uid == userId ||
+          (
+            exists(/databases/$(database)/documents/users/$(userId)/partners/$(request.auth.uid)) &&
+            get(/databases/$(database)/documents/users/$(userId)/partners/$(request.auth.uid)).data.get('shareTracking', true) == true
+          )
+        );
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
+
+      // Igual que /pregnancy/{docId} de arriba, pero para el RESUMEN de
+      // ciclo (previsto/ventana fértil ya calculados, nunca los síntomas
+      // ni notas del día a día) que esta persona comparte cuando NO está
+      // en modo embarazo — "Seguir mi periodo" o "Intentar concebir" (ver
+      // PartnerService.syncCycleData/watchCycleData). Mismo interruptor
+      // shareTracking por socio: compartir/dejar de compartir aplica a
+      // los dos documentos por igual, sin uno adicional.
+      match /cycle/{docId} {
+        allow read: if request.auth != null && (
+          request.auth.uid == userId ||
+          (
+            exists(/databases/$(database)/documents/users/$(userId)/partners/$(request.auth.uid)) &&
+            get(/databases/$(database)/documents/users/$(userId)/partners/$(request.auth.uid)).data.get('shareTracking', true) == true
+          )
+        );
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
+
+      // Lista de socios vinculados a MI seguimiento (quién puede verlo).
+      // Solo yo (dueño) o la propia persona vinculada pueden leer su
+      // entrada, o borrarla (desvincular, en cualquiera de los dos
+      // sentidos). Un vínculo puede CREARSE de dos formas: (a) la forma
+      // normal, presentando un código de invitación mío que en ese momento
+      // siga pendiente — así nadie puede auto-vincularse sin haber
+      // recibido antes el código de esta cuenta; o (b) tras una
+      // RECONEXIÓN aprobada por mí (ver /reconnectRequests más abajo) —
+      // esto pasa cuando la socia cerró sesión y volvió a pegar el mismo
+      // código: ya no cuenta como "código nuevo", así que necesita que yo
+      // apruebe esa solicitud antes de que pueda crear este documento.
+      match /partners/{partnerUid} {
+        allow read, delete: if request.auth != null &&
+          (request.auth.uid == userId || request.auth.uid == partnerUid);
+        allow create: if request.auth != null &&
+          request.auth.uid == partnerUid &&
+          request.resource.data.partnerUid == partnerUid && (
+            (
+              request.resource.data.inviteCode is string &&
+              get(/databases/$(database)/documents/partnerInvites/$(request.resource.data.inviteCode)).data.ownerUid == userId &&
+              get(/databases/$(database)/documents/partnerInvites/$(request.resource.data.inviteCode)).data.status == 'pending'
+            ) ||
+            (
+              request.resource.data.reconnectRequestId is string &&
+              get(/databases/$(database)/documents/users/$(userId)/reconnectRequests/$(request.resource.data.reconnectRequestId)).data.partnerUid == partnerUid &&
+              get(/databases/$(database)/documents/users/$(userId)/reconnectRequests/$(request.resource.data.reconnectRequestId)).data.status == 'approved'
+            )
+          );
+        // La dueña puede prender/apagar, para ESTA socia concreta, si
+        // comparte con ella el seguimiento del embarazo (pestañas
+        // Seguimiento/Consejos del Hub) — el interruptor del icono de
+        // embarazo en "Invitar a un socio". affectedKeys().hasOnly(...)
+        // asegura que solo pueda tocar ese campo: nunca reasignar el
+        // vínculo a otra persona, cambiar el código, ni nada más.
+        allow update: if request.auth != null &&
+          request.auth.uid == userId &&
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['shareTracking']);
+      }
+
+      // Solicitudes de reconexión: cuando alguien pega un código que YA se
+      // usó antes (es decir, quien lo aceptó cerró sesión y quiere volver
+      // a entrar), no se vincula al instante — se crea aquí una solicitud
+      // pendiente que solo yo (dueña) puedo aprobar o rechazar. Así "ella
+      // tiene el poder absoluto": nadie puede reconectar sin que yo lo
+      // acepte explícitamente, aunque tenga el código correcto.
+      match /reconnectRequests/{requestId} {
+        // Yo (dueña) puedo leer/listar todas mis solicitudes; quien pide
+        // reconectar solo puede leer la suya propia (para esperar a que
+        // cambie a "approved").
+        allow read: if request.auth != null &&
+          (request.auth.uid == userId || request.auth.uid == resource.data.partnerUid);
+        allow list: if request.auth != null && request.auth.uid == userId;
+        // Crear una solicitud: cualquiera que no sea la dueña, siempre que
+        // se atribuya la solicitud a sí misma y presente un código real de
+        // esta cuenta que ya haya sido aceptado antes (si el código nunca
+        // se usó, no hace falta pasar por aquí: se vincula directo con el
+        // flujo normal de /partners).
+        allow create: if request.auth != null &&
+          request.auth.uid != userId &&
+          request.resource.data.partnerUid == request.auth.uid &&
+          request.resource.data.status == 'pending' &&
+          request.resource.data.code is string &&
+          get(/databases/$(database)/documents/partnerInvites/$(request.resource.data.code)).data.ownerUid == userId &&
+          get(/databases/$(database)/documents/partnerInvites/$(request.resource.data.code)).data.status == 'accepted';
+        // Aprobar/rechazar: solo la dueña, y solo pasando de "pending" a
+        // "approved" o "rejected" (nunca al revés).
+        allow update: if request.auth != null &&
+          request.auth.uid == userId &&
+          resource.data.status == 'pending' &&
+          request.resource.data.status in ['approved', 'rejected'];
+        // Borrar: la dueña (limpieza tras rechazar) o quien la pidió (tras
+        // completar la reconexión, o para cancelarla).
+        allow delete: if request.auth != null &&
+          (request.auth.uid == userId || request.auth.uid == resource.data.partnerUid);
+      }
+
+      // Lista de "deseos" de la dueña (antojos o cosas que quiere/necesita
+      // — ver WishService y PartnerWishesScreen): ella escribe el texto,
+      // su(s) socia(s) ya vinculada(s) pueden verlos y marcarlos como
+      // cumplidos, pero NUNCA cambiar el texto ni borrarlos. Esa
+      // restricción se aplica aquí mismo con affectedKeys().hasOnly(...),
+      // así que aunque alguien manipulara la app no podría escribir nada
+      // más que 'done'/'doneBy' desde el lado de la pareja.
+      match /wishes/{wishId} {
+        allow read: if request.auth != null &&
+          (request.auth.uid == userId ||
+            exists(/databases/$(database)/documents/users/$(userId)/partners/$(request.auth.uid)));
+        allow create, delete: if request.auth != null && request.auth.uid == userId;
+        allow update: if request.auth != null && (
+          request.auth.uid == userId ||
+          (
+            exists(/databases/$(database)/documents/users/$(userId)/partners/$(request.auth.uid)) &&
+            request.resource.data.diff(resource.data).affectedKeys().hasOnly(['done', 'doneBy'])
+          )
+        );
+      }
+
+      // Lista de embarazos que YO puedo ver como socio — espejo de
+      // /partners pero dentro de mi propia cuenta, para no depender de
+      // una consulta entre cuentas de otra persona. Misma protección que
+      // /partners (código pendiente, o reconexión ya aprobada por la
+      // dueña) — ver los comentarios de esa regla más arriba.
+      match /viewerOf/{ownerUid} {
+        allow read, delete: if request.auth != null &&
+          (request.auth.uid == userId || request.auth.uid == ownerUid);
+        allow create: if request.auth != null &&
+          request.auth.uid == userId &&
+          request.resource.data.ownerUid == ownerUid && (
+            (
+              request.resource.data.inviteCode is string &&
+              get(/databases/$(database)/documents/partnerInvites/$(request.resource.data.inviteCode)).data.ownerUid == ownerUid &&
+              get(/databases/$(database)/documents/partnerInvites/$(request.resource.data.inviteCode)).data.status == 'pending'
+            ) ||
+            (
+              request.resource.data.reconnectRequestId is string &&
+              get(/databases/$(database)/documents/users/$(ownerUid)/reconnectRequests/$(request.resource.data.reconnectRequestId)).data.partnerUid == userId &&
+              get(/databases/$(database)/documents/users/$(ownerUid)/reconnectRequests/$(request.resource.data.reconnectRequestId)).data.status == 'approved'
+            )
+          );
+        allow update: if false;
+      }
+    }
+
+    // Códigos de invitación (6 caracteres, válidos 48h). Se pueden leer
+    // por id exacto (para que quien recibe el código pueda comprobarlo
+    // antes de aceptar) pero nunca "listar" en conjunto (allow list:
+    // false), así nadie puede enumerar invitaciones ajenas ni buscarlas
+    // por dueño — solo quien ya conoce el código exacto puede leerlo.
+    match /partnerInvites/{code} {
+      allow get: if request.auth != null;
+      allow list: if false;
+      allow create: if request.auth != null &&
+        request.auth.uid == request.resource.data.ownerUid;
+      // Aceptar: cualquiera que NO sea el dueño puede marcar como
+      // "accepted" una invitación que siga "pending", siempre que se
+      // atribuya la aceptación a sí mismo (acceptedBy == su propio uid).
+      //
+      // Anular (accepted -> revoked): la dueña ("quitar acceso") o quien
+      // la aceptó ("ya no quiero seguir este embarazo") pueden anular un
+      // código ya usado — a partir de ahí queda 'revoked' para siempre,
+      // ver acceptInvite/previewInvite en partner_service.dart, que
+      // rechazan cualquier intento de usar un código en ese estado.
+      allow update: if request.auth != null && (
+        (
+          request.auth.uid != resource.data.ownerUid &&
+          resource.data.status == 'pending' &&
+          request.resource.data.status == 'accepted' &&
+          request.resource.data.acceptedBy == request.auth.uid
+        ) ||
+        (
+          resource.data.status == 'accepted' &&
+          request.resource.data.status == 'revoked' &&
+          (request.auth.uid == resource.data.ownerUid || request.auth.uid == resource.data.acceptedBy)
+        ) ||
+        (
+          // Reconexión finalizada: quien pidió reconectar transfiere
+          // "acceptedBy" a su propio uid, pero SOLO si la dueña ya aprobó
+          // su solicitud (mismo id determinista {code}_{uid} que usa
+          // requestReconnect) — así el código sigue "vivo" para la nueva
+          // identidad en vez de quedar ligado para siempre a la vieja.
+          resource.data.status == 'accepted' &&
+          request.resource.data.status == 'accepted' &&
+          request.resource.data.acceptedBy == request.auth.uid &&
+          get(/databases/$(database)/documents/users/$(resource.data.ownerUid)/reconnectRequests/$(code + '_' + request.auth.uid)).data.status == 'approved'
+        )
+      );
+      // Cancelar: solo el dueño puede borrar su propio código.
+      allow delete: if request.auth != null &&
+        request.auth.uid == resource.data.ownerUid;
+    }
+
+    // Chat privado 1 a 1 entre la dueña de un embarazo y una socia ya
+    // vinculada (ver ChatService en la app). El id del chat es siempre
+    // "{uidMenor}_{uidMayor}" (los dos uids ordenados alfabéticamente),
+    // así que el mismo par de personas siempre llega al mismo documento
+    // sin importar quién abra el chat primero. NUNCA es un chat entre
+    // desconocidos: solo se puede crear si ya existe un vínculo
+    // partners/viewerOf entre esos dos uids exactos (en cualquiera de los
+    // dos sentidos) — es decir, solo entre quienes ya pasaron por el
+    // flujo de "Invitar a un socio" y lo aceptaron.
+    match /chats/{chatId} {
+      // ChatService._ensureChat siempre hace un get() de este documento
+      // ANTES de crearlo (para decidir si hace falta el `set` inicial), así
+      // que la primera vez que dos personas hablan, este doc todavía no
+      // existe. En reglas de Firestore, "resource" es null cuando el
+      // documento leído no existe todavía — sin el `resource == null ||` de
+      // aquí, esa comprobación de "resource.data.participants" fallaría con
+      // un error de permisos (no un simple "no existe"), bloqueando para
+      // siempre el primer mensaje entre cualquier pareja nueva. Con el
+      // null-check, se permite leer un doc que no existe (no hay ningún
+      // dato que proteger todavía) y ChatService sigue su flujo normal.
+      allow get: if request.auth != null &&
+        (resource == null || request.auth.uid in resource.data.participants);
+      // Nunca se listan todos los chats (no hace falta: cada persona
+      // calcula el id del chat con la otra a partir de los dos uids, no
+      // necesita "buscar" sus chats).
+      allow list: if false;
+      allow create: if request.auth != null &&
+        request.auth.uid in request.resource.data.participants &&
+        request.resource.data.participants.size() == 2 && (
+          exists(/databases/$(database)/documents/users/$(request.resource.data.participants[0])/partners/$(request.resource.data.participants[1])) ||
+          exists(/databases/$(database)/documents/users/$(request.resource.data.participants[1])/partners/$(request.resource.data.participants[0]))
+        );
+      allow update: if request.auth != null && request.auth.uid in resource.data.participants;
+      allow delete: if false;
+
+      match /messages/{messageId} {
+        // PartnerChatScreen escucha watchMessages() en cuanto se abre el
+        // chat — que es ANTES de que exista el documento padre
+        // /chats/{chatId}, porque ChatService solo crea ese documento
+        // dentro de sendText()/sendPhoto() (_ensureChat), nunca al abrir
+        // la pantalla. Si aquí exigiéramos que el chat exista, ese primer
+        // listen siempre moriría con PERMISSION_DENIED — y un listener de
+        // Firestore que falla por permisos NO se recupera solo cuando la
+        // regla después pasa a permitir: hay que denegar limpio, sí, pero
+        // dejando pasar el caso "todavía no existe" para no romper nunca
+        // la primera vez que dos personas abren su chat. Como una
+        // subcolección de un documento inexistente está, por definición,
+        // vacía, permitir su lectura no expone ningún dato real — solo
+        // evita el error. En cuanto el chat exista de verdad, se exige el
+        // mismo chequeo de participants que antes.
+        allow read: if request.auth != null && (
+          !exists(/databases/$(database)/documents/chats/$(chatId)) ||
+          request.auth.uid in get(/databases/$(database)/documents/chats/$(chatId)).data.participants
+        );
+        // Un mensaje nunca se puede editar ni borrar una vez enviado —
+        // ni siquiera quien lo escribió.
+        allow create: if request.auth != null &&
+          exists(/databases/$(database)/documents/chats/$(chatId)) &&
+          request.auth.uid in get(/databases/$(database)/documents/chats/$(chatId)).data.participants &&
+          request.resource.data.senderUid == request.auth.uid;
+        allow update, delete: if false;
+      }
+    }
+  }
+}

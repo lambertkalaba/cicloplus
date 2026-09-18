@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "455122663711",
+    "project_id": "cicloplus-9a957",
+    "storage_bucket": "cicloplus-9a957.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455122663711:android:6cecf656dace0b1a02182a",
+        "android_client_info": {
+          "package_name": "com.cicloplus.cicloplus_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "455122663711-pij0qhq7dabieq21rkhup0nlpmp5gilh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cicloplus.cicloplus_app",
+            "certificate_hash": "9998d85f42e3072e7f7035e1bd061698977e3d28"
+          }
+        },
+        {
+          "client_id": "455122663711-hrqf53qessnns4fidje7a8oj0acshrkg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHXCw0EIuJoPDvBAEh828fQBs9R9_0IBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "455122663711-hrqf53qessnns4fidje7a8oj0acshrkg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

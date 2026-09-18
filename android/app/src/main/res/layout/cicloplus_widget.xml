@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Layout del widget real de pantalla de inicio (fase 8). RemoteViews
+     solo admite un subconjunto de vistas de Android (LinearLayout,
+     TextView, ImageView, etc.) — por eso se evita ConstraintLayout aquí,
+     aunque sea el estándar en el resto de la app nativa. Los ids
+     widget_cycle_day_line/widget_period_line los rellena
+     CicloPlusWidgetProvider.kt con los textos ya traducidos que llegan
+     desde Dart vía HomeWidgetService. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cicloplus_widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:background="@drawable/cicloplus_widget_background"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/widget_cycle_day_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:ellipsize="end" />
+
+    <TextView
+        android:id="@+id/widget_period_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:maxLines="2"
+        android:ellipsize="end" />
+</LinearLayout>
