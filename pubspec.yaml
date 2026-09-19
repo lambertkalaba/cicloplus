@@ -74,6 +74,18 @@ dependencies:
   # `flutter pub get` + `flutter run` y avisar si aparece algún conflicto
   # de AGP/androidx como los ya documentados arriba con `health`/`url_launcher`.
   google_sign_in: ^6.2.2
+  # Inicio de sesión con Apple — obligatorio en iOS (guía 4.8 de Apple)
+  # porque la app ya ofrece Google como login social; Apple exige dar
+  # también esta alternativa o rechaza la app en revisión. Solo se muestra
+  # el botón en iOS (ver auth_screen.dart) — en Android no hace falta ni
+  # está disponible. Requiere el capability "Sign in with Apple" habilitado
+  # en el Apple ID de la app (ios/Runner/Runner.entitlements) y en el App
+  # ID del portal de Apple Developer.
+  sign_in_with_apple: ^6.1.4
+  # Genera el "nonce" (código aleatorio de un solo uso) que exige el flujo
+  # de seguridad de Sign in with Apple antes de canjear el token con
+  # Firebase — ver signInWithApple en auth_service.dart.
+  crypto: ^3.0.5
   # Login de Facebook retirado (ver auth_service.dart y auth_screen.dart) —
   # Meta exige verificación de empresa que la cuenta no puede completar.
   # QR de invitación — segundo intento, con otro enfoque para no repetir
