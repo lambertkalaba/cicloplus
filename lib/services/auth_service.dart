@@ -1,10 +1,13 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../models/app_user.dart';
 import 'app_open_controller.dart';
 import 'settings_service.dart';
@@ -33,7 +36,7 @@ class AuthException implements Exception {
 
 /// Método con el que la persona inició sesión — usado solo para mostrarlo
 /// en la pantalla "Gestionar cuenta" (ver AuthService.currentSignInProvider).
-enum SignInProvider { email, google, facebook }
+enum SignInProvider { email, google, facebook, apple }
 
 /// Maneja registro, inicio de sesión y sesión actual usando Firebase
 /// Authentication (para el correo/contraseña) y Cloud Firestore (para
@@ -251,6 +254,64 @@ class AuthService {
       );
       final userCredential = await _auth.signInWithCredential(credential);
       return _loadOrCreateSocialUser(userCredential.user!, fallbackName: googleUser.displayName);
+    } on fb.FirebaseAuthException catch (e) {
+      throw _mapFirebaseError(e);
+    }
+  }
+
+  /// Genera una cadena aleatoria criptográficamente segura — Apple exige
+  /// enviar un "nonce" (nunce de un solo uso) en la petición de login y
+  /// verificar que el token devuelto lo incluye hasheado, para blindar el
+  /// flujo contra ataques de repetición (replay attacks).
+  String _generateNonce([int length = 32]) {
+    const charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    final random = Random.secure();
+    return List.generate(length, (_) => charset[random.nextInt(charset.length)]).join();
+  }
+
+  /// Inicia sesión (o crea la cuenta, si es la primera vez) usando "Sign in
+  /// with Apple". Solo tiene sentido en iOS/macOS (ver el botón condicional
+  /// en auth_screen.dart) — Apple EXIGE ofrecer esta opción en la App Store
+  /// porque la app ya tiene login de Google (guía 4.8 de App Review).
+  ///
+  /// A diferencia de Google, Apple solo entrega el nombre la PRIMERA vez
+  /// que la persona autoriza la app (después nunca lo vuelve a mandar), así
+  /// que se guarda igual que fallbackName en _loadOrCreateSocialUser.
+  Future<AppUser> signInWithApple() async {
+    try {
+      final rawNonce = _generateNonce();
+      final hashedNonce = sha256.convert(utf8.encode(rawNonce)).toString();
+
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        nonce: hashedNonce,
+      );
+
+      final oauthCredential = fb.OAuthProvider('apple.com').credential(
+        idToken: appleCredential.identityToken,
+        rawNonce: rawNonce,
+      );
+
+      final userCredential = await _auth.signInWithCredential(oauthCredential);
+
+      // Apple entrega givenName/familyName sueltos (no un solo displayName
+      // como Google) y solo la primera vez — se combinan aquí si vienen.
+      final givenName = appleCredential.givenName?.trim() ?? '';
+      final familyName = appleCredential.familyName?.trim() ?? '';
+      final fullName = [givenName, familyName].where((s) => s.isNotEmpty).join(' ');
+
+      return _loadOrCreateSocialUser(
+        userCredential.user!,
+        fallbackName: fullName.isNotEmpty ? fullName : null,
+      );
+    } on SignInWithAppleAuthorizationException catch (e) {
+      if (e.code == AuthorizationErrorCode.canceled) {
+        throw AuthException('Inicio de sesión cancelado.');
+      }
+      throw AuthException('No se pudo iniciar sesión con Apple. Inténtalo de nuevo.');
     } on fb.FirebaseAuthException catch (e) {
       throw _mapFirebaseError(e);
     }
@@ -499,6 +560,8 @@ class AuthService {
         return SignInProvider.google;
       case 'facebook.com':
         return SignInProvider.facebook;
+      case 'apple.com':
+        return SignInProvider.apple;
       default:
         return SignInProvider.email;
     }
@@ -604,6 +667,22 @@ class AuthService {
           // auth_screen.dart); las cuentas antiguas vinculadas a Facebook ya
           // no pueden reautenticarse por esta vía.
           throw AuthException('El inicio de sesión con Facebook ya no está disponible. Contacta con soporte para recuperar tu cuenta.');
+
+        case SignInProvider.apple:
+          // Igual que Google: repetir el flujo de Apple equivale a
+          // reautenticarse, no hay contraseña propia de CicloPlus que pedir.
+          final rawNonce = _generateNonce();
+          final hashedNonce = sha256.convert(utf8.encode(rawNonce)).toString();
+          final appleCredential = await SignInWithApple.getAppleIDCredential(
+            scopes: [AppleIDAuthorizationScopes.email, AppleIDAuthorizationScopes.fullName],
+            nonce: hashedNonce,
+          );
+          final credential = fb.OAuthProvider('apple.com').credential(
+            idToken: appleCredential.identityToken,
+            rawNonce: rawNonce,
+          );
+          await fbUser.reauthenticateWithCredential(credential);
+          break;
       }
     } on fb.FirebaseAuthException catch (e) {
       throw _mapFirebaseError(e);
