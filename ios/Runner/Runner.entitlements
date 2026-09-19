@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Necesario para el botón "Continuar con Apple" (sign_in_with_apple,
+	     ver auth_service.dart) — sin este capability, iOS rechaza la
+	     petición de login con un error de firma en vez de mostrar el
+	     selector de Apple. También hay que habilitar "Sign In with Apple"
+	     en el App ID (com.cicloplus.cicloplusApp) del portal de Apple
+	     Developer, o el binario firmado no coincidirá con este entitlement. -->
+	<key>com.apple.developer.applesignin</key>
+	<array>
+		<string>Default</string>
+	</array>
+</dict>
+</plist>
