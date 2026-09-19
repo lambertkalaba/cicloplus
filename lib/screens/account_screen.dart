@@ -127,6 +127,8 @@ class _AccountScreenState extends State<AccountScreen> {
         return s.accountSignInMethodGoogle;
       case SignInProvider.facebook:
         return s.accountSignInMethodFacebook;
+      case SignInProvider.apple:
+        return s.accountSignInMethodApple;
       case SignInProvider.email:
         return s.accountSignInMethodEmail;
     }

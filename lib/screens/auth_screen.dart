@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show defaultTargetPlatform, TargetPlatform;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -529,6 +530,27 @@ class _AuthScreenState extends State<AuthScreen> {
                       iconColor: const Color(0xFF4285F4),
                       onPressed: _isLoading ? null : () => _handleSocialSignIn(_authService.signInWithGoogle),
                     ),
+                    // Botón "Continuar con Apple" — solo en iOS: es donde
+                    // Apple lo exige (guía 4.8 de App Review, porque la app
+                    // ya ofrece Google) y donde SignInWithApple.getAppleIDCredential
+                    // funciona de forma nativa sin configuración extra. En
+                    // Android no aporta nada y no está disponible sin montar
+                    // el flujo web alternativo del paquete, así que se omite.
+                    if (defaultTargetPlatform == TargetPlatform.iOS) ...[
+                      const SizedBox(height: 12),
+                      _SocialButton(
+                        // U+F8FF: glifo privado del logo de Apple — se
+                        // renderiza correctamente solo con la fuente del
+                        // sistema de iOS/macOS (San Francisco), que es
+                        // justo donde se muestra este botón (ver el `if`
+                        // de arriba). En cualquier otra fuente se vería
+                        // como un cuadro vacío, por eso NO se usa fuera de iOS.
+                        label: s.authContinueWithApple,
+                        icon: '',
+                        iconColor: Colors.black,
+                        onPressed: _isLoading ? null : () => _handleSocialSignIn(_authService.signInWithApple),
+                      ),
+                    ],
                     // Boton de Facebook retirado temporalmente: para
                     // publicar la app con login de Facebook, Meta exige
                     // verificar la empresa con un documento fiscal/de
