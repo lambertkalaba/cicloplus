@@ -2910,6 +2910,8 @@ class AppStrings {
       _t({'es': 'Continuar con Google', 'en': 'Continue with Google', 'fr': 'Continuer avec Google', 'de': 'Mit Google fortfahren', 'ru': 'Продолжить с Google', 'ar': 'المتابعة عبر Google', 'hi': 'Google से जारी रखें', 'bn': 'Google দিয়ে চালিয়ে যান', 'pt': 'Continuar com o Google',});
   String get authContinueWithFacebook =>
       _t({'es': 'Continuar con Facebook', 'en': 'Continue with Facebook', 'fr': 'Continuer avec Facebook', 'de': 'Mit Facebook fortfahren', 'ru': 'Продолжить с Facebook', 'ar': 'المتابعة عبر Facebook', 'hi': 'Facebook से जारी रखें', 'bn': 'Facebook দিয়ে চালিয়ে যান', 'pt': 'Continuar com o Facebook',});
+  String get authContinueWithApple =>
+      _t({'es': 'Continuar con Apple', 'en': 'Continue with Apple', 'fr': 'Continuer avec Apple', 'de': 'Mit Apple fortfahren', 'ru': 'Продолжить с Apple', 'ar': 'المتابعة عبر Apple', 'hi': 'Apple से जारी रखें', 'bn': 'Apple দিয়ে চালিয়ে যান', 'pt': 'Continuar com a Apple',});
   String get authOrDivider => _t({'es': 'o', 'en': 'or', 'fr': 'ou', 'de': 'oder', 'ru': 'или', 'ar': 'أو', 'hi': 'या', 'bn': 'অথবা', 'pt': 'ou',});
   String get authSignInWithEmail => _t({
         'es': 'Iniciar sesión con correo',
@@ -4625,6 +4627,7 @@ class AppStrings {
   String get accountSignInMethodEmail => _t({'es': 'Correo y contraseña', 'en': 'Email and password', 'fr': 'E-mail et mot de passe', 'de': 'E-Mail und Passwort', 'ru': 'Почта и пароль', 'ar': 'البريد الإلكتروني وكلمة المرور', 'hi': 'ईमेल और पासवर्ड', 'bn': 'ইমেইল ও পাসওয়ার্ড', 'pt': 'E-mail e senha'});
   String get accountSignInMethodGoogle => _t({'es': 'Google', 'en': 'Google', 'fr': 'Google', 'de': 'Google', 'ru': 'Google', 'ar': 'Google', 'hi': 'Google', 'bn': 'Google', 'pt': 'Google'});
   String get accountSignInMethodFacebook => _t({'es': 'Facebook', 'en': 'Facebook', 'fr': 'Facebook', 'de': 'Facebook', 'ru': 'Facebook', 'ar': 'Facebook', 'hi': 'Facebook', 'bn': 'Facebook', 'pt': 'Facebook'});
+  String get accountSignInMethodApple => _t({'es': 'Apple', 'en': 'Apple', 'fr': 'Apple', 'de': 'Apple', 'ru': 'Apple', 'ar': 'Apple', 'hi': 'Apple', 'bn': 'Apple', 'pt': 'Apple'});
   String get accountMemberSinceLabel =>
       _t({'es': 'Miembro desde', 'en': 'Member since', 'fr': 'Membre depuis', 'de': 'Mitglied seit', 'ru': 'Участница с', 'ar': 'عضوة منذ', 'hi': 'सदस्यता की शुरुआत', 'bn': 'সদস্য হওয়ার তারিখ', 'pt': 'Membro desde'});
   String get accountSubscriptionSection =>
