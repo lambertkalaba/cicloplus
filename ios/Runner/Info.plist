@@ -42,6 +42,13 @@
 	<string>CicloPlus necesita acceso a la cámara para que puedas tomar una foto y enviarla en el chat con tu pareja.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>CicloPlus necesita acceso a tus fotos para que puedas elegir una imagen y enviarla en el chat con tu pareja.</string>
+	<!-- CicloPlus no usa la ubicación para nada; esta clave existe solo
+	     porque alguna librería (aviso de Apple ITMS-90683 en el build 16,
+	     probablemente google_sign_in o un SDK de Firebase) referencia APIs
+	     de CoreLocation aunque no las llamemos. Sin este texto, Apple
+	     rechaza el envío a revisión aunque la app nunca pida el permiso. -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>CicloPlus no usa tu ubicación. Esta descripción existe solo porque alguna de las librerías que usamos la referencia internamente.</string>
 	<!-- Inicio de sesión con Facebook (flutter_facebook_auth) en iOS — mismo
 	     App ID/Client Token reales ya usados en Android (ver
 	     android/app/src/main/res/values/strings.xml y el comentario junto al
