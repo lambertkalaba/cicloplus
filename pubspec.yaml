@@ -1,7 +1,7 @@
 name: cicloplus_app
 description: "CicloPlus — seguimiento de ciclo menstrual con privacidad local."
 publish_to: 'none'
-version: 0.1.2+20
+version: 0.1.2+21
 
 environment:
   sdk: '>=3.3.0 <4.0.0'

@@ -266,6 +266,20 @@ class _MeScreenState extends State<MeScreen> {
         ),
       ),
     );
+    // Al volver de Configuración, refrescamos "Mi objetivo"/modo embarazo
+    // por si se cambiaron ahí (SettingsScreen los guarda directo en disco,
+    // sin pasar por los callbacks de esta pantalla) — sin este refresco,
+    // MainTabScreen se quedaba con el valor viejo en memoria hasta cerrar
+    // y reabrir la app del todo, y por eso la tarjeta del bebé en "Hoy" y
+    // la pantalla "Seguir embarazo" seguían sin aparecer aunque
+    // Configuración ya mostrara el modo embarazo activado. Bug reportado
+    // por la usuaria tras la versión 20.
+    final pregnancy = await _settingsService.loadPregnancySettings();
+    final userGoal = await _settingsService.loadUserGoal();
+    if (!mounted) return;
+    widget.onPregnancyChanged(pregnancy);
+    widget.onUserGoalChanged(userGoal);
+    setState(() => _goal = pregnancy.enabled ? 'pregnancy' : userGoal);
   }
 
   Future<void> _openAccountScreen() async {
