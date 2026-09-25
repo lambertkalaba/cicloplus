@@ -752,6 +752,16 @@ class TodayScreen extends StatelessWidget {
                             width: 132,
                             height: 132,
                             fit: BoxFit.cover,
+                            // Mismo respaldo que en PregnancyTrackingScreen: si
+                            // falla la decodificación, un ícono en vez de nada.
+                            errorBuilder: (context, error, stackTrace) {
+                              debugPrint('pregnancyDayImagePath fallo al cargar: $error');
+                              return Container(
+                                color: AppColors.primaryDark.withOpacity(0.08),
+                                alignment: Alignment.center,
+                                child: Icon(Icons.pregnant_woman, size: 48, color: AppColors.primaryDark.withOpacity(0.7)),
+                              );
+                            },
                           ),
                         ),
                       ],

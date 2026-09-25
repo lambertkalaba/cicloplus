@@ -110,12 +110,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
   // sincronizado vía didUpdateWidget más abajo.
   late String _userGoal = widget.userGoal;
 
-  // Estado del gesto de deslizar arriba/abajo sobre la cuadrícula del mes
-  // (ver Listener en build()): posición Y y momento en que el dedo tocó la
-  // pantalla, usados para calcular la velocidad al soltar.
-  double? _monthSwipeStartY;
-  Duration? _monthSwipeStartTime;
-
   @override
   void initState() {
     super.initState();
@@ -655,39 +649,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 ),
               ),
             ),
-            // Deslizar verticalmente sobre la cuadrícula también cambia de
-            // mes (arriba = mes siguiente, abajo = mes anterior), además de
-            // los botones de flecha ya existentes — pedido de la usuaria.
-            // Se usa Listener (eventos de puntero crudos) en vez de
-            // GestureDetector.onVerticalDragEnd porque todo este bloque vive
-            // dentro de un SingleChildScrollView que también arrastra en
-            // vertical: si compitieran por el mismo "arena" de gestos, el
-            // scroll ambiente podría quedarse con el gesto y este detector
-            // nunca dispararía. Listener no participa en esa disputa: recibe
-            // el down/move/up del dedo sin importar quién más lo use, así
-            // que el cambio de mes siempre se evalúa al soltar, sin
-            // interferir con el tap normal de cada día ni con el scroll de
-            // la pantalla.
-            Listener(
-              behavior: HitTestBehavior.translucent,
-              onPointerDown: (event) {
-                _monthSwipeStartY = event.position.dy;
-                _monthSwipeStartTime = event.timeStamp;
-              },
-              onPointerUp: (event) {
-                final startY = _monthSwipeStartY;
-                final startTime = _monthSwipeStartTime;
-                _monthSwipeStartY = null;
-                _monthSwipeStartTime = null;
-                if (startY == null || startTime == null) return;
-                final deltaY = event.position.dy - startY;
-                final deltaSeconds = (event.timeStamp - startTime).inMicroseconds / 1e6;
-                if (deltaSeconds <= 0) return;
-                final velocity = deltaY / deltaSeconds; // px/s, positivo = hacia abajo
-                if (deltaY.abs() < 40 || velocity.abs() < 200) return;
-                _changeMonth(velocity < 0 ? 1 : -1);
-              },
-              child: ListenableBuilder(
+            // Deslizar verticalmente sobre la cuadrícula solía cambiar de
+            // mes (arriba/abajo) además de los botones de flecha — pedido
+            // por la usuaria en su momento. Se quitó a petición explícita
+            // porque interfería con el scroll normal de la pantalla: ahora
+            // el mes solo cambia con los botones de flecha o el selector de
+            // mes/año.
+            ListenableBuilder(
                 listenable: CalendarStyleController.instance,
                 builder: (context, _) {
                   // "Estilo de calendario" (Configuración > Estilo de
@@ -750,7 +718,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   );
                 },
               ),
-            ),
             const SizedBox(height: 14),
             // Leyenda de 4 categorías: Periodo (círculo sólido), Previsto y
             // Fértil (círculo con borde punteado), y Hoy (anillo verde sin

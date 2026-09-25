@@ -249,6 +249,20 @@ class PregnancyTrackingScreen extends StatelessWidget {
                         width: 190,
                         height: 190,
                         fit: BoxFit.cover,
+                        // Si la imagen del día exacto fallara al decodificar
+                        // por cualquier motivo (visto solo en dispositivo
+                        // real iOS, nunca en el emulador), antes se quedaba
+                        // en blanco sin avisar. Ahora se ve al menos un
+                        // ícono en vez de nada, y loguea el error concreto
+                        // para poder diagnosticarlo si vuelve a pasar.
+                        errorBuilder: (context, error, stackTrace) {
+                          debugPrint('pregnancyDayImagePath fallo al cargar: $error');
+                          return Container(
+                            color: Colors.white.withOpacity(0.06),
+                            alignment: Alignment.center,
+                            child: Icon(Icons.pregnant_woman, size: 72, color: _gold.withOpacity(0.7)),
+                          );
+                        },
                       ),
                     ),
                 ],
