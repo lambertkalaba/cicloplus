@@ -2553,6 +2553,61 @@ class AppStrings {
   /// Opción "Cancelar" del menú contextual de un día.
   String get calendarCancelOption => _t({'es': 'Cancelar', 'en': 'Cancel', 'fr': 'Annuler', 'de': 'Abbrechen', 'ru': 'Отмена', 'ar': 'إلغاء', 'hi': 'रद्द करें', 'bn': 'বাতিল করুন', 'pt': 'Cancelar',});
 
+  // ---- Chip "Ciclo irregular" arriba del calendario (acceso rápido, ver
+  // calendar_screen.dart _IrregularModeChip / _openIrregularModeSheet). ----
+
+  /// Título de la hoja que se abre al tocar el chip.
+  String get calendarIrregularSheetTitle => _t({'es': '¿Cómo quieres ver el calendario?', 'en': 'How do you want to view the calendar?', 'fr': 'Comment voulez-vous voir le calendrier ?', 'de': 'Wie möchtest du den Kalender sehen?', 'ru': 'Как вы хотите видеть календарь?', 'ar': 'كيف تريدين رؤية التقويم؟', 'hi': 'आप कैलेंडर कैसे देखना चाहती हैं?', 'bn': 'আপনি ক্যালেন্ডারটি কীভাবে দেখতে চান?', 'pt': 'Como você quer ver o calendário?',});
+
+  /// Etiqueta corta del chip cuando está en modo regular (por defecto).
+  String get calendarIrregularChipRegular => _t({'es': 'Ciclo regular', 'en': 'Regular cycle', 'fr': 'Cycle régulier', 'de': 'Regelmäßiger Zyklus', 'ru': 'Регулярный цикл', 'ar': 'دورة منتظمة', 'hi': 'नियमित चक्र', 'bn': 'নিয়মিত চক্র', 'pt': 'Ciclo regular',});
+
+  /// Etiqueta corta del chip cuando el modo irregular está activo (siempre o vista previa).
+  String get calendarIrregularChipActive => _t({'es': 'Ciclo irregular', 'en': 'Irregular cycle', 'fr': 'Cycle irrégulier', 'de': 'Unregelmäßiger Zyklus', 'ru': 'Нерегулярный цикл', 'ar': 'دورة غير منتظمة', 'hi': 'अनियमित चक्र', 'bn': 'অনিয়মিত চক্র', 'pt': 'Ciclo irregular',});
+
+  /// Etiqueta añadida al chip cuando el modo irregular es solo vista previa (no guardado).
+  String get calendarIrregularChipPreviewSuffix => _t({'es': ' (vista previa)', 'en': ' (preview)', 'fr': ' (aperçu)', 'de': ' (Vorschau)', 'ru': ' (просмотр)', 'ar': ' (معاينة)', 'hi': ' (पूर्वावलोकन)', 'bn': ' (প্রিভিউ)', 'pt': ' (pré-visualização)',});
+
+  /// Opción "Regular" de la hoja del chip.
+  String get calendarIrregularOptionRegular => _t({'es': 'Regular', 'en': 'Regular', 'fr': 'Régulier', 'de': 'Regelmäßig', 'ru': 'Регулярный', 'ar': 'منتظمة', 'hi': 'नियमित', 'bn': 'নিয়মিত', 'pt': 'Regular',});
+
+  /// Opción "Irregular — ver una vez" de la hoja del chip.
+  String get calendarIrregularOptionPreview => _t({'es': 'Irregular — solo ver ahora', 'en': 'Irregular — preview only', 'fr': 'Irrégulier — aperçu seulement', 'de': 'Unregelmäßig — nur Vorschau', 'ru': 'Нерегулярный — только просмотр', 'ar': 'غير منتظمة — معاينة فقط', 'hi': 'अनियमित — केवल पूर्वावलोकन', 'bn': 'অনিয়মিত — শুধু প্রিভিউ', 'pt': 'Irregular — só pré-visualizar',});
+
+  /// Opción "Irregular — activarlo siempre" de la hoja del chip.
+  String get calendarIrregularOptionAlways => _t({'es': 'Irregular — activarlo siempre', 'en': 'Irregular — always on', 'fr': 'Irrégulier — toujours activé', 'de': 'Unregelmäßig — immer aktiv', 'ru': 'Нерегулярный — всегда включено', 'ar': 'غير منتظمة — تفعيل دائم', 'hi': 'अनियमित — हमेशा चालू', 'bn': 'অনিয়মিত — সবসময় চালু', 'pt': 'Irregular — sempre ativo',});
+
+  // ---- "Orden de las tarjetas de Registrar" (Configuración > Opciones
+  // personalizadas > RegisterCardOrderScreen). ----
+
+  /// Fila de navegación en Configuración y título de la pantalla de reordenar.
+  String get settingsRegisterCardOrder => _t({'es': 'Orden de las tarjetas de Registrar', 'en': 'Log screen card order', 'fr': 'Ordre des cartes d’enregistrement', 'de': 'Kartenreihenfolge in Erfassen', 'ru': 'Порядок карточек экрана записи', 'ar': 'ترتيب بطاقات شاشة التسجيل', 'hi': 'रजिस्टर स्क्रीन कार्ड का क्रम', 'bn': 'রেজিস্টার স্ক্রিনের কার্ডের ক্রম', 'pt': 'Ordem dos cartões de Registrar',});
+
+  /// Texto de ayuda arriba de la lista arrastrable.
+  String get settingsRegisterCardOrderHint => _t({'es': 'Arrastra para cambiar el orden. Flujo menstrual y Síntomas siempre van primero, y no se pueden mover.', 'en': 'Drag to reorder. Menstrual flow and Symptoms always come first and can’t be moved.', 'fr': 'Faites glisser pour réorganiser. Flux menstruel et Symptômes sont toujours en premier et ne peuvent pas être déplacés.', 'de': 'Ziehen, um die Reihenfolge zu ändern. Menstruationsfluss und Symptome stehen immer an erster Stelle und können nicht verschoben werden.', 'ru': 'Перетащите, чтобы изменить порядок. «Менструальные выделения» и «Симптомы» всегда идут первыми и не могут быть перемещены.', 'ar': 'اسحب لإعادة الترتيب. يظهر تدفق الدورة والأعراض دائمًا أولاً ولا يمكن نقلهما.', 'hi': 'क्रम बदलने के लिए खींचें। मासिक प्रवाह और लक्षण हमेशा सबसे पहले आते हैं और इन्हें हटाया नहीं जा सकता।', 'bn': 'ক্রম পরিবর্তন করতে টেনে আনুন। ঋতুস্রাব প্রবাহ এবং লক্ষণ সবসময় প্রথমে থাকে এবং সরানো যায় না।', 'pt': 'Arraste para reordenar. Fluxo menstrual e Sintomas sempre vêm primeiro e não podem ser movidos.',});
+
+  // ---- AccountPendingDeletionScreen (recuperación de cuenta dentro de 30
+  // días tras "Borrar cuenta" — ver AuthService.requestAccountDeletion). ----
+
+  String get accountPendingDeletionTitle => _t({'es': 'Tu cuenta está pendiente de borrado', 'en': 'Your account is scheduled for deletion', 'fr': 'Votre compte est en attente de suppression', 'de': 'Dein Konto ist zur Löschung vorgemerkt', 'ru': 'Ваш аккаунт ожидает удаления', 'ar': 'حسابك في انتظار الحذف', 'hi': 'आपका खाता हटाए जाने के लिए निर्धारित है', 'bn': 'আপনার অ্যাকাউন্ট মুছে ফেলার জন্য নির্ধারিত', 'pt': 'Sua conta está pendente de exclusão',});
+
+  /// $1 = fecha (dd/mm/aaaa), $2 = días restantes.
+  String accountPendingDeletionBody(String date, int daysLeft) => _t({
+        'es': 'Pediste borrar tu cuenta. Se borrará para siempre el $date (en $daysLeft días) junto con todos tus datos. Si quieres seguir usando CicloPlus, puedes recuperarla ahora mismo.',
+        'en': 'You asked to delete your account. It will be permanently deleted on $date (in $daysLeft days) along with all your data. If you’d like to keep using CicloPlus, you can recover it right now.',
+        'fr': 'Vous avez demandé la suppression de votre compte. Il sera définitivement supprimé le $date (dans $daysLeft jours) avec toutes vos données. Si vous souhaitez continuer à utiliser CicloPlus, vous pouvez le récupérer maintenant.',
+        'de': 'Du hast die Löschung deines Kontos angefordert. Es wird am $date (in $daysLeft Tagen) zusammen mit all deinen Daten endgültig gelöscht. Wenn du CicloPlus weiter nutzen möchtest, kannst du es jetzt wiederherstellen.',
+        'ru': 'Вы запросили удаление аккаунта. Он будет окончательно удалён $date (через $daysLeft дн.) вместе со всеми данными. Если вы хотите продолжить пользоваться CicloPlus, вы можете восстановить его прямо сейчас.',
+        'ar': 'طلبتِ حذف حسابك. سيُحذف نهائيًا في $date (خلال $daysLeft يومًا) مع جميع بياناتك. إذا كنتِ ترغبين في الاستمرار باستخدام CicloPlus، يمكنك استعادته الآن.',
+        'hi': 'आपने अपना खाता हटाने का अनुरोध किया था। यह $date को (यानी $daysLeft दिनों में) आपके सभी डेटा सहित स्थायी रूप से हटा दिया जाएगा। यदि आप CicloPlus का उपयोग जारी रखना चाहती हैं, तो आप अभी इसे पुनर्प्राप्त कर सकती हैं।',
+        'bn': 'আপনি আপনার অ্যাকাউন্ট মুছে ফেলার অনুরোধ করেছিলেন। এটি $date তারিখে (অর্থাৎ $daysLeft দিনের মধ্যে) আপনার সমস্ত ডেটাসহ স্থায়ীভাবে মুছে ফেলা হবে। আপনি যদি CicloPlus ব্যবহার চালিয়ে যেতে চান, তাহলে এখনই এটি পুনরুদ্ধার করতে পারেন।',
+        'pt': 'Você pediu para excluir sua conta. Ela será excluída permanentemente em $date (em $daysLeft dias) junto com todos os seus dados. Se quiser continuar usando o CicloPlus, você pode recuperá-la agora mesmo.',
+      });
+
+  String get accountPendingDeletionRecover => _t({'es': 'Recuperar mi cuenta', 'en': 'Recover my account', 'fr': 'Récupérer mon compte', 'de': 'Mein Konto wiederherstellen', 'ru': 'Восстановить аккаунт', 'ar': 'استعادة حسابي', 'hi': 'मेरा खाता पुनर्प्राप्त करें', 'bn': 'আমার অ্যাকাউন্ট পুনরুদ্ধার করুন', 'pt': 'Recuperar minha conta',});
+
+  String get accountPendingDeletionSignOut => _t({'es': 'Cerrar sesión', 'en': 'Sign out', 'fr': 'Se déconnecter', 'de': 'Abmelden', 'ru': 'Выйти', 'ar': 'تسجيل الخروج', 'hi': 'साइन आउट करें', 'bn': 'সাইন আউট করুন', 'pt': 'Sair',});
+
   // ---- Panel "Leyenda" rediseñado: tarjetas con icono + switch por
   // categoría, agrupadas. Cada switch decide si esa categoría se pinta en
   // el calendario — pensado para privacidad (poder mostrarle el calendario
@@ -5216,12 +5271,12 @@ class AppStrings {
         'ar': 'هل تريدين حذف حسابكِ؟', 'hi': 'क्या आप अपना खाता हटाना चाहते हैं?', 'bn': 'আপনার অ্যাকাউন্ট মুছে ফেলবেন?', 'pt': 'Excluir sua conta?',
       });
   String get settingsDeleteAccountConfirmBody => _t({
-        'es': 'Se eliminará tu cuenta por completo: registros del ciclo, ajustes y tu acceso a CicloPlus. No podrás recuperarla. Esta acción no se puede deshacer.',
-        'en': "Your account will be permanently deleted: cycle records, settings, and your access to CicloPlus. You won't be able to recover it. This action cannot be undone.",
-        'fr': "Votre compte sera définitivement supprimé : données de cycle, paramètres et votre accès à CicloPlus. Vous ne pourrez pas le récupérer. Cette action est irréversible.",
-        'de': 'Dein Konto wird endgültig gelöscht: Zyklusdaten, Einstellungen und dein Zugang zu CicloPlus. Du kannst es nicht wiederherstellen. Diese Aktion kann nicht rückgängig gemacht werden.',
-        'ru': 'Твой аккаунт будет удалён полностью: записи цикла, настройки и твой доступ к CicloPlus. Ты не сможешь его восстановить. Это действие нельзя отменить.',
-        'ar': 'سيتم حذف حسابكِ بالكامل: سجلات الدورة، الإعدادات، ووصولكِ إلى CicloPlus. لن تتمكني من استعادته. لا يمكن التراجع عن هذا الإجراء.', 'hi': 'आपका खाता पूरी तरह हटा दिया जाएगा: चक्र के रिकॉर्ड, सेटिंग्स और CicloPlus तक आपकी पहुंच। आप इसे वापस नहीं पा सकेंगे। यह कार्रवाई पूर्ववत नहीं की जा सकती।', 'bn': 'আপনার অ্যাকাউন্ট সম্পূর্ণরূপে মুছে যাবে: চক্রের রেকর্ড, সেটিংস এবং CicloPlus-এ আপনার প্রবেশাধিকার। আপনি এটি ফিরে পাবেন না। এই কাজটি বাতিল করা যাবে না।', 'pt': 'Sua conta será excluída permanentemente: registros de ciclo, configurações e seu acesso ao CicloPlus. Você não poderá recuperá-la. Esta ação não pode ser desfeita.',
+        'es': 'Se borrará tu cuenta y todos tus datos de forma permanente ahora mismo. Esta acción no se puede deshacer. Si más adelante quieres volver, tendrás que crear una cuenta nueva.',
+        'en': "Your account and all your data will be permanently deleted right now. This can't be undone. If you want to come back later, you'll need to create a new account.",
+        'fr': "Votre compte et toutes vos données seront supprimés définitivement dès maintenant. Cette action est irréversible. Si vous souhaitez revenir plus tard, vous devrez créer un nouveau compte.",
+        'de': 'Dein Konto und alle deine Daten werden jetzt endgültig gelöscht. Das kann nicht rückgängig gemacht werden. Wenn du später zurückkehren möchtest, musst du ein neues Konto erstellen.',
+        'ru': 'Твой аккаунт и все данные будут удалены навсегда прямо сейчас. Это действие нельзя отменить. Если захочешь вернуться позже, придётся создать новый аккаунт.',
+        'ar': 'سيتم حذف حسابكِ وجميع بياناتكِ نهائيًا الآن. لا يمكن التراجع عن هذا الإجراء. إذا رغبتِ بالعودة لاحقًا، سيتعين عليكِ إنشاء حساب جديد.', 'hi': 'आपका खाता और आपका सारा डेटा अभी स्थायी रूप से हटा दिया जाएगा। इसे पूर्ववत नहीं किया जा सकता। यदि आप बाद में वापस आना चाहती हैं, तो आपको एक नया खाता बनाना होगा।', 'bn': 'আপনার অ্যাকাউন্ট এবং সমস্ত ডেটা এখনই স্থায়ীভাবে মুছে ফেলা হবে। এটি ফেরানো যাবে না। পরে ফিরে আসতে চাইলে আপনাকে নতুন অ্যাকাউন্ট তৈরি করতে হবে।', 'pt': 'Sua conta e todos os seus dados serão excluídos permanentemente agora. Isso não pode ser desfeito. Se quiser voltar depois, você precisará criar uma nova conta.',
       });
   String get settingsDeleteAccountConfirmPasswordBody => _t({
         'es': 'Por seguridad, escribe la contraseña con la que iniciaste sesión antes de borrar tu cuenta.',
@@ -5240,12 +5295,12 @@ class AppStrings {
         'ar': 'لأسباب أمنية، سجّلي الدخول مجددًا بنفس الحساب قبل حذف حسابكِ.', 'hi': 'सुरक्षा कारणों से, अपना खाता हटाने से पहले उसी खाते से दोबारा लॉग इन करें।', 'bn': 'নিরাপত্তার জন্য, আপনার অ্যাকাউন্ট মুছে ফেলার আগে একই অ্যাকাউন্ট দিয়ে আবার লগ ইন করুন।', 'pt': 'Por segurança, faça login novamente com a mesma conta antes de excluir sua conta.',
       });
   String get settingsDeleteAccountSuccess => _t({
-        'es': 'Tu cuenta se ha borrado. Hasta pronto 💜',
-        'en': 'Your account has been deleted. See you soon 💜',
-        'fr': 'Votre compte a été supprimé. À bientôt 💜',
-        'de': 'Dein Konto wurde gelöscht. Bis bald 💜',
-        'ru': 'Твой аккаунт удалён. До скорого 💜',
-        'ar': 'تم حذف حسابكِ. إلى اللقاء 💜', 'hi': 'आपका खाता हटा दिया गया है। फिर मिलेंगे 💜', 'bn': 'আপনার অ্যাকাউন্ট মুছে ফেলা হয়েছে। শীঘ্রই দেখা হবে 💜', 'pt': 'Sua conta foi excluída. Até breve 💜',
+        'es': 'Tu cuenta se ha borrado por completo. Gracias por haber usado CicloPlus 💜',
+        'en': 'Your account has been permanently deleted. Thanks for using CicloPlus 💜',
+        'fr': 'Votre compte a été définitivement supprimé. Merci d’avoir utilisé CicloPlus 💜',
+        'de': 'Dein Konto wurde endgültig gelöscht. Danke, dass du CicloPlus genutzt hast 💜',
+        'ru': 'Твой аккаунт был удалён навсегда. Спасибо, что пользовалась CicloPlus 💜',
+        'ar': 'تم حذف حسابكِ نهائيًا. شكرًا لاستخدامكِ CicloPlus 💜', 'hi': 'आपका खाता स्थायी रूप से हटा दिया गया है। CicloPlus इस्तेमाल करने के लिए धन्यवाद 💜', 'bn': 'আপনার অ্যাকাউন্ট স্থায়ীভাবে মুছে ফেলা হয়েছে। CicloPlus ব্যবহার করার জন্য ধন্যবাদ 💜', 'pt': 'Sua conta foi excluída permanentemente. Obrigado por usar o CicloPlus 💜',
       });
   String get settingsFaceIdPassword =>
       _t({'es': 'Face ID & contraseña', 'en': 'Face ID & password', 'fr': 'Face ID et mot de passe', 'de': 'Face ID & Passwort', 'ru': 'Face ID и пароль', 'ar': 'Face ID وكلمة المرور', 'hi': 'Face ID और पासवर्ड', 'bn': 'Face ID ও পাসওয়ার্ড', 'pt': 'Face ID e senha',});

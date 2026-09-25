@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CicloPlus — Suivi des règles et de la grossesse, gratuit en 9 langues</title>
+<meta name="description" content="CicloPlus est une application gratuite pour suivre votre cycle menstruel ou votre grossesse au jour le jour, la partager avec votre partenaire et faire pousser votre jardin. Sans publicité, votre vie privée avant tout. Disponible en 9 langues.">
+<meta property="og:title" content="CicloPlus — Suivi des règles et de la grossesse">
+<meta property="og:description" content="Application gratuite de suivi des règles et de la grossesse, avec mode partenaire et un jardin qui grandit avec vous. Disponible en 9 langues.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://cicloplus.com/index-fr.html">
+<link rel="alternate" hreflang="es" href="https://cicloplus.com/">
+<link rel="alternate" hreflang="en" href="https://cicloplus.com/index-en.html">
+<link rel="alternate" hreflang="fr" href="https://cicloplus.com/index-fr.html">
+<link rel="alternate" hreflang="de" href="https://cicloplus.com/index-de.html">
+<link rel="alternate" hreflang="pt" href="https://cicloplus.com/index-pt.html">
+<link rel="alternate" hreflang="ru" href="https://cicloplus.com/index-ru.html">
+<link rel="alternate" hreflang="ar" href="https://cicloplus.com/index-ar.html">
+<link rel="alternate" hreflang="hi" href="https://cicloplus.com/index-hi.html">
+<link rel="alternate" hreflang="bn" href="https://cicloplus.com/index-bn.html">
+<link rel="alternate" hreflang="x-default" href="https://cicloplus.com/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "CicloPlus",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "iOS, Android",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Application gratuite pour suivre son cycle menstruel ou sa grossesse au jour le jour, avec mode partenaire et calculatrices de fertilité et de terme."
+}
+</script>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    color: #2b2530;
+    line-height: 1.6;
+    background: #fffafc;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+  a { color: #9c4dcc; }
+
+  .lang-switcher { text-align: right; padding: 10px 0; border-bottom: 1px solid #f4e9f6; }
+  .lang-select-wrap { position: relative; display: inline-block; }
+  .lang-select-wrap::after {
+    content: "\25BE";
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #9c4dcc; font-size: 0.8rem; pointer-events: none;
+  }
+  select.lang-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    font-family: inherit; font-size: 0.85rem; font-weight: 600; color: #2b2530;
+    background: #fbeafd; border: 1px solid #f0d9f4; border-radius: 10px;
+    padding: 7px 30px 7px 14px; cursor: pointer;
+  }
+  select.lang-select:hover { background: #f6dcfa; }
+
+  header.hero {
+    background: linear-gradient(160deg, #fbeafd 0%, #fffafc 60%);
+    padding: 56px 0 48px;
+    text-align: center;
+  }
+  .icon-badge {
+    width: 96px; height: 96px; border-radius: 24px; overflow: hidden;
+    box-shadow: 0 8px 24px rgba(156,77,204,0.25);
+    margin: 0 auto 20px;
+    background: linear-gradient(160deg, #c96fe6, #9c4dcc);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 44px;
+  }
+  header.hero h1 { font-size: 2.1rem; margin: 0 0 10px; color: #1f1a24; }
+  header.hero p.tag { font-size: 1.05rem; color: #6b5e70; max-width: 560px; margin: 0 auto 28px; }
+
+  .store-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 18px; }
+  .store-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #1f1a24; color: #fff; text-decoration: none;
+    padding: 12px 22px; border-radius: 14px; font-weight: 600; font-size: 0.95rem;
+    transition: transform 0.15s ease;
+  }
+  .store-btn:hover { transform: translateY(-2px); }
+  .store-btn .glyph { font-size: 1.3rem; line-height: 1; }
+  .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 6px; }
+  .badge {
+    font-size: 0.8rem; color: #9c4dcc; background: #fbeafd;
+    border-radius: 999px; padding: 5px 14px; font-weight: 600;
+  }
+
+  section { padding: 48px 0; }
+  h2.section-title {
+    font-size: 1.5rem; text-align: center; margin: 0 0 8px; color: #1f1a24;
+  }
+  p.section-sub { text-align: center; color: #8a7f8e; max-width: 520px; margin: 0 auto 32px; }
+
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .feature-card {
+    background: #fff; border-radius: 16px; padding: 22px;
+    box-shadow: 0 2px 10px rgba(43,37,48,0.06); border: 1px solid #f4e9f6;
+  }
+  .feature-card .emoji { font-size: 1.7rem; margin-bottom: 10px; display: block; }
+  .feature-card h3 { font-size: 1.02rem; margin: 0 0 6px; color: #1f1a24; }
+  .feature-card p { font-size: 0.9rem; color: #6b5e70; margin: 0; }
+
+  .calc-section { background: #fbeafd; }
+  .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .calc-card {
+    background: #fff; border-radius: 18px; padding: 26px; box-shadow: 0 4px 16px rgba(43,37,48,0.07);
+  }
+  .calc-card h3 { margin: 0 0 4px; font-size: 1.15rem; color: #1f1a24; }
+  .calc-card p.desc { font-size: 0.85rem; color: #8a7f8e; margin: 0 0 18px; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 0.82rem; font-weight: 600; color: #4a3f4e; margin-bottom: 5px; }
+  .field input {
+    width: 100%; padding: 10px 12px; border-radius: 10px; border: 1.5px solid #f0d9f4;
+    font-size: 0.95rem; font-family: inherit; color: #2b2530;
+  }
+  .field input:focus { outline: none; border-color: #9c4dcc; }
+  .calc-btn {
+    width: 100%; background: #9c4dcc; color: #fff; border: none; border-radius: 12px;
+    padding: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer; margin-top: 4px;
+  }
+  .calc-btn:hover { background: #8a3fb8; }
+  .calc-result {
+    margin-top: 18px; padding: 16px; background: #fbeafd; border-radius: 12px;
+    font-size: 0.9rem; display: none;
+  }
+  .calc-result.show { display: block; }
+  .calc-result .row { display: flex; justify-content: space-between; padding: 5px 0; }
+  .calc-result .row strong { color: #1f1a24; }
+  .calc-result .row span.val { color: #9c4dcc; font-weight: 700; }
+  .calc-cta {
+    margin-top: 14px; font-size: 0.82rem; color: #6b5e70; text-align: center;
+  }
+  .calc-disclaimer { font-size: 0.75rem; color: #a89aae; text-align: center; margin-top: 28px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+  .partner-cta {
+    text-align: center; background: #1f1a24; color: #fff; border-radius: 24px;
+    padding: 44px 28px; margin: 8px 0;
+  }
+  .partner-cta h2 { color: #fff; margin: 0 0 10px; font-size: 1.4rem; }
+  .partner-cta p { color: #d8cddd; max-width: 480px; margin: 0 auto 24px; font-size: 0.95rem; }
+
+  footer {
+    text-align: center; padding: 32px 24px 56px; font-size: 0.85rem; color: #a89aae;
+  }
+  footer a { color: #9c4dcc; margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher">
+  <div class="wrap">
+    <span class="lang-select-wrap">
+      <select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Idioma / Language">
+        <option value="/">Español</option>
+        <option value="/index-en.html">English</option>
+        <option value="/index-fr.html" selected>Français</option>
+        <option value="/index-de.html">Deutsch</option>
+        <option value="/index-pt.html">Português</option>
+        <option value="/index-ru.html">Русский</option>
+        <option value="/index-ar.html">العربية</option>
+        <option value="/index-hi.html">हिन्दी</option>
+        <option value="/index-bn.html">বাংলা</option>
+      </select>
+    </span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="icon-badge" role="img" aria-label="Icône CicloPlus">🌸</div>
+    <h1>Vos règles, sous contrôle</h1>
+    <p class="tag">CicloPlus s'adapte à vos besoins : suivre mes règles, essayer de concevoir avec prédiction des jours fertiles, ou suivre ma grossesse semaine par semaine. Et si vous le souhaitez, partagez votre suivi avec votre partenaire en mode lecture seule — sans publicité, votre vie privée avant tout.</p>
+    <div class="store-buttons">
+      <a class="store-btn" href="https://apps.apple.com/app/id6813932649" target="_blank" rel="noopener">
+        <span class="glyph">🍎</span> Télécharger sur l'App Store
+      </a>
+      <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.cicloplus.cicloplus_app" target="_blank" rel="noopener">
+        <span class="glyph">▶</span> Disponible sur Google Play
+      </a>
+    </div>
+    <div class="badges">
+      <span class="badge">Gratuit</span>
+      <span class="badge">Sans publicité</span>
+      <span class="badge">9 langues</span>
+      <span class="badge">Vie privée d'abord</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">Tout ce dont vous avez besoin, au même endroit</h2>
+    <p class="section-sub">Suivi du cycle ou de la grossesse, conçu pour vraiment vous accompagner.</p>
+    <div class="features">
+      <div class="feature-card">
+        <span class="emoji">🌸</span>
+        <h3>Cycle et grossesse</h3>
+        <p>Enregistrez vos règles ou suivez votre grossesse semaine par semaine, avec prédictions de la fenêtre fertile et de l'ovulation.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🌱</span>
+        <h3>Votre jardin</h3>
+        <p>Un jardin qui fleurit à chaque fois que vous enregistrez — une jolie façon de visualiser votre régularité.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">💬</span>
+        <h3>Mode partenaire</h3>
+        <p>Invitez votre partenaire à suivre votre grossesse ou votre cycle en mode lecture seule, avec chat et liste de souhaits.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🔒</span>
+        <h3>Vie privée d'abord</h3>
+        <p>Vos données vous appartiennent. Pas de publicité, jamais revendues à des tiers.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🌍</span>
+        <h3>9 langues</h3>
+        <p>Espagnol, anglais, français, allemand, portugais, russe, arabe, hindi et bengali.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🔔</span>
+        <h3>Rappels</h3>
+        <p>Alertes pour vos règles, ovulation et rendez-vous, entièrement personnalisables.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="calc-section">
+  <div class="wrap">
+    <h2 class="section-title">Calculatrices rapides</h2>
+    <p class="section-sub">Sans inscription, rien n'est enregistré — juste une estimation instantanée. Pour un suivi automatique chaque mois, utilisez l'application.</p>
+    <div class="calc-grid">
+
+      <div class="calc-card">
+        <h3>Jours fertiles</h3>
+        <p class="desc">Estimez votre fenêtre fertile et vos prochaines règles.</p>
+        <div class="field">
+          <label for="lmpDate">Premier jour de vos dernières règles</label>
+          <input type="date" id="lmpDate">
+        </div>
+        <div class="field">
+          <label for="cycleLen">Durée moyenne de votre cycle (jours)</label>
+          <input type="number" id="cycleLen" value="28" min="20" max="45">
+        </div>
+        <button class="calc-btn" onclick="calcFertile()">Calculer</button>
+        <div class="calc-result" id="fertileResult"></div>
+      </div>
+
+      <div class="calc-card">
+        <h3>Date d'accouchement prévue</h3>
+        <p class="desc">À partir de vos dernières règles (règle de Naegele).</p>
+        <div class="field">
+          <label for="dueLmpDate">Premier jour de vos dernières règles</label>
+          <input type="date" id="dueLmpDate">
+        </div>
+        <button class="calc-btn" onclick="calcDueDate()">Calculer</button>
+        <div class="calc-result" id="dueResult"></div>
+      </div>
+
+    </div>
+    <p class="calc-disclaimer">Ces calculatrices donnent une estimation indicative et ne remplacent pas l'avis d'un professionnel de santé. Chaque cycle et chaque grossesse sont différents.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="partner-cta">
+      <h2>Vivez-le accompagnée</h2>
+      <p>Invitez votre partenaire à suivre votre cycle ou votre grossesse avec vous — en mode lecture seule, avec chat et liste de souhaits inclus.</p>
+      <div class="store-buttons">
+        <a class="store-btn" href="https://apps.apple.com/app/id6813932649" target="_blank" rel="noopener">
+          <span class="glyph">🍎</span> App Store
+        </a>
+        <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.cicloplus.cicloplus_app" target="_blank" rel="noopener">
+          <span class="glyph">▶</span> Google Play
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>CicloPlus</div>
+  <div>
+    <a href="/app.html">Voir mes données</a>
+    <a href="/privacidad.html">Politique de confidentialité</a>
+    <a href="/terminos.html">Conditions</a>
+    <a href="mailto:soportelambert@gmail.com">Contact</a>
+  </div>
+</footer>
+
+<script>
+  function fmt(d) {
+    return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  function calcFertile() {
+    const lmpVal = document.getElementById('lmpDate').value;
+    const cycleLen = parseInt(document.getElementById('cycleLen').value, 10) || 28;
+    const box = document.getElementById('fertileResult');
+    if (!lmpVal) {
+      box.innerHTML = '<p style="color:#c0392b;margin:0;">Indiquez la date de vos dernières règles.</p>';
+      box.classList.add('show');
+      return;
+    }
+    const lastPeriod = new Date(lmpVal + 'T00:00:00');
+    const ovulation = new Date(lastPeriod); ovulation.setDate(ovulation.getDate() + (cycleLen - 14));
+    const fertileStart = new Date(ovulation); fertileStart.setDate(fertileStart.getDate() - 5);
+    const fertileEnd = new Date(ovulation); fertileEnd.setDate(fertileEnd.getDate() + 1);
+    const nextPeriod = new Date(lastPeriod); nextPeriod.setDate(nextPeriod.getDate() + cycleLen);
+
+    box.innerHTML =
+      '<div class="row"><span>Fenêtre fertile</span><span class="val">' + fmt(fertileStart) + ' \u2013 ' + fmt(fertileEnd) + '</span></div>' +
+      '<div class="row"><span>Ovulation estimée</span><span class="val">' + fmt(ovulation) + '</span></div>' +
+      '<div class="row"><span>Prochaines règles estimées</span><span class="val">' + fmt(nextPeriod) + '</span></div>' +
+      '<div class="calc-cta">CicloPlus recalcule cela automatiquement chaque mois et vous prévient avant l'échéance.</div>';
+    box.classList.add('show');
+  }
+
+  function calcDueDate() {
+    const lmpVal = document.getElementById('dueLmpDate').value;
+    const box = document.getElementById('dueResult');
+    if (!lmpVal) {
+      box.innerHTML = '<p style="color:#c0392b;margin:0;">Indiquez la date de vos dernières règles.</p>';
+      box.classList.add('show');
+      return;
+    }
+    const lastPeriod = new Date(lmpVal + 'T00:00:00');
+    const dueDate = new Date(lastPeriod); dueDate.setDate(dueDate.getDate() + 280);
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const diffDays = Math.floor((today - lastPeriod) / 86400000);
+    let weeksLine = '';
+    if (diffDays >= 0 && diffDays <= 300) {
+      const weeks = Math.floor(diffDays / 7);
+      const days = diffDays % 7;
+      weeksLine = '<div class="row"><span>Semaine actuelle</span><span class="val">' + weeks + ' semaines et ' + days + ' jours</span></div>';
+    }
+    box.innerHTML =
+      '<div class="row"><span>Date d'accouchement prévue</span><span class="val">' + fmt(dueDate) + '</span></div>' +
+      weeksLine +
+      '<div class="calc-cta">CicloPlus vous montre comment votre bébé grandit jour après jour, avec des images réelles de son développement.</div>';
+    box.classList.add('show');
+  }
+</script>
+
+</body>
+</html>

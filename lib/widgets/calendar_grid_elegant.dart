@@ -323,8 +323,22 @@ class CalendarGridElegant extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: (showTodayRing || showSelectedRing) ? null : shapeBackground,
-              shape: circleLook ? BoxShape.circle : BoxShape.rectangle,
-              borderRadius: circleLook ? null : BorderRadius.zero,
+              // Nunca se alterna `shape` entre circle/rectangle aquí: un
+              // AnimatedContainer interpola (tween) la decoración vieja y
+              // la nueva, y a mitad de esa animación Flutter puede quedar
+              // con `shape: circle` mientras `borderRadius` todavía no ha
+              // llegado a null del todo (viene de BorderRadius.zero) —
+              // combinación que BoxDecoration prohíbe explícitamente
+              // ("A circle cannot have a border radius") y que causaba un
+              // error visible como un parpadeo rojo cada vez que el aro
+              // de "seleccionado" aparecía/desaparecía. En su lugar se usa
+              // siempre `BoxShape.rectangle` con un borderRadius que llega
+              // a la mitad del tamaño (círculo perfecto) cuando toca verse
+              // redondo — así la animación solo interpola un número
+              // (borderRadius), nunca el tipo de forma, y nunca es inválida
+              // a mitad de camino.
+              shape: BoxShape.rectangle,
+              borderRadius: circleLook ? BorderRadius.circular(beadSize / 2) : BorderRadius.zero,
               border: showTodayRing
                   ? Border.all(color: CalendarPhaseColors.todayRingColor, width: 2.5)
                   : showSelectedRing

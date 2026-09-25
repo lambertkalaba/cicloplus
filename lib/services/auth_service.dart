@@ -505,37 +505,57 @@ class AuthService {
     await _auth.signOut();
   }
 
-  /// Borra la cuenta por completo y de forma irreversible: el documento de
-  /// Firestore (`users/{uid}`, que incluye la fecha de registro usada para
-  /// la prueba gratis) y la propia cuenta en Firebase Authentication. Cierra
-  /// también la sesión de Google/Facebook si estaba activa, igual que
-  /// `signOut`.
+  /// Borra la cuenta YA MISMO, de forma permanente — sin plazo de gracia
+  /// ni posibilidad de recuperarla (así lo pidió la usuaria explícitamente:
+  /// nada de esperar 30 días, borrado total al pulsar "Borrar cuenta"). Si
+  /// más adelante quiere volver, tendrá que registrarse de cero como una
+  /// cuenta nueva (con el mismo correo o uno distinto, Firebase Auth no
+  /// pone problema en reutilizar un correo ya borrado).
   ///
-  /// Los registros del ciclo (colección `days`) y los ajustes locales
-  /// (SharedPreferences) NO se borran aquí — la pantalla que llama a este
-  /// método debe borrarlos antes (StorageService.deleteAll +
-  /// SettingsService.clearAll), para que "Borrar cuenta" borre
-  /// absolutamente todo y no deje nada huérfano.
+  /// Borra, en este orden: las subcolecciones conocidas bajo
+  /// `users/{uid}` (days, pregnancy, cycle, partners, reconnectRequests,
+  /// wishes — cada una vía batch), el propio documento `users/{uid}`, y
+  /// por último la cuenta de Firebase Authentication. Si algún borrado de
+  /// subcolección falla no se aborta el resto: mejor dejar algún documento
+  /// huérfano sin dueño (inofensivo, sin dueño real que lo lea) que dejar
+  /// la cuenta a medio borrar con el correo bloqueado.
   ///
   /// Requiere que la sesión se haya reautenticado recientemente (ver
-  /// `reauthenticate`) — si no, Firebase lanza `requires-recent-login` y
-  /// esto falla con un AuthException claro en vez de un error críptico.
+  /// `reauthenticate`) — si no, Firebase puede rechazar el borrado de la
+  /// cuenta con `requires-recent-login`.
   Future<void> deleteAccount() async {
     final fbUser = _auth.currentUser;
     if (fbUser == null) {
       throw AuthException('No hay ninguna sesión activa.');
     }
-
-    try {
-      await _db.collection(_usersCollection).doc(fbUser.uid).delete();
-      await fbUser.delete();
-    } on fb.FirebaseAuthException catch (e) {
-      throw _mapFirebaseError(e);
+    final userDoc = _db.collection(_usersCollection).doc(fbUser.uid);
+    for (final sub in const ['days', 'pregnancy', 'cycle', 'partners', 'reconnectRequests', 'wishes']) {
+      try {
+        final snapshot = await userDoc.collection(sub).get();
+        if (snapshot.docs.isNotEmpty) {
+          final batch = _db.batch();
+          for (final doc in snapshot.docs) {
+            batch.delete(doc.reference);
+          }
+          await batch.commit();
+        }
+      } catch (_) {
+        // Se sigue con las demás subcolecciones/pasos aunque una falle —
+        // ver comentario de arriba.
+      }
     }
-
     try {
-      await GoogleSignIn().signOut();
+      await userDoc.delete();
     } catch (_) {}
+    try {
+      await fbUser.delete();
+    } catch (e) {
+      throw AuthException(
+        e is fb.FirebaseAuthException && e.code == 'requires-recent-login'
+            ? 'Por seguridad, vuelve a iniciar sesión e inténtalo de nuevo.'
+            : 'No se pudo borrar la cuenta (revisa tu conexión). Inténtalo de nuevo.',
+      );
+    }
   }
 
   /// Devuelve el usuario con sesión activa, o null si nadie ha iniciado sesión.

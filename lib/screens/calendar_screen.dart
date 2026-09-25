@@ -35,6 +35,12 @@ class CalendarScreen extends StatefulWidget {
   /// amplio en vez de una fecha exacta.
   final bool irregularCycleMode;
 
+  /// Avisa a MainTabScreen que el modo irregular cambió (toggle del chip de
+  /// arriba del calendario), para que actualice su propio estado
+  /// _irregularCycleMode y las demás pestañas (Hoy, etc.) usen el nuevo
+  /// valor sin esperar a que se navegue a Configuración y se vuelva.
+  final ValueChanged<bool>? onIrregularModeChanged;
+
   // Duración de ciclo/periodo autoinformadas en el cuestionario de
   // "Intentar concebir" — respaldo para CyclePredictor mientras no hay
   // suficientes datos reales (ver conceive_intake_sheet.dart).
@@ -65,6 +71,7 @@ class CalendarScreen extends StatefulWidget {
     required this.data,
     required this.onDataChanged,
     this.irregularCycleMode = false,
+    this.onIrregularModeChanged,
     this.selfReportedCycleLen,
     this.selfReportedPeriodLen,
     this.appointments = const [],
@@ -80,6 +87,7 @@ class CalendarScreen extends StatefulWidget {
 class _CalendarScreenState extends State<CalendarScreen> {
   DateTime _viewMonth = DateTime(DateTime.now().year, DateTime.now().month, 1);
   DateTime _selectedDate = DateTime.now();
+
 
   // Categorías ocultas del calendario (ver panel "Leyenda" /
   // CalendarLegendCategory) — vacío significa "todo visible", que es el
@@ -457,12 +465,19 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 
-  // Selección simple (un solo toque): solo resalta/selecciona el día
-  // tocado, sin abrir ningún menú — antes un solo toque ya abría de
-  // golpe el menú contextual completo (ver _onDayTap más abajo), a
-  // petición de la usuaria ahora hace falta doble toque o mantener
-  // pulsado el número para abrirlo.
+  // Selección simple (un solo toque): la primera vez que se toca un día
+  // solo lo resalta/selecciona, sin abrir ningún menú. Pero si se toca
+  // OTRA VEZ ese mismo día que ya estaba seleccionado, se abre el mismo
+  // menú contextual que antes exigía un doble toque rápido (ver
+  // _onDayTap) — así no hace falta acertar el gesto de doble-tap: basta
+  // con dar dos toques normales y tranquilos sobre el número. El doble
+  // toque rápido (onDoubleTap, ver los widgets de grilla) se deja activo
+  // también, por si alguien ya tiene el hábito.
   void _onDaySelect(DateTime date) {
+    if (dateKey(date) == dateKey(_selectedDate)) {
+      _onDayTap(date);
+      return;
+    }
     setState(() => _selectedDate = date);
   }
 
@@ -585,6 +600,16 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 
+  // Chip "Ciclo irregular" de arriba del calendario: alterna directamente
+  // entre Regular e Irregular al tocarlo (sin hoja de opciones ni modo
+  // "ver una vez" — se guarda de una vez en Configuración, igual que el
+  // interruptor de Configuración > Configuración de predicción).
+  Future<void> _toggleIrregularMode() async {
+    final newValue = !widget.irregularCycleMode;
+    await _settings.saveIrregularCycleMode(newValue);
+    widget.onIrregularModeChanged?.call(newValue);
+  }
+
   @override
   Widget build(BuildContext context) {
     final predictor = CyclePredictor(
@@ -613,6 +638,23 @@ class _CalendarScreenState extends State<CalendarScreen> {
         padding: const EdgeInsets.fromLTRB(16, 14, 16, 100),
         child: Column(
           children: [
+            // Acceso rápido al modo "Ciclo irregular" — antes solo se podía
+            // cambiar entrando a Configuración > Configuración de
+            // predicción. Ninguna app grande (Flo, Clue) lo pone aquí
+            // arriba del calendario, pero la usuaria pidió tenerlo a mano
+            // sin salir de esta pantalla. Botón directo: muestra "Regular"
+            // o "Irregular" según widget.irregularCycleMode y, al tocarlo,
+            // alterna y guarda de una vez (sin hoja de opciones).
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: _IrregularModeChip(
+                  active: widget.irregularCycleMode,
+                  onTap: _toggleIrregularMode,
+                ),
+              ),
+            ),
             // Deslizar verticalmente sobre la cuadrícula también cambia de
             // mes (arriba = mes siguiente, abajo = mes anterior), además de
             // los botones de flecha ya existentes — pedido de la usuaria.
@@ -1240,6 +1282,54 @@ class _LegendSwitchRow extends StatelessWidget {
 /// distingue con texto en negrita normal (sin color de acento) y un
 /// pequeño espacio arriba, imitando la separación visual de un action
 /// sheet nativo respecto a las demás opciones.
+/// Chip pequeño arriba del calendario para el acceso rápido al modo "Ciclo
+/// irregular" (ver _toggleIrregularMode en _CalendarScreenState). Por
+/// defecto (active=false) muestra "Ciclo regular" en gris neutro; al
+/// tocarlo alterna directamente a "Ciclo irregular" en magenta (sin hoja de
+/// opciones ni modo "ver una vez").
+class _IrregularModeChip extends StatelessWidget {
+  final bool active;
+  final VoidCallback onTap;
+
+  const _IrregularModeChip({required this.active, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final s = AppStrings.of(context);
+    final label = active ? s.calendarIrregularChipActive : s.calendarIrregularChipRegular;
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+          decoration: BoxDecoration(
+            color: active ? AppColors.primary.withOpacity(0.12) : Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: active ? AppColors.primary.withOpacity(0.4) : AppColors.border, width: 1),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.sync_alt_rounded, size: 14, color: active ? AppColors.primary : AppColors.textMuted),
+              const SizedBox(width: 5),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: active ? AppColors.primary : AppColors.textMuted,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _SheetOption extends StatelessWidget {
   final String label;
   final VoidCallback onTap;

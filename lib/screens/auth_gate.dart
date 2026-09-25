@@ -66,9 +66,10 @@ class _AuthGateState extends State<AuthGate> {
   }
 
   void _onAuthenticated(AppUser user) {
+    final isAnonymous = _authService.isCurrentUserAnonymous;
     setState(() {
       _user = user;
-      _isAnonymous = _authService.isCurrentUserAnonymous;
+      _isAnonymous = isAnonymous;
       _emailVerified = _authService.isCurrentUserEmailVerified;
     });
   }

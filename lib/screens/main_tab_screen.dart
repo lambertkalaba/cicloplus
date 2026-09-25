@@ -468,6 +468,11 @@ class _MainTabScreenState extends State<MainTabScreen> with SingleTickerProvider
         data: _data,
         onDataChanged: _onDataChanged,
         irregularCycleMode: _irregularCycleMode,
+        // Chip rápido de arriba del calendario, opción "activarlo siempre"
+        // o "Regular": actualiza este mismo estado para que el resto de
+        // pestañas (Hoy, etc.) usen el nuevo valor al instante, sin
+        // necesitar pasar por Configuración.
+        onIrregularModeChanged: (value) => setState(() => _irregularCycleMode = value),
         selfReportedCycleLen: _selfReportedCycleLen,
         selfReportedPeriodLen: _selfReportedPeriodLen,
         appointments: _appointments,

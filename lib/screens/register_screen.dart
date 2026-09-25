@@ -21,6 +21,17 @@ import '../widgets/reminder_time_sheet.dart' show ReminderDatePickerSheet, Remin
 /// pasarle `targetDate` puede abrirse también sobre un día pasado (p. ej.
 /// desde Calendario o Cronología vía `Navigator.push`, con
 /// `showCloseButton: true`).
+/// Orden por defecto (y catálogo completo de ids válidos) de las tarjetas
+/// reordenables de Registrar — todas menos Flujo menstrual y Síntomas
+/// (siempre primero) y la sección plegable "Opcional" (siempre al final).
+/// Usado tanto aquí (RegisterScreen._cardOrder) como en
+/// RegisterCardOrderScreen (settings_screen.dart) para la hoja de
+/// reordenar. 'sexLife' solo se muestra en este bloque si "Mostrar 'Vida
+/// sexual' siempre visible" está activo (ver _visibleOrderedCardIds); si no
+/// aparece en el orden pero sí en esta lista, no pasa nada — simplemente no
+/// se dibuja en este bloque fijo.
+const List<String> kDefaultRegisterCardOrder = ['sexLife', 'mood', 'energy', 'skinHair', 'medication'];
+
 class RegisterScreen extends StatefulWidget {
   final Map<String, DayEntry> data;
   final ValueChanged<Map<String, DayEntry>> onDataChanged;
@@ -169,6 +180,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   // defecto mientras se carga el valor real guardado, igual que el
   // resto de preferencias booleanas de esta pantalla.
   bool _sexAlwaysVisible = false;
+
+  // Orden de las tarjetas "Vida sexual (si fija)/Ánimo/Energía/Piel y
+  // cabello/Medicamento" — configurable desde Configuración > Opciones
+  // personalizadas > "Orden de las tarjetas de Registrar". Empieza con el
+  // orden original de siempre mientras se carga el valor real guardado
+  // (ver _loadCardOrder), igual que _sexAlwaysVisible arriba.
+  List<String> _cardOrder = List<String>.from(kDefaultRegisterCardOrder);
+
   static const int _waterGoalGlasses = 8; // meta diaria en vasos
   static const double _dropsPerGlass = 20; // conversión vasos -> gotas
 
@@ -181,6 +200,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _todayKey = dateKey(_today);
     _loadFromEntry(widget.data[_todayKey] ?? const DayEntry());
     _loadSexAlwaysVisible();
+    _loadCardOrder();
     if (widget.focusSection == 'water') {
       // El círculo de Agua no muestra su detalle inline salvo que se abra
       // su panel expandible (_waterPanelOpen) — si venimos directo desde
@@ -221,6 +241,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _loadSexAlwaysVisible() async {
     final value = await _settingsService.loadSexAlwaysVisible();
     if (mounted) setState(() => _sexAlwaysVisible = value);
+  }
+
+  /// Carga el orden guardado de las tarjetas reordenables (ver _cardOrder,
+  /// configurable desde Configuración > Opciones personalizadas > "Orden de
+  /// las tarjetas de Registrar" → RegisterCardOrderScreen).
+  Future<void> _loadCardOrder() async {
+    final saved = await _settingsService.loadRegisterCardOrderRaw();
+    // Combina el orden guardado (filtrando ids que ya no existan) con
+    // cualquier id nuevo de kDefaultRegisterCardOrder que no estuviera
+    // todavía guardado (por ejemplo si en el futuro se añade una tarjeta
+    // nueva a este bloque) — así nunca desaparece una tarjeta por tener un
+    // orden guardado antiguo e incompleto.
+    final merged = saved.where(kDefaultRegisterCardOrder.contains).toList();
+    for (final id in kDefaultRegisterCardOrder) {
+      if (!merged.contains(id)) merged.add(id);
+    }
+    if (mounted) setState(() => _cardOrder = merged);
   }
 
   void _maybeAutoOpenFocusSectionEntry() {
@@ -1096,186 +1133,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
             const SizedBox(height: 16),
 
-            // ---- 2.5 Vida sexual, fija junto a Flujo/Síntomas cuando
-            // "Mostrar 'Vida sexual' siempre visible" está activo
-            // (Configuración > Opciones personalizadas). Con el ajuste
-            // desactivado (por defecto) no se dibuja aquí — sigue viviendo
-            // dentro de la sección plegable "Opcional", más abajo. ----
-            if (_sexAlwaysVisible) ...[
-              _sexLifeSectionCard(s),
+            // ---- 2.5-6. Vida sexual (si "siempre visible")/Ánimo/Energía/
+            // Piel y cabello/Medicamento — orden configurable desde
+            // Configuración > Opciones personalizadas > "Orden de las
+            // tarjetas de Registrar" (ver _cardOrder, _visibleOrderedCardIds
+            // y _buildOrderedCard más abajo). Flujo menstrual/Síntomas
+            // (arriba) y la sección plegable "Opcional" (abajo) quedan
+            // siempre fijos, fuera de este orden — la usuaria solo pidió
+            // reordenar "las demás tarjetas", no esas dos.
+            for (final _cardId in _visibleOrderedCardIds) ...[
+              _buildOrderedCard(_cardId, s),
               const SizedBox(height: 16),
             ],
-
-            // ---- 3. Ánimo ----
-            _sectionCard(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _sectionTitle(s.moodSectionTitle),
-                  const SizedBox(height: 12),
-                  Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
-                    children: kMoodCatalog.map((cat) {
-                      final id = cat['id']!;
-                      final selected = _mood.contains(id);
-                      return _catalogChip(
-                        label: '${cat['emoji']} ${s.moodLabelFor(id)}',
-                        selected: selected,
-                        onTap: () => _toggleMood(id),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // ---- 4. Energía ----
-            _sectionCard(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _sectionTitle(s.energySectionTitle),
-                  const SizedBox(height: 12),
-                  Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
-                    children: kEnergyOptions.map((cat) {
-                      final id = cat['id']!;
-                      final selected = _energy == id;
-                      return _catalogChip(
-                        label: '${cat['emoji']} ${s.energyLabelFor(id)}',
-                        selected: selected,
-                        onTap: () => setState(() => _energy = selected ? null : id),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // ---- 5. Piel y cabello ----
-            _sectionCard(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _sectionTitle(s.skinHairSectionTitle),
-                  const SizedBox(height: 12),
-                  Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
-                    children: kSkinHairCatalog.map((cat) {
-                      final id = cat['id']!;
-                      final selected = _skinHair.contains(id);
-                      return _catalogChip(
-                        label: '${cat['emoji']} ${s.skinHairLabelFor(id)}',
-                        selected: selected,
-                        onTap: () => _toggleSkinHair(id),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // ---- 6. Añadir medicamento ----
-            // Rediseño editorial (Claude Visualize, 2026-08-16), a juego con
-            // el sheet de _addMedication: eyebrow naranja quemado en vez del
-            // título mayúscula gris genérico, botón pill con relleno crema
-            // en vez del OutlinedButton con color del tema, y chips con
-            // emoji cuando ya hay medicamentos guardados.
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(18),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFAF8F5),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          s.medicationSectionTitle.toUpperCase(),
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFFD85A30),
-                            letterSpacing: 1.2,
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: _addMedication,
-                        borderRadius: BorderRadius.circular(100),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF2C2C2A),
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Icon(Icons.add, size: 15, color: Colors.white),
-                              const SizedBox(width: 5),
-                              Text(s.medicationAddButton,
-                                  style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w500, color: Colors.white)),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 14),
-                  if (_medication.isEmpty)
-                    Text(s.medicationEmpty, style: const TextStyle(fontSize: 13, color: Color(0xFF888780)))
-                  else
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: _medication.map((id) {
-                        return Container(
-                          padding: const EdgeInsets.only(left: 12, right: 6, top: 7, bottom: 7),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(_medicationEmoji[id] ?? '💊', style: const TextStyle(fontSize: 14)),
-                              const SizedBox(width: 6),
-                              Text(_medicationDisplayLabel(s, id),
-                                  style: const TextStyle(fontSize: 13, color: Color(0xFF2C2C2A))),
-                              const SizedBox(width: 2),
-                              InkWell(
-                                onTap: () => _removeMedication(id),
-                                borderRadius: BorderRadius.circular(100),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(4),
-                                  child: Icon(Icons.close, size: 14, color: Color(0xFF888780)),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
 
             // ---- 7-9. Opcional (Vida sexual / Autoexamen de mamas /
             // Estilo de vida): agrupadas bajo una cabecera plegable porque
@@ -1518,6 +1387,206 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  /// Ids de las tarjetas reordenables ("Vida sexual" si está fija arriba,
+  /// Ánimo, Energía, Piel y cabello, Medicamento) que SÍ corresponde
+  /// mostrar ahora mismo, en el orden guardado por la usuaria (`_cardOrder`,
+  /// cargado desde SettingsService en initState — ver kDefaultRegisterCardOrder).
+  /// "Vida sexual" se filtra aquí igual que antes: solo aparece en este
+  /// bloque fijo si `_sexAlwaysVisible` está activo; si no, sigue viviendo
+  /// dentro de "Opcional" y este getter la omite para no duplicarla.
+  List<String> get _visibleOrderedCardIds =>
+      _cardOrder.where((id) => id != 'sexLife' || _sexAlwaysVisible).toList();
+
+  /// Construye la tarjeta correspondiente a cada id de _visibleOrderedCardIds.
+  Widget _buildOrderedCard(String id, AppStrings s) {
+    switch (id) {
+      case 'sexLife':
+        return _sexLifeSectionCard(s);
+      case 'mood':
+        return _moodSectionCard(s);
+      case 'energy':
+        return _energySectionCard(s);
+      case 'skinHair':
+        return _skinHairSectionCard(s);
+      case 'medication':
+        return _medicationSectionCard(s);
+      default:
+        return const SizedBox.shrink();
+    }
+  }
+
+  /// ---- Ánimo ---- (extraída a método para poder reordenarla — ver
+  /// _buildOrderedCard).
+  Widget _moodSectionCard(AppStrings s) {
+    return _sectionCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _sectionTitle(s.moodSectionTitle),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: kMoodCatalog.map((cat) {
+              final id = cat['id']!;
+              final selected = _mood.contains(id);
+              return _catalogChip(
+                label: '${cat['emoji']} ${s.moodLabelFor(id)}',
+                selected: selected,
+                onTap: () => _toggleMood(id),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// ---- Energía ---- (extraída a método — ver _buildOrderedCard).
+  Widget _energySectionCard(AppStrings s) {
+    return _sectionCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _sectionTitle(s.energySectionTitle),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: kEnergyOptions.map((cat) {
+              final id = cat['id']!;
+              final selected = _energy == id;
+              return _catalogChip(
+                label: '${cat['emoji']} ${s.energyLabelFor(id)}',
+                selected: selected,
+                onTap: () => setState(() => _energy = selected ? null : id),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// ---- Piel y cabello ---- (extraída a método — ver _buildOrderedCard).
+  Widget _skinHairSectionCard(AppStrings s) {
+    return _sectionCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _sectionTitle(s.skinHairSectionTitle),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: kSkinHairCatalog.map((cat) {
+              final id = cat['id']!;
+              final selected = _skinHair.contains(id);
+              return _catalogChip(
+                label: '${cat['emoji']} ${s.skinHairLabelFor(id)}',
+                selected: selected,
+                onTap: () => _toggleSkinHair(id),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// ---- Añadir medicamento ---- (extraída a método — ver
+  /// _buildOrderedCard). Rediseño editorial (Claude Visualize, 2026-08-16),
+  /// a juego con el sheet de _addMedication: eyebrow naranja quemado en vez
+  /// del título mayúscula gris genérico, botón pill con relleno crema en
+  /// vez del OutlinedButton con color del tema, y chips con emoji cuando ya
+  /// hay medicamentos guardados.
+  Widget _medicationSectionCard(AppStrings s) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFAF8F5),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  s.medicationSectionTitle.toUpperCase(),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFFD85A30),
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: _addMedication,
+                borderRadius: BorderRadius.circular(100),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF2C2C2A),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.add, size: 15, color: Colors.white),
+                      const SizedBox(width: 5),
+                      Text(s.medicationAddButton,
+                          style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w500, color: Colors.white)),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          if (_medication.isEmpty)
+            Text(s.medicationEmpty, style: const TextStyle(fontSize: 13, color: Color(0xFF888780)))
+          else
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: _medication.map((id) {
+                return Container(
+                  padding: const EdgeInsets.only(left: 12, right: 6, top: 7, bottom: 7),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(_medicationEmoji[id] ?? '💊', style: const TextStyle(fontSize: 14)),
+                      const SizedBox(width: 6),
+                      Text(_medicationDisplayLabel(s, id),
+                          style: const TextStyle(fontSize: 13, color: Color(0xFF2C2C2A))),
+                      const SizedBox(width: 2),
+                      InkWell(
+                        onTap: () => _removeMedication(id),
+                        borderRadius: BorderRadius.circular(100),
+                        child: const Padding(
+                          padding: EdgeInsets.all(4),
+                          child: Icon(Icons.close, size: 14, color: Color(0xFF888780)),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
+        ],
       ),
     );
   }

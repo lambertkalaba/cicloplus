@@ -816,6 +816,27 @@ class SettingsService {
     await prefs.setBool(_irregularCycleModeKey, value);
   }
 
+  // ---- Orden de las tarjetas de Registrar (Vida sexual si fija/Ánimo/
+  // Energía/Piel y cabello/Medicamento) — configurable desde Configuración
+  // > Opciones personalizadas > "Orden de las tarjetas de Registrar". Se
+  // guarda la lista de ids tal cual (sin conocer aquí cuáles son válidos ni
+  // el orden por defecto — eso vive en register_screen.dart como
+  // kDefaultRegisterCardOrder, para no crear una dependencia circular entre
+  // este servicio y esa pantalla); si no hay nada guardado todavía,
+  // devuelve una lista vacía y quien llama aplica su propio orden por
+  // defecto. ----
+  static const _registerCardOrderKey = 'cicloplus_register_card_order';
+
+  Future<List<String>> loadRegisterCardOrderRaw() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList(_registerCardOrderKey) ?? const [];
+  }
+
+  Future<void> saveRegisterCardOrder(List<String> order) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(_registerCardOrderKey, order);
+  }
+
   // ---- Sección "Bienestar" (temperatura, agua, sueño, peso): activada
   // por defecto (true), para no cambiar el comportamiento de quien ya
   // usaba la app. Si se desactiva, la sección se oculta del editor del

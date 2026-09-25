@@ -1,0 +1,13 @@
+{
+  "name": "cicloplus-functions",
+  "description": "Cloud Functions para CicloPlus — borrado definitivo programado de cuentas pendientes de eliminación (30 días de gracia). Ver lib/services/auth_service.dart (requestAccountDeletion) en la app Flutter.",
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0"
+  },
+  "private": true
+}

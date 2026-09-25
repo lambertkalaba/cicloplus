@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CicloPlus — Period & pregnancy tracking, free and in 9 languages</title>
+<meta name="description" content="CicloPlus is a free app to track your menstrual cycle or your pregnancy day by day, share it with your partner, and grow your garden. No ads, privacy first. Available in 9 languages.">
+<meta property="og:title" content="CicloPlus — Period & pregnancy tracking">
+<meta property="og:description" content="Free period and pregnancy tracking app, with partner mode and a garden that grows with you. Available in 9 languages.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://cicloplus.com/index-en.html">
+<link rel="alternate" hreflang="es" href="https://cicloplus.com/">
+<link rel="alternate" hreflang="en" href="https://cicloplus.com/index-en.html">
+<link rel="alternate" hreflang="fr" href="https://cicloplus.com/index-fr.html">
+<link rel="alternate" hreflang="de" href="https://cicloplus.com/index-de.html">
+<link rel="alternate" hreflang="pt" href="https://cicloplus.com/index-pt.html">
+<link rel="alternate" hreflang="ru" href="https://cicloplus.com/index-ru.html">
+<link rel="alternate" hreflang="ar" href="https://cicloplus.com/index-ar.html">
+<link rel="alternate" hreflang="hi" href="https://cicloplus.com/index-hi.html">
+<link rel="alternate" hreflang="bn" href="https://cicloplus.com/index-bn.html">
+<link rel="alternate" hreflang="x-default" href="https://cicloplus.com/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "CicloPlus",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "iOS, Android",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Free app to track your menstrual cycle or pregnancy day by day, with partner mode and fertility/due date calculators."
+}
+</script>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    color: #2b2530;
+    line-height: 1.6;
+    background: #fffafc;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+  a { color: #9c4dcc; }
+
+  .lang-switcher { text-align: right; padding: 10px 0; border-bottom: 1px solid #f4e9f6; }
+  .lang-select-wrap { position: relative; display: inline-block; }
+  .lang-select-wrap::after {
+    content: "\25BE";
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #9c4dcc; font-size: 0.8rem; pointer-events: none;
+  }
+  select.lang-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    font-family: inherit; font-size: 0.85rem; font-weight: 600; color: #2b2530;
+    background: #fbeafd; border: 1px solid #f0d9f4; border-radius: 10px;
+    padding: 7px 30px 7px 14px; cursor: pointer;
+  }
+  select.lang-select:hover { background: #f6dcfa; }
+
+  header.hero {
+    background: linear-gradient(160deg, #fbeafd 0%, #fffafc 60%);
+    padding: 56px 0 48px;
+    text-align: center;
+  }
+  .icon-badge {
+    width: 96px; height: 96px; border-radius: 24px; overflow: hidden;
+    box-shadow: 0 8px 24px rgba(156,77,204,0.25);
+    margin: 0 auto 20px;
+    background: linear-gradient(160deg, #c96fe6, #9c4dcc);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 44px;
+  }
+  header.hero h1 { font-size: 2.1rem; margin: 0 0 10px; color: #1f1a24; }
+  header.hero p.tag { font-size: 1.05rem; color: #6b5e70; max-width: 560px; margin: 0 auto 28px; }
+
+  .store-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 18px; }
+  .store-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #1f1a24; color: #fff; text-decoration: none;
+    padding: 12px 22px; border-radius: 14px; font-weight: 600; font-size: 0.95rem;
+    transition: transform 0.15s ease;
+  }
+  .store-btn:hover { transform: translateY(-2px); }
+  .store-btn .glyph { font-size: 1.3rem; line-height: 1; }
+  .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 6px; }
+  .badge {
+    font-size: 0.8rem; color: #9c4dcc; background: #fbeafd;
+    border-radius: 999px; padding: 5px 14px; font-weight: 600;
+  }
+
+  section { padding: 48px 0; }
+  h2.section-title {
+    font-size: 1.5rem; text-align: center; margin: 0 0 8px; color: #1f1a24;
+  }
+  p.section-sub { text-align: center; color: #8a7f8e; max-width: 520px; margin: 0 auto 32px; }
+
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .feature-card {
+    background: #fff; border-radius: 16px; padding: 22px;
+    box-shadow: 0 2px 10px rgba(43,37,48,0.06); border: 1px solid #f4e9f6;
+  }
+  .feature-card .emoji { font-size: 1.7rem; margin-bottom: 10px; display: block; }
+  .feature-card h3 { font-size: 1.02rem; margin: 0 0 6px; color: #1f1a24; }
+  .feature-card p { font-size: 0.9rem; color: #6b5e70; margin: 0; }
+
+  .calc-section { background: #fbeafd; }
+  .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .calc-card {
+    background: #fff; border-radius: 18px; padding: 26px; box-shadow: 0 4px 16px rgba(43,37,48,0.07);
+  }
+  .calc-card h3 { margin: 0 0 4px; font-size: 1.15rem; color: #1f1a24; }
+  .calc-card p.desc { font-size: 0.85rem; color: #8a7f8e; margin: 0 0 18px; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 0.82rem; font-weight: 600; color: #4a3f4e; margin-bottom: 5px; }
+  .field input {
+    width: 100%; padding: 10px 12px; border-radius: 10px; border: 1.5px solid #f0d9f4;
+    font-size: 0.95rem; font-family: inherit; color: #2b2530;
+  }
+  .field input:focus { outline: none; border-color: #9c4dcc; }
+  .calc-btn {
+    width: 100%; background: #9c4dcc; color: #fff; border: none; border-radius: 12px;
+    padding: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer; margin-top: 4px;
+  }
+  .calc-btn:hover { background: #8a3fb8; }
+  .calc-result {
+    margin-top: 18px; padding: 16px; background: #fbeafd; border-radius: 12px;
+    font-size: 0.9rem; display: none;
+  }
+  .calc-result.show { display: block; }
+  .calc-result .row { display: flex; justify-content: space-between; padding: 5px 0; }
+  .calc-result .row strong { color: #1f1a24; }
+  .calc-result .row span.val { color: #9c4dcc; font-weight: 700; }
+  .calc-cta {
+    margin-top: 14px; font-size: 0.82rem; color: #6b5e70; text-align: center;
+  }
+  .calc-disclaimer { font-size: 0.75rem; color: #a89aae; text-align: center; margin-top: 28px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+  .partner-cta {
+    text-align: center; background: #1f1a24; color: #fff; border-radius: 24px;
+    padding: 44px 28px; margin: 8px 0;
+  }
+  .partner-cta h2 { color: #fff; margin: 0 0 10px; font-size: 1.4rem; }
+  .partner-cta p { color: #d8cddd; max-width: 480px; margin: 0 auto 24px; font-size: 0.95rem; }
+
+  footer {
+    text-align: center; padding: 32px 24px 56px; font-size: 0.85rem; color: #a89aae;
+  }
+  footer a { color: #9c4dcc; margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher">
+  <div class="wrap">
+    <span class="lang-select-wrap">
+      <select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Idioma / Language">
+        <option value="/">Español</option>
+        <option value="/index-en.html" selected>English</option>
+        <option value="/index-fr.html">Français</option>
+        <option value="/index-de.html">Deutsch</option>
+        <option value="/index-pt.html">Português</option>
+        <option value="/index-ru.html">Русский</option>
+        <option value="/index-ar.html">العربية</option>
+        <option value="/index-hi.html">हिन्दी</option>
+        <option value="/index-bn.html">বাংলা</option>
+      </select>
+    </span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="icon-badge" role="img" aria-label="CicloPlus icon">🌸</div>
+    <h1>Your period, under control</h1>
+    <p class="tag">CicloPlus adapts to what you need: track my period, try to conceive with fertile-day predictions, or track my pregnancy week by week. And if you want, share your tracking with your partner in read-only mode — no ads, privacy first.</p>
+    <div class="store-buttons">
+      <a class="store-btn" href="https://apps.apple.com/app/id6813932649" target="_blank" rel="noopener">
+        <span class="glyph">🍎</span> Download on App Store
+      </a>
+      <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.cicloplus.cicloplus_app" target="_blank" rel="noopener">
+        <span class="glyph">▶</span> Get it on Google Play
+      </a>
+    </div>
+    <div class="badges">
+      <span class="badge">Free</span>
+      <span class="badge">No ads</span>
+      <span class="badge">9 languages</span>
+      <span class="badge">Privacy first</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">Everything you need, in one place</h2>
+    <p class="section-sub">Cycle or pregnancy tracking, built to truly be there with you.</p>
+    <div class="features">
+      <div class="feature-card">
+        <span class="emoji">🌸</span>
+        <h3>Cycle & pregnancy</h3>
+        <p>Log your period or follow your pregnancy week by week, with fertile window and ovulation predictions.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🌱</span>
+        <h3>Your garden</h3>
+        <p>A garden that blooms every time you check in — a pretty way to see your consistency.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">💬</span>
+        <h3>Partner mode</h3>
+        <p>Invite your partner to follow your pregnancy or cycle in read-only mode, with chat and a wishlist.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🔒</span>
+        <h3>Privacy first</h3>
+        <p>Your data is yours. No ads, never sold to third parties.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🌍</span>
+        <h3>9 languages</h3>
+        <p>Spanish, English, French, German, Portuguese, Russian, Arabic, Hindi and Bengali.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🔔</span>
+        <h3>Reminders</h3>
+        <p>Alerts for your period, ovulation and appointments, fully customizable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="calc-section">
+  <div class="wrap">
+    <h2 class="section-title">Quick calculators</h2>
+    <p class="section-sub">No sign-up, nothing saved — just an instant estimate. For automatic monthly tracking, use the app.</p>
+    <div class="calc-grid">
+
+      <div class="calc-card">
+        <h3>Fertile days</h3>
+        <p class="desc">Estimate your fertile window and your next period.</p>
+        <div class="field">
+          <label for="lmpDate">First day of your last period</label>
+          <input type="date" id="lmpDate">
+        </div>
+        <div class="field">
+          <label for="cycleLen">Average cycle length (days)</label>
+          <input type="number" id="cycleLen" value="28" min="20" max="45">
+        </div>
+        <button class="calc-btn" onclick="calcFertile()">Calculate</button>
+        <div class="calc-result" id="fertileResult"></div>
+      </div>
+
+      <div class="calc-card">
+        <h3>Estimated due date</h3>
+        <p class="desc">Based on your last period (Naegele's rule).</p>
+        <div class="field">
+          <label for="dueLmpDate">First day of your last period</label>
+          <input type="date" id="dueLmpDate">
+        </div>
+        <button class="calc-btn" onclick="calcDueDate()">Calculate</button>
+        <div class="calc-result" id="dueResult"></div>
+      </div>
+
+    </div>
+    <p class="calc-disclaimer">These calculators give a rough estimate and are not a substitute for professional medical advice. Every cycle and every pregnancy is different.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="partner-cta">
+      <h2>Go through it together</h2>
+      <p>Invite your partner to follow your cycle or pregnancy with you — read-only mode, with chat and a wishlist included.</p>
+      <div class="store-buttons">
+        <a class="store-btn" href="https://apps.apple.com/app/id6813932649" target="_blank" rel="noopener">
+          <span class="glyph">🍎</span> App Store
+        </a>
+        <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.cicloplus.cicloplus_app" target="_blank" rel="noopener">
+          <span class="glyph">▶</span> Google Play
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>CicloPlus</div>
+  <div>
+    <a href="/app.html">View my data</a>
+    <a href="/privacidad.html">Privacy Policy</a>
+    <a href="/terminos.html">Terms</a>
+    <a href="mailto:soportelambert@gmail.com">Contact</a>
+  </div>
+</footer>
+
+<script>
+  function fmt(d) {
+    return d.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  function calcFertile() {
+    const lmpVal = document.getElementById('lmpDate').value;
+    const cycleLen = parseInt(document.getElementById('cycleLen').value, 10) || 28;
+    const box = document.getElementById('fertileResult');
+    if (!lmpVal) {
+      box.innerHTML = '<p style="color:#c0392b;margin:0;">Enter the first day of your last period.</p>';
+      box.classList.add('show');
+      return;
+    }
+    const lastPeriod = new Date(lmpVal + 'T00:00:00');
+    const ovulation = new Date(lastPeriod); ovulation.setDate(ovulation.getDate() + (cycleLen - 14));
+    const fertileStart = new Date(ovulation); fertileStart.setDate(fertileStart.getDate() - 5);
+    const fertileEnd = new Date(ovulation); fertileEnd.setDate(fertileEnd.getDate() + 1);
+    const nextPeriod = new Date(lastPeriod); nextPeriod.setDate(nextPeriod.getDate() + cycleLen);
+
+    box.innerHTML =
+      '<div class="row"><span>Fertile window</span><span class="val">' + fmt(fertileStart) + ' \u2013 ' + fmt(fertileEnd) + '</span></div>' +
+      '<div class="row"><span>Estimated ovulation</span><span class="val">' + fmt(ovulation) + '</span></div>' +
+      '<div class="row"><span>Estimated next period</span><span class="val">' + fmt(nextPeriod) + '</span></div>' +
+      '<div class="calc-cta">CicloPlus recalculates this automatically every month and reminds you before it arrives.</div>';
+    box.classList.add('show');
+  }
+
+  function calcDueDate() {
+    const lmpVal = document.getElementById('dueLmpDate').value;
+    const box = document.getElementById('dueResult');
+    if (!lmpVal) {
+      box.innerHTML = '<p style="color:#c0392b;margin:0;">Enter the first day of your last period.</p>';
+      box.classList.add('show');
+      return;
+    }
+    const lastPeriod = new Date(lmpVal + 'T00:00:00');
+    const dueDate = new Date(lastPeriod); dueDate.setDate(dueDate.getDate() + 280);
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const diffDays = Math.floor((today - lastPeriod) / 86400000);
+    let weeksLine = '';
+    if (diffDays >= 0 && diffDays <= 300) {
+      const weeks = Math.floor(diffDays / 7);
+      const days = diffDays % 7;
+      weeksLine = '<div class="row"><span>Current week</span><span class="val">' + weeks + ' weeks and ' + days + ' days</span></div>';
+    }
+    box.innerHTML =
+      '<div class="row"><span>Estimated due date</span><span class="val">' + fmt(dueDate) + '</span></div>' +
+      weeksLine +
+      '<div class="calc-cta">CicloPlus shows you how your baby is growing day by day, with real images of their development.</div>';
+    box.classList.add('show');
+  }
+</script>
+
+</body>
+</html>

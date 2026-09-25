@@ -30,6 +30,7 @@ import '../widgets/coming_soon_sheet.dart';
 import '../widgets/conceive_intake_sheet.dart';
 import 'apple_watch_screen.dart';
 import 'lock_screen.dart';
+import 'register_card_order_screen.dart';
 import 'paywall_screen.dart';
 import 'pregnancy_tracking_screen.dart';
 import 'reminder_screen.dart';
@@ -980,15 +981,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     setState(() => _deletingAccount = true);
     try {
-      // Orden importante: primero se borra todo lo que depende del uid
-      // (historial del ciclo en Firestore, ajustes locales), y solo al
-      // final la propia cuenta — así, si algo falla a mitad de camino, la
-      // cuenta sigue existiendo en vez de quedar huérfana sin datos que
-      // borrar la próxima vez.
+      // Borrado inmediato y permanente, sin plazo de gracia: primero los
+      // datos del ciclo + ajustes locales, y deleteAccount() se encarga de
+      // borrar el resto de Firestore (pregnancy/cycle/partners/etc.) y la
+      // cuenta de Firebase Authentication. Si quiere volver, tendrá que
+      // registrarse de cero.
       await _storage.deleteAll();
       await _settings.clearAll();
-      await _authService.deleteAccount();
       widget.onDataChanged(const {});
+      await _authService.deleteAccount();
       if (!mounted) return;
       _showSnack(s.settingsDeleteAccountSuccess);
       widget.onSignOut();
@@ -1903,6 +1904,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     subtitle: _sexAlwaysVisible ? s.settingsSexAlwaysVisibleOn : s.settingsSexAlwaysVisibleOff,
                     value: _sexAlwaysVisible,
                     onChanged: _toggleSexAlwaysVisible,
+                  ),
+                  const SizedBox(height: 16),
+                  _navRow(
+                    icon: Icons.reorder,
+                    label: s.settingsRegisterCardOrder,
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => RegisterCardOrderScreen(themeId: _themeId)),
+                    ),
                   ),
                   const SizedBox(height: 16),
                   _switchRow(
