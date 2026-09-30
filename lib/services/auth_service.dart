@@ -25,6 +25,22 @@ const String _kVerifyEmailWorkerUrl =
 const String _kResetPasswordWorkerUrl =
     'https://cicloplus-verify-email.cicloplus-app.workers.dev/reset-password';
 
+/// Client ID de OAuth para "Sign in with Google" en iOS (proyecto Firebase
+/// cicloplus-9a957, app com.cicloplus.cicloplusApp — sacado de Google Cloud
+/// Console > APIs y servicios > Credenciales > "iOS client for
+/// com.cicloplus.cicloplusApp"). El paquete `google_sign_in` lo necesita
+/// explícito en iOS porque este proyecto nunca tuvo GoogleService-Info.plist
+/// añadido al Xcode project (solo existen las claves sueltas en
+/// firebase_options.dart); sin este valor, `GoogleSignIn().signIn()` falla
+/// de forma nativa (no capturable con try/catch de Dart) apenas se toca
+/// "Continuar con Google" en iOS — esto fue justo el crash que Apple
+/// reportó en la revisión del build 22 (2026-09-30). En Android no hace
+/// falta (se resuelve solo vía google-services.json), así que se pasa
+/// `null` ahí para no romper nada.
+final String? _googleIosClientId = defaultTargetPlatform == TargetPlatform.iOS
+    ? '455122663711-c5pg7f08cih2ouuljpmj7n2adfe5vtvr.apps.googleusercontent.com'
+    : null;
+
 /// Excepción con un mensaje ya listo para mostrar en pantalla (en español,
 /// sin jerga técnica), para que la UI no tenga que traducir errores.
 class AuthException implements Exception {
@@ -241,7 +257,7 @@ class AuthService {
   /// hubiera registrado con correo.
   Future<AppUser> signInWithGoogle() async {
     try {
-      final googleUser = await GoogleSignIn().signIn();
+      final googleUser = await GoogleSignIn(clientId: _googleIosClientId).signIn();
       if (googleUser == null) {
         // La persona cerró el selector de cuenta sin elegir ninguna — no
         // es un error real, solo canceló.
@@ -670,7 +686,7 @@ class AuthService {
           break;
 
         case SignInProvider.google:
-          final googleUser = await GoogleSignIn().signIn();
+          final googleUser = await GoogleSignIn(clientId: _googleIosClientId).signIn();
           if (googleUser == null) {
             throw AuthException('Confirmación cancelada.');
           }

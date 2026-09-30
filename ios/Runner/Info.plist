@@ -68,17 +68,29 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
-	<!-- OJO al añadir Google Sign-In para iOS más adelante (necesita su
-	     propio esquema con el REVERSED_CLIENT_ID que trae
-	     GoogleService-Info.plist, hoy todavía no existe en este proyecto):
-	     hay que AÑADIR un <dict> nuevo dentro de este mismo array, no
-	     reemplazar el que ya está aquí para Facebook. -->
+	<!-- Segundo <dict>: Sign in with Google (google_sign_in) — esquema
+	     REVERSED_CLIENT_ID del "iOS client for com.cicloplus.cicloplusApp"
+	     en Google Cloud Console (proyecto cicloplus-9a957). Sin esto, iOS no
+	     puede devolver el control a la app tras el login en el navegador y
+	     el SDK de Google falla de forma nativa — esto causó el crash que
+	     Apple reportó al probar "Continuar con Google" en la revisión del
+	     build 22 (2026-09-30). Ver también la constante _googleIosClientId
+	     en auth_service.dart, que debe coincidir con este mismo client ID
+	     (sin la parte ".apps.googleusercontent.com" y con los segmentos
+	     invertidos). Si algún día se regenera este client ID en Google
+	     Cloud Console, hay que actualizar AMBOS sitios a la vez. -->
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb1044303078498035</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.455122663711-c5pg7f08cih2ouuljpmj7n2adfe5vtvr</string>
 			</array>
 		</dict>
 	</array>
