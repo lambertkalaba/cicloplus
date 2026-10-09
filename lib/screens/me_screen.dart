@@ -218,6 +218,21 @@ class _MeScreenState extends State<MeScreen> {
     // conflicto.
     if (goal == 'pregnancy' && !widget.pregnancy.enabled) {
       widget.onPregnancyChanged(widget.pregnancy.copyWith(enabled: true));
+      // Primera vez que se activa el modo embarazo sin fecha guardada:
+      // pedimos la fecha de última regla de inmediato en vez de dejar el
+      // modo activado pero invisible — la tarjeta de "Hoy" y "Seguir mi
+      // embarazo" exigen lmp != null (ver inPregnancyMode en
+      // today_screen.dart), así que sin este selector el modo quedaba
+      // marcado pero sin ninguna gráfica de bebé hasta que la usuaria
+      // entrara por su cuenta a Configuración a buscar el selector de
+      // fecha. Bug reportado tras la versión 21. Si ya había una fecha
+      // guardada de antes, no se vuelve a preguntar.
+      if (widget.pregnancy.lmp == null) {
+        final picked = await _pickLmpDate();
+        if (picked != null && mounted) {
+          widget.onPregnancyChanged(widget.pregnancy.copyWith(enabled: true, lmp: picked));
+        }
+      }
     } else if (goal != 'pregnancy' && widget.pregnancy.enabled) {
       widget.onPregnancyChanged(widget.pregnancy.copyWith(enabled: false));
     }
@@ -227,6 +242,19 @@ class _MeScreenState extends State<MeScreen> {
     if (goal == 'conceive') {
       await maybeShowConceiveIntake(context, _settingsService);
     }
+  }
+
+  /// Selector de fecha de última regla, reutilizado desde el chip "Seguir
+  /// mi embarazo" (ver _selectGoal) — mismo rango/estilo que el selector
+  /// equivalente en settings_screen.dart._pickLmpDate.
+  Future<DateTime?> _pickLmpDate() async {
+    final now = DateTime.now();
+    return showDatePicker(
+      context: context,
+      initialDate: widget.pregnancy.lmp ?? now,
+      firstDate: DateTime(now.year - 2),
+      lastDate: now,
+    );
   }
 
   AppThemeOption get _theme => themeById(widget.themeId);

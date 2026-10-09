@@ -827,6 +827,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
     // publicación — ahora se guarda siempre, actives o desactives.
     await _settings.saveUserGoal(_userGoal);
     PartnerService().syncPregnancyData(widget.userId);
+    // Primera vez que se activa el modo embarazo sin fecha guardada:
+    // pedimos la fecha de última regla de inmediato (mismo selector que
+    // usa la fila "Fecha de última regla" más abajo) en vez de dejar el
+    // modo marcado como activo pero sin ninguna gráfica de bebé hasta que
+    // la usuaria encuentre y toque ese selector por su cuenta — la
+    // tarjeta de "Hoy" y "Seguir mi embarazo" exigen lmp != null. Si ya
+    // había una fecha guardada de antes, no se vuelve a preguntar.
+    if (value && _pregnancy.lmp == null) {
+      await _pickLmpDate();
+    }
   }
 
   /// Fecha de última regla (LMP): de ella se deriva toda la pantalla de

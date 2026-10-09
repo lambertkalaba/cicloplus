@@ -6,9 +6,8 @@ import '../models/app_user.dart';
 /// Controla si los puntos de entrada al paywall (botón "Ver planes
 /// Premium" en Configuración, ítem en "Yo") están visibles en la app.
 ///
-/// La API key de Android ya es la real (proyecto CicloPlus en RevenueCat,
-/// app "CicloPlus (Play Store)"). Pendiente: la de iOS sigue siendo
-/// placeholder hasta que se publique también en App Store.
+/// Las API keys de Android e iOS ya son las reales (proyecto CicloPlus en
+/// RevenueCat, apps "CicloPlus (Play Store)" y "CicloPlus (App Store)").
 const bool kPaywallEnabled = true;
 
 /// Gestiona la conexión con RevenueCat para saber si la persona tiene una
@@ -24,9 +23,10 @@ class SubscriptionService {
   // cliente.
   static const String _revenueCatApiKeyAndroid = 'goog_FygVCYConHLDNAeyOxomQPLbaHC';
 
-  // TODO(RevenueCat): si también se publica en iOS, sustituir por la API
-  // key pública de iOS (suele ser distinta de la de Android en RevenueCat).
-  static const String _revenueCatApiKeyIOS = 'REVENUECAT_API_KEY_PLACEHOLDER';
+  // API key pública (iOS) del proyecto CicloPlus en RevenueCat,
+  // app "CicloPlus (App Store)". No es secreta, se puede incluir en el
+  // cliente.
+  static const String _revenueCatApiKeyIOS = 'appl_QJtfTOaxrZeUVnEQoCEBxgPqqab';
 
   // Identificador del Entitlement en RevenueCat que agrupa los productos
   // de pago (semanal/mensual/anual).
@@ -56,9 +56,8 @@ class SubscriptionService {
     if (_configured) return;
     if (!_hasRealApiKey) {
       debugPrint(
-        'SubscriptionService: RevenueCat no configurado — falta sustituir '
-        'REVENUECAT_API_KEY_PLACEHOLDER por la API key real (ver TODO en '
-        'subscription_service.dart). Todas las funciones premium se '
+        'SubscriptionService: RevenueCat no configurado para esta '
+        'plataforma (falta API key real). Todas las funciones premium se '
         'evaluarán como no compradas.',
       );
       return;
