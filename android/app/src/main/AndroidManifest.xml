@@ -3,7 +3,7 @@
          (función "Adjuntar foto"). En Android 13+ el selector nativo de
          fotos no siempre requiere estos permisos, pero declararlos evita
          problemas en versiones anteriores de Android. -->
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
