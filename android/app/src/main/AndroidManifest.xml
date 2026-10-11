@@ -1,11 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Permisos para elegir fotos de la galería desde el editor de día
-         (función "Adjuntar foto"). En Android 13+ el selector nativo de
-         fotos no siempre requiere estos permisos, pero declararlos evita
-         problemas en versiones anteriores de Android. -->
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
+    <!-- NOTA: no declaramos READ_MEDIA_IMAGES ni READ_EXTERNAL_STORAGE.
+         La función "Adjuntar foto" usa `file_picker`, que abre el selector
+         de archivos del propio sistema (Storage Access Framework); ese
+         selector no necesita permisos de almacenamiento en ninguna
+         versión de Android. Declarar esos permisos (aunque limitados con
+         maxSdkVersion) incumple la política de Google Play de usar
+         selectores del sistema en vez de pedir acceso general a medios. -->
 
     <!-- Cámara para el chat con el socio/pareja (adjuntar una foto tomada
          en el momento, no solo elegida de la galería) — usada por
