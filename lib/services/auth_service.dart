@@ -84,7 +84,7 @@ class AuthService {
 
   /// Traduce los códigos de error de Firebase a mensajes claros en español,
   /// sin jerga técnica — para que cualquier persona entienda qué pasó.
-  AuthException _mapFirebaseError(fb.FirebaseAuthException e) {
+  AuthException _mapFirebaseError(fb.FirebaseAuthException e, {bool isSocialSignIn = false}) {
     switch (e.code) {
       case 'email-already-in-use':
         return AuthException('Ya existe una cuenta con ese correo. Intenta iniciar sesión.');
@@ -95,6 +95,15 @@ class AuthService {
       case 'user-not-found':
       case 'wrong-password':
       case 'invalid-credential':
+        if (isSocialSignIn) {
+          // Con Google/Apple no hay "contraseña incorrecta" posible — este
+          // código normalmente significa que Firebase rechazó el token de
+          // la cuenta social (token caducado, nonce no coincide, etc.), no
+          // un fallo de credenciales del usuario. Mensaje genérico en vez
+          // de "contraseña incorrecta", que no aplica aquí y confundía a
+          // los usuarios (y al equipo de revisión de Apple).
+          return AuthException('No se pudo completar el inicio de sesión. Inténtalo de nuevo en unos segundos.');
+        }
         return AuthException('Correo o contraseña incorrectos.');
       case 'too-many-requests':
         return AuthException('Demasiados intentos. Espera un momento y vuelve a intentarlo.');
@@ -271,7 +280,7 @@ class AuthService {
       final userCredential = await _auth.signInWithCredential(credential);
       return _loadOrCreateSocialUser(userCredential.user!, fallbackName: googleUser.displayName);
     } on fb.FirebaseAuthException catch (e) {
-      throw _mapFirebaseError(e);
+      throw _mapFirebaseError(e, isSocialSignIn: true);
     }
   }
 
@@ -329,7 +338,7 @@ class AuthService {
       }
       throw AuthException('No se pudo iniciar sesión con Apple. Inténtalo de nuevo.');
     } on fb.FirebaseAuthException catch (e) {
-      throw _mapFirebaseError(e);
+      throw _mapFirebaseError(e, isSocialSignIn: true);
     }
   }
 
@@ -721,7 +730,7 @@ class AuthService {
           break;
       }
     } on fb.FirebaseAuthException catch (e) {
-      throw _mapFirebaseError(e);
+      throw _mapFirebaseError(e, isSocialSignIn: provider != SignInProvider.email);
     }
   }
 }
