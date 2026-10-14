@@ -102,7 +102,11 @@ class AuthService {
           // un fallo de credenciales del usuario. Mensaje genérico en vez
           // de "contraseña incorrecta", que no aplica aquí y confundía a
           // los usuarios (y al equipo de revisión de Apple).
-          return AuthException('No se pudo completar el inicio de sesión. Inténtalo de nuevo en unos segundos.');
+          // TEMPORAL (quitar cuando se confirme la causa raíz): se muestra
+          // el código y mensaje reales de Firebase para poder diagnosticar
+          // por qué rechaza el token de Apple/Google, en vez del mensaje
+          // genérico para el usuario final.
+          return AuthException('Debug (${e.code}): ${e.message}');
         }
         return AuthException('Correo o contraseña incorrectos.');
       case 'too-many-requests':
