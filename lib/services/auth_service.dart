@@ -69,6 +69,11 @@ class AuthService {
 
   static const _usersCollection = 'users';
 
+  // TEMPORAL (depuracion "Sign in with Apple"): guarda el ultimo resumen de
+  // diagnostico del identityToken de Apple, para mostrarlo si Firebase
+  // termina rechazando la credencial.
+  String? _lastAppleDebugInfo;
+
   String _validateEmail(String email) {
     final trimmed = email.trim().toLowerCase();
     final valid = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(trimmed);
@@ -106,7 +111,7 @@ class AuthService {
           // el código y mensaje reales de Firebase para poder diagnosticar
           // por qué rechaza el token de Apple/Google, en vez del mensaje
           // genérico para el usuario final.
-          return AuthException('Debug (${e.code}): ${e.message}');
+          return AuthException('Debug (${e.code}): ${e.message} | ${_lastAppleDebugInfo ?? "sin datos Apple"}');
         }
         return AuthException('Correo o contraseña incorrectos.');
       case 'too-many-requests':
@@ -298,6 +303,29 @@ class AuthService {
     return List.generate(length, (_) => charset[random.nextInt(charset.length)]).join();
   }
 
+  /// TEMPORAL (solo para depurar el rechazo de "Sign in with Apple"): decodifica
+  /// (sin verificar firma, no hace falta para depuración) la parte central
+  /// (payload) de un JWT y devuelve sus claims como mapa. Un identityToken de
+  /// Apple es un JWT normal de 3 partes separadas por ".".
+  Map<String, dynamic>? _decodeJwtPayload(String jwt) {
+    try {
+      final parts = jwt.split('.');
+      if (parts.length != 3) return null;
+      var payload = parts[1];
+      payload = payload.replaceAll('-', '+').replaceAll('_', '/');
+      final remainder = payload.length % 4;
+      if (remainder == 2) {
+        payload += '==';
+      } else if (remainder == 3) {
+        payload += '=';
+      }
+      final decoded = utf8.decode(base64.decode(payload));
+      return jsonDecode(decoded) as Map<String, dynamic>;
+    } catch (_) {
+      return null;
+    }
+  }
+
   /// Inicia sesión (o crea la cuenta, si es la primera vez) usando "Sign in
   /// with Apple". Solo tiene sentido en iOS/macOS (ver el botón condicional
   /// en auth_screen.dart) — Apple EXIGE ofrecer esta opción en la App Store
@@ -318,6 +346,18 @@ class AuthService {
         ],
         nonce: hashedNonce,
       );
+
+      // TEMPORAL: inspecciona el identityToken de Apple antes de mandarlo a
+      // Firebase, para saber si el "aud" (bundle id) y el "nonce" (hash)
+      // coinciden con lo esperado, o si Apple ya lo devolvió mal formado.
+      final idToken = appleCredential.identityToken;
+      final claims = idToken != null ? _decodeJwtPayload(idToken) : null;
+      _lastAppleDebugInfo =
+          'idToken:${idToken == null ? "NULL" : "${idToken.length}chars"} '
+          'aud:${claims?['aud']} '
+          'iss:${claims?['iss']} '
+          'nonceMatch:${claims?['nonce'] == hashedNonce} '
+          'authCode:${appleCredential.authorizationCode.isEmpty ? "EMPTY" : "present"}';
 
       final oauthCredential = fb.OAuthProvider('apple.com').credential(
         idToken: appleCredential.identityToken,
