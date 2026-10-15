@@ -359,9 +359,16 @@ class AuthService {
           'nonceMatch:${claims?['nonce'] == hashedNonce} '
           'authCode:${appleCredential.authorizationCode.isEmpty ? "EMPTY" : "present"}';
 
+      // FIX: Firebase a veces rechaza con "Invalid OAuth response from
+      // apple.com" / invalid-credential aunque el idToken y el nonce sean
+      // correctos (bug conocido, ver firebase/flutterfire#13235 y #18289).
+      // La solucion confirmada por varios desarrolladores con el mismo
+      // problema exacto es mandar tambien el authorizationCode de Apple
+      // como "accessToken" junto al idToken.
       final oauthCredential = fb.OAuthProvider('apple.com').credential(
         idToken: appleCredential.identityToken,
         rawNonce: rawNonce,
+        accessToken: appleCredential.authorizationCode,
       );
 
       final userCredential = await _auth.signInWithCredential(oauthCredential);
@@ -769,6 +776,7 @@ class AuthService {
           final credential = fb.OAuthProvider('apple.com').credential(
             idToken: appleCredential.identityToken,
             rawNonce: rawNonce,
+            accessToken: appleCredential.authorizationCode,
           );
           await fbUser.reauthenticateWithCredential(credential);
           break;
