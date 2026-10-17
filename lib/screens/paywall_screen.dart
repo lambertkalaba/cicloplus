@@ -5,10 +5,12 @@ import '../l10n/app_strings.dart';
 import '../services/subscription_service.dart';
 import '../theme/app_theme.dart';
 
-/// Pantalla de suscripción (paywall): muestra los 3 planes de pago
-/// (semanal, mensual, anual) con precios reales obtenidos de RevenueCat
-/// (`package.storeProduct.priceString`), con el plan anual destacado como
-/// "Más popular".
+/// Pantalla de suscripción (paywall): muestra los planes de pago
+/// (semanal, mensual, anual y de por vida) con precios reales obtenidos
+/// de RevenueCat (`package.storeProduct.priceString`), con el plan anual
+/// destacado como "Más popular" y el de por vida como "Mejor valor" (si
+/// RevenueCat no lo ofrece todavía en alguna plataforma, simplemente no
+/// aparece en la lista).
 ///
 /// Si RevenueCat no devuelve ninguna oferta (sin conexión, offering no
 /// publicado, etc.), `getAvailablePackages()` devuelve una lista vacía y
@@ -63,6 +65,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
 
   bool _isWeekly(Package p) =>
       p.packageType == PackageType.weekly || p.storeProduct.identifier == SubscriptionService.weeklyProductId;
+
+  bool _isLifetime(Package p) =>
+      p.packageType == PackageType.lifetime || p.storeProduct.identifier == SubscriptionService.lifetimeProductId;
 
   Future<void> _purchase() async {
     final package = _selectedPackage;
@@ -160,11 +165,12 @@ class _PaywallScreenState extends State<PaywallScreen> {
       SubscriptionService.weeklyProductId: 0,
       SubscriptionService.monthlyProductId: 1,
       SubscriptionService.annualProductId: 2,
+      SubscriptionService.lifetimeProductId: 3,
     };
     final sorted = [..._packages];
     sorted.sort((a, b) {
-      final aKey = order[a.storeProduct.identifier] ?? (_isWeekly(a) ? 0 : (_isAnnual(a) ? 2 : 1));
-      final bKey = order[b.storeProduct.identifier] ?? (_isWeekly(b) ? 0 : (_isAnnual(b) ? 2 : 1));
+      final aKey = order[a.storeProduct.identifier] ?? (_isWeekly(a) ? 0 : (_isAnnual(a) ? 2 : (_isLifetime(a) ? 3 : 1)));
+      final bKey = order[b.storeProduct.identifier] ?? (_isWeekly(b) ? 0 : (_isAnnual(b) ? 2 : (_isLifetime(b) ? 3 : 1)));
       return aKey.compareTo(bKey);
     });
     return sorted;
@@ -249,22 +255,31 @@ class _PaywallScreenState extends State<PaywallScreen> {
     final selected = _selectedPackage?.identifier == package.identifier;
     final isAnnual = _isAnnual(package);
     final isWeekly = _isWeekly(package);
+    final isLifetime = _isLifetime(package);
 
-    final String title = isAnnual
-        ? s.paywallPlanAnnual
-        : isWeekly
-            ? s.paywallPlanWeekly
-            : s.paywallPlanMonthly;
-    final String desc = isAnnual
-        ? s.paywallPlanAnnualDesc
-        : isWeekly
-            ? s.paywallPlanWeeklyDesc
-            : s.paywallPlanMonthlyDesc;
-    final String priceSuffix = isAnnual
-        ? s.paywallPerYear
-        : isWeekly
-            ? s.paywallPerWeek
-            : s.paywallPerMonth;
+    final String title = isLifetime
+        ? s.paywallPlanLifetime
+        : isAnnual
+            ? s.paywallPlanAnnual
+            : isWeekly
+                ? s.paywallPlanWeekly
+                : s.paywallPlanMonthly;
+    final String desc = isLifetime
+        ? s.paywallPlanLifetimeDesc
+        : isAnnual
+            ? s.paywallPlanAnnualDesc
+            : isWeekly
+                ? s.paywallPlanWeeklyDesc
+                : s.paywallPlanMonthlyDesc;
+    // El plan de por vida es un pago único: en vez de "/periodo" se
+    // indica que es un pago único.
+    final String priceSuffix = isLifetime
+        ? s.paywallOneTimePayment
+        : isAnnual
+            ? s.paywallPerYear
+            : isWeekly
+                ? s.paywallPerWeek
+                : s.paywallPerMonth;
 
     return InkWell(
       borderRadius: BorderRadius.circular(16),
@@ -281,7 +296,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                 color: selected ? AppColors.ovulation : AppColors.border,
                 width: selected ? 2 : 1.5,
               ),
-              boxShadow: isAnnual
+              boxShadow: isAnnual || isLifetime
                   ? [BoxShadow(color: AppColors.ovulation.withOpacity(0.15), blurRadius: 12, offset: const Offset(0, 4))]
                   : null,
             ),
@@ -317,7 +332,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
               ],
             ),
           ),
-          if (isAnnual)
+          if (isAnnual || isLifetime)
             Positioned(
               top: -10,
               left: 16,
@@ -328,7 +343,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  s.paywallRecommendedBadge,
+                  isLifetime ? s.paywallBestValueBadge : s.paywallRecommendedBadge,
                   style: const TextStyle(color: Colors.white, fontSize: 9.5, fontWeight: FontWeight.w800, letterSpacing: 0.4),
                 ),
               ),

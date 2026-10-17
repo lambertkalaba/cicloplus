@@ -3366,6 +3366,8 @@ class AppStrings {
       _t({'es': 'Mensual', 'en': 'Monthly', 'fr': 'Mensuel', 'de': 'Monatlich', 'ru': 'Ежемесячно', 'ar': 'شهري', 'hi': 'मासिक', 'bn': 'মাসিক', 'pt': 'Mensal',});
   String get paywallPlanAnnual =>
       _t({'es': 'Anual', 'en': 'Annual', 'fr': 'Annuel', 'de': 'Jährlich', 'ru': 'Ежегодно', 'ar': 'سنوي', 'hi': 'वार्षिक', 'bn': 'বার্ষিক', 'pt': 'Anual',});
+  String get paywallPlanLifetime =>
+      _t({'es': 'De por vida', 'en': 'Lifetime', 'fr': 'À vie', 'de': 'Lebenslang', 'ru': 'Пожизненно', 'ar': 'مدى الحياة', 'hi': 'लाइफटाइम', 'bn': 'লাইফটাইম', 'pt': 'Vitalício',});
   String get paywallPlanWeeklyDesc => _t({
         'es': 'Se renueva cada semana',
         'en': 'Renews every week',
@@ -3390,11 +3392,22 @@ class AppStrings {
         'ru': 'Продлевается каждый год · выгоднее месячного',
         'ar': 'يتجدد كل عام · وفّري مقارنةً بالشهري', 'hi': 'हर साल नवीनीकृत होता है · मासिक से ज़्यादा बचत', 'bn': 'প্রতি বছর নবায়ন হয় · মাসিকের চেয়ে সাশ্রয়ী', 'pt': 'Renova todo ano · economize em relação ao mensal',
       });
+  String get paywallPlanLifetimeDesc => _t({
+        'es': 'Pago único · acceso para siempre, sin renovaciones',
+        'en': 'One-time payment · lifetime access, no renewals',
+        'fr': 'Paiement unique · accès à vie, sans renouvellement',
+        'de': 'Einmalzahlung · lebenslanger Zugang, keine Verlängerung',
+        'ru': 'Разовый платёж · доступ навсегда, без продлений',
+        'ar': 'دفعة واحدة · وصول مدى الحياة، بدون تجديد', 'hi': 'एक बार भुगतान · जीवनभर एक्सेस, कोई नवीनीकरण नहीं', 'bn': 'এককালীন পেমেন্ট · আজীবন অ্যাক্সেস, নবায়ন ছাড়াই', 'pt': 'Pagamento único · acesso vitalício, sem renovações',
+      });
   String get paywallRecommendedBadge =>
       _t({'es': 'MÁS POPULAR', 'en': 'MOST POPULAR', 'fr': 'LE PLUS POPULAIRE', 'de': 'AM BELIEBTESTEN', 'ru': 'САМЫЙ ПОПУЛЯРНЫЙ', 'ar': 'الأكثر شيوعًا', 'hi': 'सबसे लोकप्रिय', 'bn': 'সবচেয়ে জনপ্রিয়', 'pt': 'MAIS POPULAR',});
+  String get paywallBestValueBadge =>
+      _t({'es': 'MEJOR VALOR', 'en': 'BEST VALUE', 'fr': 'MEILLEURE OFFRE', 'de': 'BESTER WERT', 'ru': 'ЛУЧШАЯ ЦЕНА', 'ar': 'أفضل قيمة', 'hi': 'सर्वश्रेष्ठ मूल्य', 'bn': 'সেরা মূল্য', 'pt': 'MELHOR VALOR',});
   String get paywallPerWeek => _t({'es': '/semana', 'en': '/wk', 'fr': '/semaine', 'de': '/Woche', 'ru': '/нед', 'ar': '/أسبوع', 'hi': '/हफ्ता', 'bn': '/সপ্তাহ', 'pt': '/sem',});
   String get paywallPerMonth => _t({'es': '/mes', 'en': '/mo', 'fr': '/mois', 'de': '/Monat', 'ru': '/мес', 'ar': '/شهر', 'hi': '/माह', 'bn': '/মাস', 'pt': '/mês',});
   String get paywallPerYear => _t({'es': '/año', 'en': '/yr', 'fr': '/an', 'de': '/Jahr', 'ru': '/год', 'ar': '/سنة', 'hi': '/साल', 'bn': '/বছর', 'pt': '/ano',});
+  String get paywallOneTimePayment => _t({'es': 'Pago único', 'en': 'One-time', 'fr': 'Paiement unique', 'de': 'Einmalig', 'ru': 'Разовый платёж', 'ar': 'دفعة واحدة', 'hi': 'एक बार', 'bn': 'এককালীন', 'pt': 'Pagamento único',});
   String get paywallCtaButton => _t({
         'es': 'Empezar prueba gratis de 7 días',
         'en': 'Start 7-day free trial',

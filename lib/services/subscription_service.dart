@@ -39,6 +39,10 @@ class SubscriptionService {
   static const String weeklyProductId = 'cicloplus_monthly:weekly-autorenew';
   static const String monthlyProductId = 'cicloplus_monthly:monthly-autorenew';
   static const String annualProductId = 'cicloplus_monthly:annual-autorenew';
+  // Producto de pago único (sin suscripción) "De por vida", creado en
+  // Play Console como producto único (no tiene base plan, el ID es el
+  // identificador completo).
+  static const String lifetimeProductId = 'cicloplus_lifetime';
 
   bool _configured = false;
 

@@ -937,16 +937,12 @@ class _ReminderScreenState extends State<ReminderScreen> {
                     s.reminderScreenTitleLine1,
                     style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600, color: Colors.black),
                   ),
-                  IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    icon: const Icon(Icons.close, size: 15, color: _iosLabelMuted),
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: const CircleBorder(),
-                      minimumSize: const Size(28, 28),
-                      padding: EdgeInsets.zero,
-                    ),
-                  ),
+                  // Botón de cerrar (X) quitado a petición del usuario — se
+                  // deja este SizedBox del mismo ancho que ocupaba el botón
+                  // (28px) para que el título siga centrado respecto al
+                  // SizedBox(width: 44) de la izquierda. La pantalla se sigue
+                  // pudiendo cerrar con el gesto/botón de atrás del sistema.
+                  const SizedBox(width: 28),
                 ],
               ),
             ),
