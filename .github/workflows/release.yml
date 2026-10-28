@@ -48,10 +48,3 @@ jobs:
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           track: internal
           status: draft
-          # Evita que la API de Google Play intente enviar la edicion a
-          # revision automaticamente al confirmarla. Sin esto, el commit
-          # falla si ya hay otros cambios pendientes de revision en la
-          # cuenta (p. ej. cambios de la ficha de Play Console hechos a
-          # mano) -- el envio a revision se sigue haciendo aparte, desde
-          # la propia Play Console, cuando se decida.
-          changesNotSentForReview: true
