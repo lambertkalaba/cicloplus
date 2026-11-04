@@ -1,4 +1,5 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <!-- NOTA: no declaramos READ_MEDIA_IMAGES ni READ_EXTERNAL_STORAGE.
          La función "Adjuntar foto" usa `file_picker`, que abre el selector
          de archivos del propio sistema (Storage Access Framework); ese
@@ -26,29 +27,61 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
-    <!-- Permisos de Health Connect para sincronizar peso, sueño,
-         temperatura basal y flujo menstrual (función "Sincronizar con
-         Apple Salud / Google Fit" en Configuración). Se piden en tiempo
-         de ejecución vía el paquete `health`; declararlos aquí es
-         obligatorio para que el sistema los reconozca. -->
-    <uses-permission android:name="android.permission.health.READ_WEIGHT"/>
-    <uses-permission android:name="android.permission.health.WRITE_WEIGHT"/>
-    <uses-permission android:name="android.permission.health.READ_SLEEP"/>
-    <uses-permission android:name="android.permission.health.WRITE_SLEEP"/>
-    <uses-permission android:name="android.permission.health.READ_BODY_TEMPERATURE"/>
-    <uses-permission android:name="android.permission.health.WRITE_BODY_TEMPERATURE"/>
-    <uses-permission android:name="android.permission.health.READ_MENSTRUATION"/>
-    <uses-permission android:name="android.permission.health.WRITE_MENSTRUATION"/>
-    <!-- Frecuencia cardíaca en reposo y variabilidad (HRV): usadas por las
-         tarjetas "por fase del ciclo" de Estadísticas (ver
-         HealthSyncService._types / PhaseHealthCardsGroup en stats_screen.dart).
-         Sin declarar esto, Health Connect nunca concede el permiso aunque
-         haya un reloj conectado y la usuaria lo acepte — quedaban pidiendo
-         estos dos tipos de dato sin tenerlos declarados aquí. -->
-    <uses-permission android:name="android.permission.health.READ_HEART_RATE_VARIABILITY"/>
-    <uses-permission android:name="android.permission.health.WRITE_HEART_RATE_VARIABILITY"/>
-    <uses-permission android:name="android.permission.health.READ_RESTING_HEART_RATE"/>
-    <uses-permission android:name="android.permission.health.WRITE_RESTING_HEART_RATE"/>
+    <!-- CicloPlus en Android no usa Health Connect: se eliminan aquí los
+         permisos de salud que pudiera aportar algún plugin al fusionar
+         manifiestos, para no tener que declarar funciones de salud en Play. -->
+    <uses-permission android:name="android.permission.health.READ_HEALTH_DATA_HISTORY" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_HEALTH_DATA_IN_BACKGROUND" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_WEIGHT" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_WEIGHT" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_SLEEP" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_SLEEP" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_BODY_TEMPERATURE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_BODY_TEMPERATURE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_MENSTRUATION" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_MENSTRUATION" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_HEART_RATE_VARIABILITY" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_HEART_RATE_VARIABILITY" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_RESTING_HEART_RATE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_RESTING_HEART_RATE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_HEART_RATE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_HEART_RATE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_STEPS" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_STEPS" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_ACTIVE_CALORIES_BURNED" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_ACTIVE_CALORIES_BURNED" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_DISTANCE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_DISTANCE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_EXERCISE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_EXERCISE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_BLOOD_PRESSURE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_BLOOD_PRESSURE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_BLOOD_GLUCOSE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_BLOOD_GLUCOSE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_OXYGEN_SATURATION" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_OXYGEN_SATURATION" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_HEIGHT" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_HEIGHT" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_TOTAL_CALORIES_BURNED" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_TOTAL_CALORIES_BURNED" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_BODY_FAT" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_BODY_FAT" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_HYDRATION" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_HYDRATION" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_NUTRITION" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_NUTRITION" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_RESPIRATORY_RATE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_RESPIRATORY_RATE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_BASAL_METABOLIC_RATE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_BASAL_METABOLIC_RATE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_OVULATION_TEST" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_OVULATION_TEST" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_CERVICAL_MUCUS" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_CERVICAL_MUCUS" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_INTERMENSTRUAL_BLEEDING" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_INTERMENSTRUAL_BLEEDING" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.READ_SEXUAL_ACTIVITY" tools:node="remove"/>
+    <uses-permission android:name="android.permission.health.WRITE_SEXUAL_ACTIVITY" tools:node="remove"/>
 
     <application
         android:label="cicloplus_app"
@@ -75,11 +108,6 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-            <!-- Requerido por Health Connect para mostrar la pantalla de
-                 explicación de permisos ("rationale") en Android 14+. -->
-            <intent-filter>
-                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
-            </intent-filter>
             <!-- Enlace de invitación al vincular con un socio/pareja (ver
                  DeepLinkService e InvitePartnerScreen): al escanear con la
                  cámara NORMAL del móvil (no una cámara dentro de la app)
@@ -96,20 +124,6 @@
                 <data android:scheme="cicloplus" android:host="link" />
             </intent-filter>
         </activity>
-
-        <!-- Alias de actividad que Health Connect usa para mostrar el
-             enlace a la política de privacidad de la app desde su propia
-             pantalla de permisos. -->
-        <activity-alias
-            android:name="ViewPermissionUsageActivity"
-            android:exported="true"
-            android:targetActivity=".MainActivity"
-            android:permission="android.permission.START_VIEW_PERMISSION_USAGE">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
-                <category android:name="android.intent.category.HEALTH_PERMISSIONS" />
-            </intent-filter>
-        </activity-alias>
 
         <!-- Widget real de pantalla de inicio (fase 8, Configuración >
              Widget) — ver CicloPlusWidgetProvider.kt, actualizado desde
@@ -158,12 +172,5 @@
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
         </intent>
-        <!-- Necesario para detectar si la app Health Connect está
-             instalada en el dispositivo. -->
-        <package android:name="com.google.android.apps.healthdata" />
-        <intent>
-            <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
-        </intent>
-
     </queries>
 </manifest>

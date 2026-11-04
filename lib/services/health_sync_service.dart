@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:health/health.dart';
 
 import '../models/day_entry.dart';
@@ -52,6 +54,10 @@ class HealthSyncService {
     HealthDataType.RESTING_HEART_RATE,
   ];
 
+  /// La integración con Salud solo existe en iOS (HealthKit). En Android
+  /// se retiró Health Connect, así que todos los métodos devuelven vacío.
+  static bool get _supported => Platform.isIOS;
+
   Future<void> _ensureConfigured() async {
     if (_configured) return;
     await _health.configure();
@@ -62,6 +68,7 @@ class HealthSyncService {
   /// `false` si la persona los denegó o si la plataforma no está
   /// disponible (p. ej. Health Connect no instalado).
   Future<bool> requestPermissions() async {
+    if (!_supported) return false;
     try {
       await _ensureConfigured();
       final permissions = _types.map((_) => HealthDataAccess.READ_WRITE).toList();
@@ -72,6 +79,7 @@ class HealthSyncService {
   }
 
   Future<bool> hasPermissions() async {
+    if (!_supported) return false;
     try {
       await _ensureConfigured();
       final permissions = _types.map((_) => HealthDataAccess.READ_WRITE).toList();
@@ -86,6 +94,7 @@ class HealthSyncService {
   /// fecha). Se usa para pre-rellenar el editor de día si el usuario no
   /// ha introducido esos valores todavía.
   Future<HealthDaySnapshot> readDay(DateTime date) async {
+    if (!_supported) return const HealthDaySnapshot();
     try {
       await _ensureConfigured();
       final start = DateTime(date.year, date.month, date.day);
@@ -141,6 +150,7 @@ class HealthSyncService {
   /// plataforma no tiene el permiso o no hay datos, devuelve lista vacía
   /// en vez de lanzar una excepción.
   Future<List<HealthDataPoint>> readRange(HealthDataType type, DateTime start, DateTime end) async {
+    if (!_supported) return const [];
     try {
       await _ensureConfigured();
       final points = await _health.getHealthDataFromTypes(
@@ -166,6 +176,7 @@ class HealthSyncService {
   /// — la app sigue funcionando igual usando solo su propio
   /// almacenamiento local.
   Future<void> writeDay(DateTime date, DayEntry entry) async {
+    if (!_supported) return;
     try {
       await _ensureConfigured();
 

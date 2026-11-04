@@ -1940,6 +1940,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const SizedBox(height: 20),
 
             // ---- 16. Apple Salud (Sync Salud real) ----
+            if (Platform.isIOS) ...[
             _sectionCard(
               title: s.settingsAppleHealth,
               subtitle: s.settingsHealthSyncHint,
@@ -1952,6 +1953,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             const SizedBox(height: 20),
+            ],
 
             // ---- 17+18+20+21+22. Apple Watch / Widget / Quitar anuncios /
             // Informe de errores / Puntúanos — agrupados en una sola
