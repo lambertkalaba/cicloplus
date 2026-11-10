@@ -571,10 +571,13 @@ class _MainTabScreenState extends State<MainTabScreen> with SingleTickerProvider
             // se mantiene el borde recto original para no alterar su
             // aspecto ya aprobado.
             ClipPath(
-              clipper: _currentTab == 0 ? const _HeaderWaveClipper() : null,
+              // Rediseño 2026-11 (maquetas ChatGPT aprobadas): la onda pasa
+              // a todas las pestañas menos Yo, que tiene su propia cabecera
+              // verde justo debajo (con onda se vería cortada).
+              clipper: _currentTab != 4 ? const _HeaderWaveClipper() : null,
               child: Container(
                 width: double.infinity,
-                padding: EdgeInsets.fromLTRB(16, statusBarHeight + 8, 16, _currentTab == 0 ? 20 : 10),
+                padding: EdgeInsets.fromLTRB(16, statusBarHeight + 8, 16, _currentTab != 4 ? 20 : 10),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [Color(theme.primary), Color(theme.primaryDark)],
@@ -596,8 +599,8 @@ class _MainTabScreenState extends State<MainTabScreen> with SingleTickerProvider
                                   style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w800)),
                             )
                           else
-                            const Text('🌸 CicloPlus',
-                                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700)),
+                            const Text('CicloPlus',
+                                style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
                           Positioned(
                             right: 0,
                             child: IconButton(
