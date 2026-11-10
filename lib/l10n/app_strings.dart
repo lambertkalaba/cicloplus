@@ -34,7 +34,7 @@ class AppStrings {
 
   String get tabCalendar => _t({'es': 'Calendario', 'en': 'Calendar', 'fr': 'Calendrier', 'de': 'Kalender', 'ru': 'Календарь', 'ar': 'التقويم', 'hi': 'कैलेंडर', 'bn': 'ক্যালেন্ডার', 'pt': 'Calendário'});
   String get tabTimeline => _t({'es': 'Línea de tiempo', 'en': 'Timeline', 'fr': 'Chronologie', 'de': 'Zeitleiste', 'ru': 'Хронология', 'ar': 'الجدول الزمني', 'hi': 'टाइमलाइन', 'bn': 'টাইমলাইন', 'pt': 'Linha do tempo'});
-  String get tabReview => _t({'es': 'Revisión', 'en': 'Review', 'fr': 'Bilan', 'de': 'Überblick', 'ru': 'Обзор', 'ar': 'المراجعة', 'hi': 'समीक्षा', 'bn': 'পর্যালোচনা', 'pt': 'Revisão'});
+  String get tabReview => _t({'es': 'Estadísticas', 'en': 'Review', 'fr': 'Bilan', 'de': 'Überblick', 'ru': 'Обзор', 'ar': 'المراجعة', 'hi': 'समीक्षा', 'bn': 'পর্যালোচনা', 'pt': 'Revisão'});
   String get tabStats => _t({'es': 'Estadísticas', 'en': 'Statistics', 'fr': 'Statistiques', 'de': 'Statistiken', 'ru': 'Статистика', 'ar': 'الإحصائيات', 'hi': 'आंकड़े', 'bn': 'পরিসংখ্যান', 'pt': 'Estatísticas'});
 
   // ==================== review_screen.dart ====================
@@ -338,6 +338,14 @@ class AppStrings {
   String get reminderScreenTitleLine1 => _t({'es': 'Obtener', 'en': 'Get', 'fr': 'Obtenir', 'de': 'Erhalte', 'ru': 'Получить', 'ar': 'الحصول عليه', 'hi': 'पाएं', 'bn': 'পান', 'pt': 'Obter'});
   String get reminderScreenTitleLine2 =>
       _t({'es': 'Recordatorio', 'en': 'Reminder', 'fr': 'un rappel', 'de': 'Erinnerung', 'ru': 'Напоминание', 'ar': 'تذكير', 'hi': 'रिमाइंडर', 'bn': 'রিমাইন্ডার', 'pt': 'Lembrete'});
+  // Título único y lema de la pantalla de recordatorios (rediseño 2026-11).
+  // Tarjeta "Próximo periodo" bajo el calendario (rediseño 2026-11).
+  String get calendarNextPeriodTitle => _t({'es': 'PRÓXIMO PERIODO', 'en': 'NEXT PERIOD', 'fr': 'PROCHAINES RÈGLES', 'de': 'NÄCHSTE PERIODE', 'ru': 'СЛЕДУЮЩАЯ МЕНСТРУАЦИЯ', 'ar': 'الدورة القادمة', 'hi': 'अगला पीरियड', 'bn': 'পরবর্তী পিরিয়ড', 'pt': 'PRÓXIMA MENSTRUAÇÃO'});
+  String calendarNextPeriodInDays(int n) => _t({'es': n == 1 ? 'En 1 día' : 'En $n días', 'en': n == 1 ? 'In 1 day' : 'In $n days', 'fr': n == 1 ? 'Dans 1 jour' : 'Dans $n jours', 'de': n == 1 ? 'In 1 Tag' : 'In $n Tagen', 'ru': 'Через $n дн.', 'ar': 'بعد $n يوم', 'hi': '$n दिन में', 'bn': '$n দিনে', 'pt': n == 1 ? 'Em 1 dia' : 'Em $n dias'});
+  String get calendarNextPeriodToday => _t({'es': 'Podría empezar hoy', 'en': 'Could start today', 'fr': "Pourrait commencer aujourd'hui", 'de': 'Könnte heute beginnen', 'ru': 'Может начаться сегодня', 'ar': 'قد تبدأ اليوم', 'hi': 'आज शुरू हो सकता है', 'bn': 'আজ শুরু হতে পারে', 'pt': 'Pode começar hoje'});
+  String meLoggingStreak(int n) => _t({'es': n == 1 ? 'Llevas 1 día registrando' : 'Llevas $n días seguidos registrando', 'en': n == 1 ? '1 day logging in a row' : '$n days logging in a row', 'fr': '$n jour(s) de suivi d\'affilée', 'de': '$n Tag(e) in Folge eingetragen', 'ru': 'Записи $n дн. подряд', 'ar': '$n يوم تسجيل متتالي', 'hi': 'लगातार $n दिन से दर्ज कर रही हैं', 'bn': 'টানা $n দিন রেকর্ড করছেন', 'pt': n == 1 ? '1 dia registrando' : '$n dias seguidos registrando'});
+  String get remindersScreenTitle => _t({'es': 'Recordatorios', 'en': 'Reminders', 'fr': 'Rappels', 'de': 'Erinnerungen', 'ru': 'Напоминания', 'ar': 'التذكيرات', 'hi': 'रिमाइंडर', 'bn': 'রিমাইন্ডার', 'pt': 'Lembretes'});
+  String get remindersScreenTagline => _t({'es': 'No olvides tus citas, hábitos y cuidados', 'en': "Don't forget your appointments, habits and self-care", 'fr': "N'oublie pas tes rendez-vous, habitudes et soins", 'de': 'Vergiss deine Termine, Gewohnheiten und Pflege nicht', 'ru': 'Не забывай о приёмах, привычках и заботе о себе', 'ar': 'لا تنسي مواعيدك وعاداتك والعناية بنفسك', 'hi': 'अपनी अपॉइंटमेंट, आदतें और देखभाल न भूलें', 'bn': 'আপনার অ্যাপয়েন্টমেন্ট, অভ্যাস ও যত্ন ভুলবেন না', 'pt': 'Não esqueça suas consultas, hábitos e cuidados'});
   String get reminderRowPeriod => _t({'es': 'Periodo', 'en': 'Period', 'fr': 'Règles', 'de': 'Periode', 'ru': 'Менструация', 'ar': 'الدورة', 'hi': 'पीरियड', 'bn': 'পিরিয়ড', 'pt': 'Período'});
   String get reminderRowOvulation => _t({'es': 'Ovulación', 'en': 'Ovulation', 'fr': 'Ovulation', 'de': 'Eisprung', 'ru': 'Овуляция', 'ar': 'الإباضة', 'hi': 'ओव्यूलेशन', 'bn': 'ডিম্বস্ফোটন', 'pt': 'Ovulação'});
   String get reminderRowFertile =>
@@ -3795,7 +3803,7 @@ class AppStrings {
         'ar': 'شاركي إيقاعكِ ولحظاتكِ مع شريككِ', 'hi': 'अपनी लय और पलों को अपने पार्टनर के साथ सिंक करें', 'bn': 'আপনার ছন্দ ও মুহূর্তগুলো আপনার পার্টনারের সাথে সিঙ্ক করুন', 'pt': 'Sincronize seu ritmo e seus momentos com seu parceiro(a)',
       });
   String get todayInvitePartner =>
-      _t({'es': 'Invitar a un socio', 'en': 'Invite a partner', 'fr': 'Inviter un(e) partenaire', 'de': 'Partner:in einladen', 'ru': 'Пригласить партнёра', 'ar': 'دعوة شريك', 'hi': 'पार्टनर को आमंत्रित करें', 'bn': 'পার্টনারকে আমন্ত্রণ জানান', 'pt': 'Convidar um parceiro(a)',});
+      _t({'es': 'Invitar a tu pareja', 'en': 'Invite a partner', 'fr': 'Inviter un(e) partenaire', 'de': 'Partner:in einladen', 'ru': 'Пригласить партнёра', 'ar': 'دعوة شريك', 'hi': 'पार्टनर को आमंत्रित करें', 'bn': 'পার্টনারকে আমন্ত্রণ জানান', 'pt': 'Convidar um parceiro(a)',});
   String get todayHighFertility => _t({
         'es': 'Alta - posibilidad de quedar embarazada',
         'en': 'High - chance of getting pregnant',
@@ -3841,6 +3849,10 @@ class AppStrings {
       });
   // Encabezado pequeño de la tarjeta "Tu jardín" (ver
   // TodayScreen._buildGardenCard) — también le faltaba al catálogo.
+  // Portada de la tarjeta del jardín durante el embarazo (rediseño 2026-11).
+  String get todayPregnancyHeroLabel => _t({'es': 'Tu embarazo', 'en': 'Your pregnancy', 'fr': 'Ta grossesse', 'de': 'Deine Schwangerschaft', 'ru': 'Твоя беременность', 'ar': 'حملكِ', 'hi': 'आपकी गर्भावस्था', 'bn': 'আপনার গর্ভাবস্থা', 'pt': 'Sua gravidez'});
+  String todayPregnancyHeroWeek(int n) => _t({'es': 'Semana $n', 'en': 'Week $n', 'fr': 'Semaine $n', 'de': 'Woche $n', 'ru': 'Неделя $n', 'ar': 'الأسبوع $n', 'hi': 'सप्ताह $n', 'bn': 'সপ্তাহ $n', 'pt': 'Semana $n'});
+  String todayPregnancyHeroWeeksLeft(int n) => _t({'es': 'Faltan $n semanas para tu parto', 'en': '$n weeks until your due date', 'fr': 'Encore $n semaines avant le terme', 'de': 'Noch $n Wochen bis zur Geburt', 'ru': 'До родов осталось недель: $n', 'ar': 'متبقٍ $n أسبوعًا على الولادة', 'hi': 'प्रसव में $n सप्ताह बाकी', 'bn': 'প্রসবের $n সপ্তাহ বাকি', 'pt': 'Faltam $n semanas para o parto'});
   String get todayGardenHeader => _t({
         'es': 'TU JARDÍN',
         'en': 'YOUR GARDEN',

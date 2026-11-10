@@ -483,6 +483,11 @@ class _MeScreenState extends State<MeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Rediseño 2026-11 (maqueta ChatGPT aprobada): resumen bonito
+              // arriba — semana de embarazo o próximo periodo, más la racha
+              // de días seguidos registrando.
+              _buildSummaryCard(s, predictor),
+              const SizedBox(height: 14),
               _buildTimelineCard(s, primary),
               const SizedBox(height: 22),
               _buildGoalSection(s, primary),
@@ -711,6 +716,10 @@ class _MeScreenState extends State<MeScreen> {
         ],
       ),
       child: GridView.builder(
+        // padding: zero — sin esto GridView añade por defecto el margen
+        // superior de la zona segura (MediaQuery), y eso era el hueco blanco
+        // vacío que se veía arriba de esta tarjeta.
+        padding: EdgeInsets.zero,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: items.length,
@@ -759,6 +768,100 @@ class _MeScreenState extends State<MeScreen> {
             ),
           );
         },
+      ),
+    );
+  }
+
+  /// Días seguidos (hasta hoy, o hasta ayer si hoy aún no se registró)
+  /// con algún registro guardado.
+  int _loggingStreak() {
+    final now = DateTime.now();
+    var day = DateTime(now.year, now.month, now.day);
+    if (!widget.data.containsKey(dateKey(day))) {
+      day = day.subtract(const Duration(days: 1));
+    }
+    var streak = 0;
+    while (widget.data.containsKey(dateKey(day)) && streak < 3650) {
+      streak++;
+      day = day.subtract(const Duration(days: 1));
+    }
+    return streak;
+  }
+
+  Widget _buildSummaryCard(AppStrings s, CyclePredictor predictor) {
+    String? big;
+    String? small;
+    if (_goal == 'pregnancy' && widget.pregnancy.lmp != null) {
+      final lmp = widget.pregnancy.lmp!;
+      final now = DateTime.now();
+      final raw = DateTime(now.year, now.month, now.day).difference(DateTime(lmp.year, lmp.month, lmp.day)).inDays;
+      final daysSince = raw < 0 ? 0 : raw;
+      final totalDays = widget.pregnancy.isTwins ? 259 : 280;
+      final capDays = totalDays + 7;
+      final week = ((daysSince > capDays ? capDays : daysSince) / 7).floor() + 1;
+      small = s.todayPregnancyHeroLabel;
+      big = s.todayPregnancyHeroWeek(week);
+    } else if (_goal != 'pregnancy') {
+      final next = predictor.predict().nextPeriodStart;
+      if (next != null) {
+        final now = DateTime.now();
+        final days = DateTime(next.year, next.month, next.day).difference(DateTime(now.year, now.month, now.day)).inDays;
+        small = s.calendarNextPeriodTitle;
+        big = days > 0 ? s.calendarNextPeriodInDays(days) : s.calendarNextPeriodToday;
+      }
+    }
+    final streak = _loggingStreak();
+    if (big == null && streak == 0) return const SizedBox.shrink();
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFFFFF0F4), Color(0xFFFDE3EC)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(color: AppColors.primary.withOpacity(0.14), blurRadius: 18, offset: const Offset(0, 8)),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 52,
+            height: 52,
+            decoration: BoxDecoration(color: AppColors.primary.withOpacity(0.12), shape: BoxShape.circle),
+            child: Icon(_goal == 'pregnancy' ? Icons.child_friendly : Icons.water_drop, color: AppColors.primaryDark, size: 26),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (small != null)
+                  Text(small, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.textMuted, letterSpacing: 0.3)),
+                if (big != null)
+                  Text(big, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: AppColors.primaryDark, height: 1.15)),
+                if (streak > 0) ...[
+                  const SizedBox(height: 6),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(color: Colors.white.withOpacity(0.85), borderRadius: BorderRadius.circular(14)),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.local_fire_department, size: 15, color: Color(0xFFF26B1D)),
+                        const SizedBox(width: 4),
+                        Text(s.meLoggingStreak(streak), style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+                      ],
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

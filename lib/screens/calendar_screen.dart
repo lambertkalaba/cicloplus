@@ -813,6 +813,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 ),
               ],
             ),
+            // Rediseño 2026-11 (maqueta ChatGPT aprobada): tarjeta destacada
+            // que aprovecha el hueco bajo el calendario con el próximo
+            // periodo previsto. No se muestra en embarazo (no hay periodo
+            // que prever) ni si aún no hay predicción.
+            if (_userGoal != 'pregnancy' && prediction.nextPeriodStart != null) ...[
+              const SizedBox(height: 14),
+              _buildNextPeriodCard(s, prediction.nextPeriodStart!),
+            ],
             // "Atajo" con lo registrado en _selectedDate (período, vida
             // sexual, síntomas/ánimo, método anticonceptivo, nota) — un
             // vistazo rápido de la información de ese día sin tener que
@@ -836,6 +844,62 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildNextPeriodCard(AppStrings s, DateTime next) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final days = DateTime(next.year, next.month, next.day).difference(today).inDays;
+    final big = days > 0 ? s.calendarNextPeriodInDays(days) : s.calendarNextPeriodToday;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFFFFF0F4), Color(0xFFFDE3EC)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(color: AppColors.primary.withOpacity(0.14), blurRadius: 18, offset: const Offset(0, 8)),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: CalendarPhaseColors.periodFill.withOpacity(0.15),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(Icons.water_drop, color: CalendarPhaseColors.periodFill, size: 26),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  s.calendarNextPeriodTitle,
+                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.textMuted, letterSpacing: 0.4),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  big,
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: AppColors.primaryDark),
+                ),
+                Text(
+                  '${next.day}/${next.month}/${next.year}',
+                  style: const TextStyle(fontSize: 13, color: AppColors.textMuted),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

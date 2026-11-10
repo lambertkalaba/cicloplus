@@ -8,6 +8,7 @@ import '../models/day_entry.dart';
 import '../services/cycle_predictor.dart' show dateKey;
 import '../services/settings_service.dart' show AppThemeOption, SettingsService, themeById;
 import '../theme/app_theme.dart';
+import '../widgets/petal_burst.dart';
 import '../widgets/reminder_time_sheet.dart' show ReminderDatePickerSheet, ReminderTimePickerSheet;
 
 /// Pestaña "Registrar" (índice 2 de la barra inferior): pantalla completa
@@ -460,6 +461,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
   /// fondo de color sólido distinto por síntoma, silueta blanca simple,
   /// sombra suave, sin brillo de plástico. La app las recorta en círculo
   /// con [ClipOval] + `BoxFit.cover`, así que no necesitan fondo transparente.
+  /// Color fuerte propio de cada síntoma (a juego con su insignia) para
+  /// rellenar la tarjeta cuando está marcada — rediseño 2026-11. Tonos lo
+  /// bastante oscuros para que el texto blanco se lea bien.
+  Color _symptomStrongColor(String id) {
+    switch (id) {
+      case 'dolor':
+        return const Color(0xFFD9363E);
+      case 'animo':
+        return const Color(0xFFC77700);
+      case 'energia':
+        return const Color(0xFF2F8A3E);
+      case 'antojos':
+        return const Color(0xFF2F6FD6);
+      case 'hinchazon':
+        return const Color(0xFF0E8A7E);
+      case 'sueno':
+        return const Color(0xFF7446D6);
+      case 'acne':
+        return const Color(0xFFD43C86);
+      case 'dolorcab':
+        return const Color(0xFF6A5AC8);
+      default:
+        return AppColors.primaryDark;
+    }
+  }
+
   String _symptomAsset(String id) {
     switch (id) {
       case 'dolor':
@@ -908,6 +935,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     updated[_todayKey] = entry;
     _enforceWeightHistoryLimit(updated);
     widget.onDataChanged(updated);
+    // Rediseño 2026-11: lluvia de pétalos al guardar. Va en el Overlay raíz
+    // para que siga viéndose aunque esta pantalla se cierre o cambie de
+    // pestaña justo después.
+    showPetalBurst(context);
 
     // Si esta pantalla se abrió con Navigator.push (showCloseButton: true,
     // p. ej. desde Calendario/Cronología/"Editar" en Yo), Guardar también
@@ -1071,16 +1102,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       final level = _symptomLevels[id];
                       final color = _symptomLevelColor(level);
                       final selected = level != null;
+                      final strong = _symptomStrongColor(id);
                       return GestureDetector(
                         onTap: () => _cycleSymptom(id),
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 150),
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
-                            color: selected ? color.background : AppColors.background,
+                            // Rediseño 2026-11 (maqueta ChatGPT aprobada): el
+                            // síntoma marcado se rellena con su color fuerte,
+                            // texto blanco y un check, para que se vea de un
+                            // vistazo qué está seleccionado.
+                            color: selected ? strong : Colors.white,
                             borderRadius: BorderRadius.circular(14),
                             border: Border.all(
-                                color: selected ? color.border : AppColors.border, width: selected ? 1.5 : 1),
+                                color: selected ? strong : AppColors.border, width: selected ? 1.5 : 1),
+                            boxShadow: selected
+                                ? [BoxShadow(color: strong.withOpacity(0.35), blurRadius: 10, offset: const Offset(0, 4))]
+                                : null,
                           ),
                           child: Row(
                             children: [
@@ -1090,7 +1129,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: selected
-                                      ? Border.all(color: color.border, width: 2)
+                                      ? Border.all(color: Colors.white, width: 2)
                                       : null,
                                 ),
                                 child: ClipOval(
@@ -1109,18 +1148,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: selected ? color.text : AppColors.textPrimary,
+                                        color: selected ? Colors.white : AppColors.textPrimary,
                                         fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
                                       ),
                                     ),
                                     if (level != null)
                                       Text(
                                         s.symptomLevelLabelFor(level),
-                                        style: TextStyle(fontSize: 10, color: color.border.withOpacity(0.9)),
+                                        style: const TextStyle(fontSize: 10, color: Color(0xE6FFFFFF)),
                                       ),
                                   ],
                                 ),
                               ),
+                              if (selected) const Icon(Icons.check_circle, size: 18, color: Colors.white),
                             ],
                           ),
                         ),

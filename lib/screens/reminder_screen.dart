@@ -923,40 +923,52 @@ class _ReminderScreenState extends State<ReminderScreen> {
     final primary = Color(theme.primary);
 
     return Scaffold(
-      backgroundColor: _iosBg,
+      // Rediseño 2026-11 (aprobado por el usuario con maquetas de ChatGPT):
+      // mismo fondo rosa claro que el resto de la app en vez del gris de
+      // Ajustes de iPhone, que rompía la coherencia visual.
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(4, 4, 16, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(width: 44),
-                  Text(
-                    s.reminderScreenTitleLine1,
-                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600, color: Colors.black),
-                  ),
-                  // Botón de cerrar (X) quitado a petición del usuario — se
-                  // deja este SizedBox del mismo ancho que ocupaba el botón
-                  // (28px) para que el título siga centrado respecto al
-                  // SizedBox(width: 44) de la izquierda. La pantalla se sigue
-                  // pudiendo cerrar con el gesto/botón de atrás del sistema.
-                  const SizedBox(width: 28),
-                ],
-              ),
-            ),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(16, 4, 16, 32),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Un solo título (antes salía duplicado: "Obtener" arriba y
+                    // "Obtener Recordatorio" debajo) con campana y lema.
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
-                      child: Text(
-                        '${s.reminderScreenTitleLine1}\n${s.reminderScreenTitleLine2}',
-                        style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: Colors.black, height: 1.15),
+                      padding: const EdgeInsets.fromLTRB(4, 12, 4, 4),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.notifications_active, color: Color(0xFFF5A623), size: 30),
+                              const SizedBox(width: 8),
+                              Flexible(
+                                child: Text(
+                                  s.remindersScreenTitle,
+                                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800, color: AppColors.primaryDark, height: 1.15),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryLight.withOpacity(0.6),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              s.remindersScreenTagline,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(fontSize: 13, color: AppColors.textPrimary),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     // Durante el embarazo no hay periodos que seguir, así
@@ -1211,12 +1223,12 @@ class _ReminderScreenState extends State<ReminderScreen> {
         padding: const EdgeInsets.fromLTRB(4, 16, 4, 6),
         child: Text(
           text.toUpperCase(),
-          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: _iosLabelMuted, letterSpacing: 0.3),
+          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.primaryDark, letterSpacing: 0.6),
         ),
       );
 
   Widget _iosDividerLine() => const Padding(
-        padding: EdgeInsets.only(left: 42),
+        padding: EdgeInsets.only(left: 50),
         child: Divider(height: 0.5, thickness: 0.5, color: _iosDivider),
       );
 
@@ -1229,12 +1241,12 @@ class _ReminderScreenState extends State<ReminderScreen> {
       // Inicio/Calendario.
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(18),
         boxShadow: [
           BoxShadow(
-            color: AppColors.textPrimary.withOpacity(0.16),
-            blurRadius: 22,
-            offset: const Offset(0, 9),
+            color: AppColors.primary.withOpacity(0.12),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
           ),
         ],
       ),
@@ -1243,11 +1255,13 @@ class _ReminderScreenState extends State<ReminderScreen> {
   }
 
   Widget _iosIcon(IconData icon, Color bg) {
+    // Icono redondo con fondo suave del mismo color (en vez del cuadrado
+    // sólido estilo iOS), a juego con la maqueta aprobada.
     return Container(
-      width: 30,
-      height: 30,
-      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(8)),
-      child: Icon(icon, size: 16, color: Colors.white),
+      width: 38,
+      height: 38,
+      decoration: BoxDecoration(color: bg.withOpacity(0.15), shape: BoxShape.circle),
+      child: Icon(icon, size: 20, color: bg),
     );
   }
 
@@ -1279,7 +1293,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(label, style: const TextStyle(fontSize: 16, color: Colors.black)),
+                  Text(label, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
                   if (subtitle != null)
                     Padding(
                       padding: const EdgeInsets.only(top: 2),

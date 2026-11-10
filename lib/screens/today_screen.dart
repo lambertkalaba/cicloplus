@@ -8,6 +8,7 @@ import '../models/day_entry.dart';
 import '../services/app_open_controller.dart';
 import '../services/couple_illustration_controller.dart';
 import '../services/cycle_predictor.dart';
+import '../data/pregnancy_week_info.dart' show pregnancyWeekInfoFor;
 import '../services/garden_stage.dart';
 import '../services/settings_service.dart' show AppThemeOption, PregnancySettings, kAppThemes, themeById;
 import '../theme/app_theme.dart';
@@ -451,6 +452,27 @@ class TodayScreen extends StatelessWidget {
   // imagen de la etapa del jardín ocupa toda la tarjeta de lado a lado
   // (estilo "banner"), con el texto superpuesto abajo sobre un degradado
   // oscuro para que siga siendo legible.
+  /// Semana de embarazo actual (1-indexada) y semanas que faltan para el
+  /// parto, con el mismo cálculo que _buildPregnancyCard. Null si no hay
+  /// fecha de último periodo configurada.
+  ({int week, int weeksLeft})? _pregnancyWeekNow() {
+    final lmp = pregnancy.lmp;
+    if (lmp == null) return null;
+    final today = DateTime.now();
+    final todayMidnight = DateTime(today.year, today.month, today.day);
+    final raw = todayMidnight.difference(DateTime(lmp.year, lmp.month, lmp.day)).inDays;
+    final daysSince = raw < 0 ? 0 : raw;
+    final totalDays = pregnancy.isTwins ? 259 : 280;
+    final capDays = totalDays + 7;
+    final week = ((daysSince > capDays ? capDays : daysSince) / 7).floor() + 1;
+    final left = ((totalDays - daysSince) / 7).ceil();
+    return (week: week, weeksLeft: left < 0 ? 0 : left);
+  }
+
+  /// Quita emojis/símbolos del texto de tamaño (p. ej. "una frambuesa 🍇").
+  String _cleanSize(String raw) =>
+      raw.replaceAll(RegExp(r'[^\p{L}\p{N}\s,.\-]', unicode: true), '').trim();
+
   Widget _buildGardenCard(
     AppStrings s,
     AppThemeOption theme,
@@ -513,6 +535,50 @@ class TodayScreen extends StatelessWidget {
                 ),
               ),
             ),
+            // Rediseño 2026-11 (maqueta de ChatGPT aprobada): durante el
+            // embarazo la foto de flores también informa — "Semana N" en
+            // grande, centrado, con las semanas que faltan para el parto.
+            if (inPregnancyMode && _pregnancyWeekNow() != null)
+              Positioned.fill(
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        s.todayPregnancyHeroLabel,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                          shadows: [Shadow(color: Color(0x99000000), blurRadius: 8)],
+                        ),
+                      ),
+                      Text(
+                        s.todayPregnancyHeroWeek(_pregnancyWeekNow()!.week),
+                        style: const TextStyle(
+                          fontSize: 44,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                          height: 1.05,
+                          shadows: [Shadow(color: Color(0xAA000000), blurRadius: 14, offset: Offset(0, 2))],
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.88),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          s.todayPregnancyHeroWeeksLeft(_pregnancyWeekNow()!.weeksLeft),
+                          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.primaryDark),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             Positioned(
               left: 16,
               right: 16,
@@ -794,6 +860,25 @@ class TodayScreen extends StatelessWidget {
                         style: const TextStyle(fontSize: 15, color: AppColors.textMuted),
                         textAlign: lmp != null ? TextAlign.start : TextAlign.center,
                       ),
+                      // Comparación de tamaño ("Tu bebé es como una
+                      // frambuesa") — el contenido de pregnancy_week_info
+                      // solo existe en español, así que solo se muestra en
+                      // español y desde la semana 4 (antes no hay
+                      // comparación con una fruta/semilla).
+                      if (lmp != null && s.code == 'es' && _pregnancyWeekNow() != null && _pregnancyWeekNow()!.week >= 4) ...[
+                        const SizedBox(height: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryLight.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Text(
+                            'Tu bebé es como ${_cleanSize(pregnancyWeekInfoFor(_pregnancyWeekNow()!.week).size)}',
+                            style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: AppColors.primaryDark),
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),
