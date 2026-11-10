@@ -15,7 +15,7 @@ import '../widgets/conceive_intake_sheet.dart';
 import 'account_screen.dart';
 import 'field_detail_screen.dart';
 import 'ovulation_test_screen.dart';
-import 'pregnancy_tracking_screen.dart';
+import 'pregnancy_tracking_screen.dart' show PregnancyTrackingScreen, pregnancyDayImagePath;
 import 'quick_summary_screen.dart';
 import 'reminder_screen.dart';
 import 'review_screen.dart';
@@ -471,12 +471,19 @@ class _MeScreenState extends State<MeScreen> {
       padding: EdgeInsets.zero,
       children: [
         _buildHeader(s, primary, primaryDark),
+        // Rediseño 2026-11 (maqueta ChatGPT aprobada): la tarjeta resumen
+        // (semana de embarazo / próximo periodo + racha) es la que se solapa
+        // con el header, y debajo va la fila de accesos de colores.
         Transform.translate(
           offset: const Offset(0, -24),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _buildGrid(s, primary),
+            child: _buildSummaryCard(s, predictor),
           ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
+          child: _buildGrid(s, primary),
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
@@ -486,8 +493,6 @@ class _MeScreenState extends State<MeScreen> {
               // Rediseño 2026-11 (maqueta ChatGPT aprobada): resumen bonito
               // arriba — semana de embarazo o próximo periodo, más la racha
               // de días seguidos registrando.
-              _buildSummaryCard(s, predictor),
-              const SizedBox(height: 14),
               _buildTimelineCard(s, primary),
               const SizedBox(height: 22),
               _buildGoalSection(s, primary),
@@ -705,70 +710,67 @@ class _MeScreenState extends State<MeScreen> {
       ),
     ];
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 10, offset: const Offset(0, 3)),
-        ],
+    // Rediseño 2026-11: cada acceso es un mosaico de color suave con su
+    // icono redondo arriba y el texto debajo, en filas de 5 (como la
+    // maqueta de ChatGPT), en vez de la lista de 2 columnas de antes.
+    return GridView.builder(
+      // padding: zero — sin esto GridView añade el margen superior de la
+      // zona segura (MediaQuery): era el hueco blanco vacío de antes.
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: items.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 5,
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+        childAspectRatio: 0.74,
       ),
-      child: GridView.builder(
-        // padding: zero — sin esto GridView añade por defecto el margen
-        // superior de la zona segura (MediaQuery), y eso era el hueco blanco
-        // vacío que se veía arriba de esta tarjeta.
-        padding: EdgeInsets.zero,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: items.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 4,
-          crossAxisSpacing: 4,
-          childAspectRatio: 2.7,
-        ),
-        itemBuilder: (context, index) {
-          final item = items[index];
-          return InkWell(
-            onTap: item.onTap,
-            borderRadius: BorderRadius.circular(14),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-              child: Row(
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [item.colorStart, item.colorEnd],
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(color: item.colorEnd.withOpacity(0.35), blurRadius: 6, offset: const Offset(0, 2)),
-                      ],
-                    ),
-                    child: Icon(item.icon, color: Colors.white, size: 20),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      item.label,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
-                    ),
-                  ),
-                ],
-              ),
+      itemBuilder: (context, index) {
+        final item = items[index];
+        return InkWell(
+          onTap: item.onTap,
+          borderRadius: BorderRadius.circular(16),
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(4, 10, 4, 6),
+            decoration: BoxDecoration(
+              color: item.colorStart.withOpacity(0.14),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: item.colorStart.withOpacity(0.25)),
             ),
-          );
-        },
-      ),
+            child: Column(
+              children: [
+                Container(
+                  width: 38,
+                  height: 38,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [item.colorStart, item.colorEnd],
+                    ),
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(color: item.colorEnd.withOpacity(0.35), blurRadius: 6, offset: const Offset(0, 2)),
+                    ],
+                  ),
+                  child: Icon(item.icon, color: Colors.white, size: 20),
+                ),
+                const SizedBox(height: 6),
+                Expanded(
+                  child: Text(
+                    item.label,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 10.5, fontWeight: FontWeight.w700, color: AppColors.textPrimary, height: 1.15),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -791,6 +793,7 @@ class _MeScreenState extends State<MeScreen> {
   Widget _buildSummaryCard(AppStrings s, CyclePredictor predictor) {
     String? big;
     String? small;
+    int? babyDays;
     if (_goal == 'pregnancy' && widget.pregnancy.lmp != null) {
       final lmp = widget.pregnancy.lmp!;
       final now = DateTime.now();
@@ -801,6 +804,7 @@ class _MeScreenState extends State<MeScreen> {
       final week = ((daysSince > capDays ? capDays : daysSince) / 7).floor() + 1;
       small = s.todayPregnancyHeroLabel;
       big = s.todayPregnancyHeroWeek(week);
+      babyDays = daysSince;
     } else if (_goal != 'pregnancy') {
       final next = predictor.predict().nextPeriodStart;
       if (next != null) {
@@ -828,12 +832,34 @@ class _MeScreenState extends State<MeScreen> {
       ),
       child: Row(
         children: [
-          Container(
-            width: 52,
-            height: 52,
-            decoration: BoxDecoration(color: AppColors.primary.withOpacity(0.12), shape: BoxShape.circle),
-            child: Icon(_goal == 'pregnancy' ? Icons.child_friendly : Icons.water_drop, color: AppColors.primaryDark, size: 26),
-          ),
+          if (babyDays != null)
+            // Foto del bebé del día (la misma de la tarjeta de Hoy) en un
+            // círculo con borde rosa, como en la maqueta.
+            Container(
+              width: 74,
+              height: 74,
+              padding: const EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                border: Border.all(color: AppColors.primaryLight, width: 3),
+              ),
+              child: ClipOval(
+                child: Image.asset(
+                  pregnancyDayImagePath(babyDays),
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.child_friendly, color: AppColors.primaryDark, size: 30),
+                ),
+              ),
+            )
+          else
+            Container(
+              width: 52,
+              height: 52,
+              decoration: BoxDecoration(color: AppColors.primary.withOpacity(0.12), shape: BoxShape.circle),
+              child: const Icon(Icons.water_drop, color: AppColors.primaryDark, size: 26),
+            ),
           const SizedBox(width: 14),
           Expanded(
             child: Column(
@@ -1061,7 +1087,8 @@ class _MeScreenState extends State<MeScreen> {
       children: [
         _quickLinkRow(
           icon: Icons.notifications_active_outlined,
-          label: s.reminderScreenEntry,
+          label: s.remindersScreenTitle,
+          subtitle: s.meRemindersSubtitle,
           colorStart: const Color(0xFFFFA14A),
           colorEnd: const Color(0xFFFF7A1F),
           onTap: _openReminder,
@@ -1070,6 +1097,7 @@ class _MeScreenState extends State<MeScreen> {
         _quickLinkRow(
           icon: Icons.bar_chart,
           label: s.tabReview,
+          subtitle: s.meStatsSubtitle,
           colorStart: const Color(0xFF8888F5),
           colorEnd: const Color(0xFF5C5CE0),
           onTap: _openReview,
@@ -1078,6 +1106,7 @@ class _MeScreenState extends State<MeScreen> {
         _quickLinkRow(
           icon: Icons.settings_outlined,
           label: s.settingsTitle,
+          subtitle: s.meSettingsSubtitle,
           colorStart: const Color(0xFF9AA3AD),
           colorEnd: const Color(0xFF6B7280),
           onTap: _openSettings,
@@ -1093,20 +1122,25 @@ class _MeScreenState extends State<MeScreen> {
   Widget _quickLinkRow({
     required IconData icon,
     required String label,
+    String? subtitle,
     required Color colorStart,
     required Color colorEnd,
     required VoidCallback onTap,
   }) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(16),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
+          gradient: LinearGradient(
+            colors: [Colors.white, colorStart.withOpacity(0.10)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+          borderRadius: BorderRadius.circular(16),
           boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 2)),
+            BoxShadow(color: AppColors.primary.withOpacity(0.10), blurRadius: 12, offset: const Offset(0, 4)),
           ],
         ),
         child: Row(
@@ -1129,7 +1163,14 @@ class _MeScreenState extends State<MeScreen> {
             ),
             const SizedBox(width: 12),
             Expanded(
-              child: Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(label, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+                  if (subtitle != null)
+                    Text(subtitle, style: const TextStyle(fontSize: 11.5, color: AppColors.textMuted)),
+                ],
+              ),
             ),
             const Icon(Icons.chevron_right, color: AppColors.textMuted, size: 18),
           ],
