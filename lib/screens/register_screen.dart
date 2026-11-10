@@ -1786,14 +1786,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
       key: key,
       width: double.infinity,
       padding: const EdgeInsets.all(16),
+      // Rediseño 2026-11 (maqueta ChatGPT aprobada): tarjetas con un toque
+      // rosado muy suave, más redondeadas y con algo más de profundidad.
       decoration: BoxDecoration(
-        color: AppColors.cardBackground,
-        borderRadius: BorderRadius.circular(16),
+        gradient: const LinearGradient(
+          colors: [Colors.white, Color(0xFFFFF6F9)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.border.withOpacity(0.7)),
         boxShadow: [
           BoxShadow(
-            color: Color(_theme.primary).withOpacity(0.10),
-            blurRadius: 16,
-            offset: const Offset(0, 4),
+            color: Color(_theme.primary).withOpacity(0.14),
+            blurRadius: 18,
+            offset: const Offset(0, 6),
           ),
         ],
       ),
@@ -1805,14 +1812,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
   /// color) en todas las tarjetas para que la jerarquía visual sea
   /// consistente en toda la pantalla — versalitas (mayúsculas) + tracking
   /// amplio, como en el diseño de referencia aprobado en v0.
-  Widget _sectionTitle(String text) => Text(
-        text.toUpperCase(),
-        style: const TextStyle(
-          fontSize: 12.5,
-          fontWeight: FontWeight.w700,
-          color: AppColors.textMuted,
-          letterSpacing: 0.6,
-        ),
+  // Rediseño 2026-11: títulos de sección en granate con un punto de color
+  // delante, más visibles que el gris de antes (maqueta ChatGPT).
+  Widget _sectionTitle(String text) => Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 8,
+            height: 8,
+            decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
+          ),
+          const SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              text.toUpperCase(),
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w800,
+                color: AppColors.primaryDark,
+                letterSpacing: 0.6,
+              ),
+            ),
+          ),
+        ],
       );
 
   Widget _roundIconButton({required IconData icon, required VoidCallback onTap, bool enabled = true}) {
