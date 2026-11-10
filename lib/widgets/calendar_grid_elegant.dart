@@ -311,6 +311,11 @@ class CalendarGridElegant extends StatelessWidget {
       final showTodayRing = isToday;
       final showSelectedRing = isSelected && !isToday;
       final bool circleLook = showTodayRing || showSelectedRing || (showShapeMarker && markerShape == 'circle');
+      // Rediseño 2026-11 (maqueta ChatGPT aprobada): los días sin marca
+      // también llevan un círculo rosa muy suave detrás del número, para
+      // que el calendario se vea como "cuentas" de color en vez de números
+      // sueltos sobre blanco. Hoy y seleccionado siguen con su aro.
+      final bool softBead = !showTodayRing && !showSelectedRing && shapeBackground == null;
 
       Widget cellCore = Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -322,7 +327,11 @@ class CalendarGridElegant extends StatelessWidget {
             height: beadSize,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: (showTodayRing || showSelectedRing) ? null : shapeBackground,
+              color: showTodayRing
+                  ? CalendarPhaseColors.todayRingColor.withOpacity(0.12)
+                  : showSelectedRing
+                      ? null
+                      : (shapeBackground ?? const Color(0xFFFBEEF3)),
               // Nunca se alterna `shape` entre circle/rectangle aquí: un
               // AnimatedContainer interpola (tween) la decoración vieja y
               // la nueva, y a mitad de esa animación Flutter puede quedar
@@ -338,7 +347,7 @@ class CalendarGridElegant extends StatelessWidget {
               // (borderRadius), nunca el tipo de forma, y nunca es inválida
               // a mitad de camino.
               shape: BoxShape.rectangle,
-              borderRadius: circleLook ? BorderRadius.circular(beadSize / 2) : BorderRadius.zero,
+              borderRadius: (circleLook || softBead) ? BorderRadius.circular(beadSize / 2) : BorderRadius.zero,
               border: showTodayRing
                   ? Border.all(color: CalendarPhaseColors.todayRingColor, width: 2.5)
                   : showSelectedRing
