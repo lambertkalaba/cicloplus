@@ -988,41 +988,39 @@ class TodayScreen extends StatelessWidget {
           children: [
             Positioned(right: -12, bottom: -16, child: _leafDecor(size: 52, angle: -0.5, color: primary.withOpacity(0.07))),
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              // Rediseño 2026-11 (maqueta ChatGPT aprobada): tarjeta compacta
+              // en una sola fila — icono, pregunta y botón a la derecha —
+              // para dejar más protagonismo al resto de Hoy.
+              padding: const EdgeInsets.fromLTRB(14, 12, 12, 12),
+              child: Row(
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(color: primary.withOpacity(0.12), shape: BoxShape.circle),
-                        child: Icon(Icons.sentiment_satisfied_alt_outlined, size: 18, color: primary),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Text(s.todayHowDoYouFeel, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
-                      ),
-                    ],
+                  Container(
+                    width: 38,
+                    height: 38,
+                    decoration: BoxDecoration(color: primary.withOpacity(0.12), shape: BoxShape.circle),
+                    child: Icon(Icons.spa_outlined, size: 20, color: primary),
                   ),
-                  const SizedBox(height: 8),
-                  Text(s.todayTellUsMore, style: const TextStyle(fontSize: 12.5, color: AppColors.textMuted, height: 1.35)),
-                  const SizedBox(height: 10),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton.icon(
-                      onPressed: () => _openTodayEditor(context),
-                      icon: const Icon(Icons.add, size: 18),
-                      label: Text(s.todayAddSymptom, style: const TextStyle(fontWeight: FontWeight.w700)),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: primary,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        elevation: 6,
-                        shadowColor: primary.withOpacity(0.4),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                      ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      s.todayHowDoYouFeel,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  ElevatedButton.icon(
+                    onPressed: () => _openTodayEditor(context),
+                    icon: const Icon(Icons.add, size: 18),
+                    label: Text(s.todayAddSymptom, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                      elevation: 4,
+                      shadowColor: primary.withOpacity(0.4),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
                     ),
                   ),
                 ],

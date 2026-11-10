@@ -757,10 +757,18 @@ class _MainTabScreenState extends State<MainTabScreen> with SingleTickerProvider
   }
 
   Widget _buildNavItem(_NavItemData item, bool isSelected, Color primary) {
+    // Rediseño 2026-11 (maqueta ChatGPT aprobada): la pestaña activa lleva
+    // una "píldora" de color suave detrás del icono y el texto, para que se
+    // vea claramente en qué sección estás.
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeOut,
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 2),
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      decoration: BoxDecoration(
+        color: isSelected ? primary.withOpacity(0.13) : Colors.transparent,
+        borderRadius: BorderRadius.circular(18),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -769,7 +777,7 @@ class _MainTabScreenState extends State<MainTabScreen> with SingleTickerProvider
             curve: Curves.easeOut,
             padding: const EdgeInsets.all(7),
             decoration: BoxDecoration(
-              color: isSelected ? primary.withOpacity(0.15) : Colors.transparent,
+              color: Colors.transparent,
               shape: BoxShape.circle,
             ),
             child: Icon(
