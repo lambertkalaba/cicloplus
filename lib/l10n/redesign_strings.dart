@@ -322,4 +322,200 @@ class RedesignStrings {
         'bn': 'শুধু আনুমানিক, গর্ভনিরোধক পদ্ধতি নয়।',
         'pt': 'Estimativas apenas orientativas, não servem como método contraceptivo.',
       });
+
+  // ---------- Yo / Calendario / Registrar (rediseño 2.0) ----------
+  String get myCycleNumbers => _t({
+        'es': 'Mi ciclo en números',
+        'en': 'My cycle in numbers',
+        'fr': 'Mon cycle en chiffres',
+        'de': 'Mein Zyklus in Zahlen',
+        'ru': 'Мой цикл в цифрах',
+        'ar': 'دورتي بالأرقام',
+        'hi': 'मेरा चक्र आंकड़ों में',
+        'bn': 'সংখ্যায় আমার চক্র',
+        'pt': 'Meu ciclo em números',
+      });
+
+  String daysN(int n) => _t({
+        'es': '$n días',
+        'en': '$n days',
+        'fr': '$n jours',
+        'de': '$n Tage',
+        'ru': '$n дн.',
+        'ar': '$n أيام',
+        'hi': '$n दिन',
+        'bn': '$n দিন',
+        'pt': '$n dias',
+      });
+
+  String get avgCycle => _t({
+        'es': 'Ciclo medio',
+        'en': 'Average cycle',
+        'fr': 'Cycle moyen',
+        'de': 'Ø Zyklus',
+        'ru': 'Средний цикл',
+        'ar': 'متوسط الدورة',
+        'hi': 'औसत चक्र',
+        'bn': 'গড় চক্র',
+        'pt': 'Ciclo médio',
+      });
+
+  String get avgPeriod => _t({
+        'es': 'Periodo medio',
+        'en': 'Average period',
+        'fr': 'Règles moyennes',
+        'de': 'Ø Periode',
+        'ru': 'Средние месячные',
+        'ar': 'متوسط الحيض',
+        'hi': 'औसत पीरियड',
+        'bn': 'গড় পিরিয়ড',
+        'pt': 'Período médio',
+      });
+
+  String get regular => _t({
+        'es': 'Regular',
+        'en': 'Regular',
+        'fr': 'Régulier',
+        'de': 'Regelmäßig',
+        'ru': 'Регулярный',
+        'ar': 'منتظمة',
+        'hi': 'नियमित',
+        'bn': 'নিয়মিত',
+        'pt': 'Regular',
+      });
+
+  String get irregular => _t({
+        'es': 'Irregular',
+        'en': 'Irregular',
+        'fr': 'Irrégulier',
+        'de': 'Unregelmäßig',
+        'ru': 'Нерегулярный',
+        'ar': 'غير منتظمة',
+        'hi': 'अनियमित',
+        'bn': 'অনিয়মিত',
+        'pt': 'Irregular',
+      });
+
+  String get stableCycles => _t({
+        'es': 'Ciclos estables',
+        'en': 'Stable cycles',
+        'fr': 'Cycles stables',
+        'de': 'Stabile Zyklen',
+        'ru': 'Стабильные циклы',
+        'ar': 'دورات مستقرة',
+        'hi': 'स्थिर चक्र',
+        'bn': 'স্থির চক্র',
+        'pt': 'Ciclos estáveis',
+      });
+
+  String get variableCycles => _t({
+        'es': 'Ciclos variables',
+        'en': 'Variable cycles',
+        'fr': 'Cycles variables',
+        'de': 'Wechselnde Zyklen',
+        'ru': 'Переменные циклы',
+        'ar': 'دورات متغيرة',
+        'hi': 'बदलते चक्र',
+        'bn': 'পরিবর্তনশীল চক্র',
+        'pt': 'Ciclos variáveis',
+      });
+
+  String get myGoalNow => _t({
+        'es': 'Mi objetivo actual:',
+        'en': 'My current goal:',
+        'fr': 'Mon objectif actuel :',
+        'de': 'Mein aktuelles Ziel:',
+        'ru': 'Моя текущая цель:',
+        'ar': 'هدفي الحالي:',
+        'hi': 'मेरा वर्तमान लक्ष्य:',
+        'bn': 'আমার বর্তমান লক্ষ্য:',
+        'pt': 'Meu objetivo atual:',
+      });
+
+  String get quickAccess => _t({
+        'es': 'Accesos rápidos',
+        'en': 'Quick access',
+        'fr': 'Accès rapides',
+        'de': 'Schnellzugriff',
+        'ru': 'Быстрый доступ',
+        'ar': 'وصول سريع',
+        'hi': 'त्वरित पहुंच',
+        'bn': 'দ্রুত প্রবেশ',
+        'pt': 'Acessos rápidos',
+      });
+
+  String dayOfCycleN(int n) => _t({
+        'es': 'Día $n del ciclo',
+        'en': 'Cycle day $n',
+        'fr': 'Jour $n du cycle',
+        'de': 'Zyklustag $n',
+        'ru': 'День цикла $n',
+        'ar': 'اليوم $n من الدورة',
+        'hi': 'चक्र का दिन $n',
+        'bn': 'চক্রের দিন $n',
+        'pt': 'Dia $n do ciclo',
+      });
+
+  String get symptomsLogged => _t({
+        'es': 'Síntomas registrados',
+        'en': 'Logged symptoms',
+        'fr': 'Symptômes notés',
+        'de': 'Eingetragene Symptome',
+        'ru': 'Отмеченные симптомы',
+        'ar': 'الأعراض المسجلة',
+        'hi': 'दर्ज लक्षण',
+        'bn': 'লেখা উপসর্গ',
+        'pt': 'Sintomas registrados',
+      });
+
+  String get nothingLogged => _t({
+        'es': 'Aún no hay nada registrado este día',
+        'en': 'Nothing logged on this day yet',
+        'fr': 'Rien de noté ce jour-là',
+        'de': 'Für diesen Tag ist noch nichts eingetragen',
+        'ru': 'За этот день пока ничего не отмечено',
+        'ar': 'لا يوجد شيء مسجل لهذا اليوم بعد',
+        'hi': 'इस दिन अभी कुछ दर्ज नहीं है',
+        'bn': 'এই দিনে এখনও কিছু লেখা নেই',
+        'pt': 'Ainda não há nada registrado neste dia',
+      });
+
+  String get editDayRecords => _t({
+        'es': 'Editar registros del día',
+        'en': 'Edit this day',
+        'fr': 'Modifier ce jour',
+        'de': 'Tag bearbeiten',
+        'ru': 'Изменить записи дня',
+        'ar': 'تعديل سجلات اليوم',
+        'hi': 'दिन के रिकॉर्ड बदलें',
+        'bn': 'দিনের রেকর্ড সম্পাদনা',
+        'pt': 'Editar registros do dia',
+      });
+
+  String get logYourDaySubtitle => _t({
+        'es': 'Registra tus síntomas, hábitos y notas.',
+        'en': 'Log your symptoms, habits and notes.',
+        'fr': 'Note tes symptômes, habitudes et notes.',
+        'de': 'Trage Symptome, Gewohnheiten und Notizen ein.',
+        'ru': 'Отмечай симптомы, привычки и заметки.',
+        'ar': 'سجّلي أعراضك وعاداتك وملاحظاتك.',
+        'hi': 'अपने लक्षण, आदतें और नोट्स दर्ज करें।',
+        'bn': 'আপনার উপসর্গ, অভ্যাস ও নোট লিখুন।',
+        'pt': 'Registre seus sintomas, hábitos e notas.',
+      });
+
+  String monthShort(int month) {
+    const t = {
+      'es': ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+      'en': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      'fr': ['Janv', 'Févr', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'],
+      'de': ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+      'ru': ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+      'ar': ['ينا', 'فبر', 'مار', 'أبر', 'ماي', 'يون', 'يول', 'أغس', 'سبت', 'أكت', 'نوف', 'ديس'],
+      'hi': ['जन', 'फ़र', 'मार्च', 'अप्रै', 'मई', 'जून', 'जुल', 'अग', 'सित', 'अक्टू', 'नव', 'दिस'],
+      'bn': ['জানু', 'ফেব্রু', 'মার্চ', 'এপ্রি', 'মে', 'জুন', 'জুলা', 'আগ', 'সেপ্টে', 'অক্টো', 'নভে', 'ডিসে'],
+      'pt': ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+    };
+    return (t[code] ?? t['es']!)[(month - 1).clamp(0, 11)];
+  }
 }
