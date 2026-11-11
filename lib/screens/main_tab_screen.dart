@@ -560,7 +560,7 @@ class _MainTabScreenState extends State<MainTabScreen> with SingleTickerProvider
         statusBarBrightness: Brightness.dark,
       ),
       child: Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: const Color(0xFFFFF5F8),
       body: SafeArea(
         top: false,
         child: Column(
@@ -570,48 +570,79 @@ class _MainTabScreenState extends State<MainTabScreen> with SingleTickerProvider
             // su maqueta de referencia "Después"); en el resto de pestañas
             // se mantiene el borde recto original para no alterar su
             // aspecto ya aprobado.
-            ClipPath(
-              // Rediseño 2026-11 (maquetas ChatGPT aprobadas): la onda pasa
-              // a todas las pestañas menos Yo, que tiene su propia cabecera
-              // verde justo debajo (con onda se vería cortada).
-              clipper: _currentTab != 4 ? const _HeaderWaveClipper() : null,
-              child: Container(
-                width: double.infinity,
-                padding: EdgeInsets.fromLTRB(16, statusBarHeight + 8, 16, _currentTab != 4 ? 20 : 10),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(theme.primary), Color(theme.primaryDark)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+            // Cabecera del rediseño CicloPlus 2.0: verde esmeralda con flores
+            // de hibisco en la esquina, logo centrado y ajustes a la derecha
+            // (igual en todas las pestañas).
+            Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xFF16956A), Color(0xFF0B6B47)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                child: Column(
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(26)),
+              ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(26)),
+                child: Stack(
                   children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          if (_currentTab == 0)
-                            const Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text('CicloPlus',
-                                  style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w800)),
-                            )
-                          else
-                            const Text('CicloPlus',
-                                style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
-                          Positioned(
-                            right: 0,
-                            child: IconButton(
-                              onPressed: _openSettings,
-                              icon: const Icon(Icons.settings, color: Colors.white, size: 24),
-                              tooltip: s.settingsTooltip,
-                              padding: EdgeInsets.zero,
-                              constraints: const BoxConstraints(minWidth: 38, minHeight: 38),
+                    Positioned(
+                      left: -18,
+                      bottom: -26,
+                      child: Opacity(
+                        opacity: 0.9,
+                        child: Transform.flip(
+                          flipX: true,
+                          child: Image.asset('assets/decorative/flowers_corner.png', width: 96, height: 96),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      right: 30,
+                      top: statusBarHeight - 18,
+                      child: Opacity(
+                        opacity: 0.85,
+                        child: Image.asset('assets/decorative/flowers_corner.png', width: 84, height: 84),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(16, statusBarHeight + 6, 8, 12),
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 40,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('🌸', style: TextStyle(fontSize: 20)),
+                                SizedBox(width: 6),
+                                Text(
+                                  'CicloPlus',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 0.2,
+                                    shadows: [Shadow(color: Color(0x55000000), blurRadius: 6, offset: Offset(0, 2))],
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                            Positioned(
+                              right: 0,
+                              child: IconButton(
+                                onPressed: _openSettings,
+                                icon: const Icon(Icons.settings_rounded, color: Colors.white, size: 25),
+                                tooltip: s.settingsTooltip,
+                                padding: EdgeInsets.zero,
+                                constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

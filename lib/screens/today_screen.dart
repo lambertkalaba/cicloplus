@@ -12,6 +12,7 @@ import '../data/pregnancy_week_info.dart' show pregnancyWeekInfoFor;
 import '../services/garden_stage.dart';
 import '../services/settings_service.dart' show AppThemeOption, PregnancySettings, kAppThemes, themeById;
 import '../theme/app_theme.dart';
+import '../widgets/today_v2.dart';
 import '../widgets/uterus_phase_illustration.dart';
 import 'body_stage_detail_screen.dart';
 import 'invite_partner_screen.dart';
@@ -142,6 +143,45 @@ class TodayScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 6),
+            // ---- Rediseño CicloPlus 2.0 (maqueta aprobada): saludo con la
+            // chica ilustrada, anillo del ciclo con el día en grande,
+            // resumen del día, ánimo en un toque, agua/sueño y botón de
+            // registrar. Solo fuera del modo embarazo; el embarazo conserva
+            // su diseño. Debajo siguen el resto de tarjetas (jardín, pareja,
+            // dato curioso, anatomía) para no perder nada.
+            if (!inPregnancyMode) ...[
+              const V2GreetingCard(),
+              const SizedBox(height: 12),
+              V2CycleRingCard(
+                predictor: _predictor,
+                data: data,
+                onLogPeriod: () => _openTodayEditor(context),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => BodyStageDetailScreen(
+                      data: data,
+                      pregnancy: pregnancy,
+                      irregularCycleMode: irregularCycleMode,
+                      themeId: themeId,
+                      userGoal: userGoal,
+                    ),
+                  ),
+                ),
+              ),
+              if (tryingToConceive && ovulation != null) ...[
+                const SizedBox(height: 12),
+                _buildOvulationCard(s, theme, ovulation, isFertileToday, tryingToConceive),
+              ],
+              const SizedBox(height: 12),
+              V2SummaryCard(phaseKey: currentPhaseKey),
+              const SizedBox(height: 12),
+              V2MoodRow(data: data, onDataChanged: onDataChanged),
+              const SizedBox(height: 12),
+              V2QuickStats(data: data, onDataChanged: onDataChanged, onOpenEditor: () => _openTodayEditor(context)),
+              const SizedBox(height: 14),
+              V2LogButton(onTap: () => _openTodayEditor(context)),
+              const SizedBox(height: 18),
+            ],
             // Pedido explícito de la usuaria: el jardín va ARRIBA DE TODO,
             // antes incluso de la tarjeta del bebé/concebir/etapa corporal,
             // y en ese mismo orden para los 3 objetivos (seguir mi período,
@@ -172,29 +212,14 @@ class TodayScreen extends StatelessWidget {
             //  - "Seguir mi período" (o sin datos aún para calcular la
             //    ovulación) -> "Etapa corporal" tal cual estaba, con su
             //    acceso a BodyStageDetailScreen.
-            if (inPregnancyMode)
-              _buildPregnancyCard(s, context)
-            else if (tryingToConceive && ovulation != null)
-              _buildOvulationCard(s, theme, ovulation, isFertileToday, tryingToConceive)
-            else
-              _TapScale(
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => BodyStageDetailScreen(
-                      data: data,
-                      pregnancy: pregnancy,
-                      irregularCycleMode: irregularCycleMode,
-                      themeId: themeId,
-                      userGoal: userGoal,
-                    ),
-                  ),
-                ),
-                child: _buildBodyStageCard(s, theme, cycleDayLabel),
-              ),
-            const SizedBox(height: 10),
-            // "¿Cómo te sientes hoy?" — debajo de la tarjeta de objetivo,
-            // igual para los 3 objetivos (pedido explícito de la usuaria).
-            _buildHowDoYouFeelCard(s, theme, context),
+            // Con el rediseño 2.0 el anillo, el ánimo y la ovulación ya se
+            // muestran arriba; aquí solo queda la tarjeta del bebé y la de
+            // "¿Cómo te sientes hoy?" original para el modo embarazo.
+            if (inPregnancyMode) ...[
+              _buildPregnancyCard(s, context),
+              const SizedBox(height: 10),
+              _buildHowDoYouFeelCard(s, theme, context),
+            ],
             // "Invitar a un socio" lleva a InvitePartnerScreen, que ahora
             // comparte en modo lectura el embarazo (si está activo) o el
             // calendario de ciclo — previsto/ventana fértil — en los otros
