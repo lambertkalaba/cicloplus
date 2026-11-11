@@ -9,6 +9,8 @@ import '../services/cycle_predictor.dart' show dateKey;
 import '../services/settings_service.dart' show AppThemeOption, SettingsService, themeById;
 import '../theme/app_theme.dart';
 import '../widgets/petal_burst.dart';
+import '../widgets/v2_screens.dart';
+import '../l10n/redesign_strings.dart';
 import '../widgets/reminder_time_sheet.dart' show ReminderDatePickerSheet, ReminderTimePickerSheet;
 
 /// Pestaña "Registrar" (índice 2 de la barra inferior): pantalla completa
@@ -1011,23 +1013,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
           // `Scrollable.ensureVisible` puede encontrarlas de inmediato.
           cacheExtent: 4000,
           children: [
+            // Rediseño 2.0 (maqueta ChatGPT aprobada): título grande
+            // "Registrar mi día" + subtítulo + calendario 3D, con la fecha
+            // en una píldora debajo.
             if (widget.showCloseButton)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(dateLabel, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
-                  IconButton(
-                    tooltip: s.commonClose,
-                    onPressed: () => Navigator.of(context).pop(),
-                    icon: const Icon(Icons.close, color: AppColors.textPrimary),
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(),
-                  ),
-                ],
-              )
-            else
-              Text(dateLabel, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
-            const SizedBox(height: 18),
+              Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  tooltip: s.commonClose,
+                  onPressed: () => Navigator.of(context).pop(),
+                  icon: const Icon(Icons.close, color: AppColors.textPrimary),
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                ),
+              ),
+            V2ScreenTitle(
+              title: RedesignStrings.current.logMyDay,
+              subtitle: RedesignStrings.current.logYourDaySubtitle,
+              showIllustration: true,
+            ),
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(color: const Color(0xFFFFE4EF), borderRadius: BorderRadius.circular(16)),
+                child: Text(dateLabel, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w800, color: Color(0xFFC2185B))),
+              ),
+            ),
+            const SizedBox(height: 16),
 
             // ---- 1. Flujo menstrual ----
             // No aporta durante el embarazo (no hay periodos que
@@ -1090,13 +1104,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(height: 4),
                   Text(s.symptomsHint, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
                   const SizedBox(height: 12),
+                  // Rediseño 2.0 (maqueta ChatGPT aprobada): cuadrícula de 4
+                  // columnas con el icono arriba y el nombre debajo.
                   GridView.count(
-                    crossAxisCount: 2,
+                    crossAxisCount: 4,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 2.6,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    childAspectRatio: 0.82,
                     children: kSymptomCatalog.map((cat) {
                       final id = cat['id']!;
                       final level = _symptomLevels[id];
@@ -1107,7 +1123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onTap: () => _cycleSymptom(id),
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 150),
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
                           decoration: BoxDecoration(
                             // Rediseño 2026-11 (maqueta ChatGPT aprobada): el
                             // síntoma marcado se rellena con su color fuerte,
@@ -1121,46 +1137,52 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ? [BoxShadow(color: strong.withOpacity(0.35), blurRadius: 10, offset: const Offset(0, 4))]
                                 : null,
                           ),
-                          child: Row(
+                          child: Stack(
+                            clipBehavior: Clip.none,
                             children: [
-                              Container(
-                                width: 38,
-                                height: 38,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: selected
-                                      ? Border.all(color: Colors.white, width: 2)
-                                      : null,
-                                ),
-                                child: ClipOval(
-                                  child: Image.asset(_symptomAsset(id), fit: BoxFit.cover),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Expanded(
+                              Center(
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
+                                    Container(
+                                      width: 38,
+                                      height: 38,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: selected ? Border.all(color: Colors.white, width: 2) : null,
+                                      ),
+                                      child: ClipOval(
+                                        child: Image.asset(_symptomAsset(id), fit: BoxFit.cover),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
                                     Text(
                                       s.symptomLabelFor(id),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontSize: 12,
+                                        fontSize: 11.5,
                                         color: selected ? Colors.white : AppColors.textPrimary,
-                                        fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                                        fontWeight: selected ? FontWeight.w800 : FontWeight.w600,
                                       ),
                                     ),
                                     if (level != null)
                                       Text(
                                         s.symptomLevelLabelFor(level),
-                                        style: const TextStyle(fontSize: 10, color: Color(0xE6FFFFFF)),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(fontSize: 9.5, color: Color(0xE6FFFFFF)),
                                       ),
                                   ],
                                 ),
                               ),
-                              if (selected) const Icon(Icons.check_circle, size: 18, color: Colors.white),
+                              if (selected)
+                                const Positioned(
+                                  top: -2,
+                                  right: -2,
+                                  child: Icon(Icons.check_circle, size: 16, color: Colors.white),
+                                ),
                             ],
                           ),
                         ),

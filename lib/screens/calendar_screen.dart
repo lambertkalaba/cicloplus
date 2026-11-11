@@ -8,6 +8,7 @@ import '../theme/app_theme.dart';
 import '../widgets/calendar_grid.dart';
 import '../widgets/calendar_grid_elegant.dart';
 import '../widgets/calendar_grid_ios.dart';
+import '../widgets/v2_screens.dart';
 import 'period_editor_screen.dart';
 import 'register_screen.dart';
 
@@ -639,11 +640,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
             // sin salir de esta pantalla. Botón directo: muestra "Regular"
             // o "Irregular" según widget.irregularCycleMode y, al tocarlo,
             // alterna y guarda de una vez (sin hoja de opciones).
+            // Rediseño 2.0: título grande "Calendario" con el chip
+            // Regular/Irregular a la derecha.
             Padding(
               padding: const EdgeInsets.only(bottom: 12),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: _IrregularModeChip(
+              child: V2ScreenTitle(
+                title: s.tabCalendar,
+                trailing: _IrregularModeChip(
                   active: widget.irregularCycleMode,
                   onTap: _toggleIrregularMode,
                 ),
@@ -812,6 +815,18 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   ),
                 ),
               ],
+            ),
+            // Rediseño 2.0 (maqueta ChatGPT aprobada): tarjeta del día
+            // seleccionado siempre visible — día del ciclo, fase, síntomas,
+            // ánimo, agua/sueño, nota y botón para editar ese día.
+            const SizedBox(height: 14),
+            V2DayCard(
+              date: _selectedDate,
+              data: widget.data,
+              predictor: predictor,
+              prediction: prediction,
+              showPhase: _userGoal != 'pregnancy',
+              onEdit: () => _openDayEditor(_selectedDate),
             ),
             // Rediseño 2026-11 (maqueta ChatGPT aprobada): tarjeta destacada
             // que aprovecha el hueco bajo el calendario con el próximo

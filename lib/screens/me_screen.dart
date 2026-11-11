@@ -12,6 +12,8 @@ import '../services/subscription_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/coming_soon_sheet.dart';
 import '../widgets/conceive_intake_sheet.dart';
+import '../widgets/v2_screens.dart';
+import '../l10n/redesign_strings.dart';
 import 'account_screen.dart';
 import 'field_detail_screen.dart';
 import 'ovulation_test_screen.dart';
@@ -470,16 +472,34 @@ class _MeScreenState extends State<MeScreen> {
     return ListView(
       padding: EdgeInsets.zero,
       children: [
-        _buildHeader(s, primary, primaryDark),
-        // Rediseño 2026-11 (maqueta ChatGPT aprobada): la tarjeta resumen
-        // (semana de embarazo / próximo periodo + racha) es la que se solapa
-        // con el header, y debajo va la fila de accesos de colores.
-        Transform.translate(
-          offset: const Offset(0, -24),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _buildSummaryCard(s, predictor),
+        // Rediseño 2.0 (maqueta ChatGPT aprobada): tarjeta de perfil con
+        // avatar ilustrado, nombre y objetivo actual; "Mi ciclo en números";
+        // y "Accesos rápidos" con título. La cabecera verde ya la pone
+        // MainTabScreen, así que aquí no se repite otro degradado.
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 14, 16, 12),
+          child: V2ProfileCard(
+            name: _greetingName,
+            goalLabel: _goal == 'conceive'
+                ? s.meGoalTryConceive
+                : _goal == 'pregnancy'
+                    ? s.meGoalTrackPregnancy
+                    : s.meGoalTrackPeriod,
+            onEdit: widget.userEmail.trim().isNotEmpty ? _openAccountScreen : () => _showComingSoon(s),
           ),
+        ),
+        if (_goal != 'pregnancy')
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+            child: V2CycleNumbersCard(predictor: predictor),
+          ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+          child: _buildSummaryCard(s, predictor),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 4, 16, 10),
+          child: V2SectionTitle(icon: Icons.local_florist, text: RedesignStrings.current.quickAccess),
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
@@ -942,54 +962,77 @@ class _MeScreenState extends State<MeScreen> {
   }
 
   Widget _buildGoalSection(AppStrings s, Color primary) {
+    // Rediseño 2.0: tres mosaicos iguales con icono dentro de una tarjeta
+    // blanca, el elegido relleno en rosa (maqueta ChatGPT aprobada).
     final options = [
-      ('period', s.meGoalTrackPeriod),
-      ('conceive', s.meGoalTryConceive),
-      ('pregnancy', s.meGoalTrackPregnancy),
+      ('period', s.meGoalTrackPeriod, '🌸'),
+      ('conceive', s.meGoalTryConceive, '🌱'),
+      ('pregnancy', s.meGoalTrackPregnancy, '👶'),
     ];
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(s.meMyGoal, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
-        const SizedBox(height: 10),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: options.map((o) {
-            final selected = _goal == o.$1;
-            return InkWell(
-              onTap: () => _selectGoal(o.$1),
-              borderRadius: BorderRadius.circular(22),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 11),
-                decoration: BoxDecoration(
-                  gradient: selected
-                      ? const LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Color(0xFFFF7FB0), Color(0xFFE0344A)],
-                        )
-                      : null,
-                  color: selected ? null : Colors.white,
-                  borderRadius: BorderRadius.circular(22),
-                  border: selected ? null : Border.all(color: AppColors.border),
-                  boxShadow: selected
-                      ? [BoxShadow(color: const Color(0xFFE0344A).withOpacity(0.35), blurRadius: 10, offset: const Offset(0, 4))]
-                      : [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 4, offset: const Offset(0, 1))],
-                ),
-                child: Text(
-                  o.$2,
-                  style: TextStyle(
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w600,
-                    color: selected ? Colors.white : AppColors.textPrimary,
+    return Container(
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(22),
+        boxShadow: [BoxShadow(color: const Color(0xFFB0306A).withOpacity(0.10), blurRadius: 22, offset: const Offset(0, 8))],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          V2SectionTitle(icon: Icons.track_changes, text: s.meMyGoal),
+          const SizedBox(height: 10),
+          Row(
+            children: options.map((o) {
+              final selected = _goal == o.$1;
+              return Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(right: o.$1 == 'pregnancy' ? 0 : 8),
+                  child: InkWell(
+                    onTap: () => _selectGoal(o.$1),
+                    borderRadius: BorderRadius.circular(18),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 180),
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                      decoration: BoxDecoration(
+                        gradient: selected
+                            ? const LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Color(0xFFFF6FA5), Color(0xFFC2185B)],
+                              )
+                            : null,
+                        color: selected ? null : const Color(0xFFFFF7FA),
+                        borderRadius: BorderRadius.circular(18),
+                        border: selected ? null : Border.all(color: const Color(0xFFF6DDE8)),
+                        boxShadow: selected
+                            ? [BoxShadow(color: const Color(0xFFC2185B).withOpacity(0.35), blurRadius: 10, offset: const Offset(0, 4))]
+                            : null,
+                      ),
+                      child: Column(
+                        children: [
+                          Text(selected ? '✔️' : o.$3, style: const TextStyle(fontSize: 18)),
+                          const SizedBox(height: 4),
+                          Text(
+                            o.$2,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            style: TextStyle(
+                              fontSize: 12,
+                              height: 1.15,
+                              fontWeight: FontWeight.w800,
+                              color: selected ? Colors.white : AppColors.textPrimary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            );
-          }).toList(),
-        ),
-      ],
+              );
+            }).toList(),
+          ),
+        ],
+      ),
     );
   }
 
