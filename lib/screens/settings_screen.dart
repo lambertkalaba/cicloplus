@@ -1580,15 +1580,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     label: s.settingsWidget,
                     onTap: _openWidgetPlaceholder,
                   ),
-                  if (kPaywallEnabled) ...[
-                    _cardDivider(),
-                    _groupedNavRow(
-                      icon: Icons.block_outlined,
-                      iconColor: Color(themeById(_themeId).primary),
-                      label: s.settingsRemoveAdsForever,
-                      onTap: _openPaywall,
-                    ),
-                  ],
                   _cardDivider(),
                   _groupedNavRow(
                     icon: Icons.bug_report_outlined,
