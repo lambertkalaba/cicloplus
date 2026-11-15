@@ -209,6 +209,26 @@ class MeScreen extends StatelessWidget {
                     onTap: () => CP.openOvulationTest(context),
                   ),
                   LinkRow(
+                    icon: const Icon(Icons.thermostat_rounded, color: C.pink),
+                    title: tr('Temperatura basal', 'Basal temperature'),
+                    onTap: () => CicloYo.field(context, 'temperature'),
+                  ),
+                  LinkRow(
+                    icon: const Icon(Icons.spa_rounded, color: C.pink),
+                    title: tr('Fertilidad', 'Fertility'),
+                    onTap: () => CicloYo.summary(context, 'fertility'),
+                  ),
+                  LinkRow(
+                    icon: const Icon(Icons.fact_check_rounded, color: C.pink),
+                    title: tr('Revisión del ciclo', 'Cycle review'),
+                    onTap: () => CicloYo.review(context),
+                  ),
+                  LinkRow(
+                    icon: const Icon(Icons.query_stats_rounded, color: C.pink),
+                    title: tr('Estadísticas', 'Statistics'),
+                    onTap: () => CicloYo.stats(context),
+                  ),
+                  LinkRow(
                     icon: const Icon(Icons.forum_rounded, color: C.pink),
                     title: tr('Comunidad', 'Community'),
                     onTap: () => CP.openForum(context),
@@ -220,6 +240,14 @@ class MeScreen extends StatelessWidget {
                     onTap: () => CP.togglePin(context),
                   ),
                 ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            Center(
+              child: TextButton.icon(
+                onPressed: () => GoSession.onSignOut?.call(),
+                icon: const Icon(Icons.logout_rounded, color: C.pinkDark),
+                label: Text(tr('Cerrar sesión', 'Sign out'), style: const TextStyle(color: C.pinkDark, fontWeight: FontWeight.w800)),
               ),
             ),
           ],

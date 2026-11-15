@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../models/day_entry.dart';
+import '../screens/field_detail_screen.dart';
+import '../screens/quick_summary_screen.dart';
+import '../screens/review_screen.dart';
 import '../screens/settings_screen.dart';
+import '../screens/stats_screen.dart';
 import '../screens/today_screen.dart';
 import '../services/settings_service.dart';
 import 'cicloplus_links.dart';
 import 'data/store.dart';
 import 'go_root.dart';
+import 'screens/shell.dart' show ShellState;
 
 /// Datos que necesitan las pantallas de CicloPlus que se conservan (Hoy y
 /// Configuración). Los días salen de la misma nube que usa el diseño nuevo,
@@ -126,4 +131,68 @@ Future<void> openCicloSettings(BuildContext context) async {
   // Al volver, refresca embarazo/objetivo y lo pasa al diseño nuevo.
   await c.load();
   await CP.loadFromCicloPlus();
+}
+
+/// Pantallas del antiguo "Yo" de CicloPlus que el diseño nuevo no tenía.
+class CicloYo {
+  CicloYo._();
+
+  static Future<void> _push(BuildContext context, Widget w) async {
+    await CicloData.instance.load();
+    if (!context.mounted) return;
+    await Navigator.of(context).push(MaterialPageRoute(builder: (_) => w));
+  }
+
+  /// Las pantallas antiguas usan 0 Hoy, 1 Calendario, 2 Registrar, 3 Recordatorio, 4 Yo.
+  static void _goTab(BuildContext context, int oldTab) {
+    final shell = context.findAncestorStateOfType<ShellState>();
+    Navigator.of(context).popUntil((r) => r.isFirst);
+    if (shell == null) return;
+    switch (oldTab) {
+      case 2:
+        shell.openRegister();
+      case 3:
+        shell.go(2);
+      case 4:
+        shell.go(3);
+      default:
+        shell.go(oldTab);
+    }
+  }
+
+  static Future<void> field(BuildContext context, String key) {
+    final c = CicloData.instance;
+    return _push(
+      context,
+      FieldDetailScreen(themeId: c.themeId, data: c.data, fieldKey: key, onDataChanged: c.onDataChanged, userGoal: c.userGoal),
+    );
+  }
+
+  static Future<void> summary(BuildContext context, String key) {
+    final c = CicloData.instance;
+    return _push(
+      context,
+      QuickSummaryScreen(
+        summaryKey: key,
+        themeId: c.themeId,
+        data: c.data,
+        irregularCycleMode: c.irregular,
+        selfReportedCycleLen: c.selfCycle,
+        selfReportedPeriodLen: c.selfPeriod,
+        pregnancy: c.pregnancy,
+        onNavigateToTab: (t) => _goTab(context, t),
+      ),
+    );
+  }
+
+  static Future<void> review(BuildContext context) =>
+      _push(context, ReviewScreen(data: CicloData.instance.data, themeId: CicloData.instance.themeId));
+
+  static Future<void> stats(BuildContext context) {
+    final c = CicloData.instance;
+    return _push(
+      context,
+      StatsScreen(data: c.data, themeId: c.themeId, inPregnancyMode: c.pregnancy.enabled && c.pregnancy.lmp != null),
+    );
+  }
 }
