@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import '../go/data/store.dart';
+import '../go/data/store.dart' show AppStore;
 import '../go/strings.dart' show L;
 import 'package:flutter/cupertino.dart' show CupertinoAlertDialog, CupertinoDialogAction;
 import 'package:path_provider/path_provider.dart';
