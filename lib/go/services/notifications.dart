@@ -100,7 +100,11 @@ class Notifier {
         iOS: DarwinNotificationDetails(),
       );
 
+  bool _firstRun = true;
+  final Set<int> _scheduled = {};
+
   Future<void> _at(int id, String title, String body, DateTime when, {DateTimeComponents? repeat}) async {
+    _scheduled.add(id);
     final t = tz.TZDateTime(tz.local, when.year, when.month, when.day, when.hour, when.minute);
     if (repeat == null && t.isBefore(tz.TZDateTime.now(tz.local))) return;
     await _plugin.zonedSchedule(
@@ -130,10 +134,10 @@ class Notifier {
       // Solo se borran los avisos de esta parte (ids 1-299) y los antiguos de
       // periodo/ovulación (1001-1006). Los de Configuración (2001+, citas
       // 3000+) los gestiona la pantalla de Configuración de CicloPlus.
-      for (var i = 1; i < 300; i++) {
-        await _plugin.cancel(i);
-      }
-      for (var i = 1001; i <= 1006; i++) {
+      final toCancel = _firstRun ? [for (var i = 1; i < 300; i++) i, for (var i = 1001; i <= 1006; i++) i] : _scheduled.toList();
+      _firstRun = false;
+      _scheduled.clear();
+      for (final i in toCancel) {
         await _plugin.cancel(i);
       }
       var id = 1;
