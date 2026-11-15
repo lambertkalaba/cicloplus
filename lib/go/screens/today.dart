@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../data/store.dart';
 import '../strings.dart';
+import '../cicloplus_links.dart';
 import '../widgets/ui.dart';
 import 'extras.dart';
 import 'more.dart';
@@ -109,7 +110,7 @@ class _PregnancyCard extends StatelessWidget {
     final w = s.pregnancyWeek!;
     final due = addDays(s.pregnancyStart!, 280);
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const PregnancyScreen())),
+      onTap: () => CP.openPregnancy(context),
       child: Container(
         padding: const EdgeInsets.fromLTRB(8, 10, 12, 10),
         decoration: card(),

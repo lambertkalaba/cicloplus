@@ -3,6 +3,10 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../services/legal_links.dart';
+import '../../services/locale_controller.dart';
 
 import '../data/store.dart';
 import '../go_root.dart';
@@ -1156,6 +1160,24 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
               ),
+              _box(Column(
+                children: [
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: const Icon(Icons.privacy_tip_rounded, color: C.pink),
+                    title: Text(tr('Política de privacidad', 'Privacy policy'), style: const TextStyle(fontWeight: FontWeight.w700)),
+                    trailing: const Icon(Icons.open_in_new_rounded, color: C.muted, size: 18),
+                    onTap: () => launchUrl(Uri.parse(privacyPolicyUrlFor(LocaleController.instance.languageCode)), mode: LaunchMode.externalApplication),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: const Icon(Icons.description_rounded, color: C.pink),
+                    title: Text(tr('Términos de uso', 'Terms of use'), style: const TextStyle(fontWeight: FontWeight.w700)),
+                    trailing: const Icon(Icons.open_in_new_rounded, color: C.muted, size: 18),
+                    onTap: () => launchUrl(Uri.parse(termsOfUseUrlFor(LocaleController.instance.languageCode)), mode: LaunchMode.externalApplication),
+                  ),
+                ],
+              ), padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4)),
               const SizedBox(height: 6),
               PinkButton(
                 label: tr('Borrar todos mis datos', 'Delete all my data'),

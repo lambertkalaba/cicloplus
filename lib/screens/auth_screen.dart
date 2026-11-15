@@ -11,7 +11,7 @@ import '../services/locale_controller.dart';
 import '../services/settings_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/reminder_time_sheet.dart' show ReminderDatePickerSheet;
-import 'settings_screen.dart' show privacyPolicyUrlFor, termsOfUseUrlFor;
+import '../services/legal_links.dart';
 
 /// Paleta específica de esta pantalla — propuesta de rediseño pedida por la
 /// usuaria y generada con ChatGPT ("arregla ese diseño con chatgpt"), no la

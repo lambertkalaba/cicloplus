@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../data/store.dart';
 import '../strings.dart';
+import '../cicloplus_links.dart';
+import '../go_root.dart';
 import '../widgets/ui.dart';
 import 'extras.dart';
 import 'more.dart';
@@ -70,11 +72,17 @@ class MeScreen extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w900, color: C.text)),
                           const SizedBox(height: 5),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
-                            decoration: BoxDecoration(color: const Color(0xFFFFF1C9), borderRadius: BorderRadius.circular(10)),
-                            child: Text('👑 ${tr('Cuenta Premium', 'Premium account')}',
-                                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: Color(0xFFB7791F))),
+                          ValueListenableBuilder<bool>(
+                            valueListenable: GoSession.premium,
+                            builder: (context, premium, _) => GestureDetector(
+                              onTap: premium ? null : () => CP.openPremium(context),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
+                                decoration: BoxDecoration(color: const Color(0xFFFFF1C9), borderRadius: BorderRadius.circular(10)),
+                                child: Text(premium ? '👑 ${tr('Cuenta Premium', 'Premium account')}' : '👑 ${tr('Hazte Premium', 'Go Premium')}',
+                                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: Color(0xFFB7791F))),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -161,18 +169,54 @@ class MeScreen extends StatelessWidget {
                     LinkRow(
                       icon: const Img('g_feet', size: 24),
                       title: tr('Mi embarazo', 'My pregnancy'),
-                      onTap: () => _push(context, const PregnancyScreen()),
+                      onTap: () => CP.openPregnancy(context),
                     ),
                   LinkRow(
                     icon: const Icon(Icons.people_alt_rounded, color: C.pink),
                     title: tr('Mi pareja', 'My partner'),
-                    onTap: () => _push(context, const PartnerScreen()),
+                    onTap: () => CP.openPartner(context),
                   ),
                   LinkRow(
                     icon: const Icon(Icons.settings_rounded, color: C.pink),
                     title: tr('Preferencias y privacidad', 'Preferences & privacy'),
                     divider: false,
                     onTap: () => _push(context, const SettingsScreen()),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 12),
+            // ── Más de CicloPlus (lo que solo tenía la versión anterior) ──
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+              decoration: card(),
+              child: Column(
+                children: [
+                  LinkRow(
+                    icon: const Icon(Icons.account_circle_rounded, color: C.pink),
+                    title: tr('Mi cuenta', 'My account'),
+                    onTap: () => CP.openAccount(context),
+                  ),
+                  LinkRow(
+                    icon: const Icon(Icons.workspace_premium_rounded, color: Color(0xFFB7791F)),
+                    title: tr('CicloPlus Premium', 'CicloPlus Premium'),
+                    onTap: () => CP.openPremium(context),
+                  ),
+                  LinkRow(
+                    icon: const Icon(Icons.science_rounded, color: C.pink),
+                    title: tr('Test de ovulación', 'Ovulation test'),
+                    onTap: () => CP.openOvulationTest(context),
+                  ),
+                  LinkRow(
+                    icon: const Icon(Icons.forum_rounded, color: C.pink),
+                    title: tr('Comunidad', 'Community'),
+                    onTap: () => CP.openForum(context),
+                  ),
+                  LinkRow(
+                    icon: const Icon(Icons.lock_rounded, color: C.pink),
+                    title: tr('Bloqueo con PIN', 'PIN lock'),
+                    divider: false,
+                    onTap: () => CP.togglePin(context),
                   ),
                 ],
               ),
@@ -194,7 +238,7 @@ class MeScreen extends StatelessWidget {
         await s.commit();
         if (!context.mounted) return;
       }
-      _push(context, const PregnancyScreen());
+      if (context.mounted) await CP.openPregnancy(context);
       return;
     }
     s.goal = g;
