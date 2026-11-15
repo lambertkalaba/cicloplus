@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/store.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
+import 'extra_details.dart';
 
 /// Registrar mi día: flujo, síntomas, dolor, ánimo y notas.
 class RegisterScreen extends StatefulWidget {
@@ -312,6 +313,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                       ],
                     ),
+                  ),
+                  const SizedBox(height: 12),
+                  _section(
+                    SectionTitle(Icons.add_circle_outline_rounded, tr('Más detalles', 'More details')),
+                    ExtraDetails(log: _log, onChanged: () => setState(() {}), showSex: AppStore.instance.showSex),
                   ),
                   const SizedBox(height: 12),
                   _section(

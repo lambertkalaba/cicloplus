@@ -37,6 +37,11 @@ class DayLog {
   bool breastExam;
   int activity; // minutos de actividad física
 
+  /// Datos que solo existían en CicloPlus (temperatura, moco cervical,
+  /// manchado, medicación, energía, piel y cabello, autoexamen, detalles de
+  /// vida sexual, foto…), guardados con los mismos nombres que en la nube.
+  Map<String, dynamic> extra;
+
   DayLog({
     this.flow = 0,
     Set<String>? symptoms,
@@ -49,7 +54,15 @@ class DayLog {
     this.sex = 0,
     this.breastExam = false,
     this.activity = 0,
-  }) : symptoms = symptoms ?? <String>{};
+    Map<String, dynamic>? extra,
+  })  : symptoms = symptoms ?? <String>{},
+        extra = extra ?? <String, dynamic>{};
+
+  static dynamic _deep(dynamic v) => v is List ? List.from(v) : (v is Map ? Map<String, dynamic>.from(v) : v);
+
+  static bool _filled(dynamic v) => !(v == null || v == false || v == '' || (v is List && v.isEmpty) || (v is Map && v.isEmpty));
+
+  bool get hasExtra => extra.values.any(_filled);
 
   DayLog copy() => DayLog(
         flow: flow,
@@ -63,6 +76,7 @@ class DayLog {
         sex: sex,
         breastExam: breastExam,
         activity: activity,
+        extra: extra.map((k, v) => MapEntry(k, _deep(v))),
       );
 
   bool get isEmpty =>
@@ -76,7 +90,8 @@ class DayLog {
       weight == null &&
       sex == 0 &&
       !breastExam &&
-      activity == 0;
+      activity == 0 &&
+      !hasExtra;
 
   Map<String, dynamic> toJson() => {
         if (flow != 0) 'f': flow,
@@ -90,6 +105,7 @@ class DayLog {
         if (sex != 0) 'sx': sex,
         if (breastExam) 'be': true,
         if (activity != 0) 'ac': activity,
+        if (hasExtra) 'x': Map.fromEntries(extra.entries.where((e) => _filled(e.value))),
       };
 
   factory DayLog.fromJson(Map<String, dynamic> j) => DayLog(
@@ -104,6 +120,7 @@ class DayLog {
         sex: (j['sx'] as num?)?.toInt() ?? 0,
         breastExam: j['be'] == true,
         activity: (j['ac'] as num?)?.toInt() ?? 0,
+        extra: (j['x'] as Map?)?.map((k, v) => MapEntry(k.toString(), v)),
       );
 }
 

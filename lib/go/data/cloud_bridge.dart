@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'store.dart';
@@ -23,6 +25,13 @@ class CloudBridge {
 
   static const _flows = ['none', 'light', 'medium', 'heavy'];
   static const _levels = ['leve', 'moderado', 'fuerte'];
+
+  /// Campos que solo tenía CicloPlus; se editan en "Más detalles" del registro.
+  static const extraKeys = [
+    'temp', 'cervicalMucus', 'spotting', 'medication', 'energy', 'skinHair', 'breastSelfExam',
+    'sexTimes', 'sexDesire', 'sexMasturbation', 'sexOrgasm', 'sexNoOrgasm', 'sexNone', 'diu', 'photo',
+    'sleepBedtime', 'sleepWakeTime',
+  ];
 
   /// Ids de síntomas que cambian de nombre entre los dos diseños.
   static const _symToCloud = {'cabeza': 'dolorcab'};
@@ -67,19 +76,24 @@ class CloudBridge {
     if (ops > 0) await batch.commit();
   }
 
-  static bool _same(DayLog a, DayLog b) => _eq(a.toJson(), b.toJson());
+  static bool _same(DayLog a, DayLog b) => _canon(a.toJson()) == _canon(b.toJson());
 
-  static bool _eq(Map<String, dynamic> a, Map<String, dynamic> b) {
-    if (a.length != b.length) return false;
-    for (final k in a.keys) {
-      final x = a[k], y = b[k];
-      if (x is List && y is List) {
-        if (x.length != y.length || !x.toSet().containsAll(y)) return false;
-      } else if (x != y) {
-        return false;
+  /// JSON en orden fijo (claves y listas ordenadas) para comparar.
+  static String _canon(dynamic v) {
+    dynamic norm(dynamic x) {
+      if (x is Map) {
+        final keys = x.keys.map((k) => k.toString()).toList()..sort();
+        return {for (final k in keys) k: norm(x[k])};
       }
+      if (x is Iterable) {
+        final l = x.map(norm).toList();
+        l.sort((p, q) => jsonEncode(p).compareTo(jsonEncode(q)));
+        return l;
+      }
+      return x;
     }
-    return true;
+
+    return jsonEncode(norm(v));
   }
 
   /// Un documento vacío según CicloPlus (no queda ningún dato de ninguna versión).
@@ -116,6 +130,7 @@ class CloudBridge {
       sex: sex,
       breastExam: j['breastSelfExam'] != null,
       activity: (j['activity'] as num?)?.toInt() ?? 0,
+      extra: {for (final k in extraKeys) if (j[k] != null) k: j[k] is List ? List.from(j[k] as List) : j[k]},
     );
   }
 
@@ -150,11 +165,20 @@ class CloudBridge {
     j['weight'] = l.weight;
     j['sex'] = l.sex > 0;
     j['unprotected'] = l.sex == 2;
+    for (final k in extraKeys) {
+      j[k] = l.extra[k];
+    }
     if (l.breastExam) {
-      j['breastSelfExam'] = old['breastSelfExam'] ?? 'normal';
+      j['breastSelfExam'] = l.extra['breastSelfExam'] ?? old['breastSelfExam'] ?? 'normal';
     } else {
       j['breastSelfExam'] = null;
     }
+    // Valores "vacíos" de CicloPlus que no hace falta guardar.
+    for (final k in ['sexDesire', 'sexMasturbation', 'sexOrgasm', 'sexNoOrgasm', 'sexNone', 'diu']) {
+      if (j[k] == false) j.remove(k);
+    }
+    if (j['medication'] is List && (j['medication'] as List).isEmpty) j.remove('medication');
+    if (j['skinHair'] is List && (j['skinHair'] as List).isEmpty) j.remove('skinHair');
     j['activity'] = l.activity == 0 ? null : l.activity;
     j.removeWhere((k, v) => v == null);
     return j;

@@ -1096,6 +1096,47 @@ class SettingsScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
               ),
               _box(
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: const Icon(Icons.language_rounded, color: C.pink),
+                  title: Text(tr('Idioma', 'Language'), style: const TextStyle(fontWeight: FontWeight.w800)),
+                  subtitle: Text(() {
+                    final c = LocaleController.instance.languageCode;
+                    final l = kAppLanguages.where((e) => e.code == c);
+                    return l.isEmpty ? c : '${l.first.flag}  ${l.first.nativeName}';
+                  }()),
+                  trailing: const Icon(Icons.chevron_right_rounded, color: C.muted),
+                  onTap: () async {
+                    final code = await showModalBottomSheet<String>(
+                      context: context,
+                      backgroundColor: Colors.white,
+                      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+                      builder: (ctx) => SafeArea(
+                        child: ListView(
+                          shrinkWrap: true,
+                          children: [
+                            for (final l in kAppLanguages)
+                              ListTile(
+                                leading: Text(l.flag, style: const TextStyle(fontSize: 22)),
+                                title: Text(l.nativeName, style: const TextStyle(fontWeight: FontWeight.w700)),
+                                trailing: l.code == LocaleController.instance.languageCode
+                                    ? const Icon(Icons.check_rounded, color: C.pink)
+                                    : null,
+                                onTap: () => Navigator.pop(ctx, l.code),
+                              ),
+                          ],
+                        ),
+                      ),
+                    );
+                    if (code == null) return;
+                    L.es = code == 'es';
+                    await LocaleController.instance.setLanguage(code);
+                    await s.commit();
+                  },
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+              ),
+              _box(
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
                   secondary: const Icon(Icons.favorite_rounded, color: C.pink),
