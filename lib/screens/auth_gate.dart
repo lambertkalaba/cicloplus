@@ -6,7 +6,7 @@ import '../theme/app_theme.dart';
 import 'auth_screen.dart';
 import 'email_verification_screen.dart';
 import 'lock_screen.dart';
-import 'main_tab_screen.dart';
+import '../go/go_root.dart';
 import 'partner_viewer_home_screen.dart';
 
 /// Punto de entrada de la app: revisa si ya hay una sesión activa y decide
@@ -126,6 +126,7 @@ class _AuthGateState extends State<AuthGate> {
       );
     }
 
-    return MainTabScreen(user: _user!, onSignOut: _onSignOut);
+    // Diseño nuevo (fusión con CicloPlus Go, nov 2026).
+    return GoRoot(user: _user!, onSignOut: _onSignOut);
   }
 }
