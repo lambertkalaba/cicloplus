@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import '../go/data/store.dart';
+import '../go/strings.dart' show L;
 import 'package:flutter/cupertino.dart' show CupertinoAlertDialog, CupertinoDialogAction;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -1382,97 +1384,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             const SizedBox(height: 20),
 
-            // ---- 1b. Prueba prémium (Suscripción) ----
-            // Movida justo debajo de "Idioma" a petición de la usuaria
-            // (antes estaba más abajo, cerca de Recordatorio) — mismo
-            // bloque tal cual, solo cambia su posición en el ListView.
-            // Oculto mientras kPaywallEnabled sea false (ver comentario en
-            // subscription_service.dart) — RevenueCat todavía no tiene API
-            // keys reales, así que no hay nada que comprar todavía.
-            //
-            // Tarjeta destacada (mismo tratamiento que el mockup de
-            // ChatGPT aprobado): icono en círculo, botón lleno en vez de
-            // solo contorno, para que sea la primera invitación visual de
-            // la pantalla.
-            if (kPaywallEnabled) ...[
-              _sectionCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        _iconBadge(Icons.workspace_premium_rounded, AppColors.ovulation),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                s.settingsSubscriptionTitle,
-                                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
-                              ),
-                              const SizedBox(height: 2),
-                              Text(s.settingsSubscriptionHint, style: const TextStyle(fontSize: 11.5, color: AppColors.textMuted)),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 14),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton.icon(
-                        onPressed: _openPaywall,
-                        icon: const Icon(Icons.workspace_premium_outlined, size: 18),
-                        label: Text(s.settingsManageSubscription, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(themeById(_themeId).primary),
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                          elevation: 0,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-            ],
-
-            // ---- 3. Mi objetivo ----
-            // A diferencia de las demás secciones, esta NO es plegable: la
-            // usuaria pidió que "Mi objetivo" se vea siempre, sin la flecha
-            // de plegar/desplegar arriba/abajo (_CollapsibleSection).
-            _sectionCard(
-              title: s.meMyGoal,
-              titleIcon: Icons.flag_outlined,
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  ('period', s.meGoalTrackPeriod),
-                  ('conceive', s.meGoalTryConceive),
-                  ('pregnancy', s.meGoalTrackPregnancy),
-                ].map((o) {
-                  final selected = _userGoal == o.$1;
-                  return ChoiceChip(
-                    label: Text(o.$2, style: const TextStyle(fontSize: 12.5)),
-                    selected: selected,
-                    onSelected: (_) => _selectGoal(o.$1),
-                    selectedColor: Color(themeById(_themeId).primary),
-                    labelStyle: TextStyle(color: selected ? Colors.white : AppColors.textPrimary, fontWeight: FontWeight.w600),
-                    backgroundColor: AppColors.background,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(color: selected ? Color(themeById(_themeId).primary) : AppColors.border),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-            const SizedBox(height: 20),
-
             // ---- 4. Configuración de predicción (sub-pantalla en
             // bottomsheet que envuelve el mismo _irregularCycleMode real,
             // sin persistencia nueva) ----
@@ -1483,225 +1394,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 label: s.settingsPredictionConfig,
                 subtitle: s.settingsPredictionConfigHint,
                 onTap: _openPredictionConfigSheet,
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // ---- 4b. Colores del calendario ----
-            // Chips de paleta, mismo patrón visual que "Mi objetivo" más
-            // abajo — cada chip muestra el nombre + 3 puntos de color como
-            // vista previa, para elegir sin tener que ir al calendario.
-            _sectionCard(
-              child: _CollapsibleSection(
-              title: s.settingsCalendarColorsTitle,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(s.settingsCalendarColorsHint, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
-                  const SizedBox(height: 10),
-                  ListenableBuilder(
-                    listenable: CalendarPaletteController.instance,
-                    builder: (context, _) {
-                      final currentId = CalendarPaletteController.instance.paletteId;
-                      return Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: [
-                          ...kCalendarPalettes.map((p) {
-                            final selected = p.id == currentId;
-                            return ChoiceChip(
-                              label: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(_calendarPaletteName(s, p.id), style: const TextStyle(fontSize: 12.5)),
-                                  const SizedBox(width: 6),
-                                  _PaletteSwatchDots(palette: p),
-                                ],
-                              ),
-                              selected: selected,
-                              onSelected: (_) => CalendarPaletteController.instance.setPaletteId(p.id),
-                              selectedColor: Color(themeById(_themeId).primary),
-                              labelStyle: TextStyle(color: selected ? Colors.white : AppColors.textPrimary, fontWeight: FontWeight.w600),
-                              backgroundColor: AppColors.background,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                side: BorderSide(color: selected ? Color(themeById(_themeId).primary) : AppColors.border),
-                              ),
-                            );
-                          }),
-                          // ---- Paleta 'custom': no vive en kCalendarPalettes
-                          // (es dinámica, no const), así que este chip se
-                          // añade a mano. Tocarlo SIEMPRE abre la hoja
-                          // "Personalizar colores" — tanto para elegir los
-                          // colores por primera vez como para retocar una
-                          // paleta personalizada ya guardada — y esta se
-                          // activa sola al pulsar "Guardar" dentro de la hoja.
-                          Builder(builder: (context) {
-                            final selected = currentId == 'custom';
-                            final custom = CalendarPaletteController.instance.customPalette;
-                            return ChoiceChip(
-                              label: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(Icons.palette_outlined, size: 14, color: selected ? Colors.white : AppColors.textMuted),
-                                  const SizedBox(width: 4),
-                                  Text(s.calendarPaletteNameCustom, style: const TextStyle(fontSize: 12.5)),
-                                  const SizedBox(width: 6),
-                                  _PaletteSwatchDots(palette: custom),
-                                ],
-                              ),
-                              selected: selected,
-                              onSelected: (_) => _openCustomPaletteSheet(),
-                              selectedColor: Color(themeById(_themeId).primary),
-                              labelStyle: TextStyle(color: selected ? Colors.white : AppColors.textPrimary, fontWeight: FontWeight.w600),
-                              backgroundColor: AppColors.background,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                side: BorderSide(color: selected ? Color(themeById(_themeId).primary) : AppColors.border),
-                              ),
-                            );
-                          }),
-                        ],
-                      );
-                    },
-                  ),
-                ],
-              ),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // ---- 4b-bis. Estilo de calendario ----
-            // Mismo patrón visual que "Colores del calendario" de arriba,
-            // pero eligiendo el DISEÑO del grid (CalendarGrid clásico vs.
-            // CalendarGridElegant nuevo) en vez de sus colores — ver
-            // CalendarStyleController. Las dos opciones se pueden combinar
-            // libremente con cualquier paleta de color.
-            _sectionCard(
-              child: _CollapsibleSection(
-              title: s.settingsCalendarStyleTitle,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(s.settingsCalendarStyleHint, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
-                  const SizedBox(height: 10),
-                  ListenableBuilder(
-                    listenable: CalendarStyleController.instance,
-                    builder: (context, _) {
-                      final currentId = CalendarStyleController.instance.styleId;
-                      final options = [
-                        (id: 'clasico', label: s.settingsCalendarStyleClassic),
-                        (id: 'elegante', label: s.settingsCalendarStyleElegant),
-                        (id: 'ios', label: s.settingsCalendarStyleIos),
-                      ];
-                      return Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: options.map((opt) {
-                          final selected = opt.id == currentId;
-                          return ChoiceChip(
-                            label: Text(opt.label, style: const TextStyle(fontSize: 12.5)),
-                            selected: selected,
-                            onSelected: (_) => CalendarStyleController.instance.setStyleId(opt.id),
-                            selectedColor: Color(themeById(_themeId).primary),
-                            labelStyle: TextStyle(color: selected ? Colors.white : AppColors.textPrimary, fontWeight: FontWeight.w600),
-                            backgroundColor: AppColors.background,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              side: BorderSide(color: selected ? Color(themeById(_themeId).primary) : AppColors.border),
-                            ),
-                          );
-                        }).toList(),
-                      );
-                    },
-                  ),
-                  // ---- Forma y relleno de las marcas de día — pedido de la
-                  // usuaria ("cuadrado y círculo... con o sin relleno...
-                  // que los usuarios puedan elegir a su gusto"), y luego
-                  // ampliado a los otros dos estilos ("lo mismo quiero que
-                  // esté también en elegante y ios"): los tres estilos
-                  // (Clásico/Elegante/iOS) respetan ahora Forma (Cuadrado/
-                  // Círculo/Raya) y Relleno (Con relleno/Sin relleno), así
-                  // que estos selectores se muestran siempre, sin importar
-                  // cuál esté elegido.
-                  ListenableBuilder(
-                    listenable: CalendarStyleController.instance,
-                    builder: (context, _) {
-                      final currentShape = CalendarStyleController.instance.markerShape;
-                      final currentFill = CalendarStyleController.instance.markerFill;
-                      final shapeOptions = [
-                        (id: 'square', label: s.settingsCalendarMarkerShapeSquare),
-                        (id: 'circle', label: s.settingsCalendarMarkerShapeCircle),
-                        (id: 'raya', label: s.settingsCalendarMarkerShapeRaya),
-                      ];
-                      final fillOptions = [
-                        (id: 'filled', label: s.settingsCalendarMarkerFillFilled),
-                        (id: 'outline', label: s.settingsCalendarMarkerFillOutline),
-                      ];
-                      Widget chipsRow({
-                        required String title,
-                        required List<({String id, String label})> opts,
-                        required String currentId,
-                        required ValueChanged<String> onPick,
-                      }) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 14),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                title,
-                                style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
-                              ),
-                              const SizedBox(height: 8),
-                              Wrap(
-                                spacing: 8,
-                                runSpacing: 8,
-                                children: opts.map((opt) {
-                                  final selected = opt.id == currentId;
-                                  return ChoiceChip(
-                                    label: Text(opt.label, style: const TextStyle(fontSize: 12.5)),
-                                    selected: selected,
-                                    onSelected: (_) => onPick(opt.id),
-                                    selectedColor: Color(themeById(_themeId).primary),
-                                    labelStyle: TextStyle(
-                                      color: selected ? Colors.white : AppColors.textPrimary,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    backgroundColor: AppColors.background,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      side: BorderSide(color: selected ? Color(themeById(_themeId).primary) : AppColors.border),
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          chipsRow(
-                            title: s.settingsCalendarMarkerShapeTitle,
-                            opts: shapeOptions,
-                            currentId: currentShape,
-                            onPick: (id) => CalendarStyleController.instance.setMarkerShape(id),
-                          ),
-                          chipsRow(
-                            title: s.settingsCalendarMarkerFillTitle,
-                            opts: fillOptions,
-                            currentId: currentFill,
-                            onPick: (id) => CalendarStyleController.instance.setMarkerFill(id),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                ],
-              ),
               ),
             ),
             const SizedBox(height: 20),
@@ -1828,37 +1520,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             const SizedBox(height: 20),
 
-            // ---- 8. Recordatorio (acceso adicional) ----
-            _sectionCard(
-              child: _groupedNavRow(
-                icon: Icons.notifications_active_outlined,
-                iconColor: Color(themeById(_themeId).primary),
-                label: s.reminderScreenEntry,
-                onTap: _openReminderFromSettings,
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // ---- 6. Datos personales ----
-            // Quitado de Configuración a petición del usuario: el año de
-            // nacimiento sigue siendo editable desde Registrar > Peso
-            // (campo "Edad", ver register_screen.dart _saveAge), que ya
-            // escribe al mismo SettingsService.saveProfileBirthDate — no
-            // se perdió ninguna funcionalidad, solo este acceso duplicado.
-
-            // ---- 12. Face ID & contraseña (= PIN real, solo renombrado) ----
-            _sectionCard(
-              title: s.settingsFaceIdPassword,
-              titleIcon: Icons.lock_outline,
-              child: _switchRow(
-                title: s.settingsPinToggle,
-                subtitle: _pinEnabled ? s.on_ : s.off_,
-                value: _pinEnabled,
-                onChanged: _togglePin,
-              ),
-            ),
-            const SizedBox(height: 20),
-
             // ---- 14. Tema (color de app) ----
             _sectionCard(
               title: s.settingsAppColor,
@@ -1892,49 +1553,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             const SizedBox(height: 20),
 
-            // ---- 15. Opciones personalizadas (agrupa los toggles
-            // "avanzados" ya existentes: Bienestar, Diario/vida sexual
-            // siempre visible, Recordatorio diario — en vez de un
-            // placeholder vacío, reutiliza lógica real ya probada) ----
-            _sectionCard(
-              title: s.settingsCustomOptions,
-              titleIcon: Icons.tune,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _switchRow(
-                    title: s.settingsWellnessToggle,
-                    subtitle: _wellnessEnabled ? s.on_ : s.off_,
-                    value: _wellnessEnabled,
-                    onChanged: _toggleWellnessEnabled,
-                  ),
-                  const SizedBox(height: 16),
-                  _switchRow(
-                    title: s.settingsSexAlwaysVisible,
-                    subtitle: _sexAlwaysVisible ? s.settingsSexAlwaysVisibleOn : s.settingsSexAlwaysVisibleOff,
-                    value: _sexAlwaysVisible,
-                    onChanged: _toggleSexAlwaysVisible,
-                  ),
-                  const SizedBox(height: 16),
-                  _navRow(
-                    icon: Icons.reorder,
-                    label: s.settingsRegisterCardOrder,
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => RegisterCardOrderScreen(themeId: _themeId)),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  _switchRow(
-                    title: s.settingsDailyToggle,
-                    subtitle: _dailyReminder.enabled ? s.settingsActiveAt(_dailyReminder.time) : s.off_,
-                    value: _dailyReminder.enabled,
-                    onChanged: _toggleDailyReminder,
-                  ),
-                  if (_dailyReminder.enabled) ...[
-                    const SizedBox(height: 10),
-                    _timeRow(label: s.settingsHour, time: _dailyReminder.time, onTap: _pickDailyReminderTime),
-                  ],
-                ],
+            // ---- Registro de relaciones (del diseño nuevo): mostrar u
+            // ocultar la vida sexual en calendario, registro y Mi salud ----
+            ListenableBuilder(
+              listenable: AppStore.instance,
+              builder: (context, _) => _sectionCard(
+                title: L.es ? 'Registro de relaciones' : 'Sex tracking',
+                titleIcon: Icons.favorite_border_rounded,
+                child: _switchRow(
+                  title: L.es ? 'Mostrar vida sexual' : 'Show sex life',
+                  subtitle: L.es
+                      ? 'En el calendario, el registro y Mi salud. Si lo desactivas, tus datos no se borran.'
+                      : 'In the calendar, logging and My health. Turning it off does not delete your data.',
+                  value: AppStore.instance.showSex,
+                  onChanged: (v) {
+                    AppStore.instance.showSex = v;
+                    AppStore.instance.commit();
+                  },
+                ),
               ),
             ),
             const SizedBox(height: 20),
