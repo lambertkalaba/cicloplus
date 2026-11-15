@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../models/app_user.dart';
 import '../services/locale_controller.dart';
 import '../services/settings_service.dart';
+import '../services/subscription_service.dart';
+import 'cicloplus_links.dart';
 import 'data/store.dart';
 import 'screens/onboarding.dart';
 import 'screens/shell.dart';
@@ -17,6 +19,19 @@ class GoSession {
   GoSession._();
   static AppUser? user;
   static Future<void> Function()? onSignOut;
+
+  /// Suscripción (RevenueCat), igual que en la versión anterior.
+  static final SubscriptionService subscription = SubscriptionService();
+  static final ValueNotifier<bool> premium = ValueNotifier(false);
+
+  static Future<void> refreshPremium() async {
+    final u = user;
+    if (u == null) return;
+    try {
+      await subscription.refreshCachedStatus();
+      premium.value = subscription.hasAccess(u);
+    } catch (_) {}
+  }
 }
 
 /// Raíz del diseño nuevo de CicloPlus. Se muestra cuando la usuaria ya ha
@@ -51,6 +66,14 @@ class _GoRootState extends State<GoRoot> {
       profileName = await SettingsService().loadProfileName();
     } catch (_) {}
     await store.attachUser(widget.user.id, profileName: profileName);
+    await CP.loadFromCicloPlus();
+    _lastGoal = store.goal;
+    _lastPregnancy = store.pregnancyStart;
+    store.addListener(_syncGoal);
+    try {
+      await GoSession.subscription.configure(firebaseUid: widget.user.id);
+      await GoSession.refreshPremium();
+    } catch (_) {}
     try {
       await Notifier.instance.init();
       store.removeListener(Notifier.instance.reschedule);
@@ -60,7 +83,27 @@ class _GoRootState extends State<GoRoot> {
     if (mounted) setState(() => _ready = true);
   }
 
+  String? _lastGoal;
+  DateTime? _lastPregnancy;
+
+  /// Si cambia el objetivo o el embarazo en el diseño nuevo, se guarda
+  /// también donde lo leen las pantallas de CicloPlus (pareja, embarazo…).
+  void _syncGoal() {
+    final s = AppStore.instance;
+    if (s.goal == _lastGoal && s.pregnancyStart == _lastPregnancy) return;
+    _lastGoal = s.goal;
+    _lastPregnancy = s.pregnancyStart;
+    CP.syncPregnancyToCicloPlus();
+  }
+
+  @override
+  void dispose() {
+    AppStore.instance.removeListener(_syncGoal);
+    super.dispose();
+  }
+
   Future<void> _signOut() async {
+    AppStore.instance.removeListener(_syncGoal);
     AppStore.instance.removeListener(Notifier.instance.reschedule);
     AppStore.instance.detachUser();
     await widget.onSignOut();
