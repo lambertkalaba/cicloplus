@@ -60,7 +60,7 @@ class _GoRootState extends State<GoRoot> {
 
   Future<void> _start() async {
     // Idioma: de momento el diseño nuevo tiene español e inglés.
-    L.es = LocaleController.instance.languageCode == 'es';
+    L.setLang(LocaleController.instance.languageCode);
     LocaleController.instance.addListener(_syncLang);
     final store = AppStore.instance;
     String? profileName;
@@ -118,7 +118,7 @@ class _GoRootState extends State<GoRoot> {
     super.dispose();
   }
 
-  void _syncLang() => L.es = LocaleController.instance.languageCode == 'es';
+  void _syncLang() => L.setLang(LocaleController.instance.languageCode);
 
   Future<void> _signOut() async {
     AppStore.instance.removeListener(_syncGoal);

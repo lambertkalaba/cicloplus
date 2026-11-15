@@ -1,33 +1,75 @@
 import 'dart:ui' as ui;
 
 import 'data/store.dart';
+import 'go_i18n.dart';
 
-/// Textos: español por defecto, inglés si el teléfono no está en español.
+/// Textos: español, inglés y el resto de idiomas de CicloPlus (go_i18n.dart).
 class L {
   static bool es = true;
 
-  static void init() {
-    es = ui.PlatformDispatcher.instance.locale.languageCode != 'en';
+  /// Idioma elegido en CicloPlus (es, en, fr, de, ru, ar, hi, bn, pt).
+  static String lang = 'es';
+
+  static void setLang(String code) {
+    lang = code;
+    es = code == 'es';
   }
 
-  static const _monthsEs = [
-    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-  ];
-  static const _monthsEn = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
+  static void init() {
+    setLang(ui.PlatformDispatcher.instance.locale.languageCode == 'en' ? 'en' : 'es');
+  }
 
-  static String month(int m) => (es ? _monthsEs : _monthsEn)[m - 1];
-  static String monthShort(int m) => month(m).substring(0, 3);
-  static List<String> get weekdaysShort => es ? ['L', 'M', 'X', 'J', 'V', 'S', 'D'] : ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  static const _months = {
+    'es': ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    'en': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    'fr': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+    'de': ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+    'pt': ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    'ru': ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+    'ar': ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+    'hi': ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'],
+    'bn': ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'],
+  };
 
-  static String dateLong(DateTime d) => es ? '${d.day} de ${month(d.month).toLowerCase()} de ${d.year}' : '${month(d.month)} ${d.day}, ${d.year}';
-  static String dateShort(DateTime d) => es ? '${d.day} ${monthShort(d.month)}' : '${monthShort(d.month)} ${d.day}';
+  static const _weekdays = {
+    'es': ['L', 'M', 'X', 'J', 'V', 'S', 'D'],
+    'en': ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    'fr': ['L', 'M', 'M', 'J', 'V', 'S', 'D'],
+    'de': ['M', 'D', 'M', 'D', 'F', 'S', 'S'],
+    'pt': ['S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+    'ru': ['П', 'В', 'С', 'Ч', 'П', 'С', 'В'],
+    'ar': ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'],
+    'hi': ['सो', 'मं', 'बु', 'गु', 'शु', 'श', 'र'],
+    'bn': ['সো', 'ম', 'বু', 'বৃ', 'শু', 'শ', 'র'],
+  };
+
+  static List<String> get _m => _months[lang] ?? _months['en']!;
+
+  static String month(int m) => _m[m - 1];
+  static String monthShort(int m) {
+    final n = month(m);
+    return n.length <= 4 ? n : n.substring(0, 3);
+  }
+
+  static List<String> get weekdaysShort => _weekdays[lang] ?? _weekdays['en']!;
+
+  static String dateLong(DateTime d) {
+    if (lang == 'es') return '${d.day} de ${month(d.month).toLowerCase()} de ${d.year}';
+    if (lang == 'en') return '${month(d.month)} ${d.day}, ${d.year}';
+    if (lang == 'de') return '${d.day}. ${month(d.month)} ${d.year}';
+    return '${d.day} ${month(d.month).toLowerCase()} ${d.year}';
+  }
+
+  static String dateShort(DateTime d) => lang == 'en' ? '${monthShort(d.month)} ${d.day}' : '${d.day} ${monthShort(d.month)}';
 }
 
-String tr(String es, String en) => L.es ? es : en;
+/// Devuelve el texto en el idioma elegido. Español e inglés vienen en el
+/// propio código; el resto se busca en goI18n (si falta, sale en inglés).
+String tr(String es, String en) {
+  if (L.lang == 'es') return es;
+  if (L.lang == 'en') return en;
+  return goI18n[L.lang]?[es] ?? en;
+}
 
 /// Síntomas fijos (los de la imagen) con su icono.
 const symptomKeys = ['dolor', 'animo', 'energia', 'antojos', 'hinchazon', 'sueno', 'acne', 'cabeza'];

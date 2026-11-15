@@ -1129,7 +1129,7 @@ class SettingsScreen extends StatelessWidget {
                       ),
                     );
                     if (code == null) return;
-                    L.es = code == 'es';
+                    L.setLang(code);
                     await LocaleController.instance.setLanguage(code);
                     await s.commit();
                   },

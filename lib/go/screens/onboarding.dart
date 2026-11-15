@@ -62,8 +62,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       textAlign: TextAlign.center, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: C.text)),
                   const SizedBox(height: 6),
                   Text(
-                    tr('Tu calendario menstrual rápido y sencillo. Tus datos se quedan solo en tu teléfono.',
-                        'Your quick and simple period tracker. Your data stays only on your phone.'),
+                    tr('Tu calendario menstrual rápido y sencillo.',
+                        'Your quick and simple period tracker.'),
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 14, color: C.muted, height: 1.35, fontWeight: FontWeight.w600),
                   ),
