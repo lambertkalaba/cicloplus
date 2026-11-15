@@ -1520,39 +1520,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             const SizedBox(height: 20),
 
-            // ---- 14. Tema (color de app) ----
-            _sectionCard(
-              title: s.settingsAppColor,
-              titleIcon: Icons.palette_outlined,
-              child: Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: kAppThemes.map((t) {
-                final selected = t.id == _themeId;
-                return GestureDetector(
-                  onTap: () => _selectTheme(t.id),
-                  child: Container(
-                    width: 46,
-                    height: 46,
-                    decoration: BoxDecoration(
-                      color: Color(t.primary),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: selected ? AppColors.textPrimary : Colors.transparent,
-                        width: 2.5,
-                      ),
-                    ),
-                    alignment: Alignment.center,
-                    child: selected
-                        ? const Icon(Icons.check, color: Colors.white, size: 18)
-                        : null,
-                  ),
-                );
-              }).toList(),
-              ),
-            ),
-            const SizedBox(height: 20),
-
             // ---- Registro de relaciones (del diseño nuevo): mostrar u
             // ocultar la vida sexual en calendario, registro y Mi salud ----
             ListenableBuilder(

@@ -5,6 +5,7 @@ import '../services/locale_controller.dart';
 import '../services/settings_service.dart';
 import '../services/subscription_service.dart';
 import 'cicloplus_links.dart';
+import 'upgrade.dart';
 import 'data/store.dart';
 import 'screens/onboarding.dart';
 import 'screens/shell.dart';
@@ -68,6 +69,13 @@ class _GoRootState extends State<GoRoot> {
     } catch (_) {}
     await store.attachUser(widget.user.id, profileName: profileName);
     await CP.loadFromCicloPlus();
+    await Upgrade.migrateReminders();
+    await Upgrade.fixTheme();
+    store.removeListener(Upgrade.syncProfileName);
+    store.addListener(Upgrade.syncProfileName);
+    store.removeListener(Upgrade.updateWidget);
+    store.addListener(Upgrade.updateWidget);
+    Upgrade.updateWidget();
     _lastGoal = store.goal;
     _lastPregnancy = store.pregnancyStart;
     store.addListener(_syncGoal);
