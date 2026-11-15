@@ -14,7 +14,10 @@ import 'more.dart';
 class TodayScreen extends StatelessWidget {
   final void Function([DateTime? day]) onRegister;
   final VoidCallback onCalendar;
-  const TodayScreen({super.key, required this.onRegister, required this.onCalendar});
+
+  /// Dentro de otra pantalla con scroll (Hoy de CicloPlus): sin scroll propio.
+  final bool embedded;
+  const TodayScreen({super.key, required this.onRegister, required this.onCalendar, this.embedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,9 @@ class TodayScreen extends StatelessWidget {
         final log = s.logFor(today);
         final pregnant = s.goal == 'pregnancy' && s.pregnancyWeek != null;
         return ListView(
-          padding: const EdgeInsets.fromLTRB(16, 6, 16, 24),
+          shrinkWrap: embedded,
+          physics: embedded ? const NeverScrollableScrollPhysics() : null,
+          padding: embedded ? EdgeInsets.zero : const EdgeInsets.fromLTRB(16, 6, 16, 24),
           children: [
             _Greeting(name: s.name),
             const SizedBox(height: 10),

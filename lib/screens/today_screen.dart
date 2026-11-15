@@ -62,7 +62,13 @@ class TodayScreen extends StatelessWidget {
     this.userGoal = 'period',
     required this.onDataChanged,
     this.onOpenRegister,
+    this.topSection,
   });
+
+  /// Parte de arriba del diseño nuevo (saludo, anillo, ánimo, consejo y
+  /// botón de registrar). Si se indica, sustituye a la parte de arriba
+  /// antigua que hacía lo mismo; el resto de tarjetas se mantiene.
+  final Widget? topSection;
 
   /// Si se indica, "registrar" abre el registro del diseño nuevo en vez del antiguo.
   final VoidCallback? onOpenRegister;
@@ -154,7 +160,18 @@ class TodayScreen extends StatelessWidget {
             // registrar. Solo fuera del modo embarazo; el embarazo conserva
             // su diseño. Debajo siguen el resto de tarjetas (jardín, pareja,
             // dato curioso, anatomía) para no perder nada.
-            if (!inPregnancyMode) ...[
+            if (topSection != null) ...[
+              topSection!,
+              if (!inPregnancyMode && tryingToConceive && ovulation != null) ...[
+                const SizedBox(height: 12),
+                _buildOvulationCard(s, theme, ovulation, isFertileToday, tryingToConceive),
+              ],
+              if (!inPregnancyMode) ...[
+                const SizedBox(height: 12),
+                V2QuickStats(data: data, onDataChanged: onDataChanged, onOpenEditor: () => _openTodayEditor(context)),
+              ],
+              const SizedBox(height: 18),
+            ] else if (!inPregnancyMode) ...[
               const V2GreetingCard(),
               const SizedBox(height: 12),
               V2CycleRingCard(
@@ -220,7 +237,7 @@ class TodayScreen extends StatelessWidget {
             // Con el rediseño 2.0 el anillo, el ánimo y la ovulación ya se
             // muestran arriba; aquí solo queda la tarjeta del bebé y la de
             // "¿Cómo te sientes hoy?" original para el modo embarazo.
-            if (inPregnancyMode) ...[
+            if (inPregnancyMode && topSection == null) ...[
               _buildPregnancyCard(s, context),
               const SizedBox(height: 10),
               _buildHowDoYouFeelCard(s, theme, context),
