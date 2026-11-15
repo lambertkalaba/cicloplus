@@ -125,7 +125,9 @@ class TodayScreen extends StatelessWidget {
     final tryingToConceive = !inPregnancyMode && userGoal == 'conceive';
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      // Fondo transparente: se ve el rosa del diseño nuevo y las tarjetas
+      // blancas resaltan encima (pedido de la usuaria, nov 2026).
+      backgroundColor: Colors.transparent,
       // Fondo con leve degradado (en vez de color plano) — mismo lenguaje
       // visual del rediseño "Después" aprobado por la usuaria: más
       // profundidad sin cambiar la paleta base de la app.
@@ -133,12 +135,7 @@ class TodayScreen extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFFFFF0F5), Color(0xFFFFF8F6)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0.0, 0.4],
-          ),
+          color: Colors.transparent,
         ),
         child: SingleChildScrollView(
         // Antes 14 de padding arriba — pedido de la usuaria: quitar la
@@ -418,11 +415,7 @@ class TodayScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 16, 18, 16),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: visual.glow,
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         // Sombra suave a juego con el degradado de la tarjeta — le da
         // profundidad en vez de quedar plana sobre el fondo.
@@ -2275,11 +2268,7 @@ class _SyncPartnerCardContent extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 2),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [softTop, softBottom],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(

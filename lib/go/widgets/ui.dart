@@ -28,12 +28,12 @@ class C {
 
 /// Tarjeta rosada translúcida con borde blanco (estilo de la foto).
 BoxDecoration card({Color? color, double radius = 22}) => BoxDecoration(
-  color: color ?? Colors.white.withOpacity(0.62),
+  color: color ?? Colors.white,
   borderRadius: BorderRadius.circular(radius),
-  border: Border.all(color: Colors.white.withOpacity(0.9), width: 1.3),
+  border: Border.all(color: const Color(0xFFF7CADB), width: 1),
   boxShadow: [
     BoxShadow(
-      color: const Color(0xFFD0407A).withOpacity(0.10),
+      color: const Color(0xFFD0407A).withOpacity(0.14),
       blurRadius: 16,
       offset: const Offset(0, 6),
     ),
