@@ -63,7 +63,11 @@ class TodayScreen extends StatelessWidget {
     required this.onDataChanged,
     this.onOpenRegister,
     this.topSection,
+    this.petCard,
   });
+
+  /// Mascota del diseño nuevo (el gato). Si se indica, sustituye a "Tu jardín".
+  final Widget? petCard;
 
   /// Parte de arriba del diseño nuevo (saludo, anillo, ánimo, consejo y
   /// botón de registrar). Si se indica, sustituye a la parte de arriba
@@ -222,7 +226,25 @@ class TodayScreen extends StatelessWidget {
             // que aparezca el botón/contador de "Fin del período" durante
             // el embarazo, así que _buildGardenCard recibe
             // inPregnancyMode para forzar esa etapa y ocultar esa parte.
-            _buildGardenCard(s, theme, context, isPeriodToday, inPregnancyMode: inPregnancyMode),
+            if (petCard == null)
+              _buildGardenCard(s, theme, context, isPeriodToday, inPregnancyMode: inPregnancyMode)
+            else ...[
+              // El gato ocupa el sitio de "Tu jardín"; lo que vivía dentro
+              // del jardín (cuánto queda del periodo + "Fin del período")
+              // se mantiene justo debajo.
+              petCard!,
+              if (!inPregnancyMode && isPeriodToday) ...[
+                const SizedBox(height: 8),
+                if (_periodDaysRemaining() != null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 6),
+                    child: Text(s.todayGardenDaysLeft(_periodDaysRemaining()!),
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700, color: Color(0xFF8E1F4F))),
+                  ),
+                _buildPeriodEndButton(s, theme, context, light: false),
+              ],
+            ],
             const SizedBox(height: 10),
             // Segunda tarjeta, justo debajo del jardín, según el objetivo
             // activo (pedido explícito de la usuaria):
@@ -808,11 +830,7 @@ class TodayScreen extends StatelessWidget {
           // fondo crema muy suave, a juego con la maqueta "Después"
           // aprobada por la usuaria, con anillo de progreso + puntos +
           // botón de flecha en vez del bloque de solo texto.
-          gradient: const LinearGradient(
-            colors: [Color(0xFFFFF7EC), Color(0xFFFDE9EE)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(

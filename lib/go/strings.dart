@@ -2,6 +2,8 @@ import 'dart:ui' as ui;
 
 import 'data/store.dart';
 import 'go_i18n.dart';
+import 'go_i18n_tpl.dart';
+import 'go_i18n_cat.dart';
 
 /// Textos: español, inglés y el resto de idiomas de CicloPlus (go_i18n.dart).
 class L {
@@ -68,7 +70,26 @@ class L {
 String tr(String es, String en) {
   if (L.lang == 'es') return es;
   if (L.lang == 'en') return en;
-  return goI18n[L.lang]?[es] ?? en;
+  final exact = goI18n[L.lang]?[es] ?? goI18nCat[L.lang]?[es];
+  if (exact != null) return exact;
+  return _fromTemplate(es) ?? en;
+}
+
+/// Frases con datos ("Día 12 del ciclo"): busca la plantilla en español,
+/// saca los valores y los pone en la plantilla del idioma.
+final Map<String, RegExp> _tplRe = {};
+String? _fromTemplate(String es) {
+  final target = goTpl[L.lang];
+  if (target == null) return null;
+  for (var i = 0; i < goTplEs.length && i < target.length; i++) {
+    final t = goTplEs[i];
+    final re = _tplRe[t] ??= RegExp('^${t.split('{}').map(RegExp.escape).join('(.*?)')}\$', dotAll: true);
+    final m = re.firstMatch(es);
+    if (m == null) continue;
+    var k = 0;
+    return target[i].replaceAllMapped('{}', (_) => m.group(++k) ?? '');
+  }
+  return null;
 }
 
 /// Síntomas fijos (los de la imagen) con su icono.

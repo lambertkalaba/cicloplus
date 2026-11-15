@@ -13,6 +13,7 @@ import 'data/store.dart';
 import 'go_root.dart';
 import 'screens/shell.dart' show ShellState;
 import 'screens/today.dart' as go;
+import 'widgets/cat_card.dart';
 
 /// Datos que necesitan las pantallas de CicloPlus que se conservan (Hoy y
 /// Configuración). Los días salen de la misma nube que usa el diseño nuevo,
@@ -101,6 +102,7 @@ class _CicloTodayState extends State<CicloToday> {
           userGoal: c.userGoal,
           onDataChanged: c.onDataChanged,
           onOpenRegister: () => widget.onRegister(),
+          petCard: CatCard(onFeed: () => widget.onRegister()),
           topSection: go.TodayScreen(
             embedded: true,
             onRegister: widget.onRegister,
