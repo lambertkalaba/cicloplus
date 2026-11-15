@@ -71,6 +71,13 @@ class _GoRootState extends State<GoRoot> {
     _lastGoal = store.goal;
     _lastPregnancy = store.pregnancyStart;
     store.addListener(_syncGoal);
+    // La app se muestra ya; Premium y recordatorios se preparan detrás
+    // (no hace falta esperarlos para enseñar la pantalla).
+    if (mounted) setState(() => _ready = true);
+    _startBackground(store);
+  }
+
+  Future<void> _startBackground(AppStore store) async {
     try {
       await GoSession.subscription.configure(firebaseUid: widget.user.id);
       await GoSession.refreshPremium();
@@ -81,7 +88,6 @@ class _GoRootState extends State<GoRoot> {
       store.addListener(Notifier.instance.reschedule);
       await Notifier.instance.reschedule();
     } catch (_) {}
-    if (mounted) setState(() => _ready = true);
   }
 
   String? _lastGoal;
