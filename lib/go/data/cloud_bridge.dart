@@ -49,6 +49,24 @@ class CloudBridge {
     return out;
   }
 
+  /// Escribe días que vienen de las pantallas de CicloPlus (Hoy, Ajustes).
+  /// Se mezclan con lo que ya había para no perder los campos del diseño
+  /// nuevo (ánimo 1-5, actividad…). Un valor null borra el día.
+  Future<void> putRaw(Map<String, Map<String, dynamic>?> changes) async {
+    final batch = _db.batch();
+    changes.forEach((k, json) {
+      if (json == null) {
+        batch.delete(_days.doc(k));
+        raw.remove(k);
+      } else {
+        final merged = {...?raw[k], ...json}..removeWhere((_, v) => v == null);
+        batch.set(_days.doc(k), merged);
+        raw[k] = merged;
+      }
+    });
+    await batch.commit();
+  }
+
   /// Guarda solo los días que han cambiado.
   Future<void> sync(Map<String, DayLog> logs) async {
     final keys = {...raw.keys, ...logs.keys};

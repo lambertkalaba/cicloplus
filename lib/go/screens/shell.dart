@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/store.dart';
 import '../strings.dart';
+import '../cicloplus_host.dart';
 import '../cicloplus_links.dart';
 import '../widgets/ui.dart';
 import 'calendar.dart';
@@ -33,7 +34,7 @@ class ShellState extends State<Shell> {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      TodayScreen(onRegister: openRegister, onCalendar: () => go(1)),
+      CicloToday(onRegister: openRegister),
       CalendarScreen(onRegister: openRegister),
       const RemindersScreen(),
       MeScreen(onRegister: openRegister),
@@ -215,7 +216,7 @@ class AppDrawer extends StatelessWidget {
           _item(Icons.science_rounded, tr('Test de ovulación', 'Ovulation test'), () { Navigator.of(context).pop(); CP.openOvulationTest(context); }),
           _item(Icons.forum_rounded, tr('Comunidad', 'Community'), () { Navigator.of(context).pop(); CP.openForum(context); }),
           _item(Icons.workspace_premium_rounded, tr('CicloPlus Premium', 'CicloPlus Premium'), () { Navigator.of(context).pop(); CP.openPremium(context); }),
-          _item(Icons.settings_rounded, tr('Ajustes y privacidad', 'Settings & privacy'), () => push(const SettingsScreen())),
+          _item(Icons.settings_rounded, tr('Configuración', 'Settings'), () { Navigator.of(context).pop(); openCicloSettings(context); }),
         ],
       ),
     );

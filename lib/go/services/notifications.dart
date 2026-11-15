@@ -127,7 +127,15 @@ class Notifier {
     final s = AppStore.instance;
     final r = s.reminders;
     try {
-      await _plugin.cancelAll();
+      // Solo se borran los avisos de esta parte (ids 1-299) y los antiguos de
+      // periodo/ovulación (1001-1006). Los de Configuración (2001+, citas
+      // 3000+) los gestiona la pantalla de Configuración de CicloPlus.
+      for (var i = 1; i < 300; i++) {
+        await _plugin.cancel(i);
+      }
+      for (var i = 1001; i <= 1006; i++) {
+        await _plugin.cancel(i);
+      }
       var id = 1;
       if (r.daily) {
         await _at(id++, tr('¿Cómo ha ido tu día? 🌸', 'How was your day? 🌸'),

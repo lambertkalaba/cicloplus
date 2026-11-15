@@ -274,6 +274,24 @@ class AppStore extends ChangeNotifier {
     await _save();
   }
 
+  /// Días tal como están en la nube (para las pantallas de CicloPlus).
+  Map<String, Map<String, dynamic>> get cloudRaw => _cloud?.raw ?? const {};
+
+  /// Guarda días que cambian desde pantallas de CicloPlus y refresca el diseño nuevo.
+  Future<void> putCloudDays(Map<String, Map<String, dynamic>?> changes) async {
+    if (_cloud == null || changes.isEmpty) return;
+    try {
+      await _cloud!.putRaw(changes);
+    } catch (_) {}
+    logs.clear();
+    _cloud!.raw.forEach((k, v) {
+      final l = CloudBridge.fromCloud(v);
+      if (!l.isEmpty) logs[k] = l;
+    });
+    _recompute();
+    notifyListeners();
+  }
+
   /// Al cerrar sesión: olvida los días de esa cuenta en memoria.
   void detachUser() {
     _cloud = null;

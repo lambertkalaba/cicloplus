@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/store.dart';
 import '../strings.dart';
+import '../cicloplus_host.dart';
 import '../cicloplus_links.dart';
 import '../go_root.dart';
 import '../widgets/ui.dart';
@@ -178,9 +179,9 @@ class MeScreen extends StatelessWidget {
                   ),
                   LinkRow(
                     icon: const Icon(Icons.settings_rounded, color: C.pink),
-                    title: tr('Preferencias y privacidad', 'Preferences & privacy'),
+                    title: tr('Configuración', 'Settings'),
                     divider: false,
-                    onTap: () => _push(context, const SettingsScreen()),
+                    onTap: () => openCicloSettings(context),
                   ),
                 ],
               ),
