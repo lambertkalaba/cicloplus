@@ -8,14 +8,14 @@ import 'pregnancy_simulator_screen.dart';
 
 // Imagen real del bebé para el día exacto de embarazo (más granular que
 // por semana) — generadas con IA y recortadas en
-// assets/pregnancy_days/day_001.png .. day_270.png. daysSince=0 es el día 1.
+// assets/pregnancy_days/day_001.webp .. day_270.webp. daysSince=0 es el día 1.
 // No son medidas médicas exactas, solo una simulación visual del
 // desarrollo día a día. Función de nivel superior (no privada de la
 // clase) porque también la usa la tarjeta de embarazo de la pestaña Hoy
 // (today_screen.dart), que necesita mostrar la misma foto ahí arriba.
 String pregnancyDayImagePath(int daysSince) {
   final d = (daysSince + 1).clamp(1, 270);
-  return 'assets/pregnancy_days/day_${d.toString().padLeft(3, '0')}.png';
+  return 'assets/pregnancy_days/day_${d.toString().padLeft(3, '0')}.webp';
 }
 
 /// Pantalla de seguimiento de embarazo: tarjeta hero con ilustración de
