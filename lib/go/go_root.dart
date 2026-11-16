@@ -65,10 +65,12 @@ class _GoRootState extends State<GoRoot> {
     final store = AppStore.instance;
     String? profileName;
     try {
-      profileName = await SettingsService().loadProfileName();
+      profileName = await SettingsService().loadProfileName().timeout(const Duration(seconds: 4));
     } catch (_) {}
     await store.attachUser(widget.user.id, profileName: profileName);
-    await CP.loadFromCicloPlus();
+    try {
+      await CP.loadFromCicloPlus().timeout(const Duration(seconds: 5));
+    } catch (_) {}
     await Upgrade.migrateReminders();
     await Upgrade.fixTheme();
     store.removeListener(Upgrade.syncProfileName);

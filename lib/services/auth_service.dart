@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
@@ -636,7 +637,14 @@ class AuthService {
     // en vez de bloquear la entrada a la app.
     bool firestoreUnavailable = false;
     try {
-      final doc = await _db.collection(_usersCollection).doc(fbUser.uid).get();
+      final ref = _db.collection(_usersCollection).doc(fbUser.uid);
+      DocumentSnapshot<Map<String, dynamic>> doc;
+      try {
+        // Sin conexión o lenta: no se bloquea el arranque, se usa la copia local.
+        doc = await ref.get().timeout(const Duration(seconds: 5));
+      } on TimeoutException {
+        doc = await ref.get(const GetOptions(source: Source.cache));
+      }
       data = doc.data();
     } catch (_) {
       firestoreUnavailable = true;

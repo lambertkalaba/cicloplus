@@ -258,15 +258,63 @@ class AppStore extends ChangeNotifier {
 
   /// Conecta el diseño nuevo con la cuenta de la usuaria: carga sus días
   /// desde la nube y, si ya usaba CicloPlus, salta la bienvenida.
+  /// Trae los días de la nube sin bloquear la pantalla. Solo sustituye los
+  /// días que no se han tocado en el móvil mientras tanto.
+  Future<void> _refreshFromCloud() async {
+    final cloud = _cloud;
+    if (cloud == null) return;
+    final before = {for (final e in logs.entries) e.key: jsonEncode(e.value.toJson())};
+    try {
+      final cloudLogs = await cloud.loadAll().timeout(const Duration(seconds: 30));
+      if (!identical(cloud, _cloud)) return; // cambió de usuario
+      if (!cloud.loaded) {
+        // Solo había copia local de Firestore: no se pisa lo del móvil.
+        notifyListeners();
+        throw StateError('offline');
+      }
+      var changed = false;
+      for (final e in cloudLogs.entries) {
+        final now = logs[e.key];
+        final untouched = now == null ? !before.containsKey(e.key) : before[e.key] == jsonEncode(now.toJson());
+        if (!untouched) continue;
+        if (now == null || jsonEncode(now.toJson()) != jsonEncode(e.value.toJson())) {
+          logs[e.key] = e.value;
+          changed = true;
+        }
+      }
+      if (changed) _recompute();
+      notifyListeners(); // las tarjetas de CicloPlus ya tienen los datos de la nube
+      // Sube lo que se haya cambiado en el móvil mientras se leía la nube.
+      await _save();
+    } catch (_) {
+      // Reintenta en un minuto mientras siga siendo la misma sesión.
+      Future.delayed(const Duration(minutes: 1), () {
+        if (identical(cloud, _cloud) && !cloud.loaded) _refreshFromCloud();
+      });
+    }
+  }
+
   Future<void> attachUser(String uid, {String? profileName}) async {
     if (_prefs == null) await load();
     _cloud = CloudBridge(uid);
-    try {
-      final cloudLogs = await _cloud!.loadAll();
-      logs
-        ..clear()
-        ..addAll(cloudLogs);
-    } catch (_) {}
+    final p = _prefs!;
+    final sameUser = p.getString('go_uid') == uid && logs.isNotEmpty;
+    await p.setString('go_uid', uid);
+    if (sameUser) {
+      // Abre al momento con lo guardado en el móvil y trae la nube detrás.
+      _refreshFromCloud();
+    } else {
+      try {
+        final cloudLogs = await _cloud!.loadAll().timeout(const Duration(seconds: 12));
+        logs
+          ..clear()
+          ..addAll(cloudLogs);
+        if (!_cloud!.loaded) _refreshFromCloud(); // era la copia local: reintenta
+      } catch (_) {
+        // Sin conexión o lenta: se sigue intentando detrás.
+        _refreshFromCloud();
+      }
+    }
     if (name.isEmpty && profileName != null && profileName.trim().isNotEmpty) name = profileName.trim();
     if (!onboarded && (logs.isNotEmpty || name.isNotEmpty)) onboarded = true;
     _recompute();
@@ -296,6 +344,9 @@ class AppStore extends ChangeNotifier {
   void detachUser() {
     _cloud = null;
     logs.clear();
+    // Al cerrar sesión no se deja la copia de sus días en el móvil.
+    _prefs?.remove('logs');
+    _prefs?.remove('go_uid');
     _recompute();
     notifyListeners();
   }
@@ -347,12 +398,13 @@ class AppStore extends ChangeNotifier {
     logs.forEach((k, v) {
       if (!v.isEmpty) m[k] = v.toJson();
     });
+    // Copia en el móvil siempre (para abrir rápido y sin conexión);
+    // con sesión iniciada, además se sube a la nube.
+    await p.setString('logs', jsonEncode(m));
     if (_cloud != null) {
       try {
         await _cloud!.sync(logs);
       } catch (_) {}
-    } else {
-      await p.setString('logs', jsonEncode(m));
     }
     await p.setString('name', name);
     if (photoName == null) {
@@ -487,15 +539,33 @@ class AppStore extends ChangeNotifier {
   int get avgCycle {
     final c = cycleLengths;
     if (c.isEmpty) return defaultCycle;
-    final recent = c.length > 6 ? c.sublist(c.length - 6) : c;
-    return (recent.reduce((a, b) => a + b) / recent.length).round();
+    return _learned(c, outlierDays: 10);
   }
 
   int get avgPeriod {
     final p = periodLengths.where((l) => l >= 2 && l <= 12).toList();
     if (p.isEmpty) return defaultPeriod;
-    final recent = p.length > 6 ? p.sublist(p.length - 6) : p;
-    return (recent.reduce((a, b) => a + b) / recent.length).round();
+    return _learned(p, outlierDays: 4);
+  }
+
+  /// Aprende de la propia usuaria: usa sus últimos 6 valores, da más peso a
+  /// los más recientes (el cuerpo cambia) e ignora meses atípicos (enfermedad,
+  /// estrés, viaje) cuando hay datos suficientes para saberlo.
+  static int _learned(List<int> values, {required int outlierDays}) {
+    var recent = values.length > 6 ? values.sublist(values.length - 6) : values;
+    if (recent.length >= 4) {
+      final sorted = [...recent]..sort();
+      final median = sorted[sorted.length ~/ 2];
+      final clean = recent.where((v) => (v - median).abs() <= outlierDays).toList();
+      if (clean.length >= 3) recent = clean;
+    }
+    var sum = 0.0, weights = 0.0;
+    for (var i = 0; i < recent.length; i++) {
+      final w = (i + 1).toDouble(); // el más reciente pesa más
+      sum += recent[i] * w;
+      weights += w;
+    }
+    return (sum / weights).round();
   }
 
   /// null si aún no hay datos suficientes para saberlo.

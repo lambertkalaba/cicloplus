@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,8 +38,23 @@ class CloudBridge {
   static const _symToCloud = {'cabeza': 'dolorcab'};
   static const _symFromCloud = {'dolorcab': 'cabeza'};
 
+  /// true cuando ya se ha leído la nube. Hasta entonces no se escribe
+  /// nada encima (para no pisar datos que aún no conocemos).
+  bool loaded = false;
+
   Future<Map<String, DayLog>> loadAll() async {
-    final snap = await _days.get();
+    QuerySnapshot<Map<String, dynamic>> snap;
+    var fromServer = true;
+    try {
+      snap = await _days.get().timeout(const Duration(seconds: 8));
+      fromServer = !snap.metadata.isFromCache;
+    } on TimeoutException {
+      // Sin conexión: lo último guardado en el móvil por Firestore.
+      snap = await _days.get(const GetOptions(source: Source.cache));
+      fromServer = false;
+    }
+    // Solo se escribe cuando sabemos lo que hay de verdad en el servidor.
+    loaded = fromServer;
     raw.clear();
     final out = <String, DayLog>{};
     for (final d in snap.docs) {
@@ -59,9 +75,14 @@ class CloudBridge {
         batch.delete(_days.doc(k));
         raw.remove(k);
       } else {
-        final merged = {...?raw[k], ...json}..removeWhere((_, v) => v == null);
-        batch.set(_days.doc(k), merged);
-        raw[k] = merged;
+        if (!loaded) {
+          // Aún no sabemos qué hay en la nube: se mezcla en el servidor.
+          batch.set(_days.doc(k), json, SetOptions(merge: true));
+        } else {
+          final merged = {...?raw[k], ...json}..removeWhere((_, v) => v == null);
+          batch.set(_days.doc(k), merged);
+          raw[k] = merged;
+        }
       }
     });
     await batch.commit();
@@ -69,6 +90,7 @@ class CloudBridge {
 
   /// Guarda solo los días que han cambiado.
   Future<void> sync(Map<String, DayLog> logs) async {
+    if (!loaded) return; // se sube en cuanto termine de leer la nube
     final keys = {...raw.keys, ...logs.keys};
     final batch = _db.batch();
     var ops = 0;

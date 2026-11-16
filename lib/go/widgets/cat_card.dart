@@ -64,6 +64,7 @@ class _CatCardState extends State<CatCard> with TickerProviderStateMixin {
     if (!_walkedIn) {
       _walkedIn = true;
       await _walk.forward(from: 0);
+      if (mounted) setState(() {}); // ya llegó: cambia a la postura de saludo
     } else {
       _walk.value = 1;
     }
@@ -269,7 +270,11 @@ class _CatCardState extends State<CatCard> with TickerProviderStateMixin {
                   if (mood == _Mood.sleeping) {
                     // Sale de su casita caminando y te saluda.
                     setState(() => _wokeUp = true);
-                    _walk.forward(from: 0).then((_) => _wave.forward(from: 0));
+                    _walk.forward(from: 0).then((_) {
+                      if (!mounted) return;
+                      setState(() {});
+                      _wave.forward(from: 0);
+                    });
                   } else if (mood == _Mood.happy) {
                     // Caricia: corazones y saltito.
                     setState(() => _hearts = true);

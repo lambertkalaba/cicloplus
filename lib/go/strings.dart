@@ -179,9 +179,10 @@ String phaseTip(Phase? p) {
 
 String greeting(String name) {
   final h = DateTime.now().hour;
-  final base = h < 12
+  // De madrugada (antes de las 6) sigue siendo "buenas noches".
+  final base = (h >= 6 && h < 12)
       ? tr('Buenos días', 'Good morning')
-      : h < 20
+      : (h >= 12 && h < 20)
           ? tr('Buenas tardes', 'Good afternoon')
           : tr('Buenas noches', 'Good evening');
   return name.isEmpty ? base : '$base, $name';
