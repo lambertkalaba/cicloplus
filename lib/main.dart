@@ -119,8 +119,8 @@ class CicloPlusApp extends StatelessWidget {
           // Idioma de los widgets nativos (selector de fecha iOS, diálogos
           // del sistema, etc.) — sigue el mismo idioma elegido en
           // Configuración (LocaleController), no el del dispositivo.
-          locale: Locale(LocaleController.instance.languageCode),
-          supportedLocales: kAppLanguages.map((l) => Locale(l.code)),
+          locale: localeFromCode(LocaleController.instance.languageCode),
+          supportedLocales: kAppLanguages.map((l) => localeFromCode(l.code)),
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

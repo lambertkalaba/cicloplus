@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/locale_controller.dart';
+import 'extra_i18n.dart';
 
 /// Textos traducidos de la app (español, inglés, francés, alemán).
 ///
@@ -26,8 +27,14 @@ class AppStrings {
   /// desde `SettingsService.loadLanguage()`.
   static AppStrings forCode(String code) => AppStrings._(code);
 
-  String _t(Map<String, String> table) => table[code] ?? table['es']!;
-  List<String> _tList(Map<String, List<String>> table) => table[code] ?? table['es']!;
+  String _t(Map<String, String> table) =>
+      table[code] ?? ExtraI18n.t(table['es']!, table['en']) ?? table['en'] ?? table['es']!;
+  List<String> _tList(Map<String, List<String>> table) {
+    final own = table[code];
+    if (own != null) return own;
+    final es = table['es']!, en = table['en'] ?? es;
+    return [for (var i = 0; i < es.length; i++) ExtraI18n.t(es[i], i < en.length ? en[i] : null) ?? (i < en.length ? en[i] : es[i])];
+  }
 
   // ---- General ----
   String get appName => 'CicloPlus';

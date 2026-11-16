@@ -166,6 +166,7 @@ flutter:
     - assets/garden/
     - lib/assets/images/
     - assets/go/
+    - assets/l10n/
 
 # Configuración del icono de la app (flor de loto, elegida en Configuración
 # > icono). Ejecutar `dart run flutter_launcher_icons` para regenerar los

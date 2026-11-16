@@ -4,6 +4,7 @@ import 'data/store.dart';
 import 'go_i18n.dart';
 import 'go_i18n_tpl.dart';
 import 'go_i18n_cat.dart';
+import '../l10n/extra_i18n.dart';
 
 /// Textos: español, inglés y el resto de idiomas de CicloPlus (go_i18n.dart).
 class L {
@@ -45,7 +46,8 @@ class L {
     'bn': ['সো', 'ম', 'বু', 'বৃ', 'শু', 'শ', 'র'],
   };
 
-  static List<String> get _m => _months[lang] ?? _months['en']!;
+  static List<String> get _m =>
+      _months[lang] ?? [for (var i = 0; i < 12; i++) ExtraI18n.t(_months['es']![i], _months['en']![i]) ?? _months['en']![i]];
 
   static String month(int m) => _m[m - 1];
   static String monthShort(int m) {
@@ -53,7 +55,17 @@ class L {
     return n.length <= 4 ? n : n.substring(0, 3);
   }
 
-  static List<String> get weekdaysShort => _weekdays[lang] ?? _weekdays['en']!;
+  static const _weekdayNames = {
+    'es': ['Lunes (inicial)', 'Martes (inicial)', 'Miércoles (inicial)', 'Jueves (inicial)', 'Viernes (inicial)', 'Sábado (inicial)', 'Domingo (inicial)'],
+    'en': ['Monday (initial)', 'Tuesday (initial)', 'Wednesday (initial)', 'Thursday (initial)', 'Friday (initial)', 'Saturday (initial)', 'Sunday (initial)'],
+  };
+
+  static List<String> get weekdaysShort =>
+      _weekdays[lang] ??
+      [
+        for (var i = 0; i < 7; i++)
+          ExtraI18n.t(_weekdayNames['es']![i], _weekdayNames['en']![i]) ?? _weekdays['en']![i],
+      ];
 
   static String dateLong(DateTime d) {
     if (lang == 'es') return '${d.day} de ${month(d.month).toLowerCase()} de ${d.year}';
@@ -72,7 +84,7 @@ String tr(String es, String en) {
   if (L.lang == 'en') return en;
   final exact = goI18n[L.lang]?[es] ?? goI18nCat[L.lang]?[es];
   if (exact != null) return exact;
-  return _fromTemplate(es) ?? en;
+  return _fromTemplate(es) ?? ExtraI18n.t(es, en) ?? en;
 }
 
 /// Frases con datos ("Día 12 del ciclo"): busca la plantilla en español,

@@ -1,4 +1,5 @@
 import '../services/locale_controller.dart';
+import 'extra_i18n.dart';
 
 /// Textos nuevos del rediseño "CicloPlus 2.0" (pestaña Hoy con anillo del
 /// ciclo, resumen del día, ánimo en un toque, agua/sueño). Viven aparte de
@@ -9,7 +10,8 @@ class RedesignStrings {
 
   static RedesignStrings get current => RedesignStrings._(LocaleController.instance.languageCode);
 
-  String _t(Map<String, String> table) => table[code] ?? table['es']!;
+  String _t(Map<String, String> table) =>
+      table[code] ?? ExtraI18n.t(table['es']!, table['en']) ?? table['en'] ?? table['es']!;
 
   String greeting(int hour, String? name) {
     final n = (name == null || name.trim().isEmpty) ? '' : ', ${name.trim()}';
