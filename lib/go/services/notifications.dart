@@ -8,6 +8,7 @@ import 'pill.dart';
 import '../strings.dart';
 import '../widgets/cycle_plus.dart';
 import '../widgets/michi_events.dart';
+import '../widgets/michi_logic.dart';
 
 /// Recordatorios locales (sin internet). Se reprograman todos cada vez que
 /// cambian los datos o los ajustes.
@@ -77,6 +78,28 @@ class Notifier {
     } catch (e) {
       debugPrint('Notifier init: $e');
     }
+  }
+
+  /// Aviso suelto que no se borra al reprogramar (p. ej. el temporizador de
+  /// la compresa). Ids 4000+.
+  Future<void> once(int id, String title, String body, DateTime when) async {
+    if (!_ready) return;
+    try {
+      await _plugin.cancel(id);
+      final t = tz.TZDateTime.from(when, tz.local);
+      if (t.isBefore(tz.TZDateTime.now(tz.local))) return;
+      await _plugin.zonedSchedule(id, DiscreetNotif.title(title), DiscreetNotif.body(body), t, _details,
+          androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+          uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
+    } catch (e) {
+      debugPrint('Notifier once: $e');
+    }
+  }
+
+  Future<void> cancelOnce(int id) async {
+    try {
+      await _plugin.cancel(id);
+    } catch (_) {}
   }
 
   Future<bool> requestPermission() async {
@@ -176,7 +199,25 @@ class Notifier {
         await _plugin.cancel(i);
       }
       var id = 1;
-      if (r.daily) {
+      // Con Michi activado, el aviso diario lo manda él ("tengo hambre") y
+      // no llega los días que ya has registrado.
+      if (s.showMichi) {
+        final today = dateOnly(DateTime.now());
+        final mins = r.daily ? r.dailyMinutes : 20 * 60;
+        final streak = MichiLogic.streak;
+        for (var i = 0; i < 7; i++) {
+          final d = addDays(today, i);
+          if (MichiLogic.logged(d)) continue;
+          final body = streak > 0
+              ? (i == 0
+                  ? tr('Llevas {} días seguidos 🔥 Registra tu día para no perder la racha.',
+                          '{} days in a row 🔥 Log your day to keep your streak.')
+                      .replaceFirst('{}', '$streak')
+                  : tr('¡No pierdas tu racha! 🔥 Registra tu día y dame de comer.', "Don't lose your streak! 🔥 Log your day and feed me."))
+              : tr('Registra tu día y dame de comer 🐾', 'Log your day and feed me 🐾');
+          await _at(220 + i, tr('Tengo hambre 🍽️', "I'm hungry 🍽️"), body, DateTime(d.year, d.month, d.day, mins ~/ 60, mins % 60));
+        }
+      } else if (r.daily) {
         await _at(id++, tr('¿Cómo ha ido tu día? 🌸', 'How was your day? 🌸'),
             tr('Registra tus síntomas y tu ánimo en 10 segundos.', 'Log your symptoms and mood in 10 seconds.'), _nextTime(r.dailyMinutes),
             repeat: DateTimeComponents.time);

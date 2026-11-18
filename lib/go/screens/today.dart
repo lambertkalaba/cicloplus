@@ -12,6 +12,8 @@ import '../widgets/avatar_picker.dart';
 import '../widgets/ui.dart';
 import 'extras.dart';
 import 'more.dart';
+import 'period_mode.dart';
+import 'ramadan.dart';
 
 /// Pestaña Hoy.
 class TodayScreen extends StatelessWidget {
@@ -44,6 +46,8 @@ class TodayScreen extends StatelessWidget {
               const SizedBox(height: 12),
               _PillCard(today: today),
             ],
+            if (!pregnant) const PeriodModeCard(),
+            if (!pregnant) const RamadanCard(),
             const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.fromLTRB(12, 14, 12, 12),

@@ -8,6 +8,7 @@ import '../go/strings.dart' show L, tr;
 import '../go/widgets/cycle_plus.dart' show CycleExtraSettings;
 import '../go/widgets/michi_events.dart' show MichiSettings;
 import '../go/widgets/avatar_picker.dart' show AvatarSettings;
+import '../go/widgets/ui.dart' as go_ui show Avatar;
 import 'package:flutter/cupertino.dart' show CupertinoAlertDialog, CupertinoDialogAction;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -1815,7 +1816,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   border: Border.all(color: Colors.white, width: 2.5),
                 ),
                 child: ClipOval(
-                  child: Image.asset('assets/go/avatar.png', fit: BoxFit.cover, errorBuilder: (_, __, ___) => const Icon(Icons.person, color: AppColors.primary)),
+                  child: const go_ui.Avatar(size: 49), // la misma imagen que en Yo (su foto o su retrato)
                 ),
               ),
               const SizedBox(width: 12),
