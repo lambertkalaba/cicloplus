@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart';
 
 import '../l10n/app_strings.dart';
 import '../services/settings_service.dart';
@@ -48,6 +49,30 @@ class _LockScreenState extends State<LockScreen> {
   void initState() {
     super.initState();
     _stage = widget.mode;
+    if (widget.mode == LockScreenMode.unlock) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _tryBiometric());
+    }
+  }
+
+  final LocalAuthentication _auth = LocalAuthentication();
+  bool _bioAvailable = false;
+
+  /// Huella / Face ID (Android e iOS). Si no hay o falla, queda el PIN.
+  Future<void> _tryBiometric() async {
+    try {
+      final supported = await _auth.isDeviceSupported() && await _auth.canCheckBiometrics;
+      final enrolled = supported ? (await _auth.getAvailableBiometrics()).isNotEmpty : false;
+      if (!mounted) return;
+      setState(() => _bioAvailable = enrolled);
+      if (!enrolled) return;
+      final ok = await _auth.authenticate(
+        localizedReason: AppStrings.of(context).lockAppLocked,
+        options: const AuthenticationOptions(biometricOnly: true, stickyAuth: true),
+      );
+      if (ok && mounted) widget.onSuccess();
+    } catch (_) {
+      // Sin biometría disponible: se usa el PIN.
+    }
   }
 
   String get _subtitle {
@@ -178,7 +203,12 @@ class _LockScreenState extends State<LockScreen> {
                   children: [
                     for (final k in ['1', '2', '3', '4', '5', '6', '7', '8', '9'])
                       _PinKey(label: k, onTap: () => _onKey(k)),
-                    const SizedBox.shrink(),
+                    (_stage == LockScreenMode.unlock && _bioAvailable)
+                        ? IconButton(
+                            onPressed: _tryBiometric,
+                            icon: const Icon(Icons.fingerprint_rounded, size: 36, color: AppColors.primary),
+                          )
+                        : const SizedBox.shrink(),
                     _PinKey(label: '0', onTap: () => _onKey('0')),
                     _PinKey(label: '⌫', onTap: () => _onKey('del')),
                   ],

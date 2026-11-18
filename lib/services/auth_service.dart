@@ -1,3 +1,4 @@
+import '../go/strings.dart' show tr;
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
@@ -73,13 +74,13 @@ class AuthService {
   String _validateEmail(String email) {
     final trimmed = email.trim().toLowerCase();
     final valid = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(trimmed);
-    if (!valid) throw AuthException('Ese correo no parece válido. Revísalo e inténtalo de nuevo.');
+    if (!valid) throw AuthException(tr('Ese correo no parece válido. Revísalo e inténtalo de nuevo.', "That email doesn't look valid. Check it and try again."));
     return trimmed;
   }
 
   void _validatePassword(String password) {
     if (password.length < 6) {
-      throw AuthException('La contraseña debe tener al menos 6 caracteres.');
+      throw AuthException(tr('La contraseña debe tener al menos 6 caracteres.', 'The password must be at least 6 characters.'));
     }
   }
 
@@ -88,11 +89,11 @@ class AuthService {
   AuthException _mapFirebaseError(fb.FirebaseAuthException e, {bool isSocialSignIn = false}) {
     switch (e.code) {
       case 'email-already-in-use':
-        return AuthException('Ya existe una cuenta con ese correo. Intenta iniciar sesión.');
+        return AuthException(tr('Ya existe una cuenta con ese correo. Intenta iniciar sesión.', 'An account with that email already exists. Try signing in.'));
       case 'invalid-email':
-        return AuthException('Ese correo no parece válido. Revísalo e inténtalo de nuevo.');
+        return AuthException(tr('Ese correo no parece válido. Revísalo e inténtalo de nuevo.', "That email doesn't look valid. Check it and try again."));
       case 'weak-password':
-        return AuthException('La contraseña debe tener al menos 6 caracteres.');
+        return AuthException(tr('La contraseña debe tener al menos 6 caracteres.', 'The password must be at least 6 characters.'));
       case 'user-not-found':
       case 'wrong-password':
       case 'invalid-credential':
@@ -103,21 +104,21 @@ class AuthService {
           // un fallo de credenciales del usuario. Mensaje genérico en vez
           // de "contraseña incorrecta", que no aplica aquí y confundía a
           // los usuarios (y al equipo de revisión de Apple).
-          return AuthException('No se pudo completar el inicio de sesión. Inténtalo de nuevo en unos segundos.');
+          return AuthException(tr('No se pudo completar el inicio de sesión. Inténtalo de nuevo en unos segundos.', "Couldn't complete sign-in. Try again in a few seconds."));
         }
-        return AuthException('Correo o contraseña incorrectos.');
+        return AuthException(tr('Correo o contraseña incorrectos.', 'Incorrect email or password.'));
       case 'too-many-requests':
-        return AuthException('Demasiados intentos. Espera un momento y vuelve a intentarlo.');
+        return AuthException(tr('Demasiados intentos. Espera un momento y vuelve a intentarlo.', 'Too many attempts. Wait a moment and try again.'));
       case 'network-request-failed':
-        return AuthException('No hay conexión a internet. Revisa tu conexión e inténtalo de nuevo.');
+        return AuthException(tr('No hay conexión a internet. Revisa tu conexión e inténtalo de nuevo.', 'No internet connection. Check your connection and try again.'));
       case 'requires-recent-login':
-        return AuthException('Por seguridad, vuelve a confirmar tu identidad e inténtalo de nuevo.');
+        return AuthException(tr('Por seguridad, vuelve a confirmar tu identidad e inténtalo de nuevo.', 'For security, confirm your identity again and try again.'));
       case 'account-exists-with-different-credential':
         return AuthException(
-          'Ya tienes una cuenta con ese correo, registrada con otro método (correo y contraseña, Google o Facebook). Inicia sesión con el método que usaste la primera vez.',
+          tr('Ya tienes una cuenta con ese correo, registrada con otro método (correo y contraseña, Google o Facebook). Inicia sesión con el método que usaste la primera vez.', 'You already have an account with that email, registered with another method (email and password, Google or Facebook). Sign in with the method you used the first time.'),
         );
       default:
-        return AuthException('Algo salió mal (${e.code}). Inténtalo de nuevo.');
+        return AuthException(tr('Algo salió mal (${e.code}). Inténtalo de nuevo.', 'Something went wrong (${e.code}). Please try again.'));
     }
   }
 
@@ -167,7 +168,7 @@ class AuthService {
       });
     } catch (_) {
       throw AuthException(
-        'Tu cuenta se creó, pero no se pudo terminar de configurar (revisa tu conexión). Cierra la app y vuelve a iniciar sesión con tu correo y contraseña.',
+        tr('Tu cuenta se creó, pero no se pudo terminar de configurar (revisa tu conexión). Cierra la app y vuelve a iniciar sesión con tu correo y contraseña.', "Your account was created, but setup couldn't finish (check your connection). Close the app and sign in again with your email and password."),
       );
     }
 
@@ -241,7 +242,7 @@ class AuthService {
           'CicloPlus: el Worker de restablecimiento devolvió ${resp.statusCode}: ${resp.body}',
         );
         throw AuthException(
-          'No se pudo enviar el correo de restablecimiento. Inténtalo de nuevo.',
+          tr('No se pudo enviar el correo de restablecimiento. Inténtalo de nuevo.', "Couldn't send the reset email. Please try again."),
         );
       }
       final data = jsonDecode(resp.body) as Map<String, dynamic>;
@@ -251,7 +252,7 @@ class AuthService {
     } catch (e) {
       debugPrint('CicloPlus: fallo al pedir el restablecimiento de contraseña: $e');
       throw AuthException(
-        'No se pudo enviar el correo de restablecimiento. Inténtalo de nuevo.',
+        tr('No se pudo enviar el correo de restablecimiento. Inténtalo de nuevo.', "Couldn't send the reset email. Please try again."),
       );
     }
   }
@@ -271,7 +272,7 @@ class AuthService {
       if (googleUser == null) {
         // La persona cerró el selector de cuenta sin elegir ninguna — no
         // es un error real, solo canceló.
-        throw AuthException('Inicio de sesión cancelado.');
+        throw AuthException(tr('Inicio de sesión cancelado.', 'Sign-in cancelled.'));
       }
       final googleAuth = await googleUser.authentication;
       final credential = fb.GoogleAuthProvider.credential(
@@ -342,9 +343,9 @@ class AuthService {
       );
     } on SignInWithAppleAuthorizationException catch (e) {
       if (e.code == AuthorizationErrorCode.canceled) {
-        throw AuthException('Inicio de sesión cancelado.');
+        throw AuthException(tr('Inicio de sesión cancelado.', 'Sign-in cancelled.'));
       }
-      throw AuthException('No se pudo iniciar sesión con Apple. Inténtalo de nuevo.');
+      throw AuthException(tr('No se pudo iniciar sesión con Apple. Inténtalo de nuevo.', "Couldn't sign in with Apple. Please try again."));
     } on fb.FirebaseAuthException catch (e) {
       throw _mapFirebaseError(e, isSocialSignIn: true);
     }
@@ -393,7 +394,7 @@ class AuthService {
       // de Firestore aquí no debe disfrazarse de "algo salió mal" genérico.
       if (e is AuthException) rethrow;
       throw AuthException(
-        'Iniciaste sesión, pero no se pudo terminar de configurar tu cuenta (revisa tu conexión). Vuelve a intentarlo.',
+        tr('Iniciaste sesión, pero no se pudo terminar de configurar tu cuenta (revisa tu conexión). Vuelve a intentarlo.', "You signed in, but your account setup couldn't finish (check your connection). Please try again."),
       );
     }
 
@@ -451,7 +452,7 @@ class AuthService {
   Future<void> _sendVerificationEmailViaBackend({String? name}) async {
     final fbUser = _auth.currentUser;
     if (fbUser == null) {
-      throw AuthException('No hay ninguna sesión activa.');
+      throw AuthException(tr('No hay ninguna sesión activa.', 'No active session.'));
     }
     final idToken = await fbUser.getIdToken();
     // Si no se pasa un nombre explícito (p. ej. al reenviar desde
@@ -473,7 +474,7 @@ class AuthService {
         'CicloPlus: el Worker de verificación devolvió ${resp.statusCode}: ${resp.body}',
       );
       throw AuthException(
-        'No se pudo enviar el correo de verificación. Inténtalo de nuevo.',
+        tr('No se pudo enviar el correo de verificación. Inténtalo de nuevo.', "Couldn't send the verification email. Please try again."),
       );
     }
   }
@@ -519,7 +520,7 @@ class AuthService {
   Future<void> resendVerificationEmail() async {
     final fbUser = _auth.currentUser;
     if (fbUser == null) {
-      throw AuthException('No hay ninguna sesión activa.');
+      throw AuthException(tr('No hay ninguna sesión activa.', 'No active session.'));
     }
     try {
       await _sendVerificationEmailViaBackend();
@@ -559,7 +560,7 @@ class AuthService {
   Future<void> deleteAccount() async {
     final fbUser = _auth.currentUser;
     if (fbUser == null) {
-      throw AuthException('No hay ninguna sesión activa.');
+      throw AuthException(tr('No hay ninguna sesión activa.', 'No active session.'));
     }
     final userDoc = _db.collection(_usersCollection).doc(fbUser.uid);
     for (final sub in const ['days', 'pregnancy', 'cycle', 'partners', 'reconnectRequests', 'wishes']) {
@@ -585,8 +586,8 @@ class AuthService {
     } catch (e) {
       throw AuthException(
         e is fb.FirebaseAuthException && e.code == 'requires-recent-login'
-            ? 'Por seguridad, vuelve a iniciar sesión e inténtalo de nuevo.'
-            : 'No se pudo borrar la cuenta (revisa tu conexión). Inténtalo de nuevo.',
+            ? tr('Por seguridad, vuelve a iniciar sesión e inténtalo de nuevo.', 'For security, sign in again and try again.')
+            : tr('No se pudo borrar la cuenta (revisa tu conexión). Inténtalo de nuevo.', "Couldn't delete the account (check your connection). Please try again."),
       );
     }
   }
@@ -692,7 +693,7 @@ class AuthService {
   Future<void> reauthenticate({String? password}) async {
     final fbUser = _auth.currentUser;
     if (fbUser == null) {
-      throw AuthException('No hay ninguna sesión activa.');
+      throw AuthException(tr('No hay ninguna sesión activa.', 'No active session.'));
     }
 
     final provider = currentSignInProvider();
@@ -700,7 +701,7 @@ class AuthService {
       switch (provider) {
         case SignInProvider.email:
           if (password == null || password.isEmpty) {
-            throw AuthException('Introduce tu contraseña para continuar.');
+            throw AuthException(tr('Introduce tu contraseña para continuar.', 'Enter your password to continue.'));
           }
           final credential = fb.EmailAuthProvider.credential(
             email: fbUser.email ?? '',
@@ -712,7 +713,7 @@ class AuthService {
         case SignInProvider.google:
           final googleUser = await GoogleSignIn(clientId: _googleIosClientId).signIn();
           if (googleUser == null) {
-            throw AuthException('Confirmación cancelada.');
+            throw AuthException(tr('Confirmación cancelada.', 'Confirmation cancelled.'));
           }
           final googleAuth = await googleUser.authentication;
           final credential = fb.GoogleAuthProvider.credential(
@@ -726,7 +727,7 @@ class AuthService {
           // El inicio de sesión con Facebook se retiró de la app (ver
           // auth_screen.dart); las cuentas antiguas vinculadas a Facebook ya
           // no pueden reautenticarse por esta vía.
-          throw AuthException('El inicio de sesión con Facebook ya no está disponible. Contacta con soporte para recuperar tu cuenta.');
+          throw AuthException(tr('El inicio de sesión con Facebook ya no está disponible. Contacta con soporte para recuperar tu cuenta.', 'Facebook sign-in is no longer available. Contact support to recover your account.'));
 
         case SignInProvider.apple:
           // Igual que Google: repetir el flujo de Apple equivale a

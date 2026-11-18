@@ -1,3 +1,4 @@
+import '../go/strings.dart' show tr;
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
@@ -17,10 +18,10 @@ class HistoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (cycles.isEmpty) {
-      return const Padding(
+      return Padding(
         padding: EdgeInsets.symmetric(vertical: 16),
         child: Text(
-          'Aún no hay ciclos registrados. Marca tus días de periodo en el calendario.',
+          tr('Aún no hay ciclos registrados. Marca tus días de periodo en el calendario.', 'No cycles logged yet. Mark your period days on the calendar.'),
           style: TextStyle(fontSize: 12, color: AppColors.textMuted),
           textAlign: TextAlign.center,
         ),
@@ -46,7 +47,7 @@ class HistoryList extends StatelessWidget {
                 style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.textPrimary),
               ),
               Text(
-                '${cycle.length} días',
+                tr('${cycle.length} días', '${cycle.length} days'),
                 style: const TextStyle(fontSize: 12, color: AppColors.textMuted),
               ),
             ],

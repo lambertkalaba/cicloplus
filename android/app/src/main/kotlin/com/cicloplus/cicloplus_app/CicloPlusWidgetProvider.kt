@@ -37,6 +37,23 @@ class CicloPlusWidgetProvider : HomeWidgetProvider() {
                     setTextViewText(R.id.widget_period_line, periodLine)
                 }
 
+                // Michi: postura de hoy y su frase (si no está oculto).
+                val pose = widgetData.getString("cicloplus_widget_michi", null)
+                val resId = if (pose.isNullOrEmpty()) 0 else context.resources.getIdentifier("widget_$pose", "drawable", context.packageName)
+                if (resId != 0) {
+                    setImageViewResource(R.id.widget_michi, resId)
+                    setViewVisibility(R.id.widget_michi, android.view.View.VISIBLE)
+                } else {
+                    setViewVisibility(R.id.widget_michi, android.view.View.GONE)
+                }
+                val michiLine = widgetData.getString("cicloplus_widget_michi_line", null)
+                if (michiLine.isNullOrEmpty() || resId == 0) {
+                    setViewVisibility(R.id.widget_michi_line, android.view.View.GONE)
+                } else {
+                    setViewVisibility(R.id.widget_michi_line, android.view.View.VISIBLE)
+                    setTextViewText(R.id.widget_michi_line, michiLine)
+                }
+
                 val launchIntent = context.packageManager.getLaunchIntentForPackage(context.packageName)
                 if (launchIntent != null) {
                     launchIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP

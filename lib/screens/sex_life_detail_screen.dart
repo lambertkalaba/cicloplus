@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/ciclo_header.dart';
 
 import '../l10n/app_strings.dart';
 import '../models/day_entry.dart';
@@ -277,16 +278,16 @@ class SexLifeStatDetailScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
+      appBar: CicloAppBar(
         backgroundColor: AppColors.background,
         elevation: 0,
         scrolledUnderElevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.chevron_left, color: AppColors.textPrimary, size: 28),
+          icon: const Icon(Icons.chevron_left, color: Colors.white, size: 28),
           onPressed: () => Navigator.of(context).maybePop(),
         ),
         centerTitle: true,
-        title: Text(_title(s), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+        title: Text(_title(s), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white)),
       ),
       body: SafeArea(
         top: false,

@@ -1,4 +1,6 @@
+import '../go/strings.dart' show tr;
 import 'package:flutter/material.dart';
+import '../widgets/ciclo_header.dart';
 
 import '../services/partner_service.dart';
 import 'pregnancy_tracking_screen.dart';
@@ -76,7 +78,7 @@ class PartnerPregnancyScreen extends StatelessWidget {
                   const Text('🤰', style: TextStyle(fontSize: 48)),
                   const SizedBox(height: 16),
                   Text(
-                    '${(ownerLabel != null && ownerLabel!.trim().isNotEmpty) ? ownerLabel : ownerEmail} todavía no ha activado o compartido su seguimiento de embarazo.',
+                    tr('${(ownerLabel != null && ownerLabel!.trim().isNotEmpty) ? ownerLabel : ownerEmail} todavía no ha activado o compartido su seguimiento de embarazo.', "${(ownerLabel != null && ownerLabel!.trim().isNotEmpty) ? ownerLabel : ownerEmail} hasn't turned on or shared their pregnancy tracking yet."),
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 14, color: Colors.white70, height: 1.4, fontWeight: FontWeight.w500),
                   ),
@@ -89,7 +91,7 @@ class PartnerPregnancyScreen extends StatelessWidget {
           }
           return Scaffold(
             backgroundColor: _bgColor,
-            appBar: AppBar(
+            appBar: CicloAppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
               foregroundColor: Colors.white,

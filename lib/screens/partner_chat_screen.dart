@@ -1,3 +1,4 @@
+import '../go/strings.dart' show tr;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -64,7 +65,7 @@ class _PartnerChatScreenState extends State<PartnerChatScreen> {
     try {
       await _service.sendText(myUid: widget.myUid, otherUid: widget.otherUid, text: text);
     } catch (_) {
-      if (mounted) _showSnack('No se pudo enviar. Revisa tu conexión.');
+      if (mounted) _showSnack(tr('No se pudo enviar. Revisa tu conexión.', "Couldn't send. Check your connection."));
     } finally {
       if (mounted) setState(() => _sending = false);
     }
@@ -78,7 +79,7 @@ class _PartnerChatScreenState extends State<PartnerChatScreen> {
       final bytes = await picked.readAsBytes();
       await _service.sendPhoto(myUid: widget.myUid, otherUid: widget.otherUid, bytes: bytes);
     } catch (_) {
-      if (mounted) _showSnack('No se pudo enviar la foto. Revisa tu conexión.');
+      if (mounted) _showSnack(tr('No se pudo enviar la foto. Revisa tu conexión.', "Couldn't send the photo. Check your connection."));
     } finally {
       if (mounted) setState(() => _sending = false);
     }
@@ -96,7 +97,7 @@ class _PartnerChatScreenState extends State<PartnerChatScreen> {
           children: [
             ListTile(
               leading: const Icon(Icons.camera_alt_outlined),
-              title: const Text('Tomar foto'),
+              title: Text(tr('Tomar foto', 'Take photo')),
               onTap: () {
                 Navigator.pop(ctx);
                 _pickAndSendPhoto(ImageSource.camera);
@@ -104,7 +105,7 @@ class _PartnerChatScreenState extends State<PartnerChatScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.photo_library_outlined),
-              title: const Text('Elegir de la galería'),
+              title: Text(tr('Elegir de la galería', 'Choose from gallery')),
               onTap: () {
                 Navigator.pop(ctx);
                 _pickAndSendPhoto(ImageSource.gallery);
@@ -140,11 +141,11 @@ class _PartnerChatScreenState extends State<PartnerChatScreen> {
               builder: (context, snapshot) {
                 final messages = snapshot.data ?? const [];
                 if (messages.isEmpty) {
-                  return const Center(
+                  return Center(
                     child: Padding(
                       padding: EdgeInsets.all(24),
                       child: Text(
-                        'Todavía no hay mensajes. Escribe algo o manda una foto.',
+                        tr('Todavía no hay mensajes. Escribe algo o manda una foto.', 'No messages yet. Write something or send a photo.'),
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 13, color: AppColors.textMuted),
                       ),
@@ -235,7 +236,7 @@ class _PartnerChatScreenState extends State<PartnerChatScreen> {
             IconButton(
               onPressed: _sending ? null : _showAttachSheet,
               icon: Icon(Icons.camera_alt_outlined, color: primaryDark),
-              tooltip: 'Adjuntar foto',
+              tooltip: tr('Adjuntar foto', 'Attach photo'),
             ),
             Expanded(
               child: TextField(
@@ -243,7 +244,7 @@ class _PartnerChatScreenState extends State<PartnerChatScreen> {
                 minLines: 1,
                 maxLines: 4,
                 decoration: InputDecoration(
-                  hintText: 'Escribe un mensaje',
+                  hintText: tr('Escribe un mensaje', 'Write a message'),
                   filled: true,
                   fillColor: AppColors.background,
                   isDense: true,

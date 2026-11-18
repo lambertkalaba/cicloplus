@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import '../widgets/ciclo_header.dart';
 
 import '../l10n/app_strings.dart';
 import '../models/day_entry.dart';
@@ -88,6 +89,7 @@ class ReviewScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
+        top: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -100,27 +102,13 @@ class ReviewScreen extends StatelessWidget {
             // del condicional para que esté siempre visible, haya o no
             // datos, y se usa el mismo ícono de cerrar que en Estadísticas
             // en vez de "← Volver".
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: Icon(Icons.close, size: 22, color: Color(theme.primary)),
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
-                ),
-              ),
-            ),
+            CicloHeader(titleText: s.reviewTitle),
             Expanded(
               child: pastCycles.isEmpty
                   ? _buildEmptyState(s)
                   : ListView(
                       padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                       children: [
-                  Text(s.reviewTitle,
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: AppColors.textPrimary)),
-                  const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

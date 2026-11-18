@@ -1,4 +1,6 @@
+import '../go/strings.dart' show tr;
 import 'package:flutter/material.dart';
+import '../widgets/ciclo_header.dart';
 
 import '../services/settings_service.dart' show themeById;
 import '../services/wish_service.dart';
@@ -63,7 +65,7 @@ class _PartnerWishesScreenState extends State<PartnerWishesScreen> {
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No se pudo guardar. Revisa tu conexión.')),
+          SnackBar(content: Text(tr('No se pudo guardar. Revisa tu conexión.', "Couldn't save. Check your connection."))),
         );
       }
     } finally {
@@ -82,7 +84,7 @@ class _PartnerWishesScreenState extends State<PartnerWishesScreen> {
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No se pudo actualizar. Revisa tu conexión.')),
+          SnackBar(content: Text(tr('No se pudo actualizar. Revisa tu conexión.', "Couldn't update. Check your connection."))),
         );
       }
     }
@@ -94,7 +96,7 @@ class _PartnerWishesScreenState extends State<PartnerWishesScreen> {
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No se pudo borrar. Revisa tu conexión.')),
+          SnackBar(content: Text(tr('No se pudo borrar. Revisa tu conexión.', "Couldn't delete. Check your connection."))),
         );
       }
     }
@@ -116,7 +118,7 @@ class _PartnerWishesScreenState extends State<PartnerWishesScreen> {
                   child: TextField(
                     controller: _textController,
                     decoration: InputDecoration(
-                      hintText: 'Ej. Fresas con crema, que me hagan un masaje...',
+                      hintText: tr('Ej. Fresas con crema, que me hagan un masaje...', 'E.g. Strawberries and cream, a massage...'),
                       isDense: true,
                       contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
@@ -156,8 +158,8 @@ class _PartnerWishesScreenState extends State<PartnerWishesScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 32),
                     child: Text(
                       widget.isOwner
-                          ? 'Todavía no has anotado ningún deseo. Escribe uno arriba — tu pareja lo verá aquí.'
-                          : 'Todavía no hay deseos anotados.',
+                          ? tr('Todavía no has anotado ningún deseo. Escribe uno arriba — tu pareja lo verá aquí.', "You haven't added any wishes yet. Write one above — your partner will see it here.")
+                          : tr('Todavía no hay deseos anotados.', 'No wishes yet.'),
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 13.5, color: AppColors.textMuted, height: 1.4),
                     ),
@@ -179,8 +181,8 @@ class _PartnerWishesScreenState extends State<PartnerWishesScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: Text(widget.title),
+      appBar: CicloAppBar(
+        title: Text(widget.title == 'Tus deseos' ? tr('Tus deseos', 'Your wishes') : widget.title),
         backgroundColor: Color(theme.primaryDark),
         foregroundColor: Colors.white,
       ),
@@ -219,7 +221,7 @@ class _PartnerWishesScreenState extends State<PartnerWishesScreen> {
             IconButton(
               icon: const Icon(Icons.close, size: 18, color: AppColors.textMuted),
               onPressed: () => _delete(wish),
-              tooltip: 'Borrar',
+              tooltip: tr('Borrar', 'Delete'),
             ),
         ],
       ),

@@ -1,3 +1,5 @@
+import '../go/strings.dart' show tr;
+import '../data/pregnancy_week_en.dart' show trWeek;
 import 'package:flutter/material.dart';
 
 import '../data/partner_week_tips.dart';
@@ -31,11 +33,11 @@ class PartnerTipsScreen extends StatelessWidget {
       builder: (context, snapshot) {
         final data = snapshot.data;
         if (data == null || !data.enabled || data.lmp == null) {
-          return const Center(
+          return Center(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 32),
               child: Text(
-                'Cuando tu pareja active y comparta su seguimiento de embarazo, aquí verás consejos para acompañarla en cada semana.',
+                tr('Cuando tu pareja active y comparta su seguimiento de embarazo, aquí verás consejos para acompañarla en cada semana.', "When your partner turns on and shares her pregnancy tracking, you'll see tips here to support her each week."),
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 13.5, color: AppColors.textMuted, height: 1.4),
               ),
@@ -76,26 +78,26 @@ class PartnerTipsScreen extends StatelessWidget {
                       Icon(Icons.favorite, color: primary, size: 18),
                       const SizedBox(width: 8),
                       Text(
-                        'Semana $currentWeek — ahora mismo',
+                        tr('Semana $currentWeek — ahora mismo', 'Week $currentWeek — right now'),
                         style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: primary),
                       ),
                     ],
                   ),
                   const SizedBox(height: 12),
-                  const Text('Qué puede estar sintiendo', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: AppColors.textMuted)),
+                  Text(tr('Qué puede estar sintiendo', 'What she may be feeling'), style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: AppColors.textMuted)),
                   const SizedBox(height: 4),
-                  Text(currentTip.whatSheMayFeel, style: const TextStyle(fontSize: 14, color: AppColors.textPrimary, height: 1.4)),
+                  Text(trWeek(currentTip.whatSheMayFeel), style: const TextStyle(fontSize: 14, color: AppColors.textPrimary, height: 1.4)),
                   const SizedBox(height: 14),
-                  const Text('Cómo puedes ayudar', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: AppColors.textMuted)),
+                  Text(tr('Cómo puedes ayudar', 'How you can help'), style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: AppColors.textMuted)),
                   const SizedBox(height: 4),
-                  Text(currentTip.howToHelp, style: const TextStyle(fontSize: 14, color: AppColors.textPrimary, height: 1.4, fontWeight: FontWeight.w600)),
+                  Text(trWeek(currentTip.howToHelp), style: const TextStyle(fontSize: 14, color: AppColors.textPrimary, height: 1.4, fontWeight: FontWeight.w600)),
                 ],
               ),
             ),
             const SizedBox(height: 20),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 4, bottom: 8),
-              child: Text('Todas las semanas', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+              child: Text(tr('Todas las semanas', 'All weeks'), style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
             ),
             ...partnerWeekTipList.map((t) => _weekRow(t, isCurrent: t.week == currentWeek, primary: primary)),
           ],
@@ -117,13 +119,13 @@ class PartnerTipsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Semana ${t.week}',
+            tr('Semana ${t.week}', 'Week ${t.week}'),
             style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700, color: isCurrent ? primary : AppColors.textPrimary),
           ),
           const SizedBox(height: 6),
-          Text(t.whatSheMayFeel, style: const TextStyle(fontSize: 12.5, color: AppColors.textMuted, height: 1.3)),
+          Text(trWeek(t.whatSheMayFeel), style: const TextStyle(fontSize: 12.5, color: AppColors.textMuted, height: 1.3)),
           const SizedBox(height: 4),
-          Text(t.howToHelp, style: const TextStyle(fontSize: 12.5, color: AppColors.textPrimary, height: 1.3, fontWeight: FontWeight.w600)),
+          Text(trWeek(t.howToHelp), style: const TextStyle(fontSize: 12.5, color: AppColors.textPrimary, height: 1.3, fontWeight: FontWeight.w600)),
         ],
       ),
     );

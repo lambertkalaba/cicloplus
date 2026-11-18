@@ -1,3 +1,4 @@
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -66,7 +67,22 @@ const List<AppLanguage> kAppLanguages = [
   AppLanguage(code: 'ne', nativeName: 'नेपाली', flag: '🇳🇵'),
   AppLanguage(code: 'si', nativeName: 'සිංහල', flag: '🇱🇰'),
   AppLanguage(code: 'zu', nativeName: 'isiZulu', flag: '🇿🇦'),
+  AppLanguage(code: 'ln', nativeName: 'Lingála', flag: '🇨🇩'),
+  AppLanguage(code: 'ha', nativeName: 'Hausa', flag: '🇳🇬'),
+  AppLanguage(code: 'yo', nativeName: 'Yorùbá', flag: '🇳🇬'),
+  AppLanguage(code: 'wo', nativeName: 'Wolof', flag: '🇸🇳'),
+  AppLanguage(code: 'om', nativeName: 'Afaan Oromoo', flag: '🇪🇹'),
 ];
+
+/// Idioma para los widgets del sistema (calendario, diálogos). Flutter no
+/// trae todos los idiomas (p. ej. lingala, wolof, hausa): en esos casos se
+/// usa francés o inglés solo para esos widgets; la app sigue en su idioma.
+Locale materialLocaleFor(String code) {
+  final base = code.split('-').first;
+  if (kMaterialSupportedLanguages.contains(base)) return localeFromCode(code);
+  const frenchSpeaking = {'ln', 'wo'};
+  return Locale(frenchSpeaking.contains(base) ? 'fr' : 'en');
+}
 
 /// '<idioma>' o '<idioma>-<PAÍS>' (p. ej. 'zh-TW') como Locale de Flutter.
 Locale localeFromCode(String code) {
@@ -89,26 +105,38 @@ class LocaleController extends ChangeNotifier {
 
   bool _loaded = false;
 
-  /// Idiomas soportados por la app — cualquier otro código de sistema cae
-  /// a español por defecto.
+  /// Idiomas soportados por la app.
   static final _supportedCodes = {for (final l in kAppLanguages) l.code};
 
+  /// Códigos antiguos o alternativos que algunos teléfonos (sobre todo
+  /// Android) siguen enviando.
+  static const _aliases = {'iw': 'he', 'in': 'id', 'tl': 'fil', 'nb': 'no', 'nn': 'no'};
+
   /// Si la persona nunca eligió un idioma a mano, usamos el idioma del
-  /// dispositivo (si es uno de los soportados); si no, español.
+  /// teléfono. Se recorren todos los idiomas que tenga configurados, en su
+  /// orden de preferencia, y se coge el primero que la app tenga. Si
+  /// ninguno está, inglés.
   String _detectSystemLanguage() {
-    final loc = WidgetsBinding.instance.platformDispatcher.locale;
-    final deviceCode = loc.languageCode;
-    if (deviceCode == 'zh' && (loc.countryCode == 'TW' || loc.countryCode == 'HK' || loc.scriptCode == 'Hant')) {
-      return 'zh-TW';
+    final dispatcher = WidgetsBinding.instance.platformDispatcher;
+    final locales = dispatcher.locales.isNotEmpty ? dispatcher.locales : [dispatcher.locale];
+    for (final loc in locales) {
+      final code = _aliases[loc.languageCode] ?? loc.languageCode;
+      if (code == 'zh') {
+        final trad = loc.countryCode == 'TW' || loc.countryCode == 'HK' || loc.countryCode == 'MO' || loc.scriptCode == 'Hant';
+        final pick = trad ? 'zh-TW' : 'zh';
+        if (_supportedCodes.contains(pick)) return pick;
+        continue;
+      }
+      if (_supportedCodes.contains(code)) return code;
     }
-    return _supportedCodes.contains(deviceCode) ? deviceCode : 'es';
+    return 'en';
   }
 
   Future<void> load() async {
     if (_loaded) return;
     final saved = await _settings.loadLanguage();
     _languageCode = saved ?? _detectSystemLanguage();
-    if (!_supportedCodes.contains(_languageCode)) _languageCode = 'es';
+    if (!_supportedCodes.contains(_languageCode)) _languageCode = _detectSystemLanguage();
     await ExtraI18n.load(_languageCode);
     _loaded = true;
     notifyListeners();

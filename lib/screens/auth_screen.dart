@@ -1,3 +1,4 @@
+import '../go/strings.dart' show tr;
 import 'dart:async';
 
 import 'package:flutter/foundation.dart' show defaultTargetPlatform, TargetPlatform;
@@ -613,8 +614,8 @@ class _AuthScreenState extends State<AuthScreen> {
                     Center(
                       child: TextButton(
                         onPressed: _isLoading ? null : _continueAsPartnerViewer,
-                        child: const Text(
-                          '¿Solo quieres ver el embarazo de tu pareja?',
+                        child: Text(
+                          tr('¿Solo quieres ver el embarazo de tu pareja?', "Just want to see your partner's pregnancy?"),
                           textAlign: TextAlign.center,
                           // Sin subrayado y en magenta oscuro (propuesta
                           // ChatGPT: "no ponerlo dentro de una tarjeta, debe

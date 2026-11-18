@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import '../data/pregnancy_week_en.dart' show trWeek;
 import 'package:flutter/material.dart';
 
 import '../l10n/app_strings.dart';
@@ -16,6 +17,7 @@ import '../widgets/today_v2.dart';
 import '../widgets/uterus_phase_illustration.dart';
 import 'body_stage_detail_screen.dart';
 import 'invite_partner_screen.dart';
+import 'partner_welcome_screen.dart';
 import 'pregnancy_tracking_screen.dart';
 import 'register_screen.dart';
 
@@ -935,7 +937,7 @@ class TodayScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Text(
-                            'Tu bebé es como ${_cleanSize(pregnancyWeekInfoFor(_pregnancyWeekNow()!.week).size)}',
+                            '${trWeek('Tu bebé es como')} ${_cleanSize(trWeek(pregnancyWeekInfoFor(_pregnancyWeekNow()!.week).size))}',
                             style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: AppColors.primaryDark),
                           ),
                         ),
@@ -2344,9 +2346,12 @@ class _SyncPartnerCardContent extends StatelessWidget {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => InvitePartnerScreen(
+                            onPressed: () => openPartnerArea(
+                              context,
+                              userId: userId,
+                              userEmail: userEmail,
+                              themeId: themeId,
+                              inviteBuilder: (_) => InvitePartnerScreen(
                                   userId: userId,
                                   userEmail: userEmail,
                                   themeId: themeId,
@@ -2357,7 +2362,6 @@ class _SyncPartnerCardContent extends StatelessWidget {
                                   selfReportedPeriodLen: selfReportedPeriodLen,
                                   data: data,
                                 ),
-                              ),
                             ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: primaryDark,

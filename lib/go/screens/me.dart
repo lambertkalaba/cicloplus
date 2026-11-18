@@ -122,8 +122,8 @@ class MeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            // ── Mi ciclo en números ──
-            GestureDetector(
+            // ── Mi ciclo en números (no en embarazo) ──
+            if (s.goal != 'pregnancy') GestureDetector(
               onTap: () => _push(context, const AnalysisScreen()),
               child: Container(
                 padding: const EdgeInsets.all(12),
@@ -156,13 +156,24 @@ class MeScreen extends StatelessWidget {
               decoration: card(),
               child: Column(
                 children: [
+                  if (s.goal != 'pregnancy')
+                    LinkRow(
+                      icon: Icon(Icons.water_drop_rounded, color: C.pink),
+                      title: tr('Periodo y ciclo', 'Period & cycle'),
+                      onTap: () => _push(context, const PeriodCycleScreen()),
+                    ),
                   LinkRow(
-                    icon: const Icon(Icons.favorite_border_rounded, color: C.pink),
+                    icon: Icon(Icons.history_rounded, color: C.pink),
+                    title: tr('Cronología', 'Timeline'),
+                    onTap: () => _push(context, const TimelineScreen()),
+                  ),
+                  LinkRow(
+                    icon: Icon(Icons.favorite_border_rounded, color: C.pink),
                     title: tr('Mi salud', 'My health'),
                     onTap: () => _push(context, const MyHealthScreen()),
                   ),
                   LinkRow(
-                    icon: const Icon(Icons.bar_chart_rounded, color: C.pink),
+                    icon: Icon(Icons.bar_chart_rounded, color: C.pink),
                     title: tr('Informes y tendencias', 'Reports & trends'),
                     onTap: () => _push(context, const ReportsHubScreen()),
                   ),
@@ -173,12 +184,12 @@ class MeScreen extends StatelessWidget {
                       onTap: () => CP.openPregnancy(context),
                     ),
                   LinkRow(
-                    icon: const Icon(Icons.people_alt_rounded, color: C.pink),
+                    icon: Icon(Icons.people_alt_rounded, color: C.pink),
                     title: tr('Mi pareja', 'My partner'),
                     onTap: () => CP.openPartner(context),
                   ),
                   LinkRow(
-                    icon: const Icon(Icons.settings_rounded, color: C.pink),
+                    icon: Icon(Icons.settings_rounded, color: C.pink),
                     title: tr('Configuración', 'Settings'),
                     divider: false,
                     onTap: () => openCicloSettings(context),
@@ -194,7 +205,7 @@ class MeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   LinkRow(
-                    icon: const Icon(Icons.account_circle_rounded, color: C.pink),
+                    icon: Icon(Icons.account_circle_rounded, color: C.pink),
                     title: tr('Mi cuenta', 'My account'),
                     onTap: () => CP.openAccount(context),
                   ),
@@ -203,41 +214,20 @@ class MeScreen extends StatelessWidget {
                     title: tr('CicloPlus Premium', 'CicloPlus Premium'),
                     onTap: () => CP.openPremium(context),
                   ),
-                  LinkRow(
-                    icon: const Icon(Icons.science_rounded, color: C.pink),
+                  if (s.goal == 'conceive') LinkRow(
+                    icon: Icon(Icons.science_rounded, color: C.pink),
                     title: tr('Test de ovulación', 'Ovulation test'),
                     onTap: () => CP.openOvulationTest(context),
                   ),
-                  LinkRow(
-                    icon: const Icon(Icons.thermostat_rounded, color: C.pink),
+                  if (s.goal == 'conceive') LinkRow(
+                    icon: Icon(Icons.thermostat_rounded, color: C.pink),
                     title: tr('Temperatura basal', 'Basal temperature'),
                     onTap: () => CicloYo.field(context, 'temperature'),
                   ),
-                  LinkRow(
-                    icon: const Icon(Icons.spa_rounded, color: C.pink),
+                  if (s.goal == 'conceive') LinkRow(
+                    icon: Icon(Icons.spa_rounded, color: C.pink),
                     title: tr('Fertilidad', 'Fertility'),
                     onTap: () => CicloYo.summary(context, 'fertility'),
-                  ),
-                  LinkRow(
-                    icon: const Icon(Icons.fact_check_rounded, color: C.pink),
-                    title: tr('Revisión del ciclo', 'Cycle review'),
-                    onTap: () => CicloYo.review(context),
-                  ),
-                  LinkRow(
-                    icon: const Icon(Icons.query_stats_rounded, color: C.pink),
-                    title: tr('Estadísticas', 'Statistics'),
-                    onTap: () => CicloYo.stats(context),
-                  ),
-                  LinkRow(
-                    icon: const Icon(Icons.forum_rounded, color: C.pink),
-                    title: tr('Comunidad', 'Community'),
-                    onTap: () => CP.openForum(context),
-                  ),
-                  LinkRow(
-                    icon: const Icon(Icons.lock_rounded, color: C.pink),
-                    title: tr('Bloqueo con PIN', 'PIN lock'),
-                    divider: false,
-                    onTap: () => CP.togglePin(context),
                   ),
                 ],
               ),
@@ -246,8 +236,8 @@ class MeScreen extends StatelessWidget {
             Center(
               child: TextButton.icon(
                 onPressed: () => GoSession.onSignOut?.call(),
-                icon: const Icon(Icons.logout_rounded, color: C.pinkDark),
-                label: Text(tr('Cerrar sesión', 'Sign out'), style: const TextStyle(color: C.pinkDark, fontWeight: FontWeight.w800)),
+                icon: Icon(Icons.logout_rounded, color: C.pinkDark),
+                label: Text(tr('Cerrar sesión', 'Sign out'), style: TextStyle(color: C.pinkDark, fontWeight: FontWeight.w800)),
               ),
             ),
           ],
@@ -259,13 +249,36 @@ class MeScreen extends StatelessWidget {
   Future<void> _setGoal(BuildContext context, String g) async {
     final s = AppStore.instance;
     if (g == 'pregnancy') {
-      if (s.pregnancyStart == null) {
-        final ok = await PregnancyScreen.setup(context);
-        if (!ok || !context.mounted) return;
-      } else {
+      // Siempre se confirma la fecha: sin ella no se puede saber cómo está
+      // el bebé. Si ya había una (y no es de hace más de 42 semanas), se
+      // pregunta si sigue siendo la misma.
+      final prev = s.pregnancyStart;
+      final stillValid = prev != null && dateOnly(DateTime.now()).difference(prev).inDays <= 294;
+      var same = false;
+      if (stillValid) {
+        final r = await showDialog<bool>(
+              context: context,
+              builder: (c) => AlertDialog(
+                title: Text(tr('¿Es la misma fecha?', 'Is it the same date?')),
+                content: Text(tr('Tenemos guardado que el primer día de tu última regla fue el {}. ¿Sigue siendo esa fecha?',
+                        'We have saved that the first day of your last period was {}. Is that still the date?')
+                    .replaceFirst('{}', L.dateLong(prev))),
+                actions: [
+                  TextButton(onPressed: () => Navigator.pop(c, false), child: Text(tr('Cambiar fecha', 'Change date'))),
+                  FilledButton(onPressed: () => Navigator.pop(c, true), child: Text(tr('Sí, es la misma', "Yes, it's the same"))),
+                ],
+              ),
+            );
+        if (r == null || !context.mounted) return; // cerró sin elegir
+        same = r;
+      }
+      if (same) {
         s.goal = g;
         await s.commit();
         if (!context.mounted) return;
+      } else {
+        final ok = await PregnancyScreen.setup(context);
+        if (!ok || !context.mounted) return;
       }
       if (context.mounted) await CP.openPregnancy(context);
       return;
@@ -285,12 +298,12 @@ class MeScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             ListTile(
-              leading: const Icon(Icons.badge_rounded, color: C.pink),
+              leading: Icon(Icons.badge_rounded, color: C.pink),
               title: Text(tr('Cambiar mi nombre', 'Change my name'), style: const TextStyle(fontWeight: FontWeight.w700)),
               onTap: () => Navigator.pop(ctx, 'name'),
             ),
             ListTile(
-              leading: const Icon(Icons.photo_camera_rounded, color: C.pink),
+              leading: Icon(Icons.photo_camera_rounded, color: C.pink),
               title: Text(tr('Cambiar mi foto', 'Change my photo'), style: const TextStyle(fontWeight: FontWeight.w700)),
               onTap: () => Navigator.pop(ctx, 'photo'),
             ),

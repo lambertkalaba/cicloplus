@@ -7,14 +7,47 @@ import '../screens/reminders.dart';
 
 /// Colores de la maqueta (verde selva + rosa).
 class C {
+  /// Color de la app elegido por la usuaria: rosa (por defecto), lila, azul,
+  /// menta o melocotón. Todos los rosas del diseño pasan por [t].
+  static String theme = 'rosa';
+  static const themes = ['rosa', 'lila', 'azul', 'menta', 'melocoton'];
+  static const _shift = {'rosa': 0.0, 'lila': -62.0, 'azul': -128.0, 'menta': -175.0, 'melocoton': 38.0};
+  static final Map<int, Color> _cache = {};
+
+  static void setTheme(String v) {
+    theme = themes.contains(v) ? v : 'rosa';
+    _cache.clear();
+  }
+
+  /// Un rosa del diseño ([v]) convertido al color elegido.
+  static Color t(int v) {
+    if (theme == 'rosa') return Color(v);
+    return _cache.putIfAbsent(v, () {
+      final c = HSLColor.fromColor(Color(v));
+      var h = (c.hue + _shift[theme]!) % 360;
+      if (h < 0) h += 360;
+      final s = theme == 'menta' ? c.saturation * 0.8 : c.saturation;
+      return c.withHue(h).withSaturation(s.clamp(0.0, 1.0)).toColor();
+    });
+  }
+
+  /// Muestra de cada color (para el selector).
+  static Color sample(String v) {
+    final old = theme;
+    setTheme(v);
+    final c = t(0xFFE8457F);
+    setTheme(old);
+    return c;
+  }
+
   static const emerald = Color(0xFF1B8A5A);
   static const emeraldDark = Color(0xFF0B5E3B);
-  static const pink = Color(0xFFE8457F);
-  static const pinkDark = Color(0xFFD81B60);
+  static Color get pink => t(0xFFE8457F);
+  static Color get pinkDark => t(0xFFD81B60);
   static const red = Color(0xFFE5284F);
-  static const pinkSoft = Color(0xFFFFE1EC);
-  static const pinkLine = Color(0xFFF7CADB);
-  static const pinkBg = Color(0xFFFFF2F7);
+  static Color get pinkSoft => t(0xFFFFE1EC);
+  static Color get pinkLine => t(0xFFF7CADB);
+  static Color get pinkBg => t(0xFFFFF2F7);
   static const lavender = Color(0xFFB79CEB);
   static const lavenderSoft = Color(0xFFE7DCFA);
   static const purple = Color(0xFF7B4FD6);
@@ -30,10 +63,10 @@ class C {
 BoxDecoration card({Color? color, double radius = 22}) => BoxDecoration(
   color: color ?? Colors.white,
   borderRadius: BorderRadius.circular(radius),
-  border: Border.all(color: const Color(0xFFF7CADB), width: 1),
+  border: Border.all(color: C.t(0xFFF7CADB), width: 1),
   boxShadow: [
     BoxShadow(
-      color: const Color(0xFFD0407A).withOpacity(0.14),
+      color: C.t(0xFFD0407A).withOpacity(0.14),
       blurRadius: 16,
       offset: const Offset(0, 6),
     ),
@@ -47,20 +80,20 @@ BoxDecoration tile({bool selected = false, double radius = 16}) =>
       gradient: selected ? pinkGradient : null,
       borderRadius: BorderRadius.circular(radius),
       border: Border.all(
-        color: selected ? C.pink : const Color(0xFFF6D3E1),
+        color: selected ? C.pink : C.t(0xFFF6D3E1),
         width: selected ? 1.6 : 1,
       ),
       boxShadow: [
         BoxShadow(
-          color: const Color(0xFFD0407A).withOpacity(selected ? 0.28 : 0.07),
+          color: C.t(0xFFD0407A).withOpacity(selected ? 0.28 : 0.07),
           blurRadius: 10,
           offset: const Offset(0, 4),
         ),
       ],
     );
 
-const pinkGradient = LinearGradient(
-  colors: [Color(0xFFF2588F), Color(0xFFD81B60)],
+LinearGradient get pinkGradient => LinearGradient(
+  colors: [C.t(0xFFF2588F), C.t(0xFFD81B60)],
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
 );
@@ -77,7 +110,7 @@ class Img extends StatelessWidget {
     super.key,
     this.size = 32,
     this.fallback = Icons.circle,
-    this.fallbackColor = C.pink,
+    this.fallbackColor = const Color(0xFFE8457F),
     this.fit = BoxFit.contain,
   });
 
@@ -125,9 +158,9 @@ class PinkBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    decoration: const BoxDecoration(
+    decoration: BoxDecoration(
       gradient: LinearGradient(
-        colors: [Color(0xFFFCE6F0), Color(0xFFF9D9E7), Color(0xFFFBE3EE)],
+        colors: [C.t(0xFFFCE6F0), C.t(0xFFF9D9E7), C.t(0xFFFBE3EE)],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
       ),
@@ -232,16 +265,19 @@ class GreenHeader extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      IconButton(
-                        onPressed: onBack ?? onMenu,
-                        icon: Icon(
-                          onBack != null
-                              ? Icons.arrow_back_ios_new_rounded
-                              : Icons.menu_rounded,
-                          color: Colors.white,
-                          size: 26,
-                        ),
-                      ),
+                      if (onBack != null || onMenu != null)
+                        IconButton(
+                          onPressed: onBack ?? onMenu,
+                          icon: Icon(
+                            onBack != null
+                                ? Icons.arrow_back_ios_new_rounded
+                                : Icons.search_rounded, // buscador (antes menú)
+                            color: Colors.white,
+                            size: 26,
+                          ),
+                        )
+                      else
+                        const SizedBox(width: 48),
                       const Expanded(child: Center(child: Logo())),
                       IconButton(
                         onPressed:
@@ -503,16 +539,16 @@ class Choice extends StatelessWidget {
             padding: padding,
             decoration: BoxDecoration(
               color: selected
-                  ? const Color(0xFFFFE3EE)
+                  ? C.t(0xFFFFE3EE)
                   : Colors.white.withOpacity(0.92),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: selected ? C.pink : const Color(0xFFF3D6E2),
+                color: selected ? C.pink : C.t(0xFFF3D6E2),
                 width: selected ? 2 : 1,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFFD0407A)
+                  color: C.t(0xFFD0407A)
                       .withOpacity(selected ? 0.18 : 0.07),
                   blurRadius: 8,
                   offset: const Offset(0, 3),
@@ -623,7 +659,7 @@ class Stepper2 extends StatelessWidget {
     borderRadius: BorderRadius.circular(20),
     child: CircleAvatar(
       radius: 17,
-      backgroundColor: f == null ? const Color(0xFFF3E9EE) : C.pinkSoft,
+      backgroundColor: f == null ? C.t(0xFFF3E9EE) : C.pinkSoft,
       child: Icon(i, size: 18, color: f == null ? C.muted : C.pinkDark),
     ),
   );

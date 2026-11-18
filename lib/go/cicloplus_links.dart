@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../screens/account_screen.dart';
-import '../screens/forum_screen.dart';
 import '../screens/invite_partner_screen.dart';
 import '../screens/lock_screen.dart';
+import '../screens/partner_welcome_screen.dart';
 import '../screens/ovulation_test_screen.dart';
 import '../screens/paywall_screen.dart';
 import '../screens/pregnancy_tracking_screen.dart';
@@ -42,9 +42,12 @@ class CP {
     final pregnancy = await settings.loadPregnancySettings();
     final goal = await settings.loadUserGoal();
     if (!context.mounted) return;
-    await _push(
+    await openPartnerArea(
       context,
-      InvitePartnerScreen(userId: user.id, userEmail: user.email, userGoal: goal, pregnancy: pregnancy),
+      userId: user.id,
+      userEmail: user.email,
+      themeId: 'pink',
+      inviteBuilder: (_) => InvitePartnerScreen(userId: user.id, userEmail: user.email, userGoal: goal, pregnancy: pregnancy),
     );
   }
 
@@ -97,7 +100,6 @@ class CP {
 
   static Future<void> openOvulationTest(BuildContext context) => _push(context, const OvulationTestScreen());
 
-  static Future<void> openForum(BuildContext context) => _push(context, const ForumScreen());
 
   /// Activa o quita el bloqueo con PIN.
   static Future<void> togglePin(BuildContext context) async {

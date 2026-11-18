@@ -96,7 +96,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                             child: Row(
                               children: [
-                                const Icon(Icons.calendar_month_rounded, color: C.pink),
+                                Icon(Icons.calendar_month_rounded, color: C.pink),
                                 const SizedBox(width: 10),
                                 Expanded(
                                   child: Text(
@@ -129,7 +129,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           decoration: BoxDecoration(color: C.pinkBg, borderRadius: BorderRadius.circular(14)),
                           child: Row(
                             children: [
-                              const Icon(Icons.help_outline_rounded, color: C.pink, size: 20),
+                              Icon(Icons.help_outline_rounded, color: C.pink, size: 20),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
@@ -143,7 +143,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   _cycle = 28;
                                   _period = 5;
                                 }),
-                                child: Text(tr('No lo sé', 'Not sure'), style: const TextStyle(color: C.pinkDark, fontWeight: FontWeight.w800)),
+                                child: Text(tr('No lo sé', 'Not sure'), style: TextStyle(color: C.pinkDark, fontWeight: FontWeight.w800)),
                               ),
                             ],
                           ),
@@ -177,7 +177,7 @@ InputDecoration _input(String hint) => InputDecoration(
       filled: true,
       fillColor: C.pinkBg,
       contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: C.pinkLine)),
-      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: C.pinkLine)),
-      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: C.pink, width: 2)),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: C.pinkLine)),
+      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: C.pinkLine)),
+      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: C.pink, width: 2)),
     );

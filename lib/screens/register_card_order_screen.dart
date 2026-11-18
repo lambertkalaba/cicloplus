@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/ciclo_header.dart';
 
 import '../l10n/app_strings.dart';
 import '../services/settings_service.dart';
@@ -85,13 +86,13 @@ class _RegisterCardOrderScreenState extends State<RegisterCardOrderScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
+      appBar: CicloAppBar(
         backgroundColor: AppColors.background,
         elevation: 0,
-        iconTheme: const IconThemeData(color: AppColors.textPrimary),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
           s.settingsRegisterCardOrder,
-          style: const TextStyle(color: AppColors.textPrimary, fontSize: 16, fontWeight: FontWeight.w700),
+          style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
         ),
       ),
       body: _loading

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/ciclo_header.dart';
 
 import '../l10n/app_strings.dart';
 import '../models/app_user.dart';
@@ -147,7 +148,7 @@ class _AccountScreenState extends State<AccountScreen> {
     if (_loading) {
       return Scaffold(
         backgroundColor: AppColors.background,
-        appBar: AppBar(title: Text(s.accountScreenTitle)),
+        appBar: CicloAppBar(title: Text(s.accountScreenTitle)),
         body: const Center(child: CircularProgressIndicator(color: AppColors.primary)),
       );
     }
@@ -161,7 +162,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
+      appBar: CicloAppBar(
         backgroundColor: primaryDark,
         title: Text(s.accountScreenTitle),
         // En modo edición se cambia la flecha de volver por defecto por una

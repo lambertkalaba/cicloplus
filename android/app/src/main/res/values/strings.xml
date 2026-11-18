@@ -5,7 +5,9 @@
          FacebookActivity en AndroidManifest.xml (@string/app_name). Antes
          de crear este strings.xml no existía como recurso propio — hacía
          falta declararlo aquí para que compile. -->
-    <string name="app_name">cicloplus_app</string>
+    <string name="app_name">CicloPlus</string>
+    <!-- Nombre del icono discreto (ver DiscreetActivity). -->
+    <string name="discreet_label">Journal</string>
 
     <!-- Recursos para el SDK de Facebook (flutter_facebook_auth). Ver el
          comentario junto al bloque de Facebook en AndroidManifest.xml para

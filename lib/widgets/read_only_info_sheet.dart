@@ -1,3 +1,4 @@
+import '../go/strings.dart' show tr;
 import 'package:flutter/material.dart';
 
 import '../theme/app_theme.dart';
@@ -81,16 +82,14 @@ class _ReadOnlyInfoSheet extends StatelessWidget {
               child: Icon(Icons.visibility_outlined, color: primaryColor, size: 28),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Solo lectura',
+            Text(
+              tr('Solo lectura', 'Read-only'),
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
             ),
             const SizedBox(height: 10),
-            const Text(
-              'Con este código solo podrás ver el seguimiento de embarazo de la '
-              'persona que te invitó (y las fotos del bebé, si ella lo permite).\n\n'
-              'Nunca podrás editar sus datos ni ver su calendario, síntomas u otra '
-              'información personal.',
+            Text(
+              tr('Con este código solo podrás ver el seguimiento de embarazo de la persona que te invitó (y las fotos del bebé, si ella lo permite).\n\nNunca podrás editar sus datos ni ver su calendario, síntomas u otra información personal.',
+                  "With this code you'll only be able to see the pregnancy tracking of the person who invited you (and the baby photos, if she allows it).\n\nYou'll never be able to edit her data or see her calendar, symptoms or other personal information."),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14, color: AppColors.textMuted, height: 1.45),
             ),
@@ -106,7 +105,7 @@ class _ReadOnlyInfoSheet extends StatelessWidget {
                   elevation: 0,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 ),
-                child: const Text('Entendido', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+                child: Text(tr('Entendido', 'Got it'), style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
               ),
             ),
           ],

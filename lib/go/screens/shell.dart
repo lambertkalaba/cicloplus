@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../data/store.dart';
 import '../strings.dart';
 import '../cicloplus_host.dart';
 import '../cicloplus_links.dart';
+import '../widgets/avatar_maker.dart';
 import '../widgets/ui.dart';
 import 'calendar.dart';
 import 'extras.dart';
 import 'me.dart';
 import 'more.dart';
 import 'register.dart';
+import 'michi_search.dart';
 import 'reminders.dart';
 import 'today.dart';
 
@@ -22,7 +25,22 @@ class Shell extends StatefulWidget {
 }
 
 class ShellState extends State<Shell> {
+  /// Para que el buscador pueda cambiar de pestaña.
+  static ShellState? current;
   int _tab = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    current = this;
+  }
+
+  @override
+  void dispose() {
+    if (current == this) current = null;
+    super.dispose();
+  }
+
   final _scaffold = GlobalKey<ScaffoldState>();
 
   void go(int tab) => setState(() => _tab = tab);
@@ -39,19 +57,18 @@ class ShellState extends State<Shell> {
       const RemindersScreen(),
       MeScreen(onRegister: openRegister),
     ];
-    return Scaffold(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) => _back(),
+      child: Scaffold(
       key: _scaffold,
-      drawer: AppDrawer(onTab: (t) {
-        Navigator.of(context).pop();
-        go(t);
-      }),
       body: PinkBackground(
         child: Column(
           children: [
             GreenHeader(
               title: _tab == 3 ? tr('Yo', 'Me') : null,
               flowers: _tab == 3,
-              onMenu: () => _scaffold.currentState?.openDrawer(),
+              onMenu: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const MichiSearchScreen())),
               onBell: () => go(2),
             ),
             Expanded(child: IndexedStack(index: _tab, children: pages)),
@@ -63,7 +80,25 @@ class ShellState extends State<Shell> {
         onTap: go,
         onPlus: () => openRegister(),
       ),
+    ),
     );
+  }
+
+  bool _leaving = false;
+
+  /// Atrás: desde otra pestaña vuelve a Hoy; en Hoy el avatar dice adiós.
+  void _back() {
+    if (_tab != 0) {
+      go(0);
+      return;
+    }
+    if (_leaving) return;
+    _leaving = true;
+    AvatarBus.bye.value++;
+    Future.delayed(const Duration(milliseconds: 1700), () {
+      _leaving = false;
+      SystemNavigator.pop();
+    });
   }
 }
 
@@ -113,7 +148,7 @@ class _BottomBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-        boxShadow: [BoxShadow(color: const Color(0xFFB0306A).withOpacity(0.12), blurRadius: 16, offset: const Offset(0, -4))],
+        boxShadow: [BoxShadow(color: C.t(0xFFB0306A).withOpacity(0.12), blurRadius: 16, offset: const Offset(0, -4))],
       ),
       child: SafeArea(
         top: false,
@@ -160,6 +195,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = AppStore.instance;
+    final goal = s.goal;
     void push(Widget w) {
       Navigator.of(context).pop();
       Navigator.of(context).push(MaterialPageRoute(builder: (_) => w));
@@ -195,28 +231,8 @@ class AppDrawer extends StatelessWidget {
               ],
             ),
           ),
-          _item(Icons.home_rounded, tr('Hoy', 'Today'), () => onTab(0)),
-          _item(Icons.calendar_month_rounded, tr('Calendario', 'Calendar'), () => onTab(1)),
-          _item(Icons.edit_note_rounded, tr('Registrar mi día', 'Log my day'), () {
-            Navigator.of(context).pop();
-            Navigator.of(context).push(MaterialPageRoute(builder: (_) => RegisterScreen(day: DateTime.now())));
-          }),
-          _item(Icons.notifications_rounded, tr('Recordatorios', 'Reminders'), () => onTab(2)),
-          _item(Icons.person_rounded, tr('Yo', 'Me'), () => onTab(3)),
-          const Divider(indent: 16, endIndent: 16),
-          _item(Icons.water_drop_rounded, tr('Periodo y ciclo', 'Period & cycle'), () => push(const PeriodCycleScreen())),
-          _item(Icons.favorite_rounded, tr('Mi salud', 'My health'), () => push(const MyHealthScreen())),
-          _item(Icons.bar_chart_rounded, tr('Análisis del ciclo', 'Cycle analysis'), () => push(const AnalysisScreen())),
-          _item(Icons.show_chart_rounded, tr('Tendencias', 'Trends'), () => push(const TrendsScreen())),
-          _item(Icons.menu_book_rounded, tr('Mi diario', 'My diary'), () => push(const DiaryScreen())),
-          _item(Icons.people_alt_rounded, tr('Mi pareja', 'My partner'), () { Navigator.of(context).pop(); CP.openPartner(context); }),
-          _item(Icons.child_friendly_rounded, tr('Embarazo', 'Pregnancy'), () { Navigator.of(context).pop(); CP.openPregnancy(context); }),
-          _item(Icons.insights_rounded, tr('Informe del ciclo', 'Cycle report'), () => push(const ReportScreen())),
+          if (goal != 'pregnancy') _item(Icons.water_drop_rounded, tr('Periodo y ciclo', 'Period & cycle'), () => push(const PeriodCycleScreen())),
           _item(Icons.history_rounded, tr('Cronología', 'Timeline'), () => push(const TimelineScreen())),
-          _item(Icons.science_rounded, tr('Test de ovulación', 'Ovulation test'), () { Navigator.of(context).pop(); CP.openOvulationTest(context); }),
-          _item(Icons.forum_rounded, tr('Comunidad', 'Community'), () { Navigator.of(context).pop(); CP.openForum(context); }),
-          _item(Icons.workspace_premium_rounded, tr('CicloPlus Premium', 'CicloPlus Premium'), () { Navigator.of(context).pop(); CP.openPremium(context); }),
-          _item(Icons.settings_rounded, tr('Configuración', 'Settings'), () { Navigator.of(context).pop(); openCicloSettings(context); }),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/ciclo_header.dart';
 
 import '../l10n/app_strings.dart';
 import '../models/day_entry.dart';
@@ -168,6 +169,7 @@ class QuickSummaryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
+        top: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -185,27 +187,19 @@ class QuickSummaryScreen extends StatelessWidget {
   }
 
   Widget _buildTopBar(BuildContext context, AppStrings s, Color primary) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(6, 6, 16, 6),
-      child: Row(
-        children: [
-          IconButton(
-            icon: const Icon(Icons.chevron_left, color: AppColors.textPrimary, size: 28),
-            onPressed: () => Navigator.of(context).maybePop(),
-          ),
-          Expanded(
-            child: Text(
+    return CicloHeader(
+      title: Text(
               _title(s),
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+              
+              style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.white),
             ),
-          ),
-          InkWell(
+      actions: [
+        InkWell(
             onTap: () => _goToDestination(context),
             borderRadius: BorderRadius.circular(16),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
-              decoration: BoxDecoration(color: primary, borderRadius: BorderRadius.circular(16)),
+              decoration: BoxDecoration(color: Colors.white.withOpacity(0.22), borderRadius: BorderRadius.circular(16)),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -216,8 +210,8 @@ class QuickSummaryScreen extends StatelessWidget {
               ),
             ),
           ),
-        ],
-      ),
+        const SizedBox(width: 6),
+      ],
     );
   }
 

@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../../services/settings_service.dart' show SettingsService;
 import '../data/store.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
@@ -28,6 +29,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
     final now = DateTime.now();
     _month = DateTime(now.year, now.month);
     _selected = dateOnly(now);
+    _OvTests.load().then((_) {
+      if (mounted) setState(() {});
+    });
   }
 
   void _shift(int m) =>
@@ -68,7 +72,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   width: 38,
                   height: 38,
                   decoration: card(radius: 12),
-                  child: const Icon(Icons.bar_chart_rounded, color: C.pink),
+                  child: Icon(Icons.bar_chart_rounded, color: C.pink),
                 ),
               ),
             ],
@@ -119,9 +123,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.calendar_month_outlined,
-                        color: Color(0xFF6B1F4A),
+                        color: C.t(0xFF6B1F4A),
                         size: 24,
                       ),
                       const SizedBox(width: 6),
@@ -177,7 +181,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 7),
               decoration: BoxDecoration(
-                color: const Color(0xFFF6E4EC),
+                color: C.t(0xFFF6E4EC),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Row(
@@ -187,10 +191,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       child: Text(
                         w,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w800,
-                          color: Color(0xFF5A2A45),
+                          color: C.t(0xFF5A2A45),
                         ),
                       ),
                     ),
@@ -201,10 +205,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
             MonthGrid(
               month: _month,
               selected: _selected,
-              onTap: (d) => setState(() => _selected = d),
+              onTap: (d) {
+                setState(() => _selected = d);
+                _showDay(d);
+              },
             ),
             const SizedBox(height: 8),
-            const Divider(color: C.pinkLine, height: 1),
+            Divider(color: C.pinkLine, height: 1),
             const SizedBox(height: 10),
             Wrap(
               alignment: WrapAlignment.center,
@@ -256,18 +263,43 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   tr('Hoy', 'Today'),
                 ),
                 if (AppStore.instance.showSex) ...[
-                  _legend(
-                    const SexMark(sex: 1, size: 17),
-                    tr('Sexo con\nprotección', 'Protected\nsex'),
-                  ),
-                  _legend(
-                    const SexMark(sex: 2, size: 17),
-                    tr('Sexo sin\nprotección', 'Unprotected\nsex'),
-                  ),
+                  _legend(const SexMark(sex: 1, size: 18), tr('Con protección', 'Protected')),
+                  _legend(const SexMark(sex: 2, size: 18), tr('Sin protección', 'Unprotected')),
                 ],
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  void _showDay(DateTime d) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: C.t(0xFFFFF2F7),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(width: 40, height: 4, decoration: BoxDecoration(color: C.pinkLine, borderRadius: BorderRadius.circular(2))),
+              const SizedBox(height: 12),
+              ListenableBuilder(
+                listenable: AppStore.instance,
+                builder: (_, __) => _DayCard(
+                  day: d,
+                  onEdit: () {
+                    Navigator.pop(ctx);
+                    widget.onRegister(d);
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -499,16 +531,16 @@ class MonthGrid extends StatelessWidget {
     const h = 46.0;
     final log = AppStore.instance.logs[dayKey(d)];
     Color fill = CalColors.normal;
-    var textColor = const Color(0xFF4A2340);
+    var textColor = C.t(0xFF4A2340);
     Widget? mark;
     var dashed = false;
     if (info.period) {
       fill = CalColors.period;
-      textColor = const Color(0xFFC2185B);
+      textColor = C.t(0xFFC2185B);
       mark = const Img('drop', size: 13, fallback: Icons.water_drop_rounded);
     } else if (info.predictedPeriod) {
       fill = CalColors.predicted;
-      textColor = const Color(0xFFC2185B);
+      textColor = C.t(0xFFC2185B);
       dashed = true;
       mark = const Img(
         'drop_empty',
@@ -554,7 +586,7 @@ class MonthGrid extends StatelessWidget {
             : Border.all(color: Colors.white.withOpacity(0.7), width: 1),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFFD0407A).withOpacity(0.06),
+            color: C.t(0xFFD0407A).withOpacity(0.06),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -615,7 +647,7 @@ class MonthGrid extends StatelessWidget {
     Color? fill;
     Color tc = C.text;
     if (info.period || info.predictedPeriod) {
-      fill = info.period ? const Color(0xFFFF8DB5) : const Color(0xFFFFD6E5);
+      fill = info.period ? C.t(0xFFFF8DB5) : C.t(0xFFFFD6E5);
       tc = info.period ? Colors.white : C.pinkDark;
     } else if (info.ovulation) {
       fill = CalColors.flower;
@@ -643,9 +675,9 @@ class MonthGrid extends StatelessWidget {
 
 /// Colores del calendario (como la imagen de referencia).
 class CalColors {
-  static const normal = Color(0xFFF6E4EC);
-  static const period = Color(0xFFFCC3D4);
-  static const predicted = Color(0xFFFFEEF3);
+  static Color get normal => C.t(0xFFF6E4EC);
+  static const period = Color(0xFFFCC3D4); // la regla siempre en rosa
+  static Color get predicted => C.t(0xFFFFEEF3);
   static const fertile = Color(0xFFD9EDC8);
   static const ovulation = Color(0xFFE4D3FA);
   static const flower = Color(0xFF9B59E0);
@@ -709,7 +741,7 @@ class _MiniMonth extends StatelessWidget {
         children: [
           Text(
             L.month(month.month),
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 11.5,
               fontWeight: FontWeight.w800,
               color: C.pinkDark,
@@ -892,6 +924,11 @@ class _DayCard extends StatelessWidget {
       chips.add(_chip(null, '⚖️', '${fmtNum(log.weight!)} kg'));
     if (log.sex > 0 && AppStore.instance.showSex) chips.add(_chip(null, '❤️', sexNames[log.sex]));
     if (log.activity > 0) chips.add(_chip(null, '🏃', '${log.activity} min'));
+    final ov = _OvTests.byDay[dateOnly(day)];
+    if (ov != null) {
+      final res = ov == 'peak' ? tr('Pico de LH', 'LH peak') : ov == 'positive' ? tr('Positivo', 'Positive') : tr('Negativo', 'Negative');
+      chips.add(_chip(null, '🧪', '${tr('Test de ovulación', 'Ovulation test')}\n($res)'));
+    }
 
     return Container(
       padding: const EdgeInsets.all(14),
@@ -972,7 +1009,7 @@ class _DayCard extends StatelessWidget {
               const Img('cal_heart', size: 76, fallback: Icons.event_available),
             ],
           ),
-          const Divider(height: 22, color: C.pinkLine),
+          Divider(height: 22, color: C.pinkLine),
           InkWell(
             onTap: onEdit,
             child: Row(
@@ -983,7 +1020,7 @@ class _DayCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.favorite_border_rounded,
                             color: C.pink,
                             size: 19,
@@ -1021,7 +1058,7 @@ class _DayCard extends StatelessWidget {
               ],
             ),
           ),
-          const Divider(height: 22, color: C.pinkLine),
+          Divider(height: 22, color: C.pinkLine),
           InkWell(
             onTap: onEdit,
             child: Row(
@@ -1032,7 +1069,7 @@ class _DayCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.edit_rounded,
                             color: C.pink,
                             size: 18,
@@ -1100,4 +1137,18 @@ class _DayCard extends StatelessWidget {
       ],
     ),
   );
+}
+
+/// Tests de ovulación guardados (pantalla Test de ovulación), por día,
+/// para mostrarlos en el detalle del día del calendario.
+class _OvTests {
+  static Map<DateTime, String> byDay = {};
+  static Future<void> load() async {
+    final list = await SettingsService().loadOvulationTests();
+    final m = <DateTime, String>{};
+    for (final t in list.reversed) {
+      m[DateTime(t.date.year, t.date.month, t.date.day)] = t.result;
+    }
+    byDay = m;
+  }
 }

@@ -233,6 +233,9 @@ class AppStore extends ChangeNotifier {
 
   /// Foto de perfil propia (nombre del archivo dentro de Documentos) o null.
   String? photoName;
+  /// Avatar de la pantalla Hoy: '' = automático (su foto si tiene, si no
+  /// la ilustración), 'photo' = su foto, o el nombre de una ilustración.
+  String avatarId = '';
   String docsPath = '';
 
   String? get photoPath => photoName == null || docsPath.isEmpty ? null : '$docsPath/$photoName';
@@ -248,6 +251,26 @@ class AppStore extends ChangeNotifier {
 
   /// Mostrar el registro de relaciones sexuales (activado por defecto).
   bool showSex = true;
+
+  /// Michi: mostrarlo, felicitar el santo y país para sus fiestas ('' = automático).
+  bool showMichi = true;
+  bool michiSaint = false;
+  String michiCountry = '';
+  bool michiSounds = true;
+  /// Michi habla con voz (lee sus frases al tocarlo).
+  bool michiVoice = true;
+  /// Escenario de Michi: 'house' (su casa, por defecto) o 'map' (mundo de nubes).
+  String michiScene = 'house';
+  /// Color de la app: rosa (por defecto), lila, azul, menta o melocoton.
+  String themeColor = 'rosa';
+  /// Si Michi está oculto: enseñar el jardín de la flor en su lugar (o nada).
+  bool showGarden = true;
+  /// Ropa elegida en el armario ('' = automático).
+  String michiOutfit = '';
+
+  /// Modo perimenopausia y avisos discretos.
+  bool perimenopause = false;
+  bool discreetNotifs = false;
   List<String> customSymptoms = [];
   ReminderSettings reminders = ReminderSettings();
 
@@ -368,6 +391,7 @@ class AppStore extends ChangeNotifier {
     }
     name = p.getString('name') ?? '';
     photoName = p.getString('photoName');
+    avatarId = p.getString('avatarId') ?? '';
     try {
       docsPath = (await getApplicationDocumentsDirectory()).path;
     } catch (_) {}
@@ -380,6 +404,17 @@ class AppStore extends ChangeNotifier {
     waterGoal = p.getInt('waterGoal') ?? 8;
     onboarded = p.getBool('onboarded') ?? false;
     showSex = p.getBool('showSex') ?? true;
+    showMichi = p.getBool('showMichi') ?? true;
+    michiSaint = p.getBool('michiSaint') ?? false;
+    michiCountry = p.getString('michiCountry') ?? '';
+    michiSounds = p.getBool('michiSounds') ?? true;
+    michiVoice = p.getBool('michiVoice') ?? true;
+    michiScene = p.getString('michiScene') ?? 'house';
+    themeColor = p.getString('themeColor') ?? 'rosa';
+    showGarden = p.getBool('showGarden') ?? true;
+    michiOutfit = p.getString('michiOutfit') ?? '';
+    perimenopause = p.getBool('perimenopause') ?? false;
+    discreetNotifs = p.getBool('discreetNotifs') ?? false;
     customSymptoms = p.getStringList('customSymptoms') ?? [];
     final r = p.getString('reminders');
     if (r != null) {
@@ -407,6 +442,7 @@ class AppStore extends ChangeNotifier {
       } catch (_) {}
     }
     await p.setString('name', name);
+    await p.setString('avatarId', avatarId);
     if (photoName == null) {
       await p.remove('photoName');
     } else {
@@ -424,6 +460,17 @@ class AppStore extends ChangeNotifier {
     await p.setInt('waterGoal', waterGoal);
     await p.setBool('onboarded', onboarded);
     await p.setBool('showSex', showSex);
+    await p.setBool('showMichi', showMichi);
+    await p.setBool('michiSaint', michiSaint);
+    await p.setString('michiCountry', michiCountry);
+    await p.setBool('michiSounds', michiSounds);
+    await p.setBool('michiVoice', michiVoice);
+    await p.setString('michiScene', michiScene);
+    await p.setString('themeColor', themeColor);
+    await p.setBool('showGarden', showGarden);
+    await p.setString('michiOutfit', michiOutfit);
+    await p.setBool('perimenopause', perimenopause);
+    await p.setBool('discreetNotifs', discreetNotifs);
     await p.setStringList('customSymptoms', customSymptoms);
     await p.setString('reminders', jsonEncode(reminders.toJson()));
   }
@@ -485,6 +532,7 @@ class AppStore extends ChangeNotifier {
     logs.clear();
     name = '';
     photoName = null;
+    avatarId = '';
     goal = 'track';
     pregnancyStart = null;
     partnerName = '';
@@ -493,6 +541,17 @@ class AppStore extends ChangeNotifier {
     waterGoal = 8;
     onboarded = false;
     showSex = true;
+    showMichi = true;
+    michiSaint = false;
+    michiCountry = '';
+    michiSounds = true;
+    michiVoice = true;
+    michiScene = 'house';
+    themeColor = 'rosa';
+    showGarden = true;
+    michiOutfit = '';
+    perimenopause = false;
+    discreetNotifs = false;
     customSymptoms = [];
     reminders = ReminderSettings();
     await commit();

@@ -1,3 +1,4 @@
+import '../go/strings.dart' show tr;
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -247,7 +248,7 @@ class PartnerService {
   }) async {
     if (await partnerCount(ownerUid) >= _maxPartners) {
       throw PartnerException(
-        'Ya tienes $_maxPartners personas vinculadas a tu embarazo. Quita a una para poder invitar a otra.',
+        tr('Ya tienes $_maxPartners personas vinculadas a tu embarazo. Quita a una para poder invitar a otra.', 'You already have $_maxPartners people linked to your pregnancy. Remove one to invite another.'),
       );
     }
     await cancelActiveInvite(ownerUid);
@@ -335,11 +336,11 @@ class PartnerService {
   Future<String> previewInvite(String code) async {
     final trimmed = code.trim().toUpperCase();
     if (trimmed.isEmpty) {
-      throw PartnerException('Escribe el código que te compartieron.');
+      throw PartnerException(tr('Escribe el código que te compartieron.', 'Enter the code you were given.'));
     }
     final doc = await _db.collection(_invitesCollection).doc(trimmed).get();
     if (!doc.exists) {
-      throw PartnerException('Ese código no existe. Revísalo e inténtalo de nuevo.');
+      throw PartnerException(tr('Ese código no existe. Revísalo e inténtalo de nuevo.', "That code doesn't exist. Check it and try again."));
     }
     final data = doc.data()!;
     final status = data['status'] as String?;
@@ -349,15 +350,15 @@ class PartnerService {
     // una solicitud pendiente. La fecha de caducidad solo aplica al primer
     // uso, mientras el código sigue "pending".
     if (status == 'revoked') {
-      throw PartnerException('Ese código fue anulado y ya no es válido.');
+      throw PartnerException(tr('Ese código fue anulado y ya no es válido.', 'That code was cancelled and is no longer valid.'));
     }
     if (status != 'pending' && status != 'accepted') {
-      throw PartnerException('Ese código ya no es válido. Pide uno nuevo.');
+      throw PartnerException(tr('Ese código ya no es válido. Pide uno nuevo.', 'That code is no longer valid. Ask for a new one.'));
     }
     if (status == 'pending') {
       final expiresAt = (data['expiresAt'] as Timestamp?)?.toDate();
       if (expiresAt != null && expiresAt.isBefore(DateTime.now())) {
-        throw PartnerException('Ese código ya caducó. Pide uno nuevo.');
+        throw PartnerException(tr('Ese código ya caducó. Pide uno nuevo.', 'That code has expired. Ask for a new one.'));
       }
     }
     return data['ownerEmail'] as String? ?? '';
@@ -389,7 +390,7 @@ class PartnerService {
     final inviteRef = _db.collection(_invitesCollection).doc(trimmed);
     final inviteDoc = await inviteRef.get();
     if (!inviteDoc.exists) {
-      throw PartnerException('Ese código no existe. Revísalo e inténtalo de nuevo.');
+      throw PartnerException(tr('Ese código no existe. Revísalo e inténtalo de nuevo.', "That code doesn't exist. Check it and try again."));
     }
     final data = inviteDoc.data()!;
     final ownerUid = data['ownerUid'] as String;
@@ -398,7 +399,7 @@ class PartnerService {
     final label = data['label'] as String? ?? '';
 
     if (ownerUid == partnerUid) {
-      throw PartnerException('No puedes vincularte a tu propia cuenta.');
+      throw PartnerException(tr('No puedes vincularte a tu propia cuenta.', "You can't link to your own account."));
     }
 
     final status = data['status'] as String?;
@@ -408,7 +409,7 @@ class PartnerService {
     // aunque sea la misma persona que lo tenía antes o alguien a quien se
     // lo haya pasado por error.
     if (status == 'revoked') {
-      throw PartnerException('Ese código fue anulado y ya no es válido.');
+      throw PartnerException(tr('Ese código fue anulado y ya no es válido.', 'That code was cancelled and is no longer valid.'));
     }
 
     // Código ya usado antes: si fue por esta misma cuenta, ya está
@@ -432,11 +433,11 @@ class PartnerService {
       return AcceptCodeOutcome.pending(request);
     }
     if (status != 'pending') {
-      throw PartnerException('Ese código ya se usó. Pide uno nuevo.');
+      throw PartnerException(tr('Ese código ya se usó. Pide uno nuevo.', 'That code has already been used. Ask for a new one.'));
     }
     final expiresAt = (data['expiresAt'] as Timestamp?)?.toDate();
     if (expiresAt != null && expiresAt.isBefore(DateTime.now())) {
-      throw PartnerException('Ese código ya caducó. Pide uno nuevo.');
+      throw PartnerException(tr('Ese código ya caducó. Pide uno nuevo.', 'That code has expired. Ask for a new one.'));
     }
     // Nota: aquí NO se repite la comprobación de "máximo _maxPartners" que
     // sí hace createInvite. Antes se llamaba a partnerCount(ownerUid) —
@@ -476,7 +477,7 @@ class PartnerService {
     try {
       await batch.commit();
     } catch (_) {
-      throw PartnerException('No se pudo vincular. Revisa tu conexión e inténtalo de nuevo.');
+      throw PartnerException(tr('No se pudo vincular. Revisa tu conexión e inténtalo de nuevo.', "Couldn't link. Check your connection and try again."));
     }
 
     // Nota: aquí NO se intenta limpiar 'activeInviteCode' en el documento

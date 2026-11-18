@@ -1,3 +1,5 @@
+import '../go/strings.dart' show tr;
+import '../data/pregnancy_week_en.dart' show trWeek;
 import 'package:flutter/material.dart';
 
 import '../data/pregnancy_week_info.dart';
@@ -125,15 +127,15 @@ class _PregnancySimulatorScreenState extends State<PregnancySimulatorScreen> {
                   _buildTextCard(
                     icon: Icons.auto_awesome,
                     iconColor: _gold,
-                    title: 'Cómo se desarrolla tu bebé',
-                    text: info.development,
+                    title: tr('Cómo se desarrolla tu bebé', 'How your baby is developing'),
+                    text: trWeek(info.development),
                   ),
                   const SizedBox(height: 16),
                   _buildTextCard(
                     icon: Icons.favorite,
                     iconColor: primary,
-                    title: 'Consejo para esta semana',
-                    text: info.tip,
+                    title: tr('Consejo para esta semana', 'Tip for this week'),
+                    text: trWeek(info.tip),
                   ),
                 ],
               ),
@@ -150,8 +152,8 @@ class _PregnancySimulatorScreenState extends State<PregnancySimulatorScreen> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          const Text(
-            'Simulacro del embarazo',
+          Text(
+            tr('Simulacro del embarazo', 'Pregnancy preview'),
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: Colors.white),
           ),
           Align(
@@ -168,7 +170,7 @@ class _PregnancySimulatorScreenState extends State<PregnancySimulatorScreen> {
 
   Widget _buildWeekSliderCard(Color primary, DateTime weekStartDate) {
     final isCurrentWeek = _week == _currentRealWeek;
-    final size = pregnancyWeekInfoFor(_week).size;
+    final size = trWeek(pregnancyWeekInfoFor(_week).size);
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 12),
@@ -184,7 +186,7 @@ class _PregnancySimulatorScreenState extends State<PregnancySimulatorScreen> {
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: [
-              const Text('Semana', style: TextStyle(fontSize: 13, color: _textMuted)),
+              Text(tr('Semana', 'Week'), style: TextStyle(fontSize: 13, color: _textMuted)),
               const SizedBox(width: 8),
               Text(
                 '$_week',
@@ -195,7 +197,7 @@ class _PregnancySimulatorScreenState extends State<PregnancySimulatorScreen> {
           ),
           const SizedBox(height: 4),
           Text(
-            'aprox. ${_formatDate(weekStartDate)}',
+            tr('aprox. ${_formatDate(weekStartDate)}', 'approx. ${_formatDate(weekStartDate)}'),
             style: const TextStyle(fontSize: 12.5, color: _textMuted),
           ),
           const SizedBox(height: 6),
@@ -203,7 +205,7 @@ class _PregnancySimulatorScreenState extends State<PregnancySimulatorScreen> {
             // Antes de la semana 4 (implantación) todavía no hay un
             // embrión con un tamaño comparable a algo, así que se muestra
             // la frase tal cual en vez de forzar el prefijo "Del tamaño de".
-            _week >= 4 ? 'Del tamaño de $size' : size,
+            _week >= 4 ? tr('Del tamaño de $size', 'The size of $size') : size,
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w600),
           ),
@@ -220,7 +222,7 @@ class _PregnancySimulatorScreenState extends State<PregnancySimulatorScreen> {
               min: 1,
               max: _totalWeeks.toDouble(),
               divisions: _totalWeeks - 1,
-              label: 'Semana $_week',
+              label: tr('Semana $_week', 'Week $_week'),
               onChanged: (v) => setState(() => _week = v.round()),
             ),
           ),
@@ -230,7 +232,7 @@ class _PregnancySimulatorScreenState extends State<PregnancySimulatorScreen> {
               child: TextButton.icon(
                 onPressed: () => setState(() => _week = _currentRealWeek),
                 icon: Icon(Icons.today, size: 16, color: primary),
-                label: Text('Volver a hoy (semana $_currentRealWeek)', style: TextStyle(color: primary, fontSize: 12.5)),
+                label: Text(tr('Volver a hoy (semana $_currentRealWeek)', 'Back to today (week $_currentRealWeek)'), style: TextStyle(color: primary, fontSize: 12.5)),
               ),
             ),
         ],
@@ -245,7 +247,7 @@ class _PregnancySimulatorScreenState extends State<PregnancySimulatorScreen> {
       children: [
         Expanded(
           child: _imageCard(
-            label: 'Tu bebé',
+            label: tr('Tu bebé', 'Your baby'),
             // Las fotos día a día ya traen su propia viñeta circular
             // (fondo negro + círculo), así que un círculo aquí encaja con
             // el contenido en vez de recortarlo.
@@ -270,7 +272,7 @@ class _PregnancySimulatorScreenState extends State<PregnancySimulatorScreen> {
         const SizedBox(width: 12),
         Expanded(
           child: _imageCard(
-            label: 'Tu barriga',
+            label: tr('Tu barriga', 'Your bump'),
             // La foto de barriga es un retrato normal (no viene con
             // viñeta circular): un círculo le cortaba la cabeza y las
             // piernas. Con una tarjeta redondeada se ve la foto completa
@@ -331,9 +333,9 @@ class _PregnancySimulatorScreenState extends State<PregnancySimulatorScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        chip('default', 'Piel clara'),
+        chip('default', tr('Piel clara', 'Light skin')),
         const SizedBox(width: 10),
-        chip('black', 'Piel morena'),
+        chip('black', tr('Piel morena', 'Dark skin')),
       ],
     );
   }

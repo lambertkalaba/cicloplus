@@ -101,7 +101,7 @@ class Upgrade {
         periodLine = tr('El periodo llega hoy', 'Period due today');
       }
     }
-    final key = '$cycleLine|$periodLine';
+    final key = '$cycleLine|$periodLine|${s.logs[dayKey(DateTime.now())]?.isEmpty ?? true}|${s.showMichi}|${dayKey(DateTime.now())}';
     if (key == _lastWidget) return;
     _lastWidget = key;
     try {

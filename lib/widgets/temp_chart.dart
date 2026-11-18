@@ -1,3 +1,4 @@
+import '../go/strings.dart' show tr;
 import 'package:flutter/material.dart';
 
 import '../models/day_entry.dart';
@@ -19,10 +20,10 @@ class TempChart extends StatelessWidget {
     final last30 = keys.length > 30 ? keys.sublist(keys.length - 30) : keys;
 
     if (last30.isEmpty) {
-      return const Padding(
+      return Padding(
         padding: EdgeInsets.symmetric(vertical: 20),
         child: Text(
-          'Registra tu temperatura basal en algunos días para ver la gráfica.',
+          tr('Registra tu temperatura basal en algunos días para ver la gráfica.', 'Log your basal temperature on a few days to see the chart.'),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 12, color: AppColors.textMuted),
         ),

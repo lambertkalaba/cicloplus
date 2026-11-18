@@ -6,7 +6,9 @@ import 'package:share_plus/share_plus.dart';
 import '../data/store.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
+import '../cicloplus_host.dart';
 import 'extras.dart';
+import 'month_summary.dart';
 import 'register.dart';
 
 const _title = TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: C.text);
@@ -44,7 +46,7 @@ class LinkRow extends StatelessWidget {
         onTap: onTap,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 13, horizontal: 4),
-          decoration: BoxDecoration(border: divider ? const Border(bottom: BorderSide(color: C.pinkLine)) : null),
+          decoration: BoxDecoration(border: divider ? Border(bottom: BorderSide(color: C.pinkLine)) : null),
           child: Row(
             children: [
               SizedBox(width: 32, child: Center(child: icon)),
@@ -131,7 +133,7 @@ class MyHealthScreen extends StatelessWidget {
                   onTap: () => _push(context, RegisterScreen(day: DateTime.now())),
                 ),
                 LinkRow(
-                  icon: const Icon(Icons.menu_book_rounded, color: C.pink),
+                  icon: Icon(Icons.menu_book_rounded, color: C.pink),
                   title: tr('Mi diario', 'My diary'),
                   divider: false,
                   onTap: () => _push(context, const DiaryScreen()),
@@ -160,29 +162,24 @@ class ReportsHubScreen extends StatelessWidget {
             _box(
               Column(
                 children: [
-                  LinkRow(
-                    icon: const Icon(Icons.bar_chart_rounded, color: C.pink, size: 26),
+                  if (AppStore.instance.goal != 'pregnancy') LinkRow(
+                    icon: Icon(Icons.bar_chart_rounded, color: C.pink, size: 26),
                     title: tr('Análisis del ciclo', 'Cycle analysis'),
                     subtitle: tr('Ciclo, síntomas y estado de ánimo', 'Cycle, symptoms and mood'),
                     onTap: () => _push(context, const AnalysisScreen()),
                   ),
                   LinkRow(
-                    icon: const Icon(Icons.show_chart_rounded, color: C.pink, size: 26),
+                    icon: Icon(Icons.show_chart_rounded, color: C.pink, size: 26),
                     title: tr('Tendencias y bienestar', 'Trends & wellbeing'),
                     subtitle: tr('Energía, ánimo, sueño y dolor', 'Energy, mood, sleep and pain'),
                     onTap: () => _push(context, const TrendsScreen()),
                   ),
-                  LinkRow(
+                  if (AppStore.instance.goal != 'pregnancy') LinkRow(
                     icon: const Img('report_chart', size: 30),
                     title: tr('Informe del ciclo', 'Cycle report'),
                     subtitle: tr('Resumen completo y predicciones', 'Full summary and predictions'),
-                    onTap: () => _push(context, const ReportScreen()),
-                  ),
-                  LinkRow(
-                    icon: const Icon(Icons.menu_book_rounded, color: C.pink, size: 26),
-                    title: tr('Notas y diario', 'Notes & diary'),
                     divider: false,
-                    onTap: () => _push(context, const DiaryScreen()),
+                    onTap: () => _push(context, const ReportScreen()),
                   ),
                 ],
               ),
@@ -321,7 +318,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
           decoration: tile(),
           child: Column(
             children: [
-              Text(v, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: C.pinkDark)),
+              Text(v, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: C.pinkDark)),
               Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: _muted),
             ],
           ),
@@ -414,7 +411,7 @@ class _VBars extends StatelessWidget {
                   Container(
                     width: 16,
                     height: 40 + (mx == mn ? 60 : (values[i] - mn) / (mx - mn) * 80),
-                    decoration: const BoxDecoration(gradient: pinkGradient, borderRadius: BorderRadius.vertical(top: Radius.circular(8))),
+                    decoration: BoxDecoration(gradient: pinkGradient, borderRadius: BorderRadius.vertical(top: Radius.circular(8))),
                   ),
                   const SizedBox(height: 6),
                   Text(labels[i], style: _muted),
@@ -452,7 +449,7 @@ class _HBar extends StatelessWidget {
                   value: fraction.clamp(0.0, 1.0),
                   minHeight: 12,
                   backgroundColor: C.pinkSoft,
-                  valueColor: const AlwaysStoppedAnimation(C.pink),
+                  valueColor: AlwaysStoppedAnimation(C.pink),
                 ),
               ),
             ),
@@ -685,7 +682,7 @@ class DiaryScreen extends StatelessWidget {
       onTap: () => _push(context, NoteEditorScreen(day: d)),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 13, horizontal: 4),
-        decoration: BoxDecoration(border: divider ? const Border(bottom: BorderSide(color: C.pinkLine)) : null),
+        decoration: BoxDecoration(border: divider ? Border(bottom: BorderSide(color: C.pinkLine)) : null),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -701,7 +698,7 @@ class DiaryScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Icon(Icons.edit_rounded, size: 18, color: C.pink),
+            Icon(Icons.edit_rounded, size: 18, color: C.pink),
           ],
         ),
       ),
@@ -788,7 +785,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
                   const Img('n_calendar', size: 26),
                   const SizedBox(width: 10),
                   Expanded(child: Text(L.dateLong(_day), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: C.text))),
-                  const Icon(Icons.edit_calendar_rounded, color: C.pink),
+                  Icon(Icons.edit_calendar_rounded, color: C.pink),
                 ],
               ),
             ),
@@ -804,9 +801,9 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
               hintText: tr('¿Cómo te sientes hoy? ¿Qué has notado?', 'How do you feel today? What did you notice?'),
               filled: true,
               fillColor: Colors.white,
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: const BorderSide(color: C.pinkLine)),
-              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: const BorderSide(color: C.pinkLine)),
-              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: const BorderSide(color: C.pink, width: 2)),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide(color: C.pinkLine)),
+              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide(color: C.pinkLine)),
+              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide(color: C.pink, width: 2)),
             ),
           ),
         ],
@@ -935,7 +932,7 @@ class PartnerScreen extends StatelessWidget {
               ),
               _box(
                 LinkRow(
-                  icon: const Icon(Icons.person_rounded, color: C.pink),
+                  icon: Icon(Icons.person_rounded, color: C.pink),
                   title: s.partnerName.isEmpty ? tr('Añadir su nombre', 'Add their name') : s.partnerName,
                   subtitle: tr('Para personalizar los mensajes', 'To personalise the messages'),
                   divider: false,
@@ -998,10 +995,10 @@ const _babySizes = {
   23: ['un pomelo', 'a grapefruit', '29 cm'],
   24: ['una mazorca de maíz', 'an ear of corn', '30 cm'],
   25: ['una coliflor', 'a cauliflower', '35 cm'],
-  26: ['una lechuga', 'a lettuce', '36 cm'],
+  26: ['una lechuga', 'a head of lettuce', '36 cm'],
   27: ['un brócoli', 'a broccoli', '37 cm'],
   28: ['una berenjena', 'an eggplant', '38 cm'],
-  29: ['una calabaza pequeña', 'a small squash', '39 cm'],
+  29: ['una calabaza pequeña', 'a small pumpkin', '39 cm'],
   30: ['una col', 'a cabbage', '40 cm'],
   31: ['un coco', 'a coconut', '41 cm'],
   32: ['una piña pequeña', 'a small pineapple', '42 cm'],
@@ -1022,7 +1019,8 @@ String babyText(int w) {
   }
   final k = w > 40 ? 40 : w;
   final sz = _babySizes[k]!;
-  final size = tr('Tu bebé mide como ${sz[0]} (unos ${sz[2]}).', 'Your baby is about the size of ${sz[1]} (around ${sz[2]}).');
+  final noun = tr(sz[0], sz[1]);
+  final size = tr('Tu bebé mide como $noun (unos ${sz[2]}).', 'Your baby is about the size of ${sz[1]} (around ${sz[2]}).');
   String stage;
   if (w <= 8) {
     stage = tr('Se forman el corazón, que ya late, y los primeros esbozos de brazos y piernas.',
@@ -1141,7 +1139,7 @@ class PregnancyScreen extends StatelessWidget {
                         value: (w / 40).clamp(0.0, 1.0),
                         minHeight: 10,
                         backgroundColor: C.pinkSoft,
-                        valueColor: const AlwaysStoppedAnimation(C.pink),
+                        valueColor: AlwaysStoppedAnimation(C.pink),
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -1167,12 +1165,12 @@ class PregnancyScreen extends StatelessWidget {
                 Column(
                   children: [
                     LinkRow(
-                      icon: const Icon(Icons.edit_calendar_rounded, color: C.pink),
+                      icon: Icon(Icons.edit_calendar_rounded, color: C.pink),
                       title: tr('Cambiar fecha de la última regla', 'Change last period date'),
                       onTap: () => setup(context),
                     ),
                     LinkRow(
-                      icon: const Icon(Icons.logout_rounded, color: C.pink),
+                      icon: Icon(Icons.logout_rounded, color: C.pink),
                       title: tr('Salir del modo embarazo', 'Leave pregnancy mode'),
                       divider: false,
                       onTap: () async {

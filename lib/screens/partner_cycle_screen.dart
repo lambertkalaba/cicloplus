@@ -1,4 +1,6 @@
+import '../go/strings.dart' show tr;
 import 'package:flutter/material.dart';
+import '../widgets/ciclo_header.dart';
 
 import '../services/partner_service.dart';
 import '../services/settings_service.dart' show themeById;
@@ -79,7 +81,7 @@ class PartnerCycleScreen extends StatelessWidget {
                   const Text('🩷', style: TextStyle(fontSize: 48)),
                   const SizedBox(height: 16),
                   Text(
-                    '$_displayName todavía no ha activado o compartido su seguimiento.',
+                    tr('$_displayName todavía no ha activado o compartido su seguimiento.', "$_displayName hasn't turned on or shared their tracking yet."),
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 14, color: AppColors.textMuted, height: 1.4, fontWeight: FontWeight.w500),
                   ),
@@ -104,7 +106,7 @@ class PartnerCycleScreen extends StatelessWidget {
                     children: [
                       Icon(Icons.favorite, size: 14, color: primary),
                       const SizedBox(width: 6),
-                      Text('Intentando concebir', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700, color: primary)),
+                      Text(tr('Intentando concebir', 'Trying to conceive'), style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700, color: primary)),
                     ],
                   ),
                 ),
@@ -112,13 +114,13 @@ class PartnerCycleScreen extends StatelessWidget {
               const SizedBox(height: 14),
             ],
             if (data.currentDayInCycle != null) ...[
-              _statCard(icon: Icons.today_outlined, label: 'Día del ciclo', value: 'Día ${data.currentDayInCycle! + 1}', primary: primary),
+              _statCard(icon: Icons.today_outlined, label: tr('Día del ciclo', 'Cycle day'), value: tr('Día ${data.currentDayInCycle! + 1}', 'Day ${data.currentDayInCycle! + 1}'), primary: primary),
               const SizedBox(height: 12),
             ],
             if (data.nextPeriodStart != null) ...[
               _statCard(
                 icon: Icons.water_drop_outlined,
-                label: data.isIrregular ? 'Próximo periodo (aproximado)' : 'Próximo periodo previsto',
+                label: data.isIrregular ? tr('Próximo periodo (aproximado)', 'Next period (approximate)') : tr('Próximo periodo previsto', 'Next predicted period'),
                 value: _fmtDate(data.nextPeriodStart!),
                 primary: primary,
               ),
@@ -127,19 +129,19 @@ class PartnerCycleScreen extends StatelessWidget {
             if (data.fertileRangeStart != null && data.fertileRangeEnd != null) ...[
               _statCard(
                 icon: Icons.eco_outlined,
-                label: 'Ventana fértil',
+                label: tr('Ventana fértil', 'Fertile window'),
                 value: '${_fmtDate(data.fertileRangeStart!)} – ${_fmtDate(data.fertileRangeEnd!)}',
                 primary: primary,
               ),
               const SizedBox(height: 12),
             ],
             if (data.ovulationDate != null) ...[
-              _statCard(icon: Icons.circle_outlined, label: 'Ovulación estimada', value: _fmtDate(data.ovulationDate!), primary: primary),
+              _statCard(icon: Icons.circle_outlined, label: tr('Ovulación estimada', 'Estimated ovulation'), value: _fmtDate(data.ovulationDate!), primary: primary),
               const SizedBox(height: 12),
             ],
             const SizedBox(height: 8),
             Text(
-              'Solo se comparte este resumen calculado — nunca los síntomas ni notas que $_displayName registra día a día.',
+              tr('Solo se comparte este resumen calculado — nunca los síntomas ni notas que $_displayName registra día a día.', 'Only this calculated summary is shared — never the symptoms or notes $_displayName logs each day.'),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 11.5, color: AppColors.textMuted, height: 1.4),
             ),
@@ -149,7 +151,7 @@ class PartnerCycleScreen extends StatelessWidget {
         if (!standalone) return content;
         return Scaffold(
           backgroundColor: AppColors.background,
-          appBar: AppBar(
+          appBar: CicloAppBar(
             backgroundColor: primaryDark,
             foregroundColor: Colors.white,
             automaticallyImplyLeading: onClose == null,
@@ -166,7 +168,7 @@ class PartnerCycleScreen extends StatelessWidget {
     if (!standalone) return child;
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
+      appBar: CicloAppBar(
         backgroundColor: primaryDark,
         foregroundColor: Colors.white,
         automaticallyImplyLeading: onClose == null,

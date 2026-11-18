@@ -83,8 +83,9 @@
     <uses-permission android:name="android.permission.health.READ_SEXUAL_ACTIVITY" tools:node="remove"/>
     <uses-permission android:name="android.permission.health.WRITE_SEXUAL_ACTIVITY" tools:node="remove"/>
 
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
     <application
-        android:label="cicloplus_app"
+        android:label="CicloPlus"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
@@ -117,6 +118,39 @@
                  esquema propio (no un enlace https verificado con un
                  dominio), así que solo funciona si CicloPlus ya está
                  instalada en el móvil que escanea. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="cicloplus" android:host="link" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- Icono discreto (Ajustes > Ciclo y privacidad): misma app con
+             icono de cuaderno y nombre "Diario". Deshabilitada por defecto;
+             ver MainActivity.kt. -->
+        <activity
+            android:name=".DiscreetActivity"
+            android:enabled="false"
+            android:exported="true"
+            android:label="@string/discreet_label"
+            android:icon="@mipmap/discreet_icon"
+            android:roundIcon="@mipmap/discreet_icon"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -171,6 +205,10 @@
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
+        </intent>
+        <!-- Voz de Michi (flutter_tts): ver el motor de texto a voz en Android 11+. -->
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
         </intent>
     </queries>
 </manifest>

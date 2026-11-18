@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/ciclo_header.dart';
 import 'package:health/health.dart';
 
 import '../l10n/app_strings.dart';
@@ -166,7 +167,9 @@ class _StatsScreenState extends State<StatsScreen> {
     // ni elevación), solo resuelve ese ancestro que faltaba.
     return Material(
       type: MaterialType.transparency,
-      child: SafeArea(
+      child: Column(children: [
+        CicloHeader(titleText: s.statsTitle),
+        Expanded(child: SafeArea(top: false,
       child: SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -181,16 +184,6 @@ class _StatsScreenState extends State<StatsScreen> {
           // contenido en SafeArea para que nada quede bajo el notch, y se
           // cambia el botón por un ícono de cerrar suelto, con un área de
           // toque de 44x44 fácil de acertar.
-          Align(
-            alignment: Alignment.centerLeft,
-            child: IconButton(
-              onPressed: () => Navigator.of(context).pop(),
-              icon: Icon(Icons.close, size: 22, color: Color(theme.primary)),
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
-              splashRadius: 22,
-            ),
-          ),
           const SizedBox(height: 4),
           if (_wellnessEnabled) ...[
             _buildPhaseHealthCards(s, predictor),
@@ -313,7 +306,8 @@ class _StatsScreenState extends State<StatsScreen> {
         ],
       ),
       ),
-      ),
+      )),
+      ]),
     );
   }
 

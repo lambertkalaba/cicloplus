@@ -968,7 +968,14 @@ class AppStrings {
   // ---- Días de la semana (iniciales para el calendario) ----
   String get weekdayInitials => _t({'es': 'DLMMJVS', 'en': 'SMTWTFS', 'fr': 'DLMMJVS', 'de': 'SMDMDFS', 'ru': 'ВПВСЧПС', 'ar': 'حنثرخجس', 'hi': 'रसमबगशश', 'bn': 'রসমববশশ', 'pt': 'DSTQQSS'});
 
-  List<String> get weekdayInitialsList => weekdayInitials.split('');
+  List<String> get weekdayInitialsList {
+    // Algunas escrituras (gujarati, tamil…) usan letras de varios caracteres:
+    // si el texto no tiene exactamente 7 unidades, partimos por grafemas.
+    final w = weekdayInitials;
+    if (w.length == 7) return w.split('');
+    final g = w.characters.toList();
+    return g.length == 7 ? g : 'SMTWTFS'.split('');
+  }
 
   // ==================== status_card.dart ====================
 

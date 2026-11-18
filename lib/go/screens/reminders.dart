@@ -57,7 +57,8 @@ class RemindersScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             _group(Icons.calendar_month_rounded, tr('Mi ciclo', 'My cycle'), [
-              _row(
+              if (AppStore.instance.goal != 'pregnancy')
+                _row(
                 icon: const Icon(Icons.notifications_active_rounded, color: Color(0xFFF2A516), size: 26),
                 title: tr('Aviso de periodo', 'Period alert'),
                 subtitle: tr('${r.periodDaysBefore} ${daysWord(r.periodDaysBefore)} antes, 09:00', '${r.periodDaysBefore} ${daysWord(r.periodDaysBefore)} before, 09:00'),
@@ -70,14 +71,16 @@ class RemindersScreen extends StatelessWidget {
                       ])
                     : null,
               ),
-              _row(
+              if (AppStore.instance.goal != 'pregnancy')
+                _row(
                 icon: const Img('target', size: 28),
                 title: tr('Aviso de ovulación', 'Ovulation alert'),
                 subtitle: tr('El mismo día, 09:00', 'Same day, 09:00'),
                 value: r.ovulation,
                 onChanged: (v) => _set((x) => x.ovulation = v, turningOn: v),
               ),
-              _row(
+              if (AppStore.instance.goal != 'pregnancy')
+                _row(
                 icon: const Img('leaf', size: 28),
                 title: tr('Ventana fértil', 'Fertile window'),
                 subtitle: tr('Inicio y fin, 09:00', 'Start and end, 09:00'),
@@ -95,7 +98,8 @@ class RemindersScreen extends StatelessWidget {
                   if (m != null) await _set((x) => x.dailyMinutes = m);
                 },
               ),
-              _row(
+              if (AppStore.instance.goal == 'track')
+                _row(
                 icon: const Text('💊', style: TextStyle(fontSize: 22)),
                 title: tr('Píldora anticonceptiva', 'Birth control pill'),
                 subtitle: tr('Cada día, ${_time(r.pillMinutes)}', 'Every day, ${_time(r.pillMinutes)}'),
@@ -184,7 +188,7 @@ class RemindersScreen extends StatelessWidget {
             Padding(padding: const EdgeInsets.only(right: 6, bottom: 2), child: SectionTitle(icon, title)),
             for (var i = 0; i < rows.length; i++) ...[
               rows[i],
-              if (i < rows.length - 1) const Divider(height: 1, color: C.pinkLine),
+              if (i < rows.length - 1) Divider(height: 1, color: C.pinkLine),
             ],
           ],
         ),
@@ -221,7 +225,7 @@ class RemindersScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 12, color: onTapSubtitle != null ? C.pinkDark : C.muted, fontWeight: FontWeight.w600)),
                           ),
-                          if (onTapSubtitle != null) const Padding(padding: EdgeInsets.only(left: 3), child: Icon(Icons.edit_rounded, size: 12, color: C.pinkDark)),
+                          if (onTapSubtitle != null) Padding(padding: EdgeInsets.only(left: 3), child: Icon(Icons.edit_rounded, size: 12, color: C.pinkDark)),
                         ],
                       ),
                     ),

@@ -1,3 +1,4 @@
+import '../go/strings.dart' show tr;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -9,6 +10,8 @@ import '../services/settings_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/read_only_info_sheet.dart';
 import 'partner_hub_screen.dart';
+import '../services/couple_illustration_controller.dart';
+import '../widgets/partner_ui.dart';
 
 /// Colores entre los que puede elegir quien ve el embarazo de su pareja —
 /// un subconjunto de `kAppThemes` (ver settings_service.dart): solo los 3
@@ -63,6 +66,7 @@ class _PartnerViewerHomeScreenState extends State<PartnerViewerHomeScreen> {
   void initState() {
     super.initState();
     _loadTheme();
+    CoupleIllustrationController.instance.load();
     _resumePendingReconnect();
     // Si se llegó aquí porque alguien escaneó el QR de invitación con la
     // cámara del móvil (ver DeepLinkService), rellena solo el código —
@@ -155,13 +159,13 @@ class _PartnerViewerHomeScreenState extends State<PartnerViewerHomeScreen> {
     final confirmed = await showDialog<bool>(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: const Text('¿Ya no quieres seguir este seguimiento?'),
-            content: const Text(
-              'Dejarás de verlo y el código que usaste quedará anulado para siempre: ni tú ni nadie más podrá volver a usarlo. Esta acción no se puede deshacer.',
+            title: Text(tr('¿Ya no quieres seguir este seguimiento?', "Don't want to follow this tracking anymore?")),
+            content: Text(
+              tr('Dejarás de verlo y el código que usaste quedará anulado para siempre: ni tú ni nadie más podrá volver a usarlo. Esta acción no se puede deshacer.', "You'll stop seeing it and the code you used will be cancelled forever: neither you nor anyone else can use it again. This can't be undone."),
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancelar')),
-              TextButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Sí, dejar de seguir')),
+              TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(tr('Cancelar', 'Cancel'))),
+              TextButton(onPressed: () => Navigator.pop(ctx, true), child: Text(tr('Sí, dejar de seguir', 'Yes, stop following'))),
             ],
           ),
         ) ??
@@ -172,7 +176,7 @@ class _PartnerViewerHomeScreenState extends State<PartnerViewerHomeScreen> {
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No se pudo completar. Revisa tu conexión e inténtalo de nuevo.')),
+          SnackBar(content: Text(tr('No se pudo completar. Revisa tu conexión e inténtalo de nuevo.', "Couldn't complete. Check your connection and try again."))),
         );
       }
     }
@@ -211,13 +215,13 @@ class _PartnerViewerHomeScreenState extends State<PartnerViewerHomeScreen> {
       final confirmed = await showDialog<bool>(
             context: context,
             builder: (ctx) => AlertDialog(
-              title: const Text('¿Vincularte?'),
+              title: Text(tr('¿Vincularte?', 'Link up?')),
               content: Text(
-                'Vas a vincularte con $ownerEmail. Podrás ver su seguimiento (embarazo, periodo o intento de concebir, según lo que comparta) en modo solo lectura, nunca editarlo.',
+                tr('Vas a vincularte con $ownerEmail. Podrás ver su seguimiento (embarazo, periodo o intento de concebir, según lo que comparta) en modo solo lectura, nunca editarlo.', "You're about to link with $ownerEmail. You'll be able to see their tracking (pregnancy, period or trying to conceive, depending on what they share) read-only, never edit it."),
               ),
               actions: [
-                TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancelar')),
-                TextButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Vincularme')),
+                TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(tr('Cancelar', 'Cancel'))),
+                TextButton(onPressed: () => Navigator.pop(ctx, true), child: Text(tr('Vincularme', 'Link me'))),
               ],
             ),
           ) ??
@@ -240,7 +244,7 @@ class _PartnerViewerHomeScreenState extends State<PartnerViewerHomeScreen> {
     } on PartnerException catch (e) {
       setState(() => _acceptError = e.message);
     } catch (_) {
-      setState(() => _acceptError = 'Algo salió mal. Inténtalo de nuevo.');
+      setState(() => _acceptError = tr('Algo salió mal. Inténtalo de nuevo.', 'Something went wrong. Please try again.'));
     } finally {
       if (mounted) setState(() => _accepting = false);
     }
@@ -259,16 +263,16 @@ class _PartnerViewerHomeScreenState extends State<PartnerViewerHomeScreen> {
         children: [
           const Text('⏳', style: TextStyle(fontSize: 40), textAlign: TextAlign.center),
           const SizedBox(height: 20),
-          const Text(
-            'Esperando aprobación',
+          Text(
+            tr('Esperando aprobación', 'Waiting for approval'),
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
           ),
           const SizedBox(height: 10),
           Text(
             (label == null || label.isEmpty)
-                ? 'Ya usaste este código antes, así que le pedimos a quien te invitó que confirme que sigues siendo tú.'
-                : 'Ya usaste este código antes, así que le pedimos a $label que confirme que sigues siendo tú.',
+                ? tr('Ya usaste este código antes, así que le pedimos a quien te invitó que confirme que sigues siendo tú.', "You've used this code before, so we asked the person who invited you to confirm it's still you.")
+                : tr('Ya usaste este código antes, así que le pedimos a $label que confirme que sigues siendo tú.', "You've used this code before, so we asked $label to confirm it's still you."),
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 13.5, color: AppColors.textMuted, height: 1.4),
           ),
@@ -284,7 +288,7 @@ class _PartnerViewerHomeScreenState extends State<PartnerViewerHomeScreen> {
               _pendingSub?.cancel();
               if (mounted) setState(() { _waitingApproval = false; _pendingRequest = null; });
             },
-            child: const Text('Cancelar'),
+            child: Text(tr('Cancelar', 'Cancel')),
           ),
         ],
       ),
@@ -305,7 +309,7 @@ class _PartnerViewerHomeScreenState extends State<PartnerViewerHomeScreen> {
           final link = links.first;
           final ownerDisplay = link.ownerName.trim().isNotEmpty
               ? link.ownerName.trim()
-              : (link.email.isEmpty ? 'Persona vinculada' : link.email);
+              : (link.email.isEmpty ? tr('Persona vinculada', 'Linked person') : link.email);
           return PartnerHubScreen(
             ownerUid: link.uid,
             ownerEmail: link.email,
@@ -317,79 +321,132 @@ class _PartnerViewerHomeScreenState extends State<PartnerViewerHomeScreen> {
         }
 
         return Scaffold(
-          backgroundColor: AppColors.background,
-          appBar: AppBar(
-            title: const Text('Ver seguimiento de tu pareja'),
-            backgroundColor: primaryDark,
-            foregroundColor: Colors.white,
+          backgroundColor: const Color(0xFFFFF4F8),
+          appBar: PartnerHeader(
+            title: tr('Ver seguimiento de tu pareja', "See your partner's tracking"),
+            primary: primary,
+            primaryDark: primaryDark,
             actions: [
               IconButton(
                 onPressed: _pickTheme,
-                icon: const Icon(Icons.palette_outlined),
-                tooltip: 'Color',
+                icon: const Icon(Icons.palette_outlined, color: Colors.white),
+                tooltip: tr('Color', 'Colour'),
               ),
-              TextButton(
+              IconButton(
                 onPressed: _signOut,
-                child: const Text('Salir', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                icon: const Icon(Icons.logout_rounded, color: Colors.white),
+                tooltip: tr('Salir', 'Sign out'),
               ),
             ],
           ),
-          body: _waitingApproval ? _buildWaitingBody(primary) : Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(height: 12),
-                const Text('💗', style: TextStyle(fontSize: 40), textAlign: TextAlign.center),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    const Expanded(
+          body: _waitingApproval ? _buildWaitingBody(primary) : ListView(
+            padding: const EdgeInsets.fromLTRB(16, 18, 16, 32),
+            children: [
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 18, 20, 22),
+                decoration: PartnerUi.card(radius: 28),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                  // Ilustración de la pareja (la misma que eligió en
+                  // "Apariencia de tu pareja", ver CoupleIllustrationController).
+                  Container(
+                    height: 170,
+                    decoration: BoxDecoration(
+                      gradient: RadialGradient(colors: [primary.withOpacity(0.16), primary.withOpacity(0.0)], radius: 0.75),
+                    ),
+                    child: ListenableBuilder(
+                      listenable: CoupleIllustrationController.instance,
+                      builder: (context, _) => Image.asset(
+                        CoupleIllustrationController.instance.illustration.asset,
+                        fit: BoxFit.contain,
+                        errorBuilder: (_, __, ___) => Icon(Icons.favorite_rounded, size: 80, color: primary),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    tr('Ver seguimiento de tu pareja', "See your partner's tracking"),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 24, height: 1.15, fontWeight: FontWeight.w900, color: primaryDark),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(children: [
+                    const Expanded(child: Divider(color: PartnerUi.goldSoft, thickness: 1.2)),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Icon(Icons.favorite_border_rounded, size: 16, color: PartnerUi.gold),
+                    ),
+                    const Expanded(child: Divider(color: PartnerUi.goldSoft, thickness: 1.2)),
+                  ]),
+                  const SizedBox(height: 6),
+                  PartnerBenefit(
+                    icon: Icons.calendar_month_rounded,
+                    title: tr('Su calendario, en solo lectura', 'Their calendar, read-only'),
+                    text: tr('Embarazo, periodo o días fértiles, según lo que comparta contigo.', 'Pregnancy, period or fertile days, depending on what they share with you.'),
+                    primary: primary,
+                  ),
+                  PartnerBenefit(
+                    icon: Icons.chat_bubble_outline_rounded,
+                    title: tr('Chat privado', 'Private chat'),
+                    text: tr('Habláis dentro de CicloPlus, solo vosotros dos.', 'You talk inside CicloPlus, just the two of you.'),
+                    primary: primary,
+                  ),
+                  PartnerBenefit(
+                    icon: Icons.favorite_border_rounded,
+                    title: tr('Su lista de deseos', 'Their wish list'),
+                    text: tr('Descubre qué le apetece o necesita en cada momento.', 'Find out what they fancy or need at any moment.'),
+                    primary: primary,
+                  ),
+                  const SizedBox(height: 14),
+                  Row(children: [
+                    Expanded(
                       child: Text(
-                        'Pega aquí el código que te compartieron',
-                        style: TextStyle(fontSize: 15.5, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+                        tr('Pega aquí el código que te compartieron', 'Paste the code you were given here'),
+                        style: const TextStyle(fontSize: 14.5, fontWeight: FontWeight.w800, color: AppColors.textPrimary),
                       ),
                     ),
                     IconButton(
                       onPressed: _showReadOnlyInfo,
-                      icon: const Icon(Icons.info_outline, size: 20, color: AppColors.textMuted),
-                      tooltip: 'Qué podrás ver',
+                      icon: const Icon(Icons.info_outline_rounded, size: 20, color: AppColors.textMuted),
+                      tooltip: tr('Qué podrás ver', "What you'll see"),
+                      visualDensity: VisualDensity.compact,
                     ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                TextField(
-                  controller: _codeController,
-                  textCapitalization: TextCapitalization.characters,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, letterSpacing: 3),
-                  decoration: InputDecoration(
-                    hintText: 'Ej. AB3D9K',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                    isDense: true,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                  ]),
+                  const SizedBox(height: 6),
+                  PartnerField(
+                    controller: _codeController,
+                    hint: tr('Ej. AB3D9K', 'E.g. AB3D9K'),
+                    icon: Icons.confirmation_number_outlined,
+                    primary: primary,
                     errorText: _acceptError,
+                    code: true,
                   ),
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: _accepting ? null : _acceptCode,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                  const SizedBox(height: 14),
+                  PartnerButton(
+                    label: tr('Vincularme', 'Link me'),
+                    icon: Icons.link_rounded,
+                    primary: primary,
+                    primaryDark: primaryDark,
+                    loading: _accepting,
+                    onPressed: _accepting ? null : _acceptCode,
                   ),
-                  child: _accepting
-                      ? const SizedBox(
-                          width: 18,
-                          height: 18,
-                          child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-                        )
-                      : const Text('Vincularme', style: TextStyle(fontWeight: FontWeight.w700)),
-                ),
-              ],
-            ),
+                  const SizedBox(height: 14),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    decoration: BoxDecoration(color: PartnerUi.goldSoft.withOpacity(0.35), borderRadius: BorderRadius.circular(14)),
+                    child: Row(children: [
+                      const Icon(Icons.lock_outline_rounded, size: 18, color: PartnerUi.gold),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          tr('Solo podrás verlo, nunca editarlo. Puedes dejar de seguirlo cuando quieras.', 'You can only view it, never edit it. You can stop following whenever you like.'),
+                          style: const TextStyle(fontSize: 12.5, height: 1.35, fontStyle: FontStyle.italic, color: AppColors.textPrimary),
+                        ),
+                      ),
+                    ]),
+                  ),
+                ]),
+              ),
+            ],
           ),
         );
       },
@@ -430,8 +487,8 @@ class _ThemePickerSheet extends StatelessWidget {
               decoration: BoxDecoration(color: AppColors.border, borderRadius: BorderRadius.circular(2)),
             ),
             const SizedBox(height: 18),
-            const Text(
-              'Elige un color',
+            Text(
+              tr('Elige un color', 'Choose a colour'),
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
             ),
             const SizedBox(height: 20),

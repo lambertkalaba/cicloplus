@@ -11,6 +11,9 @@ import '../../services/locale_controller.dart';
 import '../data/store.dart';
 import '../go_root.dart';
 import '../strings.dart';
+import '../widgets/cycle_plus.dart' show CycleExtraSettings;
+import '../widgets/michi_events.dart' show MichiSettings;
+import '../widgets/avatar_picker.dart' show AvatarSettings, ThemeColorSettings;
 import '../widgets/ui.dart';
 import 'register.dart';
 
@@ -60,12 +63,12 @@ Future<void> pickPhoto(BuildContext context) async {
           Text(tr('Foto de perfil', 'Profile photo'), style: _h),
           const SizedBox(height: 6),
           ListTile(
-            leading: const Icon(Icons.photo_library_rounded, color: C.pink),
+            leading: Icon(Icons.photo_library_rounded, color: C.pink),
             title: Text(tr('Elegir de la galería', 'Choose from gallery'), style: const TextStyle(fontWeight: FontWeight.w700)),
             onTap: () => Navigator.pop(ctx, 'gallery'),
           ),
           ListTile(
-            leading: const Icon(Icons.photo_camera_rounded, color: C.pink),
+            leading: Icon(Icons.photo_camera_rounded, color: C.pink),
             title: Text(tr('Hacer una foto', 'Take a photo'), style: const TextStyle(fontWeight: FontWeight.w700)),
             onTap: () => Navigator.pop(ctx, 'camera'),
           ),
@@ -242,7 +245,7 @@ class PeriodCycleScreen extends StatelessWidget {
                     decoration: card(radius: 16),
                     child: Row(
                       children: [
-                        const CircleAvatar(radius: 18, backgroundColor: C.pinkSoft, child: Icon(Icons.water_drop_rounded, color: C.pink, size: 19)),
+                        CircleAvatar(radius: 18, backgroundColor: C.pinkSoft, child: Icon(Icons.water_drop_rounded, color: C.pink, size: 19)),
                         const SizedBox(width: 10),
                         Expanded(
                           child: Column(
@@ -337,7 +340,7 @@ class ReportScreen extends StatelessWidget {
                 _predRow('🌱', tr('Días fértiles', 'Fertile days'),
                     '${L.dateShort(addDays(p, s.avgCycle - 14 - 5))} – ${L.dateShort(addDays(p, s.avgCycle - 14 + 1))}'),
                 _predRow('🥚', tr('Ovulación', 'Ovulation'), L.dateShort(addDays(p, s.avgCycle - 14))),
-                const Divider(color: C.pinkLine),
+                Divider(color: C.pinkLine),
               ],
             ],
           )),
@@ -363,7 +366,7 @@ class ReportScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Img(moodImgs[i], size: 30, fallback: Icons.sentiment_satisfied_rounded, fallbackColor: C.orange),
-                          Text('${moods[i]}', style: const TextStyle(fontWeight: FontWeight.w900, color: C.pinkDark, fontSize: 16)),
+                          Text('${moods[i]}', style: TextStyle(fontWeight: FontWeight.w900, color: C.pinkDark, fontSize: 16)),
                           Text(moodNames[i], style: const TextStyle(fontSize: 10, color: C.muted, fontWeight: FontWeight.w600)),
                         ],
                       ),
@@ -386,7 +389,7 @@ class ReportScreen extends StatelessWidget {
   Widget _stat(String v, String l) => Expanded(
         child: Column(
           children: [
-            Text(v, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: C.pinkDark)),
+            Text(v, style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: C.pinkDark)),
             Text(l, textAlign: TextAlign.center, style: const TextStyle(fontSize: 11, color: C.muted, fontWeight: FontWeight.w600)),
           ],
         ),
@@ -398,7 +401,7 @@ class ReportScreen extends StatelessWidget {
           Text(e, style: const TextStyle(fontSize: 17)),
           const SizedBox(width: 8),
           Expanded(child: Text(t, style: const TextStyle(fontWeight: FontWeight.w700, color: C.text))),
-          Text(v, style: const TextStyle(fontWeight: FontWeight.w800, color: C.pinkDark)),
+          Text(v, style: TextStyle(fontWeight: FontWeight.w800, color: C.pinkDark)),
         ]),
       );
 
@@ -416,12 +419,12 @@ class ReportScreen extends StatelessWidget {
                   value: v / math.max(max, 1),
                   minHeight: 10,
                   backgroundColor: C.pinkSoft,
-                  valueColor: const AlwaysStoppedAnimation(C.pink),
+                  valueColor: AlwaysStoppedAnimation(C.pink),
                 ),
               ),
             ),
             const SizedBox(width: 8),
-            Text('$v', style: const TextStyle(fontWeight: FontWeight.w800, color: C.pinkDark)),
+            Text('$v', style: TextStyle(fontWeight: FontWeight.w800, color: C.pinkDark)),
           ],
         ),
       );
@@ -535,13 +538,13 @@ class _SexLifeScreenState extends State<SexLifeScreen> {
                 children: [
                   Expanded(
                     child: Column(children: [
-                      Text('$month', style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: C.pinkDark)),
+                      Text('$month', style: TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: C.pinkDark)),
                       Text(tr('este mes', 'this month'), style: _b),
                     ]),
                   ),
                   Expanded(
                     child: Column(children: [
-                      Text('$unprot', style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: C.pinkDark)),
+                      Text('$unprot', style: TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: C.pinkDark)),
                       Text(tr('sin protección', 'unprotected'), style: _b),
                     ]),
                   ),
@@ -582,7 +585,7 @@ class _DayNav extends StatelessWidget {
       decoration: card(radius: 18),
       child: Row(
         children: [
-          IconButton(onPressed: () => onChanged(addDays(day, -1)), icon: const Icon(Icons.chevron_left_rounded, color: C.pinkDark)),
+          IconButton(onPressed: () => onChanged(addDays(day, -1)), icon: Icon(Icons.chevron_left_rounded, color: C.pinkDark)),
           Expanded(
             child: InkWell(
               onTap: () async {
@@ -694,7 +697,7 @@ class _MetricScreenState extends State<MetricScreen> {
           switch (widget.kind) {
             case Metric.weight:
               control = Column(children: [
-                Text(v != null ? '${fmtNum(v)} kg' : '— kg', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.w900, color: C.pinkDark)),
+                Text(v != null ? '${fmtNum(v)} kg' : '— kg', style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900, color: C.pinkDark)),
                 const SizedBox(height: 10),
                 PinkButton(label: tr('Anotar peso', 'Log weight'), icon: Icons.edit_rounded, onTap: () => _enterWeight(v)),
               ]);
@@ -780,7 +783,7 @@ class _MetricScreenState extends State<MetricScreen> {
                   decoration: card(radius: 14),
                   child: Row(children: [
                     Expanded(child: Text(L.dateLong(e.key), style: const TextStyle(fontWeight: FontWeight.w700))),
-                    Text('${fmtNum(e.value)} $_unit', style: const TextStyle(fontWeight: FontWeight.w800, color: C.pinkDark)),
+                    Text('${fmtNum(e.value)} $_unit', style: TextStyle(fontWeight: FontWeight.w800, color: C.pinkDark)),
                   ]),
                 ),
             ],
@@ -914,7 +917,7 @@ class BreastExamScreen extends StatelessWidget {
                     last == null
                         ? tr('Aún no has registrado ningún autoexamen.', 'No self-exams logged yet.')
                         : tr('Último: ${L.dateLong(last!)}', 'Last: ${L.dateLong(last!)}'),
-                    style: const TextStyle(fontWeight: FontWeight.w800, color: C.pinkDark),
+                    style: TextStyle(fontWeight: FontWeight.w800, color: C.pinkDark),
                   ),
                 ],
               )),
@@ -1087,7 +1090,7 @@ class SettingsScreen extends StatelessWidget {
               _box(
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.person_rounded, color: C.pink),
+                  leading: Icon(Icons.person_rounded, color: C.pink),
                   title: Text(tr('Nombre', 'Name'), style: const TextStyle(fontWeight: FontWeight.w800)),
                   subtitle: Text(s.name.isEmpty ? tr('Sin nombre', 'No name') : s.name),
                   trailing: const Icon(Icons.edit_rounded, color: C.muted),
@@ -1098,7 +1101,7 @@ class SettingsScreen extends StatelessWidget {
               _box(
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.language_rounded, color: C.pink),
+                  leading: Icon(Icons.language_rounded, color: C.pink),
                   title: Text(tr('Idioma', 'Language'), style: const TextStyle(fontWeight: FontWeight.w800)),
                   subtitle: Text(() {
                     final c = LocaleController.instance.languageCode;
@@ -1120,7 +1123,7 @@ class SettingsScreen extends StatelessWidget {
                                 leading: Text(l.flag, style: const TextStyle(fontSize: 22)),
                                 title: Text(l.nativeName, style: const TextStyle(fontWeight: FontWeight.w700)),
                                 trailing: l.code == LocaleController.instance.languageCode
-                                    ? const Icon(Icons.check_rounded, color: C.pink)
+                                    ? Icon(Icons.check_rounded, color: C.pink)
                                     : null,
                                 onTap: () => Navigator.pop(ctx, l.code),
                               ),
@@ -1136,10 +1139,14 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
               ),
+              _box(const ThemeColorSettings(), padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4)),
+              _box(const AvatarSettings(), padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4)),
+              _box(const CycleExtraSettings(), padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4)),
+              _box(const MichiSettings(), padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4)),
               _box(
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  secondary: const Icon(Icons.favorite_rounded, color: C.pink),
+                  secondary: Icon(Icons.favorite_rounded, color: C.pink),
                   title: Text(tr('Registro de relaciones', 'Sex tracking'), style: const TextStyle(fontWeight: FontWeight.w800)),
                   subtitle: Text(tr('Muestra la vida sexual en el calendario, el registro y "Mi salud". Si lo desactivas, tus datos no se borran.',
                       'Shows sex life in the calendar, logging and "My health". Turning it off does not delete your data.')),
@@ -1173,7 +1180,7 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(children: [
-                    const Icon(Icons.info_outline_rounded, color: C.pink),
+                    Icon(Icons.info_outline_rounded, color: C.pink),
                     const SizedBox(width: 8),
                     Text(tr('Aviso', 'Notice'), style: _h),
                   ]),
@@ -1188,7 +1195,7 @@ class SettingsScreen extends StatelessWidget {
               _box(
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.account_circle_rounded, color: C.pink),
+                  leading: Icon(Icons.account_circle_rounded, color: C.pink),
                   title: Text(tr('Cuenta', 'Account'), style: const TextStyle(fontWeight: FontWeight.w800)),
                   subtitle: Text(GoSession.user?.email ?? ''),
                   trailing: TextButton(
@@ -1196,7 +1203,7 @@ class SettingsScreen extends StatelessWidget {
                       Navigator.of(context).popUntil((r) => r.isFirst);
                       await GoSession.onSignOut?.call();
                     },
-                    child: Text(tr('Cerrar sesión', 'Sign out'), style: const TextStyle(color: C.pinkDark, fontWeight: FontWeight.w800)),
+                    child: Text(tr('Cerrar sesión', 'Sign out'), style: TextStyle(color: C.pinkDark, fontWeight: FontWeight.w800)),
                   ),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
@@ -1205,14 +1212,14 @@ class SettingsScreen extends StatelessWidget {
                 children: [
                   ListTile(
                     contentPadding: EdgeInsets.zero,
-                    leading: const Icon(Icons.privacy_tip_rounded, color: C.pink),
+                    leading: Icon(Icons.privacy_tip_rounded, color: C.pink),
                     title: Text(tr('Política de privacidad', 'Privacy policy'), style: const TextStyle(fontWeight: FontWeight.w700)),
                     trailing: const Icon(Icons.open_in_new_rounded, color: C.muted, size: 18),
                     onTap: () => launchUrl(Uri.parse(privacyPolicyUrlFor(LocaleController.instance.languageCode)), mode: LaunchMode.externalApplication),
                   ),
                   ListTile(
                     contentPadding: EdgeInsets.zero,
-                    leading: const Icon(Icons.description_rounded, color: C.pink),
+                    leading: Icon(Icons.description_rounded, color: C.pink),
                     title: Text(tr('Términos de uso', 'Terms of use'), style: const TextStyle(fontWeight: FontWeight.w700)),
                     trailing: const Icon(Icons.open_in_new_rounded, color: C.muted, size: 18),
                     onTap: () => launchUrl(Uri.parse(termsOfUseUrlFor(LocaleController.instance.languageCode)), mode: LaunchMode.externalApplication),

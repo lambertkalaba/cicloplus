@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/ciclo_header.dart';
 
 import '../l10n/app_strings.dart';
 import '../models/day_entry.dart';
@@ -111,17 +112,17 @@ class _TimelineScreenState extends State<TimelineScreen> {
     // Scaffold con AppBar y botón de cierre (X) para volver atrás.
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
+      appBar: CicloAppBar(
         backgroundColor: AppColors.background,
         elevation: 0,
         scrolledUnderElevation: 0,
         automaticallyImplyLeading: false,
         title: Text(s.timelineTitle,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white)),
         actions: [
           IconButton(
             tooltip: s.commonClose,
-            icon: const Icon(Icons.close, color: AppColors.textPrimary),
+            icon: const Icon(Icons.close, color: Colors.white),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ],

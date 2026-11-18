@@ -162,7 +162,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration: card(radius: 18),
                     child: Row(
                       children: [
-                        IconButton(onPressed: () => _changeDay(-1), icon: const Icon(Icons.chevron_left_rounded, color: C.pinkDark)),
+                        IconButton(onPressed: () => _changeDay(-1), icon: Icon(Icons.chevron_left_rounded, color: C.pinkDark)),
                         Expanded(
                           child: InkWell(
                             onTap: _pickDay,
@@ -333,15 +333,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         filled: true,
                         fillColor: C.pinkBg,
                         suffixIcon: IconButton(
-                          icon: const Icon(Icons.mic_rounded, color: C.pink),
+                          icon: Icon(Icons.mic_rounded, color: C.pink),
                           tooltip: tr('Dictar con el teclado', 'Dictate with the keyboard'),
                           onPressed: () => _noteFocus.requestFocus(),
                         ),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: C.pinkLine)),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: C.pinkLine)),
                         enabledBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: C.pinkLine)),
+                            OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: C.pinkLine)),
                         focusedBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: C.pink, width: 2)),
+                            OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: C.pink, width: 2)),
                       ),
                     ),
                   ),
@@ -413,7 +413,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ListTile(
                 leading: Icon(i == 0 ? Icons.block_rounded : Icons.favorite_rounded, color: i == 0 ? C.muted : C.pink),
                 title: Text(sexNames[i], style: const TextStyle(fontWeight: FontWeight.w700)),
-                trailing: _log.sex == i ? const Icon(Icons.check_rounded, color: C.pink) : null,
+                trailing: _log.sex == i ? Icon(Icons.check_rounded, color: C.pink) : null,
                 onTap: () => Navigator.pop(ctx, i),
               ),
           ],

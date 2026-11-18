@@ -4,7 +4,10 @@ import 'package:timezone/data/latest_all.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
 
 import '../data/store.dart';
+import 'pill.dart';
 import '../strings.dart';
+import '../widgets/cycle_plus.dart';
+import '../widgets/michi_events.dart';
 
 /// Recordatorios locales (sin internet). Se reprograman todos cada vez que
 /// cambian los datos o los ajustes.
@@ -65,8 +68,12 @@ class Notifier {
           requestSoundPermission: false,
         ),
       );
-      await _plugin.initialize(settings);
+      await _plugin.initialize(settings, onDidReceiveNotificationResponse: _onResponse);
       _ready = true;
+      // Si la app se abrió pulsando un botón de la notificación.
+      final launch = await _plugin.getNotificationAppLaunchDetails();
+      final resp = launch?.notificationResponse;
+      if ((launch?.didNotificationLaunchApp ?? false) && resp != null) await _onResponse(resp);
     } catch (e) {
       debugPrint('Notifier init: $e');
     }
@@ -89,30 +96,58 @@ class Notifier {
     return false;
   }
 
-  NotificationDetails get _details => const NotificationDetails(
+  /// Botones de las notificaciones: registro rápido sin entrar en pantallas.
+  Future<void> _onResponse(NotificationResponse r) async {
+    try {
+      final today = dateOnly(DateTime.now());
+      if (r.actionId == 'pill_taken') {
+        await PillTracker.setTaken(today, true);
+      } else if (r.actionId == 'period_started') {
+        await AppStore.instance.addPeriod(today);
+      }
+    } catch (e) {
+      debugPrint('Notifier action: $e');
+    }
+  }
+
+  NotificationDetails _withAction(String id, String label) => NotificationDetails(
         android: AndroidNotificationDetails(
           'cicloplus_go_reminders',
           'Recordatorios',
+          largeIcon: DiscreetNotif.largeIcon,
+          channelDescription: 'Recordatorios de CicloPlus',
+          importance: Importance.high,
+          priority: Priority.high,
+          actions: [AndroidNotificationAction(id, label, showsUserInterface: true, cancelNotification: true)],
+        ),
+        iOS: const DarwinNotificationDetails(),
+      );
+
+  NotificationDetails get _details => NotificationDetails(
+        android: AndroidNotificationDetails(
+          'cicloplus_go_reminders',
+          'Recordatorios',
+          largeIcon: DiscreetNotif.largeIcon,
           channelDescription: 'Recordatorios de CicloPlus',
           importance: Importance.high,
           priority: Priority.high,
         ),
-        iOS: DarwinNotificationDetails(),
+        iOS: const DarwinNotificationDetails(),
       );
 
   bool _firstRun = true;
   final Set<int> _scheduled = {};
 
-  Future<void> _at(int id, String title, String body, DateTime when, {DateTimeComponents? repeat}) async {
+  Future<void> _at(int id, String title, String body, DateTime when, {DateTimeComponents? repeat, NotificationDetails? details}) async {
     _scheduled.add(id);
     final t = tz.TZDateTime(tz.local, when.year, when.month, when.day, when.hour, when.minute);
     if (repeat == null && t.isBefore(tz.TZDateTime.now(tz.local))) return;
     await _plugin.zonedSchedule(
       id,
-      title,
-      body,
+      DiscreetNotif.title(title),
+      DiscreetNotif.body(body),
       t,
-      _details,
+      details ?? _details,
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: repeat,
@@ -150,7 +185,8 @@ class Notifier {
       if (r.pill) {
         await _at(id++, tr('Hora de tu píldora 💊', 'Pill time 💊'), tr('No olvides tomar tu píldora de hoy.', "Don't forget today's pill."),
             _nextTime(r.pillMinutes),
-            repeat: DateTimeComponents.time);
+            repeat: DateTimeComponents.time,
+            details: _withAction('pill_taken', '✅ ${tr('Tomada', 'Taken')}'));
       }
       id = 20;
       if (r.water) {
@@ -198,7 +234,8 @@ class Notifier {
               tr('Tu periodo se acerca 🩸', 'Your period is coming 🩸'),
               tr('Previsto en ${r.periodDaysBefore} ${daysWord(r.periodDaysBefore)}. ¡Ten todo a mano!',
                   'Expected in ${r.periodDaysBefore} ${daysWord(r.periodDaysBefore)}. Be prepared!'),
-              DateTime(d.year, d.month, d.day, 9));
+              DateTime(d.year, d.month, d.day, 9),
+              details: _withAction('period_started', '🩸 ${tr('Me vino la regla', 'My period started')}'));
         }
         final ovu = addDays(st, -14);
         if (r.fertile) {
@@ -212,6 +249,17 @@ class Notifier {
         if (r.ovulation) {
           await _at(id++, tr('Día de ovulación estimado 🥚', 'Estimated ovulation day 🥚'),
               tr('Hoy es tu día de ovulación estimado.', 'Today is your estimated ovulation day.'), DateTime(ovu.year, ovu.month, ovu.day, 9));
+        }
+      }
+      // Michi: fiestas del país, santo y aniversarios de los próximos 60 días.
+      id = 200;
+      if (s.showMichi) {
+        final today = dateOnly(DateTime.now());
+        for (var i = 1; i <= 60 && id < 215; i++) {
+          final d = addDays(today, i);
+          final e = MichiEvents.nameDay(d) ?? MichiEvents.anniversary(d) ?? MichiEvents.holiday(d);
+          if (e == null) continue;
+          await _at(id++, '${e.emoji} ${tr('Mensaje de Michi', 'A message from Michi')}', e.text, DateTime(d.year, d.month, d.day, 10));
         }
       }
     } catch (e) {

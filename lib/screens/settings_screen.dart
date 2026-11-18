@@ -4,7 +4,10 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import '../go/data/store.dart' show AppStore;
-import '../go/strings.dart' show L;
+import '../go/strings.dart' show L, tr;
+import '../go/widgets/cycle_plus.dart' show CycleExtraSettings;
+import '../go/widgets/michi_events.dart' show MichiSettings;
+import '../go/widgets/avatar_picker.dart' show AvatarSettings;
 import 'package:flutter/cupertino.dart' show CupertinoAlertDialog, CupertinoDialogAction;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -58,6 +61,8 @@ import 'widget_placeholder_screen.dart';
 /// coincida con la referencia — mismo `SettingsService.loadPregnancySettings
 /// /savePregnancySettings` que ya usan HealthMenuScreen y MeScreen, sin
 /// estado paralelo.
+const Color _kGreen = Color(0xFF3E9B4F);
+
 class SettingsScreen extends StatefulWidget {
   final String userId;
   final ValueChanged<String> onThemeChanged;
@@ -1272,34 +1277,41 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     final s = AppStrings.of(context);
 
+    // Rediseño a partir del mockup de ChatGPT (noviembre 2026): cabecera
+    // con degradado y perfil, y secciones agrupadas por categoría
+    // (General, Privacidad, Dispositivos, Datos, Zona de peligro).
+    // Toda la lógica y los handlers son los mismos de antes.
     return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: AppBar(title: Text(s.settingsTitle)),
+      backgroundColor: const Color(0xFFFFF6F8),
       body: AbsorbPointer(
         absorbing: _busy || _exportingPdf || _deletingAllData || _deletingAccount,
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
+        child: Column(
           children: [
-            // ---- 1. Idioma ----
-            // Se puso primero (antes vivía casi al final, como sección 13)
-            // a pedido explícito: quien abre la app por primera vez en un
-            // idioma que no reconoce necesita poder cambiarlo antes que
-            // nada, sin tener que entender el resto de Configuración en un
-            // idioma que no domina.
-            //
-            // ---- Rediseño visual (tarjetas agrupadas) ----
-            // A partir de aquí, cada sección se envuelve en `_sectionCard`
-            // (tarjeta blanca, esquinas muy redondeadas, sombra suave) con
-            // un círculo de color como icono — mismo lenguaje visual que el
-            // mockup generado con ChatGPT y aprobado por la usuaria para la
-            // sección Suscripción/Backup/Borrar, ahora aplicado a TODA la
-            // pantalla de Configuración. Ninguna función/handler cambia,
-            // solo el envoltorio visual.
-            _sectionCard(
-              title: s.settingsLanguageTitle,
-              subtitle: s.settingsLanguageHint,
-              titleIcon: Icons.language,
-              child: Builder(builder: (context) {
+            _settingsHeader(s),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 32),
+                children: [
+                  _groupHeader(Icons.settings_rounded, tr('General', 'General')),
+                  _groupCard([
+                    Row(
+                      children: [
+                        _iconBadge(Icons.language_rounded, const Color(0xFF4F86E8)),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(s.settingsLanguageTitle, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+                              const SizedBox(height: 2),
+                              Text(s.settingsLanguageHint, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Builder(builder: (context) {
                 final current = kAppLanguages.firstWhere(
                   (l) => l.code == LocaleController.instance.languageCode,
                   orElse: () => kAppLanguages.first,
@@ -1381,31 +1393,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ],
                 );
               }),
-            ),
-            const SizedBox(height: 20),
-
-            // ---- 4. Configuración de predicción (sub-pantalla en
-            // bottomsheet que envuelve el mismo _irregularCycleMode real,
-            // sin persistencia nueva) ----
-            _sectionCard(
-              child: _groupedNavRow(
-                icon: Icons.auto_graph_outlined,
-                iconColor: Color(themeById(_themeId).primary),
-                label: s.settingsPredictionConfig,
-                subtitle: s.settingsPredictionConfigHint,
-                onTap: _openPredictionConfigSheet,
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // ---- 4c. Apariencia de la pareja ----
-            // Elige qué ilustración se dibuja en la tarjeta "Sincroniza tu
-            // ritmo y tus momentos con tu pareja" de la pantalla Hoy — solo
-            // cambia la imagen mostrada (tono de piel de la pareja
-            // dibujada), mismo patrón visual que "Colores del calendario"
-            // de arriba, con una miniatura circular de cada opción.
-            _sectionCard(
-              child: _CollapsibleSection(
+                    _cardDivider(),
+                    _groupedNavRow(
+                      icon: Icons.calendar_month_rounded,
+                      iconColor: const Color(0xFFE5486F),
+                      label: s.settingsPredictionConfig,
+                      subtitle: s.settingsPredictionConfigHint,
+                      onTap: _openPredictionConfigSheet,
+                    ),
+                    _cardDivider(),
+                    _iconCollapsible(Icons.people_alt_rounded, const Color(0xFFF0884F), _CollapsibleSection(
               title: s.settingsCoupleAppearanceTitle,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1451,13 +1448,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ],
               ),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // ---- 5. Embarazo ----
-            _sectionCard(
-              child: _CollapsibleSection(
+              )),
+                    _cardDivider(),
+                    _iconCollapsible(Icons.pregnant_woman_rounded, const Color(0xFF9B6BD6), _CollapsibleSection(
               title: s.settingsPregnancyTitle,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1480,10 +1473,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   if (_pregnancy.enabled) ...[
                     const SizedBox(height: 10),
                     _switchRow(
-                      title: '¿Esperas mellizos, gemelos o más de un bebé?',
+                      title: tr('¿Esperas mellizos, gemelos o más de un bebé?', 'Expecting twins or more than one baby?'),
                       subtitle: _pregnancy.isTwins
-                          ? 'Fecha de parto y semanas ajustadas a embarazo múltiple'
-                          : 'Activa esto si tu embarazo es de mellizos, gemelos o más',
+                          ? tr('Fecha de parto y semanas ajustadas a embarazo múltiple', 'Due date and weeks adjusted for a multiple pregnancy')
+                          : tr('Activa esto si tu embarazo es de mellizos, gemelos o más', 'Turn this on if you are expecting twins or more'),
                       value: _pregnancy.isTwins,
                       onChanged: _toggleTwins,
                     ),
@@ -1506,128 +1499,168 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                     const SizedBox(height: 16),
                     _switchRow(
-                      title: 'Compartir fotos del bebé con mi pareja',
+                      title: tr('Compartir fotos del bebé con mi pareja', 'Share baby photos with my partner'),
                       subtitle: _shareBabyPhotos
-                          ? 'Tu socio vinculado también verá las fotos'
-                          : 'Tu socio vinculado ve las fechas, pero no las fotos',
+                          ? tr('Tu socio vinculado también verá las fotos', 'Your linked partner will also see the photos')
+                          : tr('Tu socio vinculado ve las fechas, pero no las fotos', 'Your linked partner sees the dates, but not the photos'),
                       value: _shareBabyPhotos,
                       onChanged: _toggleShareBabyPhotos,
                     ),
                   ],
                 ],
               ),
-              ),
-            ),
-            const SizedBox(height: 20),
+              )),
+                  ]),
 
-            // ---- Registro de relaciones (del diseño nuevo): mostrar u
-            // ocultar la vida sexual en calendario, registro y Mi salud ----
-            ListenableBuilder(
-              listenable: AppStore.instance,
-              builder: (context, _) => _sectionCard(
-                title: L.es ? 'Registro de relaciones' : 'Sex tracking',
-                titleIcon: Icons.favorite_border_rounded,
-                child: _switchRow(
-                  title: L.es ? 'Mostrar vida sexual' : 'Show sex life',
-                  subtitle: L.es
-                      ? 'En el calendario, el registro y Mi salud. Si lo desactivas, tus datos no se borran.'
-                      : 'In the calendar, logging and My health. Turning it off does not delete your data.',
-                  value: AppStore.instance.showSex,
-                  onChanged: (v) {
-                    AppStore.instance.showSex = v;
-                    AppStore.instance.commit();
-                  },
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
+                  _groupHeader(Icons.face_3_rounded, tr('Tu avatar', 'Your avatar')),
+                  _groupCard([const AvatarSettings()]),
 
-            // ---- 16. Apple Salud (Sync Salud real) ----
-            if (Platform.isIOS) ...[
-            _sectionCard(
-              title: s.settingsAppleHealth,
-              subtitle: s.settingsHealthSyncHint,
-              titleIcon: Icons.favorite_border,
-              child: _switchRow(
+                  _groupHeader(Icons.spa_rounded, tr('Ciclo y privacidad', 'Cycle & privacy')),
+                  _groupCard([const CycleExtraSettings()]),
+
+                  _groupHeader(Icons.pets_rounded, 'Michi'),
+                  _groupCard([const MichiSettings()]),
+
+                  _groupHeader(Icons.favorite_rounded, tr('Privacidad', 'Privacy')),
+                  ListenableBuilder(
+                    listenable: AppStore.instance,
+                    builder: (context, _) => _groupCard([
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _iconBadge(Icons.favorite_border_rounded, const Color(0xFFE5486F)),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(tr('Registro de relaciones', 'Sex tracking'), style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+                                const SizedBox(height: 6),
+                                _switchRow(
+                                  title: tr('Vida sexual', 'Sex life'),
+                                  subtitle: tr('Muestra la vida sexual en el calendario, el registro y "Mi salud". Si lo desactivas, tus datos no se borran.', 'Shows sex life in the calendar, logging and "My health". Turning it off does not delete your data.'),
+                                  value: AppStore.instance.showSex,
+                                  onChanged: (v) {
+                                    AppStore.instance.showSex = v;
+                                    AppStore.instance.commit();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ]),
+                  ),
+
+                  _groupHeader(Icons.smartphone_rounded, tr('Dispositivos', 'Devices')),
+                  _groupCard([
+                    if (Platform.isIOS) ...[
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _iconBadge(Icons.favorite_rounded, const Color(0xFFE5486F)),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(s.settingsAppleHealth, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+                                const SizedBox(height: 2),
+                                Text(s.settingsHealthSyncHint, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                                const SizedBox(height: 6),
+                                _switchRow(
                 title: s.settingsHealthSyncToggle,
                 subtitle: _healthSyncEnabled ? s.on_ : s.off_,
                 value: _healthSyncEnabled,
                 onChanged: _healthSyncBusy ? (_) {} : _toggleHealthSync,
               ),
-            ),
-            const SizedBox(height: 20),
-            ],
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      _cardDivider(),
+                    ],
+                    if (Platform.isIOS) ...[
+                      _groupedNavRow(
+                        icon: Icons.watch_rounded,
+                        iconColor: const Color(0xFF9B6BD6),
+                        label: s.settingsAppleWatch,
+                        onTap: _openAppleWatch,
+                      ),
+                      _cardDivider(),
+                    ],
+                    _groupedNavRow(
+                      icon: Icons.widgets_rounded,
+                      iconColor: const Color(0xFFE5486F),
+                      label: s.settingsWidget,
+                      onTap: _openWidgetPlaceholder,
+                    ),
+                  ]),
 
-            // ---- 17+18+20+21+22. Apple Watch / Widget / Quitar anuncios /
-            // Informe de errores / Puntúanos — agrupados en una sola
-            // tarjeta con filas separadas por una línea fina, igual que el
-            // mockup aprobado agrupaba varios accesos relacionados bajo un
-            // mismo contenedor en vez de una fila suelta por cada uno.
-            _sectionCard(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _groupedNavRow(
-                    icon: Icons.watch_outlined,
-                    iconColor: Color(themeById(_themeId).primary),
-                    label: s.settingsAppleWatch,
-                    onTap: _openAppleWatch,
-                  ),
-                  _cardDivider(),
-                  _groupedNavRow(
-                    icon: Icons.widgets_outlined,
-                    iconColor: Color(themeById(_themeId).primary),
-                    label: s.settingsWidget,
-                    onTap: _openWidgetPlaceholder,
-                  ),
-                  _cardDivider(),
-                  _groupedNavRow(
-                    icon: Icons.bug_report_outlined,
-                    iconColor: Color(themeById(_themeId).primary),
-                    label: s.settingsBugReport,
-                    onTap: _openBugReport,
-                  ),
-                  _cardDivider(),
-                  _groupedNavRow(
-                    icon: Icons.star_border,
-                    iconColor: Color(themeById(_themeId).primary),
-                    label: s.settingsRateUs,
-                    onTap: _openRateUs,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // ---- 10. Exportar datos para el doctor (conectado a PDF real) ----
-            _sectionCard(
-              child: _groupedNavRow(
-                icon: Icons.picture_as_pdf_outlined,
-                iconColor: AppColors.primary,
-                label: s.settingsExportForDoctor,
-                onTap: _exportingPdf ? () {} : _exportForDoctor,
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // ---- Backup export/import (relacionado con exportar datos) ----
-            _sectionCard(
-              title: s.settingsBackupTitle,
-              subtitle: s.settingsBackupHint,
-              titleIcon: Icons.cloud_outlined,
-              child: Row(
+                  _groupHeader(Icons.storage_rounded, tr('Datos', 'Data')),
+                  _groupCard([
+                    _groupedNavRow(
+                      icon: Icons.error_outline_rounded,
+                      iconColor: const Color(0xFFE5486F),
+                      label: s.settingsBugReport,
+                      onTap: _openBugReport,
+                    ),
+                    _cardDivider(),
+                    _groupedNavRow(
+                      icon: Icons.star_rounded,
+                      iconColor: const Color(0xFFF2A93B),
+                      label: s.settingsRateUs,
+                      onTap: _openRateUs,
+                    ),
+                    _cardDivider(),
+                    _groupedNavRow(
+                      icon: Icons.assignment_rounded,
+                      iconColor: const Color(0xFF3E9B8F),
+                      label: s.settingsExportForDoctor,
+                      onTap: _exportingPdf ? () {} : _exportForDoctor,
+                    ),
+                    const SizedBox(height: 10),
+                    Container(
+                      padding: const EdgeInsets.all(14),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFF0F4),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              _iconBadge(Icons.cloud_upload_rounded, const Color(0xFFE5486F)),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(s.settingsBackupTitle, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+                                    const SizedBox(height: 2),
+                                    Text(s.settingsBackupHint, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          Row(
                 children: [
                   Expanded(
                     child: OutlinedButton.icon(
                       onPressed: _busy ? null : _exportBackup,
                       icon: const Icon(Icons.file_download_outlined, size: 16),
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.primary,
-                        side: const BorderSide(color: AppColors.primaryLight),
+                        foregroundColor: _kGreen,
+                        side: const BorderSide(color: _kGreen, width: 1.3),
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       ),
-                      label: Text(s.settingsExport, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
+                      label: Text(s.settingsExport.replaceAll(RegExp(r'^[⬇⬆]\uFE0F?\s*'), ''), style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -1636,28 +1669,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       onPressed: _busy ? null : _importBackup,
                       icon: const Icon(Icons.file_upload_outlined, size: 16),
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.primary,
-                        side: const BorderSide(color: AppColors.primaryLight),
+                        foregroundColor: _kGreen,
+                        side: const BorderSide(color: _kGreen, width: 1.3),
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       ),
-                      label: Text(s.settingsImport, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
+                      label: Text(s.settingsImport.replaceAll(RegExp(r'^[⬇⬆]\uFE0F?\s*'), ''), style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                     ),
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
+                  ]),
 
-            // ---- 11 + 11b. Zona de peligro: Borrar todos los datos /
-            // Borrar cuenta (ambas destructivas y reales) agrupadas en una
-            // tarjeta con tinte rojo suave, separada visualmente del resto
-            // — mismo criterio que el mockup aprobado ("zona de peligro"
-            // al final, sin que la pantalla se vea alarmante en su
-            // conjunto). No se usa un título de texto nuevo (para no tener
-            // que traducirlo a los 8 idiomas de la app): el tinte rojo +
-            // el icono de aviso ya comunican que son acciones sensibles.
-            Container(
+                  _groupHeader(Icons.warning_amber_rounded, tr('Zona de peligro', 'Danger zone'), danger: true),
+                  Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -1727,25 +1755,150 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
-
-            // ---- 24. Privacidad (al final) ----
-            // Antes tenía además una cabecera "Privacidad" con el mismo
-            // icono de escudo repetido y un subtítulo que decía básicamente
-            // lo mismo que esta fila — a petición de la usuaria se quita
-            // esa cabecera y se deja solo la fila suelta, igual que
-            // "Sincronizar datos" o "Configuración de predicción".
-            _sectionCard(
-              child: _groupedNavRow(
-                icon: Icons.privacy_tip_outlined,
-                iconColor: Color(themeById(_themeId).primary),
-                label: s.settingsPrivacyPolicyLink,
-                onTap: _openPrivacyPolicy,
+                  const SizedBox(height: 16),
+                  _groupCard([
+                    _groupedNavRow(
+                      icon: Icons.shield_outlined,
+                      iconColor: const Color(0xFF3E9B4F),
+                      label: s.settingsPrivacyPolicyLink,
+                      onTap: _openPrivacyPolicy,
+                    ),
+                  ]),
+                  const SizedBox(height: 8),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Image.asset('assets/go/hibiscus.png', width: 70, errorBuilder: (_, __, ___) => const SizedBox.shrink()),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 20),
           ],
         ),
+      ),
+    );
+  }
+
+  /// Cabecera con degradado burdeos-rosa, avatar y flor.
+  Widget _settingsHeader(AppStrings s) {
+    final top = MediaQuery.of(context).padding.top;
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.fromLTRB(4, top + 6, 12, 20),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFF9C1C4C), Color(0xFFD9507D)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(28)),
+      ),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Positioned(
+            right: -4,
+            top: -4,
+            child: Image.asset('assets/go/hibiscus.png', width: 72, errorBuilder: (_, __, ___) => const SizedBox.shrink()),
+          ),
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.arrow_back_rounded, color: Colors.white),
+                onPressed: () => Navigator.of(context).maybePop(),
+              ),
+              Container(
+                width: 54,
+                height: 54,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: const Color(0xFFFFE3EC),
+                  border: Border.all(color: Colors.white, width: 2.5),
+                ),
+                child: ClipOval(
+                  child: Image.asset('assets/go/avatar.png', fit: BoxFit.cover, errorBuilder: (_, __, ___) => const Icon(Icons.person, color: AppColors.primary)),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset('assets/go/logo_flower.png', width: 16, height: 16, errorBuilder: (_, __, ___) => const SizedBox.shrink()),
+                        const SizedBox(width: 4),
+                        const Text('CicloPlus', style: TextStyle(color: Colors.white70, fontSize: 12.5, fontWeight: FontWeight.w700)),
+                      ],
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      s.settingsTitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.white, fontSize: 23, fontWeight: FontWeight.w800),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 60),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Título de categoría: franja verde suave con icono y hoja.
+  Widget _groupHeader(IconData icon, String title, {bool danger = false}) {
+    final fg = danger ? const Color(0xFFD32F2F) : const Color(0xFF8E1B47);
+    final bg = danger ? const Color(0xFFFDE0E3) : const Color(0xFFE3F1DC);
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, bottom: 8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [bg, bg.withOpacity(0.15)]),
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, size: 18, color: fg),
+            const SizedBox(width: 8),
+            Expanded(child: Text(title, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: fg))),
+            Icon(Icons.eco_rounded, size: 18, color: danger ? fg.withOpacity(0.45) : _kGreen),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Tarjeta blanca que agrupa las filas de una categoría.
+  Widget _groupCard(List<Widget> children) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(color: const Color(0xFF8E1B47).withOpacity(0.07), blurRadius: 20, offset: const Offset(0, 8)),
+        ],
+      ),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: children),
+    );
+  }
+
+  /// Sección plegable con icono de color a la izquierda.
+  Widget _iconCollapsible(IconData icon, Color color, Widget child) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _iconBadge(icon, color),
+          const SizedBox(width: 12),
+          Expanded(child: Padding(padding: const EdgeInsets.only(top: 8), child: child)),
+        ],
       ),
     );
   }
@@ -1789,7 +1942,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
   /// en un badge circular junto a cada título/fila, en vez de un icono
   /// suelto), reutilizado en toda esta pantalla vía `_sectionCard` y
   /// `_groupedNavRow`.
+  /// Iconos ilustrados generados con ChatGPT (assets/go/set_*.png) para
+  /// la pantalla de Configuración; el resto sigue con el icono plano.
+  static final Map<IconData, String> _illustrated = {
+    Icons.language_rounded: 'globe',
+    Icons.calendar_month_rounded: 'calendar',
+    Icons.people_alt_rounded: 'couple',
+    Icons.pregnant_woman_rounded: 'pregnant',
+    Icons.favorite_border_rounded: 'heart',
+    Icons.favorite_rounded: 'heart',
+    Icons.watch_rounded: 'watch',
+    Icons.widgets_rounded: 'widget',
+    Icons.error_outline_rounded: 'error',
+    Icons.star_rounded: 'star',
+    Icons.assignment_rounded: 'doctor',
+    Icons.cloud_upload_rounded: 'cloud',
+    Icons.shield_outlined: 'shield',
+  };
+
   Widget _iconBadge(IconData icon, Color color) {
+    final img = _illustrated[icon];
+    if (img != null) {
+      return SizedBox(
+        width: 44,
+        height: 44,
+        child: Image.asset('assets/go/set_$img.png', fit: BoxFit.contain, filterQuality: FilterQuality.medium),
+      );
+    }
     return Container(
       width: 40,
       height: 40,
@@ -1949,7 +2128,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           ),
         ),
-        Switch(value: value, activeColor: Color(themeById(_themeId).primary), onChanged: onChanged),
+        Switch(value: value, activeColor: Colors.white, activeTrackColor: _kGreen, onChanged: onChanged),
       ],
     );
   }
@@ -2179,7 +2358,7 @@ class _CollapsibleSectionState extends State<_CollapsibleSection> {
                 Expanded(
                   child: Text(
                     widget.title,
-                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+                    style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
                   ),
                 ),
                 AnimatedRotation(

@@ -4,8 +4,11 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../data/store.dart';
+import '../services/pill.dart';
 import '../strings.dart';
 import '../cicloplus_links.dart';
+import '../widgets/cycle_plus.dart';
+import '../widgets/avatar_picker.dart';
 import '../widgets/ui.dart';
 import 'extras.dart';
 import 'more.dart';
@@ -36,7 +39,11 @@ class TodayScreen extends StatelessWidget {
           children: [
             _Greeting(name: s.name),
             const SizedBox(height: 10),
-            if (pregnant) const _PregnancyCard() else _RingCard(onTap: onCalendar, onLogPeriod: () => onRegister()),
+            if (pregnant) _PregnancyCard(key: ValueKey(L.lang)) else _RingCard(onTap: onCalendar, onLogPeriod: () => onRegister()),
+            if (s.reminders.pill) ...[
+              const SizedBox(height: 12),
+              _PillCard(today: today),
+            ],
             const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.fromLTRB(12, 14, 12, 12),
@@ -74,6 +81,10 @@ class TodayScreen extends StatelessWidget {
                 ],
               ),
             ),
+            if (!pregnant) ...[
+              const SizedBox(height: 12),
+              const QuickLogRow(),
+            ],
             const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.fromLTRB(10, 12, 14, 12),
@@ -87,7 +98,7 @@ class TodayScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('${tr('Tu consejo de hoy', 'Your tip for today')} ✨',
-                            style: const TextStyle(fontSize: 15.5, fontWeight: FontWeight.w900, color: C.pinkDark)),
+                            style: TextStyle(fontSize: 15.5, fontWeight: FontWeight.w900, color: C.pinkDark)),
                         const SizedBox(height: 4),
                         Text(pregnant ? pregnancyTip(s.pregnancyWeek!) : phaseTip(info.phase),
                             style: const TextStyle(fontSize: 12.5, color: C.text, height: 1.35, fontWeight: FontWeight.w600)),
@@ -97,6 +108,7 @@ class TodayScreen extends StatelessWidget {
                 ],
               ),
             ),
+            if (!pregnant) const PatternsCard(),
             const SizedBox(height: 16),
             PinkButton(label: tr('Registrar mi día', 'Log my day'), icon: Icons.add_rounded, onTap: () => onRegister()),
           ],
@@ -107,7 +119,7 @@ class TodayScreen extends StatelessWidget {
 }
 
 class _PregnancyCard extends StatelessWidget {
-  const _PregnancyCard();
+  const _PregnancyCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -148,8 +160,8 @@ class _Greeting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final path = AppStore.instance.photoPath;
-    final hasPhoto = path != null && File(path).existsSync();
+    final av = Avatars.current;
+    final hasPhoto = av == 'photo';
     return SizedBox(
       height: 140,
       child: Stack(
@@ -159,7 +171,9 @@ class _Greeting extends StatelessWidget {
           Positioned(
             left: hasPhoto ? 6 : -10,
             top: hasPhoto ? 14 : 0,
-            child: hasPhoto
+            child: GestureDetector(
+              onTap: () => showAvatarPicker(context),
+              child: hasPhoto
                 ? Container(
                     width: 112,
                     height: 112,
@@ -170,7 +184,24 @@ class _Greeting extends StatelessWidget {
                     ),
                     child: const ClipOval(child: Avatar(size: 112)),
                   )
-                : const Img('avatar_hoy', size: 140, fallback: Icons.face_3),
+                : Stack(clipBehavior: Clip.none, children: [
+                    LiveAvatar(id: av, size: 140, onEdit: () => showAvatarPicker(context)),
+                    Positioned(
+                      right: 8,
+                      bottom: 6,
+                      child: GestureDetector(
+                        onTap: () => showAvatarPicker(context),
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle,
+                              boxShadow: [BoxShadow(color: C.pink.withValues(alpha: 0.3), blurRadius: 6)]),
+                          child: Icon(Icons.edit_rounded, size: 16, color: C.pink),
+                        ),
+                      ),
+                    ),
+                  ]),
+            ),
           ),
           Positioned(
             left: 134,
@@ -183,11 +214,41 @@ class _Greeting extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontSize: 23, fontWeight: FontWeight.w900, color: C.text, height: 1.12)),
-                const SizedBox(height: 8),
+                const SizedBox(height: 6),
                 Text(tr('Cuida de ti hoy,\ntu bienestar importa 💗', 'Take care of yourself today,\nyour wellbeing matters 💗'),
-                    maxLines: 3,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 13, color: C.text, height: 1.35, fontWeight: FontWeight.w600)),
+                    style: const TextStyle(fontSize: 12.5, color: C.text, height: 1.3, fontWeight: FontWeight.w600)),
+                const SizedBox(height: 7),
+                // Su objetivo, siempre a la vista.
+                Builder(builder: (_) {
+                  final st = AppStore.instance;
+                  final w = st.pregnancyWeek;
+                  final (emoji, label) = switch (st.goal) {
+                    'pregnancy' => ('👣', w != null ? tr('Embarazo · semana {}', 'Pregnancy · week {}').replaceFirst('{}', '$w') : tr('Seguir mi embarazo', 'Track my pregnancy')),
+                    'conceive' => ('🌱', tr('Intento concebir', 'Trying to conceive')),
+                    _ => ('🩸', tr('Seguir mi período', 'Track my period')),
+                  };
+                  return Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: C.pinkLine),
+                      boxShadow: [BoxShadow(color: C.pink.withOpacity(0.12), blurRadius: 6, offset: const Offset(0, 2))],
+                    ),
+                    child: Row(mainAxisSize: MainAxisSize.min, children: [
+                      Text(emoji, style: const TextStyle(fontSize: 13)),
+                      const SizedBox(width: 5),
+                      Flexible(
+                        child: Text(label,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: C.pinkDark)),
+                      ),
+                    ]),
+                  );
+                }),
               ],
             ),
           ),
@@ -261,7 +322,8 @@ class _RingCard extends StatelessWidget {
           icon: Icons.calendar_month_rounded,
           color: C.pinkDark,
           bg: C.pinkSoft,
-          label: n == 0 ? tr('Periodo previsto hoy', 'Period expected today') : tr('Periodo en $n ${daysWord(n)}', 'Period in $n ${daysWord(n)}')));
+          label: CyclePlus.rangeLabel() ??
+              (n == 0 ? tr('Periodo previsto hoy', 'Period expected today') : tr('Periodo en $n ${daysWord(n)}', 'Period in $n ${daysWord(n)}'))));
     }
     final ov = s.nextOvulation;
     if (ov != null) {
@@ -291,7 +353,7 @@ class _RingCard extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(tr('Día del ciclo', 'Cycle day'), style: const TextStyle(fontSize: 11.5, color: C.muted, fontWeight: FontWeight.w700)),
-                          Text('$day', style: const TextStyle(fontSize: 42, fontWeight: FontWeight.w900, color: C.pinkDark, height: 1.1)),
+                          Text('$day', style: TextStyle(fontSize: 42, fontWeight: FontWeight.w900, color: C.pinkDark, height: 1.1)),
                           Text(tr('de $cycle días', 'of $cycle days'), style: const TextStyle(fontSize: 12, color: C.muted, fontWeight: FontWeight.w600)),
                         ],
                       ),
@@ -367,14 +429,14 @@ class RingPainter extends CustomPainter {
         Paint()
           ..style = PaintingStyle.stroke
           ..strokeWidth = stroke
-          ..color = const Color(0xFFF5E6EE));
+          ..color = C.t(0xFFF5E6EE));
     if (empty) return;
     final full = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = stroke
       ..strokeCap = StrokeCap.round
-      ..shader = const SweepGradient(
-        colors: [Color(0xFFFFB3CF), Color(0xFFB7E4CC), Color(0xFFD9CCF5), Color(0xFFFFB3CF)],
+      ..shader = SweepGradient(
+        colors: [C.t(0xFFFFB3CF), Color(0xFFB7E4CC), Color(0xFFD9CCF5), C.t(0xFFFFB3CF)],
         transform: GradientRotation(-math.pi / 2),
       ).createShader(rect);
     canvas.drawArc(rect, -math.pi / 2, math.pi * 2 * 0.999, false, full);
@@ -382,7 +444,7 @@ class RingPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = stroke
       ..strokeCap = StrokeCap.round
-      ..shader = const SweepGradient(
+      ..shader = SweepGradient(
         colors: [C.pink, C.emerald, C.lavender, C.pink],
         transform: GradientRotation(-math.pi / 2),
       ).createShader(rect);
@@ -403,4 +465,66 @@ class RingPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant RingPainter old) => old.progress != progress || old.empty != empty;
+}
+
+/// Píldora de hoy con racha de días seguidos (solo si el recordatorio de
+/// la píldora está activado).
+class _PillCard extends StatelessWidget {
+  final DateTime today;
+  const _PillCard({required this.today});
+
+  @override
+  Widget build(BuildContext context) {
+    final taken = PillTracker.takenOn(today);
+    final streak = PillTracker.streak();
+    return Container(
+      padding: const EdgeInsets.fromLTRB(14, 12, 12, 12),
+      decoration: card(),
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: taken ? const Color(0xFFE3F1DC) : C.pinkBg,
+              shape: BoxShape.circle,
+            ),
+            alignment: Alignment.center,
+            child: Text(taken ? '✅' : '💊', style: const TextStyle(fontSize: 24)),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(tr('Píldora de hoy', "Today's pill"),
+                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w900, color: C.text)),
+                const SizedBox(height: 2),
+                Text(
+                  streak > 0 ? '🔥 $streak ${tr('días seguidos', 'days in a row')}' : (taken ? tr('¡Tomada hoy!', 'Taken today!') : ''),
+                  style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700, color: C.pinkDark),
+                ),
+              ],
+            ),
+          ),
+          GestureDetector(
+            onTap: () => PillTracker.setTaken(today, !taken),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+              decoration: BoxDecoration(
+                color: taken ? const Color(0xFF3E9B4F) : Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: taken ? const Color(0xFF3E9B4F) : C.pink, width: 1.5),
+              ),
+              child: Text(
+                taken ? tr('¡Tomada hoy!', 'Taken today!') : tr('Marcar como tomada', 'Mark as taken'),
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: taken ? Colors.white : C.pinkDark),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

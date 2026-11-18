@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
+  local_auth: ^2.3.0
   flutter:
     sdk: flutter
   # Traduce al idioma elegido en Configuración los widgets nativos de
@@ -133,6 +134,9 @@ dependencies:
   # fallar por un conflicto de AGP/androidx con Glance, sería la próxima
   # pista a revisar aquí.
   home_widget: 0.7.0+1
+  audioplayers: ^6.1.0
+  # Voz de Michi (lee sus frases y chistes en el idioma de la app).
+  flutter_tts: ^4.2.0
 
 dev_dependencies:
   flutter_test:
@@ -166,7 +170,14 @@ flutter:
     - assets/garden/
     - lib/assets/images/
     - assets/go/
+    - assets/go/anim/
     - assets/l10n/
+    - assets/sounds/
+    - assets/jokes/
+    - assets/go/house/
+    - assets/go/av/
+    - assets/go/avt/
+    - assets/go/avc/
 
 # Configuración del icono de la app (flor de loto, elegida en Configuración
 # > icono). Ejecutar `dart run flutter_launcher_icons` para regenerar los

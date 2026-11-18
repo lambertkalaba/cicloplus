@@ -52,7 +52,11 @@ class L {
   static String month(int m) => _m[m - 1];
   static String monthShort(int m) {
     final n = month(m);
-    return n.length <= 4 ? n : n.substring(0, 3);
+    if (n.length <= 4) return n;
+    // Solo se abrevia en alfabetos latino, griego o cirílico; en el resto
+    // (tamil, tailandés, árabe…) cortar letras rompe los caracteres.
+    if (n.runes.any((r) => r > 0x04FF)) return n;
+    return n.substring(0, 3);
   }
 
   static const _weekdayNames = {

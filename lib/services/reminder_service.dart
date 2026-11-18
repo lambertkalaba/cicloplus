@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import '../go/widgets/cycle_plus.dart' show DiscreetNotif;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
@@ -354,18 +355,19 @@ class ReminderService {
     final tzScheduled = tz.TZDateTime.from(when, tz.local);
     await _plugin.zonedSchedule(
       id,
-      title,
-      body,
+      DiscreetNotif.title(title),
+      DiscreetNotif.body(body),
       tzScheduled,
-      const NotificationDetails(
+      NotificationDetails(
         android: AndroidNotificationDetails(
           'cicloplus_reminders',
           'Recordatorios de ciclo',
+          largeIcon: DiscreetNotif.largeIcon,
           channelDescription: 'Avisos de periodo, ovulación y ventana fértil',
           importance: Importance.high,
           priority: Priority.high,
         ),
-        iOS: DarwinNotificationDetails(),
+        iOS: const DarwinNotificationDetails(),
       ),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:

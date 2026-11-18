@@ -102,7 +102,9 @@ class _CicloTodayState extends State<CicloToday> {
           userGoal: c.userGoal,
           onDataChanged: c.onDataChanged,
           onOpenRegister: () => widget.onRegister(),
-          petCard: CatCard(onFeed: () => widget.onRegister()),
+          petCard: AppStore.instance.showMichi
+              ? CatCard(onFeed: () => widget.onRegister())
+              : (AppStore.instance.showGarden ? null : const SizedBox.shrink()),
           topSection: go.TodayScreen(
             embedded: true,
             onRegister: widget.onRegister,

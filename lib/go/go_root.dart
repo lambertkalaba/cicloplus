@@ -4,6 +4,7 @@ import '../models/app_user.dart';
 import '../services/locale_controller.dart';
 import '../services/settings_service.dart';
 import '../services/subscription_service.dart';
+import 'cicloplus_host.dart';
 import 'cicloplus_links.dart';
 import 'upgrade.dart';
 import 'data/store.dart';
@@ -110,7 +111,9 @@ class _GoRootState extends State<GoRoot> {
     if (s.goal == _lastGoal && s.pregnancyStart == _lastPregnancy) return;
     _lastGoal = s.goal;
     _lastPregnancy = s.pregnancyStart;
-    CP.syncPregnancyToCicloPlus();
+    // Recarga lo que leen las pantallas de CicloPlus (Hoy, estadísticas…)
+    // para que el cambio de objetivo se vea al momento.
+    CP.syncPregnancyToCicloPlus().then((_) => CicloData.instance.load());
   }
 
   @override
@@ -131,6 +134,17 @@ class _GoRootState extends State<GoRoot> {
 
   @override
   Widget build(BuildContext context) {
+    // El color elegido por la usuaria: al cambiarlo se reconstruye todo.
+    return ListenableBuilder(
+      listenable: AppStore.instance,
+      builder: (context, _) {
+        C.setTheme(AppStore.instance.themeColor);
+        return KeyedSubtree(key: ValueKey('theme_${C.theme}'), child: _themed(context));
+      },
+    );
+  }
+
+  Widget _themed(BuildContext context) {
     final theme = ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(seedColor: C.pink, primary: C.pink, secondary: C.emerald),
@@ -143,7 +157,7 @@ class _GoRootState extends State<GoRoot> {
     return Theme(
       data: theme,
       child: !_ready
-          ? const Scaffold(backgroundColor: C.pinkBg, body: Center(child: CircularProgressIndicator(color: C.pink)))
+          ? Scaffold(backgroundColor: C.pinkBg, body: Center(child: CircularProgressIndicator(color: C.pink)))
           : ListenableBuilder(
               listenable: AppStore.instance,
               builder: (context, _) => AppStore.instance.onboarded ? const Shell() : const OnboardingScreen(),

@@ -1,4 +1,8 @@
+import '../go/strings.dart' show tr;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../go/widgets/michi_gifts.dart';
+import '../widgets/ciclo_header.dart';
 
 import '../services/partner_service.dart';
 import '../services/settings_service.dart' show themeById;
@@ -112,15 +116,26 @@ class _PartnerHubScreenState extends State<PartnerHubScreen> {
   Widget _buildScaffold(BuildContext context, Color primary, Color primaryDark, List<Widget> tabs, bool pregnancyActive) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
+      appBar: CicloAppBar(
         title: Text(widget.ownerLabel),
         backgroundColor: primaryDark,
         foregroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(widget.onClose != null ? Icons.link_off : Icons.arrow_back),
-          tooltip: widget.onClose != null ? 'Dejar de seguir este seguimiento' : 'Atrás',
+          tooltip: widget.onClose != null ? tr('Dejar de seguir este seguimiento', 'Stop following this tracking') : tr('Atrás', 'Back'),
           onPressed: widget.onClose ?? () => Navigator.of(context).pop(),
         ),
+        actions: [
+          IconButton(
+            tooltip: 'Michi 🎁',
+            icon: Image.asset('assets/go/gift_box.png', width: 30, height: 30, errorBuilder: (_, __, ___) => const Icon(Icons.card_giftcard_rounded)),
+            onPressed: () => showSendMichiGiftSheet(
+              context,
+              ownerUid: widget.ownerUid,
+              fromName: FirebaseAuth.instance.currentUser?.displayName ?? '',
+            ),
+          ),
+        ],
       ),
       body: IndexedStack(index: _tabIndex, children: tabs),
       bottomNavigationBar: BottomNavigationBar(
@@ -133,10 +148,10 @@ class _PartnerHubScreenState extends State<PartnerHubScreen> {
           const BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: 'Chat'),
           BottomNavigationBarItem(
             icon: Icon(pregnancyActive ? Icons.pregnant_woman_outlined : Icons.calendar_month_outlined),
-            label: 'Seguimiento',
+            label: tr('Seguimiento', 'Tracking'),
           ),
-          const BottomNavigationBarItem(icon: Icon(Icons.lightbulb_outline), label: 'Consejos'),
-          const BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: 'Deseos'),
+          BottomNavigationBarItem(icon: Icon(Icons.lightbulb_outline), label: tr('Consejos', 'Tips')),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: tr('Deseos', 'Wishes')),
         ],
       ),
     );

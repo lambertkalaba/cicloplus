@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import '../go/widgets/cycle_plus.dart' show DiscreetNotif;
 import 'package:timezone/data/latest.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -92,13 +93,14 @@ class DailyNotificationService {
     final s = AppStrings.forCode(await _settings.loadLanguage() ?? LocaleController.instance.languageCode);
     await _plugin.zonedSchedule(
       _dailyReminderId,
-      s.notifDailyReminderTitle,
-      s.notifDailyReminderBody,
+      DiscreetNotif.title(s.notifDailyReminderTitle),
+      DiscreetNotif.body(s.notifDailyReminderBody),
       _nextInstanceOfTime(settings.hour, settings.minute),
       NotificationDetails(
         android: AndroidNotificationDetails(
           'cicloplus_daily_reminder',
           s.notifDailyChannelName,
+          largeIcon: DiscreetNotif.largeIcon,
           channelDescription: s.notifDailyChannelDesc,
           importance: Importance.high,
           priority: Priority.high,
@@ -121,13 +123,14 @@ class DailyNotificationService {
     final s = AppStrings.forCode(await _settings.loadLanguage() ?? LocaleController.instance.languageCode);
     await _plugin.zonedSchedule(
       _pillReminderId,
-      s.notifPillReminderTitle,
-      s.notifPillReminderBody,
+      DiscreetNotif.title(s.notifPillReminderTitle),
+      DiscreetNotif.body(s.notifPillReminderBody),
       _nextInstanceOfTime(settings.hour, settings.minute),
       NotificationDetails(
         android: AndroidNotificationDetails(
           'cicloplus_pill_reminder',
           s.notifPillChannelName,
+          largeIcon: DiscreetNotif.largeIcon,
           channelDescription: s.notifPillChannelDesc,
           importance: Importance.high,
           priority: Priority.high,
@@ -155,13 +158,14 @@ class DailyNotificationService {
     final s = AppStrings.forCode(await _settings.loadLanguage() ?? LocaleController.instance.languageCode);
     await _plugin.zonedSchedule(
       id,
-      s.notifAppointmentTitle,
-      s.notifAppointmentBody(appointment.label),
+      DiscreetNotif.title(s.notifAppointmentTitle),
+      DiscreetNotif.body(s.notifAppointmentBody(appointment.label)),
       when,
       NotificationDetails(
         android: AndroidNotificationDetails(
           'cicloplus_medical_appointment',
           s.notifAppointmentChannelName,
+          largeIcon: DiscreetNotif.largeIcon,
           channelDescription: s.notifAppointmentChannelDesc,
           importance: Importance.high,
           priority: Priority.high,
@@ -192,13 +196,14 @@ class DailyNotificationService {
     final s = AppStrings.forCode(await _settings.loadLanguage() ?? LocaleController.instance.languageCode);
     await _plugin.zonedSchedule(
       _drinkWaterReminderId,
-      s.notifDrinkWaterTitle,
-      s.notifDrinkWaterBody,
+      DiscreetNotif.title(s.notifDrinkWaterTitle),
+      DiscreetNotif.body(s.notifDrinkWaterBody),
       _nextInstanceOfTime(settings.hour, settings.minute),
       NotificationDetails(
         android: AndroidNotificationDetails(
           'cicloplus_drink_water_reminder',
           s.notifDrinkWaterChannelName,
+          largeIcon: DiscreetNotif.largeIcon,
           channelDescription: s.notifDrinkWaterChannelDesc,
           importance: Importance.high,
           priority: Priority.high,
@@ -228,13 +233,14 @@ class DailyNotificationService {
     final s = AppStrings.forCode(await _settings.loadLanguage() ?? LocaleController.instance.languageCode);
     await _plugin.zonedSchedule(
       _breastSelfExamNotificationId,
-      s.notifBreastSelfExamTitle,
-      s.notifBreastSelfExamBody,
+      DiscreetNotif.title(s.notifBreastSelfExamTitle),
+      DiscreetNotif.body(s.notifBreastSelfExamBody),
       when,
       NotificationDetails(
         android: AndroidNotificationDetails(
           'cicloplus_breast_self_exam_reminder',
           s.notifBreastSelfExamChannelName,
+          largeIcon: DiscreetNotif.largeIcon,
           channelDescription: s.notifBreastSelfExamChannelDesc,
           importance: Importance.high,
           priority: Priority.high,
@@ -277,13 +283,14 @@ class DailyNotificationService {
     final s = AppStrings.forCode(await _settings.loadLanguage() ?? LocaleController.instance.languageCode);
     await _plugin.zonedSchedule(
       _cyclePhaseReminderId,
-      s.notifCyclePhaseTitle,
-      s.notifCyclePhaseBody,
+      DiscreetNotif.title(s.notifCyclePhaseTitle),
+      DiscreetNotif.body(s.notifCyclePhaseBody),
       _nextInstanceOfTime(hour, minute),
       NotificationDetails(
         android: AndroidNotificationDetails(
           'cicloplus_cycle_phase_reminder',
           s.notifCyclePhaseChannelName,
+          largeIcon: DiscreetNotif.largeIcon,
           channelDescription: s.notifCyclePhaseChannelDesc,
           importance: Importance.high,
           priority: Priority.high,
@@ -321,13 +328,14 @@ class DailyNotificationService {
     final when = tz.TZDateTime.now(tz.local).add(const Duration(days: 2));
     await _plugin.zonedSchedule(
       _reengagementReminderId,
-      s.notifReengagementTitle,
-      s.notifReengagementBody,
+      DiscreetNotif.title(s.notifReengagementTitle),
+      DiscreetNotif.body(s.notifReengagementBody),
       when,
       NotificationDetails(
         android: AndroidNotificationDetails(
           'cicloplus_reengagement_reminder',
           s.notifReengagementChannelName,
+          largeIcon: DiscreetNotif.largeIcon,
           channelDescription: s.notifReengagementChannelDesc,
           importance: Importance.high,
           priority: Priority.high,

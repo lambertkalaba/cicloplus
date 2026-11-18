@@ -1,3 +1,4 @@
+import '../go/strings.dart' show tr;
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_plus/share_plus.dart';
@@ -9,6 +10,7 @@ import '../services/partner_service.dart';
 import '../services/pending_link_service.dart';
 import '../services/settings_service.dart' show PregnancySettings, SettingsService, themeById;
 import '../theme/app_theme.dart';
+import '../widgets/partner_ui.dart';
 import '../widgets/read_only_info_sheet.dart';
 import 'partner_chat_screen.dart';
 import 'partner_hub_screen.dart';
@@ -148,7 +150,7 @@ class _InvitePartnerScreenState extends State<InvitePartnerScreen> {
     // genera (ni se muestra) ningún código — así nunca se le olvida
     // ponerlo y termina con códigos sin identificar.
     if (_labelController.text.trim().isEmpty) {
-      setState(() => _labelError = 'Escribe para quién es antes de generar el código');
+      setState(() => _labelError = tr('Escribe para quién es antes de generar el código', "Write who it's for before generating the code"));
       return;
     }
     setState(() {
@@ -166,7 +168,7 @@ class _InvitePartnerScreenState extends State<InvitePartnerScreen> {
     } on PartnerException catch (e) {
       if (mounted) _showSnack(e.message);
     } catch (_) {
-      if (mounted) _showSnack('No se pudo generar el código. Revisa tu conexión.');
+      if (mounted) _showSnack(tr('No se pudo generar el código. Revisa tu conexión.', "Couldn't generate the code. Check your connection."));
     } finally {
       if (mounted) setState(() => _generating = false);
     }
@@ -174,10 +176,8 @@ class _InvitePartnerScreenState extends State<InvitePartnerScreen> {
 
   Future<void> _shareCode(String code) async {
     await Share.share(
-      'Te invito a ver mi seguimiento en CicloPlus 💗\n\n'
-      'Abre la app, ve a "Invitar a un socio" y usa este código para vincularte:\n\n'
-      '$code\n\n'
-      'Solo podrás verlo, no editar nada.',
+      tr('Te invito a ver mi seguimiento en CicloPlus 💗\n\nAbre la app, ve a "Invitar a un socio" y usa este código para vincularte:\n\n$code\n\nSolo podrás verlo, no editar nada.',
+          "I'm inviting you to see my tracking in CicloPlus 💗\n\nOpen the app, go to \"Invite a partner\" and use this code to link up:\n\n$code\n\nYou'll only be able to view it, not edit anything."),
     );
   }
 
@@ -194,13 +194,13 @@ class _InvitePartnerScreenState extends State<InvitePartnerScreen> {
       final confirmed = await showDialog<bool>(
             context: context,
             builder: (ctx) => AlertDialog(
-              title: const Text('¿Vincularte?'),
+              title: Text(tr('¿Vincularte?', 'Link up?')),
               content: Text(
-                'Vas a vincularte con $ownerEmail. Podrás ver su seguimiento (solo lectura), nunca editarlo.',
+                tr('Vas a vincularte con $ownerEmail. Podrás ver su seguimiento (solo lectura), nunca editarlo.', "You're about to link with $ownerEmail. You'll be able to see their tracking (read-only), never edit it."),
               ),
               actions: [
-                TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancelar')),
-                TextButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Vincularme')),
+                TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(tr('Cancelar', 'Cancel'))),
+                TextButton(onPressed: () => Navigator.pop(ctx, true), child: Text(tr('Vincularme', 'Link me'))),
               ],
             ),
           ) ??
@@ -212,11 +212,11 @@ class _InvitePartnerScreenState extends State<InvitePartnerScreen> {
       final outcome = await _service.acceptInvite(code: code, partnerUid: widget.userId, partnerEmail: widget.userEmail);
       if (!mounted) return;
       _codeController.clear();
-      _showSnack(outcome.linked ? 'Vinculado ✓' : 'Solicitud enviada. Espera a que la dueña la acepte.');
+      _showSnack(outcome.linked ? tr('Vinculado ✓', 'Linked ✓') : tr('Solicitud enviada. Espera a que la dueña la acepte.', 'Request sent. Wait for the owner to accept it.'));
     } on PartnerException catch (e) {
       setState(() => _acceptError = e.message);
     } catch (_) {
-      setState(() => _acceptError = 'Algo salió mal. Inténtalo de nuevo.');
+      setState(() => _acceptError = tr('Algo salió mal. Inténtalo de nuevo.', 'Something went wrong. Please try again.'));
     } finally {
       if (mounted) setState(() => _accepting = false);
     }
@@ -256,21 +256,21 @@ class _InvitePartnerScreenState extends State<InvitePartnerScreen> {
     final confirmed = await showDialog<bool>(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: Text(currentlyShared ? '¿Dejar de compartir?' : '¿Compartir seguimiento?'),
+            title: Text(currentlyShared ? tr('¿Dejar de compartir?', 'Stop sharing?') : tr('¿Compartir seguimiento?', 'Share tracking?')),
             content: Text(
               _inPregnancyMode
                   ? (currentlyShared
-                      ? '$otherLabel ya no podrá ver cómo va desarrollándose tu embarazo día a día ni los consejos para ella y para ti. Seguirá pudiendo chatear contigo y ver tus deseos.'
-                      : '$otherLabel podrá ver cómo va desarrollándose tu embarazo día a día y consejos bonitos para ella y para ti.')
+                      ? tr('$otherLabel ya no podrá ver cómo va desarrollándose tu embarazo día a día ni los consejos para ella y para ti. Seguirá pudiendo chatear contigo y ver tus deseos.', '$otherLabel will no longer see how your pregnancy develops day by day or the tips for them and for you. They can still chat with you and see your wishes.')
+                      : tr('$otherLabel podrá ver cómo va desarrollándose tu embarazo día a día y consejos bonitos para ella y para ti.', '$otherLabel will be able to see how your pregnancy develops day by day and lovely tips for them and for you.'))
                   : (currentlyShared
-                      ? '$otherLabel ya no podrá ver tu calendario de ciclo (previsto/ventana fértil). Seguirá pudiendo chatear contigo y ver tus deseos.'
-                      : '$otherLabel podrá ver tu calendario de ciclo (previsto/ventana fértil), en modo solo lectura.'),
+                      ? tr('$otherLabel ya no podrá ver tu calendario de ciclo (previsto/ventana fértil). Seguirá pudiendo chatear contigo y ver tus deseos.', '$otherLabel will no longer see your cycle calendar (predicted/fertile window). They can still chat with you and see your wishes.')
+                      : tr('$otherLabel podrá ver tu calendario de ciclo (previsto/ventana fértil), en modo solo lectura.', '$otherLabel will be able to see your cycle calendar (predicted/fertile window), read-only.')),
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancelar')),
+              TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(tr('Cancelar', 'Cancel'))),
               TextButton(
                 onPressed: () => Navigator.pop(ctx, true),
-                child: Text(currentlyShared ? 'Dejar de compartir' : 'Compartir'),
+                child: Text(currentlyShared ? tr('Dejar de compartir', 'Stop sharing') : tr('Compartir', 'Share')),
               ),
             ],
           ),
@@ -284,10 +284,10 @@ class _InvitePartnerScreenState extends State<InvitePartnerScreen> {
         enabled: !currentlyShared,
       );
       if (mounted) {
-        _showSnack(currentlyShared ? 'Ya no comparte tu seguimiento' : 'Ahora comparte tu seguimiento ✓');
+        _showSnack(currentlyShared ? tr('Ya no comparte tu seguimiento', 'No longer sharing your tracking') : tr('Ahora comparte tu seguimiento ✓', 'Now sharing your tracking ✓'));
       }
     } catch (_) {
-      if (mounted) _showSnack('No se pudo actualizar. Revisa tu conexión.');
+      if (mounted) _showSnack(tr('No se pudo actualizar. Revisa tu conexión.', "Couldn't update. Check your connection."));
     }
   }
 
@@ -300,20 +300,20 @@ class _InvitePartnerScreenState extends State<InvitePartnerScreen> {
     final confirmed = await showDialog<bool>(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: const Text('¿Desvincular?'),
+            title: Text(tr('¿Desvincular?', 'Unlink?')),
             content: Text(
-              '$otherLabel ya no podrá ver este seguimiento. El código que se usó para vincularse quedará anulado para siempre: no se podrá volver a usar.',
+              tr('$otherLabel ya no podrá ver este seguimiento. El código que se usó para vincularse quedará anulado para siempre: no se podrá volver a usar.', "$otherLabel will no longer see this tracking. The code used to link will be cancelled forever: it can't be used again."),
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancelar')),
-              TextButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Desvincular')),
+              TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(tr('Cancelar', 'Cancel'))),
+              TextButton(onPressed: () => Navigator.pop(ctx, true), child: Text(tr('Desvincular', 'Unlink'))),
             ],
           ),
         ) ??
         false;
     if (!confirmed) return;
     await _service.unlinkPartner(ownerUid: ownerUid, partnerUid: partnerUid, inviteCode: inviteCode);
-    if (mounted) _showSnack('Desvinculado');
+    if (mounted) _showSnack(tr('Desvinculado', 'Unlinked'));
   }
 
   void _showSnack(String msg) {
@@ -334,121 +334,23 @@ class _InvitePartnerScreenState extends State<InvitePartnerScreen> {
     final s = AppStrings.of(context);
     final theme = themeById(widget.themeId);
     final primary = Color(theme.primary);
+    final primaryDark = Color(theme.primaryDark);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: PreferredSize(
-        // Barra tipo iOS (fila chica de "Atrás" arriba y debajo el título
-        // grande) pero con el degradado rosa de la marca, como antes.
-        preferredSize: const Size.fromHeight(96),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(26), bottomRight: Radius.circular(26)),
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(theme.primaryDark), primary],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              boxShadow: [
-                BoxShadow(color: primary.withOpacity(0.3), blurRadius: 16, offset: const Offset(0, 6)),
-              ],
-            ),
-            child: SafeArea(
-              bottom: false,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () => Navigator.of(context).maybePop(),
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(8, 8, 16, 4),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.arrow_back_ios_new_rounded, size: 17, color: Colors.white),
-                          SizedBox(width: 4),
-                          Text('Atrás', style: TextStyle(color: Colors.white, fontSize: 17)),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 14),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Text(
-                        s.todayInvitePartner,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 29, fontWeight: FontWeight.w800, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
+      backgroundColor: const Color(0xFFFFF4F8),
+      appBar: PartnerHeader(title: s.todayInvitePartner, primary: primary, primaryDark: primaryDark),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 20, 16, 32),
+        padding: const EdgeInsets.fromLTRB(16, 18, 16, 36),
         children: [
-          _sectionLabel('Tu código de invitación'),
-          const SizedBox(height: 8),
-          _groupBox(
-            child: Padding(
-              padding: const EdgeInsets.all(14),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _iconBadge(Icons.qr_code_2_rounded, primary),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: TextField(
-                      controller: _labelController,
-                      onChanged: (_) {
-                        if (_labelError != null) setState(() => _labelError = null);
-                      },
-                      style: const TextStyle(fontSize: 15, color: AppColors.textPrimary),
-                      decoration: InputDecoration(
-                        labelText: '¿Para quién es este código?',
-                        hintText: 'Mi pareja, Mamá',
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        labelStyle: const TextStyle(fontSize: 10.5, color: AppColors.textMuted),
-                        hintStyle: const TextStyle(fontSize: 15, color: AppColors.textMuted),
-                        border: InputBorder.none,
-                        isDense: true,
-                        contentPadding: EdgeInsets.zero,
-                        errorText: _labelError,
-                        errorStyle: const TextStyle(fontSize: 10.5),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              'Es solo para ti — así no te confundes de quién es cada código si invitas a más de una persona. Nunca se le muestra a quien lo acepta.',
-              style: TextStyle(fontSize: 12, color: AppColors.textMuted, height: 1.4),
-            ),
-          ),
-          const SizedBox(height: 14),
+          // ── Sobre con el código ──
           StreamBuilder<ActiveInvite?>(
             stream: _service.watchActiveInvite(widget.userId),
             builder: (context, snapshot) {
               final invite = snapshot.data;
               final code = invite?.code;
-              // Si ya hay un código con nombre puesto, refleja ese
-              // nombre en el campo (por si se reabre la pantalla) sin
-              // pisar lo que esté escribiendo ahora mismo. Se hace
-              // después de este frame (no directo aquí en build) para
-              // no disparar un rebuild del TextField mientras el
-              // árbol todavía se está construyendo.
+              // Si ya hay un código con nombre puesto, refleja ese nombre en
+              // el campo (por si se reabre la pantalla) sin pisar lo que esté
+              // escribiendo — después de este frame, no durante el build.
               if (invite != null && _labelController.text.isEmpty) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   if (mounted && _labelController.text.isEmpty) {
@@ -456,270 +358,258 @@ class _InvitePartnerScreenState extends State<InvitePartnerScreen> {
                   }
                 });
               }
-              if (code == null) {
-                return Center(
-                  child: _pillButton(
-                    label: 'Generar código',
-                    color: primary,
-                    loading: _generating,
-                    onPressed: _generating ? null : _generateCode,
-                  ),
-                );
-              }
-              // El QR codifica un ENLACE (cicloplus://link?code=...), no
-              // solo el código a secas: así, al escanearlo con la cámara
-              // normal del móvil (ver DeepLinkService), Android puede
-              // abrir CicloPlus directamente con el código ya listo.
-              final qrData = Uri(scheme: 'cicloplus', host: 'link', queryParameters: {'code': code}).toString();
-              return Column(
-                children: [
-                  Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(14),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: primary.withOpacity(0.15)),
-                      ),
-                      child: QrImageView(
-                        data: qrData,
-                        version: QrVersions.auto,
-                        size: 168,
-                        eyeStyle: QrEyeStyle(eyeShape: QrEyeShape.square, color: primary),
-                        dataModuleStyle: QrDataModuleStyle(dataModuleShape: QrDataModuleShape.square, color: primary),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  const Center(
-                    child: Text(
-                      'Que tu pareja lo escanee con la cámara de su móvil',
-                      style: TextStyle(fontSize: 11.5, color: AppColors.textMuted),
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-                  Center(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 15),
-                      decoration: BoxDecoration(
-                        color: primary.withOpacity(0.10),
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: Text(
-                        code,
-                        style: TextStyle(
-                          fontFamily: 'monospace',
-                          fontSize: 26,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 5,
-                          color: primary,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  const Center(
-                    child: Text('Válido 48 horas · solo lectura', style: TextStyle(fontSize: 12, color: AppColors.textMuted)),
-                  ),
-                  const SizedBox(height: 14),
-                  Row(
-                    children: [
+              // El QR codifica un ENLACE (cicloplus://link?code=...): al
+              // escanearlo con la cámara normal (ver DeepLinkService),
+              // Android abre CicloPlus con el código ya listo.
+              final qrData = code == null ? null : Uri(scheme: 'cicloplus', host: 'link', queryParameters: {'code': code}).toString();
+              return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                InviteEnvelopeCard(
+                  primary: primary,
+                  label: tr('Tu código de invitación', 'Your invitation code'),
+                  child: Column(children: [
+                    Row(children: [
                       Expanded(
-                        child: OutlinedButton.icon(
-                          onPressed: () => _shareCode(code),
-                          icon: Icon(Icons.ios_share, size: 16, color: primary),
-                          label: Text('Compartir', style: TextStyle(color: primary, fontWeight: FontWeight.w600)),
-                          style: OutlinedButton.styleFrom(
-                            backgroundColor: AppColors.background,
-                            side: BorderSide.none,
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                        child: Container(
+                          height: 78,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(color: primary.withOpacity(0.08), borderRadius: BorderRadius.circular(18)),
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 12),
+                              child: Text(
+                                code ?? '······',
+                                style: TextStyle(
+                                  fontSize: 34,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 3,
+                                  color: code == null ? primary.withOpacity(0.25) : primary,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: TextButton(
-                          onPressed: _generating ? null : _generateCode,
-                          child: Text('Generar otro', style: TextStyle(color: primary, fontWeight: FontWeight.w500)),
+                      const SizedBox(width: 12),
+                      Container(
+                        width: 86,
+                        height: 86,
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: primary.withOpacity(0.12)),
                         ),
+                        child: qrData == null
+                            ? Icon(Icons.qr_code_2_rounded, size: 52, color: primary.withOpacity(0.2))
+                            : QrImageView(
+                                data: qrData,
+                                version: QrVersions.auto,
+                                padding: EdgeInsets.zero,
+                                eyeStyle: QrEyeStyle(eyeShape: QrEyeShape.square, color: primaryDark),
+                                dataModuleStyle: QrDataModuleStyle(dataModuleShape: QrDataModuleShape.square, color: primaryDark),
+                              ),
                       ),
-                    ],
-                  ),
-                ],
-              );
-            },
-          ),
-          const SizedBox(height: 26),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(child: _sectionLabel('¿Te compartieron un código?')),
-              IconButton(
-                onPressed: _showReadOnlyInfo,
-                icon: const Icon(Icons.info_outline, size: 18, color: AppColors.textMuted),
-                tooltip: 'Qué podrá ver',
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          _groupBox(
-            child: Padding(
-              padding: const EdgeInsets.all(14),
-              child: Row(
-                children: [
-                  _iconBadge(Icons.link_rounded, primary),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: TextField(
-                      controller: _codeController,
-                      textCapitalization: TextCapitalization.characters,
-                      style: const TextStyle(fontSize: 15, letterSpacing: 0.5, color: AppColors.textPrimary),
-                      decoration: InputDecoration(
-                        hintText: 'Ej. AB3D9K',
-                        hintStyle: const TextStyle(fontSize: 15, color: AppColors.textMuted, letterSpacing: 0.5),
-                        border: InputBorder.none,
-                        isDense: true,
-                        contentPadding: EdgeInsets.zero,
-                        errorText: _acceptError,
-                        errorStyle: const TextStyle(fontSize: 10.5),
+                    ]),
+                    const SizedBox(height: 10),
+                    Text(
+                      code == null
+                          ? tr('Es solo para ti — así no te confundes de quién es cada código si invitas a más de una persona. Nunca se le muestra a quien lo acepta.', "It's just for you — so you don't mix up who each code is for if you invite more than one person. It's never shown to whoever accepts it.")
+                          : '${tr('Válido 48 horas · solo lectura', 'Valid for 48 hours · read-only')}\n${tr('Que tu pareja lo escanee con la cámara de su móvil', 'Have your partner scan it with their phone camera')}',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 12, height: 1.4, color: AppColors.textMuted),
+                    ),
+                  ]),
+                ),
+                const SizedBox(height: 14),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4, bottom: 6),
+                  child: Text(tr('¿Para quién es este código?', 'Who is this code for?'),
+                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AppColors.textPrimary)),
+                ),
+                PartnerField(
+                  controller: _labelController,
+                  hint: tr('Mi pareja, Mamá', 'My partner, Mum'),
+                  icon: Icons.person_outline_rounded,
+                  primary: primary,
+                  errorText: _labelError,
+                  onChanged: (_) {
+                    if (_labelError != null) setState(() => _labelError = null);
+                  },
+                ),
+                const SizedBox(height: 14),
+                if (code == null)
+                  PartnerButton(
+                    label: tr('Generar código', 'Generate code'),
+                    icon: Icons.auto_awesome_rounded,
+                    primary: primary,
+                    primaryDark: primaryDark,
+                    loading: _generating,
+                    onPressed: _generating ? null : _generateCode,
+                  )
+                else
+                  Row(children: [
+                    Expanded(
+                      child: PartnerButton(
+                        label: tr('Compartir', 'Share'),
+                        icon: Icons.share_rounded,
+                        primary: primary,
+                        primaryDark: primaryDark,
+                        onPressed: () => _shareCode(code),
                       ),
                     ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: PartnerOutlineButton(
+                        label: tr('Generar otro', 'Generate another'),
+                        icon: Icons.autorenew_rounded,
+                        primary: primary,
+                        onPressed: _generating ? null : _generateCode,
+                      ),
+                    ),
+                  ]),
+              ]);
+            },
+          ),
+          const SizedBox(height: 22),
+
+          // ── ¿Te compartieron un código? ──
+          Container(
+            padding: const EdgeInsets.fromLTRB(16, 12, 12, 16),
+            decoration: BoxDecoration(color: primary.withOpacity(0.07), borderRadius: BorderRadius.circular(22)),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Row(children: [
+                Icon(Icons.link_rounded, color: primary, size: 22),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(tr('¿Te compartieron un código?', 'Were you given a code?'),
+                      style: const TextStyle(fontSize: 15.5, fontWeight: FontWeight.w900, color: AppColors.textPrimary)),
+                ),
+                IconButton(
+                  onPressed: _showReadOnlyInfo,
+                  icon: const Icon(Icons.info_outline_rounded, size: 20, color: AppColors.textMuted),
+                  tooltip: tr('Qué podrá ver', "What they'll see"),
+                  visualDensity: VisualDensity.compact,
+                ),
+              ]),
+              const SizedBox(height: 8),
+              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Expanded(
+                  child: PartnerField(
+                    controller: _codeController,
+                    hint: tr('Ej. AB3D9K', 'E.g. AB3D9K'),
+                    icon: Icons.confirmation_number_outlined,
+                    primary: primary,
+                    errorText: _acceptError,
+                    code: true,
                   ),
-                ],
-              ),
-            ),
+                ),
+                const SizedBox(width: 10),
+                SizedBox(
+                  width: 124,
+                  child: PartnerButton(
+                    label: tr('Vincularme', 'Link me'),
+                    primary: primary,
+                    primaryDark: primaryDark,
+                    loading: _accepting,
+                    height: 52,
+                    onPressed: _accepting ? null : _acceptCode,
+                  ),
+                ),
+              ]),
+            ]),
           ),
-          const SizedBox(height: 12),
-          Center(
-            child: _pillButton(
-              label: 'Vincularme',
-              color: primary,
-              loading: _accepting,
-              onPressed: _accepting ? null : _acceptCode,
-            ),
-          ),
+
+          // ── Solicitudes de reconexión ──
           StreamBuilder<List<ReconnectRequest>>(
             stream: _service.watchReconnectRequests(widget.userId),
             builder: (context, snapshot) {
               final requests = snapshot.data ?? const [];
               if (requests.isEmpty) return const SizedBox.shrink();
-              return Column(
-                children: [
-                  const SizedBox(height: 26),
-                  _sectionLabel('Solicitudes de reconexión'),
-                  const SizedBox(height: 8),
-                  _rowsGroup(requests.map((r) => _reconnectRow(r)).toList()),
-                ],
+              return Padding(
+                padding: const EdgeInsets.only(top: 24),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                  PartnerSectionTitle(tr('Solicitudes de reconexión', 'Reconnection requests'), color: primaryDark),
+                  for (final r in requests) ...[
+                    Container(decoration: PartnerUi.card(radius: 20), child: _reconnectRow(r)),
+                    const SizedBox(height: 10),
+                  ],
+                ]),
               );
             },
           ),
+
+          // ── Personas que pueden ver tu seguimiento ──
           const SizedBox(height: 26),
-          _sectionLabel('Personas que pueden ver tu seguimiento'),
-          const SizedBox(height: 8),
-          Builder(
-            // Antes este bloque envolvía todo en un StreamBuilder solo para
-            // saber si el modo embarazo estaba activo (y así decidir si se
-            // mostraba el icono de "compartir seguimiento" en cada fila).
-            // Ahora ese icono aplica en los 3 objetivos — embarazo, periodo
-            // o intento de concebir siempre hay algo que compartir/dejar de
-            // compartir (ver PartnerLink.shareTracking, ya genérico) — así
-            // que ya no hace falta esa comprobación.
-            builder: (context) {
-              return StreamBuilder<List<PartnerLink>>(
-                stream: _service.watchMyPartners(widget.userId),
-                builder: (context, snapshot) {
-                  final links = snapshot.data ?? const [];
-                  if (links.isEmpty) {
-                    return _groupBox(
-                      child: const Padding(
-                        padding: EdgeInsets.all(14),
-                        child: Text('Nadie vinculado todavía.', style: TextStyle(fontSize: 12.5, color: AppColors.textMuted)),
-                      ),
+          PartnerSectionTitle(tr('Personas que pueden ver tu seguimiento', 'People who can see your tracking'), color: primaryDark),
+          StreamBuilder<List<PartnerLink>>(
+            stream: _service.watchMyPartners(widget.userId),
+            builder: (context, snapshot) {
+              final links = snapshot.data ?? const [];
+              if (links.isEmpty) return _emptyCard(tr('Nadie vinculado todavía.', 'Nobody linked yet.'));
+              return Column(children: [
+                for (final l in links)
+                  Builder(builder: (context) {
+                    final label = l.label.isNotEmpty ? l.label : (l.email.isEmpty ? tr('Persona vinculada', 'Linked person') : l.email);
+                    return _personCard(
+                      name: label,
+                      primary: primary,
+                      primaryDark: primaryDark,
+                      removeLabel: tr('Desvincular', 'Unlink'),
+                      onRemove: () => _confirmUnlink(ownerUid: widget.userId, partnerUid: l.uid, otherLabel: label, inviteCode: l.inviteCode),
+                      chips: [
+                        PartnerChip(icon: Icons.chat_bubble_outline_rounded, label: tr('Chatear', 'Chat'), primary: primary, onTap: () => _openChat(otherUid: l.uid, otherLabel: label)),
+                        PartnerChip(icon: Icons.favorite_border_rounded, label: tr('Tus deseos', 'Your wishes'), primary: primary, onTap: _openWishes),
+                        PartnerChip(
+                          icon: l.shareTracking ? Icons.calendar_month_rounded : Icons.visibility_off_outlined,
+                          label: tr('Compartir', 'Share'),
+                          primary: primary,
+                          active: l.shareTracking,
+                          onTap: () => _confirmToggleTracking(partnerUid: l.uid, otherLabel: label, currentlyShared: l.shareTracking),
+                        ),
+                      ],
                     );
-                  }
-                  return _rowsGroup(links
-                      .map((l) {
-                        final label = l.label.isNotEmpty ? l.label : (l.email.isEmpty ? 'Persona vinculada' : l.email);
-                        return _linkRow(
-                          icon: Icons.favorite,
-                          iconColor: primary,
-                          label: label,
-                          onChatTap: () => _openChat(otherUid: l.uid, otherLabel: label),
-                          onWishesTap: _openWishes,
-                          showPregnancyToggle: true,
-                          pregnancyShared: l.shareTracking,
-                          onPregnancyToggle: () => _confirmToggleTracking(
-                            partnerUid: l.uid,
-                            otherLabel: label,
-                            currentlyShared: l.shareTracking,
-                          ),
-                          onRemove: () => _confirmUnlink(
-                            ownerUid: widget.userId,
-                            partnerUid: l.uid,
-                            otherLabel: label,
-                            inviteCode: l.inviteCode,
-                          ),
-                        );
-                      })
-                      .toList());
-                },
-              );
+                  }),
+              ]);
             },
           ),
-          const SizedBox(height: 26),
-          _sectionLabel(
-            // Antes decía "Embarazos que sigues": cada dueña puede estar en
-            // un objetivo distinto (una en embarazo, otra solo llevando su
-            // periodo), así que ya no se puede asumir que todo lo que se
-            // sigue aquí es un embarazo — ver PartnerHubScreen, que decide
-            // qué mostrar (embarazo o calendario de ciclo) según cada
-            // dueña concreta.
-            'Seguimientos que sigues',
-          ),
-          const SizedBox(height: 8),
+
+          // ── Seguimientos que sigues ──
+          const SizedBox(height: 22),
+          PartnerSectionTitle(tr('Seguimientos que sigues', 'Tracking you follow'), color: primaryDark),
           StreamBuilder<List<PartnerLink>>(
             stream: _service.watchPregnanciesIFollow(widget.userId),
             builder: (context, snapshot) {
               final links = snapshot.data ?? const [];
-              if (links.isEmpty) {
-                return _groupBox(
-                  child: const Padding(
-                    padding: EdgeInsets.all(14),
-                    child: Text('No sigues ningún seguimiento todavía.', style: TextStyle(fontSize: 12.5, color: AppColors.textMuted)),
-                  ),
-                );
-              }
-              return _rowsGroup(links
-                  .map((l) {
-                    final display = l.ownerName.trim().isNotEmpty
-                        ? l.ownerName.trim()
-                        : (l.email.isEmpty ? 'Persona vinculada' : l.email);
-                    return _linkRow(
-                      icon: Icons.visibility_outlined,
-                      iconColor: primary,
-                      label: display,
-                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => PartnerHubScreen(
-                          ownerUid: l.uid,
-                          ownerEmail: l.email,
-                          ownerLabel: display,
-                          myUid: widget.userId,
-                          themeId: widget.themeId,
-                        ),
-                      )),
-                      onChatTap: () => _openChat(otherUid: l.uid, otherLabel: display),
-                      onRemove: () => _confirmUnlink(
-                        ownerUid: l.uid,
-                        partnerUid: widget.userId,
-                        otherLabel: display,
-                        inviteCode: l.inviteCode,
-                      ),
+              if (links.isEmpty) return _emptyCard(tr('No sigues ningún seguimiento todavía.', "You're not following anyone yet."));
+              return Column(children: [
+                for (final l in links)
+                  Builder(builder: (context) {
+                    final display = l.ownerName.trim().isNotEmpty ? l.ownerName.trim() : (l.email.isEmpty ? tr('Persona vinculada', 'Linked person') : l.email);
+                    void open() => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => PartnerHubScreen(
+                            ownerUid: l.uid,
+                            ownerEmail: l.email,
+                            ownerLabel: display,
+                            myUid: widget.userId,
+                            themeId: widget.themeId,
+                          ),
+                        ));
+                    return _personCard(
+                      name: display,
+                      primary: primary,
+                      primaryDark: primaryDark,
+                      badge: Icons.visibility_rounded,
+                      onTap: open,
+                      removeLabel: tr('Desvincular', 'Unlink'),
+                      onRemove: () => _confirmUnlink(ownerUid: l.uid, partnerUid: widget.userId, otherLabel: display, inviteCode: l.inviteCode),
+                      chips: [
+                        PartnerChip(icon: Icons.visibility_outlined, label: tr('Ver', 'View'), primary: primary, onTap: open),
+                        PartnerChip(icon: Icons.chat_bubble_outline_rounded, label: tr('Chatear', 'Chat'), primary: primary, onTap: () => _openChat(otherUid: l.uid, otherLabel: display)),
+                      ],
                     );
-                  })
-                  .toList());
+                  }),
+              ]);
             },
           ),
         ],
@@ -730,195 +620,115 @@ class _InvitePartnerScreenState extends State<InvitePartnerScreen> {
   Future<void> _approveReconnect(ReconnectRequest request) async {
     try {
       await _service.approveReconnect(request);
-      if (mounted) _showSnack('Reconexión aceptada ✓');
+      if (mounted) _showSnack(tr('Reconexión aceptada ✓', 'Reconnection accepted ✓'));
     } catch (_) {
-      if (mounted) _showSnack('No se pudo aceptar. Revisa tu conexión.');
+      if (mounted) _showSnack(tr('No se pudo aceptar. Revisa tu conexión.', "Couldn't accept. Check your connection."));
     }
   }
 
   Future<void> _rejectReconnect(ReconnectRequest request) async {
     try {
       await _service.rejectReconnect(request);
-      if (mounted) _showSnack('Solicitud rechazada.');
+      if (mounted) _showSnack(tr('Solicitud rechazada.', 'Request declined.'));
     } catch (_) {
-      if (mounted) _showSnack('No se pudo rechazar. Revisa tu conexión.');
+      if (mounted) _showSnack(tr('No se pudo rechazar. Revisa tu conexión.', "Couldn't decline. Check your connection."));
     }
   }
 
-  // ---- Piezas de UI reutilizables (estilo "grouped list" tipo iOS) ----
+  // ---- Piezas de UI (diseño elegante, ver partner_ui.dart) ----
 
-  /// Etiqueta pequeña en mayúsculas que va encima de cada caja agrupada.
-  Widget _sectionLabel(String text) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16),
-      child: Text(
-        text.toUpperCase(),
-        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.textMuted, letterSpacing: 0.5),
-      ),
-    );
-  }
-
-  /// Caja blanca agrupada con esquinas redondeadas y sombra casi plana.
-  Widget _groupBox({required Widget child}) {
+  Widget _emptyCard(String text) {
     return Container(
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: AppColors.cardBackground,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(color: AppColors.textPrimary.withOpacity(0.05), blurRadius: 2, offset: const Offset(0, 1)),
-        ],
-      ),
-      child: child,
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: PartnerUi.card(radius: 20),
+      child: Text(text, style: const TextStyle(fontSize: 13.5, color: AppColors.textMuted)),
     );
   }
 
-  /// Junta varias filas dentro de una sola caja agrupada, separadas por un
-  /// divisor fino con sangría (como una lista de Ajustes de iOS).
-  Widget _rowsGroup(List<Widget> rows) {
-    final children = <Widget>[];
-    for (var i = 0; i < rows.length; i++) {
-      children.add(rows[i]);
-      if (i != rows.length - 1) {
-        children.add(Container(margin: const EdgeInsets.only(left: 41), height: 0.8, color: AppColors.border));
-      }
-    }
-    return _groupBox(child: Column(children: children));
-  }
-
-  /// Cuadradito de color con un icono blanco dentro (estilo icono de
-  /// Ajustes de iOS) en vez de la burbuja circular usada antes.
-  Widget _iconBadge(IconData icon, Color color) {
-    return Container(
-      width: 29,
-      height: 29,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
-      child: Icon(icon, size: 15, color: Colors.white),
-    );
-  }
-
-  /// Botón principal, más chico y centrado (no de ancho completo) — así
-  /// pesa menos visualmente que un botón que ocupa todo el ancho.
-  Widget _pillButton({
-    required String label,
-    required Color color,
-    required VoidCallback? onPressed,
-    bool loading = false,
+  Widget _personCard({
+    required String name,
+    required Color primary,
+    required Color primaryDark,
+    required List<Widget> chips,
+    required String removeLabel,
+    required VoidCallback onRemove,
+    IconData badge = Icons.favorite_rounded,
+    VoidCallback? onTap,
   }) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color,
-        foregroundColor: Colors.white,
-        elevation: 0,
-        padding: const EdgeInsets.symmetric(horizontal: 34, vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: PartnerUi.card(radius: 22),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(22),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),
+            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              PartnerAvatar(name: name, primary: primary, primaryDark: primaryDark, badge: badge),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Row(children: [
+                    Expanded(
+                      child: Text(name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontSize: 16.5, fontWeight: FontWeight.w900, color: AppColors.textPrimary)),
+                    ),
+                    const SizedBox(width: 6),
+                    SizedBox(
+                      height: 30,
+                      child: OutlinedButton(
+                        onPressed: onRemove,
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: primaryDark,
+                          side: BorderSide(color: primary.withOpacity(0.5)),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                          textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800),
+                        ),
+                        child: Text(removeLabel),
+                      ),
+                    ),
+                  ]),
+                  const SizedBox(height: 10),
+                  Wrap(spacing: 7, runSpacing: 7, children: chips),
+                ]),
+              ),
+            ]),
+          ),
+        ),
       ),
-      child: loading
-          ? const SizedBox(
-              width: 18,
-              height: 18,
-              child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-            )
-          : Text(label, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14.5)),
     );
   }
 
   Widget _reconnectRow(ReconnectRequest request) {
-    final label = request.partnerEmail.isEmpty ? 'Persona vinculada' : request.partnerEmail;
+    final label = request.partnerEmail.isEmpty ? tr('Persona vinculada', 'Linked person') : request.partnerEmail;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
       child: Row(
         children: [
-          _iconBadge(Icons.replay_circle_filled_outlined, AppColors.primary),
+          const Icon(Icons.replay_circle_filled_outlined, color: AppColors.primary),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              '$label quiere reconectar',
+              tr('$label quiere reconectar', '$label wants to reconnect'),
               style: const TextStyle(fontSize: 13.5, color: AppColors.textPrimary, fontWeight: FontWeight.w600),
             ),
           ),
           TextButton(
             onPressed: () => _rejectReconnect(request),
-            child: const Text('Rechazar'),
+            child: Text(tr('Rechazar', 'Decline')),
           ),
           TextButton(
             onPressed: () => _approveReconnect(request),
-            child: const Text('Aceptar'),
+            child: Text(tr('Aceptar', 'Accept')),
           ),
         ],
       ),
     );
-  }
-
-  Widget _linkRow({
-    required IconData icon,
-    required Color iconColor,
-    required String label,
-    VoidCallback? onTap,
-    VoidCallback? onChatTap,
-    VoidCallback? onWishesTap,
-    bool showPregnancyToggle = false,
-    bool pregnancyShared = true,
-    VoidCallback? onPregnancyToggle,
-    required VoidCallback onRemove,
-  }) {
-    final row = Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
-      child: Row(
-        children: [
-          _iconBadge(icon, iconColor),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(label, style: const TextStyle(fontSize: 15, color: AppColors.textPrimary)),
-          ),
-          // Los iconos de acceso rápido van siempre en el mismo orden y
-          // alineados: chat, deseos y (si aplica) embarazo — los tres se
-          // tocan igual, para entrar a su pantalla.
-          if (onChatTap != null)
-            IconButton(
-              icon: Icon(Icons.chat_bubble_outline, size: 18, color: iconColor),
-              onPressed: onChatTap,
-              tooltip: 'Chatear',
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-            ),
-          if (onWishesTap != null)
-            IconButton(
-              icon: Icon(Icons.auto_awesome, size: 18, color: iconColor),
-              onPressed: onWishesTap,
-              tooltip: 'Tus deseos',
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-            ),
-          if (showPregnancyToggle)
-            IconButton(
-              icon: Icon(
-                Icons.pregnant_woman,
-                size: 18,
-                color: pregnancyShared ? iconColor : AppColors.textMuted,
-              ),
-              onPressed: onPregnancyToggle,
-              tooltip: pregnancyShared ? 'Compartiendo seguimiento — toca para dejar de compartir' : 'Toca para compartir tu seguimiento',
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-            ),
-          IconButton(
-            icon: const Icon(Icons.close, size: 18, color: AppColors.textMuted),
-            onPressed: onRemove,
-            tooltip: 'Desvincular',
-            padding: EdgeInsets.zero,
-            constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-          ),
-          if (onTap != null) ...[
-            const SizedBox(width: 2),
-            Icon(Icons.chevron_right_rounded, size: 20, color: iconColor.withOpacity(0.55)),
-          ],
-        ],
-      ),
-    );
-    if (onTap == null) return row;
-    return Material(color: Colors.transparent, child: InkWell(onTap: onTap, child: row));
   }
 }

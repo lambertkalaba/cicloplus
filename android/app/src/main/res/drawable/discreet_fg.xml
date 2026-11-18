@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icono discreto: cuaderno neutro (108x108, zona segura central 66). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- tapas -->
+    <path android:fillColor="#5B6B7A"
+        android:pathData="M36,30 h34 a4,4 0 0 1 4,4 v40 a4,4 0 0 1 -4,4 h-34 a4,4 0 0 1 -4,-4 v-40 a4,4 0 0 1 4,-4 z"/>
+    <!-- hojas -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M40,34 h28 a2,2 0 0 1 2,2 v36 a2,2 0 0 1 -2,2 h-28 z"/>
+    <!-- lineas -->
+    <path android:fillColor="#C9D2DA" android:pathData="M45,44 h20 v2 h-20 z"/>
+    <path android:fillColor="#C9D2DA" android:pathData="M45,51 h20 v2 h-20 z"/>
+    <path android:fillColor="#C9D2DA" android:pathData="M45,58 h20 v2 h-20 z"/>
+    <path android:fillColor="#C9D2DA" android:pathData="M45,65 h14 v2 h-14 z"/>
+    <!-- anillas -->
+    <path android:fillColor="#3E4A55" android:pathData="M34,38 h8 v3 h-8 z"/>
+    <path android:fillColor="#3E4A55" android:pathData="M34,52.5 h8 v3 h-8 z"/>
+    <path android:fillColor="#3E4A55" android:pathData="M34,67 h8 v3 h-8 z"/>
+</vector>

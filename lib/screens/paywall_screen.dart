@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/ciclo_header.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../l10n/app_strings.dart';
@@ -113,7 +114,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(title: Text(s.paywallTitle)),
+      appBar: CicloAppBar(title: Text(s.paywallTitle)),
       body: SafeArea(
         child: _loading
             ? const Center(child: CircularProgressIndicator(color: AppColors.primary))

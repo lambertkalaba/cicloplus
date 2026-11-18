@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../go/strings.dart' show tr;
 import '../l10n/app_strings.dart';
 import '../services/settings_service.dart' show themeById;
 import 'pregnancy_simulator_screen.dart';
@@ -300,7 +301,7 @@ class PregnancyTrackingScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  '👯 Mellizos/gemelos · fechas ajustadas',
+                  tr('👯 Mellizos/gemelos · fechas ajustadas', '👯 Twins · adjusted dates'),
                   style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: _gold.withOpacity(0.9)),
                 ),
               ),
@@ -328,7 +329,7 @@ class PregnancyTrackingScreen extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         ),
         icon: const Icon(Icons.auto_awesome, size: 18),
-        label: const Text('Simulacro: ver otras semanas', style: TextStyle(fontWeight: FontWeight.w600)),
+        label: Text(tr('Simulacro: ver otras semanas', 'Preview: see other weeks'), style: TextStyle(fontWeight: FontWeight.w600)),
       ),
     );
   }
@@ -493,6 +494,27 @@ class PregnancyTrackingScreen extends StatelessWidget {
     _WeekRange(38, 42, 'una sandía pequeña 🍉'),
   ];
 
+  static const Map<String, String> _babySizesEn = {
+    'una semilla de amapola 🌱': 'a poppy seed 🌱',
+    'una lenteja 🫘': 'a lentil 🫘',
+    'una frambuesa 🍇': 'a raspberry 🍇',
+    'una aceituna 🫒': 'an olive 🫒',
+    'una ciruela pasa 🍈': 'a prune 🍈',
+    'una manzana 🍎': 'an apple 🍎',
+    'un aguacate 🥑': 'an avocado 🥑',
+    'un pimiento 🫑': 'a bell pepper 🫑',
+    'un plátano 🍌': 'a banana 🍌',
+    'una papaya 🥭': 'a papaya 🥭',
+    'una mazorca de maíz 🌽': 'an ear of corn 🌽',
+    'una coliflor 🥦': 'a cauliflower 🥦',
+    'una berenjena 🍆': 'an eggplant 🍆',
+    'un repollo 🥬': 'a cabbage 🥬',
+    'una piña 🍍': 'a pineapple 🍍',
+    'un melón pequeño 🍈': 'a small melon 🍈',
+    'una lechuga romana 🥬': 'a romaine lettuce 🥬',
+    'una sandía pequeña 🍉': 'a small watermelon 🍉',
+  };
+
   String _babySizeFor(int weeks) {
     final w = weeks <= 0 ? 1 : weeks.clamp(1, 40);
     for (final range in _babySizes) {
@@ -508,7 +530,7 @@ class PregnancyTrackingScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 6),
         child: Text(
-          label,
+          tr(label, _babySizesEn[label] ?? label),
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
         ),
       ),
@@ -519,11 +541,11 @@ class PregnancyTrackingScreen extends StatelessWidget {
   String _factFor(int trimester) {
     switch (trimester) {
       case 1:
-        return 'Durante el primer trimestre se forman los órganos principales del bebé. El corazón ya late alrededor de la semana 6, y el tubo neural (origen del cerebro y la médula espinal) se cierra en estas primeras semanas.';
+        return tr('Durante el primer trimestre se forman los órganos principales del bebé. El corazón ya late alrededor de la semana 6, y el tubo neural (origen del cerebro y la médula espinal) se cierra en estas primeras semanas.', "During the first trimester the baby's main organs form. The heart starts beating around week 6, and the neural tube (which becomes the brain and spinal cord) closes in these early weeks.");
       case 2:
-        return 'En el segundo trimestre suelen empezar a sentirse los primeros movimientos del bebé. Los huesos se endurecen, los sentidos como el oído se desarrollan y el crecimiento se acelera notablemente.';
+        return tr('En el segundo trimestre suelen empezar a sentirse los primeros movimientos del bebé. Los huesos se endurecen, los sentidos como el oído se desarrollan y el crecimiento se acelera notablemente.', "In the second trimester you usually start to feel the baby's first movements. Bones harden, senses like hearing develop and growth speeds up noticeably.");
       default:
-        return 'En el tercer trimestre el bebé gana peso rápidamente y los pulmones terminan de madurar en preparación para respirar aire fuera del útero. El bebé suele acomodarse cabeza abajo de cara al parto.';
+        return tr('En el tercer trimestre el bebé gana peso rápidamente y los pulmones terminan de madurar en preparación para respirar aire fuera del útero. El bebé suele acomodarse cabeza abajo de cara al parto.', "In the third trimester the baby gains weight quickly and the lungs finish maturing to breathe air outside the womb. The baby usually settles head-down ready for birth.");
     }
   }
 
@@ -670,65 +692,60 @@ class PregnancyStatDetailScreen extends StatelessWidget {
       };
 
   String get _title => switch (type) {
-        _StatDetailType.lastPeriod => 'Última regla',
-        _StatDetailType.dueDate => 'Fecha probable de parto',
-        _StatDetailType.dueIn => 'Cuenta atrás',
+        _StatDetailType.lastPeriod => tr('Última regla', 'Last period'),
+        _StatDetailType.dueDate => tr('Fecha probable de parto', 'Estimated due date'),
+        _StatDetailType.dueIn => tr('Cuenta atrás', 'Countdown'),
       };
 
   String get _bigValue => switch (type) {
         _StatDetailType.lastPeriod => _fmt(lmp),
         _StatDetailType.dueDate => _fmt(dueDate),
-        _StatDetailType.dueIn => '$weeksLeft semanas',
+        _StatDetailType.dueIn => tr('$weeksLeft semanas', '$weeksLeft weeks'),
       };
 
-  String get _explanation => switch (type) {
-        _StatDetailType.lastPeriod =>
-          'El embarazo se cuenta desde el primer día de tu última regla (FUM), no desde el día de la concepción. Es la convención médica estándar porque la mayoría de las mujeres recuerda esa fecha con más precisión que el día exacto de la ovulación.\n\n'
-              'Por eso, en la "semana 4" de embarazo el bebé en realidad solo lleva alrededor de 2 semanas desde la concepción: las primeras 2 semanas del conteo son antes de que ocurriera la ovulación.',
-        _StatDetailType.dueDate => isTwins
-            ? 'Con mellizos/gemelos, la fecha se calcula a las 37 semanas (259 días) desde tu última regla, en vez de las 40 semanas de un embarazo único — un embarazo múltiple a término completo dura menos porque el espacio en el útero es más limitado.\n\n'
-                'Es solo una fecha probable: muchos partos de mellizos ocurren incluso antes, entre las semanas 36 y 37.'
-            : 'Se calcula con la Regla de Naegele: tu última regla + 280 días (40 semanas). Es solo una fecha probable, no una fecha exacta — se calcula así porque un embarazo a término dura en promedio 40 semanas desde la FUM.\n\n'
-                'En la práctica, muy pocos bebés nacen exactamente ese día: la mayoría nace en una ventana de un par de semanas antes o después.',
-        _StatDetailType.dueIn =>
-          'Vas por la semana $weeks de $_totalWeeks. Esto representa aproximadamente el ${((weeks / _totalWeeks * 100).clamp(0, 100)).round()}% del embarazo. '
-              '${isTwins ? 'El conteo total de un embarazo de mellizos a término son 37 semanas (259 días)' : 'El conteo total de un embarazo a término son 40 semanas (280 días)'} desde tu última regla.',
-      };
+  String get _explanation {
+    final pct = ((weeks / _totalWeeks * 100).clamp(0, 100)).round();
+    return switch (type) {
+      _StatDetailType.lastPeriod => tr("El embarazo se cuenta desde el primer día de tu última regla (FUM), no desde el día de la concepción. Es la convención médica estándar porque la mayoría de las mujeres recuerda esa fecha con más precisión que el día exacto de la ovulación.\n\nPor eso, en la \"semana 4\" de embarazo el bebé en realidad solo lleva alrededor de 2 semanas desde la concepción: las primeras 2 semanas del conteo son antes de que ocurriera la ovulación.", "Pregnancy is counted from the first day of your last period (LMP), not from the day of conception. It's the standard medical convention because most women remember that date more precisely than the exact day of ovulation.\n\nThat's why in \"week 4\" of pregnancy the baby has actually only been growing for about 2 weeks since conception: the first 2 weeks of the count are before ovulation happened."),
+      _StatDetailType.dueDate => isTwins ? tr("Con mellizos/gemelos, la fecha se calcula a las 37 semanas (259 días) desde tu última regla, en vez de las 40 semanas de un embarazo único — un embarazo múltiple a término completo dura menos porque el espacio en el útero es más limitado.\n\nEs solo una fecha probable: muchos partos de mellizos ocurren incluso antes, entre las semanas 36 y 37.", "With twins, the date is calculated at 37 weeks (259 days) from your last period, instead of the 40 weeks of a single pregnancy — a full-term multiple pregnancy is shorter because there's less room in the womb.\n\nIt's only an estimated date: many twin births happen even earlier, between weeks 36 and 37.") : tr("Se calcula con la Regla de Naegele: tu última regla + 280 días (40 semanas). Es solo una fecha probable, no una fecha exacta — se calcula así porque un embarazo a término dura en promedio 40 semanas desde la FUM.\n\nEn la práctica, muy pocos bebés nacen exactamente ese día: la mayoría nace en una ventana de un par de semanas antes o después.", "It's calculated with Naegele's rule: your last period + 280 days (40 weeks). It's only an estimated date, not an exact one — it's calculated this way because a full-term pregnancy lasts 40 weeks on average from the LMP.\n\nIn practice, very few babies are born exactly on that day: most arrive within a couple of weeks before or after."),
+      _StatDetailType.dueIn => tr("Vas por la semana $weeks de $_totalWeeks. Esto representa aproximadamente el $pct% del embarazo. ", "You're in week $weeks of $_totalWeeks. That's about $pct% of the pregnancy. ") + (isTwins ? tr("El conteo total de un embarazo de mellizos a término son 37 semanas (259 días) desde tu última regla.", "A full-term twin pregnancy counts 37 weeks (259 days) in total from your last period.") : tr("El conteo total de un embarazo a término son 40 semanas (280 días) desde tu última regla.", "A full-term pregnancy counts 40 weeks (280 days) in total from your last period.")),
+    };
+  }
 
   List<String> get _tips => switch (type) {
-        _StatDetailType.lastPeriod => const [
-            'Si no recuerdas la fecha exacta de tu última regla, la primera ecografía puede ajustar esta fecha con más precisión.',
-            'Anotar tus ciclos en la app ayuda a que este cálculo sea más exacto en futuros embarazos.',
-            'Un ciclo irregular puede hacer que la fecha real de concepción varíe unos días respecto a este cálculo estándar.',
+        _StatDetailType.lastPeriod => [
+            tr("Si no recuerdas la fecha exacta de tu última regla, la primera ecografía puede ajustar esta fecha con más precisión.", "If you don't remember the exact date of your last period, the first ultrasound can adjust this date more precisely."),
+            tr("Anotar tus ciclos en la app ayuda a que este cálculo sea más exacto en futuros embarazos.", "Logging your cycles in the app helps make this calculation more accurate in future pregnancies."),
+            tr("Un ciclo irregular puede hacer que la fecha real de concepción varíe unos días respecto a este cálculo estándar.", "An irregular cycle can make the real conception date differ by a few days from this standard calculation."),
           ],
         _StatDetailType.dueDate => isTwins
-            ? const [
-                'La mayoría de los embarazos de mellizos/gemelos llega a término entre las semanas 36 y 38 — muy pocos pasan de la semana 38.',
-                'Muchos médicos recomiendan programar o inducir el parto de mellizos alrededor de la semana 37-38, aunque no haya complicaciones.',
-                'Ten la maleta del hospital lista desde la semana 32-34: con mellizos el parto se adelanta con más frecuencia que en un embarazo único.',
-                'Las citas de control suelen ser más frecuentes que en un embarazo único — tu médico vigilará de cerca el crecimiento de cada bebé.',
+            ? [
+                tr("La mayoría de los embarazos de mellizos/gemelos llega a término entre las semanas 36 y 38 — muy pocos pasan de la semana 38.", "Most twin pregnancies reach term between weeks 36 and 38 — very few go past week 38."),
+                tr("Muchos médicos recomiendan programar o inducir el parto de mellizos alrededor de la semana 37-38, aunque no haya complicaciones.", "Many doctors recommend scheduling or inducing twin births around week 37–38, even without complications."),
+                tr("Ten la maleta del hospital lista desde la semana 32-34: con mellizos el parto se adelanta con más frecuencia que en un embarazo único.", "Have your hospital bag ready from week 32–34: with twins, labour comes early more often than in a single pregnancy."),
+                tr("Las citas de control suelen ser más frecuentes que en un embarazo único — tu médico vigilará de cerca el crecimiento de cada bebé.", "Check-ups are usually more frequent than in a single pregnancy — your doctor will closely monitor each baby's growth."),
               ]
-            : const [
-                'Pretérmino: antes de la semana 37. A término temprano: semanas 37-38. A término completo: semanas 39-40.',
-                'A término tardío: semana 41. Postérmino: semana 42 en adelante.',
-                'Ten la maleta del hospital lista desde la semana 36, por si el parto se adelanta.',
-                'Si llegas a la semana 41 sin señales de parto, tu médico probablemente hablará contigo sobre inducción.',
+            : [
+                tr("Pretérmino: antes de la semana 37. A término temprano: semanas 37-38. A término completo: semanas 39-40.", "Preterm: before week 37. Early term: weeks 37–38. Full term: weeks 39–40."),
+                tr("A término tardío: semana 41. Postérmino: semana 42 en adelante.", "Late term: week 41. Post-term: week 42 onwards."),
+                tr("Ten la maleta del hospital lista desde la semana 36, por si el parto se adelanta.", "Have your hospital bag ready from week 36, in case labour comes early."),
+                tr("Si llegas a la semana 41 sin señales de parto, tu médico probablemente hablará contigo sobre inducción.", "If you reach week 41 with no signs of labour, your doctor will probably talk to you about induction."),
               ],
         _StatDetailType.dueIn => switch (weeks <= 13 ? 1 : (weeks <= 27 ? 2 : 3)) {
-            1 => const [
-                'Primer trimestre: es clave empezar (o continuar) el ácido fólico y agendar tu primera cita prenatal.',
-                'Las náuseas y el cansancio son más comunes en estas semanas — suelen mejorar al entrar al segundo trimestre.',
-                'Evita alcohol, tabaco y alimentos crudos o poco cocidos durante todo el embarazo.',
+            1 => [
+                tr("Primer trimestre: es clave empezar (o continuar) el ácido fólico y agendar tu primera cita prenatal.", "First trimester: it's key to start (or keep taking) folic acid and book your first prenatal appointment."),
+                tr("Las náuseas y el cansancio son más comunes en estas semanas — suelen mejorar al entrar al segundo trimestre.", "Nausea and tiredness are most common in these weeks — they usually ease in the second trimester."),
+                tr("Evita alcohol, tabaco y alimentos crudos o poco cocidos durante todo el embarazo.", "Avoid alcohol, tobacco and raw or undercooked food throughout pregnancy."),
               ],
-            2 => const [
-                'Segundo trimestre: suele ser el más cómodo. Es un buen momento para la ecografía morfológica (semana 18-22).',
-                'Empieza a sentirse el movimiento del bebé, normalmente entre las semanas 18 y 22.',
-                'Buen momento para investigar clases de preparación al parto si te interesan.',
+            2 => [
+                tr("Segundo trimestre: suele ser el más cómodo. Es un buen momento para la ecografía morfológica (semana 18-22).", "Second trimester: usually the most comfortable. It's a good time for the anatomy scan (weeks 18–22)."),
+                tr("Empieza a sentirse el movimiento del bebé, normalmente entre las semanas 18 y 22.", "You start to feel the baby move, usually between weeks 18 and 22."),
+                tr("Buen momento para investigar clases de preparación al parto si te interesan.", "A good time to look into antenatal classes if you're interested."),
               ],
-            _ => const [
-                'Tercer trimestre: revisa o arma la maleta del hospital a partir de la semana 36.',
-                'Las citas prenatales suelen ser más frecuentes en este tramo — cada 2 semanas y luego cada semana.',
-                'Presta atención a los movimientos del bebé; avisa a tu médico si notas un cambio brusco en el patrón habitual.',
+            _ => [
+                tr("Tercer trimestre: revisa o arma la maleta del hospital a partir de la semana 36.", "Third trimester: check or pack your hospital bag from week 36."),
+                tr("Las citas prenatales suelen ser más frecuentes en este tramo — cada 2 semanas y luego cada semana.", "Prenatal appointments are usually more frequent now — every 2 weeks and then every week."),
+                tr("Presta atención a los movimientos del bebé; avisa a tu médico si notas un cambio brusco en el patrón habitual.", "Pay attention to the baby's movements; tell your doctor if you notice a sudden change in the usual pattern."),
               ],
           },
       };
@@ -765,14 +782,14 @@ class PregnancyStatDetailScreen extends StatelessWidget {
                 children: [
                   _headerBlock(),
                   const SizedBox(height: 20),
-                  _sectionCard(title: 'Qué significa', child: Text(
+                  _sectionCard(title: tr('Qué significa', 'What it means'), child: Text(
                     _explanation,
                     style: const TextStyle(fontSize: 13.5, color: _textMuted, height: 1.5),
                   )),
                   const SizedBox(height: 16),
-                  _sectionCard(title: 'Gráfica', child: _chart()),
+                  _sectionCard(title: tr('Gráfica', 'Chart'), child: _chart()),
                   const SizedBox(height: 16),
-                  _sectionCard(title: 'Consejos', child: _tipsList()),
+                  _sectionCard(title: tr('Consejos', 'Tips'), child: _tipsList()),
                 ],
               ),
             ),
@@ -810,7 +827,7 @@ class PregnancyStatDetailScreen extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            type == _StatDetailType.dueIn ? 'te faltan para conocer a tu bebé' : _title,
+            type == _StatDetailType.dueIn ? tr('te faltan para conocer a tu bebé', 'until you meet your baby') : _title,
             style: const TextStyle(fontSize: 12.5, color: _textMuted),
           ),
         ],
@@ -944,10 +961,10 @@ class _TimelineChart extends StatelessWidget {
       // inicio, o pegado a "Parto" cerca del final) siempre terminan en
       // filas distintas y no se superponen.
       final points = <(double, String, String)>[
-        (0.0, 'FUM', 'día 0'),
-        (conceptionFrac, 'Concepción', '~día 14'),
-        (todayFrac, 'Hoy', 'día $daysSince'),
-        (1.0, 'Parto', 'día $totalDays'),
+        (0.0, tr('FUM', 'LMP'), tr('día 0', 'day 0')),
+        (conceptionFrac, tr('Concepción', 'Conception'), tr('~día 14', '~day 14')),
+        (todayFrac, tr('Hoy', 'Today'), tr('día $daysSince', 'day $daysSince')),
+        (1.0, tr('Parto', 'Birth'), tr('día $totalDays', 'day $totalDays')),
       ]..sort((a, b) => a.$1.compareTo(b.$1));
 
       return SizedBox(
@@ -1043,8 +1060,8 @@ class _BirthDistributionChart extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           isTwins
-              ? 'Distribución aproximada y referencial de la semana de nacimiento de mellizos/gemelos — la mayoría nace entre las semanas 36 y 38.'
-              : 'Distribución aproximada y referencial de la semana de nacimiento — la mayoría de los bebés nace entre las semanas 39 y 41.',
+              ? tr("Distribución aproximada y referencial de la semana de nacimiento de mellizos/gemelos — la mayoría nace entre las semanas 36 y 38.", "Approximate, reference distribution of twin birth weeks — most are born between weeks 36 and 38.")
+              : tr("Distribución aproximada y referencial de la semana de nacimiento — la mayoría de los bebés nace entre las semanas 39 y 41.", "Approximate, reference distribution of birth weeks — most babies are born between weeks 39 and 41."),
           style: const TextStyle(fontSize: 11, color: PregnancyTrackingScreen._textMuted, height: 1.4),
         ),
       ],
@@ -1101,16 +1118,16 @@ class _TrimesterProgressChart extends StatelessWidget {
           );
         }),
         const SizedBox(height: 6),
-        const Row(
+        Row(
           children: [
-            Expanded(child: Text('1er trimestre', style: TextStyle(fontSize: 9.5, color: PregnancyTrackingScreen._textMuted))),
-            Expanded(child: Text('2do trimestre', textAlign: TextAlign.center, style: TextStyle(fontSize: 9.5, color: PregnancyTrackingScreen._textMuted))),
-            Expanded(child: Text('3er trimestre', textAlign: TextAlign.end, style: TextStyle(fontSize: 9.5, color: PregnancyTrackingScreen._textMuted))),
+            Expanded(child: Text(tr('1er trimestre', '1st trimester'), style: TextStyle(fontSize: 9.5, color: PregnancyTrackingScreen._textMuted))),
+            Expanded(child: Text(tr('2do trimestre', '2nd trimester'), textAlign: TextAlign.center, style: TextStyle(fontSize: 9.5, color: PregnancyTrackingScreen._textMuted))),
+            Expanded(child: Text(tr('3er trimestre', '3rd trimester'), textAlign: TextAlign.end, style: TextStyle(fontSize: 9.5, color: PregnancyTrackingScreen._textMuted))),
           ],
         ),
         const SizedBox(height: 12),
         Text(
-          'Estás en la semana $weeks de $totalWeeks — ${(frac * 100).round()}% del camino recorrido.',
+          tr('Estás en la semana $weeks de $totalWeeks — ${(frac * 100).round()}% del camino recorrido.', "You're in week $weeks of $totalWeeks — ${(frac * 100).round()}% of the way there."),
           style: const TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
         ),
       ],
