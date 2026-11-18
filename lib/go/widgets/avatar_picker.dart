@@ -321,8 +321,8 @@ class _Preview extends StatelessWidget {
   }
 }
 
-/// Foto de perfil de Yo cuando no ha puesto su foto: su mismo avatar en
-/// pose de retrato (ojos cerrados, manos en la mejilla) con una flor en el pelo.
+/// Foto de perfil de Yo cuando no ha puesto su foto: la misma cara de su
+/// avatar de Hoy, de cerca, con una flor en el pelo.
 /// Las ilustraciones clásicas ya son retratos y se enseñan tal cual.
 class AvatarPortrait extends StatelessWidget {
   const AvatarPortrait({super.key, required this.size});
@@ -336,12 +336,18 @@ class AvatarPortrait extends StatelessWidget {
       width: size,
       height: size,
       color: C.pinkSoft,
+      // La misma cara que en Hoy (pose de la tarde), ampliada para que la
+      // mano que saluda quede fuera del círculo, y una flor en el pelo.
       child: Stack(clipBehavior: Clip.hardEdge, children: [
-        AvatarImg(Avatars.image(id, 'n'), size: size),
         Positioned(
-          left: size * 0.19,
-          top: size * 0.07,
-          child: Image.asset('assets/go/flower_overlay.png', width: size * 0.25, fit: BoxFit.contain),
+          left: -size * 30 / 300,
+          top: -size * 35 / 300,
+          child: AvatarImg(Avatars.image(id, 'a'), size: size * 448 / 300),
+        ),
+        Positioned(
+          left: size * 0.06,
+          top: size * 0.06,
+          child: Image.asset('assets/go/flower_overlay.png', width: size * 0.267, fit: BoxFit.contain),
         ),
       ]),
     );

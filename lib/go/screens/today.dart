@@ -172,7 +172,7 @@ class _Greeting extends StatelessWidget {
             left: hasPhoto ? 6 : -10,
             top: hasPhoto ? 14 : 0,
             child: GestureDetector(
-              onTap: () => showAvatarPicker(context),
+              onLongPress: () => showAvatarPicker(context),
               child: hasPhoto
                 ? Container(
                     width: 112,
@@ -184,23 +184,8 @@ class _Greeting extends StatelessWidget {
                     ),
                     child: const ClipOval(child: Avatar(size: 112)),
                   )
-                : Stack(clipBehavior: Clip.none, children: [
-                    LiveAvatar(id: av, size: 140, onEdit: () => showAvatarPicker(context)),
-                    Positioned(
-                      right: 8,
-                      bottom: 6,
-                      child: GestureDetector(
-                        onTap: () => showAvatarPicker(context),
-                        child: Container(
-                          width: 30,
-                          height: 30,
-                          decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle,
-                              boxShadow: [BoxShadow(color: C.pink.withValues(alpha: 0.3), blurRadius: 6)]),
-                          child: Icon(Icons.edit_rounded, size: 16, color: C.pink),
-                        ),
-                      ),
-                    ),
-                  ]),
+                // Tocar = saluda; mantener pulsado = editar (también en Configuración).
+                : LiveAvatar(id: av, size: 140, onEdit: () => showAvatarPicker(context)),
             ),
           ),
           Positioned(
