@@ -8,7 +8,7 @@ import '../go_root.dart';
 import '../widgets/ui.dart';
 import 'extras.dart';
 import 'more.dart';
-import 'ramadan.dart';
+import 'traditions.dart';
 
 /// Pestaña Yo (igual que la maqueta).
 class MeScreen extends StatelessWidget {
@@ -211,10 +211,10 @@ class MeScreen extends StatelessWidget {
                     onTap: () => CP.openAccount(context),
                   ),
                   LinkRow(
-                    icon: const Text('🌙', style: TextStyle(fontSize: 20)),
-                    title: tr('Ramadán', 'Ramadan'),
-                    subtitle: tr('Días de regla y días por recuperar', 'Period days and days to make up'),
-                    onTap: () => _push(context, const RamadanScreen()),
+                    icon: const Text('✨', style: TextStyle(fontSize: 20)),
+                    title: tr('Tradiciones', 'Traditions'),
+                    subtitle: tr('Fechas especiales, solo si quieres', 'Special dates, only if you want'),
+                    onTap: () => _push(context, const TraditionsScreen()),
                   ),
                   LinkRow(
                     icon: const Icon(Icons.workspace_premium_rounded, color: Color(0xFFB7791F)),

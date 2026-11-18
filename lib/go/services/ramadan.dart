@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/store.dart';
 import '../strings.dart';
+import 'traditions.dart';
 
 /// Un Ramadán: primer día y último día (incluidos).
 class RamadanPeriod {
@@ -37,15 +38,14 @@ class Ramadan extends ChangeNotifier {
     DateTime(2034, 11, 12),
   ];
 
-  /// Idiomas en los que el modo viene activado de serie.
-  static const _defaultOn = {'ar', 'ur', 'fa', 'id', 'ms', 'tr', 'uz', 'kk', 'az', 'ha', 'wo', 'so', 'bn'};
 
   bool _loaded = false;
   bool? _enabled;
   int _offset = 0;
   int _days = 30;
+  Set<String> _qada = {};
 
-  bool get enabled => _enabled ?? _defaultOn.contains(L.lang);
+  bool get enabled => _enabled ?? true;
   int get offset => _offset;
   int get days => _days;
 
@@ -54,6 +54,20 @@ class Ramadan extends ChangeNotifier {
     _loaded = true;
     SharedPreferences.getInstance().then((p) {
       _enabled = p.getBool('ramadan_on');
+      _qada = (p.getStringList('ramadan_qada') ?? const []).toSet();
+      // Antes los días recuperados iban en el registro (que se sincroniza).
+      // Ahora se quedan solo en el móvil: se mueven y se quitan del registro.
+      final old = <String>[];
+      AppStore.instance.logs.forEach((k, v) {
+        if (v.extra['qada'] == true) old.add(k);
+      });
+      if (old.isNotEmpty) {
+        _qada.addAll(old);
+        p.setStringList('ramadan_qada', _qada.toList());
+        for (final k in old) {
+          AppStore.instance.updateLog(parseKey(k), (l) => l.extra.remove('qada'));
+        }
+      }
       _offset = p.getInt('ramadan_offset') ?? 0;
       _days = p.getInt('ramadan_days') ?? 30;
       notifyListeners();
@@ -124,15 +138,20 @@ class Ramadan extends ChangeNotifier {
     return n;
   }
 
-  static bool madeUpOn(DateTime d) => AppStore.instance.logFor(d).extra['qada'] == true;
+  /// Días recuperados: se guardan SOLO en el móvil (nunca se sincronizan).
+  static bool madeUpOn(DateTime d) => instance._qada.contains(dayKey(d));
 
-  static Future<void> setMadeUp(DateTime d, bool v) => AppStore.instance.updateLog(d, (l) {
-        if (v) {
-          l.extra['qada'] = true;
-        } else {
-          l.extra.remove('qada');
-        }
-      });
+  static Future<void> setMadeUp(DateTime d, bool v) async {
+    final k = dayKey(d);
+    if (v) {
+      instance._qada.add(k);
+    } else {
+      instance._qada.remove(k);
+    }
+    final p = await SharedPreferences.getInstance();
+    await p.setStringList('ramadan_qada', instance._qada.toList());
+    instance.notifyListeners();
+  }
 
   /// Días recuperados después de [r] (hasta el siguiente Ramadán).
   int madeUpAfter(RamadanPeriod r) {
@@ -140,11 +159,10 @@ class Ramadan extends ChangeNotifier {
     final i = list.indexWhere((x) => x.start == r.start);
     final limit = i >= 0 && i + 1 < list.length ? addDays(list[i + 1].start, -1) : addDays(r.end, 354);
     var n = 0;
-    AppStore.instance.logs.forEach((k, v) {
-      if (v.extra['qada'] != true) return;
+    for (final k in _qada) {
       final d = parseKey(k);
       if (d.isAfter(r.end) && !d.isAfter(limit)) n++;
-    });
+    }
     return n;
   }
 
@@ -196,7 +214,7 @@ class Ramadan extends ChangeNotifier {
   /// ¿Se enseña la tarjeta en Hoy? Si está activado y el Ramadán está en
   /// curso, empieza en menos de 2 semanas o quedan días por recuperar.
   bool get showOnToday {
-    if (!enabled) return false;
+    if (!Traditions.instance.muslim || !enabled) return false;
     final t = dateOnly(DateTime.now());
     final r = currentOrNext(t);
     if (r != null && (r.contains(t) || r.start.difference(t).inDays <= 14)) return true;

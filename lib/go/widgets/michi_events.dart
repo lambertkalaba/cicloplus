@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../data/store.dart';
 import '../screens/michi_stories.dart' show StoryParticles, StoryFx;
 import '../strings.dart';
+import '../services/traditions.dart';
 import '../screens/michi_more.dart' show MichiCounters;
 import 'michi_sound.dart';
 import 'ui.dart';
@@ -235,8 +236,10 @@ class MichiEvents {
     final t = DateTime(n.year, n.month, n.day);
     final c = country;
     final y = t.year;
-    final muslim = _muslim.contains(c);
+    final tdn = Traditions.instance..ensureLoaded();
+    final muslim = tdn.chosen == null || tdn.chosen == 'none' ? _muslim.contains(c) : tdn.muslim;
     final ev = <MichiEvent?>[
+      if (tdn.isSantoDay(t)) MichiEvent('🎉', tdn.greeting, StoryFx.sparkles),
       if (_md(t, 1, 1)) MichiEvent('🎆', tr('¡Feliz Año Nuevo! Que este año te trate con mucho cariño 🎆', 'Happy New Year! May this year treat you with lots of love 🎆'), StoryFx.sparkles),
       if (_md(t, 12, 31)) MichiEvent('✨', tr('¡Última noche del año! Gracias por este año a tu lado ✨', 'Last night of the year! Thank you for this year by your side ✨'), StoryFx.sparkles),
       if (_md(t, 3, 8)) MichiEvent('💜', tr('¡Feliz Día de la Mujer! Hoy y siempre, eres increíble 💜', "Happy Women's Day! Today and always, you're amazing 💜"), StoryFx.hearts),

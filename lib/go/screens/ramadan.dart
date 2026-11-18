@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/store.dart';
 import '../services/ramadan.dart';
+import '../services/traditions.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
 
@@ -189,8 +190,9 @@ class RamadanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rm = Ramadan.instance..ensureLoaded();
+    Traditions.instance.ensureLoaded();
     return ListenableBuilder(
-      listenable: rm,
+      listenable: Listenable.merge([rm, Traditions.instance]),
       builder: (context, _) {
         if (!rm.showOnToday) return const SizedBox.shrink();
         final today = dateOnly(DateTime.now());

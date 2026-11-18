@@ -684,7 +684,7 @@ class CalColors {
   static const todayDark = Color(0xFF14612C);
 }
 
-/// Corazón de relación sexual: 1 = con protección (corazón con escudo), 2 = sin protección (corazón rojo).
+/// Corazón de relación sexual: 1 = con protección (medio corazón), 2 = sin protección (corazón entero).
 class SexMark extends StatelessWidget {
   final int sex;
   final double size;
@@ -705,17 +705,29 @@ class SexMark extends StatelessWidget {
       ),
       child: Center(
         child: protected
-            ? Stack(
-                alignment: Alignment.center,
-                children: [
-                  Icon(
-                    Icons.favorite,
-                    size: size,
-                    color: const Color(0xFF3BA3D9),
-                  ),
-                  Icon(Icons.shield, size: size * 0.5, color: Colors.white),
-                ],
+            // Con protección: medio corazón (la mitad izquierda rellena).
+            ? SizedBox(
+                width: size,
+                height: size,
+                child: Stack(
+                  children: [
+                    Icon(Icons.favorite_border, size: size, color: const Color(0xFFE5284F)),
+                    Positioned(
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      child: ClipRect(
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          widthFactor: 0.5,
+                          child: Icon(Icons.favorite, size: size, color: const Color(0xFFE5284F)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               )
+            // Sin protección: corazón entero.
             : Icon(Icons.favorite, size: size, color: const Color(0xFFE5284F)),
       ),
     );
@@ -1060,7 +1072,7 @@ class _DayCard extends StatelessWidget {
           ),
           Divider(height: 22, color: C.pinkLine),
           InkWell(
-            onTap: onEdit,
+            onTap: () => _editNote(context, log.note),
             child: Row(
               children: [
                 Expanded(
@@ -1108,6 +1120,55 @@ class _DayCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  /// Notas: solo escribir la nota de este día (sin abrir todo el registro).
+  Future<void> _editNote(BuildContext context, String current) async {
+    final c = TextEditingController(text: current);
+    final text = await showModalBottomSheet<String>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      backgroundColor: Colors.white,
+      builder: (ctx) => Padding(
+        padding: EdgeInsets.fromLTRB(18, 0, 18, 16 + MediaQuery.of(ctx).viewInsets.bottom),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('${tr('Nota', 'Note')} · ${L.dateLong(day)}',
+                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: C.text)),
+            const SizedBox(height: 12),
+            TextField(
+              controller: c,
+              autofocus: true,
+              minLines: 4,
+              maxLines: 10,
+              textCapitalization: TextCapitalization.sentences,
+              decoration: InputDecoration(
+                hintText: tr('¿Cómo te sientes hoy? ¿Qué has notado?', 'How do you feel today? What did you notice?'),
+                filled: true,
+                fillColor: C.pinkBg,
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: C.pinkLine)),
+                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: C.pinkLine)),
+                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: C.pink, width: 2)),
+              ),
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(child: PinkButton(label: tr('Cancelar', 'Cancel'), outlined: true, onTap: () => Navigator.pop(ctx))),
+                const SizedBox(width: 10),
+                Expanded(child: PinkButton(label: tr('Guardar', 'Save'), icon: Icons.check_rounded, onTap: () => Navigator.pop(ctx, c.text))),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+    if (text == null) return;
+    await AppStore.instance.updateLog(day, (l) => l.note = text.trim());
+    if (context.mounted) toast(context, tr('Nota guardada 💗', 'Note saved 💗'));
   }
 
   Widget _chip(String? asset, String? emoji, String label) => Container(

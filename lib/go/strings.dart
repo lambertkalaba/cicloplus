@@ -4,6 +4,7 @@ import 'data/store.dart';
 import 'go_i18n.dart';
 import 'go_i18n_tpl.dart';
 import 'go_i18n_cat.dart';
+import 'go_i18n_trad.dart';
 import 'go_i18n_new.dart';
 import '../l10n/extra_i18n.dart';
 
@@ -87,7 +88,7 @@ class L {
 String tr(String es, String en) {
   if (L.lang == 'es') return es;
   if (L.lang == 'en') return en;
-  final exact = goI18nNew[L.lang]?[es] ?? goI18n[L.lang]?[es] ?? goI18nCat[L.lang]?[es];
+  final exact = goI18nTrad[L.lang]?[es] ?? goI18nNew[L.lang]?[es] ?? goI18n[L.lang]?[es] ?? goI18nCat[L.lang]?[es];
   if (exact != null) return exact;
   return _fromTemplate(es) ?? ExtraI18n.t(es, en) ?? en;
 }
