@@ -13,7 +13,7 @@ import '../go_root.dart';
 import '../strings.dart';
 import '../widgets/cycle_plus.dart' show CycleExtraSettings;
 import '../widgets/michi_events.dart' show MichiSettings;
-import '../widgets/avatar_picker.dart' show AvatarSettings, ThemeColorSettings;
+import '../widgets/avatar_picker.dart' show AvatarPortrait, AvatarSettings, ThemeColorSettings;
 import '../widgets/ui.dart';
 import 'register.dart';
 
@@ -73,7 +73,7 @@ Future<void> pickPhoto(BuildContext context) async {
             onTap: () => Navigator.pop(ctx, 'camera'),
           ),
           ListTile(
-            leading: const ClipOval(child: Img('avatar', size: 28, fit: BoxFit.cover, fallback: Icons.face_3)),
+            leading: const ClipOval(child: AvatarPortrait(size: 28)),
             title: Text(tr('Usar la ilustración', 'Use the illustration'), style: const TextStyle(fontWeight: FontWeight.w700)),
             onTap: () => Navigator.pop(ctx, 'default'),
           ),

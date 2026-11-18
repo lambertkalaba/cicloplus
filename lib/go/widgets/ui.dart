@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import '../data/store.dart';
+import 'avatar_picker.dart';
 import '../screens/reminders.dart';
 
 /// Colores de la maqueta (verde selva + rosa).
@@ -125,7 +126,7 @@ class Img extends StatelessWidget {
   );
 }
 
-/// Foto de perfil: la de la usuaria si la puso, si no la ilustración.
+/// Foto de perfil (Yo): la de la usuaria si la puso, si no su avatar en pose de retrato.
 class Avatar extends StatelessWidget {
   final double size;
   const Avatar({super.key, required this.size});
@@ -139,15 +140,10 @@ class Avatar extends StatelessWidget {
         width: size,
         height: size,
         fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => Img(
-          'avatar',
-          size: size,
-          fit: BoxFit.cover,
-          fallback: Icons.face_3,
-        ),
+        errorBuilder: (_, __, ___) => AvatarPortrait(size: size),
       );
     }
-    return Img('avatar', size: size, fit: BoxFit.cover, fallback: Icons.face_3);
+    return AvatarPortrait(size: size);
   }
 }
 

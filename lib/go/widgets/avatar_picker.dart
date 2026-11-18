@@ -70,12 +70,12 @@ class Avatars {
     return p != null && File(p).existsSync();
   }
 
-  /// Qué se enseña: 'photo', un avatar personalizable o una ilustración clásica.
+  /// El avatar elegido: uno personalizable o una ilustración clásica.
+  /// En Hoy siempre sale un avatar; la foto real solo se ve en Yo.
   static String get current {
     final id = AppStore.instance.avatarId;
-    if (id == 'photo') return hasPhoto ? 'photo' : defaultLook;
     if (isLook(id) || classic.contains(id)) return id;
-    return hasPhoto ? 'photo' : defaultLook;
+    return defaultLook;
   }
 
   /// Postura según la hora: m (mañana), a (tarde), n (noche).
@@ -236,7 +236,6 @@ class _AvatarSheetState extends State<_AvatarSheet> {
               mainAxisSpacing: 12,
               crossAxisSpacing: 12,
               children: [
-                if (Avatars.hasPhoto && _skin == null && _hair == null) _option('photo', cur),
                 for (final l in looks) _option(l.id, cur),
               ],
             ),
@@ -318,6 +317,33 @@ class _Preview extends StatelessWidget {
         height: size,
         child: AvatarImg(Avatars.image(id, pose), size: size),
       ),
+    );
+  }
+}
+
+/// Foto de perfil de Yo cuando no ha puesto su foto: su mismo avatar en
+/// pose de retrato (ojos cerrados, manos en la mejilla) con una flor en el pelo.
+/// Las ilustraciones clásicas ya son retratos y se enseñan tal cual.
+class AvatarPortrait extends StatelessWidget {
+  const AvatarPortrait({super.key, required this.size});
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    final id = Avatars.current;
+    if (Avatars.classic.contains(id)) return Img(id, size: size, fit: BoxFit.cover, fallback: Icons.face_3);
+    return Container(
+      width: size,
+      height: size,
+      color: C.pinkSoft,
+      child: Stack(clipBehavior: Clip.hardEdge, children: [
+        AvatarImg(Avatars.image(id, 'n'), size: size),
+        Positioned(
+          left: size * 0.19,
+          top: size * 0.07,
+          child: Image.asset('assets/go/flower_overlay.png', width: size * 0.25, fit: BoxFit.contain),
+        ),
+      ]),
     );
   }
 }
