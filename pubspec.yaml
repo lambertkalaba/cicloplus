@@ -178,6 +178,7 @@ flutter:
     - assets/go/av/
     - assets/go/avt/
     - assets/go/avc/
+    - assets/go/avp/
 
 # Configuración del icono de la app (flor de loto, elegida en Configuración
 # > icono). Ejecutar `dart run flutter_launcher_icons` para regenerar los

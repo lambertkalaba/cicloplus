@@ -332,6 +332,10 @@ class AvatarPortrait extends StatelessWidget {
   Widget build(BuildContext context) {
     final id = Avatars.current;
     if (Avatars.classic.contains(id)) return Img(id, size: size, fit: BoxFit.cover, fallback: Icons.face_3);
+    // Avatar hecho por ella: su retrato dibujado, con su piel, peinado y color.
+    if (CustomLook.parse(id) != null) {
+      return Container(width: size, height: size, color: C.pinkSoft, child: PortraitImg(id: id, size: size));
+    }
     return Container(
       width: size,
       height: size,

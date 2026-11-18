@@ -97,6 +97,15 @@ class CustomLook {
     ]);
   }
 
+  /// Filtro para el pelo del retrato de Yo (las capas ph_ tienen el pelo en
+  /// gris con brillo medio 100). El hiyab va a juego con el color de la app.
+  ColorFilter? portraitFilter() {
+    if (hair == 'hijab') return _tint(C.t(0xFFE7A9CC), 1.05, 100);
+    final c = colors[color];
+    if (c == null) return null;
+    return _tint(c.$1, c.$2, 100);
+  }
+
   /// Filtro para el pelo (o el hiyab, que va a juego con el color de la app).
   ColorFilter? hairFilter(String pose) {
     final m = avatarHairLum['${hair}_$pose'] ?? 76;
@@ -385,4 +394,101 @@ class _MakerSheetState extends State<_MakerSheet> {
 class AvatarBus {
   AvatarBus._();
   static final bye = ValueNotifier<int>(0);
+}
+
+/// Retrato de Yo (ojos cerrados, manos bajo la mejilla y una flor), el mismo
+/// avatar de Hoy. Está en assets/go/avp/:
+///   p_<piel>_<peinado>.webp   el retrato tal cual (pelo castaño)
+///   pg_<piel>_<peinado>.webp  el mismo con el pelo (o el hiyab) marcado
+///   ph_<piel>_<peinado>.webp  solo el pelo en gris, para recolorearlo
+class PortraitMaker {
+  PortraitMaker._();
+  static const _dir = 'assets/go/avp';
+  static final _cache = <String, ui.Image>{};
+  static final _loading = <String, Future<ui.Image?>>{};
+
+  static String _key(String id) => '$id|${C.theme}';
+
+  static ui.Image? cached(String id) => _cache[_key(id)];
+
+  static Future<ui.Image?> build(String id) {
+    final k = _key(id);
+    final c = _cache[k];
+    if (c != null) return Future.value(c);
+    return _loading[k] ??= _compose(id).then((im) {
+      _loading.remove(k);
+      if (im != null) {
+        if (_cache.length > 20) _cache.clear();
+        _cache[k] = im;
+      }
+      return im;
+    });
+  }
+
+  static Future<ui.Image?> _compose(String id) async {
+    final l = CustomLook.parse(id);
+    if (l == null) return null;
+    final n = '${l.skin}_${l.hair}';
+    final f = l.hair == 'sinpelo' ? null : l.portraitFilter();
+    if (f == null) return AvatarMaker._load('$_dir/p_$n.webp');
+    final r = await Future.wait([AvatarMaker._load('$_dir/pg_$n.webp'), AvatarMaker._load('$_dir/ph_$n.webp')]);
+    final base = r[0], hair = r[1];
+    if (base == null || hair == null) return AvatarMaker._load('$_dir/p_$n.webp');
+    final w = base.width.toDouble(), h = base.height.toDouble();
+    final dst = Rect.fromLTWH(0, 0, w, h);
+    final rec = ui.PictureRecorder();
+    final cv = Canvas(rec, dst);
+    final q = FilterQuality.medium;
+    cv.drawImage(base, Offset.zero, Paint()..filterQuality = q);
+    cv.drawImageRect(hair, Rect.fromLTWH(0, 0, hair.width.toDouble(), hair.height.toDouble()), dst, Paint()
+      ..filterQuality = q
+      ..colorFilter = f);
+    return rec.endRecording().toImage(base.width, base.height);
+  }
+}
+
+/// Imagen del retrato de un avatar hecho por ella.
+class PortraitImg extends StatefulWidget {
+  const PortraitImg({super.key, required this.id, required this.size});
+  final String id;
+  final double size;
+
+  @override
+  State<PortraitImg> createState() => _PortraitImgState();
+}
+
+class _PortraitImgState extends State<PortraitImg> {
+  ui.Image? _img;
+
+  @override
+  void initState() {
+    super.initState();
+    _get();
+  }
+
+  @override
+  void didUpdateWidget(PortraitImg old) {
+    super.didUpdateWidget(old);
+    if (old.id != widget.id) _get();
+  }
+
+  void _get() {
+    final c = PortraitMaker.cached(widget.id);
+    if (c != null) {
+      _img = c;
+      return;
+    }
+    final id = widget.id;
+    PortraitMaker.build(id).then((im) {
+      if (!mounted || id != widget.id) return;
+      setState(() => _img = im);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final im = _img;
+    if (im == null) return SizedBox(width: widget.size, height: widget.size);
+    return RawImage(image: im, width: widget.size, height: widget.size, fit: BoxFit.cover, filterQuality: FilterQuality.medium);
+  }
 }
