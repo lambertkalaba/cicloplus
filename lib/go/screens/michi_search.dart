@@ -15,6 +15,7 @@ import 'more.dart';
 import 'month_summary.dart';
 import 'period_mode.dart';
 import 'ramadan.dart';
+import 'fertility.dart';
 import 'traditions.dart';
 import '../services/traditions.dart';
 import 'register.dart';
@@ -75,7 +76,7 @@ final List<_Entry> _entries = [
       'temperatura basal termometro grados basal temperature thermometer', (c) => CicloYo.field(c, 'temperature'), goals: {'conceive'}),
   _Entry(Icons.spa_rounded, () => tr('Fertilidad', 'Fertility'), () => tr('Tus días fértiles y tu ovulación', 'Your fertile days and ovulation'),
       'fertilidad fertil ovulacion concebir quedarme embarazada bebe fertility fertile ovulation conceive get pregnant',
-      (c) => CicloYo.summary(c, 'fertility'), goals: {'conceive'}),
+      (c) => _push(c, const FertilityScreen()), goals: {'conceive'}),
   _Entry(Icons.child_friendly_rounded, () => tr('Mi embarazo', 'My pregnancy'), () => tr('Cómo está tu bebé semana a semana', 'How your baby is doing week by week'),
       'embarazo bebe semana parto fecha tamaño pregnancy baby week due date size', (c) => CP.openPregnancy(c), goals: {'pregnancy'}),
   _Entry(Icons.people_alt_rounded, () => tr('Mi pareja', 'My partner'), () => tr('Invita a tu pareja y compartid el ciclo', 'Invite your partner and share your cycle'),

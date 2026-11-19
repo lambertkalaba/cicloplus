@@ -3,6 +3,9 @@
 
 const Map<String, Map<String, String>> goI18nTrad = {
   "am": {
+    "Registra tu regla para calcular tu ovulación.": "እንቁላል የሚለቀቅበትን ቀን ለማስላት የወር አበባሽን መዝግቢ።",
+    "Próxima ovulación": "የሚቀጥለው የእንቁላል መልቀቂያ",
+    "Hoy estás en tu ventana fértil 🌱": "ዛሬ በምርታማ ቀናትሽ ውስጥ ነሽ 🌱",
     "Nota del día": "የዕለቱ ማስታወሻ",
     "Escribe una nota en cualquier día del calendario": "በቀን መቁጠሪያው በማንኛውም ቀን ማስታወሻ ጻፊ",
     "Todas tus notas juntas": "ሁሉም ማስታወሻዎችሽ በአንድ ላይ",
@@ -73,6 +76,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ቀለም ምረጪ",
   },
   "ar": {
+    "Registra tu regla para calcular tu ovulación.": "سجّلي دورتك لحساب موعد الإباضة.",
+    "Próxima ovulación": "الإباضة القادمة",
+    "Hoy estás en tu ventana fértil 🌱": "أنتِ اليوم في نافذة الخصوبة 🌱",
+    "Ventana fértil estimada": "نافذة الخصوبة المتوقعة",
+    "Tus días más fértiles son los 5 días antes de la ovulación y el día siguiente. Son estimaciones según tus registros, no un método anticonceptivo.": "أكثر أيامك خصوبة هي الأيام الخمسة قبل الإباضة واليوم التالي لها. هذه تقديرات حسب تسجيلاتك وليست وسيلة لمنع الحمل.",
     "Nota del día": "ملاحظة اليوم",
     "Escribe una nota en cualquier día del calendario": "اكتبي ملاحظة في أي يوم من التقويم",
     "Todas tus notas juntas": "كل ملاحظاتك معًا",
@@ -200,6 +208,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} أيام",
   },
   "az": {
+    "Registra tu regla para calcular tu ovulación.": "Ovulyasiyanı hesablamaq üçün aybaşını qeyd et.",
+    "Próxima ovulación": "Növbəti ovulyasiya",
+    "Hoy estás en tu ventana fértil 🌱": "Bu gün məhsuldar dövründəsən 🌱",
     "Nota del día": "Günün qeydi",
     "Escribe una nota en cualquier día del calendario": "Təqvimin istənilən gününə qeyd yaz",
     "Todas tus notas juntas": "Bütün qeydlərin bir yerdə",
@@ -270,6 +281,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rəng seç",
   },
   "bn": {
+    "Registra tu regla para calcular tu ovulación.": "ওভুলেশন হিসাব করতে তোমার পিরিয়ড লেখো।",
+    "Próxima ovulación": "পরবর্তী ওভুলেশন",
+    "Hoy estás en tu ventana fértil 🌱": "আজ তুমি তোমার উর্বর সময়ে আছ 🌱",
+    "Ventana fértil estimada": "সম্ভাব্য উর্বর সময়",
+    "Tus días más fértiles son los 5 días antes de la ovulación y el día siguiente. Son estimaciones según tus registros, no un método anticonceptivo.": "তোমার সবচেয়ে উর্বর দিন হলো ওভুলেশনের আগের ৫ দিন ও তার পরের দিন। এগুলো তোমার রেকর্ড অনুযায়ী অনুমান, জন্মনিয়ন্ত্রণ পদ্ধতি নয়।",
     "Nota del día": "আজকের নোট",
     "Escribe una nota en cualquier día del calendario": "ক্যালেন্ডারের যেকোনো দিনে নোট লেখো",
     "Todas tus notas juntas": "তোমার সব নোট একসাথে",
@@ -397,6 +413,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} দিন",
   },
   "cs": {
+    "Registra tu regla para calcular tu ovulación.": "Zapiš menstruaci a spočítáme ovulaci.",
+    "Próxima ovulación": "Příští ovulace",
+    "Hoy estás en tu ventana fértil 🌱": "Dnes jsi v plodném okně 🌱",
     "Nota del día": "Poznámka dne",
     "Escribe una nota en cualquier día del calendario": "Napiš poznámku ke kterémukoli dni v kalendáři",
     "Todas tus notas juntas": "Všechny tvé poznámky pohromadě",
@@ -467,6 +486,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber barvu",
   },
   "da": {
+    "Registra tu regla para calcular tu ovulación.": "Log din menstruation for at beregne din ægløsning.",
+    "Próxima ovulación": "Næste ægløsning",
+    "Hoy estás en tu ventana fértil 🌱": "Du er i dit frugtbare vindue i dag 🌱",
     "Nota del día": "Dagens note",
     "Escribe una nota en cualquier día del calendario": "Skriv en note på enhver dag i kalenderen",
     "Todas tus notas juntas": "Alle dine noter samlet",
@@ -537,6 +559,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vælg en farve",
   },
   "de": {
+    "Registra tu regla para calcular tu ovulación.": "Trag deine Periode ein, um deinen Eisprung zu berechnen.",
+    "Próxima ovulación": "Nächster Eisprung",
+    "Hoy estás en tu ventana fértil 🌱": "Du bist heute in deinem fruchtbaren Fenster 🌱",
+    "Ventana fértil estimada": "Geschätztes fruchtbares Fenster",
+    "Tus días más fértiles son los 5 días antes de la ovulación y el día siguiente. Son estimaciones según tus registros, no un método anticonceptivo.": "Deine fruchtbarsten Tage sind die 5 Tage vor dem Eisprung und der Tag danach. Das sind Schätzungen aus deinen Einträgen, keine Verhütungsmethode.",
     "Nota del día": "Notiz des Tages",
     "Escribe una nota en cualquier día del calendario": "Schreib an jedem Kalendertag eine Notiz",
     "Todas tus notas juntas": "Alle deine Notizen zusammen",
@@ -664,6 +691,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} Tage",
   },
   "el": {
+    "Registra tu regla para calcular tu ovulación.": "Κατέγραψε την περίοδό σου για να υπολογιστεί η ωορρηξία.",
+    "Próxima ovulación": "Επόμενη ωορρηξία",
+    "Hoy estás en tu ventana fértil 🌱": "Σήμερα είσαι στο γόνιμο παράθυρο 🌱",
     "Nota del día": "Σημείωση της ημέρας",
     "Escribe una nota en cualquier día del calendario": "Γράψε σημείωση σε όποια μέρα του ημερολογίου θέλεις",
     "Todas tus notas juntas": "Όλες οι σημειώσεις σου μαζί",
@@ -734,6 +764,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Διάλεξε χρώμα",
   },
   "fa": {
+    "Registra tu regla para calcular tu ovulación.": "برای محاسبه تخمک‌گذاری، پریودت را ثبت کن.",
+    "Próxima ovulación": "تخمک‌گذاری بعدی",
+    "Hoy estás en tu ventana fértil 🌱": "امروز در دوره باروری‌ات هستی 🌱",
     "Nota del día": "یادداشت روز",
     "Escribe una nota en cualquier día del calendario": "در هر روز تقویم یادداشت بنویس",
     "Todas tus notas juntas": "همه یادداشت‌هایت یک‌جا",
@@ -804,6 +837,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "یک رنگ انتخاب کن",
   },
   "fi": {
+    "Registra tu regla para calcular tu ovulación.": "Kirjaa kuukautisesi, niin ovulaatio lasketaan.",
+    "Próxima ovulación": "Seuraava ovulaatio",
+    "Hoy estás en tu ventana fértil 🌱": "Olet tänään hedelmällisessä vaiheessa 🌱",
     "Nota del día": "Päivän muistiinpano",
     "Escribe una nota en cualquier día del calendario": "Kirjoita muistiinpano mihin tahansa kalenterin päivään",
     "Todas tus notas juntas": "Kaikki muistiinpanosi yhdessä",
@@ -874,6 +910,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Valitse väri",
   },
   "fil": {
+    "Registra tu regla para calcular tu ovulación.": "Itala ang regla mo para makalkula ang ovulation.",
+    "Próxima ovulación": "Susunod na ovulation",
+    "Hoy estás en tu ventana fértil 🌱": "Nasa fertile window ka ngayon 🌱",
     "Nota del día": "Tala ng araw",
     "Escribe una nota en cualquier día del calendario": "Magsulat ng tala sa kahit anong araw sa kalendaryo",
     "Todas tus notas juntas": "Lahat ng tala mo sa isang lugar",
@@ -944,6 +983,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pumili ng kulay",
   },
   "fr": {
+    "Registra tu regla para calcular tu ovulación.": "Note tes règles pour calculer ton ovulation.",
+    "Próxima ovulación": "Prochaine ovulation",
+    "Hoy estás en tu ventana fértil 🌱": "Tu es dans ta fenêtre fertile aujourd’hui 🌱",
+    "Ventana fértil estimada": "Fenêtre fertile estimée",
+    "Tus días más fértiles son los 5 días antes de la ovulación y el día siguiente. Son estimaciones según tus registros, no un método anticonceptivo.": "Tes jours les plus fertiles sont les 5 jours avant l’ovulation et le jour suivant. Ce sont des estimations d’après tes données, pas une méthode de contraception.",
     "Nota del día": "Note du jour",
     "Escribe una nota en cualquier día del calendario": "Écris une note sur n’importe quel jour du calendrier",
     "Todas tus notas juntas": "Toutes tes notes réunies",
@@ -1071,6 +1115,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} jours",
   },
   "gu": {
+    "Registra tu regla para calcular tu ovulación.": "ઓવ્યુલેશન ગણવા માટે તમારો પીરિયડ નોંધો.",
+    "Próxima ovulación": "આગામી ઓવ્યુલેશન",
+    "Hoy estás en tu ventana fértil 🌱": "આજે તમે ફળદ્રુપ સમયગાળામાં છો 🌱",
     "Nota del día": "આજની નોંધ",
     "Escribe una nota en cualquier día del calendario": "કેલેન્ડરના કોઈ પણ દિવસે નોંધ લખો",
     "Todas tus notas juntas": "તમારી બધી નોંધો એક જગ્યાએ",
@@ -1141,6 +1188,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "એક રંગ પસંદ કરો",
   },
   "ha": {
+    "Registra tu regla para calcular tu ovulación.": "Rubuta al’adarki don a lissafa lokacin ƙwai.",
+    "Próxima ovulación": "Lokacin ƙwai na gaba",
+    "Hoy estás en tu ventana fértil 🌱": "Yau kina cikin lokacin haihuwa 🌱",
     "Nota del día": "Bayanin yau",
     "Escribe una nota en cualquier día del calendario": "Rubuta bayani a kowace rana ta kalanda",
     "Todas tus notas juntas": "Duk bayananki a wuri ɗaya",
@@ -1211,6 +1261,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Zaɓi launi",
   },
   "he": {
+    "Registra tu regla para calcular tu ovulación.": "רשמי את המחזור כדי לחשב את הביוץ.",
+    "Próxima ovulación": "הביוץ הבא",
+    "Hoy estás en tu ventana fértil 🌱": "היום את בחלון הפוריות 🌱",
     "Nota del día": "פתק היום",
     "Escribe una nota en cualquier día del calendario": "כתבי פתק בכל יום בלוח השנה",
     "Todas tus notas juntas": "כל הפתקים שלך יחד",
@@ -1281,6 +1334,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "בחרי צבע",
   },
   "hi": {
+    "Registra tu regla para calcular tu ovulación.": "ओव्यूलेशन जानने के लिए अपना पीरियड दर्ज करें।",
+    "Próxima ovulación": "अगला ओव्यूलेशन",
+    "Hoy estás en tu ventana fértil 🌱": "आज आप अपनी फ़र्टाइल विंडो में हैं 🌱",
+    "Ventana fértil estimada": "अनुमानित फ़र्टाइल विंडो",
+    "Tus días más fértiles son los 5 días antes de la ovulación y el día siguiente. Son estimaciones según tus registros, no un método anticonceptivo.": "आपके सबसे फ़र्टाइल दिन ओव्यूलेशन से पहले के 5 दिन और उसके अगले दिन हैं। ये आपके रिकॉर्ड पर आधारित अनुमान हैं, गर्भनिरोधक तरीका नहीं।",
     "Nota del día": "आज का नोट",
     "Escribe una nota en cualquier día del calendario": "कैलेंडर के किसी भी दिन नोट लिखें",
     "Todas tus notas juntas": "आपके सारे नोट्स एक साथ",
@@ -1408,6 +1466,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} दिन",
   },
   "hu": {
+    "Registra tu regla para calcular tu ovulación.": "Rögzítsd a menstruációdat az ovuláció kiszámításához.",
+    "Próxima ovulación": "Következő ovuláció",
+    "Hoy estás en tu ventana fértil 🌱": "Ma a termékeny időszakodban vagy 🌱",
     "Nota del día": "A nap jegyzete",
     "Escribe una nota en cualquier día del calendario": "Írj jegyzetet a naptár bármelyik napjához",
     "Todas tus notas juntas": "Az összes jegyzeted együtt",
@@ -1478,6 +1539,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Válassz színt",
   },
   "id": {
+    "Registra tu regla para calcular tu ovulación.": "Catat haidmu untuk menghitung ovulasi.",
+    "Próxima ovulación": "Ovulasi berikutnya",
+    "Hoy estás en tu ventana fértil 🌱": "Hari ini kamu dalam masa subur 🌱",
     "Nota del día": "Catatan hari ini",
     "Escribe una nota en cualquier día del calendario": "Tulis catatan di hari mana pun di kalender",
     "Todas tus notas juntas": "Semua catatanmu di satu tempat",
@@ -1548,6 +1612,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "it": {
+    "Registra tu regla para calcular tu ovulación.": "Registra il ciclo per calcolare l’ovulazione.",
+    "Próxima ovulación": "Prossima ovulazione",
+    "Hoy estás en tu ventana fértil 🌱": "Oggi sei nella tua finestra fertile 🌱",
     "Nota del día": "Nota del giorno",
     "Escribe una nota en cualquier día del calendario": "Scrivi una nota in qualsiasi giorno del calendario",
     "Todas tus notas juntas": "Tutte le tue note insieme",
@@ -1618,6 +1685,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Scegli un colore",
   },
   "ja": {
+    "Registra tu regla para calcular tu ovulación.": "排卵日を計算するために生理を記録してね。",
+    "Próxima ovulación": "次の排卵日",
+    "Hoy estás en tu ventana fértil 🌱": "今日は妊娠しやすい期間です 🌱",
     "Nota del día": "今日のメモ",
     "Escribe una nota en cualquier día del calendario": "カレンダーのどの日にもメモを書けます",
     "Todas tus notas juntas": "すべてのメモをまとめて",
@@ -1688,6 +1758,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "色を選ぶ",
   },
   "kk": {
+    "Registra tu regla para calcular tu ovulación.": "Овуляцияны есептеу үшін етеккіріңізді жазыңыз.",
+    "Próxima ovulación": "Келесі овуляция",
+    "Hoy estás en tu ventana fértil 🌱": "Бүгін құнарлы кезеңдесіз 🌱",
     "Nota del día": "Күн жазбасы",
     "Escribe una nota en cualquier día del calendario": "Күнтізбенің кез келген күніне жазба жазыңыз",
     "Todas tus notas juntas": "Барлық жазбаларыңыз бір жерде",
@@ -1758,6 +1831,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Түс таңдаңыз",
   },
   "kn": {
+    "Registra tu regla para calcular tu ovulación.": "ಅಂಡೋತ್ಪತ್ತಿ ಲೆಕ್ಕಿಸಲು ನಿಮ್ಮ ಮುಟ್ಟು ದಾಖಲಿಸಿ.",
+    "Próxima ovulación": "ಮುಂದಿನ ಅಂಡೋತ್ಪತ್ತಿ",
+    "Hoy estás en tu ventana fértil 🌱": "ಇಂದು ನೀವು ಫಲವತ್ತಾದ ಅವಧಿಯಲ್ಲಿದ್ದೀರಿ 🌱",
     "Nota del día": "ಇಂದಿನ ಟಿಪ್ಪಣಿ",
     "Escribe una nota en cualquier día del calendario": "ಕ್ಯಾಲೆಂಡರ್‌ನ ಯಾವುದೇ ದಿನಕ್ಕೆ ಟಿಪ್ಪಣಿ ಬರೆಯಿರಿ",
     "Todas tus notas juntas": "ನಿಮ್ಮ ಎಲ್ಲಾ ಟಿಪ್ಪಣಿಗಳು ಒಂದೇ ಕಡೆ",
@@ -1828,6 +1904,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ಒಂದು ಬಣ್ಣ ಆರಿಸಿ",
   },
   "ko": {
+    "Registra tu regla para calcular tu ovulación.": "배란일을 계산하려면 생리를 기록하세요.",
+    "Próxima ovulación": "다음 배란일",
+    "Hoy estás en tu ventana fértil 🌱": "오늘은 가임기예요 🌱",
     "Nota del día": "오늘의 메모",
     "Escribe una nota en cualquier día del calendario": "달력의 어느 날에든 메모를 써요",
     "Todas tus notas juntas": "모든 메모를 한곳에",
@@ -1898,6 +1977,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "색상 선택",
   },
   "ln": {
+    "Registra tu regla para calcular tu ovulación.": "Koma sanza na yo mpo na kotánga ovulation.",
+    "Próxima ovulación": "Ovulation oyo ekoya",
+    "Hoy estás en tu ventana fértil 🌱": "Lelo ozali na mikolo na yo ya kozwa zemi 🌱",
     "Nota del día": "Likomi ya mokolo",
     "Escribe una nota en cualquier día del calendario": "Koma likomi na mokolo nyonso na kalandrie",
     "Todas tus notas juntas": "Makomi na yo nyonso esika moko",
@@ -1968,6 +2050,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pona langi",
   },
   "ml": {
+    "Registra tu regla para calcular tu ovulación.": "അണ്ഡോത്പാദനം കണക്കാക്കാൻ ആർത്തവം രേഖപ്പെടുത്തൂ.",
+    "Próxima ovulación": "അടുത്ത അണ്ഡോത്പാദനം",
+    "Hoy estás en tu ventana fértil 🌱": "ഇന്ന് നിങ്ങൾ ഫെർട്ടൈൽ വിൻഡോയിലാണ് 🌱",
     "Nota del día": "ഇന്നത്തെ കുറിപ്പ്",
     "Escribe una nota en cualquier día del calendario": "കലണ്ടറിലെ ഏത് ദിവസത്തിലും കുറിപ്പ് എഴുതൂ",
     "Todas tus notas juntas": "നിങ്ങളുടെ എല്ലാ കുറിപ്പുകളും ഒരിടത്ത്",
@@ -2038,6 +2123,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ഒരു നിറം തിരഞ്ഞെടുക്കൂ",
   },
   "mr": {
+    "Registra tu regla para calcular tu ovulación.": "ओव्ह्युलेशन मोजण्यासाठी तुमची पाळी नोंदवा.",
+    "Próxima ovulación": "पुढील ओव्ह्युलेशन",
+    "Hoy estás en tu ventana fértil 🌱": "आज तुम्ही सुपीक कालावधीत आहात 🌱",
     "Nota del día": "आजची नोंद",
     "Escribe una nota en cualquier día del calendario": "कॅलेंडरमधील कोणत्याही दिवशी नोंद लिहा",
     "Todas tus notas juntas": "तुमच्या सर्व नोंदी एकत्र",
@@ -2108,6 +2196,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एक रंग निवडा",
   },
   "ms": {
+    "Registra tu regla para calcular tu ovulación.": "Catat haid anda untuk mengira ovulasi.",
+    "Próxima ovulación": "Ovulasi seterusnya",
+    "Hoy estás en tu ventana fértil 🌱": "Hari ini anda dalam tempoh subur 🌱",
     "Nota del día": "Nota hari ini",
     "Escribe una nota en cualquier día del calendario": "Tulis nota pada mana-mana hari dalam kalendar",
     "Todas tus notas juntas": "Semua nota anda bersama",
@@ -2178,6 +2269,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "my": {
+    "Registra tu regla para calcular tu ovulación.": "မျိုးဥကြွေချိန် တွက်ရန် ရာသီကို မှတ်ပါ။",
+    "Próxima ovulación": "နောက်ထပ် မျိုးဥကြွေချိန်",
+    "Hoy estás en tu ventana fértil 🌱": "ယနေ့ သင် ကိုယ်ဝန်ရနိုင်ချိန်တွင် ရှိသည် 🌱",
     "Nota del día": "ယနေ့မှတ်စု",
     "Escribe una nota en cualquier día del calendario": "ပြက္ခဒိန်ရှိ မည်သည့်နေ့တွင်မဆို မှတ်စုရေးပါ",
     "Todas tus notas juntas": "သင့်မှတ်စုအားလုံး တစ်နေရာတည်း",
@@ -2248,6 +2342,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "အရောင်ရွေးပါ",
   },
   "ne": {
+    "Registra tu regla para calcular tu ovulación.": "डिम्बक्षरण गणना गर्न आफ्नो महिनावारी लेख्नुहोस्।",
+    "Próxima ovulación": "अर्को डिम्बक्षरण",
+    "Hoy estás en tu ventana fértil 🌱": "आज तपाईं उर्वर अवधिमा हुनुहुन्छ 🌱",
     "Nota del día": "आजको नोट",
     "Escribe una nota en cualquier día del calendario": "क्यालेन्डरको जुनसुकै दिनमा नोट लेख्नुहोस्",
     "Todas tus notas juntas": "तपाईंका सबै नोट एकै ठाउँमा",
@@ -2318,6 +2415,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एउटा रङ छान्नुहोस्",
   },
   "nl": {
+    "Registra tu regla para calcular tu ovulación.": "Log je menstruatie om je eisprong te berekenen.",
+    "Próxima ovulación": "Volgende eisprong",
+    "Hoy estás en tu ventana fértil 🌱": "Je zit vandaag in je vruchtbare periode 🌱",
     "Nota del día": "Notitie van de dag",
     "Escribe una nota en cualquier día del calendario": "Schrijf een notitie op elke dag in de kalender",
     "Todas tus notas juntas": "Al je notities bij elkaar",
@@ -2388,6 +2488,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Kies een kleur",
   },
   "om": {
+    "Registra tu regla para calcular tu ovulación.": "Yeroo hanqaaquu herreguuf laguu kee galmeessi.",
+    "Próxima ovulación": "Hanqaaquu itti aanu",
+    "Hoy estás en tu ventana fértil 🌱": "Har’a yeroo ulfaa’uu keessa jirta 🌱",
     "Nota del día": "Yaadannoo guyyaa",
     "Escribe una nota en cualquier día del calendario": "Guyyaa kamiyyuu kaalaandara irratti yaadannoo barreessi",
     "Todas tus notas juntas": "Yaadannoowwan kee hunduu bakka tokkotti",
@@ -2458,6 +2561,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Halluu filadhu",
   },
   "pa": {
+    "Registra tu regla para calcular tu ovulación.": "ਓਵੂਲੇਸ਼ਨ ਗਿਣਨ ਲਈ ਆਪਣੀ ਮਾਹਵਾਰੀ ਦਰਜ ਕਰੋ।",
+    "Próxima ovulación": "ਅਗਲਾ ਓਵੂਲੇਸ਼ਨ",
+    "Hoy estás en tu ventana fértil 🌱": "ਅੱਜ ਤੁਸੀਂ ਆਪਣੇ ਉਪਜਾਊ ਦਿਨਾਂ ਵਿੱਚ ਹੋ 🌱",
     "Nota del día": "ਅੱਜ ਦਾ ਨੋਟ",
     "Escribe una nota en cualquier día del calendario": "ਕੈਲੰਡਰ ਦੇ ਕਿਸੇ ਵੀ ਦਿਨ ਨੋਟ ਲਿਖੋ",
     "Todas tus notas juntas": "ਤੁਹਾਡੇ ਸਾਰੇ ਨੋਟ ਇੱਕ ਥਾਂ",
@@ -2528,6 +2634,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ਇੱਕ ਰੰਗ ਚੁਣੋ",
   },
   "pl": {
+    "Registra tu regla para calcular tu ovulación.": "Zapisz okres, aby obliczyć owulację.",
+    "Próxima ovulación": "Następna owulacja",
+    "Hoy estás en tu ventana fértil 🌱": "Dziś jesteś w oknie płodnym 🌱",
     "Nota del día": "Notatka dnia",
     "Escribe una nota en cualquier día del calendario": "Napisz notatkę w dowolnym dniu kalendarza",
     "Todas tus notas juntas": "Wszystkie twoje notatki razem",
@@ -2598,6 +2707,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Wybierz kolor",
   },
   "pt": {
+    "Registra tu regla para calcular tu ovulación.": "Registre sua menstruação para calcular sua ovulação.",
+    "Próxima ovulación": "Próxima ovulação",
+    "Hoy estás en tu ventana fértil 🌱": "Hoje você está na sua janela fértil 🌱",
+    "Ventana fértil estimada": "Janela fértil estimada",
+    "Tus días más fértiles son los 5 días antes de la ovulación y el día siguiente. Son estimaciones según tus registros, no un método anticonceptivo.": "Seus dias mais férteis são os 5 dias antes da ovulação e o dia seguinte. São estimativas com base nos seus registros, não um método contraceptivo.",
     "Nota del día": "Nota do dia",
     "Escribe una nota en cualquier día del calendario": "Escreva uma nota em qualquer dia do calendário",
     "Todas tus notas juntas": "Todas as suas notas juntas",
@@ -2725,6 +2839,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} dias",
   },
   "ro": {
+    "Registra tu regla para calcular tu ovulación.": "Notează menstruația ca să calculăm ovulația.",
+    "Próxima ovulación": "Următoarea ovulație",
+    "Hoy estás en tu ventana fértil 🌱": "Azi ești în fereastra fertilă 🌱",
     "Nota del día": "Notița zilei",
     "Escribe una nota en cualquier día del calendario": "Scrie o notiță în orice zi din calendar",
     "Todas tus notas juntas": "Toate notițele tale la un loc",
@@ -2795,6 +2912,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Alege o culoare",
   },
   "ru": {
+    "Registra tu regla para calcular tu ovulación.": "Запиши месячные, чтобы рассчитать овуляцию.",
+    "Próxima ovulación": "Следующая овуляция",
+    "Hoy estás en tu ventana fértil 🌱": "Сегодня у тебя фертильное окно 🌱",
+    "Ventana fértil estimada": "Ожидаемое фертильное окно",
+    "Tus días más fértiles son los 5 días antes de la ovulación y el día siguiente. Son estimaciones según tus registros, no un método anticonceptivo.": "Самые фертильные дни — 5 дней до овуляции и день после. Это оценки по твоим записям, а не метод контрацепции.",
     "Nota del día": "Заметка дня",
     "Escribe una nota en cualquier día del calendario": "Пиши заметку в любой день календаря",
     "Todas tus notas juntas": "Все твои заметки вместе",
@@ -2922,6 +3044,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} дн.",
   },
   "si": {
+    "Registra tu regla para calcular tu ovulación.": "ඩිම්බ මෝචනය ගණනය කිරීමට ඔබේ ඔසප් සටහන් කරන්න.",
+    "Próxima ovulación": "ඊළඟ ඩිම්බ මෝචනය",
+    "Hoy estás en tu ventana fértil 🌱": "අද ඔබ සරු කාලයේ සිටී 🌱",
     "Nota del día": "අද සටහන",
     "Escribe una nota en cualquier día del calendario": "දින දර්ශනයේ ඕනෑම දිනයක සටහනක් ලියන්න",
     "Todas tus notas juntas": "ඔබේ සියලු සටහන් එක තැනක",
@@ -2992,6 +3117,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "වර්ණයක් තෝරන්න",
   },
   "sk": {
+    "Registra tu regla para calcular tu ovulación.": "Zapíš menštruáciu a vypočítame ovuláciu.",
+    "Próxima ovulación": "Ďalšia ovulácia",
+    "Hoy estás en tu ventana fértil 🌱": "Dnes si v plodnom okne 🌱",
     "Nota del día": "Poznámka dňa",
     "Escribe una nota en cualquier día del calendario": "Napíš poznámku ku ktorémukoľvek dňu v kalendári",
     "Todas tus notas juntas": "Všetky tvoje poznámky spolu",
@@ -3062,6 +3190,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber farbu",
   },
   "sv": {
+    "Registra tu regla para calcular tu ovulación.": "Logga din mens för att räkna ut ägglossningen.",
+    "Próxima ovulación": "Nästa ägglossning",
+    "Hoy estás en tu ventana fértil 🌱": "Du är i ditt fertila fönster i dag 🌱",
     "Nota del día": "Dagens anteckning",
     "Escribe una nota en cualquier día del calendario": "Skriv en anteckning på valfri dag i kalendern",
     "Todas tus notas juntas": "Alla dina anteckningar samlade",
@@ -3132,6 +3263,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Välj en färg",
   },
   "sw": {
+    "Registra tu regla para calcular tu ovulación.": "Andika hedhi yako ili kuhesabu ovulesheni.",
+    "Próxima ovulación": "Ovulesheni ijayo",
+    "Hoy estás en tu ventana fértil 🌱": "Leo uko katika siku zako za rutuba 🌱",
     "Nota del día": "Kumbukumbu ya siku",
     "Escribe una nota en cualquier día del calendario": "Andika kumbukumbu siku yoyote kwenye kalenda",
     "Todas tus notas juntas": "Kumbukumbu zako zote pamoja",
@@ -3202,6 +3336,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chagua rangi",
   },
   "ta": {
+    "Registra tu regla para calcular tu ovulación.": "அண்டவிடுப்பைக் கணக்கிட உங்கள் மாதவிடாயைப் பதிவுசெய்யுங்கள்.",
+    "Próxima ovulación": "அடுத்த அண்டவிடுப்பு",
+    "Hoy estás en tu ventana fértil 🌱": "இன்று நீங்கள் கருவுறும் காலத்தில் உள்ளீர்கள் 🌱",
     "Nota del día": "இன்றைய குறிப்பு",
     "Escribe una nota en cualquier día del calendario": "நாட்காட்டியின் எந்த நாளிலும் குறிப்பு எழுதுங்கள்",
     "Todas tus notas juntas": "உங்கள் எல்லா குறிப்புகளும் ஒரே இடத்தில்",
@@ -3272,6 +3409,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ஒரு நிறத்தைத் தேர்வுசெய்யுங்கள்",
   },
   "te": {
+    "Registra tu regla para calcular tu ovulación.": "అండోత్సర్గాన్ని లెక్కించడానికి మీ పీరియడ్ నమోదు చేయండి.",
+    "Próxima ovulación": "తదుపరి అండోత్సర్గం",
+    "Hoy estás en tu ventana fértil 🌱": "ఈ రోజు మీరు ఫలవంతమైన కాలంలో ఉన్నారు 🌱",
     "Nota del día": "ఈ రోజు నోట్",
     "Escribe una nota en cualquier día del calendario": "క్యాలెండర్‌లో ఏ రోజైనా నోట్ రాయండి",
     "Todas tus notas juntas": "మీ అన్ని నోట్స్ ఒకే చోట",
@@ -3342,6 +3482,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ఒక రంగును ఎంచుకోండి",
   },
   "th": {
+    "Registra tu regla para calcular tu ovulación.": "บันทึกประจำเดือนเพื่อคำนวณวันไข่ตก",
+    "Próxima ovulación": "วันไข่ตกครั้งถัดไป",
+    "Hoy estás en tu ventana fértil 🌱": "วันนี้คุณอยู่ในช่วงเจริญพันธุ์ 🌱",
     "Nota del día": "บันทึกประจำวัน",
     "Escribe una nota en cualquier día del calendario": "เขียนบันทึกในวันไหนก็ได้ของปฏิทิน",
     "Todas tus notas juntas": "บันทึกทั้งหมดของคุณ",
@@ -3412,6 +3555,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "เลือกสี",
   },
   "tr": {
+    "Registra tu regla para calcular tu ovulación.": "Yumurtlamanı hesaplamak için adetini kaydet.",
+    "Próxima ovulación": "Sonraki yumurtlama",
+    "Hoy estás en tu ventana fértil 🌱": "Bugün doğurgan dönemindesin 🌱",
     "Nota del día": "Günün notu",
     "Escribe una nota en cualquier día del calendario": "Takvimin herhangi bir gününe not yaz",
     "Todas tus notas juntas": "Tüm notların bir arada",
@@ -3482,6 +3628,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Bir renk seç",
   },
   "uk": {
+    "Registra tu regla para calcular tu ovulación.": "Запиши місячні, щоб розрахувати овуляцію.",
+    "Próxima ovulación": "Наступна овуляція",
+    "Hoy estás en tu ventana fértil 🌱": "Сьогодні в тебе фертильне вікно 🌱",
     "Nota del día": "Нотатка дня",
     "Escribe una nota en cualquier día del calendario": "Пиши нотатку в будь-який день календаря",
     "Todas tus notas juntas": "Усі твої нотатки разом",
@@ -3552,6 +3701,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Обери колір",
   },
   "ur": {
+    "Registra tu regla para calcular tu ovulación.": "اوویولیشن معلوم کرنے کے لیے اپنے ایام درج کریں۔",
+    "Próxima ovulación": "اگلا اوویولیشن",
+    "Hoy estás en tu ventana fértil 🌱": "آج آپ اپنے زرخیز دنوں میں ہیں 🌱",
     "Nota del día": "آج کا نوٹ",
     "Escribe una nota en cualquier día del calendario": "کیلنڈر کے کسی بھی دن نوٹ لکھیں",
     "Todas tus notas juntas": "آپ کے سب نوٹس ایک جگہ",
@@ -3622,6 +3774,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ایک رنگ چنیں",
   },
   "uz": {
+    "Registra tu regla para calcular tu ovulación.": "Ovulyatsiyani hisoblash uchun hayzingizni yozing.",
+    "Próxima ovulación": "Keyingi ovulyatsiya",
+    "Hoy estás en tu ventana fértil 🌱": "Bugun unumdor davringizdasiz 🌱",
     "Nota del día": "Kun eslatmasi",
     "Escribe una nota en cualquier día del calendario": "Taqvimning istalgan kuniga eslatma yozing",
     "Todas tus notas juntas": "Barcha eslatmalaringiz bir joyda",
@@ -3692,6 +3847,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rang tanlang",
   },
   "vi": {
+    "Registra tu regla para calcular tu ovulación.": "Ghi kỳ kinh để tính ngày rụng trứng.",
+    "Próxima ovulación": "Lần rụng trứng tới",
+    "Hoy estás en tu ventana fértil 🌱": "Hôm nay bạn đang trong thời kỳ dễ thụ thai 🌱",
     "Nota del día": "Ghi chú trong ngày",
     "Escribe una nota en cualquier día del calendario": "Viết ghi chú vào bất kỳ ngày nào trên lịch",
     "Todas tus notas juntas": "Tất cả ghi chú của bạn",
@@ -3762,6 +3920,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chọn màu",
   },
   "wo": {
+    "Registra tu regla para calcular tu ovulación.": "Bindal sa àdd ngir xayma ovulation.",
+    "Próxima ovulación": "Ovulation bi ci kanam",
+    "Hoy estás en tu ventana fértil 🌱": "Tey yaa ngi ci sa jamono ju mat ci jur 🌱",
     "Nota del día": "Bindu tey",
     "Escribe una nota en cualquier día del calendario": "Bindal ci bés bu nekk ci arminaat bi",
     "Todas tus notas juntas": "Sa bind yépp ci benn béréb",
@@ -3832,6 +3993,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Tànnal benn melo",
   },
   "yo": {
+    "Registra tu regla para calcular tu ovulación.": "Kọ nǹkan oṣù rẹ sílẹ̀ láti ṣírò ìgbà ẹyin.",
+    "Próxima ovulación": "Ìgbà ẹyin tó ń bọ̀",
+    "Hoy estás en tu ventana fértil 🌱": "Òní o wà nínú àkókò ìlóyún rẹ 🌱",
     "Nota del día": "Àkọsílẹ̀ ọjọ́",
     "Escribe una nota en cualquier día del calendario": "Kọ àkọsílẹ̀ sí ọjọ́ èyíkéyìí lórí kàlẹ́ńdà",
     "Todas tus notas juntas": "Gbogbo àkọsílẹ̀ rẹ papọ̀",
@@ -3902,6 +4066,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Yan àwọ̀ kan",
   },
   "zh": {
+    "Registra tu regla para calcular tu ovulación.": "记录经期以计算排卵日。",
+    "Próxima ovulación": "下次排卵",
+    "Hoy estás en tu ventana fértil 🌱": "今天你在易孕期 🌱",
     "Nota del día": "今日笔记",
     "Escribe una nota en cualquier día del calendario": "在日历的任意一天写笔记",
     "Todas tus notas juntas": "你的所有笔记都在这里",
@@ -3972,6 +4139,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "选择颜色",
   },
   "zh-TW": {
+    "Registra tu regla para calcular tu ovulación.": "記錄經期以計算排卵日。",
+    "Próxima ovulación": "下次排卵",
+    "Hoy estás en tu ventana fértil 🌱": "今天你在易孕期 🌱",
     "Nota del día": "今日筆記",
     "Escribe una nota en cualquier día del calendario": "在日曆的任何一天寫筆記",
     "Todas tus notas juntas": "你的所有筆記都在這裡",
@@ -4042,6 +4212,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "選擇顏色",
   },
   "zu": {
+    "Registra tu regla para calcular tu ovulación.": "Bhala isikhathi sakho ukuze kubalwe i-ovulation.",
+    "Próxima ovulación": "I-ovulation elandelayo",
+    "Hoy estás en tu ventana fértil 🌱": "Namuhla usesikhathini sakho sokuzala 🌱",
     "Nota del día": "Inothi losuku",
     "Escribe una nota en cualquier día del calendario": "Bhala inothi nganoma yiluphi usuku ekhalendeni",
     "Todas tus notas juntas": "Wonke amanothi akho ndawonye",

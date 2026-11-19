@@ -8,6 +8,7 @@ import '../go_root.dart';
 import '../widgets/ui.dart';
 import 'extras.dart';
 import 'more.dart';
+import 'fertility.dart';
 import 'traditions.dart';
 
 /// Pestaña Yo (igual que la maqueta).
@@ -234,7 +235,7 @@ class MeScreen extends StatelessWidget {
                   if (s.goal == 'conceive') LinkRow(
                     icon: Icon(Icons.spa_rounded, color: C.pink),
                     title: tr('Fertilidad', 'Fertility'),
-                    onTap: () => CicloYo.summary(context, 'fertility'),
+                    onTap: () => _push(context, const FertilityScreen()),
                   ),
                 ],
               ),
