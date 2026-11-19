@@ -9,6 +9,7 @@ import '../widgets/michi_sound.dart';
 import '../widgets/ui.dart';
 import 'michi_more.dart';
 import '../widgets/premium.dart';
+import '../cicloplus_links.dart';
 
 /// Armario de Michi: elige qué lleva puesto los días normales (sin
 /// cumpleaños, regla, ánimo registrado, etc., que tienen su propia pose).
@@ -23,7 +24,8 @@ class _Outfit {
   final String name;
   final String lock; // texto para desbloquear
   final bool Function(int best, int challenges) open;
-  const _Outfit(this.img, this.name, this.lock, this.open);
+  final bool premium; // solo con Premium
+  const _Outfit(this.img, this.name, this.lock, this.open, {this.premium = false});
 }
 
 class _MichiWardrobeScreenState extends State<_MichiWardrobeScreenBody> {
@@ -35,9 +37,9 @@ class _MichiWardrobeScreenState extends State<_MichiWardrobeScreenBody> {
         _Outfit('', tr('Automático', 'Automatic'), '', (_, __) => true),
         _Outfit('michi_flower', tr('Flor', 'Flower'), '', (_, __) => true),
         _Outfit('michi_scarf', tr('Bufanda', 'Scarf'), '', (_, __) => true),
-        _Outfit('michi_collar', tr('Collar', 'Collar'), tr('Racha de 3 días', '3-day streak'), (b, _) => b >= 3),
-        _Outfit('michi_party', tr('Gorro de fiesta', 'Party hat'), tr('Completa un reto de 7 días.', 'Complete a 7-day challenge.'), (_, c) => c >= 1),
-        _Outfit('michi_crown', tr('Corona', 'Crown'), tr('Racha de 30 días.', '30-day streak.'), (b, _) => b >= 30),
+        _Outfit('michi_collar', tr('Collar', 'Collar'), tr('Racha de 3 días', '3-day streak'), (b, _) => b >= 3, premium: true),
+        _Outfit('michi_party', tr('Gorro de fiesta', 'Party hat'), tr('Completa un reto de 7 días.', 'Complete a 7-day challenge.'), (_, c) => c >= 1, premium: true),
+        _Outfit('michi_crown', tr('Corona', 'Crown'), tr('Racha de 30 días.', '30-day streak.'), (b, _) => b >= 30, premium: true),
       ];
 
   @override
@@ -61,8 +63,14 @@ class _MichiWardrobeScreenState extends State<_MichiWardrobeScreenBody> {
     });
   }
 
-  void _pick(_Outfit o) {
+  Future<void> _pick(_Outfit o) async {
     final s = AppStore.instance;
+    if (o.premium && !Premium.active) {
+      HapticFeedback.lightImpact();
+      await CP.openPremium(context);
+      if (mounted) setState(() {});
+      return;
+    }
     if (!o.open(_best, _ch)) {
       HapticFeedback.lightImpact();
       ScaffoldMessenger.of(context)
@@ -119,13 +127,15 @@ class _MichiWardrobeScreenState extends State<_MichiWardrobeScreenBody> {
                     for (final o in _outfits) _tile(o, o.img == cur),
                   ],
                 ),
+                if (!Premium.active) PremiumTeaser(text: tr('Premium: más ropa para Michi 👑', 'Premium: more outfits for Michi 👑')),
               ],
             ),
     );
   }
 
   Widget _tile(_Outfit o, bool sel) {
-    final open = o.open(_best, _ch);
+    final locked = o.premium && !Premium.active;
+    final open = !locked && o.open(_best, _ch);
     return Material(
       color: Colors.white,
       borderRadius: BorderRadius.circular(18),
@@ -147,7 +157,7 @@ class _MichiWardrobeScreenState extends State<_MichiWardrobeScreenBody> {
                       ? const Center(child: Text('✨', style: TextStyle(fontSize: 38)))
                       : Img(o.img, size: 72, fallback: Icons.pets_rounded),
                 ),
-                if (!open) const Text('🔒', style: TextStyle(fontSize: 24)),
+                if (locked) const Text('👑', style: TextStyle(fontSize: 24)) else if (!open) const Text('🔒', style: TextStyle(fontSize: 24)),
               ]),
             ),
             const SizedBox(height: 4),
@@ -168,5 +178,5 @@ class MichiWardrobeScreen extends StatelessWidget {
   const MichiWardrobeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => PremiumGate(title: tr('Armario', 'Wardrobe'), child: _MichiWardrobeScreenBody());
+  Widget build(BuildContext context) => const _MichiWardrobeScreenBody();
 }

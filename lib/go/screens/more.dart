@@ -240,6 +240,7 @@ class _AnalysisScreenState extends State<_AnalysisScreenBody> {
           ),
           const SizedBox(height: 12),
           if (_tab == 0) ..._cycle(),
+          if (_tab == 0 && !Premium.active) PremiumTeaser(text: tr('Premium: historial completo de tus ciclos, síntomas y estado de ánimo.', 'Premium: full history of your cycles, symptoms and mood.')),
           if (_tab == 1) ..._symptoms(),
           if (_tab == 2) ..._moods(),
         ],
@@ -275,7 +276,8 @@ class _AnalysisScreenState extends State<_AnalysisScreenBody> {
       final len = daysBetween(starts[i - 1], starts[i]);
       if (len >= 15 && len <= 60) bars.add(MapEntry(L.monthShort(starts[i - 1].month), len));
     }
-    final recent = bars.length > 6 ? bars.sublist(bars.length - 6) : bars;
+    final keep = Premium.active ? 6 : 3;
+    final recent = bars.length > keep ? bars.sublist(bars.length - keep) : bars;
     final reg = s.isRegular;
     String pattern;
     if (recent.isEmpty) {
@@ -292,7 +294,7 @@ class _AnalysisScreenState extends State<_AnalysisScreenBody> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(tr('Duración del ciclo (últimos 6)', 'Cycle length (last 6)'), style: _title),
+            Text(Premium.active ? tr('Duración del ciclo (últimos 6)', 'Cycle length (last 6)') : tr('Duración del ciclo (últimos 3)', 'Cycle length (last 3)'), style: _title),
             const SizedBox(height: 12),
             if (recent.isEmpty)
               _empty(tr('Aún no hay ciclos completos.', 'No complete cycles yet.'))
@@ -330,7 +332,7 @@ class _AnalysisScreenState extends State<_AnalysisScreenBody> {
 
   List<Widget> _symptoms() {
     final counts = AppStore.instance.symptomCounts.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
-    final top = counts.take(8).toList();
+    final top = counts.take(Premium.active ? 8 : 3).toList();
     final max = top.isEmpty ? 1 : top.first.value;
     return [
       _box(
@@ -356,10 +358,12 @@ class _AnalysisScreenState extends State<_AnalysisScreenBody> {
           ? tr('Cuando registres síntomas verás cuáles se repiten más.', 'Once you log symptoms you will see which repeat most.')
           : tr('Tu síntoma más habitual es "${symptomName(top.first.key).toLowerCase()}" (${top.first.value} veces).',
               'Your most common symptom is "${symptomName(top.first.key).toLowerCase()}" (${top.first.value} times).')),
+      if (!Premium.active) PremiumTeaser(text: tr('Premium: historial completo de tus ciclos, síntomas y estado de ánimo.', 'Premium: full history of your cycles, symptoms and mood.')),
     ];
   }
 
   List<Widget> _moods() {
+    if (!Premium.active) return [PremiumTeaser(text: tr('Premium: historial completo de tus ciclos, síntomas y estado de ánimo.', 'Premium: full history of your cycles, symptoms and mood.'))];
     final counts = AppStore.instance.moodCounts;
     final total = counts.values.fold<int>(0, (a, b) => a + b);
     final max = counts.values.fold<int>(1, (a, b) => math.max(a, b));
@@ -507,7 +511,7 @@ class _TrendsScreenBody extends StatelessWidget {
                     title: _trends[i].name,
                     divider: i < _trends.length - 1,
                     trailing: SizedBox(width: 110, height: 34, child: CustomPaint(painter: SparkPainter(s.weekly(_trends[i].value), _trends[i].color))),
-                    onTap: () => _push(context, TrendDetailScreen(index: i)),
+                    onTap: () => _push(context, PremiumGate(title: _trends[i].name, child: TrendDetailScreen(index: i))),
                   ),
               ],
             ),
@@ -515,6 +519,7 @@ class _TrendsScreenBody extends StatelessWidget {
           ),
           Text(tr('Cuantos más días registres, más precisas serán tus tendencias.', 'The more days you log, the more accurate your trends.'),
               textAlign: TextAlign.center, style: _muted),
+          if (!Premium.active) PremiumTeaser(text: tr('Premium: toca una tendencia para ver su detalle de 8 semanas.', 'Premium: tap a trend to see its 8-week detail.')),
         ],
       ),
     );
@@ -1265,7 +1270,7 @@ class AnalysisScreen extends StatelessWidget {
   final int initialTab;
 
   @override
-  Widget build(BuildContext context) => PremiumGate(title: tr('Análisis del ciclo', 'Cycle analysis'), child: _AnalysisScreenBody(initialTab: initialTab));
+  Widget build(BuildContext context) => _AnalysisScreenBody(initialTab: initialTab);
 }
 
 
@@ -1274,5 +1279,5 @@ class TrendsScreen extends StatelessWidget {
   const TrendsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => PremiumGate(title: tr('Tendencias', 'Trends'), child: _TrendsScreenBody());
+  Widget build(BuildContext context) => const _TrendsScreenBody();
 }
