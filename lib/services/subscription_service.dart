@@ -44,7 +44,9 @@ class SubscriptionService {
   // identificador completo).
   static const String lifetimeProductId = 'cicloplus_lifetime';
 
-  bool _configured = false;
+  // RevenueCat (Purchases) es único en toda la app: el estado también,
+  // para que cualquier SubscriptionService() (p. ej. el del paywall) lo vea.
+  static bool _configured = false;
 
   /// Inicializa el SDK de RevenueCat y vincula el usuario actual de
   /// Firebase Auth (`firebaseUid`) como `appUserID`, para que la
@@ -112,7 +114,7 @@ class SubscriptionService {
   /// RevenueCat en el momento).
   bool hasActiveSubscription(AppUser user) => _cachedHasActiveSubscription;
 
-  bool _cachedHasActiveSubscription = false;
+  static bool _cachedHasActiveSubscription = false;
 
   /// Refresca el valor cacheado que usa `hasActiveSubscription`. Conviene
   /// llamarlo tras `configure()` y tras volver de la pantalla de paywall

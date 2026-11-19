@@ -17,6 +17,7 @@ import '../widgets/avatar_picker.dart' show AvatarPortrait, AvatarSettings, Them
 import '../widgets/ui.dart';
 import 'register.dart';
 import '../widgets/ciclo_date_picker.dart';
+import '../widgets/premium.dart';
 
 const _h = TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: C.text);
 const _b = TextStyle(fontSize: 13, color: C.muted, fontWeight: FontWeight.w600, height: 1.35);
@@ -291,8 +292,8 @@ class PeriodCycleScreen extends StatelessWidget {
 
 // ───────────────────────────── Informe del ciclo ─────────────────────────────
 
-class ReportScreen extends StatelessWidget {
-  const ReportScreen({super.key});
+class _ReportScreenBody extends StatelessWidget {
+  const _ReportScreenBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1263,4 +1264,13 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+
+/// ReportScreen es Premium: sin Premium enseña qué incluye y lleva al pago.
+class ReportScreen extends StatelessWidget {
+  const ReportScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) => PremiumGate(title: tr('Informe del ciclo', 'Cycle report'), child: _ReportScreenBody());
 }

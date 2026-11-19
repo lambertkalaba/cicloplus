@@ -6,6 +6,8 @@ import '../data/store.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
 import '../../services/settings_service.dart';
+import '../widgets/premium.dart';
+import '../go_root.dart' show GoSession;
 
 /// Fertilidad: usa exactamente el mismo cálculo que Hoy y el Calendario
 /// (ovulación = ciclo medio − 14; ventana = 5 días antes hasta 1 después).
@@ -63,7 +65,14 @@ class FertilityScreen extends StatelessWidget {
                   _box(tr('Hoy estás en tu ventana fértil 🌱', "You're in your fertile window today 🌱")),
                 ],
               ],
-              const _LhCard(),
+              ValueListenableBuilder<bool>(
+                valueListenable: GoSession.premium,
+                builder: (_, on, __) => on
+                    ? const _LhCard()
+                    : PremiumTeaser(
+                        text: tr('Premium: te avisamos cuando tu test de ovulación o tu temperatura indican que vas a ovular.',
+                            'Premium: we let you know when your ovulation test or temperature show you are about to ovulate.')),
+              ),
               const SizedBox(height: 12),
               _box(tr(
                   'Tus días más fértiles son los 5 días antes de la ovulación y el día siguiente. Son estimaciones según tus registros, no un método anticonceptivo.',

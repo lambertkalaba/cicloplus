@@ -10,6 +10,8 @@ import 'package:flutter/cupertino.dart' show CupertinoPicker;
 import '../go/strings.dart' show tr;
 import '../services/cycle_predictor.dart' show dateKey;
 import 'sex_life_detail_screen.dart';
+import '../go/widgets/premium.dart' as gopremium;
+import '../go/strings.dart' as gotr2;
 
 /// Pantalla de detalle de solo lectura para uno de los 6 campos "simples"
 /// del grid de accesos rápidos de la pestaña "Yo" (temperatura, vida
@@ -395,7 +397,9 @@ class _FieldDetailScreenState extends State<FieldDetailScreen> {
   }
 
   Widget _tempExtras(AppStrings s, Color primary) {
-    final shift = _tempShift();
+    // La gráfica del ciclo y el aviso de subida son Premium.
+    final premium = gopremium.Premium.active;
+    final shift = premium ? _tempShift() : null;
     final cycle = _numericSeries(maxPoints: 30);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       const SizedBox(height: 14),
@@ -420,7 +424,11 @@ class _FieldDetailScreenState extends State<FieldDetailScreen> {
           ),
         ),
       ],
-      if (cycle.length >= 4) ...[
+      if (!premium)
+        gopremium.PremiumTeaser(
+            text: gotr2.tr('Premium: gráfica de tu ciclo y aviso de cuándo has ovulado según tu temperatura.',
+                'Premium: a chart of your cycle and an alert of when you ovulated based on your temperature.')),
+      if (premium && cycle.length >= 4) ...[
         const SizedBox(height: 14),
         _cardShadow(Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(tr('Tu ciclo (últimos 30 registros)', 'Your cycle (last 30 entries)'),

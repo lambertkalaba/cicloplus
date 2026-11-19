@@ -8,13 +8,14 @@ import '../widgets/michi_logic.dart';
 import '../widgets/michi_sound.dart';
 import '../widgets/ui.dart';
 import 'michi_more.dart';
+import '../widgets/premium.dart';
 
 /// Armario de Michi: elige qué lleva puesto los días normales (sin
 /// cumpleaños, regla, ánimo registrado, etc., que tienen su propia pose).
-class MichiWardrobeScreen extends StatefulWidget {
-  const MichiWardrobeScreen({super.key});
+class _MichiWardrobeScreenBody extends StatefulWidget {
+  const _MichiWardrobeScreenBody({super.key});
   @override
-  State<MichiWardrobeScreen> createState() => _MichiWardrobeScreenState();
+  State<_MichiWardrobeScreenBody> createState() => _MichiWardrobeScreenState();
 }
 
 class _Outfit {
@@ -25,7 +26,7 @@ class _Outfit {
   const _Outfit(this.img, this.name, this.lock, this.open);
 }
 
-class _MichiWardrobeScreenState extends State<MichiWardrobeScreen> {
+class _MichiWardrobeScreenState extends State<_MichiWardrobeScreenBody> {
   int _best = 0;
   int _ch = 0;
   bool _ready = false;
@@ -159,4 +160,13 @@ class _MichiWardrobeScreenState extends State<MichiWardrobeScreen> {
       ),
     );
   }
+}
+
+
+/// MichiWardrobeScreen es Premium: sin Premium enseña qué incluye y lleva al pago.
+class MichiWardrobeScreen extends StatelessWidget {
+  const MichiWardrobeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) => PremiumGate(title: tr('Armario', 'Wardrobe'), child: _MichiWardrobeScreenBody());
 }

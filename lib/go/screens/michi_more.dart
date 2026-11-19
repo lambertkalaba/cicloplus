@@ -11,6 +11,7 @@ import 'michi_advent.dart';
 import 'more.dart' show DiaryScreen;
 import 'michi_extras.dart';
 import 'michi_stories.dart' show MichiStories, StoryParticles, StoryFx;
+import '../widgets/premium.dart';
 
 /// Contadores pequeños que usan los logros.
 class MichiCounters {
@@ -328,14 +329,14 @@ class MichiChallenges {
   static Future<int> completed() async => ((await SharedPreferences.getInstance()).getStringList('michi_ch_done') ?? const []).length;
 }
 
-class MichiChallengeScreen extends StatefulWidget {
-  const MichiChallengeScreen({super.key});
+class _MichiChallengeScreenBody extends StatefulWidget {
+  const _MichiChallengeScreenBody({super.key});
 
   @override
-  State<MichiChallengeScreen> createState() => _MichiChallengeScreenState();
+  State<_MichiChallengeScreenBody> createState() => _MichiChallengeScreenState();
 }
 
-class _MichiChallengeScreenState extends State<MichiChallengeScreen> {
+class _MichiChallengeScreenState extends State<_MichiChallengeScreenBody> {
   String? _id;
   Set<String> _days = {};
   bool _celebrate = false;
@@ -579,14 +580,14 @@ class MichiBadges {
   }
 }
 
-class MichiBadgesScreen extends StatefulWidget {
-  const MichiBadgesScreen({super.key});
+class _MichiBadgesScreenBody extends StatefulWidget {
+  const _MichiBadgesScreenBody({super.key});
 
   @override
-  State<MichiBadgesScreen> createState() => _MichiBadgesScreenState();
+  State<_MichiBadgesScreenBody> createState() => _MichiBadgesScreenState();
 }
 
-class _MichiBadgesScreenState extends State<MichiBadgesScreen> {
+class _MichiBadgesScreenState extends State<_MichiBadgesScreenBody> {
   Set<String> _u = {};
   Set<String> _fresh = {};
 
@@ -665,4 +666,22 @@ class _MichiBadgesScreenState extends State<MichiBadgesScreen> {
       ),
     );
   }
+}
+
+
+/// MichiChallengeScreen es Premium: sin Premium enseña qué incluye y lleva al pago.
+class MichiChallengeScreen extends StatelessWidget {
+  const MichiChallengeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) => PremiumGate(title: tr('Retos de Michi', "Michi's challenges"), child: _MichiChallengeScreenBody());
+}
+
+
+/// MichiBadgesScreen es Premium: sin Premium enseña qué incluye y lleva al pago.
+class MichiBadgesScreen extends StatelessWidget {
+  const MichiBadgesScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) => PremiumGate(title: tr('Logros', 'Badges'), child: _MichiBadgesScreenBody());
 }

@@ -1,0 +1,798 @@
+From e98a657b224ac7bc1f0bc7e1f75695ef42ede649 Mon Sep 17 00:00:00 2001
+From: Lambert <soportelambert@gmail.com>
+Date: Tue, 10 Nov 2026 11:44:46 +0000
+Subject: [PATCH] =?UTF-8?q?Redise=C3=B1o=20visual=202026-11=20(maquetas=20?=
+ =?UTF-8?q?ChatGPT)=20y=20version=200.1.4+35?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+- Hoy: "Semana N" sobre la foto de flores en embarazo y "Tu bebé es como..."
+- Calendario: tarjeta "Próximo periodo"
+- Registrar: síntoma marcado relleno con su color y check; pétalos al guardar
+- Recordatorios: fondo rosa, un solo título con lema, iconos redondos
+- Yo: quitado el hueco blanco; tarjeta resumen con racha de registros
+- Textos: "Invitar a tu pareja", "Estadísticas"
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_015EErVzuHgFmwNPtiFkfH6j
+---
+ lib/l10n/app_strings.dart        |  16 ++++-
+ lib/screens/calendar_screen.dart |  64 +++++++++++++++++
+ lib/screens/me_screen.dart       | 103 +++++++++++++++++++++++++++
+ lib/screens/register_screen.dart |  50 +++++++++++--
+ lib/screens/reminder_screen.dart |  84 +++++++++++++---------
+ lib/screens/today_screen.dart    |  85 ++++++++++++++++++++++
+ lib/widgets/petal_burst.dart     | 117 +++++++++++++++++++++++++++++++
+ pubspec.yaml                     |   2 +-
+ 8 files changed, 478 insertions(+), 43 deletions(-)
+ create mode 100644 lib/widgets/petal_burst.dart
+
+diff --git a/lib/l10n/app_strings.dart b/lib/l10n/app_strings.dart
+index 6ead609..54a814a 100644
+--- a/lib/l10n/app_strings.dart
++++ b/lib/l10n/app_strings.dart
+@@ -34,7 +34,7 @@ class AppStrings {
+ 
+   String get tabCalendar => _t({'es': 'Calendario', 'en': 'Calendar', 'fr': 'Calendrier', 'de': 'Kalender', 'ru': 'Календарь', 'ar': 'التقويم', 'hi': 'कैलेंडर', 'bn': 'ক্যালেন্ডার', 'pt': 'Calendário'});
+   String get tabTimeline => _t({'es': 'Línea de tiempo', 'en': 'Timeline', 'fr': 'Chronologie', 'de': 'Zeitleiste', 'ru': 'Хронология', 'ar': 'الجدول الزمني', 'hi': 'टाइमलाइन', 'bn': 'টাইমলাইন', 'pt': 'Linha do tempo'});
+-  String get tabReview => _t({'es': 'Revisión', 'en': 'Review', 'fr': 'Bilan', 'de': 'Überblick', 'ru': 'Обзор', 'ar': 'المراجعة', 'hi': 'समीक्षा', 'bn': 'পর্যালোচনা', 'pt': 'Revisão'});
++  String get tabReview => _t({'es': 'Estadísticas', 'en': 'Review', 'fr': 'Bilan', 'de': 'Überblick', 'ru': 'Обзор', 'ar': 'المراجعة', 'hi': 'समीक्षा', 'bn': 'পর্যালোচনা', 'pt': 'Revisão'});
+   String get tabStats => _t({'es': 'Estadísticas', 'en': 'Statistics', 'fr': 'Statistiques', 'de': 'Statistiken', 'ru': 'Статистика', 'ar': 'الإحصائيات', 'hi': 'आंकड़े', 'bn': 'পরিসংখ্যান', 'pt': 'Estatísticas'});
+ 
+   // ==================== review_screen.dart ====================
+@@ -338,6 +338,14 @@ class AppStrings {
+   String get reminderScreenTitleLine1 => _t({'es': 'Obtener', 'en': 'Get', 'fr': 'Obtenir', 'de': 'Erhalte', 'ru': 'Получить', 'ar': 'الحصول عليه', 'hi': 'पाएं', 'bn': 'পান', 'pt': 'Obter'});
+   String get reminderScreenTitleLine2 =>
+       _t({'es': 'Recordatorio', 'en': 'Reminder', 'fr': 'un rappel', 'de': 'Erinnerung', 'ru': 'Напоминание', 'ar': 'تذكير', 'hi': 'रिमाइंडर', 'bn': 'রিমাইন্ডার', 'pt': 'Lembrete'});
++  // Título único y lema de la pantalla de recordatorios (rediseño 2026-11).
++  // Tarjeta "Próximo periodo" bajo el calendario (rediseño 2026-11).
++  String get calendarNextPeriodTitle => _t({'es': 'PRÓXIMO PERIODO', 'en': 'NEXT PERIOD', 'fr': 'PROCHAINES RÈGLES', 'de': 'NÄCHSTE PERIODE', 'ru': 'СЛЕДУЮЩАЯ МЕНСТРУАЦИЯ', 'ar': 'الدورة القادمة', 'hi': 'अगला पीरियड', 'bn': 'পরবর্তী পিরিয়ড', 'pt': 'PRÓXIMA MENSTRUAÇÃO'});
++  String calendarNextPeriodInDays(int n) => _t({'es': n == 1 ? 'En 1 día' : 'En $n días', 'en': n == 1 ? 'In 1 day' : 'In $n days', 'fr': n == 1 ? 'Dans 1 jour' : 'Dans $n jours', 'de': n == 1 ? 'In 1 Tag' : 'In $n Tagen', 'ru': 'Через $n дн.', 'ar': 'بعد $n يوم', 'hi': '$n दिन में', 'bn': '$n দিনে', 'pt': n == 1 ? 'Em 1 dia' : 'Em $n dias'});
++  String get calendarNextPeriodToday => _t({'es': 'Podría empezar hoy', 'en': 'Could start today', 'fr': "Pourrait commencer aujourd'hui", 'de': 'Könnte heute beginnen', 'ru': 'Может начаться сегодня', 'ar': 'قد تبدأ اليوم', 'hi': 'आज शुरू हो सकता है', 'bn': 'আজ শুরু হতে পারে', 'pt': 'Pode começar hoje'});
++  String meLoggingStreak(int n) => _t({'es': n == 1 ? 'Llevas 1 día registrando' : 'Llevas $n días seguidos registrando', 'en': n == 1 ? '1 day logging in a row' : '$n days logging in a row', 'fr': '$n jour(s) de suivi d\'affilée', 'de': '$n Tag(e) in Folge eingetragen', 'ru': 'Записи $n дн. подряд', 'ar': '$n يوم تسجيل متتالي', 'hi': 'लगातार $n दिन से दर्ज कर रही हैं', 'bn': 'টানা $n দিন রেকর্ড করছেন', 'pt': n == 1 ? '1 dia registrando' : '$n dias seguidos registrando'});
++  String get remindersScreenTitle => _t({'es': 'Recordatorios', 'en': 'Reminders', 'fr': 'Rappels', 'de': 'Erinnerungen', 'ru': 'Напоминания', 'ar': 'التذكيرات', 'hi': 'रिमाइंडर', 'bn': 'রিমাইন্ডার', 'pt': 'Lembretes'});
++  String get remindersScreenTagline => _t({'es': 'No olvides tus citas, hábitos y cuidados', 'en': "Don't forget your appointments, habits and self-care", 'fr': "N'oublie pas tes rendez-vous, habitudes et soins", 'de': 'Vergiss deine Termine, Gewohnheiten und Pflege nicht', 'ru': 'Не забывай о приёмах, привычках и заботе о себе', 'ar': 'لا تنسي مواعيدك وعاداتك والعناية بنفسك', 'hi': 'अपनी अपॉइंटमेंट, आदतें और देखभाल न भूलें', 'bn': 'আপনার অ্যাপয়েন্টমেন্ট, অভ্যাস ও যত্ন ভুলবেন না', 'pt': 'Não esqueça suas consultas, hábitos e cuidados'});
+   String get reminderRowPeriod => _t({'es': 'Periodo', 'en': 'Period', 'fr': 'Règles', 'de': 'Periode', 'ru': 'Менструация', 'ar': 'الدورة', 'hi': 'पीरियड', 'bn': 'পিরিয়ড', 'pt': 'Período'});
+   String get reminderRowOvulation => _t({'es': 'Ovulación', 'en': 'Ovulation', 'fr': 'Ovulation', 'de': 'Eisprung', 'ru': 'Овуляция', 'ar': 'الإباضة', 'hi': 'ओव्यूलेशन', 'bn': 'ডিম্বস্ফোটন', 'pt': 'Ovulação'});
+   String get reminderRowFertile =>
+@@ -3795,7 +3803,7 @@ class AppStrings {
+         'ar': 'شاركي إيقاعكِ ولحظاتكِ مع شريككِ', 'hi': 'अपनी लय और पलों को अपने पार्टनर के साथ सिंक करें', 'bn': 'আপনার ছন্দ ও মুহূর্তগুলো আপনার পার্টনারের সাথে সিঙ্ক করুন', 'pt': 'Sincronize seu ritmo e seus momentos com seu parceiro(a)',
+       });
+   String get todayInvitePartner =>
+-      _t({'es': 'Invitar a un socio', 'en': 'Invite a partner', 'fr': 'Inviter un(e) partenaire', 'de': 'Partner:in einladen', 'ru': 'Пригласить партнёра', 'ar': 'دعوة شريك', 'hi': 'पार्टनर को आमंत्रित करें', 'bn': 'পার্টনারকে আমন্ত্রণ জানান', 'pt': 'Convidar um parceiro(a)',});
++      _t({'es': 'Invitar a tu pareja', 'en': 'Invite a partner', 'fr': 'Inviter un(e) partenaire', 'de': 'Partner:in einladen', 'ru': 'Пригласить партнёра', 'ar': 'دعوة شريك', 'hi': 'पार्टनर को आमंत्रित करें', 'bn': 'পার্টনারকে আমন্ত্রণ জানান', 'pt': 'Convidar um parceiro(a)',});
+   String get todayHighFertility => _t({
+         'es': 'Alta - posibilidad de quedar embarazada',
+         'en': 'High - chance of getting pregnant',
+@@ -3841,6 +3849,10 @@ class AppStrings {
+       });
+   // Encabezado pequeño de la tarjeta "Tu jardín" (ver
+   // TodayScreen._buildGardenCard) — también le faltaba al catálogo.
++  // Portada de la tarjeta del jardín durante el embarazo (rediseño 2026-11).
++  String get todayPregnancyHeroLabel => _t({'es': 'Tu embarazo', 'en': 'Your pregnancy', 'fr': 'Ta grossesse', 'de': 'Deine Schwangerschaft', 'ru': 'Твоя беременность', 'ar': 'حملكِ', 'hi': 'आपकी गर्भावस्था', 'bn': 'আপনার গর্ভাবস্থা', 'pt': 'Sua gravidez'});
++  String todayPregnancyHeroWeek(int n) => _t({'es': 'Semana $n', 'en': 'Week $n', 'fr': 'Semaine $n', 'de': 'Woche $n', 'ru': 'Неделя $n', 'ar': 'الأسبوع $n', 'hi': 'सप्ताह $n', 'bn': 'সপ্তাহ $n', 'pt': 'Semana $n'});
++  String todayPregnancyHeroWeeksLeft(int n) => _t({'es': 'Faltan $n semanas para tu parto', 'en': '$n weeks until your due date', 'fr': 'Encore $n semaines avant le terme', 'de': 'Noch $n Wochen bis zur Geburt', 'ru': 'До родов осталось недель: $n', 'ar': 'متبقٍ $n أسبوعًا على الولادة', 'hi': 'प्रसव में $n सप्ताह बाकी', 'bn': 'প্রসবের $n সপ্তাহ বাকি', 'pt': 'Faltam $n semanas para o parto'});
+   String get todayGardenHeader => _t({
+         'es': 'TU JARDÍN',
+         'en': 'YOUR GARDEN',
+diff --git a/lib/screens/calendar_screen.dart b/lib/screens/calendar_screen.dart
+index 434a05f..bc17ce9 100644
+--- a/lib/screens/calendar_screen.dart
++++ b/lib/screens/calendar_screen.dart
+@@ -813,6 +813,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
+                 ),
+               ],
+             ),
++            // Rediseño 2026-11 (maqueta ChatGPT aprobada): tarjeta destacada
++            // que aprovecha el hueco bajo el calendario con el próximo
++            // periodo previsto. No se muestra en embarazo (no hay periodo
++            // que prever) ni si aún no hay predicción.
++            if (_userGoal != 'pregnancy' && prediction.nextPeriodStart != null) ...[
++              const SizedBox(height: 14),
++              _buildNextPeriodCard(s, prediction.nextPeriodStart!),
++            ],
+             // "Atajo" con lo registrado en _selectedDate (período, vida
+             // sexual, síntomas/ánimo, método anticonceptivo, nota) — un
+             // vistazo rápido de la información de ese día sin tener que
+@@ -840,6 +848,62 @@ class _CalendarScreenState extends State<CalendarScreen> {
+     );
+   }
+ 
++  Widget _buildNextPeriodCard(AppStrings s, DateTime next) {
++    final now = DateTime.now();
++    final today = DateTime(now.year, now.month, now.day);
++    final days = DateTime(next.year, next.month, next.day).difference(today).inDays;
++    final big = days > 0 ? s.calendarNextPeriodInDays(days) : s.calendarNextPeriodToday;
++    return Container(
++      width: double.infinity,
++      padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
++      decoration: BoxDecoration(
++        gradient: const LinearGradient(
++          colors: [Color(0xFFFFF0F4), Color(0xFFFDE3EC)],
++          begin: Alignment.topLeft,
++          end: Alignment.bottomRight,
++        ),
++        borderRadius: BorderRadius.circular(20),
++        boxShadow: [
++          BoxShadow(color: AppColors.primary.withOpacity(0.14), blurRadius: 18, offset: const Offset(0, 8)),
++        ],
++      ),
++      child: Row(
++        children: [
++          Container(
++            width: 48,
++            height: 48,
++            decoration: BoxDecoration(
++              color: CalendarPhaseColors.periodFill.withOpacity(0.15),
++              shape: BoxShape.circle,
++            ),
++            child: Icon(Icons.water_drop, color: CalendarPhaseColors.periodFill, size: 26),
++          ),
++          const SizedBox(width: 14),
++          Expanded(
++            child: Column(
++              crossAxisAlignment: CrossAxisAlignment.start,
++              children: [
++                Text(
++                  s.calendarNextPeriodTitle,
++                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.textMuted, letterSpacing: 0.4),
++                ),
++                const SizedBox(height: 2),
++                Text(
++                  big,
++                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: AppColors.primaryDark),
++                ),
++                Text(
++                  '${next.day}/${next.month}/${next.year}',
++                  style: const TextStyle(fontSize: 13, color: AppColors.textMuted),
++                ),
++              ],
++            ),
++          ),
++        ],
++      ),
++    );
++  }
++
+   // Arma la lista de chips con lo registrado en _selectedDate, usada por
+   // _buildDaySummary (fila que el botón "i" activa/desactiva).
+   List<Widget> _dayChips(AppStrings s) {
+diff --git a/lib/screens/me_screen.dart b/lib/screens/me_screen.dart
+index 89d871a..bcd626c 100644
+--- a/lib/screens/me_screen.dart
++++ b/lib/screens/me_screen.dart
+@@ -483,6 +483,11 @@ class _MeScreenState extends State<MeScreen> {
+           child: Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
+             children: [
++              // Rediseño 2026-11 (maqueta ChatGPT aprobada): resumen bonito
++              // arriba — semana de embarazo o próximo periodo, más la racha
++              // de días seguidos registrando.
++              _buildSummaryCard(s, predictor),
++              const SizedBox(height: 14),
+               _buildTimelineCard(s, primary),
+               const SizedBox(height: 22),
+               _buildGoalSection(s, primary),
+@@ -711,6 +716,10 @@ class _MeScreenState extends State<MeScreen> {
+         ],
+       ),
+       child: GridView.builder(
++        // padding: zero — sin esto GridView añade por defecto el margen
++        // superior de la zona segura (MediaQuery), y eso era el hueco blanco
++        // vacío que se veía arriba de esta tarjeta.
++        padding: EdgeInsets.zero,
+         shrinkWrap: true,
+         physics: const NeverScrollableScrollPhysics(),
+         itemCount: items.length,
+@@ -763,6 +772,100 @@ class _MeScreenState extends State<MeScreen> {
+     );
+   }
+ 
++  /// Días seguidos (hasta hoy, o hasta ayer si hoy aún no se registró)
++  /// con algún registro guardado.
++  int _loggingStreak() {
++    final now = DateTime.now();
++    var day = DateTime(now.year, now.month, now.day);
++    if (!widget.data.containsKey(dateKey(day))) {
++      day = day.subtract(const Duration(days: 1));
++    }
++    var streak = 0;
++    while (widget.data.containsKey(dateKey(day)) && streak < 3650) {
++      streak++;
++      day = day.subtract(const Duration(days: 1));
++    }
++    return streak;
++  }
++
++  Widget _buildSummaryCard(AppStrings s, CyclePredictor predictor) {
++    String? big;
++    String? small;
++    if (_goal == 'pregnancy' && widget.pregnancy.lmp != null) {
++      final lmp = widget.pregnancy.lmp!;
++      final now = DateTime.now();
++      final raw = DateTime(now.year, now.month, now.day).difference(DateTime(lmp.year, lmp.month, lmp.day)).inDays;
++      final daysSince = raw < 0 ? 0 : raw;
++      final totalDays = widget.pregnancy.isTwins ? 259 : 280;
++      final capDays = totalDays + 7;
++      final week = ((daysSince > capDays ? capDays : daysSince) / 7).floor() + 1;
++      small = s.todayPregnancyHeroLabel;
++      big = s.todayPregnancyHeroWeek(week);
++    } else if (_goal != 'pregnancy') {
++      final next = predictor.predict().nextPeriodStart;
++      if (next != null) {
++        final now = DateTime.now();
++        final days = DateTime(next.year, next.month, next.day).difference(DateTime(now.year, now.month, now.day)).inDays;
++        small = s.calendarNextPeriodTitle;
++        big = days > 0 ? s.calendarNextPeriodInDays(days) : s.calendarNextPeriodToday;
++      }
++    }
++    final streak = _loggingStreak();
++    if (big == null && streak == 0) return const SizedBox.shrink();
++    return Container(
++      width: double.infinity,
++      padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
++      decoration: BoxDecoration(
++        gradient: const LinearGradient(
++          colors: [Color(0xFFFFF0F4), Color(0xFFFDE3EC)],
++          begin: Alignment.topLeft,
++          end: Alignment.bottomRight,
++        ),
++        borderRadius: BorderRadius.circular(20),
++        boxShadow: [
++          BoxShadow(color: AppColors.primary.withOpacity(0.14), blurRadius: 18, offset: const Offset(0, 8)),
++        ],
++      ),
++      child: Row(
++        children: [
++          Container(
++            width: 52,
++            height: 52,
++            decoration: BoxDecoration(color: AppColors.primary.withOpacity(0.12), shape: BoxShape.circle),
++            child: Icon(_goal == 'pregnancy' ? Icons.child_friendly : Icons.water_drop, color: AppColors.primaryDark, size: 26),
++          ),
++          const SizedBox(width: 14),
++          Expanded(
++            child: Column(
++              crossAxisAlignment: CrossAxisAlignment.start,
++              children: [
++                if (small != null)
++                  Text(small, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.textMuted, letterSpacing: 0.3)),
++                if (big != null)
++                  Text(big, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: AppColors.primaryDark, height: 1.15)),
++                if (streak > 0) ...[
++                  const SizedBox(height: 6),
++                  Container(
++                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
++                    decoration: BoxDecoration(color: Colors.white.withOpacity(0.85), borderRadius: BorderRadius.circular(14)),
++                    child: Row(
++                      mainAxisSize: MainAxisSize.min,
++                      children: [
++                        const Icon(Icons.local_fire_department, size: 15, color: Color(0xFFF26B1D)),
++                        const SizedBox(width: 4),
++                        Text(s.meLoggingStreak(streak), style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
++                      ],
++                    ),
++                  ),
++                ],
++              ],
++            ),
++          ),
++        ],
++      ),
++    );
++  }
++
+   Widget _buildTimelineCard(AppStrings s, Color primary) {
+     return InkWell(
+       onTap: _openTimeline,
+diff --git a/lib/screens/register_screen.dart b/lib/screens/register_screen.dart
+index 95f0a0f..76108e0 100644
+--- a/lib/screens/register_screen.dart
++++ b/lib/screens/register_screen.dart
+@@ -8,6 +8,7 @@ import '../models/day_entry.dart';
+ import '../services/cycle_predictor.dart' show dateKey;
+ import '../services/settings_service.dart' show AppThemeOption, SettingsService, themeById;
+ import '../theme/app_theme.dart';
++import '../widgets/petal_burst.dart';
+ import '../widgets/reminder_time_sheet.dart' show ReminderDatePickerSheet, ReminderTimePickerSheet;
+ 
+ /// Pestaña "Registrar" (índice 2 de la barra inferior): pantalla completa
+@@ -460,6 +461,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
+   /// fondo de color sólido distinto por síntoma, silueta blanca simple,
+   /// sombra suave, sin brillo de plástico. La app las recorta en círculo
+   /// con [ClipOval] + `BoxFit.cover`, así que no necesitan fondo transparente.
++  /// Color fuerte propio de cada síntoma (a juego con su insignia) para
++  /// rellenar la tarjeta cuando está marcada — rediseño 2026-11. Tonos lo
++  /// bastante oscuros para que el texto blanco se lea bien.
++  Color _symptomStrongColor(String id) {
++    switch (id) {
++      case 'dolor':
++        return const Color(0xFFD9363E);
++      case 'animo':
++        return const Color(0xFFC77700);
++      case 'energia':
++        return const Color(0xFF2F8A3E);
++      case 'antojos':
++        return const Color(0xFF2F6FD6);
++      case 'hinchazon':
++        return const Color(0xFF0E8A7E);
++      case 'sueno':
++        return const Color(0xFF7446D6);
++      case 'acne':
++        return const Color(0xFFD43C86);
++      case 'dolorcab':
++        return const Color(0xFF6A5AC8);
++      default:
++        return AppColors.primaryDark;
++    }
++  }
++
+   String _symptomAsset(String id) {
+     switch (id) {
+       case 'dolor':
+@@ -908,6 +935,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
+     updated[_todayKey] = entry;
+     _enforceWeightHistoryLimit(updated);
+     widget.onDataChanged(updated);
++    // Rediseño 2026-11: lluvia de pétalos al guardar. Va en el Overlay raíz
++    // para que siga viéndose aunque esta pantalla se cierre o cambie de
++    // pestaña justo después.
++    showPetalBurst(context);
+ 
+     // Si esta pantalla se abrió con Navigator.push (showCloseButton: true,
+     // p. ej. desde Calendario/Cronología/"Editar" en Yo), Guardar también
+@@ -1071,16 +1102,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
+                       final level = _symptomLevels[id];
+                       final color = _symptomLevelColor(level);
+                       final selected = level != null;
++                      final strong = _symptomStrongColor(id);
+                       return GestureDetector(
+                         onTap: () => _cycleSymptom(id),
+                         child: AnimatedContainer(
+                           duration: const Duration(milliseconds: 150),
+                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                           decoration: BoxDecoration(
+-                            color: selected ? color.background : AppColors.background,
++                            // Rediseño 2026-11 (maqueta ChatGPT aprobada): el
++                            // síntoma marcado se rellena con su color fuerte,
++                            // texto blanco y un check, para que se vea de un
++                            // vistazo qué está seleccionado.
++                            color: selected ? strong : Colors.white,
+                             borderRadius: BorderRadius.circular(14),
+                             border: Border.all(
+-                                color: selected ? color.border : AppColors.border, width: selected ? 1.5 : 1),
++                                color: selected ? strong : AppColors.border, width: selected ? 1.5 : 1),
++                            boxShadow: selected
++                                ? [BoxShadow(color: strong.withOpacity(0.35), blurRadius: 10, offset: const Offset(0, 4))]
++                                : null,
+                           ),
+                           child: Row(
+                             children: [
+@@ -1090,7 +1129,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
+                                 decoration: BoxDecoration(
+                                   shape: BoxShape.circle,
+                                   border: selected
+-                                      ? Border.all(color: color.border, width: 2)
++                                      ? Border.all(color: Colors.white, width: 2)
+                                       : null,
+                                 ),
+                                 child: ClipOval(
+@@ -1109,18 +1148,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
+                                       overflow: TextOverflow.ellipsis,
+                                       style: TextStyle(
+                                         fontSize: 12,
+-                                        color: selected ? color.text : AppColors.textPrimary,
++                                        color: selected ? Colors.white : AppColors.textPrimary,
+                                         fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                                       ),
+                                     ),
+                                     if (level != null)
+                                       Text(
+                                         s.symptomLevelLabelFor(level),
+-                                        style: TextStyle(fontSize: 10, color: color.border.withOpacity(0.9)),
++                                        style: const TextStyle(fontSize: 10, color: Color(0xE6FFFFFF)),
+                                       ),
+                                   ],
+                                 ),
+                               ),
++                              if (selected) const Icon(Icons.check_circle, size: 18, color: Colors.white),
+                             ],
+                           ),
+                         ),
+diff --git a/lib/screens/reminder_screen.dart b/lib/screens/reminder_screen.dart
+index e388c83..5362fdb 100644
+--- a/lib/screens/reminder_screen.dart
++++ b/lib/screens/reminder_screen.dart
+@@ -923,40 +923,52 @@ class _ReminderScreenState extends State<ReminderScreen> {
+     final primary = Color(theme.primary);
+ 
+     return Scaffold(
+-      backgroundColor: _iosBg,
++      // Rediseño 2026-11 (aprobado por el usuario con maquetas de ChatGPT):
++      // mismo fondo rosa claro que el resto de la app en vez del gris de
++      // Ajustes de iPhone, que rompía la coherencia visual.
++      backgroundColor: AppColors.background,
+       body: SafeArea(
+         child: Column(
+           children: [
+-            Padding(
+-              padding: const EdgeInsets.fromLTRB(4, 4, 16, 0),
+-              child: Row(
+-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+-                children: [
+-                  const SizedBox(width: 44),
+-                  Text(
+-                    s.reminderScreenTitleLine1,
+-                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600, color: Colors.black),
+-                  ),
+-                  // Botón de cerrar (X) quitado a petición del usuario — se
+-                  // deja este SizedBox del mismo ancho que ocupaba el botón
+-                  // (28px) para que el título siga centrado respecto al
+-                  // SizedBox(width: 44) de la izquierda. La pantalla se sigue
+-                  // pudiendo cerrar con el gesto/botón de atrás del sistema.
+-                  const SizedBox(width: 28),
+-                ],
+-              ),
+-            ),
+             Expanded(
+               child: SingleChildScrollView(
+                 padding: const EdgeInsets.fromLTRB(16, 4, 16, 32),
+                 child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
++                    // Un solo título (antes salía duplicado: "Obtener" arriba y
++                    // "Obtener Recordatorio" debajo) con campana y lema.
+                     Padding(
+-                      padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
+-                      child: Text(
+-                        '${s.reminderScreenTitleLine1}\n${s.reminderScreenTitleLine2}',
+-                        style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: Colors.black, height: 1.15),
++                      padding: const EdgeInsets.fromLTRB(4, 12, 4, 4),
++                      child: Column(
++                        children: [
++                          Row(
++                            mainAxisAlignment: MainAxisAlignment.center,
++                            children: [
++                              const Icon(Icons.notifications_active, color: Color(0xFFF5A623), size: 30),
++                              const SizedBox(width: 8),
++                              Flexible(
++                                child: Text(
++                                  s.remindersScreenTitle,
++                                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800, color: AppColors.primaryDark, height: 1.15),
++                                ),
++                              ),
++                            ],
++                          ),
++                          const SizedBox(height: 8),
++                          Container(
++                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
++                            decoration: BoxDecoration(
++                              color: AppColors.primaryLight.withOpacity(0.6),
++                              borderRadius: BorderRadius.circular(20),
++                            ),
++                            child: Text(
++                              s.remindersScreenTagline,
++                              textAlign: TextAlign.center,
++                              style: const TextStyle(fontSize: 13, color: AppColors.textPrimary),
++                            ),
++                          ),
++                        ],
+                       ),
+                     ),
+                     // Durante el embarazo no hay periodos que seguir, así
+@@ -1211,12 +1223,12 @@ class _ReminderScreenState extends State<ReminderScreen> {
+         padding: const EdgeInsets.fromLTRB(4, 16, 4, 6),
+         child: Text(
+           text.toUpperCase(),
+-          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: _iosLabelMuted, letterSpacing: 0.3),
++          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.primaryDark, letterSpacing: 0.6),
+         ),
+       );
+ 
+   Widget _iosDividerLine() => const Padding(
+-        padding: EdgeInsets.only(left: 42),
++        padding: EdgeInsets.only(left: 50),
+         child: Divider(height: 0.5, thickness: 0.5, color: _iosDivider),
+       );
+ 
+@@ -1229,12 +1241,12 @@ class _ReminderScreenState extends State<ReminderScreen> {
+       // Inicio/Calendario.
+       decoration: BoxDecoration(
+         color: Colors.white,
+-        borderRadius: BorderRadius.circular(14),
++        borderRadius: BorderRadius.circular(18),
+         boxShadow: [
+           BoxShadow(
+-            color: AppColors.textPrimary.withOpacity(0.16),
+-            blurRadius: 22,
+-            offset: const Offset(0, 9),
++            color: AppColors.primary.withOpacity(0.12),
++            blurRadius: 20,
++            offset: const Offset(0, 8),
+           ),
+         ],
+       ),
+@@ -1243,11 +1255,13 @@ class _ReminderScreenState extends State<ReminderScreen> {
+   }
+ 
+   Widget _iosIcon(IconData icon, Color bg) {
++    // Icono redondo con fondo suave del mismo color (en vez del cuadrado
++    // sólido estilo iOS), a juego con la maqueta aprobada.
+     return Container(
+-      width: 30,
+-      height: 30,
+-      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(8)),
+-      child: Icon(icon, size: 16, color: Colors.white),
++      width: 38,
++      height: 38,
++      decoration: BoxDecoration(color: bg.withOpacity(0.15), shape: BoxShape.circle),
++      child: Icon(icon, size: 20, color: bg),
+     );
+   }
+ 
+@@ -1279,7 +1293,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+-                  Text(label, style: const TextStyle(fontSize: 16, color: Colors.black)),
++                  Text(label, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+                   if (subtitle != null)
+                     Padding(
+                       padding: const EdgeInsets.only(top: 2),
+diff --git a/lib/screens/today_screen.dart b/lib/screens/today_screen.dart
+index 99f499a..19cf58e 100644
+--- a/lib/screens/today_screen.dart
++++ b/lib/screens/today_screen.dart
+@@ -8,6 +8,7 @@ import '../models/day_entry.dart';
+ import '../services/app_open_controller.dart';
+ import '../services/couple_illustration_controller.dart';
+ import '../services/cycle_predictor.dart';
++import '../data/pregnancy_week_info.dart' show pregnancyWeekInfoFor;
+ import '../services/garden_stage.dart';
+ import '../services/settings_service.dart' show AppThemeOption, PregnancySettings, kAppThemes, themeById;
+ import '../theme/app_theme.dart';
+@@ -451,6 +452,27 @@ class TodayScreen extends StatelessWidget {
+   // imagen de la etapa del jardín ocupa toda la tarjeta de lado a lado
+   // (estilo "banner"), con el texto superpuesto abajo sobre un degradado
+   // oscuro para que siga siendo legible.
++  /// Semana de embarazo actual (1-indexada) y semanas que faltan para el
++  /// parto, con el mismo cálculo que _buildPregnancyCard. Null si no hay
++  /// fecha de último periodo configurada.
++  ({int week, int weeksLeft})? _pregnancyWeekNow() {
++    final lmp = pregnancy.lmp;
++    if (lmp == null) return null;
++    final today = DateTime.now();
++    final todayMidnight = DateTime(today.year, today.month, today.day);
++    final raw = todayMidnight.difference(DateTime(lmp.year, lmp.month, lmp.day)).inDays;
++    final daysSince = raw < 0 ? 0 : raw;
++    final totalDays = pregnancy.isTwins ? 259 : 280;
++    final capDays = totalDays + 7;
++    final week = ((daysSince > capDays ? capDays : daysSince) / 7).floor() + 1;
++    final left = ((totalDays - daysSince) / 7).ceil();
++    return (week: week, weeksLeft: left < 0 ? 0 : left);
++  }
++
++  /// Quita emojis/símbolos del texto de tamaño (p. ej. "una frambuesa 🍇").
++  String _cleanSize(String raw) =>
++      raw.replaceAll(RegExp(r'[^\p{L}\p{N}\s,.\-]', unicode: true), '').trim();
++
+   Widget _buildGardenCard(
+     AppStrings s,
+     AppThemeOption theme,
+@@ -513,6 +535,50 @@ class TodayScreen extends StatelessWidget {
+                 ),
+               ),
+             ),
++            // Rediseño 2026-11 (maqueta de ChatGPT aprobada): durante el
++            // embarazo la foto de flores también informa — "Semana N" en
++            // grande, centrado, con las semanas que faltan para el parto.
++            if (inPregnancyMode && _pregnancyWeekNow() != null)
++              Positioned.fill(
++                child: Center(
++                  child: Column(
++                    mainAxisSize: MainAxisSize.min,
++                    children: [
++                      Text(
++                        s.todayPregnancyHeroLabel,
++                        style: const TextStyle(
++                          fontSize: 13,
++                          fontWeight: FontWeight.w700,
++                          color: Colors.white,
++                          shadows: [Shadow(color: Color(0x99000000), blurRadius: 8)],
++                        ),
++                      ),
++                      Text(
++                        s.todayPregnancyHeroWeek(_pregnancyWeekNow()!.week),
++                        style: const TextStyle(
++                          fontSize: 44,
++                          fontWeight: FontWeight.w900,
++                          color: Colors.white,
++                          height: 1.05,
++                          shadows: [Shadow(color: Color(0xAA000000), blurRadius: 14, offset: Offset(0, 2))],
++                        ),
++                      ),
++                      const SizedBox(height: 6),
++                      Container(
++                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
++                        decoration: BoxDecoration(
++                          color: Colors.white.withOpacity(0.88),
++                          borderRadius: BorderRadius.circular(20),
++                        ),
++                        child: Text(
++                          s.todayPregnancyHeroWeeksLeft(_pregnancyWeekNow()!.weeksLeft),
++                          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.primaryDark),
++                        ),
++                      ),
++                    ],
++                  ),
++                ),
++              ),
+             Positioned(
+               left: 16,
+               right: 16,
+@@ -794,6 +860,25 @@ class TodayScreen extends StatelessWidget {
+                         style: const TextStyle(fontSize: 15, color: AppColors.textMuted),
+                         textAlign: lmp != null ? TextAlign.start : TextAlign.center,
+                       ),
++                      // Comparación de tamaño ("Tu bebé es como una
++                      // frambuesa") — el contenido de pregnancy_week_info
++                      // solo existe en español, así que solo se muestra en
++                      // español y desde la semana 4 (antes no hay
++                      // comparación con una fruta/semilla).
++                      if (lmp != null && s.code == 'es' && _pregnancyWeekNow() != null && _pregnancyWeekNow()!.week >= 4) ...[
++                        const SizedBox(height: 8),
++                        Container(
++                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
++                          decoration: BoxDecoration(
++                            color: AppColors.primaryLight.withOpacity(0.7),
++                            borderRadius: BorderRadius.circular(16),
++                          ),
++                          child: Text(
++                            'Tu bebé es como ${_cleanSize(pregnancyWeekInfoFor(_pregnancyWeekNow()!.week).size)}',
++                            style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: AppColors.primaryDark),
++                          ),
++                        ),
++                      ],
+                     ],
+                   ),
+                 ),
+diff --git a/lib/widgets/petal_burst.dart b/lib/widgets/petal_burst.dart
+new file mode 100644
+index 0000000..d5f922f
+--- /dev/null
++++ b/lib/widgets/petal_burst.dart
+@@ -0,0 +1,117 @@
++import 'dart:math' as math;
++
++import 'package:flutter/material.dart';
++
++/// Lluvia corta de pétalos rosas que cae sobre toda la pantalla (≈1,6 s) —
++/// pequeño detalle de celebración al guardar el registro del día
++/// (rediseño 2026-11). Se dibuja en el Overlay raíz y se quita sola; no
++/// bloquea toques (IgnorePointer).
++void showPetalBurst(BuildContext context) {
++  final overlay = Overlay.maybeOf(context, rootOverlay: true);
++  if (overlay == null) return;
++  late OverlayEntry entry;
++  entry = OverlayEntry(
++    builder: (_) => _PetalBurst(onDone: () {
++      if (entry.mounted) entry.remove();
++    }),
++  );
++  overlay.insert(entry);
++}
++
++class _PetalBurst extends StatefulWidget {
++  const _PetalBurst({required this.onDone});
++  final VoidCallback onDone;
++
++  @override
++  State<_PetalBurst> createState() => _PetalBurstState();
++}
++
++class _Petal {
++  _Petal(math.Random r)
++      : x = r.nextDouble(),
++        delay = r.nextDouble() * 0.35,
++        size = 10 + r.nextDouble() * 12,
++        drift = (r.nextDouble() - 0.5) * 0.25,
++        spin = (r.nextDouble() - 0.5) * 8,
++        color = const [
++          Color(0xFFF8A5C2),
++          Color(0xFFF06595),
++          Color(0xFFFFC9DE),
++          Color(0xFFE64980),
++        ][r.nextInt(4)];
++
++  final double x;
++  final double delay;
++  final double size;
++  final double drift;
++  final double spin;
++  final Color color;
++}
++
++class _PetalBurstState extends State<_PetalBurst> with SingleTickerProviderStateMixin {
++  late final AnimationController _c;
++  late final List<_Petal> _petals;
++
++  @override
++  void initState() {
++    super.initState();
++    final r = math.Random();
++    _petals = List.generate(26, (_) => _Petal(r));
++    _c = AnimationController(vsync: this, duration: const Duration(milliseconds: 1600))
++      ..addStatusListener((st) {
++        if (st == AnimationStatus.completed) widget.onDone();
++      })
++      ..forward();
++  }
++
++  @override
++  void dispose() {
++    _c.dispose();
++    super.dispose();
++  }
++
++  @override
++  Widget build(BuildContext context) {
++    return IgnorePointer(
++      child: AnimatedBuilder(
++        animation: _c,
++        builder: (context, _) => CustomPaint(
++          size: MediaQuery.of(context).size,
++          painter: _PetalPainter(_petals, _c.value),
++        ),
++      ),
++    );
++  }
++}
++
++class _PetalPainter extends CustomPainter {
++  _PetalPainter(this.petals, this.t);
++  final List<_Petal> petals;
++  final double t;
++
++  @override
++  void paint(Canvas canvas, Size size) {
++    for (final p in petals) {
++      final local = ((t - p.delay) / (1 - p.delay)).clamp(0.0, 1.0);
++      if (local <= 0) continue;
++      final y = -30 + (size.height + 60) * Curves.easeIn.transform(local);
++      final x = size.width * (p.x + p.drift * local) + math.sin(local * 6 + p.x * 10) * 18;
++      final opacity = local > 0.8 ? (1 - local) / 0.2 : 1.0;
++      final paint = Paint()..color = p.color.withOpacity(opacity.clamp(0.0, 1.0) * 0.9);
++      canvas.save();
++      canvas.translate(x, y);
++      canvas.rotate(p.spin * local);
++      // Pétalo: óvalo alargado con una punta.
++      final path = Path()
++        ..moveTo(0, -p.size / 2)
++        ..quadraticBezierTo(p.size / 2, -p.size / 6, 0, p.size / 2)
++        ..quadraticBezierTo(-p.size / 2, -p.size / 6, 0, -p.size / 2)
++        ..close();
++      canvas.drawPath(path, paint);
++      canvas.restore();
++    }
++  }
++
++  @override
++  bool shouldRepaint(covariant _PetalPainter old) => old.t != t;
++}
+diff --git a/pubspec.yaml b/pubspec.yaml
+index 0692c2a..a38ac81 100644
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+@@ -1,7 +1,7 @@
+ name: cicloplus_app
+ description: "CicloPlus — seguimiento de ciclo menstrual con privacidad local."
+ publish_to: 'none'
+-version: 0.1.4+34
++version: 0.1.4+35
+ 
+ environment:
+   sdk: '>=3.3.0 <4.0.0'
+-- 
+2.34.1
+

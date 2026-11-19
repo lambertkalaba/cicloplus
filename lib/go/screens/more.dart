@@ -12,6 +12,7 @@ import 'month_summary.dart';
 import 'michi_more.dart' show MichiDiaryScreen;
 import 'register.dart';
 import '../widgets/ciclo_date_picker.dart';
+import '../widgets/premium.dart';
 
 const _title = TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: C.text);
 const _body = TextStyle(fontSize: 13, color: C.text, fontWeight: FontWeight.w600, height: 1.35);
@@ -194,15 +195,15 @@ class ReportsHubScreen extends StatelessWidget {
 
 // ───────────────────────────── Análisis del ciclo ─────────────────────────────
 
-class AnalysisScreen extends StatefulWidget {
+class _AnalysisScreenBody extends StatefulWidget {
   final int initialTab;
-  const AnalysisScreen({super.key, this.initialTab = 0});
+  const _AnalysisScreenBody({super.key, this.initialTab = 0});
 
   @override
-  State<AnalysisScreen> createState() => _AnalysisScreenState();
+  State<_AnalysisScreenBody> createState() => _AnalysisScreenState();
 }
 
-class _AnalysisScreenState extends State<AnalysisScreen> {
+class _AnalysisScreenState extends State<_AnalysisScreenBody> {
   late int _tab = widget.initialTab;
 
   @override
@@ -484,8 +485,8 @@ List<_Trend> get _trends => [
           tr('Intensidad media del dolor los días que lo registraste.', 'Average pain intensity on the days you logged it.')),
     ];
 
-class TrendsScreen extends StatelessWidget {
-  const TrendsScreen({super.key});
+class _TrendsScreenBody extends StatelessWidget {
+  const _TrendsScreenBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1255,4 +1256,23 @@ class PregnancyScreen extends StatelessWidget {
           ),
         ),
       );
+}
+
+
+/// AnalysisScreen es Premium: sin Premium enseña qué incluye y lleva al pago.
+class AnalysisScreen extends StatelessWidget {
+  const AnalysisScreen({super.key, this.initialTab = 0});
+  final int initialTab;
+
+  @override
+  Widget build(BuildContext context) => PremiumGate(title: tr('Análisis del ciclo', 'Cycle analysis'), child: _AnalysisScreenBody(initialTab: initialTab));
+}
+
+
+/// TrendsScreen es Premium: sin Premium enseña qué incluye y lleva al pago.
+class TrendsScreen extends StatelessWidget {
+  const TrendsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) => PremiumGate(title: tr('Tendencias', 'Trends'), child: _TrendsScreenBody());
 }

@@ -1,0 +1,55 @@
+NOVEDADES PARA LA TIENDA (Google Play y App Store) — máx. 500 caracteres por idioma
+
+<es-ES>
+🐱 Michi está más vivo que nunca: celebra las fiestas de tu país, tu cumpleaños y las estaciones, te trae flores, te cuenta cuentos y tiene calendario de Adviento.
+🩷 Kit de regla, diario con Michi, retos de 7 días y logros.
+⚡ Registro rápido en un toque y "Tus patrones".
+📅 Predicción con margen de fechas y modo perimenopausia.
+🔒 Avisos discretos y bloqueo con PIN o huella.
+🧩 Michi también en el widget.
+</es-ES>
+
+<en-US>
+🐱 Michi is more alive than ever: he celebrates your country's holidays, your birthday and the seasons, brings you flowers, tells stories and has an Advent calendar.
+🩷 Period kit, diary with Michi, 7-day challenges and badges.
+⚡ One-tap quick log and "Your patterns".
+📅 Prediction with a date range and perimenopause mode.
+🔒 Discreet notifications and PIN or fingerprint lock.
+🧩 Michi on your home-screen widget too.
+</en-US>
+
+<fr-FR>
+🐱 Michi est plus vivant que jamais : il fête les jours fériés de ton pays, ton anniversaire et les saisons, t'offre des fleurs, te raconte des histoires et a un calendrier de l'Avent.
+🩷 Kit règles, journal avec Michi, défis de 7 jours et badges.
+⚡ Saisie rapide en un geste et « Tes tendances ».
+📅 Prévision avec une plage de dates et mode périménopause.
+🔒 Notifications discrètes et verrouillage par code ou empreinte.
+🧩 Michi aussi sur le widget.
+</fr-FR>
+
+<de-DE>
+🐱 Michi ist lebendiger denn je: Er feiert die Feiertage deines Landes, deinen Geburtstag und die Jahreszeiten, bringt dir Blumen, erzählt Geschichten und hat einen Adventskalender.
+🩷 Perioden-Kit, Tagebuch mit Michi, 7-Tage-Challenges und Abzeichen.
+⚡ Schnelleintrag mit einem Tipp und „Deine Muster".
+📅 Vorhersage als Zeitraum und Perimenopause-Modus.
+🔒 Diskrete Benachrichtigungen und PIN- oder Fingerabdrucksperre.
+🧩 Michi jetzt auch im Widget.
+</de-DE>
+
+<pt-BR>
+🐱 O Michi está mais vivo do que nunca: comemora os feriados do seu país, seu aniversário e as estações, traz flores, conta histórias e tem calendário do Advento.
+🩷 Kit da menstruação, diário com o Michi, desafios de 7 dias e conquistas.
+⚡ Registro rápido em um toque e "Seus padrões".
+📅 Previsão com intervalo de datas e modo perimenopausa.
+🔒 Notificações discretas e bloqueio com PIN ou digital.
+🧩 Michi também no widget.
+</pt-BR>
+
+<it-IT>
+🐱 Michi è più vivo che mai: festeggia le feste del tuo Paese, il tuo compleanno e le stagioni, ti porta fiori, ti racconta storie e ha un calendario dell'Avvento.
+🩷 Kit ciclo, diario con Michi, sfide di 7 giorni e traguardi.
+⚡ Registro rapido con un tocco e "I tuoi schemi".
+📅 Previsione con intervallo di date e modalità perimenopausa.
+🔒 Notifiche discrete e blocco con PIN o impronta.
+🧩 Michi anche nel widget.
+</it-IT>
