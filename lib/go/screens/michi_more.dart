@@ -104,7 +104,26 @@ Future<void> showMichiPeriodKit(BuildContext context) {
 
 // ───────────────────────────── Diario con Michi ─────────────────────────────
 
+/// Palabras de algo grave (pérdida, fallecimiento, hospital...). Michi solo
+/// se pone con lágrimas cuando ella le cuenta algo así.
+const _seriousWords = [
+  'falleci', 'murió', 'murio', 'muerto', 'muerta', 'muerte', 'pérdida', 'perdida de', 'luto', 'funeral', 'entierro', 'tanatorio',
+  'cáncer', 'cancer', 'hospital', 'accidente', 'aborto', 'despedid', 'me ha dejado', 'hemos roto',
+  'died', 'passed away', 'death', 'funeral', 'miscarriage', 'lost my',
+  'décéd', 'deces', 'décès', 'deuil', 'enterrement', 'hôpital', 'fausse couche',
+  'توفي', 'توفيت', 'وفاة', 'مات', 'ماتت', 'مستشفى', 'جنازة',
+];
+
+bool michiIsSerious(String text) {
+  final t = text.toLowerCase();
+  return _seriousWords.any(t.contains);
+}
+
 String michiReply(DayLog? l, String text) {
+  if (michiIsSerious(text)) {
+    return tr('Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.',
+        "I'm so, so sorry. I'm here with you, sending you a big hug 💗 If you need it, talk to someone you trust too.");
+  }
   final i = text.length % 3;
   final mood = l?.mood ?? 0;
   if (mood == 2 || mood == 3 || (l?.pain ?? 0) >= 2) {
@@ -138,6 +157,7 @@ class MichiDiaryScreen extends StatefulWidget {
 class _MichiDiaryScreenState extends State<MichiDiaryScreen> {
   late final TextEditingController _t = TextEditingController(text: AppStore.instance.logs[dayKey(DateTime.now())]?.note ?? '');
   String? _reply;
+  String _replyImg = 'michi_heart';
 
   @override
   void dispose() {
@@ -153,7 +173,10 @@ class _MichiDiaryScreenState extends State<MichiDiaryScreen> {
     final today = dateOnly(DateTime.now());
     await AppStore.instance.updateLog(today, (l) => l.note = text);
     if (!mounted) return;
-    setState(() => _reply = michiReply(AppStore.instance.logs[dayKey(today)], text));
+    setState(() {
+      _reply = michiReply(AppStore.instance.logs[dayKey(today)], text);
+      _replyImg = michiIsSerious(text) ? 'michi_letter_sad' : 'michi_heart';
+    });
   }
 
   @override
@@ -212,7 +235,7 @@ class _MichiDiaryScreenState extends State<MichiDiaryScreen> {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(color: C.pinkSoft, borderRadius: BorderRadius.circular(16)),
                       child: Row(children: [
-                        const Text('🐱', style: TextStyle(fontSize: 22)),
+                        Img(_replyImg, size: 48, fallback: Icons.pets_rounded),
                         const SizedBox(width: 8),
                         Expanded(child: Text(_reply!, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: C.pinkDark))),
                       ]),
