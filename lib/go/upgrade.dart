@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/home_widget_service.dart';
+import '../services/photo_service.dart';
 import '../services/reminder_service.dart';
 import '../services/settings_service.dart';
 import '../services/theme_controller.dart';
@@ -38,6 +41,26 @@ class Upgrade {
       final s = AppStore.instance;
       s.showMichi = false;
       s.showGarden = true;
+      await s.commit();
+    } catch (_) {}
+  }
+
+  static const _photoKey = 'go_upgrade_photo_v1';
+
+  /// Una sola vez: si en la versión anterior tenía una foto de perfil en
+  /// "Mi cuenta", pasa a ser la foto de Yo (así hay una sola foto).
+  static Future<void> migratePhoto() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool(_photoKey) == true) return;
+    await prefs.setBool(_photoKey, true);
+    try {
+      final s = AppStore.instance;
+      if (s.photoPath != null || s.docsPath.isEmpty) return;
+      final bytes = PhotoService.decodeDataUrl(await SettingsService().loadProfilePhoto());
+      if (bytes == null || bytes.isEmpty) return;
+      final name = 'perfil_${DateTime.now().millisecondsSinceEpoch}.jpg';
+      await File('${s.docsPath}/$name').writeAsBytes(bytes);
+      s.photoName = name;
       await s.commit();
     } catch (_) {}
   }

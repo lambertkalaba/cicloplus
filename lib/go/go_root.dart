@@ -77,6 +77,7 @@ class _GoRootState extends State<GoRoot> {
     } catch (_) {}
     await Upgrade.migrateReminders();
     await Upgrade.migrateScene();
+    await Upgrade.migratePhoto();
     await Upgrade.fixTheme();
     store.removeListener(Upgrade.syncProfileName);
     store.addListener(Upgrade.syncProfileName);

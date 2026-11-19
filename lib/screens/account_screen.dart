@@ -11,6 +11,8 @@ import '../theme/app_theme.dart';
 import '../go/strings.dart' show tr;
 import '../go/widgets/ui.dart' show Avatar;
 import '../go/data/settings_sync.dart';
+import '../go/data/store.dart' as gostore;
+import '../go/screens/extras.dart' as goextras show pickPhoto;
 
 /// Pantalla "Mi cuenta", abierta desde el botón "Gestionar" de la tarjeta
 /// de sesión en la pestaña "Yo".
@@ -141,19 +143,11 @@ class _AccountScreenState extends State<AccountScreen> {
     setState(() => _isEditing = false);
   }
 
+  /// Misma foto que en Yo (galería, cámara o la ilustración).
   Future<void> _pickPhoto() async {
     setState(() => _pickingPhoto = true);
     try {
-      final dataUrl = await _photoService.pickAndResizeFromGallery();
-      if (dataUrl == null) return; // Canceló la selección, no es un error.
-      await _settings.saveProfilePhoto(dataUrl);
-      if (!mounted) return;
-      setState(() => _photoDataUrl = dataUrl);
-    } catch (_) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppStrings.of(context).accountPhotoUpdateError)),
-      );
+      await goextras.pickPhoto(context);
     } finally {
       if (mounted) setState(() => _pickingPhoto = false);
     }
@@ -206,7 +200,6 @@ class _AccountScreenState extends State<AccountScreen> {
       );
     }
 
-    final photoBytes = PhotoService.decodeDataUrl(_photoDataUrl);
     final subscriptionService = widget.subscriptionService;
     final hasActiveSubscription = subscriptionService.hasActiveSubscription(widget.user);
     final displayName = [_nameController.text.trim(), _lastNameController.text.trim()]
@@ -249,11 +242,13 @@ class _AccountScreenState extends State<AccountScreen> {
               children: [
                 Stack(
                   children: [
-                    CircleAvatar(
-                      radius: 52,
-                      backgroundColor: Color(theme.primaryLight),
-                      backgroundImage: photoBytes != null ? MemoryImage(photoBytes) : null,
-                      child: photoBytes == null ? const ClipOval(child: Avatar(size: 104)) : null,
+                    ListenableBuilder(
+                      listenable: gostore.AppStore.instance,
+                      builder: (_, __) => CircleAvatar(
+                        radius: 52,
+                        backgroundColor: Color(theme.primaryLight),
+                        child: const ClipOval(child: Avatar(size: 104)),
+                      ),
                     ),
                     if (_isEditing)
                       Positioned(
