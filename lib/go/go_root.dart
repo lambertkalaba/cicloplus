@@ -73,6 +73,7 @@ class _GoRootState extends State<GoRoot> {
       await CP.loadFromCicloPlus().timeout(const Duration(seconds: 5));
     } catch (_) {}
     await Upgrade.migrateReminders();
+    await Upgrade.migrateScene();
     await Upgrade.fixTheme();
     store.removeListener(Upgrade.syncProfileName);
     store.addListener(Upgrade.syncProfileName);

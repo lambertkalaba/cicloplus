@@ -16,6 +16,32 @@ class Upgrade {
 
   static const _doneKey = 'go_upgrade_reminders_v1';
 
+  static const _sceneKey = 'go_upgrade_scene_v1';
+
+  /// Una sola vez: quien ya usaba CicloPlus antes de esta versión sigue
+  /// viendo su flor del jardín (no aparece Michi de golpe). Las cuentas
+  /// nuevas empiezan con la casa de Michi. Si ya había elegido algo en este
+  /// diseño, se respeta.
+  static Future<void> migrateScene() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool(_sceneKey) == true) return;
+    await prefs.setBool(_sceneKey, true);
+    if (prefs.containsKey('showMichi')) return;
+    try {
+      final dates = await SettingsService().loadAppOpenDates();
+      final limit = DateTime.now().subtract(const Duration(days: 5));
+      final old = dates.any((d) {
+        final t = DateTime.tryParse(d);
+        return t != null && t.isBefore(limit);
+      });
+      if (!old) return;
+      final s = AppStore.instance;
+      s.showMichi = false;
+      s.showGarden = true;
+      await s.commit();
+    } catch (_) {}
+  }
+
   static int _minutes(String hhmm, int fallback) {
     final p = hhmm.split(':');
     if (p.length != 2) return fallback;

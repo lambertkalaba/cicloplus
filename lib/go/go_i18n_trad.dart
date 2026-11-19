@@ -3,6 +3,8 @@
 
 const Map<String, Map<String, String>> goI18nTrad = {
   "am": {
+    "La flor que crece cada día que entras": "በገባሽ ቁጥር በየቀኑ የምታድግ አበባ",
+    "Nada en la pantalla de inicio": "በመነሻ ገጹ ላይ ምንም የለም",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "በጣም አዝናለሁ። እዚህ ካንቺ ጋር ነኝ፣ ጠንካራ እቅፍ እልክልሻለሁ 💗 ካስፈለገሽ ከምታምኚው ሰው ጋርም ተነጋገሪ።",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "ጥራጥሬዎች፣ ስፒናች ወይም ስጋ የምታጪውን ብረት እንድትመልሺ ይረዱሻል።",
     "Lo que me has contado": "የነገርሽኝ ነገር",
@@ -82,6 +84,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ቀለም ምረጪ",
   },
   "ar": {
+    "La flor que crece cada día que entras": "الزهرة التي تنمو كل يوم تدخلين فيه",
+    "Nada en la pantalla de inicio": "لا شيء في الشاشة الرئيسية",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "أنا آسف جدًا. أنا هنا معكِ وأرسل لكِ حضنًا قويًا 💗 إذا احتجتِ، تحدثي أيضًا مع شخص تثقين به.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "البقوليات أو السبانخ أو اللحوم تساعدك على تعويض الحديد الذي تفقدينه.",
     "Lo que me has contado": "ما حكيتِه لي",
@@ -220,6 +224,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} أيام",
   },
   "az": {
+    "La flor que crece cada día que entras": "Hər gün girdikcə böyüyən çiçək",
+    "Nada en la pantalla de inicio": "Ana ekranda heç nə",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Çox təəssüf edirəm. Mən buradayam, səninləyəm və səni bərk qucaqlayıram 💗 Ehtiyacın olsa, güvəndiyin biri ilə də danış.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Paxlalılar, ispanaq və ya ət itirdiyin dəmiri bərpa etməyə kömək edir.",
     "Lo que me has contado": "Mənə danışdıqların",
@@ -299,6 +305,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rəng seç",
   },
   "bn": {
+    "La flor que crece cada día que entras": "যে ফুল প্রতিদিন তুমি ঢুকলে বড় হয়",
+    "Nada en la pantalla de inicio": "হোম স্ক্রিনে কিছু নেই",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "আমি খুব দুঃখিত। আমি তোমার পাশে আছি, তোমাকে শক্ত করে জড়িয়ে ধরছি 💗 দরকার হলে বিশ্বস্ত কারও সঙ্গেও কথা বলো।",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "ডাল, পালং শাক বা মাংস তোমার হারানো আয়রন ফিরে পেতে সাহায্য করে।",
     "Lo que me has contado": "তুমি আমাকে যা বলেছ",
@@ -437,6 +445,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} দিন",
   },
   "cs": {
+    "La flor que crece cada día que entras": "Květina, která roste každý den, kdy aplikaci otevřeš",
+    "Nada en la pantalla de inicio": "Na úvodní obrazovce nic",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Moc mě to mrzí. Jsem tu s tebou a posílám ti pevné objetí 💗 Když budeš potřebovat, promluv si i s někým, komu věříš.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Luštěniny, špenát nebo maso ti pomohou doplnit železo, které ztrácíš.",
     "Lo que me has contado": "Co jsi mi svěřila",
@@ -516,6 +526,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber barvu",
   },
   "da": {
+    "La flor que crece cada día que entras": "Blomsten, der vokser hver dag, du åbner appen",
+    "Nada en la pantalla de inicio": "Intet på startskærmen",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Jeg er så ked af det. Jeg er her hos dig og sender dig et stort kram 💗 Hvis du har brug for det, så tal også med en, du stoler på.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Bælgfrugter, spinat eller kød hjælper dig med at få det jern tilbage, du mister.",
     "Lo que me has contado": "Det, du har fortalt mig",
@@ -595,6 +607,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vælg en farve",
   },
   "de": {
+    "La flor que crece cada día que entras": "Die Blume, die jeden Tag wächst, an dem du die App öffnest",
+    "Nada en la pantalla de inicio": "Nichts auf dem Startbildschirm",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Es tut mir so leid. Ich bin hier bei dir und schicke dir eine ganz feste Umarmung 💗 Wenn du es brauchst, sprich auch mit jemandem, dem du vertraust.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Hülsenfrüchte, Spinat oder Fleisch helfen dir, das verlorene Eisen wieder aufzufüllen.",
     "Lo que me has contado": "Was du mir erzählt hast",
@@ -733,6 +747,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} Tage",
   },
   "el": {
+    "La flor que crece cada día que entras": "Το λουλούδι που μεγαλώνει κάθε μέρα που μπαίνεις",
+    "Nada en la pantalla de inicio": "Τίποτα στην αρχική οθόνη",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Λυπάμαι πάρα πολύ. Είμαι εδώ μαζί σου και σου στέλνω μια σφιχτή αγκαλιά 💗 Αν το χρειάζεσαι, μίλησε και με κάποιον που εμπιστεύεσαι.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Τα όσπρια, το σπανάκι ή το κρέας σε βοηθούν να αναπληρώσεις τον σίδηρο που χάνεις.",
     "Lo que me has contado": "Όσα μου είπες",
@@ -812,6 +828,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Διάλεξε χρώμα",
   },
   "fa": {
+    "La flor que crece cada día que entras": "گلی که هر روز که وارد می‌شوی رشد می‌کند",
+    "Nada en la pantalla de inicio": "هیچ چیز در صفحهٔ اصلی",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "خیلی متأسفم. من اینجا کنارت هستم و یک بغل محکم برایت می‌فرستم 💗 اگر لازم داری، با کسی که به او اعتماد داری هم صحبت کن.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "حبوبات، اسفناج یا گوشت به تو کمک می‌کنند آهنی را که از دست می‌دهی جبران کنی.",
     "Lo que me has contado": "چیزهایی که به من گفتی",
@@ -891,6 +909,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "یک رنگ انتخاب کن",
   },
   "fi": {
+    "La flor que crece cada día que entras": "Kukka, joka kasvaa joka päivä, kun avaat sovelluksen",
+    "Nada en la pantalla de inicio": "Ei mitään aloitusnäytöllä",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Olen niin pahoillani. Olen tässä kanssasi ja lähetän sinulle ison halauksen 💗 Jos tarvitset, puhu myös jollekulle, johon luotat.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Palkokasvit, pinaatti tai liha auttavat korvaamaan menettämääsi rautaa.",
     "Lo que me has contado": "Mitä olet kertonut minulle",
@@ -970,6 +990,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Valitse väri",
   },
   "fil": {
+    "La flor que crece cada día que entras": "Ang bulaklak na lumalaki tuwing papasok ka",
+    "Nada en la pantalla de inicio": "Walang nakalagay sa home screen",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Lubos akong nalulungkot para sa iyo. Narito ako kasama mo at niyayakap kita nang mahigpit 💗 Kung kailangan mo, kausapin mo rin ang taong pinagkakatiwalaan mo.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Ang mga legume, spinach o karne ay tumutulong na maibalik ang iron na nawawala sa iyo.",
     "Lo que me has contado": "Ang mga ikinuwento mo sa akin",
@@ -1049,6 +1071,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pumili ng kulay",
   },
   "fr": {
+    "La flor que crece cada día que entras": "La fleur qui grandit chaque jour où tu ouvres l’app",
+    "Nada en la pantalla de inicio": "Rien sur l’écran d’accueil",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Je suis vraiment désolé. Je suis là avec toi et je t’envoie un très gros câlin 💗 Si tu en as besoin, parles-en aussi à une personne de confiance.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Les légumineuses, les épinards ou la viande t’aident à récupérer le fer que tu perds.",
     "Lo que me has contado": "Ce que tu m’as raconté",
@@ -1187,6 +1211,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} jours",
   },
   "gu": {
+    "La flor que crece cada día que entras": "દરરોજ તમે આવો ત્યારે વધતું ફૂલ",
+    "Nada en la pantalla de inicio": "હોમ સ્ક્રીન પર કંઈ નહીં",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "મને ખૂબ જ દુઃખ છે. હું અહીં તારી સાથે છું અને તને જોરથી ભેટું છું 💗 જરૂર હોય તો કોઈ વિશ્વાસુ વ્યક્તિ સાથે પણ વાત કર.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "કઠોળ, પાલક અથવા માંસ તમે ગુમાવેલું આયર્ન પાછું મેળવવામાં મદદ કરે છે.",
     "Lo que me has contado": "તમે મને જે કહ્યું",
@@ -1266,6 +1292,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "એક રંગ પસંદ કરો",
   },
   "ha": {
+    "La flor que crece cada día que entras": "Furen da ke girma kowace rana da kika shiga",
+    "Nada en la pantalla de inicio": "Babu komai a allon farko",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Na yi baƙin ciki ƙwarai. Ina nan tare da ke, ina rungume ki sosai 💗 Idan kina bukata, ki yi magana da wanda kike amincewa da shi.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Wake, alayyahu ko nama suna taimaka miki ki dawo da ƙarfen da kike rasawa.",
     "Lo que me has contado": "Abin da kika gaya min",
@@ -1345,6 +1373,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Zaɓi launi",
   },
   "he": {
+    "La flor que crece cada día que entras": "הפרח שגדל בכל יום שאת נכנסת",
+    "Nada en la pantalla de inicio": "שום דבר במסך הבית",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "אני כל כך מצטער. אני כאן איתך ושולח לך חיבוק חזק 💗 אם את צריכה, דברי גם עם מישהו שאת סומכת עליו.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "קטניות, תרד או בשר עוזרים לך להשלים את הברזל שאת מאבדת.",
     "Lo que me has contado": "מה שסיפרת לי",
@@ -1424,6 +1454,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "בחרי צבע",
   },
   "hi": {
+    "La flor que crece cada día que entras": "वह फूल जो हर दिन ऐप खोलने पर बढ़ता है",
+    "Nada en la pantalla de inicio": "होम स्क्रीन पर कुछ नहीं",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "मुझे बहुत दुख है। मैं यहीं तुम्हारे साथ हूँ और तुम्हें कसकर गले लगा रहा हूँ 💗 ज़रूरत हो तो किसी भरोसेमंद व्यक्ति से भी बात करो।",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "दालें, पालक या मांस आपके खोए हुए आयरन को वापस पाने में मदद करते हैं।",
     "Lo que me has contado": "आपने मुझे जो बताया",
@@ -1562,6 +1594,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} दिन",
   },
   "hu": {
+    "La flor que crece cada día que entras": "A virág, amely minden nap nő, amikor megnyitod az appot",
+    "Nada en la pantalla de inicio": "Semmi a kezdőképernyőn",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Nagyon sajnálom. Itt vagyok veled, és szorosan átölellek 💗 Ha szükséged van rá, beszélj valakivel is, akiben megbízol.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "A hüvelyesek, a spenót vagy a hús segít pótolni az elvesztett vasat.",
     "Lo que me has contado": "Amit elmeséltél nekem",
@@ -1641,6 +1675,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Válassz színt",
   },
   "id": {
+    "La flor que crece cada día que entras": "Bunga yang tumbuh setiap hari kamu membuka aplikasi",
+    "Nada en la pantalla de inicio": "Tidak ada apa pun di layar utama",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Aku turut sedih sekali. Aku di sini bersamamu dan memelukmu erat 💗 Kalau perlu, bicaralah juga dengan orang yang kamu percaya.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Kacang-kacangan, bayam, atau daging membantumu mengganti zat besi yang hilang.",
     "Lo que me has contado": "Yang sudah kamu ceritakan padaku",
@@ -1720,6 +1756,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "it": {
+    "La flor que crece cada día que entras": "Il fiore che cresce ogni giorno in cui entri",
+    "Nada en la pantalla de inicio": "Niente nella schermata iniziale",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Mi dispiace tantissimo. Sono qui con te e ti mando un abbraccio fortissimo 💗 Se ne hai bisogno, parlane anche con una persona di fiducia.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Legumi, spinaci o carne ti aiutano a recuperare il ferro che perdi.",
     "Lo que me has contado": "Quello che mi hai raccontato",
@@ -1799,6 +1837,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Scegli un colore",
   },
   "ja": {
+    "La flor que crece cada día que entras": "アプリを開くたびに毎日育つお花",
+    "Nada en la pantalla de inicio": "ホーム画面には何も表示しない",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "本当につらかったね。ぼくはそばにいるよ、ぎゅっと抱きしめるね 💗 必要なら、信頼できる人にも話してね。",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "豆類、ほうれん草、お肉は、失われた鉄分を補うのに役立ちます。",
     "Lo que me has contado": "話してくれたこと",
@@ -1878,6 +1918,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "色を選ぶ",
   },
   "kk": {
+    "La flor que crece cada día que entras": "Күн сайын кірген сайын өсетін гүл",
+    "Nada en la pantalla de inicio": "Басты экранда ештеңе жоқ",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Қатты қайғырып тұрмын. Мен осындамын, сені қатты құшақтаймын 💗 Қажет болса, сенімді адаммен де сөйлес.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Бұршақ тұқымдастар, саумалдық немесе ет жоғалтқан темірді толықтыруға көмектеседі.",
     "Lo que me has contado": "Маған айтқандарың",
@@ -1957,6 +1999,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Түс таңдаңыз",
   },
   "kn": {
+    "La flor que crece cada día que entras": "ನೀವು ಪ್ರತಿದಿನ ಬಂದಾಗ ಬೆಳೆಯುವ ಹೂವು",
+    "Nada en la pantalla de inicio": "ಮುಖಪುಟದಲ್ಲಿ ಏನೂ ಇಲ್ಲ",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "ನನಗೆ ತುಂಬಾ ದುಃಖವಾಗಿದೆ. ನಾನು ನಿನ್ನ ಜೊತೆ ಇದ್ದೇನೆ, ಗಟ್ಟಿಯಾಗಿ ಅಪ್ಪಿಕೊಳ್ಳುತ್ತೇನೆ 💗 ಬೇಕಾದರೆ ನಂಬಿಕೆಯ ಯಾರೊಂದಿಗಾದರೂ ಮಾತನಾಡು.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "ಬೇಳೆಕಾಳು, ಪಾಲಕ್ ಅಥವಾ ಮಾಂಸ ನೀವು ಕಳೆದುಕೊಳ್ಳುವ ಕಬ್ಬಿಣಾಂಶವನ್ನು ಮರಳಿ ಪಡೆಯಲು ಸಹಾಯ ಮಾಡುತ್ತವೆ.",
     "Lo que me has contado": "ನೀವು ನನಗೆ ಹೇಳಿದ್ದು",
@@ -2036,6 +2080,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ಒಂದು ಬಣ್ಣ ಆರಿಸಿ",
   },
   "ko": {
+    "La flor que crece cada día que entras": "앱을 열 때마다 매일 자라는 꽃",
+    "Nada en la pantalla de inicio": "홈 화면에 아무것도 없음",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "정말 마음이 아파요. 내가 곁에 있어요, 꼭 안아 줄게요 💗 필요하면 믿을 수 있는 사람과도 이야기해 보세요.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "콩류, 시금치, 고기는 잃어버린 철분을 보충하는 데 도움이 돼요.",
     "Lo que me has contado": "나에게 들려준 이야기",
@@ -2115,6 +2161,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "색상 선택",
   },
   "ln": {
+    "La flor que crece cada día que entras": "Fololo oyo ekolaka mokolo na mokolo soki okoti",
+    "Nada en la pantalla de inicio": "Eloko moko te na ekrán ya ebandeli",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Nayoki mawa mingi. Nazali awa elongo na yo, nakangi yo makasi na maboko 💗 Soki osengeli, solola mpe na moto oyo otyelaka motema.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Madesu, épinards to mosuni esalisaka yo ozwa lisusu fer oyo obungisaka.",
     "Lo que me has contado": "Oyo oyebisaki ngai",
@@ -2194,6 +2242,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pona langi",
   },
   "ml": {
+    "La flor que crece cada día que entras": "നീ കയറുന്ന ഓരോ ദിവസവും വളരുന്ന പൂവ്",
+    "Nada en la pantalla de inicio": "ഹോം സ്ക്രീനിൽ ഒന്നുമില്ല",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "എനിക്ക് വല്ലാത്ത വിഷമമുണ്ട്. ഞാൻ നിന്റെ കൂടെയുണ്ട്, നിന്നെ മുറുകെ കെട്ടിപ്പിടിക്കുന്നു 💗 വേണമെങ്കിൽ വിശ്വസിക്കുന്ന ആരോടെങ്കിലും സംസാരിക്കൂ.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "പയർവർഗങ്ങൾ, ചീര അല്ലെങ്കിൽ ഇറച്ചി നഷ്ടപ്പെടുന്ന ഇരുമ്പ് തിരികെ നേടാൻ സഹായിക്കും.",
     "Lo que me has contado": "നീ എന്നോട് പറഞ്ഞത്",
@@ -2273,6 +2323,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ഒരു നിറം തിരഞ്ഞെടുക്കൂ",
   },
   "mr": {
+    "La flor que crece cada día que entras": "तुम्ही दररोज उघडल्यावर वाढणारे फूल",
+    "Nada en la pantalla de inicio": "होम स्क्रीनवर काहीही नाही",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "मला खूप वाईट वाटतंय. मी इथे तुझ्यासोबत आहे आणि तुला घट्ट मिठी मारतो 💗 गरज असेल तर विश्वासू व्यक्तीशीही बोल.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "डाळी, पालक किंवा मांस तुम्ही गमावलेले लोह परत मिळवण्यास मदत करतात.",
     "Lo que me has contado": "तुम्ही मला जे सांगितले",
@@ -2352,6 +2404,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एक रंग निवडा",
   },
   "ms": {
+    "La flor que crece cada día que entras": "Bunga yang tumbuh setiap hari anda membuka aplikasi",
+    "Nada en la pantalla de inicio": "Tiada apa-apa di skrin utama",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Saya sangat bersimpati. Saya di sini bersama awak dan memeluk awak erat-erat 💗 Jika perlu, bercakaplah juga dengan orang yang awak percaya.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Kekacang, bayam atau daging membantu anda mendapatkan semula zat besi yang hilang.",
     "Lo que me has contado": "Apa yang anda ceritakan kepada saya",
@@ -2431,6 +2485,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "my": {
+    "La flor que crece cada día que entras": "နေ့တိုင်း ဝင်တိုင်း ကြီးထွားလာသော ပန်း",
+    "Nada en la pantalla de inicio": "ပင်မမျက်နှာပြင်တွင် ဘာမှမရှိ",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "အရမ်းဝမ်းနည်းပါတယ်။ ငါ မင်းနားမှာ ရှိတယ်၊ တင်းတင်းကြပ်ကြပ် ဖက်ထားပေးမယ် 💗 လိုအပ်ရင် ယုံကြည်ရတဲ့သူနဲ့လည်း စကားပြောပါ။",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "ပဲအမျိုးမျိုး၊ ဟင်းနုနွယ် သို့မဟုတ် အသားသည် ဆုံးရှုံးသော သံဓာတ်ကို ပြန်ဖြည့်ရန် ကူညီသည်။",
     "Lo que me has contado": "ငါ့ကို ပြောပြခဲ့တာတွေ",
@@ -2510,6 +2566,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "အရောင်ရွေးပါ",
   },
   "ne": {
+    "La flor que crece cada día que entras": "तपाईं हरेक दिन खोल्दा बढ्ने फूल",
+    "Nada en la pantalla de inicio": "गृह स्क्रिनमा केही छैन",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "मलाई धेरै दुःख लाग्यो। म यहीँ तिम्रो साथमा छु, तिमीलाई कसेर अँगालो हाल्छु 💗 चाहिए भने विश्वासिलो कसैसँग पनि कुरा गर।",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "दाल, पालुङ्गो वा मासुले तपाईंले गुमाउने फलाम फिर्ता पाउन मद्दत गर्छ।",
     "Lo que me has contado": "तपाईंले मलाई भनेका कुरा",
@@ -2589,6 +2647,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एउटा रङ छान्नुहोस्",
   },
   "nl": {
+    "La flor que crece cada día que entras": "De bloem die elke dag groeit dat je de app opent",
+    "Nada en la pantalla de inicio": "Niets op het startscherm",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Wat vind ik dit erg voor je. Ik ben hier bij je en geef je een hele dikke knuffel 💗 Als je het nodig hebt, praat dan ook met iemand die je vertrouwt.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Peulvruchten, spinazie of vlees helpen je het ijzer aan te vullen dat je verliest.",
     "Lo que me has contado": "Wat je me hebt verteld",
@@ -2668,6 +2728,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Kies een kleur",
   },
   "om": {
+    "La flor que crece cada día que entras": "Abaaboo guyyaa guyyaan yeroo seentu guddatu",
+    "Nada en la pantalla de inicio": "Fuula jalqabaa irratti homaa hin jiru",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Baay’ee na gaddisiise. Ani asuma si wajjin jira, cimsee si hammadha 💗 Yoo si barbaachise, nama amanattu wajjin dubbadhu.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Qoqqobaa, ispinaachii ykn foon sibiila si jalaa badu deebisuuf si gargaaru.",
     "Lo que me has contado": "Waan natti himte",
@@ -2747,6 +2809,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Halluu filadhu",
   },
   "pa": {
+    "La flor que crece cada día que entras": "ਉਹ ਫੁੱਲ ਜੋ ਹਰ ਦਿਨ ਐਪ ਖੋਲ੍ਹਣ ’ਤੇ ਵਧਦਾ ਹੈ",
+    "Nada en la pantalla de inicio": "ਹੋਮ ਸਕ੍ਰੀਨ ’ਤੇ ਕੁਝ ਨਹੀਂ",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "ਮੈਨੂੰ ਬਹੁਤ ਦੁੱਖ ਹੈ। ਮੈਂ ਇੱਥੇ ਤੇਰੇ ਨਾਲ ਹਾਂ ਅਤੇ ਤੈਨੂੰ ਘੁੱਟ ਕੇ ਜੱਫੀ ਪਾਉਂਦਾ ਹਾਂ 💗 ਲੋੜ ਹੋਵੇ ਤਾਂ ਕਿਸੇ ਭਰੋਸੇਮੰਦ ਨਾਲ ਵੀ ਗੱਲ ਕਰ।",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "ਦਾਲਾਂ, ਪਾਲਕ ਜਾਂ ਮਾਸ ਤੁਹਾਡਾ ਗੁਆਚਿਆ ਆਇਰਨ ਵਾਪਸ ਪਾਉਣ ਵਿੱਚ ਮਦਦ ਕਰਦੇ ਹਨ।",
     "Lo que me has contado": "ਜੋ ਤੁਸੀਂ ਮੈਨੂੰ ਦੱਸਿਆ",
@@ -2826,6 +2890,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ਇੱਕ ਰੰਗ ਚੁਣੋ",
   },
   "pl": {
+    "La flor que crece cada día que entras": "Kwiat, który rośnie każdego dnia, gdy otwierasz aplikację",
+    "Nada en la pantalla de inicio": "Nic na ekranie głównym",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Bardzo mi przykro. Jestem tu z tobą i mocno cię przytulam 💗 Jeśli potrzebujesz, porozmawiaj też z kimś zaufanym.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Rośliny strączkowe, szpinak lub mięso pomagają uzupełnić utracone żelazo.",
     "Lo que me has contado": "To, co mi opowiedziałaś",
@@ -2905,6 +2971,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Wybierz kolor",
   },
   "pt": {
+    "La flor que crece cada día que entras": "A flor que cresce a cada dia que você entra",
+    "Nada en la pantalla de inicio": "Nada na tela inicial",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Sinto muito, de verdade. Estou aqui com você e te mando um abraço bem apertado 💗 Se precisar, fale também com alguém de confiança.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Leguminosas, espinafre ou carne ajudam você a repor o ferro que perde.",
     "Lo que me has contado": "O que você me contou",
@@ -3043,6 +3111,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} dias",
   },
   "ro": {
+    "La flor que crece cada día que entras": "Floarea care crește în fiecare zi în care intri",
+    "Nada en la pantalla de inicio": "Nimic pe ecranul principal",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Îmi pare tare rău. Sunt aici cu tine și te îmbrățișez strâns 💗 Dacă ai nevoie, vorbește și cu cineva în care ai încredere.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Leguminoasele, spanacul sau carnea te ajută să recuperezi fierul pe care îl pierzi.",
     "Lo que me has contado": "Ce mi-ai povestit",
@@ -3122,6 +3192,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Alege o culoare",
   },
   "ru": {
+    "La flor que crece cada día que entras": "Цветок, который растёт каждый день, когда ты заходишь",
+    "Nada en la pantalla de inicio": "Ничего на главном экране",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Мне очень жаль. Я здесь, рядом с тобой, и крепко тебя обнимаю 💗 Если нужно, поговори ещё с тем, кому доверяешь.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Бобовые, шпинат или мясо помогают восполнить железо, которое ты теряешь.",
     "Lo que me has contado": "То, что ты мне рассказала",
@@ -3260,6 +3332,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} дн.",
   },
   "si": {
+    "La flor que crece cada día que entras": "ඔබ දිනපතා ඇතුළු වන විට වැඩෙන මල",
+    "Nada en la pantalla de inicio": "මුල් තිරයේ කිසිවක් නැත",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "මට ගොඩක් දුකයි. මම මෙතන ඔයා එක්ක ඉන්නවා, ඔයාව තදින් බදාගන්නවා 💗 අවශ්‍ය නම් ඔයා විශ්වාස කරන කෙනෙක් එක්කත් කතා කරන්න.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "රනිල කුලයේ ධාන්‍ය, නිවිති හෝ මස් ඔබට අහිමි වන යකඩ නැවත ලබා ගැනීමට උදව් වේ.",
     "Lo que me has contado": "ඔබ මට කී දේ",
@@ -3339,6 +3413,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "වර්ණයක් තෝරන්න",
   },
   "sk": {
+    "La flor que crece cada día que entras": "Kvet, ktorý rastie každý deň, keď otvoríš aplikáciu",
+    "Nada en la pantalla de inicio": "Na úvodnej obrazovke nič",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Veľmi ma to mrzí. Som tu s tebou a posielam ti pevné objatie 💗 Ak potrebuješ, porozprávaj sa aj s niekým, komu dôveruješ.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Strukoviny, špenát alebo mäso ti pomôžu doplniť železo, ktoré strácaš.",
     "Lo que me has contado": "Čo si mi zverila",
@@ -3418,6 +3494,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber farbu",
   },
   "sv": {
+    "La flor que crece cada día que entras": "Blomman som växer varje dag du öppnar appen",
+    "Nada en la pantalla de inicio": "Inget på startskärmen",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Jag är så ledsen. Jag är här med dig och skickar en stor kram 💗 Om du behöver det, prata också med någon du litar på.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Baljväxter, spenat eller kött hjälper dig att få tillbaka järnet du förlorar.",
     "Lo que me has contado": "Det du har berättat för mig",
@@ -3497,6 +3575,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Välj en färg",
   },
   "sw": {
+    "La flor que crece cada día que entras": "Ua linalokua kila siku unapoingia",
+    "Nada en la pantalla de inicio": "Hakuna kitu kwenye skrini ya mwanzo",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Pole sana. Niko hapa pamoja nawe, nakukumbatia kwa nguvu 💗 Ukihitaji, zungumza pia na mtu unayemwamini.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Jamii ya kunde, mchicha au nyama hukusaidia kurudisha madini ya chuma unayopoteza.",
     "Lo que me has contado": "Ulichoniambia",
@@ -3576,6 +3656,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chagua rangi",
   },
   "ta": {
+    "La flor que crece cada día que entras": "ஒவ்வொரு நாளும் நீங்கள் வரும்போது வளரும் பூ",
+    "Nada en la pantalla de inicio": "முகப்புத் திரையில் எதுவும் இல்லை",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "எனக்கு மிகவும் வருத்தமாக இருக்கிறது. நான் உன்னுடன் இருக்கிறேன், உன்னை இறுக்கமாக அணைத்துக்கொள்கிறேன் 💗 தேவைப்பட்டால் நம்பிக்கையான ஒருவரிடமும் பேசு.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "பருப்பு வகைகள், கீரை அல்லது இறைச்சி நீங்கள் இழக்கும் இரும்புச்சத்தை மீட்க உதவும்.",
     "Lo que me has contado": "நீங்கள் என்னிடம் சொன்னவை",
@@ -3655,6 +3737,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ஒரு நிறத்தைத் தேர்வுசெய்யுங்கள்",
   },
   "te": {
+    "La flor que crece cada día que entras": "మీరు ప్రతి రోజు వచ్చినప్పుడు పెరిగే పువ్వు",
+    "Nada en la pantalla de inicio": "హోమ్ స్క్రీన్‌లో ఏమీ లేదు",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "నాకు చాలా బాధగా ఉంది. నేను నీతో ఇక్కడే ఉన్నాను, నిన్ను గట్టిగా హత్తుకుంటున్నాను 💗 అవసరమైతే నమ్మకమైన ఎవరితోనైనా మాట్లాడు.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "పప్పుధాన్యాలు, పాలకూర లేదా మాంసం మీరు కోల్పోయే ఇనుమును తిరిగి పొందడానికి సహాయపడతాయి.",
     "Lo que me has contado": "మీరు నాకు చెప్పినవి",
@@ -3734,6 +3818,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ఒక రంగును ఎంచుకోండి",
   },
   "th": {
+    "La flor que crece cada día que entras": "ดอกไม้ที่โตขึ้นทุกวันที่คุณเข้ามา",
+    "Nada en la pantalla de inicio": "ไม่มีอะไรบนหน้าหลัก",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "เสียใจด้วยจริงๆ นะ ฉันอยู่ตรงนี้กับเธอ และขอกอดแน่นๆ 💗 ถ้าต้องการ ลองคุยกับคนที่เธอไว้ใจด้วยนะ",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "ถั่ว ผักโขม หรือเนื้อสัตว์ช่วยเติมธาตุเหล็กที่คุณสูญเสียไป",
     "Lo que me has contado": "สิ่งที่เธอเล่าให้ฉันฟัง",
@@ -3813,6 +3899,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "เลือกสี",
   },
   "tr": {
+    "La flor que crece cada día que entras": "Uygulamaya girdiğin her gün büyüyen çiçek",
+    "Nada en la pantalla de inicio": "Ana ekranda hiçbir şey yok",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Çok üzgünüm. Buradayım, seninleyim ve sana sımsıkı sarılıyorum 💗 İhtiyacın olursa güvendiğin biriyle de konuş.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Baklagiller, ıspanak veya et kaybettiğin demiri geri kazanmana yardımcı olur.",
     "Lo que me has contado": "Bana anlattıkların",
@@ -3892,6 +3980,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Bir renk seç",
   },
   "uk": {
+    "La flor que crece cada día que entras": "Квітка, що росте щодня, коли ти заходиш",
+    "Nada en la pantalla de inicio": "Нічого на головному екрані",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Мені дуже шкода. Я тут, поруч із тобою, і міцно тебе обіймаю 💗 Якщо треба, поговори ще з кимось, кому довіряєш.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Бобові, шпинат або м’ясо допомагають відновити залізо, яке ти втрачаєш.",
     "Lo que me has contado": "Те, що ти мені розповіла",
@@ -3971,6 +4061,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Обери колір",
   },
   "ur": {
+    "La flor que crece cada día que entras": "وہ پھول جو ہر دن ایپ کھولنے پر بڑھتا ہے",
+    "Nada en la pantalla de inicio": "ہوم اسکرین پر کچھ نہیں",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "مجھے بہت افسوس ہے۔ میں یہیں تمہارے ساتھ ہوں اور تمہیں زور سے گلے لگا رہا ہوں 💗 ضرورت ہو تو کسی بھروسے والے سے بھی بات کرو۔",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "دالیں، پالک یا گوشت آپ کا ضائع ہونے والا آئرن واپس لانے میں مدد کرتے ہیں۔",
     "Lo que me has contado": "جو آپ نے مجھے بتایا",
@@ -4050,6 +4142,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ایک رنگ چنیں",
   },
   "uz": {
+    "La flor que crece cada día que entras": "Har kuni kirganingizda o‘sadigan gul",
+    "Nada en la pantalla de inicio": "Bosh ekranda hech narsa yo‘q",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Juda achinaman. Men shu yerdaman, sen bilanman va seni mahkam quchoqlayman 💗 Kerak bo‘lsa, ishonchli odam bilan ham gaplash.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Dukkaklilar, ismaloq yoki go‘sht yo‘qotgan temiringizni tiklashga yordam beradi.",
     "Lo que me has contado": "Menga aytganlaring",
@@ -4129,6 +4223,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rang tanlang",
   },
   "vi": {
+    "La flor que crece cada día que entras": "Bông hoa lớn lên mỗi ngày bạn vào ứng dụng",
+    "Nada en la pantalla de inicio": "Không có gì trên màn hình chính",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Mình rất tiếc. Mình ở đây cùng bạn và ôm bạn thật chặt 💗 Nếu cần, hãy nói chuyện thêm với người bạn tin tưởng nhé.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Các loại đậu, rau chân vịt hoặc thịt giúp bạn bù lại lượng sắt đã mất.",
     "Lo que me has contado": "Những điều bạn đã kể với mình",
@@ -4208,6 +4304,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chọn màu",
   },
   "wo": {
+    "La flor que crece cada día que entras": "Tóor-tóor bi di màgg bés bu nekk boo duggee",
+    "Nada en la pantalla de inicio": "Dara ci écran bu njëkk bi",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Dama ko jéggal lool. Maa ngi fi ak yaw, maa ngi la leewu bu dëgër 💗 Su la soxla, waxtaanal it ak ku nga woolu.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Ñebbe, épinards walla yàpp dañuy dimbali nga gën a am fer bi nga ñàkk.",
     "Lo que me has contado": "Li nga ma wax",
@@ -4287,6 +4385,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Tànnal benn melo",
   },
   "yo": {
+    "La flor que crece cada día que entras": "Òdòdó tí ń dàgbà ní gbogbo ọjọ́ tí o bá wọlé",
+    "Nada en la pantalla de inicio": "Kò sí nǹkan kan lójú ìbẹ̀rẹ̀",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Mo kẹ́dùn gidigidi. Mo wà níbí pẹ̀lú rẹ, mo gbá ọ mọ́ra dáadáa 💗 Bí o bá nílò rẹ̀, bá ẹnì kan tí o gbẹ́kẹ̀lé sọ̀rọ̀ pẹ̀lú.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Ẹ̀wà, ẹ̀fọ́ tàbí ẹran ń ràn ọ́ lọ́wọ́ láti rí irin tí o pàdánù padà.",
     "Lo que me has contado": "Ohun tí o sọ fún mi",
@@ -4366,6 +4466,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Yan àwọ̀ kan",
   },
   "zh": {
+    "La flor que crece cada día que entras": "你每天打开应用都会长大的花",
+    "Nada en la pantalla de inicio": "主屏幕上什么都不显示",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "我真的很难过。我就在这里陪着你，给你一个紧紧的拥抱 💗 如果需要，也和你信任的人聊一聊吧。",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "豆类、菠菜或肉类能帮你补回流失的铁。",
     "Lo que me has contado": "你告诉我的事",
@@ -4445,6 +4547,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "选择颜色",
   },
   "zh-TW": {
+    "La flor que crece cada día que entras": "你每天打開應用都會長大的花",
+    "Nada en la pantalla de inicio": "主畫面上什麼都不顯示",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "我真的很難過。我就在這裡陪著你，給你一個緊緊的擁抱 💗 如果需要，也和你信任的人聊一聊吧。",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "豆類、菠菜或肉類能幫你補回流失的鐵。",
     "Lo que me has contado": "你告訴我的事",
@@ -4524,6 +4628,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "選擇顏色",
   },
   "zu": {
+    "La flor que crece cada día que entras": "Imbali ekhula nsuku zonke uma ungena",
+    "Nada en la pantalla de inicio": "Akukho lutho esikrinini sasekhaya",
     "Lo siento muchísimo. Estoy aquí contigo y te mando un abrazo muy fuerte 💗 Si lo necesitas, habla también con alguien de confianza.": "Ngiyaxolisa kakhulu. Ngilapha nawe, ngikugona ngokuqinile 💗 Uma udinga, khuluma nomuntu omethembayo.",
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "Imidumba, isipinashi noma inyama kukusiza ukubuyisa i-ayoni oyilahlekelayo.",
     "Lo que me has contado": "Lokho ongitshele khona",

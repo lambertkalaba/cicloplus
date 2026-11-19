@@ -577,35 +577,7 @@ class MichiSettings extends StatelessWidget {
         final shown = auto ? MichiEvents.country : s.michiCountry;
         final name = MichiEvents.countries.where((x) => x.$1 == shown).map((x) => x.$2).firstOrNull ?? shown;
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            secondary: const Text('🐱', style: TextStyle(fontSize: 24)),
-            title: Text(tr('Mostrar a Michi', 'Show Michi'), style: const TextStyle(fontWeight: FontWeight.w800)),
-            subtitle: Text(tr('Tu gatito en la pantalla de inicio. Si lo ocultas, no pierdes nada: te espera para cuando vuelvas.',
-                'Your kitten on the home screen. If you hide him, you lose nothing: he will wait for you to come back.')),
-            value: s.showMichi,
-            activeColor: Colors.white,
-            activeTrackColor: const Color(0xFF2FB45A),
-            onChanged: (v) {
-              s.showMichi = v;
-              s.commit();
-            },
-          ),
-          if (!s.showMichi)
-            SwitchListTile(
-              contentPadding: EdgeInsets.zero,
-              secondary: const Text('🌸', style: TextStyle(fontSize: 22)),
-              title: Text(tr('Mostrar el jardín en su lugar', 'Show the garden instead'), style: const TextStyle(fontWeight: FontWeight.w800)),
-              subtitle: Text(tr('La flor que crece cada día que entras. Si lo desactivas, no aparece nada.',
-                  'The flower that grows every day you open the app. If you turn it off, nothing is shown.')),
-              value: s.showGarden,
-              activeColor: Colors.white,
-              activeTrackColor: const Color(0xFF2FB45A),
-              onChanged: (v) {
-                s.showGarden = v;
-                s.commit();
-              },
-            ),
+          _HomeScenePicker(s: s),
           if (s.showMichi) ...[
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
@@ -634,24 +606,6 @@ class MichiSettings extends StatelessWidget {
                 s.michiVoice = v;
                 s.commit();
               },
-            ),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: Text(s.michiScene == 'map' ? '☁️' : '🏠', style: const TextStyle(fontSize: 22)),
-              title: Text(tr('Dónde vive Michi', 'Where Michi lives'), style: const TextStyle(fontWeight: FontWeight.w800)),
-              subtitle: Text(s.michiScene == 'map' ? tr('Mundo de las nubes', 'Cloud world') : tr('Su casa', 'His house')),
-              trailing: SegmentedButton<String>(
-                showSelectedIcon: false,
-                segments: const [
-                  ButtonSegment(value: 'house', label: Text('🏠')),
-                  ButtonSegment(value: 'map', label: Text('☁️')),
-                ],
-                selected: {s.michiScene == 'map' ? 'map' : 'house'},
-                onSelectionChanged: (v) {
-                  s.michiScene = v.first;
-                  s.commit();
-                },
-              ),
             ),
             ListTile(
               contentPadding: EdgeInsets.zero,
@@ -703,5 +657,67 @@ class MichiSettings extends StatelessWidget {
     if (picked == null) return;
     s.michiCountry = picked;
     await s.commit();
+  }
+}
+
+
+/// Qué aparece en la pantalla de inicio: Michi en su casa, Michi en el
+/// mundo de las nubes, la flor del jardín (como antes) o nada. Con la flor
+/// o nada, Michi se desactiva (sin perder sus datos).
+class _HomeScenePicker extends StatelessWidget {
+  const _HomeScenePicker({required this.s});
+  final AppStore s;
+
+  String get _value => s.showMichi ? (s.michiScene == 'map' ? 'map' : 'house') : (s.showGarden ? 'flower' : 'none');
+
+  @override
+  Widget build(BuildContext context) {
+    final v = _value;
+    final sub = switch (v) {
+      'map' => tr('Mundo de las nubes', 'Cloud world'),
+      'flower' => tr('La flor que crece cada día que entras', 'The flower that grows every day you open the app'),
+      'none' => tr('Nada en la pantalla de inicio', 'Nothing on the home screen'),
+      _ => tr('Su casa', 'His house'),
+    };
+    final emoji = switch (v) { 'map' => '☁️', 'flower' => '🌸', 'none' => '🚫', _ => '🏠' };
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          leading: Text(emoji, style: const TextStyle(fontSize: 22)),
+          title: Text(tr('Dónde vive Michi', 'Where Michi lives'), style: const TextStyle(fontWeight: FontWeight.w800)),
+          subtitle: Text(sub),
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: SegmentedButton<String>(
+            showSelectedIcon: false,
+            segments: const [
+              ButtonSegment(value: 'house', label: Text('🏠', style: TextStyle(fontSize: 18))),
+              ButtonSegment(value: 'map', label: Text('☁️', style: TextStyle(fontSize: 18))),
+              ButtonSegment(value: 'flower', label: Text('🌸', style: TextStyle(fontSize: 18))),
+              ButtonSegment(value: 'none', label: Text('🚫', style: TextStyle(fontSize: 18))),
+            ],
+            selected: {v},
+            onSelectionChanged: (sel) {
+              switch (sel.first) {
+                case 'house':
+                case 'map':
+                  s.showMichi = true;
+                  s.michiScene = sel.first;
+                case 'flower':
+                  s.showMichi = false;
+                  s.showGarden = true;
+                default:
+                  s.showMichi = false;
+                  s.showGarden = false;
+              }
+              s.commit();
+            },
+          ),
+        ),
+      ]),
+    );
   }
 }
