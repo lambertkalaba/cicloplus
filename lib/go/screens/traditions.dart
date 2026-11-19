@@ -216,7 +216,7 @@ class SantoCard extends StatelessWidget {
     return ListenableBuilder(
       listenable: t,
       builder: (context, _) {
-        if (!t.isSantoDay(DateTime.now())) return const SizedBox.shrink();
+        if (!t.isSantoDay(DateTime.now()) || AppStore.instance.showMichi) return const SizedBox.shrink();
         return Padding(
           padding: const EdgeInsets.only(top: 12),
           child: Container(

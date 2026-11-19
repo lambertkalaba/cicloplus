@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../data/store.dart';
 import '../strings.dart';
 import 'notifications.dart';
+import '../widgets/michi_events.dart' show MichiEvents;
 
 /// Tradición elegida por ella (opcional). Se guarda SOLO en el móvil
 /// (SharedPreferences): no se sincroniza ni sale nunca del dispositivo.
@@ -38,6 +39,11 @@ class Traditions extends ChangeNotifier {
       _id = 'muslim';
       await p.setString('tradition', _id!);
     }
+    // Quien tenía "Felicitarme por mi santo" en Configuración.
+    if (_id == null && p.getBool('michiSaint') == true) {
+      _id = 'christian';
+      await p.setString('tradition', _id!);
+    }
     _santoMd = p.getString('santo_md');
     notifyListeners();
     scheduleSanto();
@@ -63,7 +69,7 @@ class Traditions extends ChangeNotifier {
   (int, int)? get santo {
     final md = _santoMd;
     if (md != null && md.length == 5) return (int.parse(md.substring(0, 2)), int.parse(md.substring(3)));
-    return santoForName(AppStore.instance.name);
+    return santoForName(AppStore.instance.name) ?? MichiEvents.saintFor(AppStore.instance.name);
   }
 
   bool get santoFromName => _santoMd == null && santo != null;
@@ -90,15 +96,12 @@ class Traditions extends ChangeNotifier {
   }
 
   /// Aviso a las 10:00 del día de su santo.
+  /// El aviso del santo lo programa Michi junto a sus demás mensajes
+  /// (Notifier.reschedule → MichiEvents.nameDay). Aquí solo se reprograma
+  /// para que el cambio se note enseguida.
   Future<void> scheduleSanto() async {
-    final d = christian ? nextSanto() : null;
-    if (d == null) {
-      await Notifier.instance.cancelOnce(_notifId);
-      return;
-    }
-    var when = DateTime(d.year, d.month, d.day, 10);
-    if (when.isBefore(DateTime.now())) when = DateTime(d.year + 1, d.month, d.day, 10);
-    await Notifier.instance.once(_notifId, greeting, tr('Hoy es tu día. Que lo disfrutes mucho 💗', 'Today is your day. Enjoy it 💗'), when);
+    await Notifier.instance.cancelOnce(_notifId);
+    await Notifier.instance.reschedule();
   }
 
   static String _norm(String s) {

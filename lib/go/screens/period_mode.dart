@@ -97,7 +97,10 @@ class PadTimer extends ChangeNotifier {
 
 /// Tarjeta de Hoy los días de regla: consejos rápidos y temporizador.
 class PeriodModeCard extends StatefulWidget {
-  const PeriodModeCard({super.key});
+  const PeriodModeCard({super.key, this.force = false});
+
+  /// true = se enseña aunque hoy no sea día de regla (desde el buscador).
+  final bool force;
 
   @override
   State<PeriodModeCard> createState() => _PeriodModeCardState();
@@ -147,7 +150,7 @@ class _PeriodModeCardState extends State<PeriodModeCard> {
       builder: (context, _) {
         final today = dateOnly(DateTime.now());
         final onPeriod = AppStore.instance.isPeriodDay(today);
-        if (!onPeriod && !pt.running) return const SizedBox.shrink();
+        if (!widget.force && !onPeriod && !pt.running) return const SizedBox.shrink();
         final day = _periodDay(today);
         return Padding(
           padding: const EdgeInsets.only(top: 12),

@@ -9,6 +9,7 @@ import '../data/store.dart';
 import '../screens/michi_stories.dart' show StoryParticles, StoryFx;
 import '../strings.dart';
 import '../services/traditions.dart';
+import '../screens/traditions.dart' show TraditionsScreen;
 import '../screens/michi_more.dart' show MichiCounters;
 import 'michi_sound.dart';
 import 'ui.dart';
@@ -239,7 +240,6 @@ class MichiEvents {
     final tdn = Traditions.instance..ensureLoaded();
     final muslim = tdn.chosen == null || tdn.chosen == 'none' ? _muslim.contains(c) : tdn.muslim;
     final ev = <MichiEvent?>[
-      if (tdn.isSantoDay(t)) MichiEvent('🎉', tdn.greeting, StoryFx.sparkles),
       if (_md(t, 1, 1)) MichiEvent('🎆', tr('¡Feliz Año Nuevo! Que este año te trate con mucho cariño 🎆', 'Happy New Year! May this year treat you with lots of love 🎆'), StoryFx.sparkles),
       if (_md(t, 12, 31)) MichiEvent('✨', tr('¡Última noche del año! Gracias por este año a tu lado ✨', 'Last night of the year! Thank you for this year by your side ✨'), StoryFx.sparkles),
       if (_md(t, 3, 8)) MichiEvent('💜', tr('¡Feliz Día de la Mujer! Hoy y siempre, eres increíble 💜', "Happy Women's Day! Today and always, you're amazing 💜"), StoryFx.hearts),
@@ -357,14 +357,18 @@ class MichiEvents {
     return n.split(RegExp(r'\s+')).first;
   }
 
+  /// Santo de un nombre según el santoral de Michi (varios idiomas).
+  static (int, int)? saintFor(String name) => _saints[_norm(name.trim().split(RegExp(r'\s+')).first)];
+
   static MichiEvent? nameDay([DateTime? at]) {
-    if (!AppStore.instance.michiSaint) return null;
     final t = at ?? DateTime.now();
+    // Un solo interruptor: Yo > Tradiciones > Cristiana.
+    if (!Traditions.instance.isSantoDay(t)) return null;
     final n = firstName;
-    final d = _saints[_norm(n)];
-    if (d == null || !_md(t, d.$1, d.$2)) return null;
-    return MichiEvent('😇', tr('¡Feliz santo, {}! Hoy es tu día y Michi lo sabe 😇', "Happy name day, {}! Today is your day and Michi knows it 😇").replaceFirst('{}', n),
-        StoryFx.sparkles);
+    final text = n.isEmpty
+        ? tr('¡Feliz santo! 🎉', 'Happy name day! 🎉')
+        : tr('¡Feliz santo, {}! Hoy es tu día y Michi lo sabe 😇', "Happy name day, {}! Today is your day and Michi knows it 😇").replaceFirst('{}', n);
+    return MichiEvent('😇', text, StoryFx.sparkles);
   }
 
   /// ¿Tenemos su santo en el calendario? (para explicarlo en Configuración)
@@ -649,19 +653,13 @@ class MichiSettings extends StatelessWidget {
                 },
               ),
             ),
-            SwitchListTile(
+            ListTile(
               contentPadding: EdgeInsets.zero,
-              secondary: const Text('😇', style: TextStyle(fontSize: 22)),
-              title: Text(tr('Felicitarme por mi santo', 'Celebrate my name day'), style: const TextStyle(fontWeight: FontWeight.w800)),
-              subtitle: Text(tr('Si eres creyente, Michi te felicitará el día de tu santo (según tu nombre).',
-                  'If you are a believer, Michi will congratulate you on your name day (based on your name).')),
-              value: s.michiSaint,
-              activeColor: Colors.white,
-              activeTrackColor: const Color(0xFF2FB45A),
-              onChanged: (v) {
-                s.michiSaint = v;
-                s.commit();
-              },
+              leading: const Text('✨', style: TextStyle(fontSize: 22)),
+              title: Text(tr('Tradiciones', 'Traditions'), style: const TextStyle(fontWeight: FontWeight.w800)),
+              subtitle: Text(tr('Fechas especiales, solo si quieres', 'Special dates, only if you want')),
+              trailing: const Icon(Icons.chevron_right_rounded),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const TraditionsScreen())),
             ),
             ListTile(
               contentPadding: EdgeInsets.zero,
