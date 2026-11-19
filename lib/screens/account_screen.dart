@@ -357,7 +357,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 if (_authService.currentSignInProvider() == SignInProvider.email) ...[
                   const Divider(height: 22, color: AppColors.border),
                   _detailRow(
-                    label: tr('Correo', 'Email'),
+                    label: tr('Verificación', 'Verification'),
                     value: _authService.isCurrentUserEmailVerified ? tr('Verificado ✓', 'Verified ✓') : tr('Sin verificar', 'Not verified'),
                   ),
                   const Divider(height: 22, color: AppColors.border),

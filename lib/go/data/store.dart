@@ -387,6 +387,7 @@ class AppStore extends ChangeNotifier {
   Future<void> load() async {
     _prefs = await SharedPreferences.getInstance();
     final p = _prefs!;
+    refreshLh();
     logs.clear();
     final raw = p.getString('logs');
     if (raw != null) {
@@ -677,11 +678,49 @@ class AppStore extends ChangeNotifier {
     return [for (var i = 0; i < count; i++) addDays(first, avgCycle * i)];
   }
 
+  /// Tests de ovulación positivos o con pico de LH (fecha del test).
+  /// Se guardan en la pantalla "Test de ovulación" (SharedPreferences
+  /// 'cicloplus_ovulation_tests'); [refreshLh] los vuelve a leer.
+  List<DateTime> lhPositive = [];
+
+  void refreshLh() {
+    lhPositive = [];
+    try {
+      final raw = _prefs?.getString('cicloplus_ovulation_tests');
+      if (raw != null && raw.isNotEmpty) {
+        for (final e in jsonDecode(raw) as List) {
+          final m = e as Map<String, dynamic>;
+          if (m['result'] == 'negative') continue;
+          final d = DateTime.tryParse(m['date'] as String? ?? '');
+          if (d != null) lhPositive.add(dateOnly(d));
+        }
+        lhPositive.sort();
+      }
+    } catch (_) {}
+    notifyListeners();
+  }
+
+  /// Ovulación según el test de LH del ciclo que empieza en [start]
+  /// (el día siguiente al último test positivo de ese ciclo), o null.
+  DateTime? lhOvulationFor(DateTime start) {
+    DateTime? best;
+    for (final t in lhPositive) {
+      if (t.isBefore(start)) continue;
+      if (daysBetween(start, t) > avgCycle + 10) continue;
+      best = t;
+    }
+    return best == null ? null : addDays(best, 1);
+  }
+
+  /// Día de ovulación del ciclo que empieza en [start]: el del test de LH
+  /// si lo hay, si no ciclo medio − 14.
+  DateTime ovulationFor(DateTime start) => lhOvulationFor(start) ?? addDays(start, avgCycle - 14);
+
   DateTime? get nextOvulation {
     final today = dateOnly(DateTime.now());
     final l = lastStart;
     if (l == null) return null;
-    final cur = addDays(l, avgCycle - 14);
+    final cur = ovulationFor(l);
     if (!cur.isBefore(today)) return cur;
     final p = predictedStarts(2);
     for (final s in p) {
@@ -736,7 +775,7 @@ class AppStore extends ChangeNotifier {
     Phase? phase;
     if (start != null) {
       cd = daysBetween(start, day) + 1;
-      final ovDay = avgCycle - 14 + 1; // día del ciclo de la ovulación
+      final ovDay = daysBetween(start, ovulationFor(start)) + 1; // día del ciclo de la ovulación (test LH si lo hay)
       if (cd <= avgCycle + 10) {
         ovu = cd == ovDay;
         fertile = cd >= ovDay - 5 && cd <= ovDay + 1;

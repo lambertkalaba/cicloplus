@@ -87,6 +87,7 @@ class _CicloTimeDialogState extends State<_CicloTimeDialog> {
     required ValueChanged<int> onChanged,
     bool loop = true,
     double width = 76,
+    bool small = false,
   }) {
     final pink = C.pink;
     return SizedBox(
@@ -110,21 +111,22 @@ class _CicloTimeDialogState extends State<_CicloTimeDialog> {
           childDelegate: loop
               ? ListWheelChildBuilderDelegate(
                   childCount: _rows * count,
-                  builder: (_, i) => _cell(label(i % count), i % count == selected),
+                  builder: (_, i) => _cell(label(i % count), i % count == selected, small),
                 )
               : ListWheelChildBuilderDelegate(
                   childCount: count,
-                  builder: (_, i) => _cell(label(i), i == selected),
+                  builder: (_, i) => _cell(label(i), i == selected, small),
                 ),
         ),
       ]),
     );
   }
 
-  Widget _cell(String t, bool sel) => Center(
+  Widget _cell(String t, bool sel, [bool small = false]) => Center(
         child: Text(t,
+            maxLines: 1,
             style: TextStyle(
-              fontSize: sel ? 30 : 21,
+              fontSize: small ? (sel ? 22 : 17) : (sel ? 30 : 21),
               fontWeight: sel ? FontWeight.w900 : FontWeight.w600,
               color: sel ? C.pink : const Color(0xFFB9AEB4),
             )),
@@ -216,7 +218,8 @@ class _CicloTimeDialogState extends State<_CicloTimeDialog> {
                     count: 2,
                     selected: _h >= 12 ? 1 : 0,
                     loop: false,
-                    width: 70,
+                    width: 96,
+                    small: true,
                     label: (i) => i == 0 ? loc.anteMeridiemAbbreviation : loc.postMeridiemAbbreviation,
                     onChanged: (i) => setState(() => _h = (_h % 12) + (i == 1 ? 12 : 0)),
                   ),

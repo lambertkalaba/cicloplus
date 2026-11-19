@@ -121,10 +121,28 @@ class _LhCard extends StatelessWidget {
         final recent = (snap.data ?? const <OvulationTestEntry>[]).where((t) {
           final d = dateOnly(t.date);
           return t.result != 'negative' && !d.isAfter(today) && daysBetween(d, today) <= 2;
-        }).toList();
+        }).toList()
+          ..sort((a, b) => a.date.compareTo(b.date));
         if (recent.isEmpty) return const SizedBox.shrink();
-        final t = recent.first;
+        final t = recent.last;
         final peak = t.result == 'peak';
+        final ov = addDays(dateOnly(t.date), 1);
+        final String msg;
+        if (ov.isAfter(today)) {
+          msg = (peak
+                  ? tr('Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱',
+                      'LH peak on {}: you will most likely ovulate tomorrow. Today and tomorrow are your most fertile days! 🌱')
+                  : tr('Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱',
+                      'Positive test on {}: you will most likely ovulate tomorrow. Today and tomorrow are your most fertile days! 🌱'))
+              .replaceFirst('{}', L.dateShort(dateOnly(t.date)));
+        } else if (ov == today) {
+          msg = tr('Por tu test de ovulación, lo más probable es que ovules hoy. ¡Es tu día más fértil! 🌱',
+              'Based on your ovulation test, you will most likely ovulate today. It is your most fertile day! 🌱');
+        } else {
+          msg = tr('Por tu test de ovulación, lo más probable es que ovularas el {}. Ya hemos ajustado tus fechas 🌱',
+                  'Based on your ovulation test, you most likely ovulated on {}. We have adjusted your dates 🌱')
+              .replaceFirst('{}', L.dateShort(ov));
+        }
         return Padding(
           padding: const EdgeInsets.only(top: 12),
           child: Container(
@@ -139,12 +157,7 @@ class _LhCard extends StatelessWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  (peak
-                          ? tr('Pico de LH el {}: lo más probable es que ovules en las próximas 24–36 horas. ¡Son tus días más fértiles! 🌱',
-                              'LH peak on {}: you will most likely ovulate in the next 24–36 hours. These are your most fertile days! 🌱')
-                          : tr('Test positivo el {}: tu ovulación está muy cerca. Tus días más fértiles son hoy y mañana 🌱',
-                              'Positive test on {}: your ovulation is very close. Your most fertile days are today and tomorrow 🌱'))
-                      .replaceFirst('{}', L.dateShort(dateOnly(t.date))),
+                  msg,
                   style: const TextStyle(fontSize: 13, height: 1.35, fontWeight: FontWeight.w700, color: Color(0xFF235C37)),
                 ),
               ),

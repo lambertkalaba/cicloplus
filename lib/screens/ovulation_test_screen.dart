@@ -5,6 +5,7 @@ import '../l10n/app_strings.dart';
 import '../services/settings_service.dart';
 import '../theme/app_theme.dart';
 import '../go/widgets/ciclo_date_picker.dart';
+import '../go/data/store.dart' show AppStore;
 
 /// Pantalla "Test de ovulación" (tira de LH), rediseñada a partir de la
 /// maqueta de ChatGPT (noviembre 2026): cabecera con degradado, tarjeta de
@@ -65,6 +66,7 @@ class _OvulationTestScreenState extends State<OvulationTestScreen> {
     final entry = OvulationTestEntry(date: _date, result: _selectedResult);
     final updated = [entry, ..._tests]..sort((a, b) => b.date.compareTo(a.date));
     await _settings.saveOvulationTests(updated);
+    AppStore.instance.refreshLh();
     if (!mounted) return;
     setState(() {
       _tests = updated;
@@ -93,6 +95,7 @@ class _OvulationTestScreenState extends State<OvulationTestScreen> {
     if (ok != true) return;
     final updated = [..._tests]..removeAt(index);
     await _settings.saveOvulationTests(updated);
+    AppStore.instance.refreshLh();
     if (!mounted) return;
     setState(() => _tests = updated);
   }
@@ -177,6 +180,7 @@ class _OvulationTestScreenState extends State<OvulationTestScreen> {
     updated[index] = OvulationTestEntry(date: date, result: result);
     updated.sort((a, b) => b.date.compareTo(a.date));
     await _settings.saveOvulationTests(updated);
+    AppStore.instance.refreshLh();
     if (!mounted) return;
     setState(() => _tests = updated);
   }

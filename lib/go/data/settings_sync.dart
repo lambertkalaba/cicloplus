@@ -66,7 +66,7 @@ class SettingsSync {
     final p = await SharedPreferences.getInstance();
     if (p.getString(_restoredKey) == uid) return false;
     try {
-      final snap = await _doc(uid).get().timeout(const Duration(seconds: 8));
+      final snap = await _doc(uid).get().timeout(const Duration(seconds: 25));
       final data = snap.data()?[_field];
       await p.setString(_restoredKey, uid);
       if (data is! Map) return false;
@@ -95,8 +95,9 @@ class SettingsSync {
         } catch (_) {}
       }
       return changed;
-    } catch (_) {
-      // Sin conexión: se intentará la próxima vez que entre.
+    } catch (e) {
+      // Sin conexión o lenta: se vuelve a intentar antes de la próxima subida.
+      debugPrint('SettingsSync restore: $e');
       return false;
     }
   }
@@ -126,8 +127,12 @@ class SettingsSync {
     _timer?.cancel();
     try {
       final p = await SharedPreferences.getInstance();
-      // No pisar la copia de la nube antes de haberla traído a este móvil.
-      if (p.getString(_restoredKey) != uid) return;
+      // No pisar la copia de la nube antes de haberla traído a este móvil:
+      // si aún no se pudo leer, se intenta ahora.
+      if (p.getString(_restoredKey) != uid) {
+        await restoreIfNeeded(uid);
+        if (p.getString(_restoredKey) != uid) return;
+      }
       final out = <String, Object>{};
       var total = 0;
       for (final k in p.getKeys()) {
@@ -152,7 +157,14 @@ class SettingsSync {
         total += size;
         out[k] = e;
       }
-      await _doc(uid).set({_field: out, '${_field}At': FieldValue.serverTimestamp()}, SetOptions(merge: true));
-    } catch (_) {}
+      await _doc(uid)
+          .set({_field: out, '${_field}At': FieldValue.serverTimestamp()}, SetOptions(mergeFields: [_field, '${_field}At']))
+          .timeout(const Duration(seconds: 25));
+      final now = DateTime.now();
+      await p.setString('cloud_settings_at', now.toIso8601String());
+      lastUpload.value = now;
+    } catch (e) {
+      debugPrint('SettingsSync upload: $e');
+    }
   }
 }
