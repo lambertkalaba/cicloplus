@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../services/settings_service.dart' show SettingsService;
+import '../cicloplus_host.dart' show CicloData;
 import '../data/store.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
@@ -268,6 +269,31 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 ],
               ],
             ),
+            Divider(height: 26, color: C.pinkLine),
+            // Atajo: el mismo ajuste que Configuración > Configuración de predicción.
+            Row(children: [
+              const Text('🔀', style: TextStyle(fontSize: 20)),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(tr('Mi ciclo es irregular', 'My cycle is irregular'),
+                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: C.text)),
+                  Text(tr('Te mostramos un margen de fechas en vez de un día exacto', 'We show you a range of dates instead of an exact day'),
+                      style: const TextStyle(fontSize: 12, color: C.muted)),
+                ]),
+              ),
+              Switch(
+                value: CicloData.instance.irregular,
+                activeColor: Colors.white,
+                activeTrackColor: const Color(0xFF2FB45A),
+                onChanged: (v) async {
+                  CicloData.instance.irregular = v;
+                  setState(() {});
+                  await SettingsService().saveIrregularCycleMode(v);
+                  await AppStore.instance.commit();
+                },
+              ),
+            ]),
           ],
         ),
       ),

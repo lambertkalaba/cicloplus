@@ -3,6 +3,8 @@
 
 const Map<String, Map<String, String>> goI18nTrad = {
   "am": {
+    "Mi ciclo es irregular": "ዑደቴ መደበኛ አይደለም",
+    "Te mostramos un margen de fechas en vez de un día exacto": "ከትክክለኛ ቀን ይልቅ የቀናት ክልል እናሳይሻለን",
     "Verificación": "ማረጋገጫ",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "በ{} የLH ከፍተኛ፦ ምናልባት ነገ እንቁላል ትለቂያለሽ። ዛሬና ነገ በጣም ለም ቀናትሽ ናቸው! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "በ{} አዎንታዊ ምርመራ፦ ምናልባት ነገ እንቁላል ትለቂያለሽ። ዛሬና ነገ በጣም ለም ቀናትሽ ናቸው! 🌱",
@@ -117,6 +119,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ቀለም ምረጪ",
   },
   "ar": {
+    "Mi ciclo es irregular": "دورتي غير منتظمة",
+    "Te mostramos un margen de fechas en vez de un día exacto": "نعرض لكِ نطاقًا من التواريخ بدل يوم محدد",
     "Verificación": "التحقق",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "ذروة LH في {}: على الأرجح ستحدث الإباضة غدًا. اليوم وغدًا أكثر أيامك خصوبة! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "اختبار إيجابي في {}: على الأرجح ستحدث الإباضة غدًا. اليوم وغدًا أكثر أيامك خصوبة! 🌱",
@@ -290,6 +294,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} أيام",
   },
   "az": {
+    "Mi ciclo es irregular": "Dövrüm nizamsızdır",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Dəqiq gün əvəzinə tarix aralığı göstəririk",
     "Verificación": "Təsdiq",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} tarixində LH zirvəsi: çox güman ki, sabah ovulyasiya olacaq. Bu gün və sabah ən məhsuldar günlərindir! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} tarixində müsbət test: çox güman ki, sabah ovulyasiya olacaq. Bu gün və sabah ən məhsuldar günlərindir! 🌱",
@@ -404,6 +410,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rəng seç",
   },
   "bn": {
+    "Mi ciclo es irregular": "আমার চক্র অনিয়মিত",
+    "Te mostramos un margen de fechas en vez de un día exacto": "নির্দিষ্ট দিনের বদলে তারিখের একটা পরিসর দেখাই",
     "Verificación": "যাচাই",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} তারিখে LH পিক: খুব সম্ভবত কাল ওভুলেশন হবে। আজ ও কাল তোমার সবচেয়ে উর্বর দিন! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} তারিখে পজিটিভ টেস্ট: খুব সম্ভবত কাল ওভুলেশন হবে। আজ ও কাল তোমার সবচেয়ে উর্বর দিন! 🌱",
@@ -577,6 +585,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} দিন",
   },
   "cs": {
+    "Mi ciclo es irregular": "Můj cyklus je nepravidelný",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Ukážeme ti rozmezí dat místo přesného dne",
     "Verificación": "Ověření",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Vrchol LH {}: nejspíš budeš ovulovat zítra. Dnes a zítra jsou tvé nejplodnější dny! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Pozitivní test {}: nejspíš budeš ovulovat zítra. Dnes a zítra jsou tvé nejplodnější dny! 🌱",
@@ -691,6 +701,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber barvu",
   },
   "da": {
+    "Mi ciclo es irregular": "Min cyklus er uregelmæssig",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Vi viser et datointerval i stedet for en præcis dag",
     "Verificación": "Bekræftelse",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "LH-top den {}: du har sandsynligvis ægløsning i morgen. I dag og i morgen er dine mest frugtbare dage! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Positiv test den {}: du har sandsynligvis ægløsning i morgen. I dag og i morgen er dine mest frugtbare dage! 🌱",
@@ -805,6 +817,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vælg en farve",
   },
   "de": {
+    "Mi ciclo es irregular": "Mein Zyklus ist unregelmäßig",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Wir zeigen dir einen Zeitraum statt eines genauen Tages",
     "Verificación": "Bestätigung",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "LH-Spitze am {}: Du hast sehr wahrscheinlich morgen deinen Eisprung. Heute und morgen sind deine fruchtbarsten Tage! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Positiver Test am {}: Du hast sehr wahrscheinlich morgen deinen Eisprung. Heute und morgen sind deine fruchtbarsten Tage! 🌱",
@@ -978,6 +992,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} Tage",
   },
   "el": {
+    "Mi ciclo es irregular": "Ο κύκλος μου είναι ακανόνιστος",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Σου δείχνουμε εύρος ημερομηνιών αντί για ακριβή μέρα",
     "Verificación": "Επαλήθευση",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Κορυφή LH στις {}: πιθανότατα θα έχεις ωορρηξία αύριο. Σήμερα και αύριο είναι οι πιο γόνιμες μέρες σου! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Θετικό τεστ στις {}: πιθανότατα θα έχεις ωορρηξία αύριο. Σήμερα και αύριο είναι οι πιο γόνιμες μέρες σου! 🌱",
@@ -1092,6 +1108,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Διάλεξε χρώμα",
   },
   "fa": {
+    "Mi ciclo es irregular": "چرخه‌ام نامنظم است",
+    "Te mostramos un margen de fechas en vez de un día exacto": "به جای یک روز دقیق، بازه‌ای از تاریخ‌ها نشان می‌دهیم",
     "Verificación": "تأیید",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "اوج LH در {}: به احتمال زیاد فردا تخمک‌گذاری می‌کنی. امروز و فردا باروری‌ترین روزهایت است! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "تست مثبت در {}: به احتمال زیاد فردا تخمک‌گذاری می‌کنی. امروز و فردا باروری‌ترین روزهایت است! 🌱",
@@ -1206,6 +1224,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "یک رنگ انتخاب کن",
   },
   "fi": {
+    "Mi ciclo es irregular": "Kiertoni on epäsäännöllinen",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Näytämme aikavälin tarkan päivän sijaan",
     "Verificación": "Vahvistus",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "LH-huippu {}: ovuloit todennäköisesti huomenna. Tänään ja huomenna ovat hedelmällisimmät päiväsi! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Positiivinen testi {}: ovuloit todennäköisesti huomenna. Tänään ja huomenna ovat hedelmällisimmät päiväsi! 🌱",
@@ -1320,6 +1340,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Valitse väri",
   },
   "fil": {
+    "Mi ciclo es irregular": "Irregular ang cycle ko",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Ipinapakita namin ang hanay ng petsa sa halip na eksaktong araw",
     "Verificación": "Beripikasyon",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "LH peak noong {}: malamang mag-o-ovulate ka bukas. Ngayon at bukas ang pinaka-fertile mong araw! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Positibong test noong {}: malamang mag-o-ovulate ka bukas. Ngayon at bukas ang pinaka-fertile mong araw! 🌱",
@@ -1434,6 +1456,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pumili ng kulay",
   },
   "fr": {
+    "Mi ciclo es irregular": "Mon cycle est irrégulier",
+    "Te mostramos un margen de fechas en vez de un día exacto": "On te montre une plage de dates au lieu d’un jour précis",
     "Verificación": "Vérification",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Pic de LH le {} : tu vas très probablement ovuler demain. Aujourd’hui et demain sont tes jours les plus fertiles ! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Test positif le {} : tu vas très probablement ovuler demain. Aujourd’hui et demain sont tes jours les plus fertiles ! 🌱",
@@ -1607,6 +1631,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} jours",
   },
   "gu": {
+    "Mi ciclo es irregular": "મારું ચક્ર અનિયમિત છે",
+    "Te mostramos un margen de fechas en vez de un día exacto": "ચોક્કસ દિવસને બદલે તારીખોની શ્રેણી બતાવીએ છીએ",
     "Verificación": "ચકાસણી",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} એ LH પીક: મોટે ભાગે આવતીકાલે ઓવ્યુલેશન થશે. આજે અને કાલે સૌથી ફળદ્રુપ દિવસો! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} એ પોઝિટિવ ટેસ્ટ: મોટે ભાગે આવતીકાલે ઓવ્યુલેશન થશે. આજે અને કાલે સૌથી ફળદ્રુપ દિવસો! 🌱",
@@ -1721,6 +1747,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "એક રંગ પસંદ કરો",
   },
   "ha": {
+    "Mi ciclo es irregular": "Zagayowata ba ta da tsari",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Muna nuna miki tazarar kwanaki maimakon rana ɗaya",
     "Verificación": "Tabbatarwa",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Kololuwar LH a ranar {}: mai yiwuwa za ki yi ƙwai gobe. Yau da gobe ne ranakunki mafi haihuwa! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Gwaji mai kyau a ranar {}: mai yiwuwa za ki yi ƙwai gobe. Yau da gobe ne ranakunki mafi haihuwa! 🌱",
@@ -1835,6 +1863,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Zaɓi launi",
   },
   "he": {
+    "Mi ciclo es irregular": "המחזור שלי לא סדיר",
+    "Te mostramos un margen de fechas en vez de un día exacto": "נציג לך טווח תאריכים במקום יום מדויק",
     "Verificación": "אימות",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "שיא LH ב-{}: סביר מאוד שתבייצי מחר. היום ומחר הם הימים הפוריים ביותר שלך! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "בדיקה חיובית ב-{}: סביר מאוד שתבייצי מחר. היום ומחר הם הימים הפוריים ביותר שלך! 🌱",
@@ -1949,6 +1979,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "בחרי צבע",
   },
   "hi": {
+    "Mi ciclo es irregular": "मेरा चक्र अनियमित है",
+    "Te mostramos un margen de fechas en vez de un día exacto": "सही दिन की जगह हम तारीखों की सीमा दिखाते हैं",
     "Verificación": "सत्यापन",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} को LH पीक: बहुत संभव है कल ओव्यूलेशन होगा। आज और कल आपके सबसे फ़र्टाइल दिन हैं! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} को पॉज़िटिव टेस्ट: बहुत संभव है कल ओव्यूलेशन होगा। आज और कल आपके सबसे फ़र्टाइल दिन हैं! 🌱",
@@ -2122,6 +2154,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} दिन",
   },
   "hu": {
+    "Mi ciclo es irregular": "A ciklusom rendszertelen",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Pontos nap helyett dátumtartományt mutatunk",
     "Verificación": "Ellenőrzés",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "LH-csúcs: {}: valószínűleg holnap ovulálsz. Ma és holnap a legtermékenyebb napjaid! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Pozitív teszt: {}: valószínűleg holnap ovulálsz. Ma és holnap a legtermékenyebb napjaid! 🌱",
@@ -2236,6 +2270,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Válassz színt",
   },
   "id": {
+    "Mi ciclo es irregular": "Siklusku tidak teratur",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Kami tampilkan rentang tanggal, bukan hari pasti",
     "Verificación": "Verifikasi",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Puncak LH pada {}: kemungkinan besar kamu berovulasi besok. Hari ini dan besok hari paling suburmu! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Tes positif pada {}: kemungkinan besar kamu berovulasi besok. Hari ini dan besok hari paling suburmu! 🌱",
@@ -2350,6 +2386,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "it": {
+    "Mi ciclo es irregular": "Il mio ciclo è irregolare",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Ti mostriamo un intervallo di date invece di un giorno preciso",
     "Verificación": "Verifica",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Picco di LH il {}: molto probabilmente ovulerai domani. Oggi e domani sono i tuoi giorni più fertili! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Test positivo il {}: molto probabilmente ovulerai domani. Oggi e domani sono i tuoi giorni più fertili! 🌱",
@@ -2464,6 +2502,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Scegli un colore",
   },
   "ja": {
+    "Mi ciclo es irregular": "周期が不規則",
+    "Te mostramos un margen de fechas en vez de un día exacto": "正確な日付の代わりに日付の範囲を表示します",
     "Verificación": "確認",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} にLHピーク：明日排卵する可能性が高いです。今日と明日が最も妊娠しやすい日です！🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} に陽性：明日排卵する可能性が高いです。今日と明日が最も妊娠しやすい日です！🌱",
@@ -2578,6 +2618,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "色を選ぶ",
   },
   "kk": {
+    "Mi ciclo es irregular": "Циклім тұрақсыз",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Нақты күннің орнына күндер аралығын көрсетеміз",
     "Verificación": "Растау",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} күні ЛГ шыңы: овуляция ертең болуы ықтимал. Бүгін мен ертең — ең құнарлы күндерің! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} күні оң тест: овуляция ертең болуы ықтимал. Бүгін мен ертең — ең құнарлы күндерің! 🌱",
@@ -2692,6 +2734,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Түс таңдаңыз",
   },
   "kn": {
+    "Mi ciclo es irregular": "ನನ್ನ ಚಕ್ರ ಅನಿಯಮಿತ",
+    "Te mostramos un margen de fechas en vez de un día exacto": "ನಿಖರ ದಿನದ ಬದಲು ದಿನಾಂಕಗಳ ಶ್ರೇಣಿ ತೋರಿಸುತ್ತೇವೆ",
     "Verificación": "ಪರಿಶೀಲನೆ",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} ರಂದು LH ಉತ್ತುಂಗ: ಬಹುಶಃ ನಾಳೆ ಅಂಡೋತ್ಪತ್ತಿ. ಇಂದು ಮತ್ತು ನಾಳೆ ಅತ್ಯಂತ ಫಲವತ್ತಾದ ದಿನಗಳು! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} ರಂದು ಪಾಸಿಟಿವ್ ಪರೀಕ್ಷೆ: ಬಹುಶಃ ನಾಳೆ ಅಂಡೋತ್ಪತ್ತಿ. ಇಂದು ಮತ್ತು ನಾಳೆ ಅತ್ಯಂತ ಫಲವತ್ತಾದ ದಿನಗಳು! 🌱",
@@ -2806,6 +2850,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ಒಂದು ಬಣ್ಣ ಆರಿಸಿ",
   },
   "ko": {
+    "Mi ciclo es irregular": "주기가 불규칙해요",
+    "Te mostramos un margen de fechas en vez de un día exacto": "정확한 날짜 대신 날짜 범위를 보여드려요",
     "Verificación": "인증",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} LH 최고치: 내일 배란할 가능성이 높아요. 오늘과 내일이 가장 임신하기 쉬운 날이에요! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} 양성: 내일 배란할 가능성이 높아요. 오늘과 내일이 가장 임신하기 쉬운 날이에요! 🌱",
@@ -2920,6 +2966,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "색상 선택",
   },
   "ln": {
+    "Mi ciclo es irregular": "Cycle na ngai ezali malamu te",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Tokolakisa yo mikolo mingi na esika ya mokolo moko",
     "Verificación": "Kondimisa",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Songe ya LH na {}: mbala mingi okobimisa likei lobi. Lelo mpe lobi ezali mikolo na yo ya kozwa zemi koleka! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Test ya malamu na {}: mbala mingi okobimisa likei lobi. Lelo mpe lobi ezali mikolo na yo ya kozwa zemi koleka! 🌱",
@@ -3034,6 +3082,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pona langi",
   },
   "ml": {
+    "Mi ciclo es irregular": "എന്റെ ചക്രം ക്രമരഹിതമാണ്",
+    "Te mostramos un margen de fechas en vez de un día exacto": "കൃത്യ ദിവസത്തിന് പകരം തീയതി പരിധി കാണിക്കും",
     "Verificación": "സ്ഥിരീകരണം",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} ന് LH ഉച്ചസ്ഥായി: മിക്കവാറും നാളെ അണ്ഡോത്പാദനം. ഇന്നും നാളെയും ഏറ്റവും ഫലഭൂയിഷ്ഠമായ ദിവസങ്ങൾ! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} ന് പോസിറ്റീവ് ടെസ്റ്റ്: മിക്കവാറും നാളെ അണ്ഡോത്പാദനം. ഇന്നും നാളെയും ഏറ്റവും ഫലഭൂയിഷ്ഠമായ ദിവസങ്ങൾ! 🌱",
@@ -3148,6 +3198,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ഒരു നിറം തിരഞ്ഞെടുക്കൂ",
   },
   "mr": {
+    "Mi ciclo es irregular": "माझे चक्र अनियमित आहे",
+    "Te mostramos un margen de fechas en vez de un día exacto": "नेमक्या दिवसाऐवजी तारखांची श्रेणी दाखवतो",
     "Verificación": "पडताळणी",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} रोजी LH पीक: बहुधा उद्या ओव्ह्युलेशन होईल. आज आणि उद्या सर्वात सुपीक दिवस! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} रोजी पॉझिटिव्ह टेस्ट: बहुधा उद्या ओव्ह्युलेशन होईल. आज आणि उद्या सर्वात सुपीक दिवस! 🌱",
@@ -3262,6 +3314,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एक रंग निवडा",
   },
   "ms": {
+    "Mi ciclo es irregular": "Kitaran saya tidak teratur",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Kami tunjukkan julat tarikh, bukan hari tepat",
     "Verificación": "Pengesahan",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Puncak LH pada {}: kemungkinan besar anda berovulasi esok. Hari ini dan esok hari paling subur anda! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Ujian positif pada {}: kemungkinan besar anda berovulasi esok. Hari ini dan esok hari paling subur anda! 🌱",
@@ -3376,6 +3430,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "my": {
+    "Mi ciclo es irregular": "ကျွန်မ စက်ဝန်း မမှန်ပါ",
+    "Te mostramos un margen de fechas en vez de un día exacto": "တိကျသောရက်အစား ရက်အပိုင်းအခြားကို ပြပါမည်",
     "Verificación": "အတည်ပြုခြင်း",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} တွင် LH အမြင့်ဆုံး: မနက်ဖြန် မျိုးဥကြွေဖွယ် များသည်။ ယနေ့နှင့် မနက်ဖြန်သည် အချိန်ကောင်းဆုံး! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} တွင် အပြုသဘော: မနက်ဖြန် မျိုးဥကြွေဖွယ် များသည်။ ယနေ့နှင့် မနက်ဖြန်သည် အချိန်ကောင်းဆုံး! 🌱",
@@ -3490,6 +3546,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "အရောင်ရွေးပါ",
   },
   "ne": {
+    "Mi ciclo es irregular": "मेरो चक्र अनियमित छ",
+    "Te mostramos un margen de fechas en vez de un día exacto": "ठ्याक्कै दिनको सट्टा मितिहरूको दायरा देखाउँछौं",
     "Verificación": "प्रमाणीकरण",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} मा LH शिखर: सम्भवतः भोलि डिम्बक्षरण हुनेछ। आज र भोलि सबैभन्दा उर्वर दिन! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} मा पोजिटिभ टेस्ट: सम्भवतः भोलि डिम्बक्षरण हुनेछ। आज र भोलि सबैभन्दा उर्वर दिन! 🌱",
@@ -3604,6 +3662,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एउटा रङ छान्नुहोस्",
   },
   "nl": {
+    "Mi ciclo es irregular": "Mijn cyclus is onregelmatig",
+    "Te mostramos un margen de fechas en vez de un día exacto": "We tonen een periode in plaats van een exacte dag",
     "Verificación": "Verificatie",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "LH-piek op {}: je hebt zeer waarschijnlijk morgen je eisprong. Vandaag en morgen zijn je vruchtbaarste dagen! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Positieve test op {}: je hebt zeer waarschijnlijk morgen je eisprong. Vandaag en morgen zijn je vruchtbaarste dagen! 🌱",
@@ -3718,6 +3778,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Kies een kleur",
   },
   "om": {
+    "Mi ciclo es irregular": "Marsaan koo sirrii miti",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Guyyaa sirrii qofa osoo hin taane hanga guyyootaa siif agarsiisna",
     "Verificación": "Mirkaneessa",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Guyyaa {} ol’aanaan LH: boru hanqaaquun gadi lakkifamuu danda’a. Har’aa fi boru guyyoota kee baay’ee ulfaa’uu! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Guyyaa {} qorannoo pozatiivii: boru hanqaaquun gadi lakkifamuu danda’a. Har’aa fi boru guyyoota kee baay’ee ulfaa’uu! 🌱",
@@ -3832,6 +3894,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Halluu filadhu",
   },
   "pa": {
+    "Mi ciclo es irregular": "ਮੇਰਾ ਚੱਕਰ ਅਨਿਯਮਿਤ ਹੈ",
+    "Te mostramos un margen de fechas en vez de un día exacto": "ਸਹੀ ਦਿਨ ਦੀ ਥਾਂ ਤਾਰੀਖਾਂ ਦੀ ਰੇਂਜ ਦਿਖਾਉਂਦੇ ਹਾਂ",
     "Verificación": "ਤਸਦੀਕ",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} ਨੂੰ LH ਪੀਕ: ਬਹੁਤ ਸੰਭਵ ਕੱਲ੍ਹ ਓਵੂਲੇਸ਼ਨ ਹੋਵੇਗਾ। ਅੱਜ ਅਤੇ ਕੱਲ੍ਹ ਸਭ ਤੋਂ ਉਪਜਾਊ ਦਿਨ! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} ਨੂੰ ਪਾਜ਼ਿਟਿਵ ਟੈਸਟ: ਬਹੁਤ ਸੰਭਵ ਕੱਲ੍ਹ ਓਵੂਲੇਸ਼ਨ ਹੋਵੇਗਾ। ਅੱਜ ਅਤੇ ਕੱਲ੍ਹ ਸਭ ਤੋਂ ਉਪਜਾਊ ਦਿਨ! 🌱",
@@ -3946,6 +4010,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ਇੱਕ ਰੰਗ ਚੁਣੋ",
   },
   "pl": {
+    "Mi ciclo es irregular": "Mój cykl jest nieregularny",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Pokażemy zakres dat zamiast dokładnego dnia",
     "Verificación": "Weryfikacja",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Szczyt LH {}: najpewniej owulacja będzie jutro. Dziś i jutro to twoje najpłodniejsze dni! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Pozytywny test {}: najpewniej owulacja będzie jutro. Dziś i jutro to twoje najpłodniejsze dni! 🌱",
@@ -4060,6 +4126,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Wybierz kolor",
   },
   "pt": {
+    "Mi ciclo es irregular": "Meu ciclo é irregular",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Mostramos um intervalo de datas em vez de um dia exato",
     "Verificación": "Verificação",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Pico de LH em {}: o mais provável é que você ovule amanhã. Hoje e amanhã são seus dias mais férteis! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Teste positivo em {}: o mais provável é que você ovule amanhã. Hoje e amanhã são seus dias mais férteis! 🌱",
@@ -4233,6 +4301,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} dias",
   },
   "ro": {
+    "Mi ciclo es irregular": "Ciclul meu e neregulat",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Îți arătăm un interval de date în loc de o zi exactă",
     "Verificación": "Verificare",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Vârf LH pe {}: cel mai probabil vei ovula mâine. Azi și mâine sunt zilele tale cele mai fertile! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Test pozitiv pe {}: cel mai probabil vei ovula mâine. Azi și mâine sunt zilele tale cele mai fertile! 🌱",
@@ -4347,6 +4417,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Alege o culoare",
   },
   "ru": {
+    "Mi ciclo es irregular": "Мой цикл нерегулярный",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Покажем диапазон дат вместо точного дня",
     "Verificación": "Подтверждение",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Пик ЛГ {}: скорее всего, овуляция будет завтра. Сегодня и завтра — твои самые фертильные дни! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Положительный тест {}: скорее всего, овуляция будет завтра. Сегодня и завтра — твои самые фертильные дни! 🌱",
@@ -4520,6 +4592,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} дн.",
   },
   "si": {
+    "Mi ciclo es irregular": "මගේ චක්‍රය අක්‍රමවත්",
+    "Te mostramos un margen de fechas en vez de un día exacto": "නිශ්චිත දිනයක් වෙනුවට දින පරාසයක් පෙන්වමු",
     "Verificación": "තහවුරු කිරීම",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} දින LH උච්චය: බොහෝ විට හෙට ඩිම්බ මෝචනය වේ. අද සහ හෙට වඩාත්ම සරු දින! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} දින ධනාත්මක පරීක්ෂණය: බොහෝ විට හෙට ඩිම්බ මෝචනය වේ. අද සහ හෙට වඩාත්ම සරු දින! 🌱",
@@ -4634,6 +4708,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "වර්ණයක් තෝරන්න",
   },
   "sk": {
+    "Mi ciclo es irregular": "Môj cyklus je nepravidelný",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Ukážeme ti rozpätie dátumov namiesto presného dňa",
     "Verificación": "Overenie",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Vrchol LH {}: najskôr budeš ovulovať zajtra. Dnes a zajtra sú tvoje najplodnejšie dni! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Pozitívny test {}: najskôr budeš ovulovať zajtra. Dnes a zajtra sú tvoje najplodnejšie dni! 🌱",
@@ -4748,6 +4824,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber farbu",
   },
   "sv": {
+    "Mi ciclo es irregular": "Min cykel är oregelbunden",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Vi visar ett datumintervall i stället för en exakt dag",
     "Verificación": "Verifiering",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "LH-topp den {}: du har troligen ägglossning i morgon. I dag och i morgon är dina mest fertila dagar! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Positivt test den {}: du har troligen ägglossning i morgon. I dag och i morgon är dina mest fertila dagar! 🌱",
@@ -4862,6 +4940,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Välj en färg",
   },
   "sw": {
+    "Mi ciclo es irregular": "Mzunguko wangu si wa kawaida",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Tunakuonyesha kipindi cha tarehe badala ya siku kamili",
     "Verificación": "Uthibitisho",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Kilele cha LH tarehe {}: huenda utatoa yai kesho. Leo na kesho ni siku zako zenye rutuba zaidi! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Kipimo chanya tarehe {}: huenda utatoa yai kesho. Leo na kesho ni siku zako zenye rutuba zaidi! 🌱",
@@ -4976,6 +5056,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chagua rangi",
   },
   "ta": {
+    "Mi ciclo es irregular": "என் சுழற்சி ஒழுங்கற்றது",
+    "Te mostramos un margen de fechas en vez de un día exacto": "சரியான நாளுக்குப் பதில் தேதி வரம்பைக் காட்டுவோம்",
     "Verificación": "சரிபார்ப்பு",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} அன்று LH உச்சம்: பெரும்பாலும் நாளை அண்டவிடுப்பு. இன்றும் நாளையும் மிகக் கருவுறும் நாட்கள்! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} அன்று பாசிட்டிவ் சோதனை: பெரும்பாலும் நாளை அண்டவிடுப்பு. இன்றும் நாளையும் மிகக் கருவுறும் நாட்கள்! 🌱",
@@ -5090,6 +5172,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ஒரு நிறத்தைத் தேர்வுசெய்யுங்கள்",
   },
   "te": {
+    "Mi ciclo es irregular": "నా చక్రం క్రమరహితం",
+    "Te mostramos un margen de fechas en vez de un día exacto": "సరైన రోజు బదులు తేదీల శ్రేణి చూపిస్తాం",
     "Verificación": "ధృవీకరణ",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} న LH శిఖరం: చాలా మటుకు రేపు అండోత్సర్గం. ఈ రోజు, రేపు అత్యంత ఫలవంతమైన రోజులు! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} న పాజిటివ్ టెస్ట్: చాలా మటుకు రేపు అండోత్సర్గం. ఈ రోజు, రేపు అత్యంత ఫలవంతమైన రోజులు! 🌱",
@@ -5204,6 +5288,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ఒక రంగును ఎంచుకోండి",
   },
   "th": {
+    "Mi ciclo es irregular": "รอบเดือนของฉันไม่สม่ำเสมอ",
+    "Te mostramos un margen de fechas en vez de un día exacto": "เราจะแสดงช่วงวันที่แทนวันที่แน่นอน",
     "Verificación": "การยืนยัน",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "LH สูงสุดวันที่ {}: มีแนวโน้มไข่ตกพรุ่งนี้ วันนี้และพรุ่งนี้เป็นวันที่เจริญพันธุ์ที่สุด! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "ผลตรวจเป็นบวกวันที่ {}: มีแนวโน้มไข่ตกพรุ่งนี้ วันนี้และพรุ่งนี้เป็นวันที่เจริญพันธุ์ที่สุด! 🌱",
@@ -5318,6 +5404,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "เลือกสี",
   },
   "tr": {
+    "Mi ciclo es irregular": "Döngüm düzensiz",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Kesin gün yerine bir tarih aralığı gösteririz",
     "Verificación": "Doğrulama",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} tarihinde LH zirvesi: büyük olasılıkla yarın yumurtlayacaksın. Bugün ve yarın en doğurgan günlerin! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} tarihinde pozitif test: büyük olasılıkla yarın yumurtlayacaksın. Bugün ve yarın en doğurgan günlerin! 🌱",
@@ -5432,6 +5520,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Bir renk seç",
   },
   "uk": {
+    "Mi ciclo es irregular": "Мій цикл нерегулярний",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Покажемо діапазон дат замість точного дня",
     "Verificación": "Підтвердження",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Пік ЛГ {}: найімовірніше, овуляція буде завтра. Сьогодні й завтра — твої найфертильніші дні! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Позитивний тест {}: найімовірніше, овуляція буде завтра. Сьогодні й завтра — твої найфертильніші дні! 🌱",
@@ -5546,6 +5636,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Обери колір",
   },
   "ur": {
+    "Mi ciclo es irregular": "میرا سائیکل بے قاعدہ ہے",
+    "Te mostramos un margen de fechas en vez de un día exacto": "ہم ایک دن کی بجائے تاریخوں کی حد دکھاتے ہیں",
     "Verificación": "تصدیق",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} کو LH کی بلند ترین سطح: غالباً کل اوویولیشن ہوگی۔ آج اور کل آپ کے سب سے زرخیز دن ہیں! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} کو مثبت ٹیسٹ: غالباً کل اوویولیشن ہوگی۔ آج اور کل آپ کے سب سے زرخیز دن ہیں! 🌱",
@@ -5660,6 +5752,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ایک رنگ چنیں",
   },
   "uz": {
+    "Mi ciclo es irregular": "Siklim notekis",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Aniq kun o‘rniga sanalar oralig‘ini ko‘rsatamiz",
     "Verificación": "Tasdiqlash",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} kuni LH cho‘qqisi: katta ehtimol bilan ertaga ovulyatsiya bo‘ladi. Bugun va ertaga eng unumdor kunlaringiz! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} kuni ijobiy test: katta ehtimol bilan ertaga ovulyatsiya bo‘ladi. Bugun va ertaga eng unumdor kunlaringiz! 🌱",
@@ -5774,6 +5868,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rang tanlang",
   },
   "vi": {
+    "Mi ciclo es irregular": "Chu kỳ của tôi không đều",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Chúng tôi hiển thị khoảng ngày thay vì một ngày cụ thể",
     "Verificación": "Xác minh",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Đỉnh LH vào {}: rất có thể bạn rụng trứng vào ngày mai. Hôm nay và ngày mai là ngày dễ thụ thai nhất! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Que thử dương tính vào {}: rất có thể bạn rụng trứng vào ngày mai. Hôm nay và ngày mai là ngày dễ thụ thai nhất! 🌱",
@@ -5888,6 +5984,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chọn màu",
   },
   "wo": {
+    "Mi ciclo es irregular": "Sama wër du jaar",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Danuy won ay bés yu bari, du benn bés rekk",
     "Verificación": "Dëggal",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Kawu LH ci {}: mën na am nga génne nen suba. Tey ak suba ñooy sa bés yi gën a jur! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Test bu baax ci {}: mën na am nga génne nen suba. Tey ak suba ñooy sa bés yi gën a jur! 🌱",
@@ -6002,6 +6100,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Tànnal benn melo",
   },
   "yo": {
+    "Mi ciclo es irregular": "Àyíká mi kò dúró déédé",
+    "Te mostramos un margen de fechas en vez de un día exacto": "A ó fi ààlà ọjọ́ hàn ọ́ dípò ọjọ́ kan pàtó",
     "Verificación": "Ìfìdí-múlẹ̀",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Òkè LH ní {}: ó ṣeé ṣe kí ẹyin jáde lọ́la. Òní àti ọ̀la ni ọjọ́ tí o lè lóyún jù lọ! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Àyẹ̀wò rere ní {}: ó ṣeé ṣe kí ẹyin jáde lọ́la. Òní àti ọ̀la ni ọjọ́ tí o lè lóyún jù lọ! 🌱",
@@ -6116,6 +6216,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Yan àwọ̀ kan",
   },
   "zh": {
+    "Mi ciclo es irregular": "我的周期不规律",
+    "Te mostramos un margen de fechas en vez de un día exacto": "我们会显示日期范围，而不是确切的一天",
     "Verificación": "验证",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} LH峰值：很可能明天排卵。今天和明天是你最易孕的日子！🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} 测试阳性：很可能明天排卵。今天和明天是你最易孕的日子！🌱",
@@ -6230,6 +6332,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "选择颜色",
   },
   "zh-TW": {
+    "Mi ciclo es irregular": "我的週期不規律",
+    "Te mostramos un margen de fechas en vez de un día exacto": "我們會顯示日期範圍，而不是確切的一天",
     "Verificación": "驗證",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} LH高峰：很可能明天排卵。今天和明天是你最易孕的日子！🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "{} 測試陽性：很可能明天排卵。今天和明天是你最易孕的日子！🌱",
@@ -6344,6 +6448,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "選擇顏色",
   },
   "zu": {
+    "Mi ciclo es irregular": "Umjikelezo wami awujwayelekile",
+    "Te mostramos un margen de fechas en vez de un día exacto": "Sikubonisa ibanga lezinsuku esikhundleni sosuku oluqondile",
     "Verificación": "Ukuqinisekisa",
     "Pico de LH el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Isiqongo se-LH ngo-{}: kungenzeka uzokhipha iqanda kusasa. Namuhla nakusasa yizinsuku zakho ezivundile kakhulu! 🌱",
     "Test positivo el {}: lo más probable es que ovules mañana. ¡Hoy y mañana son tus días más fértiles! 🌱": "Ukuhlolwa okuphozithivu ngo-{}: kungenzeka uzokhipha iqanda kusasa. Namuhla nakusasa yizinsuku zakho ezivundile kakhulu! 🌱",
