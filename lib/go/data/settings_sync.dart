@@ -34,6 +34,23 @@ class SettingsSync {
   static Timer? _timer;
   static AppLifecycleListener? _life;
 
+  /// Hora de la última copia subida (para "Mi cuenta").
+  static final ValueNotifier<DateTime?> lastUpload = ValueNotifier(null);
+
+  static Future<DateTime?> loadLastUpload() async {
+    final p = await SharedPreferences.getInstance();
+    final d = DateTime.tryParse(p.getString('cloud_settings_at') ?? '');
+    if (d != null && lastUpload.value == null) lastUpload.value = d;
+    return lastUpload.value;
+  }
+
+  /// Sube ya (botón "Guardar ahora").
+  static Future<bool> uploadNow() async {
+    final before = lastUpload.value;
+    await upload();
+    return lastUpload.value != null && lastUpload.value != before;
+  }
+
   static bool _keep(String k) {
     if (_skipExact.contains(k)) return false;
     if (_skipPrefixes.any(k.startsWith)) return false;

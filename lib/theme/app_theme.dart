@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../services/calendar_palette_controller.dart';
 import '../services/settings_service.dart' show AppThemeOption;
+import '../go/widgets/ciclo_date_picker.dart';
+import '../go/widgets/ciclo_time_picker.dart';
 
 /// Paleta de colores consistente con el prototipo web (rosa/violeta).
 class AppColors {
@@ -116,6 +118,9 @@ ThemeData buildAppTheme(AppThemeOption theme) {
       primary: primary,
     ),
     fontFamily: 'Roboto',
+    // Calendario emergente con el estilo de CicloPlus (también el de Configuración).
+    datePickerTheme: cicloDatePickerTheme(),
+    timePickerTheme: cicloTimePickerTheme(),
     appBarTheme: AppBarTheme(
       backgroundColor: primaryDark,
       foregroundColor: Colors.white,

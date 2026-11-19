@@ -13,6 +13,8 @@ import 'screens/shell.dart';
 import 'services/notifications.dart';
 import 'strings.dart';
 import 'widgets/ui.dart';
+import 'widgets/ciclo_date_picker.dart';
+import 'widgets/ciclo_time_picker.dart';
 
 /// Sesión actual de CicloPlus, para que las pantallas del diseño nuevo
 /// puedan abrir las funciones que dependen de la cuenta (perfil, premium,
@@ -150,6 +152,8 @@ class _GoRootState extends State<GoRoot> {
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(seedColor: C.pink, primary: C.pink, secondary: C.emerald),
       scaffoldBackgroundColor: C.pinkBg,
+      datePickerTheme: cicloDatePickerTheme(),
+      timePickerTheme: cicloTimePickerTheme(),
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith((s) => s.contains(WidgetState.selected) ? Colors.white : null),
         trackColor: WidgetStateProperty.resolveWith((s) => s.contains(WidgetState.selected) ? C.pink : null),

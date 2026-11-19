@@ -16,6 +16,7 @@ import '../widgets/michi_events.dart' show MichiSettings;
 import '../widgets/avatar_picker.dart' show AvatarPortrait, AvatarSettings, ThemeColorSettings;
 import '../widgets/ui.dart';
 import 'register.dart';
+import '../widgets/ciclo_date_picker.dart';
 
 const _h = TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: C.text);
 const _b = TextStyle(fontSize: 13, color: C.muted, fontWeight: FontWeight.w600, height: 1.35);
@@ -123,7 +124,7 @@ class PeriodCycleScreen extends StatelessWidget {
 
   Future<void> _addPast(BuildContext context) async {
     final now = DateTime.now();
-    final d = await showDatePicker(
+    final d = await showCicloDatePicker(
       context: context,
       initialDate: now,
       firstDate: DateTime(now.year - 3),
@@ -589,7 +590,7 @@ class _DayNav extends StatelessWidget {
           Expanded(
             child: InkWell(
               onTap: () async {
-                final d = await showDatePicker(context: context, initialDate: day, firstDate: DateTime(today.year - 3), lastDate: today);
+                final d = await showCicloDatePicker(context: context, initialDate: day, firstDate: DateTime(today.year - 3), lastDate: today);
                 if (d != null) onChanged(dateOnly(d));
               },
               child: Text(isToday ? '${tr('Hoy', 'Today')} · ${L.dateShort(day)}' : L.dateLong(day),

@@ -8,6 +8,9 @@ import '../services/photo_service.dart';
 import '../services/settings_service.dart';
 import '../services/subscription_service.dart';
 import '../theme/app_theme.dart';
+import '../go/strings.dart' show tr;
+import '../go/widgets/ui.dart' show Avatar;
+import '../go/data/settings_sync.dart';
 
 /// Pantalla "Mi cuenta", abierta desde el botón "Gestionar" de la tarjeta
 /// de sesión en la pestaña "Yo".
@@ -53,10 +56,60 @@ class _AccountScreenState extends State<AccountScreen> {
   bool _pickingPhoto = false;
   bool _isEditing = false;
 
+  bool _backingUp = false;
+
   @override
   void initState() {
     super.initState();
     _load();
+    SettingsSync.loadLastUpload();
+  }
+
+  Future<void> _backupNow() async {
+    setState(() => _backingUp = true);
+    final ok = await SettingsSync.uploadNow();
+    if (!mounted) return;
+    setState(() => _backingUp = false);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(ok
+          ? tr('¡Copia guardada en la nube! 💗', 'Backup saved to the cloud! 💗')
+          : tr('No se pudo guardar. Revisa tu conexión a internet.', "Couldn't save. Check your internet connection.")),
+    ));
+  }
+
+  Future<void> _changePassword() async {
+    final email = widget.user.email;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (c) => AlertDialog(
+        title: Text(tr('Cambiar contraseña', 'Change password')),
+        content: Text(tr('Te enviaremos un correo a {} para que pongas una contraseña nueva.', "We'll send an email to {} so you can set a new password.").replaceFirst('{}', email)),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(c, false), child: Text(AppStrings.of(context).cancel)),
+          FilledButton(onPressed: () => Navigator.pop(c, true), child: Text(tr('Enviar correo', 'Send email'))),
+        ],
+      ),
+    );
+    if (ok != true || !mounted) return;
+    String msg;
+    try {
+      final sent = await _authService.sendPasswordResetEmail(email);
+      msg = sent
+          ? tr('Correo enviado. Mira tu bandeja de entrada (y la carpeta de spam).', 'Email sent. Check your inbox (and spam folder).')
+          : tr('No se pudo enviar el correo. Inténtalo de nuevo.', "Couldn't send the email. Please try again.");
+    } catch (_) {
+      msg = tr('No se pudo enviar el correo. Inténtalo de nuevo.', "Couldn't send the email. Please try again.");
+    }
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+  }
+
+  String _ago(DateTime d) {
+    final diff = DateTime.now().difference(d);
+    if (diff.inMinutes < 1) return tr('ahora mismo', 'just now');
+    if (diff.inMinutes < 60) return tr('hace {} min', '{} min ago').replaceFirst('{}', '${diff.inMinutes}');
+    if (diff.inHours < 24) return tr('hace {} h', '{} h ago').replaceFirst('{}', '${diff.inHours}');
+    return _formatDate(d);
   }
 
   @override
@@ -200,7 +253,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       radius: 52,
                       backgroundColor: Color(theme.primaryLight),
                       backgroundImage: photoBytes != null ? MemoryImage(photoBytes) : null,
-                      child: photoBytes == null ? Icon(Icons.person, size: 52, color: primary) : null,
+                      child: photoBytes == null ? const ClipOval(child: Avatar(size: 104)) : null,
                     ),
                     if (_isEditing)
                       Positioned(
@@ -301,7 +354,77 @@ class _AccountScreenState extends State<AccountScreen> {
                 _detailRow(label: s.accountSignInMethodLabel, value: _signInMethodLabel(s)),
                 const Divider(height: 22, color: AppColors.border),
                 _detailRow(label: s.accountMemberSinceLabel, value: _formatDate(widget.user.createdAt)),
+                if (_authService.currentSignInProvider() == SignInProvider.email) ...[
+                  const Divider(height: 22, color: AppColors.border),
+                  _detailRow(
+                    label: tr('Correo', 'Email'),
+                    value: _authService.isCurrentUserEmailVerified ? tr('Verificado ✓', 'Verified ✓') : tr('Sin verificar', 'Not verified'),
+                  ),
+                  const Divider(height: 22, color: AppColors.border),
+                  InkWell(
+                    onTap: _changePassword,
+                    child: Row(children: [
+                      Icon(Icons.lock_reset_rounded, color: primary, size: 20),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text(tr('Cambiar contraseña', 'Change password'),
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: primary)),
+                      ),
+                      Icon(Icons.chevron_right_rounded, color: primary),
+                    ]),
+                  ),
+                ],
               ],
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          // ---- Copia en la nube (para cambiar de móvil sin perder nada) ----
+          _sectionTitle(tr('Tus datos en la nube', 'Your data in the cloud')),
+          const SizedBox(height: 10),
+          _card(
+            child: ValueListenableBuilder<DateTime?>(
+              valueListenable: SettingsSync.lastUpload,
+              builder: (context, last, _) => Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Row(children: [
+                  const Text('☁️', style: TextStyle(fontSize: 26)),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(tr('Tus datos están guardados ✓', 'Your data is saved ✓'),
+                          style: const TextStyle(fontSize: 14.5, fontWeight: FontWeight.w800, color: AppColors.textPrimary)),
+                      const SizedBox(height: 2),
+                      Text(
+                        last == null
+                            ? tr('Tus registros se guardan solos en tu cuenta.', 'Your logs are saved to your account automatically.')
+                            : tr('Última copia: {}', 'Last backup: {}').replaceFirst('{}', _ago(last)),
+                        style: const TextStyle(fontSize: 12.5, color: AppColors.textMuted),
+                      ),
+                    ]),
+                  ),
+                ]),
+                const SizedBox(height: 8),
+                Text(
+                  tr('Si cambias de móvil, entra con esta misma cuenta y lo recuperas todo.', 'If you change phones, sign in with this same account and you get everything back.'),
+                  style: const TextStyle(fontSize: 12.5, color: AppColors.textMuted, height: 1.35),
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: _backingUp ? null : _backupNow,
+                    icon: _backingUp
+                        ? SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, color: primary))
+                        : Icon(Icons.cloud_upload_rounded, color: primary),
+                    label: Text(tr('Guardar ahora', 'Save now'), style: TextStyle(color: primary, fontWeight: FontWeight.w800)),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: primary),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                  ),
+                ),
+              ]),
             ),
           ),
           const SizedBox(height: 24),

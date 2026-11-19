@@ -5,6 +5,7 @@ import '../services/notifications.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
 import 'more.dart';
+import '../widgets/ciclo_date_picker.dart';
 
 /// Primera vez, en 3 pasos cortos: último periodo, duraciones y objetivo
 /// (con el nombre opcional). Todo se puede saltar.
@@ -26,7 +27,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Future<void> _pickDate() async {
     final now = DateTime.now();
-    final d = await showDatePicker(
+    final d = await showCicloDatePicker(
       context: context,
       initialDate: _last ?? now,
       firstDate: DateTime(now.year - 1),

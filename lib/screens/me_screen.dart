@@ -24,6 +24,7 @@ import 'review_screen.dart';
 import 'settings_screen.dart';
 import 'stats_screen.dart';
 import 'timeline_screen.dart';
+import '../go/widgets/ciclo_date_picker.dart';
 
 /// Pestaña "Yo" (rediseño completo, fase 5): reemplaza el uso temporal de
 /// `HealthMenuScreen(section: null, ...)` como 5ª pestaña. Estructura
@@ -251,7 +252,7 @@ class _MeScreenState extends State<MeScreen> {
   /// equivalente en settings_screen.dart._pickLmpDate.
   Future<DateTime?> _pickLmpDate() async {
     final now = DateTime.now();
-    return showDatePicker(
+    return showCicloDatePicker(
       context: context,
       initialDate: widget.pregnancy.lmp ?? now,
       firstDate: DateTime(now.year - 2),

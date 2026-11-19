@@ -6,6 +6,7 @@ import '../strings.dart';
 import '../widgets/ui.dart';
 import 'ramadan.dart';
 import '../services/ramadan.dart';
+import '../widgets/ciclo_date_picker.dart';
 
 /// Tradiciones: opcional y discreto. Se guarda solo en el móvil.
 class TraditionsScreen extends StatelessWidget {
@@ -140,7 +141,7 @@ class TraditionsScreen extends StatelessWidget {
                         onTap: () async {
                           final now = DateTime.now();
                           final init = santo == null ? now : DateTime(now.year, santo.$1, santo.$2);
-                          final d = await showDatePicker(
+                          final d = await showCicloDatePicker(
                             context: context,
                             initialDate: init,
                             firstDate: DateTime(now.year, 1, 1),

@@ -11,6 +11,7 @@ import 'extras.dart';
 import 'month_summary.dart';
 import 'michi_more.dart' show MichiDiaryScreen;
 import 'register.dart';
+import '../widgets/ciclo_date_picker.dart';
 
 const _title = TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: C.text);
 const _body = TextStyle(fontSize: 13, color: C.text, fontWeight: FontWeight.w600, height: 1.35);
@@ -756,7 +757,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
 
   Future<void> _pickDay() async {
     final now = DateTime.now();
-    final d = await showDatePicker(context: context, initialDate: _day, firstDate: DateTime(now.year - 3), lastDate: now);
+    final d = await showCicloDatePicker(context: context, initialDate: _day, firstDate: DateTime(now.year - 3), lastDate: now);
     if (d != null) setState(() => _setDay(dateOnly(d)));
   }
 
@@ -1081,7 +1082,7 @@ class PregnancyScreen extends StatelessWidget {
     final s = AppStore.instance;
     final now = dateOnly(DateTime.now());
     final initial = s.pregnancyStart ?? s.lastStart ?? addDays(now, -56);
-    final d = await showDatePicker(
+    final d = await showCicloDatePicker(
       context: context,
       helpText: tr('PRIMER DÍA DE TU ÚLTIMA REGLA', 'FIRST DAY OF YOUR LAST PERIOD'),
       initialDate: initial.isAfter(now) ? now : (initial.isBefore(addDays(now, -294)) ? addDays(now, -294) : initial),

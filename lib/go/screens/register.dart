@@ -4,6 +4,7 @@ import '../data/store.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
 import 'extra_details.dart';
+import '../widgets/ciclo_date_picker.dart';
 
 /// Registrar mi día: flujo, síntomas, dolor, ánimo y notas.
 class RegisterScreen extends StatefulWidget {
@@ -40,7 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future<void> _pickDay() async {
     final now = DateTime.now();
-    final d = await showDatePicker(context: context, initialDate: _day, firstDate: DateTime(now.year - 3), lastDate: now);
+    final d = await showCicloDatePicker(context: context, initialDate: _day, firstDate: DateTime(now.year - 3), lastDate: now);
     if (d != null) setState(() => _load(dateOnly(d)));
   }
 

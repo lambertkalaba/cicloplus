@@ -8,6 +8,8 @@ import '../services/settings_service.dart';
 import '../theme/app_theme.dart';
 import 'pregnancy_tracking_screen.dart';
 import 'reminder_screen.dart';
+import '../go/widgets/ciclo_date_picker.dart';
+import '../go/widgets/ciclo_time_picker.dart';
 
 /// Las 4 secciones de "Mi salud", usadas para poder abrir HealthMenuScreen
 /// mostrando solo una de ellas (ver [HealthMenuScreen.section]) — es lo
@@ -112,7 +114,7 @@ class _HealthMenuScreenState extends State<HealthMenuScreen> {
 
   Future<void> _pickLmpDate() async {
     final now = DateTime.now();
-    final picked = await showDatePicker(
+    final picked = await showCicloDatePicker(
       context: context,
       initialDate: _pregnancy.lmp ?? now,
       firstDate: DateTime(now.year - 2),
@@ -136,7 +138,7 @@ class _HealthMenuScreenState extends State<HealthMenuScreen> {
   Future<void> _pickPillReminderTime() async {
     final parts = _pillReminder.time.split(':');
     final initial = TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
-    final picked = await showTimePicker(context: context, initialTime: initial);
+    final picked = await showCicloTimePicker(context: context, initialTime: initial);
     if (picked == null) return;
     final time = '${picked.hour.toString().padLeft(2, '0')}:${picked.minute.toString().padLeft(2, '0')}';
     final updated = _pillReminder.copyWith(time: time);
@@ -228,7 +230,7 @@ class _HealthMenuScreenState extends State<HealthMenuScreen> {
                     OutlinedButton(
                       onPressed: () async {
                         final now = DateTime.now();
-                        final date = await showDatePicker(
+                        final date = await showCicloDatePicker(
                           context: dialogContext,
                           initialDate: pickedDate ?? now,
                           firstDate: now,
@@ -236,7 +238,7 @@ class _HealthMenuScreenState extends State<HealthMenuScreen> {
                         );
                         if (date == null) return;
                         if (!dialogContext.mounted) return;
-                        final time = await showTimePicker(
+                        final time = await showCicloTimePicker(
                           context: dialogContext,
                           initialTime: pickedTime ?? TimeOfDay.now(),
                         );

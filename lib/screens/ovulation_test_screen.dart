@@ -4,6 +4,7 @@ import '../go/strings.dart' show L, tr;
 import '../l10n/app_strings.dart';
 import '../services/settings_service.dart';
 import '../theme/app_theme.dart';
+import '../go/widgets/ciclo_date_picker.dart';
 
 /// Pantalla "Test de ovulación" (tira de LH), rediseñada a partir de la
 /// maqueta de ChatGPT (noviembre 2026): cabecera con degradado, tarjeta de
@@ -35,7 +36,7 @@ class _OvulationTestScreenState extends State<OvulationTestScreen> {
     return DateTime(n.year, n.month, n.day);
   }
 
-  Future<DateTime?> _pickDate(DateTime initial) => showDatePicker(
+  Future<DateTime?> _pickDate(DateTime initial) => showCicloDatePicker(
         context: context,
         initialDate: initial,
         firstDate: DateTime(2020),

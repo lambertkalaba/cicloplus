@@ -4,6 +4,7 @@ import '../data/store.dart';
 import '../services/notifications.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
+import '../widgets/ciclo_time_picker.dart';
 
 /// Pestaña Recordatorios: Mi ciclo, Mi salud y Mis hábitos.
 class RemindersScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class RemindersScreen extends StatelessWidget {
   String _time(int m) => '${(m ~/ 60).toString().padLeft(2, '0')}:${(m % 60).toString().padLeft(2, '0')}';
 
   Future<int?> _pickTime(BuildContext context, int minutes) async {
-    final t = await showTimePicker(context: context, initialTime: TimeOfDay(hour: minutes ~/ 60, minute: minutes % 60));
+    final t = await showCicloTimePicker(context: context, initialTime: TimeOfDay(hour: minutes ~/ 60, minute: minutes % 60));
     return t == null ? null : t.hour * 60 + t.minute;
   }
 

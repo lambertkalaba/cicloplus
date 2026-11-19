@@ -318,7 +318,7 @@ class GreenHeader extends StatelessWidget {
                               ),
                           ],
                         ),
-                      ),
+                      )
                       else
                         const SizedBox(width: 48),
                     ],
