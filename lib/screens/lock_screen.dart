@@ -4,6 +4,8 @@ import 'package:local_auth/local_auth.dart';
 import '../l10n/app_strings.dart';
 import '../services/settings_service.dart';
 import '../theme/app_theme.dart';
+import '../go/strings.dart' show tr;
+import '../go/widgets/ciclo_dialog.dart' show showCicloConfirm;
 
 /// Modo de uso de la pantalla de bloqueo, equivalente a `pinStage` en el
 /// prototipo web.
@@ -26,12 +28,16 @@ class LockScreen extends StatefulWidget {
   final LockScreenMode mode;
   final VoidCallback onSuccess;
   final VoidCallback? onCancel;
+  /// "¿Olvidaste tu PIN?": quita el PIN y cierra la sesión para volver a
+  /// entrar con la cuenta (correo o Google). Los datos siguen en la nube.
+  final Future<void> Function()? onForgot;
 
   const LockScreen({
     super.key,
     required this.mode,
     required this.onSuccess,
     this.onCancel,
+    this.onForgot,
   });
 
   @override
@@ -214,6 +220,26 @@ class _LockScreenState extends State<LockScreen> {
                   ],
                 ),
               ),
+              if (_stage == LockScreenMode.unlock && widget.onForgot != null) ...[
+                const SizedBox(height: 16),
+                TextButton(
+                  onPressed: () async {
+                    final ok = await showCicloConfirm(
+                      context,
+                      title: tr('¿Olvidaste tu PIN?', 'Forgot your PIN?'),
+                      message: tr(
+                          'No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.',
+                          "No problem. We'll remove the PIN and sign you out: sign back in with your email or Google account and you'll get everything back, your data is saved in your account. Then you can set a new PIN."),
+                      confirm: tr('Quitar PIN y entrar de nuevo', 'Remove PIN and sign in again'),
+                      cancel: tr('Cancelar', 'Cancel'),
+                      icon: 'michi_heart',
+                    );
+                    if (ok == true) await widget.onForgot!();
+                  },
+                  child: Text(tr('¿Olvidaste tu PIN?', 'Forgot your PIN?'),
+                      style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700)),
+                ),
+              ],
               if (widget.onCancel != null) ...[
                 const SizedBox(height: 18),
                 TextButton(

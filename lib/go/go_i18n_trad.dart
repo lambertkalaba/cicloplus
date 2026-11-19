@@ -3,6 +3,9 @@
 
 const Map<String, Map<String, String>> goI18nTrad = {
   "am": {
+    "¿Olvidaste tu PIN?": "PIN ረሳሽው?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "ችግር የለም። PIN ን አስወግደን እናስወጣሻለን፦ በኢሜይልሽ ወይም በGoogle መለያሽ እንደገና ግቢ፣ ሁሉም ይመለሳል፣ ውሂብሽ በመለያሽ ተቀምጧል። ከዚያ አዲስ PIN ማስቀመጥ ትችያለሽ።",
+    "Quitar PIN y entrar de nuevo": "PIN አስወግደሽ እንደገና ግቢ",
     "Temperatura, flujo, energía, medicación…": "ሙቀት፣ ፈሳሽ፣ ጉልበት፣ መድኃኒት…",
     "Mostrar siempre abierto": "ሁልጊዜ ክፍት አሳይ",
     "Se guarda en tu diario": "በማስታወሻሽ ይቀመጣል",
@@ -122,6 +125,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ቀለም ምረጪ",
   },
   "ar": {
+    "¿Olvidaste tu PIN?": "نسيتِ رمز PIN؟",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "لا مشكلة. سنزيل الرمز ونسجّل خروجك: ادخلي من جديد ببريدك أو حساب Google وستستعيدين كل شيء، بياناتك محفوظة في حسابك. بعدها يمكنك وضع رمز جديد.",
+    "Quitar PIN y entrar de nuevo": "إزالة الرمز والدخول من جديد",
     "Temperatura, flujo, energía, medicación…": "الحرارة، الإفرازات، الطاقة، الأدوية…",
     "Mostrar siempre abierto": "إظهار مفتوح دائمًا",
     "Se guarda en tu diario": "تُحفظ في مذكراتك",
@@ -300,6 +306,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} أيام",
   },
   "az": {
+    "¿Olvidaste tu PIN?": "PIN-i unutmusan?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Narahat olma. PIN-i silib hesabdan çıxaracağıq: e-poçtun və ya Google hesabınla yenidən daxil ol, hər şey geri qayıdacaq, məlumatların hesabında saxlanılır. Sonra yeni PIN qoya bilərsən.",
+    "Quitar PIN y entrar de nuevo": "PIN-i sil və yenidən daxil ol",
     "Temperatura, flujo, energía, medicación…": "Temperatur, ifrazat, enerji, dərman…",
     "Mostrar siempre abierto": "Həmişə açıq göstər",
     "Se guarda en tu diario": "Gündəliyində saxlanılır",
@@ -419,6 +428,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rəng seç",
   },
   "bn": {
+    "¿Olvidaste tu PIN?": "PIN ভুলে গেছ?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "কোনো সমস্যা নেই। PIN সরিয়ে তোমাকে লগ আউট করব: ইমেল বা Google অ্যাকাউন্টে আবার ঢোকো, সব ফিরে পাবে, তোমার ডেটা অ্যাকাউন্টে আছে। পরে নতুন PIN দিতে পারো।",
+    "Quitar PIN y entrar de nuevo": "PIN সরাও ও আবার ঢোকো",
     "Temperatura, flujo, energía, medicación…": "তাপমাত্রা, স্রাব, শক্তি, ওষুধ…",
     "Mostrar siempre abierto": "সবসময় খোলা দেখাও",
     "Se guarda en tu diario": "তোমার ডায়েরিতে সেভ হয়",
@@ -597,6 +609,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} দিন",
   },
   "cs": {
+    "¿Olvidaste tu PIN?": "Zapomněla jsi PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Nevadí. Odstraníme PIN a odhlásíme tě: přihlas se znovu e-mailem nebo účtem Google a vše získáš zpět, tvá data jsou uložená v účtu. Pak si můžeš nastavit nový PIN.",
+    "Quitar PIN y entrar de nuevo": "Odstranit PIN a přihlásit se znovu",
     "Temperatura, flujo, energía, medicación…": "Teplota, výtok, energie, léky…",
     "Mostrar siempre abierto": "Vždy zobrazit otevřené",
     "Se guarda en tu diario": "Uloží se do tvého deníku",
@@ -716,6 +731,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber barvu",
   },
   "da": {
+    "¿Olvidaste tu PIN?": "Glemt din PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Det gør ikke noget. Vi fjerner PIN-koden og logger dig ud: log ind igen med din e-mail eller Google-konto, og du får det hele tilbage, dine data er gemt på din konto. Bagefter kan du vælge en ny PIN.",
+    "Quitar PIN y entrar de nuevo": "Fjern PIN og log ind igen",
     "Temperatura, flujo, energía, medicación…": "Temperatur, udflåd, energi, medicin…",
     "Mostrar siempre abierto": "Vis altid åben",
     "Se guarda en tu diario": "Gemmes i din dagbog",
@@ -835,6 +853,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vælg en farve",
   },
   "de": {
+    "¿Olvidaste tu PIN?": "PIN vergessen?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Kein Problem. Wir entfernen die PIN und melden dich ab: Melde dich mit deiner E-Mail oder deinem Google-Konto wieder an und du bekommst alles zurück, deine Daten sind in deinem Konto gespeichert. Danach kannst du eine neue PIN festlegen.",
+    "Quitar PIN y entrar de nuevo": "PIN entfernen und neu anmelden",
     "Temperatura, flujo, energía, medicación…": "Temperatur, Ausfluss, Energie, Medikamente…",
     "Mostrar siempre abierto": "Immer geöffnet anzeigen",
     "Se guarda en tu diario": "Wird in deinem Tagebuch gespeichert",
@@ -1013,6 +1034,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} Tage",
   },
   "el": {
+    "¿Olvidaste tu PIN?": "Ξέχασες το PIN;",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Κανένα πρόβλημα. Θα αφαιρέσουμε το PIN και θα σε αποσυνδέσουμε: συνδέσου ξανά με το email ή τον λογαριασμό Google και τα παίρνεις όλα πίσω, τα δεδομένα σου είναι στον λογαριασμό σου. Μετά μπορείς να βάλεις νέο PIN.",
+    "Quitar PIN y entrar de nuevo": "Αφαίρεση PIN και νέα σύνδεση",
     "Temperatura, flujo, energía, medicación…": "Θερμοκρασία, έκκριση, ενέργεια, φάρμακα…",
     "Mostrar siempre abierto": "Να εμφανίζεται πάντα ανοιχτό",
     "Se guarda en tu diario": "Αποθηκεύεται στο ημερολόγιό σου",
@@ -1132,6 +1156,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Διάλεξε χρώμα",
   },
   "fa": {
+    "¿Olvidaste tu PIN?": "پین را فراموش کرده‌ای؟",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "اشکالی ندارد. پین را برمی‌داریم و از حساب خارج می‌شوی: دوباره با ایمیل یا حساب گوگل وارد شو و همه‌چیز برمی‌گردد، داده‌هایت در حسابت ذخیره است. بعد می‌توانی پین جدید بگذاری.",
+    "Quitar PIN y entrar de nuevo": "برداشتن پین و ورود دوباره",
     "Temperatura, flujo, energía, medicación…": "دما، ترشحات، انرژی، دارو…",
     "Mostrar siempre abierto": "همیشه باز نشان بده",
     "Se guarda en tu diario": "در دفترچه‌ات ذخیره می‌شود",
@@ -1251,6 +1278,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "یک رنگ انتخاب کن",
   },
   "fi": {
+    "¿Olvidaste tu PIN?": "Unohditko PIN-koodin?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Ei hätää. Poistamme PIN-koodin ja kirjaamme sinut ulos: kirjaudu uudelleen sähköpostilla tai Google-tilillä, niin saat kaiken takaisin, tietosi on tallennettu tilillesi. Sen jälkeen voit asettaa uuden PIN-koodin.",
+    "Quitar PIN y entrar de nuevo": "Poista PIN ja kirjaudu uudelleen",
     "Temperatura, flujo, energía, medicación…": "Lämpö, vuoto, energia, lääkkeet…",
     "Mostrar siempre abierto": "Näytä aina avattuna",
     "Se guarda en tu diario": "Tallentuu päiväkirjaasi",
@@ -1370,6 +1400,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Valitse väri",
   },
   "fil": {
+    "¿Olvidaste tu PIN?": "Nakalimutan ang PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Walang problema. Aalisin namin ang PIN at ila-log out ka: mag-log in ulit gamit ang email o Google account mo at babalik lahat, naka-save ang data mo sa account. Pagkatapos, puwede kang maglagay ng bagong PIN.",
+    "Quitar PIN y entrar de nuevo": "Alisin ang PIN at mag-log in ulit",
     "Temperatura, flujo, energía, medicación…": "Temperatura, discharge, enerhiya, gamot…",
     "Mostrar siempre abierto": "Laging ipakitang bukas",
     "Se guarda en tu diario": "Nase-save sa diary mo",
@@ -1489,6 +1522,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pumili ng kulay",
   },
   "fr": {
+    "¿Olvidaste tu PIN?": "Code PIN oublié ?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Pas de souci. Nous allons retirer le code PIN et te déconnecter : reconnecte-toi avec ton e-mail ou ton compte Google et tu retrouves tout, tes données sont enregistrées dans ton compte. Tu pourras ensuite choisir un nouveau code.",
+    "Quitar PIN y entrar de nuevo": "Retirer le PIN et me reconnecter",
     "Temperatura, flujo, energía, medicación…": "Température, pertes, énergie, médicaments…",
     "Mostrar siempre abierto": "Toujours afficher ouvert",
     "Se guarda en tu diario": "Enregistrée dans ton journal",
@@ -1667,6 +1703,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} jours",
   },
   "gu": {
+    "¿Olvidaste tu PIN?": "PIN ભૂલી ગયાં?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "કંઈ વાંધો નહીં. અમે PIN હટાવી લૉગ આઉટ કરીશું: તમારા ઇમેઇલ કે Google ખાતાથી ફરી લૉગ ઇન કરો, બધું પાછું મળશે, તમારો ડેટા ખાતામાં સાચવેલો છે. પછી નવો PIN રાખી શકો.",
+    "Quitar PIN y entrar de nuevo": "PIN હટાવો અને ફરી લૉગ ઇન કરો",
     "Temperatura, flujo, energía, medicación…": "તાપમાન, સ્રાવ, ઊર્જા, દવા…",
     "Mostrar siempre abierto": "હંમેશા ખુલ્લું બતાવો",
     "Se guarda en tu diario": "તમારી ડાયરીમાં સેવ થાય છે",
@@ -1786,6 +1825,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "એક રંગ પસંદ કરો",
   },
   "ha": {
+    "¿Olvidaste tu PIN?": "Kin manta PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Ba damuwa. Za mu cire PIN mu fitar da ke: sake shiga da imel ɗinki ko asusun Google, komai zai dawo, bayananki suna cikin asusunki. Sannan za ki iya saka sabon PIN.",
+    "Quitar PIN y entrar de nuevo": "Cire PIN ki sake shiga",
     "Temperatura, flujo, energía, medicación…": "Zafi, fitar ruwa, kuzari, magani…",
     "Mostrar siempre abierto": "Koyaushe nuna a buɗe",
     "Se guarda en tu diario": "Ana adana shi a littafin tunaninki",
@@ -1905,6 +1947,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Zaɓi launi",
   },
   "he": {
+    "¿Olvidaste tu PIN?": "שכחת את הקוד?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "אין בעיה. נסיר את הקוד וננתק אותך: התחברי שוב עם המייל או חשבון Google ותקבלי הכול בחזרה, הנתונים שלך שמורים בחשבון. אחר כך תוכלי להגדיר קוד חדש.",
+    "Quitar PIN y entrar de nuevo": "להסיר קוד ולהתחבר שוב",
     "Temperatura, flujo, energía, medicación…": "חום, הפרשות, אנרגיה, תרופות…",
     "Mostrar siempre abierto": "להציג תמיד פתוח",
     "Se guarda en tu diario": "נשמר ביומן שלך",
@@ -2024,6 +2069,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "בחרי צבע",
   },
   "hi": {
+    "¿Olvidaste tu PIN?": "PIN भूल गईं?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "कोई बात नहीं। हम PIN हटाकर आपको लॉग आउट कर देंगे: अपने ईमेल या Google खाते से दोबारा लॉग इन करें, सब वापस मिल जाएगा, आपका डेटा खाते में सुरक्षित है। फिर नया PIN रख सकती हैं।",
+    "Quitar PIN y entrar de nuevo": "PIN हटाएँ और फिर से लॉग इन करें",
     "Temperatura, flujo, energía, medicación…": "तापमान, स्राव, ऊर्जा, दवा…",
     "Mostrar siempre abierto": "हमेशा खुला दिखाएँ",
     "Se guarda en tu diario": "आपकी डायरी में सेव होता है",
@@ -2202,6 +2250,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} दिन",
   },
   "hu": {
+    "¿Olvidaste tu PIN?": "Elfelejtetted a PIN-kódot?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Semmi gond. Eltávolítjuk a PIN-kódot és kijelentkeztetünk: lépj be újra az e-mail-címeddel vagy Google-fiókoddal, és mindent visszakapsz, az adataid a fiókodban vannak. Utána új PIN-kódot állíthatsz be.",
+    "Quitar PIN y entrar de nuevo": "PIN törlése és újra belépés",
     "Temperatura, flujo, energía, medicación…": "Hőmérséklet, folyás, energia, gyógyszer…",
     "Mostrar siempre abierto": "Mindig nyitva mutassa",
     "Se guarda en tu diario": "A naplódba mentődik",
@@ -2321,6 +2372,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Válassz színt",
   },
   "id": {
+    "¿Olvidaste tu PIN?": "Lupa PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Tidak apa-apa. Kami akan menghapus PIN dan mengeluarkanmu: masuk lagi dengan email atau akun Google dan semuanya kembali, datamu tersimpan di akunmu. Setelah itu kamu bisa membuat PIN baru.",
+    "Quitar PIN y entrar de nuevo": "Hapus PIN dan masuk lagi",
     "Temperatura, flujo, energía, medicación…": "Suhu, keputihan, energi, obat…",
     "Mostrar siempre abierto": "Selalu tampilkan terbuka",
     "Se guarda en tu diario": "Tersimpan di diarimu",
@@ -2440,6 +2494,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "it": {
+    "¿Olvidaste tu PIN?": "Hai dimenticato il PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Nessun problema. Toglieremo il PIN e chiuderemo la sessione: accedi di nuovo con la tua e-mail o il tuo account Google e ritrovi tutto, i tuoi dati sono salvati nel tuo account. Poi potrai impostare un nuovo PIN.",
+    "Quitar PIN y entrar de nuevo": "Togli il PIN e accedi di nuovo",
     "Temperatura, flujo, energía, medicación…": "Temperatura, perdite, energia, farmaci…",
     "Mostrar siempre abierto": "Mostra sempre aperto",
     "Se guarda en tu diario": "Si salva nel tuo diario",
@@ -2559,6 +2616,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Scegli un colore",
   },
   "ja": {
+    "¿Olvidaste tu PIN?": "PINを忘れた？",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "大丈夫です。PINを削除してログアウトします。メールまたはGoogleアカウントでもう一度ログインすれば、すべて元通り。データはアカウントに保存されています。その後、新しいPINを設定できます。",
+    "Quitar PIN y entrar de nuevo": "PINを削除して再ログイン",
     "Temperatura, flujo, energía, medicación…": "体温、おりもの、元気度、薬…",
     "Mostrar siempre abierto": "いつも開いて表示",
     "Se guarda en tu diario": "日記に保存されます",
@@ -2678,6 +2738,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "色を選ぶ",
   },
   "kk": {
+    "¿Olvidaste tu PIN?": "PIN-кодты ұмыттың ба?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Ештеңе етпейді. PIN-ді алып тастап, аккаунттан шығарамыз: поштаңмен немесе Google аккаунтыңмен қайта кір — бәрі қайтады, деректерің аккаунтта сақталған. Кейін жаңа PIN қоя аласың.",
+    "Quitar PIN y entrar de nuevo": "PIN-ді алып, қайта кіру",
     "Temperatura, flujo, energía, medicación…": "Температура, бөлініс, қуат, дәрі…",
     "Mostrar siempre abierto": "Әрдайым ашық көрсету",
     "Se guarda en tu diario": "Күнделігіңе сақталады",
@@ -2797,6 +2860,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Түс таңдаңыз",
   },
   "kn": {
+    "¿Olvidaste tu PIN?": "PIN ಮರೆತಿರಾ?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "ಪರವಾಗಿಲ್ಲ. PIN ತೆಗೆದು ನಿಮ್ಮನ್ನು ಲಾಗ್ ಔಟ್ ಮಾಡುತ್ತೇವೆ: ನಿಮ್ಮ ಇಮೇಲ್ ಅಥವಾ Google ಖಾತೆಯಿಂದ ಮತ್ತೆ ಲಾಗಿನ್ ಆಗಿ, ಎಲ್ಲವೂ ಮರಳಿ ಸಿಗುತ್ತದೆ, ನಿಮ್ಮ ಡೇಟಾ ಖಾತೆಯಲ್ಲಿ ಸುರಕ್ಷಿತ. ನಂತರ ಹೊಸ PIN ಇಡಬಹುದು.",
+    "Quitar PIN y entrar de nuevo": "PIN ತೆಗೆದು ಮತ್ತೆ ಲಾಗಿನ್ ಆಗಿ",
     "Temperatura, flujo, energía, medicación…": "ತಾಪಮಾನ, ಸ್ರಾವ, ಶಕ್ತಿ, ಔಷಧ…",
     "Mostrar siempre abierto": "ಯಾವಾಗಲೂ ತೆರೆದಿರಲಿ",
     "Se guarda en tu diario": "ನಿಮ್ಮ ಡೈರಿಯಲ್ಲಿ ಉಳಿಯುತ್ತದೆ",
@@ -2916,6 +2982,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ಒಂದು ಬಣ್ಣ ಆರಿಸಿ",
   },
   "ko": {
+    "¿Olvidaste tu PIN?": "PIN을 잊으셨나요?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "괜찮아요. PIN을 지우고 로그아웃할게요. 이메일이나 Google 계정으로 다시 로그인하면 모두 돌아와요. 데이터는 계정에 저장되어 있어요. 그다음 새 PIN을 설정할 수 있어요.",
+    "Quitar PIN y entrar de nuevo": "PIN 지우고 다시 로그인",
     "Temperatura, flujo, energía, medicación…": "체온, 분비물, 에너지, 약…",
     "Mostrar siempre abierto": "항상 펼쳐서 보기",
     "Se guarda en tu diario": "일기에 저장돼요",
@@ -3035,6 +3104,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "색상 선택",
   },
   "ln": {
+    "¿Olvidaste tu PIN?": "Obosani PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Likambo te. Tokolongola PIN mpe tokobimisa yo: kota lisusu na imeyili to compte Google na yo, okozwa nyonso, ba données na yo ebombami na compte. Sima okoki kotia PIN ya sika.",
+    "Quitar PIN y entrar de nuevo": "Longola PIN mpe kota lisusu",
     "Temperatura, flujo, energía, medicación…": "Moto ya nzoto, mai, makasi, nkisi…",
     "Mostrar siempre abierto": "Lakisa ntango nyonso efungwami",
     "Se guarda en tu diario": "Ebombami na buku na yo",
@@ -3154,6 +3226,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pona langi",
   },
   "ml": {
+    "¿Olvidaste tu PIN?": "PIN മറന്നോ?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "കുഴപ്പമില്ല. PIN നീക്കി നിന്നെ ലോഗ് ഔട്ട് ചെയ്യും: നിന്റെ ഇമെയിൽ അല്ലെങ്കിൽ Google അക്കൗണ്ടിൽ വീണ്ടും കയറൂ, എല്ലാം തിരികെ കിട്ടും, നിന്റെ ഡാറ്റ അക്കൗണ്ടിൽ സുരക്ഷിതമാണ്. പിന്നെ പുതിയ PIN വെക്കാം.",
+    "Quitar PIN y entrar de nuevo": "PIN നീക്കി വീണ്ടും കയറുക",
     "Temperatura, flujo, energía, medicación…": "താപനില, സ്രവം, ഊർജം, മരുന്ന്…",
     "Mostrar siempre abierto": "എപ്പോഴും തുറന്നു കാണിക്കുക",
     "Se guarda en tu diario": "നിന്റെ ഡയറിയിൽ സേവ് ആകും",
@@ -3273,6 +3348,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ഒരു നിറം തിരഞ്ഞെടുക്കൂ",
   },
   "mr": {
+    "¿Olvidaste tu PIN?": "PIN विसरलात?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "काही हरकत नाही. आम्ही PIN काढून तुम्हाला लॉग आउट करू: ईमेल किंवा Google खात्याने पुन्हा लॉग इन करा, सगळे परत मिळेल, तुमचा डेटा खात्यात जतन आहे. नंतर नवीन PIN ठेवू शकता.",
+    "Quitar PIN y entrar de nuevo": "PIN काढा आणि पुन्हा लॉग इन करा",
     "Temperatura, flujo, energía, medicación…": "तापमान, स्राव, ऊर्जा, औषध…",
     "Mostrar siempre abierto": "नेहमी उघडे दाखवा",
     "Se guarda en tu diario": "तुमच्या डायरीत सेव्ह होते",
@@ -3392,6 +3470,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एक रंग निवडा",
   },
   "ms": {
+    "¿Olvidaste tu PIN?": "Lupa PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Tiada masalah. Kami akan buang PIN dan log keluar anda: log masuk semula dengan e-mel atau akaun Google dan semuanya kembali, data anda disimpan dalam akaun. Kemudian anda boleh tetapkan PIN baharu.",
+    "Quitar PIN y entrar de nuevo": "Buang PIN dan log masuk semula",
     "Temperatura, flujo, energía, medicación…": "Suhu, lelehan, tenaga, ubat…",
     "Mostrar siempre abierto": "Sentiasa tunjuk terbuka",
     "Se guarda en tu diario": "Disimpan dalam diari anda",
@@ -3511,6 +3592,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "my": {
+    "¿Olvidaste tu PIN?": "PIN မေ့သွားပြီလား?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "ကိစ္စမရှိပါ။ PIN ကိုဖယ်ပြီး အကောင့်မှ ထွက်ပေးပါမည်: သင့်အီးမေးလ် သို့မဟုတ် Google အကောင့်ဖြင့် ပြန်ဝင်ပါ၊ အားလုံး ပြန်ရမည်၊ သင့်ဒေတာ အကောင့်ထဲတွင် သိမ်းထားသည်။ ပြီးရင် PIN အသစ် ထားနိုင်သည်။",
+    "Quitar PIN y entrar de nuevo": "PIN ဖယ်ပြီး ပြန်ဝင်ရန်",
     "Temperatura, flujo, energía, medicación…": "အပူချိန်၊ အဆီ၊ စွမ်းအင်၊ ဆေး…",
     "Mostrar siempre abierto": "အမြဲ ဖွင့်ပြထားရန်",
     "Se guarda en tu diario": "သင့်ဒိုင်ယာရီထဲ သိမ်းသည်",
@@ -3630,6 +3714,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "အရောင်ရွေးပါ",
   },
   "ne": {
+    "¿Olvidaste tu PIN?": "PIN बिर्सनुभयो?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "केही छैन। हामी PIN हटाएर लग आउट गर्छौं: इमेल वा Google खाताबाट फेरि लग इन गर्नुहोस्, सबै फिर्ता पाउनुहुन्छ, तपाईंको डाटा खातामा सुरक्षित छ। त्यसपछि नयाँ PIN राख्न सक्नुहुन्छ।",
+    "Quitar PIN y entrar de nuevo": "PIN हटाउनुहोस् र फेरि लग इन गर्नुहोस्",
     "Temperatura, flujo, energía, medicación…": "तापक्रम, स्राव, ऊर्जा, औषधि…",
     "Mostrar siempre abierto": "सधैं खुला देखाउनुहोस्",
     "Se guarda en tu diario": "तपाईंको डायरीमा सेभ हुन्छ",
@@ -3749,6 +3836,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एउटा रङ छान्नुहोस्",
   },
   "nl": {
+    "¿Olvidaste tu PIN?": "PIN vergeten?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Geen probleem. We verwijderen de pincode en melden je af: log opnieuw in met je e-mail of Google-account en je krijgt alles terug, je gegevens staan in je account. Daarna kun je een nieuwe pincode instellen.",
+    "Quitar PIN y entrar de nuevo": "PIN verwijderen en opnieuw inloggen",
     "Temperatura, flujo, energía, medicación…": "Temperatuur, afscheiding, energie, medicatie…",
     "Mostrar siempre abierto": "Altijd open tonen",
     "Se guarda en tu diario": "Wordt opgeslagen in je dagboek",
@@ -3868,6 +3958,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Kies een kleur",
   },
   "om": {
+    "¿Olvidaste tu PIN?": "PIN dagatteettaa?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Rakkoon hin jiru. PIN ni haqna, herrega irraa si baasna: imeelii ykn herrega Google keetiin irra deebi’ii seeni, hundi ni deebi’a, daataan kee herrega keessa jira. Booda PIN haaraa kaa’uu dandeessa.",
+    "Quitar PIN y entrar de nuevo": "PIN haqii irra deebi’ii seeni",
     "Temperatura, flujo, energía, medicación…": "Ho’a, dhangala’aa, humna, qoricha…",
     "Mostrar siempre abierto": "Yeroo hunda banaa agarsiisi",
     "Se guarda en tu diario": "Galmee kee keessatti olkaa’ama",
@@ -3987,6 +4080,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Halluu filadhu",
   },
   "pa": {
+    "¿Olvidaste tu PIN?": "PIN ਭੁੱਲ ਗਏ?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "ਕੋਈ ਗੱਲ ਨਹੀਂ। ਅਸੀਂ PIN ਹਟਾ ਕੇ ਲੌਗ ਆਊਟ ਕਰ ਦੇਵਾਂਗੇ: ਆਪਣੀ ਈਮੇਲ ਜਾਂ Google ਖਾਤੇ ਨਾਲ ਮੁੜ ਲੌਗ ਇਨ ਕਰੋ, ਸਭ ਵਾਪਸ ਮਿਲ ਜਾਵੇਗਾ, ਤੁਹਾਡਾ ਡਾਟਾ ਖਾਤੇ ਵਿੱਚ ਸੁਰੱਖਿਅਤ ਹੈ। ਫਿਰ ਨਵਾਂ PIN ਰੱਖ ਸਕਦੇ ਹੋ।",
+    "Quitar PIN y entrar de nuevo": "PIN ਹਟਾਓ ਅਤੇ ਮੁੜ ਲੌਗ ਇਨ ਕਰੋ",
     "Temperatura, flujo, energía, medicación…": "ਤਾਪਮਾਨ, ਸਰਾਵ, ਊਰਜਾ, ਦਵਾਈ…",
     "Mostrar siempre abierto": "ਹਮੇਸ਼ਾ ਖੁੱਲ੍ਹਾ ਦਿਖਾਓ",
     "Se guarda en tu diario": "ਤੁਹਾਡੀ ਡਾਇਰੀ ਵਿੱਚ ਸੇਵ ਹੁੰਦਾ ਹੈ",
@@ -4106,6 +4202,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ਇੱਕ ਰੰਗ ਚੁਣੋ",
   },
   "pl": {
+    "¿Olvidaste tu PIN?": "Nie pamiętasz PIN-u?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Nic się nie stało. Usuniemy PIN i wylogujemy cię: zaloguj się ponownie e-mailem lub kontem Google i odzyskasz wszystko, twoje dane są zapisane na koncie. Potem możesz ustawić nowy PIN.",
+    "Quitar PIN y entrar de nuevo": "Usuń PIN i zaloguj się ponownie",
     "Temperatura, flujo, energía, medicación…": "Temperatura, wydzielina, energia, leki…",
     "Mostrar siempre abierto": "Zawsze pokazuj rozwinięte",
     "Se guarda en tu diario": "Zapisuje się w twoim dzienniku",
@@ -4225,6 +4324,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Wybierz kolor",
   },
   "pt": {
+    "¿Olvidaste tu PIN?": "Esqueceu o PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Sem problema. Vamos remover o PIN e encerrar a sessão: entre de novo com seu e-mail ou sua conta Google e recupere tudo, seus dados estão salvos na sua conta. Depois você pode criar um PIN novo.",
+    "Quitar PIN y entrar de nuevo": "Remover PIN e entrar de novo",
     "Temperatura, flujo, energía, medicación…": "Temperatura, fluxo, energia, medicação…",
     "Mostrar siempre abierto": "Mostrar sempre aberto",
     "Se guarda en tu diario": "Fica salva no seu diário",
@@ -4403,6 +4505,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} dias",
   },
   "ro": {
+    "¿Olvidaste tu PIN?": "Ai uitat PIN-ul?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Nicio problemă. Scoatem PIN-ul și te deconectăm: intră din nou cu e-mailul sau contul Google și recuperezi tot, datele tale sunt salvate în cont. Apoi poți pune un PIN nou.",
+    "Quitar PIN y entrar de nuevo": "Scoate PIN-ul și intră din nou",
     "Temperatura, flujo, energía, medicación…": "Temperatură, secreții, energie, medicamente…",
     "Mostrar siempre abierto": "Arată mereu deschis",
     "Se guarda en tu diario": "Se salvează în jurnalul tău",
@@ -4522,6 +4627,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Alege o culoare",
   },
   "ru": {
+    "¿Olvidaste tu PIN?": "Забыла PIN-код?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Ничего страшного. Мы уберём PIN и выйдем из аккаунта: войди снова с почтой или аккаунтом Google — и всё вернётся, твои данные сохранены в аккаунте. Потом можно поставить новый PIN.",
+    "Quitar PIN y entrar de nuevo": "Убрать PIN и войти снова",
     "Temperatura, flujo, energía, medicación…": "Температура, выделения, энергия, лекарства…",
     "Mostrar siempre abierto": "Всегда показывать открытым",
     "Se guarda en tu diario": "Сохраняется в твоём дневнике",
@@ -4700,6 +4808,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} дн.",
   },
   "si": {
+    "¿Olvidaste tu PIN?": "PIN අමතක වුණාද?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "ප්‍රශ්නයක් නැහැ. අපි PIN ඉවත් කර ඔබව ඉවත් කරමු: ඔබේ ඊමේල් හෝ Google ගිණුමෙන් නැවත ඇතුළු වන්න, සියල්ල ආපසු ලැබේ, ඔබේ දත්ත ගිණුමේ සුරැකී ඇත. පසුව නව PIN එකක් දැමිය හැක.",
+    "Quitar PIN y entrar de nuevo": "PIN ඉවත් කර නැවත ඇතුළු වන්න",
     "Temperatura, flujo, energía, medicación…": "උෂ්ණත්වය, ස්‍රාවය, ශක්තිය, ඖෂධ…",
     "Mostrar siempre abierto": "සැමවිටම විවෘතව පෙන්වන්න",
     "Se guarda en tu diario": "ඔබේ දිනපොතේ සුරැකේ",
@@ -4819,6 +4930,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "වර්ණයක් තෝරන්න",
   },
   "sk": {
+    "¿Olvidaste tu PIN?": "Zabudla si PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Nevadí. Odstránime PIN a odhlásime ťa: prihlás sa znova e-mailom alebo účtom Google a všetko získaš späť, tvoje údaje sú uložené v účte. Potom si môžeš nastaviť nový PIN.",
+    "Quitar PIN y entrar de nuevo": "Odstrániť PIN a prihlásiť sa znova",
     "Temperatura, flujo, energía, medicación…": "Teplota, výtok, energia, lieky…",
     "Mostrar siempre abierto": "Vždy zobraziť otvorené",
     "Se guarda en tu diario": "Uloží sa do tvojho denníka",
@@ -4938,6 +5052,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber farbu",
   },
   "sv": {
+    "¿Olvidaste tu PIN?": "Glömt din PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Ingen fara. Vi tar bort PIN-koden och loggar ut dig: logga in igen med din e-post eller ditt Google-konto så får du tillbaka allt, dina data är sparade på ditt konto. Sedan kan du välja en ny PIN.",
+    "Quitar PIN y entrar de nuevo": "Ta bort PIN och logga in igen",
     "Temperatura, flujo, energía, medicación…": "Temperatur, flytningar, energi, mediciner…",
     "Mostrar siempre abierto": "Visa alltid öppen",
     "Se guarda en tu diario": "Sparas i din dagbok",
@@ -5057,6 +5174,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Välj en färg",
   },
   "sw": {
+    "¿Olvidaste tu PIN?": "Umesahau PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Hakuna shida. Tutaondoa PIN na kukutoa: ingia tena kwa barua pepe au akaunti ya Google na upate kila kitu, data yako imehifadhiwa kwenye akaunti. Kisha unaweza kuweka PIN mpya.",
+    "Quitar PIN y entrar de nuevo": "Ondoa PIN na uingie tena",
     "Temperatura, flujo, energía, medicación…": "Joto, uchafu, nguvu, dawa…",
     "Mostrar siempre abierto": "Onyesha wazi kila wakati",
     "Se guarda en tu diario": "Huhifadhiwa kwenye shajara yako",
@@ -5176,6 +5296,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chagua rangi",
   },
   "ta": {
+    "¿Olvidaste tu PIN?": "PIN மறந்துவிட்டதா?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "பரவாயில்லை. PIN-ஐ நீக்கி உங்களை வெளியேற்றுவோம்: உங்கள் மின்னஞ்சல் அல்லது Google கணக்கில் மீண்டும் உள்நுழையுங்கள், எல்லாம் திரும்ப கிடைக்கும், உங்கள் தரவு கணக்கில் சேமிக்கப்பட்டுள்ளது. பிறகு புதிய PIN வைக்கலாம்.",
+    "Quitar PIN y entrar de nuevo": "PIN-ஐ நீக்கி மீண்டும் உள்நுழை",
     "Temperatura, flujo, energía, medicación…": "வெப்பநிலை, சுரப்பு, ஆற்றல், மருந்து…",
     "Mostrar siempre abierto": "எப்போதும் திறந்தே காட்டு",
     "Se guarda en tu diario": "உங்கள் டைரியில் சேமிக்கப்படும்",
@@ -5295,6 +5418,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ஒரு நிறத்தைத் தேர்வுசெய்யுங்கள்",
   },
   "te": {
+    "¿Olvidaste tu PIN?": "PIN మర్చిపోయారా?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "పర్వాలేదు. PIN తీసివేసి మిమ్మల్ని లాగ్ అవుట్ చేస్తాం: మీ ఈమెయిల్ లేదా Google ఖాతాతో మళ్లీ లాగిన్ అవ్వండి, అన్నీ తిరిగి వస్తాయి, మీ డేటా ఖాతాలో భద్రంగా ఉంది. తర్వాత కొత్త PIN పెట్టుకోవచ్చు.",
+    "Quitar PIN y entrar de nuevo": "PIN తీసివేసి మళ్లీ లాగిన్ అవ్వు",
     "Temperatura, flujo, energía, medicación…": "ఉష్ణోగ్రత, స్రావం, శక్తి, మందులు…",
     "Mostrar siempre abierto": "ఎప్పుడూ తెరిచి చూపించు",
     "Se guarda en tu diario": "మీ డైరీలో సేవ్ అవుతుంది",
@@ -5414,6 +5540,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ఒక రంగును ఎంచుకోండి",
   },
   "th": {
+    "¿Olvidaste tu PIN?": "ลืม PIN ใช่ไหม?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "ไม่เป็นไร เราจะลบ PIN และออกจากระบบให้ เข้าสู่ระบบใหม่ด้วยอีเมลหรือบัญชี Google แล้วจะได้ทุกอย่างคืน ข้อมูลของคุณเก็บไว้ในบัญชี จากนั้นตั้ง PIN ใหม่ได้",
+    "Quitar PIN y entrar de nuevo": "ลบ PIN แล้วเข้าสู่ระบบใหม่",
     "Temperatura, flujo, energía, medicación…": "อุณหภูมิ ตกขาว พลังงาน ยา…",
     "Mostrar siempre abierto": "แสดงแบบเปิดตลอด",
     "Se guarda en tu diario": "บันทึกไว้ในไดอารี่ของคุณ",
@@ -5533,6 +5662,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "เลือกสี",
   },
   "tr": {
+    "¿Olvidaste tu PIN?": "PIN’ini mi unuttun?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Sorun değil. PIN’i kaldırıp oturumunu kapatacağız: e-postan veya Google hesabınla yeniden giriş yap, her şey geri gelir, verilerin hesabında kayıtlı. Sonra yeni bir PIN belirleyebilirsin.",
+    "Quitar PIN y entrar de nuevo": "PIN’i kaldır ve yeniden giriş yap",
     "Temperatura, flujo, energía, medicación…": "Ateş, akıntı, enerji, ilaç…",
     "Mostrar siempre abierto": "Hep açık göster",
     "Se guarda en tu diario": "Günlüğüne kaydedilir",
@@ -5652,6 +5784,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Bir renk seç",
   },
   "uk": {
+    "¿Olvidaste tu PIN?": "Забула PIN-код?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Нічого страшного. Ми приберемо PIN і вийдемо з облікового запису: увійди знову з поштою або акаунтом Google — і все повернеться, твої дані збережено в обліковому записі. Потім можна встановити новий PIN.",
+    "Quitar PIN y entrar de nuevo": "Прибрати PIN і увійти знову",
     "Temperatura, flujo, energía, medicación…": "Температура, виділення, енергія, ліки…",
     "Mostrar siempre abierto": "Завжди показувати відкритим",
     "Se guarda en tu diario": "Зберігається у твоєму щоденнику",
@@ -5771,6 +5906,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Обери колір",
   },
   "ur": {
+    "¿Olvidaste tu PIN?": "PIN بھول گئیں؟",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "کوئی بات نہیں۔ ہم PIN ہٹا کر آپ کو لاگ آؤٹ کر دیں گے: اپنے ای میل یا گوگل اکاؤنٹ سے دوبارہ داخل ہوں، سب کچھ واپس مل جائے گا، آپ کا ڈیٹا اکاؤنٹ میں محفوظ ہے۔ پھر نیا PIN رکھ سکتی ہیں۔",
+    "Quitar PIN y entrar de nuevo": "PIN ہٹائیں اور دوبارہ داخل ہوں",
     "Temperatura, flujo, energía, medicación…": "درجہ حرارت، اخراج، توانائی، دوائیں…",
     "Mostrar siempre abierto": "ہمیشہ کھلا دکھائیں",
     "Se guarda en tu diario": "آپ کی ڈائری میں محفوظ ہوتا ہے",
@@ -5890,6 +6028,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ایک رنگ چنیں",
   },
   "uz": {
+    "¿Olvidaste tu PIN?": "PIN-kodni unutdingizmi?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Hechqisi yo‘q. PIN-ni olib tashlab, hisobdan chiqaramiz: pochtangiz yoki Google hisobingiz bilan qayta kiring — hammasi qaytadi, ma’lumotlaringiz hisobingizda saqlangan. Keyin yangi PIN qo‘yishingiz mumkin.",
+    "Quitar PIN y entrar de nuevo": "PIN-ni olib, qayta kirish",
     "Temperatura, flujo, energía, medicación…": "Harorat, ajralma, quvvat, dori…",
     "Mostrar siempre abierto": "Doim ochiq ko‘rsatish",
     "Se guarda en tu diario": "Kundaligingizga saqlanadi",
@@ -6009,6 +6150,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rang tanlang",
   },
   "vi": {
+    "¿Olvidaste tu PIN?": "Quên mã PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Không sao. Chúng tôi sẽ gỡ mã PIN và đăng xuất bạn: đăng nhập lại bằng email hoặc tài khoản Google là lấy lại tất cả, dữ liệu của bạn được lưu trong tài khoản. Sau đó bạn có thể đặt mã PIN mới.",
+    "Quitar PIN y entrar de nuevo": "Gỡ PIN và đăng nhập lại",
     "Temperatura, flujo, energía, medicación…": "Nhiệt độ, dịch tiết, năng lượng, thuốc…",
     "Mostrar siempre abierto": "Luôn hiển thị mở",
     "Se guarda en tu diario": "Được lưu vào nhật ký của bạn",
@@ -6128,6 +6272,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chọn màu",
   },
   "wo": {
+    "¿Olvidaste tu PIN?": "Fàtte nga sa PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Amul solo. Dinañu dindi PIN bi te génne la: duggaatal ak sa imeel walla sa kont Google, dinga am lépp, sa données ñu denc nañu ko ci sa kont. Ginnaaw ga, mën ngaa def PIN bu bees.",
+    "Quitar PIN y entrar de nuevo": "Dindi PIN te duggaat",
     "Temperatura, flujo, energía, medicación…": "Tàngoor, ndox, doole, garab…",
     "Mostrar siempre abierto": "Wone ko ubbeeku saa su nekk",
     "Se guarda en tu diario": "Dañu koy denc ci sa kayit",
@@ -6247,6 +6394,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Tànnal benn melo",
   },
   "yo": {
+    "¿Olvidaste tu PIN?": "Ṣé o gbàgbé PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Kò burú. A ó yọ PIN kúrò, a ó sì jáde fún ọ: wọlé padà pẹ̀lú ímeèlì rẹ tàbí àkọọ́lẹ̀ Google, gbogbo rẹ̀ yóò padà, dátà rẹ wà nínú àkọọ́lẹ̀ rẹ. Lẹ́yìn náà o lè fi PIN tuntun sí i.",
+    "Quitar PIN y entrar de nuevo": "Yọ PIN kí o sì wọlé padà",
     "Temperatura, flujo, energía, medicación…": "Ìgbóná ara, ìtújáde, agbára, oògùn…",
     "Mostrar siempre abierto": "Máa fi hàn ní ṣíṣí nígbà gbogbo",
     "Se guarda en tu diario": "Ó ń wà ní ìpamọ́ nínú ìwé-ìrántí rẹ",
@@ -6366,6 +6516,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Yan àwọ̀ kan",
   },
   "zh": {
+    "¿Olvidaste tu PIN?": "忘记PIN码？",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "没关系。我们会移除PIN码并退出登录：用你的邮箱或Google账号重新登录就能找回一切，你的数据保存在账户里。之后你可以设置新的PIN码。",
+    "Quitar PIN y entrar de nuevo": "移除PIN码并重新登录",
     "Temperatura, flujo, energía, medicación…": "体温、分泌物、精力、用药…",
     "Mostrar siempre abierto": "始终展开显示",
     "Se guarda en tu diario": "会保存到你的日记",
@@ -6485,6 +6638,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "选择颜色",
   },
   "zh-TW": {
+    "¿Olvidaste tu PIN?": "忘記PIN碼？",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "沒關係。我們會移除PIN碼並登出：用你的電子郵件或Google帳號重新登入就能找回一切，你的資料儲存在帳號裡。之後你可以設定新的PIN碼。",
+    "Quitar PIN y entrar de nuevo": "移除PIN碼並重新登入",
     "Temperatura, flujo, energía, medicación…": "體溫、分泌物、精力、用藥…",
     "Mostrar siempre abierto": "一律展開顯示",
     "Se guarda en tu diario": "會儲存到你的日記",
@@ -6604,6 +6760,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "選擇顏色",
   },
   "zu": {
+    "¿Olvidaste tu PIN?": "Ukhohlwe i-PIN?",
+    "No pasa nada. Quitaremos el PIN y cerraremos la sesión: vuelve a entrar con tu correo o tu cuenta de Google y lo recuperas todo, tus datos están guardados en tu cuenta. Después puedes poner un PIN nuevo.": "Akunankinga. Sizosusa i-PIN bese sikukhipha: ngena futhi nge-imeyili noma i-akhawunti ye-Google, konke kuzobuya, idatha yakho igcinwe ku-akhawunti. Ngemva kwalokho ungafaka i-PIN entsha.",
+    "Quitar PIN y entrar de nuevo": "Susa i-PIN bese ungena futhi",
     "Temperatura, flujo, energía, medicación…": "Izinga lokushisa, ukuphuma, amandla, imithi…",
     "Mostrar siempre abierto": "Bonisa kuvuliwe njalo",
     "Se guarda en tu diario": "Kugcinwa kudayari yakho",

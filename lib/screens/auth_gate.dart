@@ -97,6 +97,15 @@ class _AuthGateState extends State<AuthGate> {
       return LockScreen(
         mode: LockScreenMode.unlock,
         onSuccess: () => setState(() => _locked = false),
+        onForgot: () async {
+          await _settingsService.clearPin();
+          await _authService.signOut();
+          if (!mounted) return;
+          setState(() {
+            _locked = false;
+            _user = null;
+          });
+        },
       );
     }
 
