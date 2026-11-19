@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../services/locale_controller.dart';
 import 'extra_i18n.dart';
+import '../go/go_i18n_trad.dart';
 
 /// Textos traducidos de la app (español, inglés, francés, alemán).
 ///
@@ -28,7 +29,7 @@ class AppStrings {
   static AppStrings forCode(String code) => AppStrings._(code);
 
   String _t(Map<String, String> table) =>
-      table[code] ?? ExtraI18n.t(table['es']!, table['en']) ?? table['en'] ?? table['es']!;
+      table[code] ?? goI18nTrad[code]?[table['es']] ?? ExtraI18n.t(table['es']!, table['en']) ?? table['en'] ?? table['es']!;
   List<String> _tList(Map<String, List<String>> table) {
     final own = table[code];
     if (own != null) return own;

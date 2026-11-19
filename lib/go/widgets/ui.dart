@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import '../data/store.dart';
+import '../strings.dart';
 import 'avatar_picker.dart';
 import '../screens/reminders.dart';
 
@@ -281,7 +282,7 @@ class GreenHeader extends StatelessWidget {
                             () => Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (_) => SubPage(
-                                  title: 'Recordatorios',
+                                  title: tr('Recordatorios', 'Reminders'),
                                   child: const RemindersScreen(),
                                 ),
                               ),

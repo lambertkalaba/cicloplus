@@ -119,7 +119,7 @@ class PartnerTipsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            tr('Semana ${t.week}', 'Week ${t.week}'),
+            tr('Semana {}', 'Week {}').replaceFirst('{}', '${t.week}'),
             style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700, color: isCurrent ? primary : AppColors.textPrimary),
           ),
           const SizedBox(height: 6),

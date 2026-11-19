@@ -47,7 +47,7 @@ class HistoryList extends StatelessWidget {
                 style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.textPrimary),
               ),
               Text(
-                tr('${cycle.length} días', '${cycle.length} days'),
+                tr('{} días', '{} days').replaceFirst('{}', '${cycle.length}'),
                 style: const TextStyle(fontSize: 12, color: AppColors.textMuted),
               ),
             ],

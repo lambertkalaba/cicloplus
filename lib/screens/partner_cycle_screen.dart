@@ -114,7 +114,7 @@ class PartnerCycleScreen extends StatelessWidget {
               const SizedBox(height: 14),
             ],
             if (data.currentDayInCycle != null) ...[
-              _statCard(icon: Icons.today_outlined, label: tr('Día del ciclo', 'Cycle day'), value: tr('Día ${data.currentDayInCycle! + 1}', 'Day ${data.currentDayInCycle! + 1}'), primary: primary),
+              _statCard(icon: Icons.today_outlined, label: tr('Día del ciclo', 'Cycle day'), value: tr('Día {}', 'Day {}').replaceFirst('{}', '${data.currentDayInCycle! + 1}'), primary: primary),
               const SizedBox(height: 12),
             ],
             if (data.nextPeriodStart != null) ...[

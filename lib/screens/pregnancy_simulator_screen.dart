@@ -222,7 +222,7 @@ class _PregnancySimulatorScreenState extends State<PregnancySimulatorScreen> {
               min: 1,
               max: _totalWeeks.toDouble(),
               divisions: _totalWeeks - 1,
-              label: tr('Semana $_week', 'Week $_week'),
+              label: tr('Semana {}', 'Week {}').replaceFirst('{}', '$_week'),
               onChanged: (v) => setState(() => _week = v.round()),
             ),
           ),
