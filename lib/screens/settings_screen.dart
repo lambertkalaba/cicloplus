@@ -41,6 +41,8 @@ import 'paywall_screen.dart';
 import 'pregnancy_tracking_screen.dart';
 import 'reminder_screen.dart';
 import 'widget_placeholder_screen.dart';
+import '../go/data/store.dart' as gostore;
+import '../go/strings.dart' as gotr;
 
 /// Pantalla de configuración, reorganizada (fase "Ajustes: reorganizar
 /// como en capturas") siguiendo el orden de las capturas de referencia:
@@ -270,8 +272,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
       selfReportedCycleLen: _selfReportedCycleLen,
       selfReportedPeriodLen: _selfReportedPeriodLen,
     );
-    final avgCycle = predictor.getAvgCycleLength();
-    final avgPeriod = predictor.getAvgPeriodLength();
+    // Mismos valores que el resto de la app (Hoy, Yo, Informes).
+    final gs = gostore.AppStore.instance;
+    final avgCycle = gs.lastStart != null ? gs.avgCycle : predictor.getAvgCycleLength();
+    final avgPeriod = gs.lastStart != null ? gs.avgPeriod : predictor.getAvgPeriodLength();
+    String dayUnit(int n) => n == 1 ? gotr.tr('día', 'day') : gotr.tr('días', 'days');
     await showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -325,7 +330,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         child: _predictionValueCard(
                           label: s.meAvgCycle,
                           value: avgCycle,
-                          unit: s.meDayUnit,
+                          unit: dayUnit(avgCycle),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -333,7 +338,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         child: _predictionValueCard(
                           label: s.meAvgPeriod,
                           value: avgPeriod,
-                          unit: s.meDayUnit,
+                          unit: dayUnit(avgPeriod),
                         ),
                       ),
                     ],

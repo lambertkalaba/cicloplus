@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import '../cicloplus_host.dart' show CicloData;
 import '../cicloplus_links.dart';
 import '../data/store.dart';
 import '../strings.dart';
@@ -20,7 +21,9 @@ class CyclePlus {
     final s = AppStore.instance;
     final c = s.cycleLengths;
     final recent = c.length > 6 ? c.sublist(c.length - 6) : c;
-    if (s.perimenopause) {
+    // "Mi ciclo es irregular" (Configuración > Configuración de predicción)
+    // también da un margen de fechas, como el modo perimenopausia.
+    if (s.perimenopause || CicloData.instance.irregular) {
       if (recent.length < 2) return 5;
       final r = recent.reduce(math.max) - recent.reduce(math.min);
       return (r ~/ 2).clamp(4, 10);
