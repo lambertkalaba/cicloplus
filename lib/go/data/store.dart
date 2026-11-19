@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'cloud_bridge.dart';
+import 'settings_sync.dart';
 
 /// Clave de día "yyyy-mm-dd".
 String dayKey(DateTime d) =>
@@ -319,6 +320,8 @@ class AppStore extends ChangeNotifier {
 
   Future<void> attachUser(String uid, {String? profileName}) async {
     if (_prefs == null) await load();
+    // Móvil nuevo: trae de la nube los ajustes y el progreso de Michi.
+    if (await SettingsSync.restoreIfNeeded(uid)) await load();
     _cloud = CloudBridge(uid);
     final p = _prefs!;
     final sameUser = p.getString('go_uid') == uid && logs.isNotEmpty;
@@ -343,6 +346,7 @@ class AppStore extends ChangeNotifier {
     _recompute();
     notifyListeners();
     await _save();
+    SettingsSync.start(uid);
   }
 
   /// Días tal como están en la nube (para las pantallas de CicloPlus).
@@ -365,6 +369,8 @@ class AppStore extends ChangeNotifier {
 
   /// Al cerrar sesión: olvida los días de esa cuenta en memoria.
   void detachUser() {
+    SettingsSync.upload();
+    SettingsSync.stop();
     _cloud = null;
     logs.clear();
     // Al cerrar sesión no se deja la copia de sus días en el móvil.
@@ -473,6 +479,7 @@ class AppStore extends ChangeNotifier {
     await p.setBool('discreetNotifs', discreetNotifs);
     await p.setStringList('customSymptoms', customSymptoms);
     await p.setString('reminders', jsonEncode(reminders.toJson()));
+    SettingsSync.schedule();
   }
 
   /// Guarda y avisa a la interfaz (y a los recordatorios).
