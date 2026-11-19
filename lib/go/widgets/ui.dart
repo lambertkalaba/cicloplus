@@ -203,6 +203,8 @@ class GreenHeader extends StatelessWidget {
   final VoidCallback? onBack;
   final VoidCallback? onBell;
   final bool bellDot;
+  /// La campana repetía la pestaña Recordatorios: oculta por defecto.
+  final bool showBell;
   final bool flowers;
 
   const GreenHeader({
@@ -211,7 +213,8 @@ class GreenHeader extends StatelessWidget {
     this.onMenu,
     this.onBack,
     this.onBell,
-    this.bellDot = true,
+    this.bellDot = false,
+    this.showBell = false,
     this.flowers = false,
   });
 
@@ -276,6 +279,7 @@ class GreenHeader extends StatelessWidget {
                       else
                         const SizedBox(width: 48),
                       const Expanded(child: Center(child: Logo())),
+                      if (onBell != null || showBell)
                       IconButton(
                         onPressed:
                             onBell ??
@@ -315,6 +319,8 @@ class GreenHeader extends StatelessWidget {
                           ],
                         ),
                       ),
+                      else
+                        const SizedBox(width: 48),
                     ],
                   ),
                   if (title != null)

@@ -69,7 +69,6 @@ class ShellState extends State<Shell> {
               title: _tab == 3 ? tr('Yo', 'Me') : null,
               flowers: _tab == 3,
               onMenu: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const MichiSearchScreen())),
-              onBell: () => go(2),
             ),
             Expanded(child: IndexedStack(index: _tab, children: pages)),
           ],
