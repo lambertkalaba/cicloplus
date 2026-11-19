@@ -93,7 +93,7 @@ class RamadanScreen extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 14),
-                      if (!active)
+                      if (!active && (pending > 0 || madeToday))
                         PinkButton(
                           label: madeToday ? tr('Hoy ya lo has recuperado ✓', 'Made up today ✓') : tr('Hoy he recuperado un día', 'I made up a day today'),
                           icon: madeToday ? Icons.undo_rounded : Icons.check_rounded,
@@ -114,13 +114,42 @@ class RamadanScreen extends StatelessWidget {
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
                       title: Text(tr('Mostrar en Hoy', 'Show on Today'), style: const TextStyle(fontWeight: FontWeight.w800)),
-                      subtitle: Text(tr('Una tarjeta en Hoy durante el Ramadán y mientras te queden días por recuperar.',
-                          'A card on Today during Ramadan and while you have days to make up.')),
+                      subtitle: Text(tr('Una tarjeta en Hoy desde unos días antes del Ramadán hasta una semana después.',
+                          'A card on Today from a few days before Ramadan until a week after.')),
                       value: rm.enabled,
                       activeColor: Colors.white,
                       activeTrackColor: const Color(0xFF2FB45A),
                       onChanged: rm.setEnabled,
                     ),
+                    if (rm.enabled) ...[
+                      Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: Text(tr('Que aparezca', 'Show it'), style: const TextStyle(fontWeight: FontWeight.w800)),
+                      ),
+                      const SizedBox(height: 6),
+                      SizedBox(
+                       width: double.infinity,
+                       child: Wrap(
+                        alignment: WrapAlignment.start,
+                        spacing: 8,
+                        children: [
+                          for (final (v, label) in [
+                            (3, tr('3 días antes', '3 days before')),
+                            (7, tr('1 semana antes', '1 week before')),
+                            (30, tr('1 mes antes', '1 month before')),
+                          ])
+                            ChoiceChip(
+                              label: Text(label),
+                              selected: rm.lead == v,
+                              onSelected: (_) => rm.setLead(v),
+                              selectedColor: C.pinkSoft,
+                              labelStyle: TextStyle(fontWeight: FontWeight.w700, color: rm.lead == v ? C.pinkDark : C.text),
+                            ),
+                        ],
+                      ),
+                      ),
+                      const SizedBox(height: 4),
+                    ],
                     const Divider(height: 8),
                     Row(
                       children: [
@@ -198,11 +227,14 @@ class RamadanCard extends StatelessWidget {
         final today = dateOnly(DateTime.now());
         final r = rm.currentOrNext(today);
         final active = r != null && r.contains(today);
-        final soon = r != null && !active && r.start.difference(today).inDays <= 14;
+        final upcoming = active || (r != null && r.start.difference(today).inDays <= rm.lead);
+        final shown = upcoming ? r : rm.debtRamadan;
         final pending = rm.pending;
-        final sub = active || soon
+        final sub = upcoming
             ? rm.status(today)
-            : tr('Te quedan {} días por recuperar', 'You have {} days to make up').replaceFirst('{}', '$pending');
+            : pending == 0
+                ? tr('No te queda ningún día por recuperar ✓', 'You have no days left to make up ✓')
+                : tr('Te quedan {} días por recuperar', 'You have {} days to make up').replaceFirst('{}', '$pending');
         return Padding(
           padding: const EdgeInsets.only(top: 12),
           child: InkWell(
@@ -225,7 +257,7 @@ class RamadanCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(r == null ? tr('Ramadán', 'Ramadan') : '${tr('Ramadán', 'Ramadan')} ${r.start.year}',
+                        Text(shown == null ? tr('Ramadán', 'Ramadan') : '${tr('Ramadán', 'Ramadan')} ${shown.start.year}',
                             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w900, color: C.text)),
                         const SizedBox(height: 2),
                         Text(sub, style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700, color: C.pinkDark)),

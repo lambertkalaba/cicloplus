@@ -48,7 +48,6 @@ class TodayScreen extends StatelessWidget {
               _PillCard(today: today),
             ],
             if (!pregnant) const PeriodModeCard(),
-            if (!pregnant) const RamadanCard(),
             const SantoCard(),
             const SizedBox(height: 12),
             Container(
@@ -87,6 +86,7 @@ class TodayScreen extends StatelessWidget {
                 ],
               ),
             ),
+            if (!pregnant) const RamadanCard(),
             if (!pregnant) ...[
               const SizedBox(height: 12),
               const QuickLogRow(),

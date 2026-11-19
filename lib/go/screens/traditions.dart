@@ -5,6 +5,7 @@ import '../services/traditions.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
 import 'ramadan.dart';
+import '../services/ramadan.dart';
 
 /// Tradiciones: opcional y discreto. Se guarda solo en el móvil.
 class TraditionsScreen extends StatelessWidget {
@@ -22,7 +23,11 @@ class TraditionsScreen extends StatelessWidget {
             final sel = t.id == id;
             return InkWell(
               borderRadius: BorderRadius.circular(16),
-              onTap: () => t.setId(id),
+              onTap: () async {
+                final before = t.id;
+                await t.setId(id);
+                if (id == 'muslim' && before != 'muslim' && context.mounted) _michiHello(context);
+              },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
                 child: Row(
@@ -151,6 +156,38 @@ class TraditionsScreen extends StatelessWidget {
             ],
           );
         },
+      ),
+    );
+  }
+
+  static void _michiHello(BuildContext context) {
+    Ramadan.instance.ensureLoaded();
+    Ramadan.instance.scheduleMichi();
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(28))),
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Img('michi_happy', size: 110, fallback: Icons.pets_rounded),
+              const SizedBox(height: 10),
+              Text(tr('Seré tu ayudante personal en el Ramadán 🌙', "I'll be your personal Ramadan helper 🌙"),
+                  textAlign: TextAlign.center, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: C.text)),
+              const SizedBox(height: 8),
+              Text(
+                  tr('Te avisaré unos días antes, contaré tus días de regla y te recordaré los días que te queden por recuperar.',
+                      "I'll let you know a few days before, count your period days and remind you of the days you have left to make up."),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 13.5, height: 1.35, fontWeight: FontWeight.w600, color: C.muted)),
+              const SizedBox(height: 16),
+              PinkButton(label: tr('¡Gracias, Michi!', 'Thanks, Michi!'), onTap: () => Navigator.pop(ctx)),
+            ],
+          ),
+        ),
       ),
     );
   }

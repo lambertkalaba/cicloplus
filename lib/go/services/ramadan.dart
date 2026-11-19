@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/store.dart';
 import '../strings.dart';
+import 'notifications.dart';
 import 'traditions.dart';
 
 /// Un Ramadán: primer día y último día (incluidos).
@@ -43,11 +44,13 @@ class Ramadan extends ChangeNotifier {
   bool? _enabled;
   int _offset = 0;
   int _days = 30;
+  int _lead = 3; // días antes en que aparece la tarjeta (3, 7 o 30)
   Set<String> _qada = {};
 
   bool get enabled => _enabled ?? true;
   int get offset => _offset;
   int get days => _days;
+  int get lead => _lead;
 
   void ensureLoaded() {
     if (_loaded) return;
@@ -69,8 +72,10 @@ class Ramadan extends ChangeNotifier {
         }
       }
       _offset = p.getInt('ramadan_offset') ?? 0;
+      _lead = p.getInt('ramadan_lead') ?? 3;
       _days = p.getInt('ramadan_days') ?? 30;
       notifyListeners();
+      scheduleMichi();
     });
   }
 
@@ -79,7 +84,9 @@ class Ramadan extends ChangeNotifier {
     if (_enabled != null) await p.setBool('ramadan_on', _enabled!);
     await p.setInt('ramadan_offset', _offset);
     await p.setInt('ramadan_days', _days);
+    await p.setInt('ramadan_lead', _lead);
     notifyListeners();
+    scheduleMichi();
   }
 
   Future<void> setEnabled(bool v) {
@@ -89,6 +96,11 @@ class Ramadan extends ChangeNotifier {
 
   Future<void> setOffset(int v) {
     _offset = v.clamp(-2, 2).toInt();
+    return _save();
+  }
+
+  Future<void> setLead(int v) {
+    _lead = v == 30 ? 30 : (v == 7 ? 7 : 3);
     return _save();
   }
 
@@ -151,6 +163,7 @@ class Ramadan extends ChangeNotifier {
     final p = await SharedPreferences.getInstance();
     await p.setStringList('ramadan_qada', instance._qada.toList());
     instance.notifyListeners();
+    instance.scheduleMichi();
   }
 
   /// Días recuperados después de [r] (hasta el siguiente Ramadán).
@@ -213,11 +226,43 @@ class Ramadan extends ChangeNotifier {
 
   /// ¿Se enseña la tarjeta en Hoy? Si está activado y el Ramadán está en
   /// curso, empieza en menos de 2 semanas o quedan días por recuperar.
+  /// ¿Se enseña la tarjeta en Hoy? Desde [lead] días antes del Ramadán
+  /// hasta una semana después de que termine. Fuera de esas fechas, si le
+  /// quedan días por recuperar, Michi se lo recuerda una vez por semana.
   bool get showOnToday {
     if (!Traditions.instance.muslim || !enabled) return false;
     final t = dateOnly(DateTime.now());
     final r = currentOrNext(t);
-    if (r != null && (r.contains(t) || r.start.difference(t).inDays <= 14)) return true;
-    return pending > 0;
+    if (r != null && !t.isBefore(addDays(r.start, -_lead))) return true;
+    final last = lastFinished(t);
+    return last != null && !t.isAfter(addDays(last.end, 7));
+  }
+
+  static const _michiId = 4200;
+
+  /// Aviso semanal de Michi mientras queden días por recuperar (y no esté
+  /// la tarjeta en Hoy). Se reprograma cada vez que se abre la app.
+  Future<void> scheduleMichi() async {
+    final n = Traditions.instance.muslim ? pending : 0;
+    if (n <= 0) {
+      await Notifier.instance.cancelOnce(_michiId);
+      return;
+    }
+    final now = DateTime.now();
+    final last = lastFinished(now);
+    var d = last == null ? now : addDays(last.end, 8);
+    final today = dateOnly(now);
+    if (!d.isAfter(today)) d = addDays(today, 7);
+    final next = currentOrNext(now);
+    if (next != null && !d.isBefore(addDays(next.start, -_lead))) {
+      await Notifier.instance.cancelOnce(_michiId);
+      return;
+    }
+    await Notifier.instance.once(
+      _michiId,
+      'Michi 🐾',
+      tr('Te quedan {} días por recuperar. ¡Yo te ayudo! 🐾', 'You have {} days left to make up. I\'ll help you! 🐾').replaceFirst('{}', '$n'),
+      DateTime(d.year, d.month, d.day, 19),
+    );
   }
 }
