@@ -3,6 +3,9 @@
 
 const Map<String, Map<String, String>> goI18nTrad = {
   "am": {
+    "Temperatura, flujo, energía, medicación…": "ሙቀት፣ ፈሳሽ፣ ጉልበት፣ መድኃኒት…",
+    "Mostrar siempre abierto": "ሁልጊዜ ክፍት አሳይ",
+    "Se guarda en tu diario": "በማስታወሻሽ ይቀመጣል",
     "Mi ciclo es irregular": "ዑደቴ መደበኛ አይደለም",
     "Te mostramos un margen de fechas en vez de un día exacto": "ከትክክለኛ ቀን ይልቅ የቀናት ክልል እናሳይሻለን",
     "Verificación": "ማረጋገጫ",
@@ -119,6 +122,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ቀለም ምረጪ",
   },
   "ar": {
+    "Temperatura, flujo, energía, medicación…": "الحرارة، الإفرازات، الطاقة، الأدوية…",
+    "Mostrar siempre abierto": "إظهار مفتوح دائمًا",
+    "Se guarda en tu diario": "تُحفظ في مذكراتك",
     "Mi ciclo es irregular": "دورتي غير منتظمة",
     "Te mostramos un margen de fechas en vez de un día exacto": "نعرض لكِ نطاقًا من التواريخ بدل يوم محدد",
     "Verificación": "التحقق",
@@ -160,7 +166,7 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.": "البقوليات أو السبانخ أو اللحوم تساعدك على تعويض الحديد الذي تفقدينه.",
     "Lo que me has contado": "ما حكيتِه لي",
     "Ver todo en Mi diario ›": "عرض الكل في مذكراتي ›",
-    "Cuéntaselo a Michi y te contesta 💌": "احكي لميتشي وسيرد عليكِ 💌",
+    "Cuéntaselo a Michi y te contesta 💌": "احكي لميشي وسيرد عليكِ 💌",
     "Ver más consejos ›": "نصائح أخرى ›",
     "Registra tu regla para calcular tu ovulación.": "سجّلي دورتك لحساب موعد الإباضة.",
     "Próxima ovulación": "الإباضة القادمة",
@@ -294,6 +300,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} أيام",
   },
   "az": {
+    "Temperatura, flujo, energía, medicación…": "Temperatur, ifrazat, enerji, dərman…",
+    "Mostrar siempre abierto": "Həmişə açıq göstər",
+    "Se guarda en tu diario": "Gündəliyində saxlanılır",
     "Mi ciclo es irregular": "Dövrüm nizamsızdır",
     "Te mostramos un margen de fechas en vez de un día exacto": "Dəqiq gün əvəzinə tarix aralığı göstəririk",
     "Verificación": "Təsdiq",
@@ -410,6 +419,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rəng seç",
   },
   "bn": {
+    "Temperatura, flujo, energía, medicación…": "তাপমাত্রা, স্রাব, শক্তি, ওষুধ…",
+    "Mostrar siempre abierto": "সবসময় খোলা দেখাও",
+    "Se guarda en tu diario": "তোমার ডায়েরিতে সেভ হয়",
     "Mi ciclo es irregular": "আমার চক্র অনিয়মিত",
     "Te mostramos un margen de fechas en vez de un día exacto": "নির্দিষ্ট দিনের বদলে তারিখের একটা পরিসর দেখাই",
     "Verificación": "যাচাই",
@@ -585,6 +597,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} দিন",
   },
   "cs": {
+    "Temperatura, flujo, energía, medicación…": "Teplota, výtok, energie, léky…",
+    "Mostrar siempre abierto": "Vždy zobrazit otevřené",
+    "Se guarda en tu diario": "Uloží se do tvého deníku",
     "Mi ciclo es irregular": "Můj cyklus je nepravidelný",
     "Te mostramos un margen de fechas en vez de un día exacto": "Ukážeme ti rozmezí dat místo přesného dne",
     "Verificación": "Ověření",
@@ -701,6 +716,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber barvu",
   },
   "da": {
+    "Temperatura, flujo, energía, medicación…": "Temperatur, udflåd, energi, medicin…",
+    "Mostrar siempre abierto": "Vis altid åben",
+    "Se guarda en tu diario": "Gemmes i din dagbog",
     "Mi ciclo es irregular": "Min cyklus er uregelmæssig",
     "Te mostramos un margen de fechas en vez de un día exacto": "Vi viser et datointerval i stedet for en præcis dag",
     "Verificación": "Bekræftelse",
@@ -817,6 +835,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vælg en farve",
   },
   "de": {
+    "Temperatura, flujo, energía, medicación…": "Temperatur, Ausfluss, Energie, Medikamente…",
+    "Mostrar siempre abierto": "Immer geöffnet anzeigen",
+    "Se guarda en tu diario": "Wird in deinem Tagebuch gespeichert",
     "Mi ciclo es irregular": "Mein Zyklus ist unregelmäßig",
     "Te mostramos un margen de fechas en vez de un día exacto": "Wir zeigen dir einen Zeitraum statt eines genauen Tages",
     "Verificación": "Bestätigung",
@@ -992,6 +1013,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} Tage",
   },
   "el": {
+    "Temperatura, flujo, energía, medicación…": "Θερμοκρασία, έκκριση, ενέργεια, φάρμακα…",
+    "Mostrar siempre abierto": "Να εμφανίζεται πάντα ανοιχτό",
+    "Se guarda en tu diario": "Αποθηκεύεται στο ημερολόγιό σου",
     "Mi ciclo es irregular": "Ο κύκλος μου είναι ακανόνιστος",
     "Te mostramos un margen de fechas en vez de un día exacto": "Σου δείχνουμε εύρος ημερομηνιών αντί για ακριβή μέρα",
     "Verificación": "Επαλήθευση",
@@ -1108,6 +1132,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Διάλεξε χρώμα",
   },
   "fa": {
+    "Temperatura, flujo, energía, medicación…": "دما، ترشحات، انرژی، دارو…",
+    "Mostrar siempre abierto": "همیشه باز نشان بده",
+    "Se guarda en tu diario": "در دفترچه‌ات ذخیره می‌شود",
     "Mi ciclo es irregular": "چرخه‌ام نامنظم است",
     "Te mostramos un margen de fechas en vez de un día exacto": "به جای یک روز دقیق، بازه‌ای از تاریخ‌ها نشان می‌دهیم",
     "Verificación": "تأیید",
@@ -1224,6 +1251,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "یک رنگ انتخاب کن",
   },
   "fi": {
+    "Temperatura, flujo, energía, medicación…": "Lämpö, vuoto, energia, lääkkeet…",
+    "Mostrar siempre abierto": "Näytä aina avattuna",
+    "Se guarda en tu diario": "Tallentuu päiväkirjaasi",
     "Mi ciclo es irregular": "Kiertoni on epäsäännöllinen",
     "Te mostramos un margen de fechas en vez de un día exacto": "Näytämme aikavälin tarkan päivän sijaan",
     "Verificación": "Vahvistus",
@@ -1340,6 +1370,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Valitse väri",
   },
   "fil": {
+    "Temperatura, flujo, energía, medicación…": "Temperatura, discharge, enerhiya, gamot…",
+    "Mostrar siempre abierto": "Laging ipakitang bukas",
+    "Se guarda en tu diario": "Nase-save sa diary mo",
     "Mi ciclo es irregular": "Irregular ang cycle ko",
     "Te mostramos un margen de fechas en vez de un día exacto": "Ipinapakita namin ang hanay ng petsa sa halip na eksaktong araw",
     "Verificación": "Beripikasyon",
@@ -1456,6 +1489,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pumili ng kulay",
   },
   "fr": {
+    "Temperatura, flujo, energía, medicación…": "Température, pertes, énergie, médicaments…",
+    "Mostrar siempre abierto": "Toujours afficher ouvert",
+    "Se guarda en tu diario": "Enregistrée dans ton journal",
     "Mi ciclo es irregular": "Mon cycle est irrégulier",
     "Te mostramos un margen de fechas en vez de un día exacto": "On te montre une plage de dates au lieu d’un jour précis",
     "Verificación": "Vérification",
@@ -1631,6 +1667,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} jours",
   },
   "gu": {
+    "Temperatura, flujo, energía, medicación…": "તાપમાન, સ્રાવ, ઊર્જા, દવા…",
+    "Mostrar siempre abierto": "હંમેશા ખુલ્લું બતાવો",
+    "Se guarda en tu diario": "તમારી ડાયરીમાં સેવ થાય છે",
     "Mi ciclo es irregular": "મારું ચક્ર અનિયમિત છે",
     "Te mostramos un margen de fechas en vez de un día exacto": "ચોક્કસ દિવસને બદલે તારીખોની શ્રેણી બતાવીએ છીએ",
     "Verificación": "ચકાસણી",
@@ -1747,6 +1786,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "એક રંગ પસંદ કરો",
   },
   "ha": {
+    "Temperatura, flujo, energía, medicación…": "Zafi, fitar ruwa, kuzari, magani…",
+    "Mostrar siempre abierto": "Koyaushe nuna a buɗe",
+    "Se guarda en tu diario": "Ana adana shi a littafin tunaninki",
     "Mi ciclo es irregular": "Zagayowata ba ta da tsari",
     "Te mostramos un margen de fechas en vez de un día exacto": "Muna nuna miki tazarar kwanaki maimakon rana ɗaya",
     "Verificación": "Tabbatarwa",
@@ -1863,6 +1905,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Zaɓi launi",
   },
   "he": {
+    "Temperatura, flujo, energía, medicación…": "חום, הפרשות, אנרגיה, תרופות…",
+    "Mostrar siempre abierto": "להציג תמיד פתוח",
+    "Se guarda en tu diario": "נשמר ביומן שלך",
     "Mi ciclo es irregular": "המחזור שלי לא סדיר",
     "Te mostramos un margen de fechas en vez de un día exacto": "נציג לך טווח תאריכים במקום יום מדויק",
     "Verificación": "אימות",
@@ -1979,6 +2024,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "בחרי צבע",
   },
   "hi": {
+    "Temperatura, flujo, energía, medicación…": "तापमान, स्राव, ऊर्जा, दवा…",
+    "Mostrar siempre abierto": "हमेशा खुला दिखाएँ",
+    "Se guarda en tu diario": "आपकी डायरी में सेव होता है",
     "Mi ciclo es irregular": "मेरा चक्र अनियमित है",
     "Te mostramos un margen de fechas en vez de un día exacto": "सही दिन की जगह हम तारीखों की सीमा दिखाते हैं",
     "Verificación": "सत्यापन",
@@ -2154,6 +2202,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} दिन",
   },
   "hu": {
+    "Temperatura, flujo, energía, medicación…": "Hőmérséklet, folyás, energia, gyógyszer…",
+    "Mostrar siempre abierto": "Mindig nyitva mutassa",
+    "Se guarda en tu diario": "A naplódba mentődik",
     "Mi ciclo es irregular": "A ciklusom rendszertelen",
     "Te mostramos un margen de fechas en vez de un día exacto": "Pontos nap helyett dátumtartományt mutatunk",
     "Verificación": "Ellenőrzés",
@@ -2270,6 +2321,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Válassz színt",
   },
   "id": {
+    "Temperatura, flujo, energía, medicación…": "Suhu, keputihan, energi, obat…",
+    "Mostrar siempre abierto": "Selalu tampilkan terbuka",
+    "Se guarda en tu diario": "Tersimpan di diarimu",
     "Mi ciclo es irregular": "Siklusku tidak teratur",
     "Te mostramos un margen de fechas en vez de un día exacto": "Kami tampilkan rentang tanggal, bukan hari pasti",
     "Verificación": "Verifikasi",
@@ -2386,6 +2440,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "it": {
+    "Temperatura, flujo, energía, medicación…": "Temperatura, perdite, energia, farmaci…",
+    "Mostrar siempre abierto": "Mostra sempre aperto",
+    "Se guarda en tu diario": "Si salva nel tuo diario",
     "Mi ciclo es irregular": "Il mio ciclo è irregolare",
     "Te mostramos un margen de fechas en vez de un día exacto": "Ti mostriamo un intervallo di date invece di un giorno preciso",
     "Verificación": "Verifica",
@@ -2502,6 +2559,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Scegli un colore",
   },
   "ja": {
+    "Temperatura, flujo, energía, medicación…": "体温、おりもの、元気度、薬…",
+    "Mostrar siempre abierto": "いつも開いて表示",
+    "Se guarda en tu diario": "日記に保存されます",
     "Mi ciclo es irregular": "周期が不規則",
     "Te mostramos un margen de fechas en vez de un día exacto": "正確な日付の代わりに日付の範囲を表示します",
     "Verificación": "確認",
@@ -2618,6 +2678,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "色を選ぶ",
   },
   "kk": {
+    "Temperatura, flujo, energía, medicación…": "Температура, бөлініс, қуат, дәрі…",
+    "Mostrar siempre abierto": "Әрдайым ашық көрсету",
+    "Se guarda en tu diario": "Күнделігіңе сақталады",
     "Mi ciclo es irregular": "Циклім тұрақсыз",
     "Te mostramos un margen de fechas en vez de un día exacto": "Нақты күннің орнына күндер аралығын көрсетеміз",
     "Verificación": "Растау",
@@ -2734,6 +2797,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Түс таңдаңыз",
   },
   "kn": {
+    "Temperatura, flujo, energía, medicación…": "ತಾಪಮಾನ, ಸ್ರಾವ, ಶಕ್ತಿ, ಔಷಧ…",
+    "Mostrar siempre abierto": "ಯಾವಾಗಲೂ ತೆರೆದಿರಲಿ",
+    "Se guarda en tu diario": "ನಿಮ್ಮ ಡೈರಿಯಲ್ಲಿ ಉಳಿಯುತ್ತದೆ",
     "Mi ciclo es irregular": "ನನ್ನ ಚಕ್ರ ಅನಿಯಮಿತ",
     "Te mostramos un margen de fechas en vez de un día exacto": "ನಿಖರ ದಿನದ ಬದಲು ದಿನಾಂಕಗಳ ಶ್ರೇಣಿ ತೋರಿಸುತ್ತೇವೆ",
     "Verificación": "ಪರಿಶೀಲನೆ",
@@ -2850,6 +2916,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ಒಂದು ಬಣ್ಣ ಆರಿಸಿ",
   },
   "ko": {
+    "Temperatura, flujo, energía, medicación…": "체온, 분비물, 에너지, 약…",
+    "Mostrar siempre abierto": "항상 펼쳐서 보기",
+    "Se guarda en tu diario": "일기에 저장돼요",
     "Mi ciclo es irregular": "주기가 불규칙해요",
     "Te mostramos un margen de fechas en vez de un día exacto": "정확한 날짜 대신 날짜 범위를 보여드려요",
     "Verificación": "인증",
@@ -2966,6 +3035,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "색상 선택",
   },
   "ln": {
+    "Temperatura, flujo, energía, medicación…": "Moto ya nzoto, mai, makasi, nkisi…",
+    "Mostrar siempre abierto": "Lakisa ntango nyonso efungwami",
+    "Se guarda en tu diario": "Ebombami na buku na yo",
     "Mi ciclo es irregular": "Cycle na ngai ezali malamu te",
     "Te mostramos un margen de fechas en vez de un día exacto": "Tokolakisa yo mikolo mingi na esika ya mokolo moko",
     "Verificación": "Kondimisa",
@@ -3082,6 +3154,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pona langi",
   },
   "ml": {
+    "Temperatura, flujo, energía, medicación…": "താപനില, സ്രവം, ഊർജം, മരുന്ന്…",
+    "Mostrar siempre abierto": "എപ്പോഴും തുറന്നു കാണിക്കുക",
+    "Se guarda en tu diario": "നിന്റെ ഡയറിയിൽ സേവ് ആകും",
     "Mi ciclo es irregular": "എന്റെ ചക്രം ക്രമരഹിതമാണ്",
     "Te mostramos un margen de fechas en vez de un día exacto": "കൃത്യ ദിവസത്തിന് പകരം തീയതി പരിധി കാണിക്കും",
     "Verificación": "സ്ഥിരീകരണം",
@@ -3198,6 +3273,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ഒരു നിറം തിരഞ്ഞെടുക്കൂ",
   },
   "mr": {
+    "Temperatura, flujo, energía, medicación…": "तापमान, स्राव, ऊर्जा, औषध…",
+    "Mostrar siempre abierto": "नेहमी उघडे दाखवा",
+    "Se guarda en tu diario": "तुमच्या डायरीत सेव्ह होते",
     "Mi ciclo es irregular": "माझे चक्र अनियमित आहे",
     "Te mostramos un margen de fechas en vez de un día exacto": "नेमक्या दिवसाऐवजी तारखांची श्रेणी दाखवतो",
     "Verificación": "पडताळणी",
@@ -3314,6 +3392,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एक रंग निवडा",
   },
   "ms": {
+    "Temperatura, flujo, energía, medicación…": "Suhu, lelehan, tenaga, ubat…",
+    "Mostrar siempre abierto": "Sentiasa tunjuk terbuka",
+    "Se guarda en tu diario": "Disimpan dalam diari anda",
     "Mi ciclo es irregular": "Kitaran saya tidak teratur",
     "Te mostramos un margen de fechas en vez de un día exacto": "Kami tunjukkan julat tarikh, bukan hari tepat",
     "Verificación": "Pengesahan",
@@ -3430,6 +3511,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "my": {
+    "Temperatura, flujo, energía, medicación…": "အပူချိန်၊ အဆီ၊ စွမ်းအင်၊ ဆေး…",
+    "Mostrar siempre abierto": "အမြဲ ဖွင့်ပြထားရန်",
+    "Se guarda en tu diario": "သင့်ဒိုင်ယာရီထဲ သိမ်းသည်",
     "Mi ciclo es irregular": "ကျွန်မ စက်ဝန်း မမှန်ပါ",
     "Te mostramos un margen de fechas en vez de un día exacto": "တိကျသောရက်အစား ရက်အပိုင်းအခြားကို ပြပါမည်",
     "Verificación": "အတည်ပြုခြင်း",
@@ -3546,6 +3630,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "အရောင်ရွေးပါ",
   },
   "ne": {
+    "Temperatura, flujo, energía, medicación…": "तापक्रम, स्राव, ऊर्जा, औषधि…",
+    "Mostrar siempre abierto": "सधैं खुला देखाउनुहोस्",
+    "Se guarda en tu diario": "तपाईंको डायरीमा सेभ हुन्छ",
     "Mi ciclo es irregular": "मेरो चक्र अनियमित छ",
     "Te mostramos un margen de fechas en vez de un día exacto": "ठ्याक्कै दिनको सट्टा मितिहरूको दायरा देखाउँछौं",
     "Verificación": "प्रमाणीकरण",
@@ -3662,6 +3749,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एउटा रङ छान्नुहोस्",
   },
   "nl": {
+    "Temperatura, flujo, energía, medicación…": "Temperatuur, afscheiding, energie, medicatie…",
+    "Mostrar siempre abierto": "Altijd open tonen",
+    "Se guarda en tu diario": "Wordt opgeslagen in je dagboek",
     "Mi ciclo es irregular": "Mijn cyclus is onregelmatig",
     "Te mostramos un margen de fechas en vez de un día exacto": "We tonen een periode in plaats van een exacte dag",
     "Verificación": "Verificatie",
@@ -3778,6 +3868,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Kies een kleur",
   },
   "om": {
+    "Temperatura, flujo, energía, medicación…": "Ho’a, dhangala’aa, humna, qoricha…",
+    "Mostrar siempre abierto": "Yeroo hunda banaa agarsiisi",
+    "Se guarda en tu diario": "Galmee kee keessatti olkaa’ama",
     "Mi ciclo es irregular": "Marsaan koo sirrii miti",
     "Te mostramos un margen de fechas en vez de un día exacto": "Guyyaa sirrii qofa osoo hin taane hanga guyyootaa siif agarsiisna",
     "Verificación": "Mirkaneessa",
@@ -3894,6 +3987,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Halluu filadhu",
   },
   "pa": {
+    "Temperatura, flujo, energía, medicación…": "ਤਾਪਮਾਨ, ਸਰਾਵ, ਊਰਜਾ, ਦਵਾਈ…",
+    "Mostrar siempre abierto": "ਹਮੇਸ਼ਾ ਖੁੱਲ੍ਹਾ ਦਿਖਾਓ",
+    "Se guarda en tu diario": "ਤੁਹਾਡੀ ਡਾਇਰੀ ਵਿੱਚ ਸੇਵ ਹੁੰਦਾ ਹੈ",
     "Mi ciclo es irregular": "ਮੇਰਾ ਚੱਕਰ ਅਨਿਯਮਿਤ ਹੈ",
     "Te mostramos un margen de fechas en vez de un día exacto": "ਸਹੀ ਦਿਨ ਦੀ ਥਾਂ ਤਾਰੀਖਾਂ ਦੀ ਰੇਂਜ ਦਿਖਾਉਂਦੇ ਹਾਂ",
     "Verificación": "ਤਸਦੀਕ",
@@ -4010,6 +4106,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ਇੱਕ ਰੰਗ ਚੁਣੋ",
   },
   "pl": {
+    "Temperatura, flujo, energía, medicación…": "Temperatura, wydzielina, energia, leki…",
+    "Mostrar siempre abierto": "Zawsze pokazuj rozwinięte",
+    "Se guarda en tu diario": "Zapisuje się w twoim dzienniku",
     "Mi ciclo es irregular": "Mój cykl jest nieregularny",
     "Te mostramos un margen de fechas en vez de un día exacto": "Pokażemy zakres dat zamiast dokładnego dnia",
     "Verificación": "Weryfikacja",
@@ -4126,6 +4225,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Wybierz kolor",
   },
   "pt": {
+    "Temperatura, flujo, energía, medicación…": "Temperatura, fluxo, energia, medicação…",
+    "Mostrar siempre abierto": "Mostrar sempre aberto",
+    "Se guarda en tu diario": "Fica salva no seu diário",
     "Mi ciclo es irregular": "Meu ciclo é irregular",
     "Te mostramos un margen de fechas en vez de un día exacto": "Mostramos um intervalo de datas em vez de um dia exato",
     "Verificación": "Verificação",
@@ -4301,6 +4403,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} dias",
   },
   "ro": {
+    "Temperatura, flujo, energía, medicación…": "Temperatură, secreții, energie, medicamente…",
+    "Mostrar siempre abierto": "Arată mereu deschis",
+    "Se guarda en tu diario": "Se salvează în jurnalul tău",
     "Mi ciclo es irregular": "Ciclul meu e neregulat",
     "Te mostramos un margen de fechas en vez de un día exacto": "Îți arătăm un interval de date în loc de o zi exactă",
     "Verificación": "Verificare",
@@ -4417,6 +4522,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Alege o culoare",
   },
   "ru": {
+    "Temperatura, flujo, energía, medicación…": "Температура, выделения, энергия, лекарства…",
+    "Mostrar siempre abierto": "Всегда показывать открытым",
+    "Se guarda en tu diario": "Сохраняется в твоём дневнике",
     "Mi ciclo es irregular": "Мой цикл нерегулярный",
     "Te mostramos un margen de fechas en vez de un día exacto": "Покажем диапазон дат вместо точного дня",
     "Verificación": "Подтверждение",
@@ -4592,6 +4700,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} дн.",
   },
   "si": {
+    "Temperatura, flujo, energía, medicación…": "උෂ්ණත්වය, ස්‍රාවය, ශක්තිය, ඖෂධ…",
+    "Mostrar siempre abierto": "සැමවිටම විවෘතව පෙන්වන්න",
+    "Se guarda en tu diario": "ඔබේ දිනපොතේ සුරැකේ",
     "Mi ciclo es irregular": "මගේ චක්‍රය අක්‍රමවත්",
     "Te mostramos un margen de fechas en vez de un día exacto": "නිශ්චිත දිනයක් වෙනුවට දින පරාසයක් පෙන්වමු",
     "Verificación": "තහවුරු කිරීම",
@@ -4708,6 +4819,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "වර්ණයක් තෝරන්න",
   },
   "sk": {
+    "Temperatura, flujo, energía, medicación…": "Teplota, výtok, energia, lieky…",
+    "Mostrar siempre abierto": "Vždy zobraziť otvorené",
+    "Se guarda en tu diario": "Uloží sa do tvojho denníka",
     "Mi ciclo es irregular": "Môj cyklus je nepravidelný",
     "Te mostramos un margen de fechas en vez de un día exacto": "Ukážeme ti rozpätie dátumov namiesto presného dňa",
     "Verificación": "Overenie",
@@ -4824,6 +4938,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber farbu",
   },
   "sv": {
+    "Temperatura, flujo, energía, medicación…": "Temperatur, flytningar, energi, mediciner…",
+    "Mostrar siempre abierto": "Visa alltid öppen",
+    "Se guarda en tu diario": "Sparas i din dagbok",
     "Mi ciclo es irregular": "Min cykel är oregelbunden",
     "Te mostramos un margen de fechas en vez de un día exacto": "Vi visar ett datumintervall i stället för en exakt dag",
     "Verificación": "Verifiering",
@@ -4940,6 +5057,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Välj en färg",
   },
   "sw": {
+    "Temperatura, flujo, energía, medicación…": "Joto, uchafu, nguvu, dawa…",
+    "Mostrar siempre abierto": "Onyesha wazi kila wakati",
+    "Se guarda en tu diario": "Huhifadhiwa kwenye shajara yako",
     "Mi ciclo es irregular": "Mzunguko wangu si wa kawaida",
     "Te mostramos un margen de fechas en vez de un día exacto": "Tunakuonyesha kipindi cha tarehe badala ya siku kamili",
     "Verificación": "Uthibitisho",
@@ -5056,6 +5176,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chagua rangi",
   },
   "ta": {
+    "Temperatura, flujo, energía, medicación…": "வெப்பநிலை, சுரப்பு, ஆற்றல், மருந்து…",
+    "Mostrar siempre abierto": "எப்போதும் திறந்தே காட்டு",
+    "Se guarda en tu diario": "உங்கள் டைரியில் சேமிக்கப்படும்",
     "Mi ciclo es irregular": "என் சுழற்சி ஒழுங்கற்றது",
     "Te mostramos un margen de fechas en vez de un día exacto": "சரியான நாளுக்குப் பதில் தேதி வரம்பைக் காட்டுவோம்",
     "Verificación": "சரிபார்ப்பு",
@@ -5172,6 +5295,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ஒரு நிறத்தைத் தேர்வுசெய்யுங்கள்",
   },
   "te": {
+    "Temperatura, flujo, energía, medicación…": "ఉష్ణోగ్రత, స్రావం, శక్తి, మందులు…",
+    "Mostrar siempre abierto": "ఎప్పుడూ తెరిచి చూపించు",
+    "Se guarda en tu diario": "మీ డైరీలో సేవ్ అవుతుంది",
     "Mi ciclo es irregular": "నా చక్రం క్రమరహితం",
     "Te mostramos un margen de fechas en vez de un día exacto": "సరైన రోజు బదులు తేదీల శ్రేణి చూపిస్తాం",
     "Verificación": "ధృవీకరణ",
@@ -5288,6 +5414,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ఒక రంగును ఎంచుకోండి",
   },
   "th": {
+    "Temperatura, flujo, energía, medicación…": "อุณหภูมิ ตกขาว พลังงาน ยา…",
+    "Mostrar siempre abierto": "แสดงแบบเปิดตลอด",
+    "Se guarda en tu diario": "บันทึกไว้ในไดอารี่ของคุณ",
     "Mi ciclo es irregular": "รอบเดือนของฉันไม่สม่ำเสมอ",
     "Te mostramos un margen de fechas en vez de un día exacto": "เราจะแสดงช่วงวันที่แทนวันที่แน่นอน",
     "Verificación": "การยืนยัน",
@@ -5404,6 +5533,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "เลือกสี",
   },
   "tr": {
+    "Temperatura, flujo, energía, medicación…": "Ateş, akıntı, enerji, ilaç…",
+    "Mostrar siempre abierto": "Hep açık göster",
+    "Se guarda en tu diario": "Günlüğüne kaydedilir",
     "Mi ciclo es irregular": "Döngüm düzensiz",
     "Te mostramos un margen de fechas en vez de un día exacto": "Kesin gün yerine bir tarih aralığı gösteririz",
     "Verificación": "Doğrulama",
@@ -5520,6 +5652,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Bir renk seç",
   },
   "uk": {
+    "Temperatura, flujo, energía, medicación…": "Температура, виділення, енергія, ліки…",
+    "Mostrar siempre abierto": "Завжди показувати відкритим",
+    "Se guarda en tu diario": "Зберігається у твоєму щоденнику",
     "Mi ciclo es irregular": "Мій цикл нерегулярний",
     "Te mostramos un margen de fechas en vez de un día exacto": "Покажемо діапазон дат замість точного дня",
     "Verificación": "Підтвердження",
@@ -5636,6 +5771,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Обери колір",
   },
   "ur": {
+    "Temperatura, flujo, energía, medicación…": "درجہ حرارت، اخراج، توانائی، دوائیں…",
+    "Mostrar siempre abierto": "ہمیشہ کھلا دکھائیں",
+    "Se guarda en tu diario": "آپ کی ڈائری میں محفوظ ہوتا ہے",
     "Mi ciclo es irregular": "میرا سائیکل بے قاعدہ ہے",
     "Te mostramos un margen de fechas en vez de un día exacto": "ہم ایک دن کی بجائے تاریخوں کی حد دکھاتے ہیں",
     "Verificación": "تصدیق",
@@ -5752,6 +5890,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ایک رنگ چنیں",
   },
   "uz": {
+    "Temperatura, flujo, energía, medicación…": "Harorat, ajralma, quvvat, dori…",
+    "Mostrar siempre abierto": "Doim ochiq ko‘rsatish",
+    "Se guarda en tu diario": "Kundaligingizga saqlanadi",
     "Mi ciclo es irregular": "Siklim notekis",
     "Te mostramos un margen de fechas en vez de un día exacto": "Aniq kun o‘rniga sanalar oralig‘ini ko‘rsatamiz",
     "Verificación": "Tasdiqlash",
@@ -5868,6 +6009,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rang tanlang",
   },
   "vi": {
+    "Temperatura, flujo, energía, medicación…": "Nhiệt độ, dịch tiết, năng lượng, thuốc…",
+    "Mostrar siempre abierto": "Luôn hiển thị mở",
+    "Se guarda en tu diario": "Được lưu vào nhật ký của bạn",
     "Mi ciclo es irregular": "Chu kỳ của tôi không đều",
     "Te mostramos un margen de fechas en vez de un día exacto": "Chúng tôi hiển thị khoảng ngày thay vì một ngày cụ thể",
     "Verificación": "Xác minh",
@@ -5984,6 +6128,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chọn màu",
   },
   "wo": {
+    "Temperatura, flujo, energía, medicación…": "Tàngoor, ndox, doole, garab…",
+    "Mostrar siempre abierto": "Wone ko ubbeeku saa su nekk",
+    "Se guarda en tu diario": "Dañu koy denc ci sa kayit",
     "Mi ciclo es irregular": "Sama wër du jaar",
     "Te mostramos un margen de fechas en vez de un día exacto": "Danuy won ay bés yu bari, du benn bés rekk",
     "Verificación": "Dëggal",
@@ -6100,6 +6247,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Tànnal benn melo",
   },
   "yo": {
+    "Temperatura, flujo, energía, medicación…": "Ìgbóná ara, ìtújáde, agbára, oògùn…",
+    "Mostrar siempre abierto": "Máa fi hàn ní ṣíṣí nígbà gbogbo",
+    "Se guarda en tu diario": "Ó ń wà ní ìpamọ́ nínú ìwé-ìrántí rẹ",
     "Mi ciclo es irregular": "Àyíká mi kò dúró déédé",
     "Te mostramos un margen de fechas en vez de un día exacto": "A ó fi ààlà ọjọ́ hàn ọ́ dípò ọjọ́ kan pàtó",
     "Verificación": "Ìfìdí-múlẹ̀",
@@ -6216,6 +6366,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Yan àwọ̀ kan",
   },
   "zh": {
+    "Temperatura, flujo, energía, medicación…": "体温、分泌物、精力、用药…",
+    "Mostrar siempre abierto": "始终展开显示",
+    "Se guarda en tu diario": "会保存到你的日记",
     "Mi ciclo es irregular": "我的周期不规律",
     "Te mostramos un margen de fechas en vez de un día exacto": "我们会显示日期范围，而不是确切的一天",
     "Verificación": "验证",
@@ -6332,6 +6485,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "选择颜色",
   },
   "zh-TW": {
+    "Temperatura, flujo, energía, medicación…": "體溫、分泌物、精力、用藥…",
+    "Mostrar siempre abierto": "一律展開顯示",
+    "Se guarda en tu diario": "會儲存到你的日記",
     "Mi ciclo es irregular": "我的週期不規律",
     "Te mostramos un margen de fechas en vez de un día exacto": "我們會顯示日期範圍，而不是確切的一天",
     "Verificación": "驗證",
@@ -6448,6 +6604,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "選擇顏色",
   },
   "zu": {
+    "Temperatura, flujo, energía, medicación…": "Izinga lokushisa, ukuphuma, amandla, imithi…",
+    "Mostrar siempre abierto": "Bonisa kuvuliwe njalo",
+    "Se guarda en tu diario": "Kugcinwa kudayari yakho",
     "Mi ciclo es irregular": "Umjikelezo wami awujwayelekile",
     "Te mostramos un margen de fechas en vez de un día exacto": "Sikubonisa ibanga lezinsuku esikhundleni sosuku oluqondile",
     "Verificación": "Ukuqinisekisa",

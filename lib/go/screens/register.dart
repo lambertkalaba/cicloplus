@@ -316,35 +316,68 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  _section(
-                    SectionTitle(Icons.add_circle_outline_rounded, tr('Más detalles', 'More details')),
-                    ExtraDetails(log: _log, onChanged: () => setState(() {}), showSex: AppStore.instance.showSex),
-                  ),
+                  MoreDetailsCard(log: _log, onChanged: () => setState(() {}), showSex: AppStore.instance.showSex),
                   const SizedBox(height: 12),
-                  _section(
-                    SectionTitle(Icons.edit_rounded, '${tr('Notas', 'Notes')} ${tr('(opcional)', '(optional)')}'),
-                    TextField(
-                      controller: _note,
-                      focusNode: _noteFocus,
-                      minLines: 1,
-                      maxLines: 4,
-                      textCapitalization: TextCapitalization.sentences,
-                      decoration: InputDecoration(
-                        hintText: tr('¿Quieres añadir algo más hoy?', 'Anything else to add today?'),
-                        filled: true,
-                        fillColor: C.pinkBg,
-                        suffixIcon: IconButton(
-                          icon: Icon(Icons.mic_rounded, color: C.pink),
-                          tooltip: tr('Dictar con el teclado', 'Dictate with the keyboard'),
-                          onPressed: () => _noteFocus.requestFocus(),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),
+                    decoration: card(radius: 20),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                      Row(children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(color: C.pinkSoft, shape: BoxShape.circle),
+                          child: Icon(Icons.menu_book_rounded, color: C.pink, size: 20),
                         ),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: C.pinkLine)),
-                        enabledBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: C.pinkLine)),
-                        focusedBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: C.pink, width: 2)),
-                      ),
-                    ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(tr('Nota del día', 'Note of the day'),
+                              style: const TextStyle(fontSize: 15.5, fontWeight: FontWeight.w800, color: C.text)),
+                        ),
+                        Text(tr('Se guarda en tu diario', 'Saved in your diary'),
+                            style: const TextStyle(fontSize: 11.5, color: C.muted, fontWeight: FontWeight.w600)),
+                      ]),
+                      const SizedBox(height: 12),
+                      Stack(children: [
+                        TextField(
+                          controller: _note,
+                          focusNode: _noteFocus,
+                          minLines: 3,
+                          maxLines: 6,
+                          textCapitalization: TextCapitalization.sentences,
+                          decoration: InputDecoration(
+                            hintText: tr('¿Quieres añadir algo más hoy?', 'Anything else to add today?'),
+                            hintStyle: const TextStyle(color: C.muted),
+                            filled: true,
+                            fillColor: const Color(0xFFFFF4F8),
+                            contentPadding: const EdgeInsets.fromLTRB(14, 14, 56, 14),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide.none),
+                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide.none),
+                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide(color: C.pink, width: 1.5)),
+                          ),
+                        ),
+                        Positioned(
+                          right: 8,
+                          bottom: 8,
+                          child: Material(
+                            color: C.pink,
+                            shape: const CircleBorder(),
+                            elevation: 2,
+                            child: InkWell(
+                              customBorder: const CircleBorder(),
+                              onTap: () => _noteFocus.requestFocus(),
+                              child: Tooltip(
+                                message: tr('Dictar con el teclado', 'Dictate with the keyboard'),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Icon(Icons.mic_rounded, color: Colors.white, size: 20),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ]),
                   ),
                 ],
               ),
