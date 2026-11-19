@@ -5,6 +5,7 @@ import '../cicloplus_links.dart';
 import '../data/store.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
+import '../../services/settings_service.dart';
 
 /// Fertilidad: usa exactamente el mismo cálculo que Hoy y el Calendario
 /// (ovulación = ciclo medio − 14; ventana = 5 días antes hasta 1 después).
@@ -62,6 +63,7 @@ class FertilityScreen extends StatelessWidget {
                   _box(tr('Hoy estás en tu ventana fértil 🌱', "You're in your fertile window today 🌱")),
                 ],
               ],
+              const _LhCard(),
               const SizedBox(height: 12),
               _box(tr(
                   'Tus días más fértiles son los 5 días antes de la ovulación y el día siguiente. Son estimaciones según tus registros, no un método anticonceptivo.',
@@ -76,7 +78,10 @@ class FertilityScreen extends StatelessWidget {
                       leading: Icon(Icons.science_rounded, color: C.pink),
                       title: Text(tr('Test de ovulación', 'Ovulation test'), style: const TextStyle(fontWeight: FontWeight.w800)),
                       trailing: const Icon(Icons.chevron_right_rounded),
-                      onTap: () => CP.openOvulationTest(context),
+                      onTap: () async {
+                        await CP.openOvulationTest(context);
+                        if (context.mounted) (context as Element).markNeedsBuild();
+                      },
                     ),
                     ListTile(
                       leading: Icon(Icons.thermostat_rounded, color: C.pink),
@@ -99,4 +104,54 @@ class FertilityScreen extends StatelessWidget {
         decoration: BoxDecoration(color: C.pinkBg, borderRadius: BorderRadius.circular(18), border: Border.all(color: C.pinkLine)),
         child: Text(text, style: const TextStyle(fontSize: 13, height: 1.35, fontWeight: FontWeight.w600, color: C.text)),
       );
+}
+
+
+/// Si hay un test de ovulación positivo o con pico de LH de los últimos
+/// 2 días, avisa de que la ovulación es inminente (24–36 h).
+class _LhCard extends StatelessWidget {
+  const _LhCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<OvulationTestEntry>>(
+      future: SettingsService().loadOvulationTests(),
+      builder: (context, snap) {
+        final today = dateOnly(DateTime.now());
+        final recent = (snap.data ?? const <OvulationTestEntry>[]).where((t) {
+          final d = dateOnly(t.date);
+          return t.result != 'negative' && !d.isAfter(today) && daysBetween(d, today) <= 2;
+        }).toList();
+        if (recent.isEmpty) return const SizedBox.shrink();
+        final t = recent.first;
+        final peak = t.result == 'peak';
+        return Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
+            decoration: BoxDecoration(
+              color: const Color(0xFFE8F5EC),
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: const Color(0xFFBFE3CB)),
+            ),
+            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const Text('🧪', style: TextStyle(fontSize: 22)),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  (peak
+                          ? tr('Pico de LH el {}: lo más probable es que ovules en las próximas 24–36 horas. ¡Son tus días más fértiles! 🌱',
+                              'LH peak on {}: you will most likely ovulate in the next 24–36 hours. These are your most fertile days! 🌱')
+                          : tr('Test positivo el {}: tu ovulación está muy cerca. Tus días más fértiles son hoy y mañana 🌱',
+                              'Positive test on {}: your ovulation is very close. Your most fertile days are today and tomorrow 🌱'))
+                      .replaceFirst('{}', L.dateShort(dateOnly(t.date))),
+                  style: const TextStyle(fontSize: 13, height: 1.35, fontWeight: FontWeight.w700, color: Color(0xFF235C37)),
+                ),
+              ),
+            ]),
+          ),
+        );
+      },
+    );
+  }
 }

@@ -10,6 +10,7 @@ import 'extras.dart';
 import 'more.dart';
 import 'fertility.dart';
 import 'traditions.dart';
+import '../widgets/ciclo_dialog.dart';
 
 /// Pestaña Yo (igual que la maqueta).
 class MeScreen extends StatelessWidget {
@@ -264,19 +265,15 @@ class MeScreen extends StatelessWidget {
       final stillValid = prev != null && dateOnly(DateTime.now()).difference(prev).inDays <= 294;
       var same = false;
       if (stillValid) {
-        final r = await showDialog<bool>(
-              context: context,
-              builder: (c) => AlertDialog(
-                title: Text(tr('¿Es la misma fecha?', 'Is it the same date?')),
-                content: Text(tr('Tenemos guardado que el primer día de tu última regla fue el {}. ¿Sigue siendo esa fecha?',
-                        'We have saved that the first day of your last period was {}. Is that still the date?')
-                    .replaceFirst('{}', L.dateLong(prev))),
-                actions: [
-                  TextButton(onPressed: () => Navigator.pop(c, false), child: Text(tr('Cambiar fecha', 'Change date'))),
-                  FilledButton(onPressed: () => Navigator.pop(c, true), child: Text(tr('Sí, es la misma', "Yes, it's the same"))),
-                ],
-              ),
-            );
+        final r = await showCicloConfirm(
+          context,
+          title: tr('¿Es la misma fecha?', 'Is it the same date?'),
+          message: tr('Tenemos guardado que el primer día de tu última regla fue el {}. ¿Sigue siendo esa fecha?',
+                  'We have saved that the first day of your last period was {}. Is that still the date?')
+              .replaceFirst('{}', L.dateLong(prev)),
+          confirm: tr('Sí, es la misma', "Yes, it's the same"),
+          cancel: tr('Cambiar fecha', 'Change date'),
+        );
         if (r == null || !context.mounted) return; // cerró sin elegir
         same = r;
       }

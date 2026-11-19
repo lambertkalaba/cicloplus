@@ -6,6 +6,9 @@ import '../models/day_entry.dart';
 import '../services/settings_service.dart' show AppThemeOption, SettingsService, themeById;
 import '../theme/app_theme.dart';
 import 'register_screen.dart';
+import 'package:flutter/cupertino.dart' show CupertinoPicker;
+import '../go/strings.dart' show tr;
+import '../services/cycle_predictor.dart' show dateKey;
 import 'sex_life_detail_screen.dart';
 
 /// Pantalla de detalle de solo lectura para uno de los 6 campos "simples"
@@ -320,6 +323,141 @@ class _FieldDetailScreenState extends State<FieldDetailScreen> {
   /// Recibe el Map actualizado (desde RegisterScreen), lo sube al padre vía
   /// `widget.onDataChanged` y actualiza el estado local para refrescar la
   /// tarjeta al instante.
+  /// Temperatura: apuntar la de hoy en 2 segundos con una rueda.
+  Future<void> _quickTemp() async {
+    final today = DateTime.now();
+    final k = dateKey(DateTime(today.year, today.month, today.day));
+    final current = _data[k]?.temp ?? _findLatest()?.value.temp ?? 36.5;
+    final values = [for (var i = 0; i <= 70; i++) 35.0 + i * 0.05];
+    var idx = values.indexWhere((v) => (v - current).abs() < 0.026);
+    if (idx < 0) idx = 30;
+    final primary = Color(_theme.primary);
+    final picked = await showModalBottomSheet<double>(
+      context: context,
+      showDragHandle: true,
+      backgroundColor: Colors.white,
+      builder: (c) {
+        var sel = idx;
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              Text(tr('Tu temperatura de hoy', 'Your temperature today'),
+                  style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.textPrimary)),
+              const SizedBox(height: 8),
+              SizedBox(
+                height: 180,
+                child: CupertinoPicker(
+                  scrollController: FixedExtentScrollController(initialItem: idx),
+                  itemExtent: 42,
+                  onSelectedItemChanged: (i) => sel = i,
+                  children: [
+                    for (final v in values)
+                      Center(child: Text('${v.toStringAsFixed(2)} °C', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: primary))),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(c, values[sel]),
+                  style: ElevatedButton.styleFrom(backgroundColor: primary, foregroundColor: Colors.white, shape: const StadiumBorder()),
+                  child: Text(tr('Guardar', 'Save'), style: const TextStyle(fontWeight: FontWeight.w800)),
+                ),
+              ),
+            ]),
+          ),
+        );
+      },
+    );
+    if (picked == null) return;
+    final updated = Map<String, DayEntry>.from(_data);
+    updated[k] = (updated[k] ?? const DayEntry()).copyWith(temp: double.parse(picked.toStringAsFixed(2)));
+    _handleDataChanged(updated);
+  }
+
+  /// Regla "3 sobre 6": 3 temperaturas seguidas al menos 0,2 °C por encima
+  /// de la más alta de las 6 anteriores = subida tras la ovulación.
+  ({DateTime ovulation, double coverline})? _tempShift() {
+    final all = _numericSeries(maxPoints: 40);
+    for (var i = all.length - 3; i >= 6; i--) {
+      final prev = all.sublist(i - 6, i).map((e) => e.value);
+      final top = prev.reduce((a, b) => a > b ? a : b);
+      final three = all.sublist(i, i + 3);
+      if (three.every((e) => e.value >= top + 0.2)) {
+        if (DateTime.now().difference(three.first.key).inDays > 35) return null;
+        return (ovulation: all[i - 1].key, coverline: top + 0.05);
+      }
+    }
+    return null;
+  }
+
+  Widget _tempExtras(AppStrings s, Color primary) {
+    final shift = _tempShift();
+    final cycle = _numericSeries(maxPoints: 30);
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      const SizedBox(height: 14),
+      SizedBox(
+        height: 50,
+        child: ElevatedButton.icon(
+          onPressed: _quickTemp,
+          icon: const Icon(Icons.thermostat_rounded),
+          label: Text(tr('Apuntar la de hoy', "Log today's"), style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
+          style: ElevatedButton.styleFrom(backgroundColor: primary, foregroundColor: Colors.white, shape: const StadiumBorder()),
+        ),
+      ),
+      if (shift != null) ...[
+        const SizedBox(height: 14),
+        Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(color: const Color(0xFFE8F5EC), borderRadius: BorderRadius.circular(18), border: Border.all(color: const Color(0xFFBFE3CB))),
+          child: Text(
+            tr('Tu temperatura ha subido: probablemente ovulaste el {} 🌱', 'Your temperature has gone up: you probably ovulated on {} 🌱')
+                .replaceFirst('{}', _dateLabel(s, shift.ovulation)),
+            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF235C37), height: 1.35),
+          ),
+        ),
+      ],
+      if (cycle.length >= 4) ...[
+        const SizedBox(height: 14),
+        _cardShadow(Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(tr('Tu ciclo (últimos 30 registros)', 'Your cycle (last 30 entries)'),
+              style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 120,
+            width: double.infinity,
+            child: CustomPaint(painter: _MiniTrendPainter(series: cycle, color: primary, coverline: shift?.coverline)),
+          ),
+          if (shift != null) ...[
+            const SizedBox(height: 6),
+            Text(tr('La línea discontinua marca tu temperatura antes de ovular.', 'The dashed line marks your temperature before ovulating.'),
+                style: const TextStyle(fontSize: 11.5, color: AppColors.textMuted)),
+          ],
+        ])),
+      ],
+      const SizedBox(height: 14),
+      _cardShadow(Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const Text('💡', style: TextStyle(fontSize: 20)),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(tr('Cómo medirla bien', 'How to measure it right'),
+                style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+            const SizedBox(height: 4),
+            Text(
+              tr('Al despertar, antes de levantarte, hablar o beber, y siempre a la misma hora. Después de ovular sube unos 0,3 °C y se queda alta hasta la regla.',
+                  'When you wake up, before getting up, talking or drinking, and always at the same time. After ovulation it rises about 0.3 °C and stays high until your period.'),
+              style: const TextStyle(fontSize: 12, color: AppColors.textMuted, height: 1.45),
+            ),
+          ]),
+        ),
+      ])),
+    ]);
+  }
+
   void _handleDataChanged(Map<String, DayEntry> updated) {
     setState(() => _data = updated);
     widget.onDataChanged(updated);
@@ -406,7 +544,7 @@ class _FieldDetailScreenState extends State<FieldDetailScreen> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _goEdit,
+              onPressed: widget.fieldKey == 'temperature' ? _quickTemp : _goEdit,
               style: ElevatedButton.styleFrom(
                 backgroundColor: primary,
                 foregroundColor: Colors.white,
@@ -562,6 +700,7 @@ class _FieldDetailScreenState extends State<FieldDetailScreen> {
             ],
           ),
         ),
+        if (widget.fieldKey == 'temperature') _tempExtras(s, primary),
       ],
     );
   }
@@ -614,13 +753,18 @@ class _FieldDetailScreenState extends State<FieldDetailScreen> {
 class _MiniTrendPainter extends CustomPainter {
   final List<MapEntry<DateTime, double>> series;
   final Color color;
-  _MiniTrendPainter({required this.series, required this.color});
+  final double? coverline;
+  _MiniTrendPainter({required this.series, required this.color, this.coverline});
 
   @override
   void paint(Canvas canvas, Size size) {
     final values = series.map((e) => e.value).toList();
-    final minV = values.reduce((a, b) => a < b ? a : b);
-    final maxV = values.reduce((a, b) => a > b ? a : b);
+    var minV = values.reduce((a, b) => a < b ? a : b);
+    var maxV = values.reduce((a, b) => a > b ? a : b);
+    if (coverline != null) {
+      if (coverline! < minV) minV = coverline!;
+      if (coverline! > maxV) maxV = coverline!;
+    }
     final range = (maxV - minV).abs() < 0.001 ? 1.0 : (maxV - minV);
     const padding = 6.0;
     final stepX = series.length > 1 ? (size.width - padding * 2) / (series.length - 1) : 0.0;
@@ -645,6 +789,16 @@ class _MiniTrendPainter extends CustomPainter {
     }
     canvas.drawPath(path, linePaint);
 
+    if (coverline != null) {
+      final cy = size.height - padding - ((coverline! - minV) / range) * (size.height - padding * 2);
+      final dash = Paint()
+        ..color = const Color(0xFF3E9B4F)
+        ..strokeWidth = 1.4;
+      for (var x = 0.0; x < size.width; x += 8) {
+        canvas.drawLine(Offset(x, cy), Offset((x + 4).clamp(0, size.width), cy), dash);
+      }
+    }
+
     final dotPaint = Paint()..color = color;
     canvas.drawCircle(points.last, 4, dotPaint);
     canvas.drawCircle(points.last, 4, Paint()..color = Colors.white..style = PaintingStyle.stroke..strokeWidth = 1.5);
@@ -652,5 +806,5 @@ class _MiniTrendPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _MiniTrendPainter oldDelegate) =>
-      oldDelegate.series != series || oldDelegate.color != color;
+      oldDelegate.series != series || oldDelegate.color != color || oldDelegate.coverline != coverline;
 }
