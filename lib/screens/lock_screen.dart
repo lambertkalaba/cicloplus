@@ -31,8 +31,12 @@ class LockScreen extends StatefulWidget {
   /// "¿Olvidaste tu PIN?": quita el PIN y cierra la sesión para volver a
   /// entrar con la cuenta (correo o Google). Los datos siguen en la nube.
   final Future<void> Function()? onForgot;
+  /// Título opcional en lugar de "CicloPlus está bloqueado" (p. ej. al
+  /// pedir el PIN para quitarlo).
+  final String? title;
 
   const LockScreen({
+    this.title,
     super.key,
     required this.mode,
     required this.onSuccess,
@@ -169,7 +173,7 @@ class _LockScreenState extends State<LockScreen> {
               const Text('🌸', style: TextStyle(fontSize: 36)),
               const SizedBox(height: 12),
               Text(
-                s.lockAppLocked,
+                widget.title ?? s.lockAppLocked,
                 style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
               ),
               const SizedBox(height: 4),

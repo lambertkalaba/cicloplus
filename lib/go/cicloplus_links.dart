@@ -101,16 +101,28 @@ class CP {
   static Future<void> openOvulationTest(BuildContext context) => _push(context, const OvulationTestScreen());
 
 
-  /// Activa o quita el bloqueo con PIN.
+  /// Activa o quita el bloqueo con PIN. Para quitarlo pide antes el PIN
+  /// actual (o la huella), así nadie más puede desactivarlo.
   static Future<void> togglePin(BuildContext context) async {
     final settings = SettingsService();
+    final nav = Navigator.of(context);
     if (await settings.hasPin()) {
+      if (!context.mounted) return;
+      final ok = await nav.push<bool>(MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (_) => LockScreen(
+          mode: LockScreenMode.unlock,
+          title: tr('Escribe tu PIN para quitarlo', 'Enter your PIN to remove it'),
+          onSuccess: () => nav.pop(true),
+          onCancel: () => nav.pop(false),
+        ),
+      ));
+      if (ok != true) return;
       await settings.clearPin();
       if (context.mounted) _snack(context, tr('Bloqueo con PIN desactivado', 'PIN lock turned off'));
       return;
     }
     if (!context.mounted) return;
-    final nav = Navigator.of(context);
     final created = await nav.push<bool>(MaterialPageRoute(
       fullscreenDialog: true,
       builder: (_) => LockScreen(

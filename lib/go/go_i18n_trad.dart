@@ -3,6 +3,8 @@
 
 const Map<String, Map<String, String>> goI18nTrad = {
   "am": {
+    "Escribe tu PIN para quitarlo": "ለማስወገድ ፒንሽን አስገቢ",
+    "Activado. Para quitarlo te pediremos tu PIN.": "በርቷል። ለማስወገድ ፒንሽን እንጠይቃለን።",
     "Duración del ciclo (últimos 3)": "የዑደት ርዝመት (የመጨረሻዎቹ 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "ፕሪሚየም፦ የዑደትሽ፣ ምልክቶችሽ እና ስሜትሽ ሙሉ ታሪክ።",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "ፕሪሚየም፦ የ8 ሳምንት ዝርዝር ለማየት አዝማሚያውን ንኪ።",
@@ -139,6 +141,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ቀለም ምረጪ",
   },
   "ar": {
+    "Escribe tu PIN para quitarlo": "اكتبي رمزك لإزالته",
+    "Activado. Para quitarlo te pediremos tu PIN.": "مفعّل. لإزالته سنطلب رمزك.",
     "Duración del ciclo (últimos 3)": "مدة الدورة (آخر 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "بريميوم: السجل الكامل لدوراتك وأعراضك ومزاجك.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "بريميوم: اضغطي على اتجاه لرؤية تفاصيل 8 أسابيع.",
@@ -334,6 +338,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} أيام",
   },
   "az": {
+    "Escribe tu PIN para quitarlo": "Silmək üçün PIN-i yaz",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Aktivdir. Silmək üçün PIN-ini soruşacağıq.",
     "Duración del ciclo (últimos 3)": "Dövrün müddəti (son 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: dövrlərin, simptomların və əhvalın tam tarixçəsi.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: 8 həftəlik təfərrüat üçün meylə toxun.",
@@ -470,6 +476,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rəng seç",
   },
   "bn": {
+    "Escribe tu PIN para quitarlo": "সরাতে তোমার পিন লেখো",
+    "Activado. Para quitarlo te pediremos tu PIN.": "চালু। সরাতে তোমার পিন চাওয়া হবে।",
     "Duración del ciclo (últimos 3)": "চক্রের সময়কাল (শেষ ৩টি)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "প্রিমিয়াম: তোমার চক্র, উপসর্গ ও মেজাজের পুরো ইতিহাস।",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "প্রিমিয়াম: ৮ সপ্তাহের বিস্তারিত দেখতে একটি প্রবণতায় চাপো।",
@@ -665,6 +673,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} দিন",
   },
   "cs": {
+    "Escribe tu PIN para quitarlo": "Zadej PIN pro jeho odstranění",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Zapnuto. Pro odstranění budeme chtít tvůj PIN.",
     "Duración del ciclo (últimos 3)": "Délka cyklu (poslední 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: kompletní historie cyklů, příznaků a nálady.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: klepni na trend a uvidíš detail za 8 týdnů.",
@@ -801,6 +811,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber barvu",
   },
   "da": {
+    "Escribe tu PIN para quitarlo": "Indtast din PIN for at fjerne den",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Til. For at fjerne den beder vi om din PIN.",
     "Duración del ciclo (últimos 3)": "Cykluslængde (seneste 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: fuld historik over dine cyklusser, symptomer og humør.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: tryk på en tendens for at se 8 ugers detaljer.",
@@ -937,6 +949,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vælg en farve",
   },
   "de": {
+    "Escribe tu PIN para quitarlo": "Gib deine PIN ein, um sie zu entfernen",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Aktiv. Zum Entfernen fragen wir nach deiner PIN.",
     "Duración del ciclo (últimos 3)": "Zykluslänge (letzte 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: vollständiger Verlauf deiner Zyklen, Symptome und Stimmung.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: Tippe auf einen Trend, um die 8-Wochen-Details zu sehen.",
@@ -1132,6 +1146,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} Tage",
   },
   "el": {
+    "Escribe tu PIN para quitarlo": "Γράψε το PIN σου για να το αφαιρέσεις",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Ενεργό. Για να το αφαιρέσεις θα σου ζητήσουμε το PIN.",
     "Duración del ciclo (últimos 3)": "Διάρκεια κύκλου (τελευταίοι 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: πλήρες ιστορικό κύκλων, συμπτωμάτων και διάθεσης.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: πάτησε μια τάση για λεπτομέρειες 8 εβδομάδων.",
@@ -1268,6 +1284,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Διάλεξε χρώμα",
   },
   "fa": {
+    "Escribe tu PIN para quitarlo": "برای برداشتن، پین خود را بنویس",
+    "Activado. Para quitarlo te pediremos tu PIN.": "فعال است. برای برداشتن، پینت را می‌پرسیم.",
     "Duración del ciclo (últimos 3)": "طول چرخه (۳ تای آخر)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "پریمیوم: تاریخچه کامل چرخه‌ها، علائم و حال‌وهوا.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "پریمیوم: روی یک روند بزن تا جزئیات ۸ هفته را ببینی.",
@@ -1404,6 +1422,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "یک رنگ انتخاب کن",
   },
   "fi": {
+    "Escribe tu PIN para quitarlo": "Anna PIN-koodisi poistaaksesi sen",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Päällä. Poistaessa kysymme PIN-koodisi.",
     "Duración del ciclo (últimos 3)": "Kierron pituus (viimeiset 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: koko historia kierroista, oireista ja mielialasta.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: napauta trendiä nähdäksesi 8 viikon tiedot.",
@@ -1540,6 +1560,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Valitse väri",
   },
   "fil": {
+    "Escribe tu PIN para quitarlo": "Ilagay ang PIN mo para alisin ito",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Naka-on. Para alisin ito, hihingin namin ang PIN mo.",
     "Duración del ciclo (últimos 3)": "Haba ng cycle (huling 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: kumpletong kasaysayan ng iyong cycle, sintomas at mood.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: i-tap ang isang trend para makita ang detalye ng 8 linggo.",
@@ -1676,6 +1698,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pumili ng kulay",
   },
   "fr": {
+    "Escribe tu PIN para quitarlo": "Saisis ton code pour le retirer",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Activé. Pour le retirer, on te demandera ton code.",
     "Duración del ciclo (últimos 3)": "Durée du cycle (3 derniers)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium : historique complet de tes cycles, symptômes et humeur.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium : touche une tendance pour voir son détail sur 8 semaines.",
@@ -1871,6 +1895,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} jours",
   },
   "gu": {
+    "Escribe tu PIN para quitarlo": "દૂર કરવા તમારો PIN લખો",
+    "Activado. Para quitarlo te pediremos tu PIN.": "ચાલુ છે. દૂર કરવા અમે તમારો PIN પૂછીશું.",
     "Duración del ciclo (últimos 3)": "ચક્રની લંબાઈ (છેલ્લા 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "પ્રીમિયમ: તમારા ચક્ર, લક્ષણો અને મૂડનો પૂરો ઇતિહાસ.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "પ્રીમિયમ: 8 અઠવાડિયાની વિગત જોવા વલણ પર ટેપ કરો.",
@@ -2007,6 +2033,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "એક રંગ પસંદ કરો",
   },
   "ha": {
+    "Escribe tu PIN para quitarlo": "Rubuta PIN ɗinki don cire shi",
+    "Activado. Para quitarlo te pediremos tu PIN.": "A kunne. Don cire shi za mu tambayi PIN ɗinki.",
     "Duración del ciclo (últimos 3)": "Tsawon zagayowa (3 na ƙarshe)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: cikakken tarihin zagayowarki, alamomi da yanayin rai.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: taɓa wani yanayi don ganin bayanin makonni 8.",
@@ -2143,6 +2171,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Zaɓi launi",
   },
   "he": {
+    "Escribe tu PIN para quitarlo": "הקלידי את הקוד כדי להסיר אותו",
+    "Activado. Para quitarlo te pediremos tu PIN.": "פעיל. כדי להסיר נבקש את הקוד שלך.",
     "Duración del ciclo (últimos 3)": "אורך המחזור (3 אחרונים)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "פרימיום: היסטוריה מלאה של המחזורים, התסמינים ומצב הרוח.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "פרימיום: הקישי על מגמה כדי לראות פירוט של 8 שבועות.",
@@ -2279,6 +2309,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "בחרי צבע",
   },
   "hi": {
+    "Escribe tu PIN para quitarlo": "हटाने के लिए अपना पिन डालें",
+    "Activado. Para quitarlo te pediremos tu PIN.": "चालू है। हटाने के लिए हम आपका पिन पूछेंगे।",
     "Duración del ciclo (últimos 3)": "चक्र की अवधि (पिछले 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "प्रीमियम: आपके चक्र, लक्षणों और मूड का पूरा इतिहास।",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "प्रीमियम: 8 हफ़्तों का विवरण देखने के लिए किसी ट्रेंड पर टैप करें।",
@@ -2474,6 +2506,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} दिन",
   },
   "hu": {
+    "Escribe tu PIN para quitarlo": "Írd be a PIN-kódot az eltávolításhoz",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Bekapcsolva. Eltávolításhoz elkérjük a PIN-kódot.",
     "Duración del ciclo (últimos 3)": "Ciklushossz (utolsó 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: ciklusaid, tüneteid és hangulatod teljes előzménye.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: koppints egy trendre a 8 hetes részletekért.",
@@ -2610,6 +2644,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Válassz színt",
   },
   "id": {
+    "Escribe tu PIN para quitarlo": "Masukkan PIN untuk menghapusnya",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Aktif. Untuk menghapusnya kami akan meminta PIN-mu.",
     "Duración del ciclo (últimos 3)": "Panjang siklus (3 terakhir)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: riwayat lengkap siklus, gejala, dan suasana hatimu.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: ketuk tren untuk melihat detail 8 minggu.",
@@ -2746,6 +2782,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "it": {
+    "Escribe tu PIN para quitarlo": "Inserisci il PIN per rimuoverlo",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Attivo. Per rimuoverlo ti chiederemo il PIN.",
     "Duración del ciclo (últimos 3)": "Durata del ciclo (ultimi 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: storico completo di cicli, sintomi e umore.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: tocca una tendenza per vedere il dettaglio di 8 settimane.",
@@ -2882,6 +2920,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Scegli un colore",
   },
   "ja": {
+    "Escribe tu PIN para quitarlo": "解除するにはPINを入力してください",
+    "Activado. Para quitarlo te pediremos tu PIN.": "オン。解除するときはPINを確認します。",
     "Duración del ciclo (últimos 3)": "周期の長さ（直近3回）",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "プレミアム：周期・症状・気分の全履歴。",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "プレミアム：傾向をタップすると8週間の詳細が見られます。",
@@ -3018,6 +3058,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "色を選ぶ",
   },
   "kk": {
+    "Escribe tu PIN para quitarlo": "Өшіру үшін PIN енгіз",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Қосулы. Өшіру үшін PIN сұраймыз.",
     "Duración del ciclo (últimos 3)": "Цикл ұзақтығы (соңғы 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: циклдардың, белгілердің және көңіл күйдің толық тарихы.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: 8 апталық толығырақ көру үшін үрдісті бас.",
@@ -3154,6 +3196,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Түс таңдаңыз",
   },
   "kn": {
+    "Escribe tu PIN para quitarlo": "ತೆಗೆದುಹಾಕಲು ನಿಮ್ಮ PIN ನಮೂದಿಸಿ",
+    "Activado. Para quitarlo te pediremos tu PIN.": "ಆನ್ ಆಗಿದೆ. ತೆಗೆದುಹಾಕಲು ನಿಮ್ಮ PIN ಕೇಳುತ್ತೇವೆ.",
     "Duración del ciclo (últimos 3)": "ಚಕ್ರದ ಅವಧಿ (ಕೊನೆಯ 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "ಪ್ರೀಮಿಯಂ: ನಿಮ್ಮ ಚಕ್ರಗಳು, ಲಕ್ಷಣಗಳು ಮತ್ತು ಮನಸ್ಥಿತಿಯ ಪೂರ್ಣ ಇತಿಹಾಸ.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "ಪ್ರೀಮಿಯಂ: 8 ವಾರಗಳ ವಿವರಕ್ಕೆ ಪ್ರವೃತ್ತಿಯನ್ನು ಒತ್ತಿ.",
@@ -3290,6 +3334,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ಒಂದು ಬಣ್ಣ ಆರಿಸಿ",
   },
   "ko": {
+    "Escribe tu PIN para quitarlo": "해제하려면 PIN을 입력하세요",
+    "Activado. Para quitarlo te pediremos tu PIN.": "켜짐. 해제하려면 PIN을 물어봐요.",
     "Duración del ciclo (últimos 3)": "주기 길이 (최근 3회)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "프리미엄: 주기, 증상, 기분의 전체 기록.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "프리미엄: 경향을 누르면 8주 상세를 볼 수 있어요.",
@@ -3426,6 +3472,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "색상 선택",
   },
   "ln": {
+    "Escribe tu PIN para quitarlo": "Koma PIN na yo mpo na kolongola yango",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Ezali kosala. Mpo na kolongola, tokosɛnga PIN na yo.",
     "Duración del ciclo (últimos 3)": "Bolai ya cycle (3 ya nsuka)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: lisolo mobimba ya ba cycle, bilembo mpe mayoki na yo.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: simba ndenge moko mpo na komona makambo ya mpɔ́sɔ 8.",
@@ -3562,6 +3610,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pona langi",
   },
   "ml": {
+    "Escribe tu PIN para quitarlo": "നീക്കാൻ നിന്റെ PIN നൽകൂ",
+    "Activado. Para quitarlo te pediremos tu PIN.": "ഓണാണ്. നീക്കാൻ നിന്റെ PIN ചോദിക്കും.",
     "Duración del ciclo (últimos 3)": "ചക്ര ദൈർഘ്യം (അവസാന 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "പ്രീമിയം: നിന്റെ ചക്രങ്ങൾ, ലക്ഷണങ്ങൾ, മൂഡ് എന്നിവയുടെ പൂർണ്ണ ചരിത്രം.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "പ്രീമിയം: 8 ആഴ്ചത്തെ വിശദാംശത്തിന് ഒരു പ്രവണതയിൽ തൊടൂ.",
@@ -3698,6 +3748,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ഒരു നിറം തിരഞ്ഞെടുക്കൂ",
   },
   "mr": {
+    "Escribe tu PIN para quitarlo": "काढण्यासाठी तुमचा पिन लिहा",
+    "Activado. Para quitarlo te pediremos tu PIN.": "चालू आहे. काढण्यासाठी आम्ही तुमचा पिन विचारू.",
     "Duración del ciclo (últimos 3)": "चक्राचा कालावधी (शेवटचे 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "प्रीमियम: तुमच्या चक्रांचा, लक्षणांचा आणि मूडचा पूर्ण इतिहास.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "प्रीमियम: 8 आठवड्यांचा तपशील पाहण्यासाठी कलावर टॅप करा.",
@@ -3834,6 +3886,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एक रंग निवडा",
   },
   "ms": {
+    "Escribe tu PIN para quitarlo": "Masukkan PIN untuk membuangnya",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Aktif. Untuk membuangnya kami akan meminta PIN anda.",
     "Duración del ciclo (últimos 3)": "Panjang kitaran (3 terakhir)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: sejarah penuh kitaran, simptom dan mood anda.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: ketik trend untuk melihat butiran 8 minggu.",
@@ -3970,6 +4024,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "my": {
+    "Escribe tu PIN para quitarlo": "ဖယ်ရှားရန် သင့် PIN ရိုက်ထည့်ပါ",
+    "Activado. Para quitarlo te pediremos tu PIN.": "ဖွင့်ထားသည်။ ဖယ်ရှားရန် သင့် PIN ကို မေးပါမည်။",
     "Duración del ciclo (últimos 3)": "စက်ဝန်းကြာချိန် (နောက်ဆုံး ၃)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "ပရီမီယံ: သင့်စက်ဝန်း၊ လက္ခဏာနှင့် စိတ်ခံစားမှု မှတ်တမ်း အပြည့်အစုံ။",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "ပရီမီယံ: ၈ ပတ် အသေးစိတ်ကြည့်ရန် လမ်းကြောင်းကို နှိပ်ပါ။",
@@ -4106,6 +4162,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "အရောင်ရွေးပါ",
   },
   "ne": {
+    "Escribe tu PIN para quitarlo": "हटाउन आफ्नो PIN लेख्नुहोस्",
+    "Activado. Para quitarlo te pediremos tu PIN.": "सक्रिय छ। हटाउन हामी तपाईंको PIN सोध्नेछौं।",
     "Duración del ciclo (últimos 3)": "चक्रको अवधि (अन्तिम ३)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "प्रिमियम: तपाईंको चक्र, लक्षण र मुडको पूरा इतिहास।",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "प्रिमियम: ८ हप्ताको विवरण हेर्न प्रवृत्तिमा थिच्नुहोस्।",
@@ -4242,6 +4300,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एउटा रङ छान्नुहोस्",
   },
   "nl": {
+    "Escribe tu PIN para quitarlo": "Voer je pincode in om hem te verwijderen",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Aan. Om hem te verwijderen vragen we je pincode.",
     "Duración del ciclo (últimos 3)": "Cyclusduur (laatste 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: volledige geschiedenis van je cycli, klachten en stemming.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: tik op een trend voor het detail van 8 weken.",
@@ -4378,6 +4438,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Kies een kleur",
   },
   "om": {
+    "Escribe tu PIN para quitarlo": "Haquuf PIN kee barreessi",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Banaa dha. Haquuf PIN kee si gaafanna.",
     "Duración del ciclo (últimos 3)": "Dheerina marsaa (3 dhumaa)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: seenaa guutuu marsaa, mallattoo fi miira kee.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: bal’ina torban 8 ilaaluuf adeemsa tuqi.",
@@ -4514,6 +4576,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Halluu filadhu",
   },
   "pa": {
+    "Escribe tu PIN para quitarlo": "ਹਟਾਉਣ ਲਈ ਆਪਣਾ PIN ਲਿਖੋ",
+    "Activado. Para quitarlo te pediremos tu PIN.": "ਚਾਲੂ ਹੈ। ਹਟਾਉਣ ਲਈ ਅਸੀਂ ਤੁਹਾਡਾ PIN ਪੁੱਛਾਂਗੇ।",
     "Duración del ciclo (últimos 3)": "ਚੱਕਰ ਦੀ ਲੰਬਾਈ (ਆਖਰੀ 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "ਪ੍ਰੀਮੀਅਮ: ਤੁਹਾਡੇ ਚੱਕਰਾਂ, ਲੱਛਣਾਂ ਅਤੇ ਮੂਡ ਦਾ ਪੂਰਾ ਇਤਿਹਾਸ।",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "ਪ੍ਰੀਮੀਅਮ: 8 ਹਫ਼ਤਿਆਂ ਦਾ ਵੇਰਵਾ ਵੇਖਣ ਲਈ ਰੁਝਾਨ 'ਤੇ ਟੈਪ ਕਰੋ।",
@@ -4650,6 +4714,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ਇੱਕ ਰੰਗ ਚੁਣੋ",
   },
   "pl": {
+    "Escribe tu PIN para quitarlo": "Wpisz PIN, aby go usunąć",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Włączony. Aby go usunąć, poprosimy o PIN.",
     "Duración del ciclo (últimos 3)": "Długość cyklu (ostatnie 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: pełna historia cykli, objawów i nastroju.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: dotknij trendu, aby zobaczyć szczegóły z 8 tygodni.",
@@ -4786,6 +4852,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Wybierz kolor",
   },
   "pt": {
+    "Escribe tu PIN para quitarlo": "Digite seu PIN para removê-lo",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Ativado. Para removê-lo, pediremos seu PIN.",
     "Duración del ciclo (últimos 3)": "Duração do ciclo (últimos 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: histórico completo dos seus ciclos, sintomas e humor.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: toque numa tendência para ver o detalhe de 8 semanas.",
@@ -4981,6 +5049,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} dias",
   },
   "ro": {
+    "Escribe tu PIN para quitarlo": "Introdu PIN-ul pentru a-l elimina",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Activat. Pentru a-l elimina îți vom cere PIN-ul.",
     "Duración del ciclo (últimos 3)": "Durata ciclului (ultimele 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: istoric complet al ciclurilor, simptomelor și stării.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: atinge o tendință pentru detaliile pe 8 săptămâni.",
@@ -5117,6 +5187,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Alege o culoare",
   },
   "ru": {
+    "Escribe tu PIN para quitarlo": "Введи PIN, чтобы убрать его",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Включено. Чтобы убрать, мы спросим твой PIN.",
     "Duración del ciclo (últimos 3)": "Длина цикла (последние 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: полная история циклов, симптомов и настроения.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: нажми на тенденцию, чтобы увидеть детали за 8 недель.",
@@ -5312,6 +5384,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} дн.",
   },
   "si": {
+    "Escribe tu PIN para quitarlo": "ඉවත් කිරීමට ඔබේ PIN ඇතුළත් කරන්න",
+    "Activado. Para quitarlo te pediremos tu PIN.": "සක්‍රියයි. ඉවත් කිරීමට ඔබේ PIN අසනු ඇත.",
     "Duración del ciclo (últimos 3)": "චක්‍රයේ දිග (අවසාන 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "ප්‍රිමියම්: ඔබේ චක්‍ර, රෝග ලක්ෂණ සහ මනෝභාවයේ සම්පූර්ණ ඉතිහාසය.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "ප්‍රිමියම්: සති 8 විස්තරය බැලීමට ප්‍රවණතාවක් තට්ටු කරන්න.",
@@ -5448,6 +5522,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "වර්ණයක් තෝරන්න",
   },
   "sk": {
+    "Escribe tu PIN para quitarlo": "Zadaj PIN na jeho odstránenie",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Zapnuté. Na odstránenie budeme chcieť tvoj PIN.",
     "Duración del ciclo (últimos 3)": "Dĺžka cyklu (posledné 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: kompletná história cyklov, príznakov a nálady.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: ťukni na trend a uvidíš detail za 8 týždňov.",
@@ -5584,6 +5660,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber farbu",
   },
   "sv": {
+    "Escribe tu PIN para quitarlo": "Ange din PIN för att ta bort den",
+    "Activado. Para quitarlo te pediremos tu PIN.": "På. För att ta bort den ber vi om din PIN.",
     "Duración del ciclo (últimos 3)": "Cykellängd (senaste 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: full historik över cykler, symtom och humör.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: tryck på en trend för att se 8 veckors detaljer.",
@@ -5720,6 +5798,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Välj en färg",
   },
   "sw": {
+    "Escribe tu PIN para quitarlo": "Andika PIN yako ili kuiondoa",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Imewashwa. Ili kuiondoa tutakuuliza PIN yako.",
     "Duración del ciclo (últimos 3)": "Urefu wa mzunguko (3 za mwisho)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: historia kamili ya mizunguko, dalili na hisia zako.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: gusa mwenendo kuona maelezo ya wiki 8.",
@@ -5856,6 +5936,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chagua rangi",
   },
   "ta": {
+    "Escribe tu PIN para quitarlo": "நீக்க உங்கள் PIN-ஐ உள்ளிடுங்கள்",
+    "Activado. Para quitarlo te pediremos tu PIN.": "இயக்கத்தில். நீக்க உங்கள் PIN கேட்கப்படும்.",
     "Duración del ciclo (últimos 3)": "சுழற்சி நீளம் (கடைசி 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "பிரீமியம்: உங்கள் சுழற்சிகள், அறிகுறிகள், மனநிலையின் முழு வரலாறு.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "பிரீமியம்: 8 வார விவரத்தைக் காண ஒரு போக்கைத் தட்டவும்.",
@@ -5992,6 +6074,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ஒரு நிறத்தைத் தேர்வுசெய்யுங்கள்",
   },
   "te": {
+    "Escribe tu PIN para quitarlo": "తీసివేయడానికి మీ PIN నమోదు చేయండి",
+    "Activado. Para quitarlo te pediremos tu PIN.": "ఆన్‌లో ఉంది. తీసివేయడానికి మీ PIN అడుగుతాం.",
     "Duración del ciclo (últimos 3)": "చక్ర వ్యవధి (చివరి 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "ప్రీమియం: మీ చక్రాలు, లక్షణాలు, మూడ్ పూర్తి చరిత్ర.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "ప్రీమియం: 8 వారాల వివరాల కోసం ధోరణిని నొక్కండి.",
@@ -6128,6 +6212,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ఒక రంగును ఎంచుకోండి",
   },
   "th": {
+    "Escribe tu PIN para quitarlo": "ใส่ PIN เพื่อปิด",
+    "Activado. Para quitarlo te pediremos tu PIN.": "เปิดอยู่ หากต้องการปิดจะต้องใส่ PIN",
     "Duración del ciclo (últimos 3)": "ความยาวรอบเดือน (3 รอบล่าสุด)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "พรีเมียม: ประวัติรอบเดือน อาการ และอารมณ์ทั้งหมด",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "พรีเมียม: แตะแนวโน้มเพื่อดูรายละเอียด 8 สัปดาห์",
@@ -6264,6 +6350,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "เลือกสี",
   },
   "tr": {
+    "Escribe tu PIN para quitarlo": "Kaldırmak için PIN’ini gir",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Açık. Kaldırmak için PIN’ini soracağız.",
     "Duración del ciclo (últimos 3)": "Döngü süresi (son 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: döngülerinin, belirtilerinin ve ruh halinin tüm geçmişi.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: 8 haftalık ayrıntı için bir eğilime dokun.",
@@ -6400,6 +6488,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Bir renk seç",
   },
   "uk": {
+    "Escribe tu PIN para quitarlo": "Введи PIN, щоб прибрати його",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Увімкнено. Щоб прибрати, ми попросимо твій PIN.",
     "Duración del ciclo (últimos 3)": "Тривалість циклу (останні 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: повна історія циклів, симптомів і настрою.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: торкнися тенденції, щоб побачити деталі за 8 тижнів.",
@@ -6536,6 +6626,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Обери колір",
   },
   "ur": {
+    "Escribe tu PIN para quitarlo": "ہٹانے کے لیے اپنا PIN لکھیں",
+    "Activado. Para quitarlo te pediremos tu PIN.": "فعال ہے۔ ہٹانے کے لیے ہم آپ کا PIN پوچھیں گے۔",
     "Duración del ciclo (últimos 3)": "سائیکل کا دورانیہ (آخری 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "پریمیم: آپ کے سائیکل، علامات اور موڈ کی مکمل تاریخ۔",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "پریمیم: 8 ہفتوں کی تفصیل دیکھنے کے لیے رجحان پر ٹیپ کریں۔",
@@ -6672,6 +6764,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ایک رنگ چنیں",
   },
   "uz": {
+    "Escribe tu PIN para quitarlo": "O‘chirish uchun PIN kiriting",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Yoqilgan. O‘chirish uchun PIN so‘raymiz.",
     "Duración del ciclo (últimos 3)": "Sikl davomiyligi (oxirgi 3)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: sikllar, alomatlar va kayfiyatning to‘liq tarixi.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: 8 haftalik tafsilot uchun tendensiyani bosing.",
@@ -6808,6 +6902,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rang tanlang",
   },
   "vi": {
+    "Escribe tu PIN para quitarlo": "Nhập mã PIN để gỡ bỏ",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Đang bật. Để gỡ bỏ, chúng tôi sẽ hỏi mã PIN của bạn.",
     "Duración del ciclo (últimos 3)": "Độ dài chu kỳ (3 lần gần nhất)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: toàn bộ lịch sử chu kỳ, triệu chứng và tâm trạng.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: chạm vào một xu hướng để xem chi tiết 8 tuần.",
@@ -6944,6 +7040,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chọn màu",
   },
   "wo": {
+    "Escribe tu PIN para quitarlo": "Bindal sa PIN ngir dindi ko",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Dafa taxaw. Ngir dindi ko dinañu laaj sa PIN.",
     "Duración del ciclo (últimos 3)": "Guddaay wër (3 yu mujj)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: taariixu wër yi, màndarga yi ak sa xel mu mat.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: bësal ci benn yoon ngir gis leeral 8 ayubés.",
@@ -7080,6 +7178,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Tànnal benn melo",
   },
   "yo": {
+    "Escribe tu PIN para quitarlo": "Tẹ PIN rẹ láti yọ ọ́ kúrò",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Ó ti tàn. Láti yọ ọ́, a ó béèrè PIN rẹ.",
     "Duración del ciclo (últimos 3)": "Gígùn àyíká (3 tó kẹ́yìn)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "Premium: ìtàn kíkún ti àyíká, àmì àìsàn àti ìṣesí rẹ.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "Premium: tẹ àṣà kan láti rí àlàyé ọ̀sẹ̀ 8.",
@@ -7216,6 +7316,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Yan àwọ̀ kan",
   },
   "zh": {
+    "Escribe tu PIN para quitarlo": "输入PIN码以移除",
+    "Activado. Para quitarlo te pediremos tu PIN.": "已开启。移除时需要输入你的PIN码。",
     "Duración del ciclo (últimos 3)": "周期长度（最近3次）",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "高级版：周期、症状和心情的完整历史。",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "高级版：点按趋势查看8周详情。",
@@ -7352,6 +7454,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "选择颜色",
   },
   "zh-TW": {
+    "Escribe tu PIN para quitarlo": "輸入PIN碼以移除",
+    "Activado. Para quitarlo te pediremos tu PIN.": "已開啟。移除時需要輸入你的PIN碼。",
     "Duración del ciclo (últimos 3)": "週期長度（最近3次）",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "進階版：週期、症狀和心情的完整歷史。",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "進階版：點按趨勢查看8週詳情。",
@@ -7488,6 +7592,8 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "選擇顏色",
   },
   "zu": {
+    "Escribe tu PIN para quitarlo": "Faka i-PIN yakho ukuze uyisuse",
+    "Activado. Para quitarlo te pediremos tu PIN.": "Ivuliwe. Ukuze uyisuse sizocela i-PIN yakho.",
     "Duración del ciclo (últimos 3)": "Ubude bomjikelezo (oku-3 kokugcina)",
     "Premium: historial completo de tus ciclos, síntomas y estado de ánimo.": "I-Premium: umlando ophelele wemijikelezo, izimpawu nemizwa yakho.",
     "Premium: toca una tendencia para ver su detalle de 8 semanas.": "I-Premium: thepha isitayela ukuze ubone imininingwane yamasonto angu-8.",

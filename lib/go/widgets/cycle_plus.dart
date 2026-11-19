@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../cicloplus_host.dart' show CicloData;
+import '../../services/settings_service.dart';
 import '../cicloplus_links.dart';
 import '../data/store.dart';
 import '../strings.dart';
@@ -251,14 +252,7 @@ class CycleExtraSettings extends StatelessWidget {
           },
         ),
         if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) const DiscreetIconTile(),
-        ListTile(
-          contentPadding: EdgeInsets.zero,
-          leading: const Text('🔒', style: TextStyle(fontSize: 22)),
-          title: Text(tr('Bloqueo con PIN o huella', 'PIN or fingerprint lock'), style: const TextStyle(fontWeight: FontWeight.w800)),
-          subtitle: Text(tr('Pide tu PIN (o tu huella / Face ID) al abrir la app.', 'Asks for your PIN (or fingerprint / Face ID) when opening the app.')),
-          trailing: const Icon(Icons.chevron_right_rounded),
-          onTap: () => CP.togglePin(context),
-        ),
+        const PinLockTile(),
       ]),
     );
   }
@@ -340,4 +334,47 @@ class DiscreetNotif {
 
   /// Carita de Michi para el aviso (Android). null = icono normal.
   static AndroidBitmap<Object>? get largeIcon => michi ? const DrawableResourceAndroidBitmap('widget_michi_happy') : null;
+}
+
+
+/// Bloqueo con PIN: interruptor que muestra si está activado. Para quitarlo
+/// pide el PIN actual.
+class PinLockTile extends StatefulWidget {
+  const PinLockTile({super.key});
+  @override
+  State<PinLockTile> createState() => _PinLockTileState();
+}
+
+class _PinLockTileState extends State<PinLockTile> {
+  bool? _on;
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    final on = await SettingsService().hasPin();
+    if (mounted) setState(() => _on = on);
+  }
+
+  Future<void> _toggle() async {
+    await CP.togglePin(context);
+    await _load();
+  }
+
+  @override
+  Widget build(BuildContext context) => SwitchListTile(
+        contentPadding: EdgeInsets.zero,
+        secondary: const Text('🔒', style: TextStyle(fontSize: 22)),
+        title: Text(tr('Bloqueo con PIN o huella', 'PIN or fingerprint lock'), style: const TextStyle(fontWeight: FontWeight.w800)),
+        subtitle: Text(_on == true
+            ? tr('Activado. Para quitarlo te pediremos tu PIN.', 'On. To remove it we will ask for your PIN.')
+            : tr('Pide tu PIN (o tu huella / Face ID) al abrir la app.', 'Asks for your PIN (or fingerprint / Face ID) when opening the app.')),
+        value: _on ?? false,
+        activeColor: Colors.white,
+        activeTrackColor: const Color(0xFF2FB45A),
+        onChanged: _on == null ? null : (_) => _toggle(),
+      );
 }
