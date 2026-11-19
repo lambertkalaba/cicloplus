@@ -95,7 +95,7 @@ final List<_Entry> _entries = [
       'premium suscripcion pagar quitar anuncios subscription pay remove ads', (c) => CP.openPremium(c)),
   _Entry(Icons.air_rounded, () => tr('Respira con Michi', 'Breathe with Michi'), () => tr('Un minuto para calmarte', 'One minute to calm down'),
       'respirar respiracion calma ansiedad estres nervios relajarme breathe breathing calm anxiety stress relax', (c) => _push(c, const MichiBreatheScreen())),
-  _Entry(Icons.menu_book_rounded, () => tr('Diario', 'Diary'), () => tr('Cuéntale tu día a Michi', 'Tell Michi about your day'),
+  _Entry(Icons.menu_book_rounded, () => tr('Diario con Michi', 'Diary with Michi'), () => tr('Cuéntale tu día a Michi', 'Tell Michi about your day'),
       'diario notas escribir sentimientos diary notes write feelings', (c) => _push(c, const MichiDiaryScreen())),
   _Entry(Icons.flag_rounded, () => tr('Retos', 'Challenges'), () => tr('Pequeños hábitos de 7 días', 'Small 7-day habits'),
       'retos habitos agua caminar dormir challenges habits', (c) => _push(c, const MichiChallengeScreen())),

@@ -9,6 +9,7 @@ import '../widgets/ui.dart';
 import '../cicloplus_host.dart';
 import 'extras.dart';
 import 'month_summary.dart';
+import 'michi_more.dart' show MichiDiaryScreen;
 import 'register.dart';
 
 const _title = TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: C.text);
@@ -652,6 +653,24 @@ class DiaryScreen extends StatelessWidget {
           child: ListView(
             padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
             children: [
+              if (s.showMichi)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(18),
+                    onTap: () => _push(context, const MichiDiaryScreen()),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                      decoration: BoxDecoration(color: C.pinkSoft, borderRadius: BorderRadius.circular(18)),
+                      child: Row(children: [
+                        const Img('michi_letter', size: 36, fallback: Icons.pets_rounded),
+                        const SizedBox(width: 10),
+                        Expanded(child: Text(tr('Cuéntaselo a Michi y te contesta 💌', 'Tell Michi and he will reply 💌'), style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w800, color: C.pinkDark))),
+                        Icon(Icons.chevron_right_rounded, color: C.pink),
+                      ]),
+                    ),
+                  ),
+                ),
               if (days.isEmpty)
                 _box(_empty(tr('Aún no tienes notas.\nEscribe cómo te sientes, qué has notado o lo que quieras recordar.',
                     "You don't have notes yet.\nWrite how you feel or anything you want to remember.")))

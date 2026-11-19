@@ -8,6 +8,7 @@ import '../widgets/michi_events.dart';
 import '../widgets/michi_logic.dart';
 import '../widgets/ui.dart';
 import 'michi_advent.dart';
+import 'more.dart' show DiaryScreen;
 import 'michi_extras.dart';
 import 'michi_stories.dart' show MichiStories, StoryParticles, StoryFx;
 
@@ -41,6 +42,7 @@ Future<void> showMichiPeriodKit(BuildContext context) {
     ('🍵', tr('Algo calentito', 'Something warm'), tr('Una infusión o agua templada te ayudará a sentirte mejor.', 'A herbal tea or warm water will help you feel better.')),
     ('🧘‍♀️', tr('Estiramientos suaves', 'Gentle stretches'), tr('La postura del niño o caminar un poco puede aliviar los calambres.', "Child's pose or a short walk can ease cramps.")),
     ('🛌', tr('Descansa sin culpa', 'Rest without guilt'), tr('Tu cuerpo está trabajando mucho. Hoy está bien ir más despacio.', "Your body is working hard. It's okay to slow down today.")),
+    ('🥬', tr('Come algo con hierro', 'Eat something with iron'), tr('Las legumbres, las espinacas o la carne te ayudan a recuperar el hierro que pierdes.', 'Pulses, spinach or meat help you recover the iron you lose.')),
   ];
   return showModalBottomSheet(
     context: context,
@@ -182,9 +184,8 @@ class _MichiDiaryScreenState extends State<MichiDiaryScreen> {
             const SizedBox(height: 10),
             TextField(
               controller: _t,
-              maxLines: 3,
+              maxLines: 5,
               minLines: 2,
-              maxLength: 200,
               textCapitalization: TextCapitalization.sentences,
               decoration: InputDecoration(
                 hintText: tr('Hoy me he sentido…', 'Today I felt…'),
@@ -220,7 +221,18 @@ class _MichiDiaryScreenState extends State<MichiDiaryScreen> {
           ]),
         ),
         const SizedBox(height: 14),
-        for (final e in entries.take(60))
+        if (entries.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8, left: 4),
+            child: Row(children: [
+              Expanded(child: Text(tr('Lo que me has contado', "What you've told me"), style: TextStyle(fontSize: 13, fontWeight: FontWeight.w900, color: C.pinkDark))),
+              TextButton(
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const DiaryScreen())),
+                child: Text(tr('Ver todo en Mi diario ›', 'See all in My diary ›'), style: TextStyle(fontWeight: FontWeight.w900, color: C.pink)),
+              ),
+            ]),
+          ),
+        for (final e in entries.take(5))
           Container(
             margin: const EdgeInsets.only(bottom: 8),
             padding: const EdgeInsets.all(12),

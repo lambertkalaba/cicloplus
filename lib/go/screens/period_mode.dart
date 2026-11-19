@@ -7,6 +7,7 @@ import '../data/store.dart';
 import '../services/notifications.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
+import 'michi_more.dart' show showMichiPeriodKit;
 
 /// Temporizador para cambiar la compresa, el tampón o la copa: guarda la
 /// hora del aviso y programa una notificación.
@@ -176,15 +177,23 @@ class _PeriodModeCardState extends State<PeriodModeCard> {
                 ),
                 if (onPeriod) ...[
                   const SizedBox(height: 10),
-                  Wrap(
-                    spacing: 6,
-                    runSpacing: 6,
-                    children: [
-                      _tip('🔥', tr('Calor en la tripa', 'Heat on your tummy')),
-                      _tip('💧', tr('Bebe agua', 'Drink water')),
-                      _tip('🧘‍♀️', tr('Estiramientos suaves', 'Gentle stretches')),
-                      _tip('🥬', tr('Come algo con hierro', 'Eat something with iron')),
-                    ],
+                  GestureDetector(
+                    onTap: () => showMichiPeriodKit(context),
+                    child: Wrap(
+                      spacing: 6,
+                      runSpacing: 6,
+                      children: [
+                        _tip('🫖', tr('Calor en la tripa', 'Warmth on your tummy')),
+                        _tip('🍵', tr('Algo calentito', 'Something warm')),
+                        _tip('🧘‍♀️', tr('Estiramientos suaves', 'Gentle stretches')),
+                        _tip('🥬', tr('Come algo con hierro', 'Eat something with iron')),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          decoration: BoxDecoration(color: C.pink, borderRadius: BorderRadius.circular(14)),
+                          child: Text(tr('Ver más consejos ›', 'More tips ›'), style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.white)),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
                 const SizedBox(height: 12),
