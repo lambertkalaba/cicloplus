@@ -20,6 +20,7 @@ import 'invite_partner_screen.dart';
 import 'partner_welcome_screen.dart';
 import 'pregnancy_tracking_screen.dart';
 import 'register_screen.dart';
+import '../go/data/store.dart' as gostore;
 
 /// Pestaña "Hoy": nueva pantalla principal de la barra inferior (índice 0),
 /// construida a partir de una captura de referencia. Reemplaza a la
@@ -985,9 +986,20 @@ class TodayScreen extends StatelessWidget {
     bool isFertileToday,
     bool tryingToConceive,
   ) {
-    final cycleLen = _predictor.getAvgCycleLength();
-    final periodLen = _predictor.getAvgPeriodLength();
-    final dayInCycle = _predictor.currentDayInCycle() ?? 0;
+    // Mismas cuentas que el resto de la app (Hoy, Calendario, Fertilidad):
+    // ciclo medio del diseño nuevo y ovulación del test de LH si lo hay.
+    var cycleLen = _predictor.getAvgCycleLength();
+    var periodLen = _predictor.getAvgPeriodLength();
+    var dayInCycle = _predictor.currentDayInCycle() ?? 0;
+    final gs = gostore.AppStore.instance;
+    final gStart = gs.cycleStartFor(DateTime.now());
+    if (gStart != null) {
+      cycleLen = gs.avgCycle;
+      periodLen = gs.avgPeriod;
+      dayInCycle = gostore.daysBetween(gStart, gostore.dateOnly(DateTime.now()));
+      ovulation = gs.ovulationFor(gStart);
+      isFertileToday = gs.infoFor(DateTime.now()).fertile;
+    }
     final ovulationLabel = '${ovulation.day}/${ovulation.month}/${ovulation.year}';
 
     // Segmentos del slider visual, como fracción del ciclo completo:
