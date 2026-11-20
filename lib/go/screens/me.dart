@@ -149,6 +149,21 @@ class MeScreen extends StatelessWidget {
                             bg: const Color(0xFFEFE7FC)),
                       ],
                     ),
+                    const SizedBox(height: 8),
+                    // Cada mujer es distinta: puede poner sus propios días.
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => _editCycle(context),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 6),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          Icon(Icons.edit_rounded, size: 16, color: C.pinkDark),
+                          const SizedBox(width: 6),
+                          Text(tr('Ajustar mi ciclo y mi regla', 'Adjust my cycle and period'),
+                              style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w800, color: C.pinkDark)),
+                        ]),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -255,6 +270,61 @@ class MeScreen extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> _editCycle(BuildContext context) async {
+    final s = AppStore.instance;
+    var auto = s.manualCycle == 0 && s.manualPeriod == 0;
+    var cycle = s.avgCycle.clamp(15, 60).toInt();
+    var period = s.avgPeriod.clamp(1, 12).toInt();
+    final ok = await showModalBottomSheet<bool>(
+      context: context,
+      showDragHandle: true,
+      isScrollControlled: true,
+      backgroundColor: C.t(0xFFFFF4F8),
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, set) => SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+            child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+              Text(tr('Mi ciclo y mi regla', 'My cycle and period'),
+                  textAlign: TextAlign.center, style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w900, color: C.text)),
+              const SizedBox(height: 6),
+              Text(tr('Cada mujer es distinta: la app aprende de tus registros, pero si lo prefieres puedes poner tus propios días.',
+                      'Every woman is different: the app learns from your logs, but you can set your own days if you prefer.'),
+                  textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, height: 1.35, color: C.muted)),
+              const SizedBox(height: 10),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: Text(tr('Calcular con mis registros', 'Calculate from my logs'), style: const TextStyle(fontWeight: FontWeight.w800)),
+                value: auto,
+                activeColor: Colors.white,
+                activeTrackColor: const Color(0xFF2FB45A),
+                onChanged: (v) => set(() => auto = v),
+              ),
+              if (!auto) ...[
+                const SizedBox(height: 6),
+                Row(children: [
+                  Expanded(child: Text(tr('Duración del ciclo', 'Cycle length'), style: const TextStyle(fontWeight: FontWeight.w800, color: C.text))),
+                  Stepper2(value: cycle, min: 15, max: 60, suffix: ' d', onChanged: (v) => set(() => cycle = v)),
+                ]),
+                const SizedBox(height: 10),
+                Row(children: [
+                  Expanded(child: Text(tr('Duración de la regla', 'Period length'), style: const TextStyle(fontWeight: FontWeight.w800, color: C.text))),
+                  Stepper2(value: period, min: 1, max: 12, suffix: ' d', onChanged: (v) => set(() => period = v)),
+                ]),
+              ],
+              const SizedBox(height: 16),
+              PinkButton(label: tr('Guardar', 'Save'), icon: Icons.check_rounded, onTap: () => Navigator.pop(ctx, true)),
+            ]),
+          ),
+        ),
+      ),
+    );
+    if (ok != true) return;
+    s.manualCycle = auto ? 0 : cycle;
+    s.manualPeriod = auto ? 0 : period;
+    await s.commit();
   }
 
   Future<void> _setGoal(BuildContext context, String g) async {

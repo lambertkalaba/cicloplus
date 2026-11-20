@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../models/app_user.dart';
 import '../services/locale_controller.dart';
@@ -51,12 +52,23 @@ class GoRoot extends StatefulWidget {
   State<GoRoot> createState() => _GoRootState();
 }
 
-class _GoRootState extends State<GoRoot> {
+class _GoRootState extends State<GoRoot> with WidgetsBindingObserver {
   bool _ready = false;
+
+  /// Al volver a la app se comprueba Premium (si ha caducado, vuelven las
+  /// coronas; si acaba de pagar, desaparecen).
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) GoSession.refreshPremium();
+  }
+
+  void _premiumChanged() => AppStore.instance.refreshUi();
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    GoSession.premium.addListener(_premiumChanged);
     GoSession.user = widget.user;
     GoSession.onSignOut = _signOut;
     _start();
@@ -97,6 +109,10 @@ class _GoRootState extends State<GoRoot> {
     try {
       await GoSession.subscription.configure(firebaseUid: widget.user.id);
       await GoSession.refreshPremium();
+      // Compra, renovación o caducidad: RevenueCat avisa y se actualiza al momento.
+      Purchases.addCustomerInfoUpdateListener((info) {
+        GoSession.premium.value = info.entitlements.active.containsKey(SubscriptionService.entitlementId);
+      });
     } catch (_) {}
     try {
       await Notifier.instance.init();
@@ -123,6 +139,8 @@ class _GoRootState extends State<GoRoot> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    GoSession.premium.removeListener(_premiumChanged);
     AppStore.instance.removeListener(_syncGoal);
     LocaleController.instance.removeListener(_syncLang);
     super.dispose();

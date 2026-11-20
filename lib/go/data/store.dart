@@ -246,6 +246,9 @@ class AppStore extends ChangeNotifier {
   /// ni predicciones del ciclo.
   bool get pregnant => goal == 'pregnancy';
 
+  /// Vuelve a pintar las pantallas (p. ej. al activar o caducar Premium).
+  void refreshUi() => notifyListeners();
+
   /// Objetivo «Intento concebir»: se muestran test de ovulación, temperatura
   /// basal y moco cervical.
   bool get conceiving => goal == 'conceive';
@@ -257,6 +260,9 @@ class AppStore extends ChangeNotifier {
   String partnerName = '';
   int defaultCycle = 28;
   int defaultPeriod = 5;
+  /// Días que pone la usuaria a mano (0 = la app aprende de sus registros).
+  int manualCycle = 0;
+  int manualPeriod = 0;
   int waterGoal = 8;
   bool onboarded = false;
 
@@ -419,6 +425,8 @@ class AppStore extends ChangeNotifier {
     partnerName = p.getString('partnerName') ?? '';
     defaultCycle = p.getInt('defaultCycle') ?? 28;
     defaultPeriod = p.getInt('defaultPeriod') ?? 5;
+    manualCycle = p.getInt('manualCycle') ?? 0;
+    manualPeriod = p.getInt('manualPeriod') ?? 0;
     waterGoal = p.getInt('waterGoal') ?? 8;
     onboarded = p.getBool('onboarded') ?? false;
     showSex = p.getBool('showSex') ?? true;
@@ -476,6 +484,8 @@ class AppStore extends ChangeNotifier {
     await p.setString('partnerName', partnerName);
     await p.setInt('defaultCycle', defaultCycle);
     await p.setInt('defaultPeriod', defaultPeriod);
+    await p.setInt('manualCycle', manualCycle);
+    await p.setInt('manualPeriod', manualPeriod);
     await p.setInt('waterGoal', waterGoal);
     await p.setBool('onboarded', onboarded);
     await p.setBool('showSex', showSex);
@@ -559,6 +569,8 @@ class AppStore extends ChangeNotifier {
     partnerName = '';
     defaultCycle = 28;
     defaultPeriod = 5;
+    manualCycle = 0;
+    manualPeriod = 0;
     waterGoal = 8;
     onboarded = false;
     showSex = true;
@@ -617,12 +629,14 @@ class AppStore extends ChangeNotifier {
   List<int> get periodLengths => _starts.map((s) => _periodLengths[s] ?? 1).toList();
 
   int get avgCycle {
+    if (manualCycle > 0) return manualCycle;
     final c = cycleLengths;
     if (c.isEmpty) return defaultCycle;
     return _learned(c, outlierDays: 10);
   }
 
   int get avgPeriod {
+    if (manualPeriod > 0) return manualPeriod;
     final p = periodLengths.where((l) => l >= 2 && l <= 12).toList();
     if (p.isEmpty) return defaultPeriod;
     return _learned(p, outlierDays: 4);

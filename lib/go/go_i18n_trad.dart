@@ -3,6 +3,9 @@
 
 const Map<String, Map<String, String>> goI18nTrad = {
   "am": {
+    "Ajustar mi ciclo y mi regla": "ዑደቴንና የወር አበባዬን አስተካክዪ",
+    "Mi ciclo y mi regla": "ዑደቴና የወር አበባዬ",
+    "Calcular con mis registros": "ከመዝገቦቼ አስሊ",
     "Un bebé": "አንድ ሕፃን",
     "Gemelos o mellizos": "መንትያ",
     "Aún no lo sé": "ገና አላውቅም",
@@ -161,6 +164,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ቀለም ምረጪ",
   },
   "ar": {
+    "Ajustar mi ciclo y mi regla": "ضبط دورتي ومدة الدورة الشهرية",
+    "Mi ciclo y mi regla": "دورتي ومدة الدورة الشهرية",
+    "Calcular con mis registros": "الحساب من سجلاتي",
+    "Cada mujer es distinta: la app aprende de tus registros, pero si lo prefieres puedes poner tus propios días.": "كل امرأة مختلفة: يتعلم التطبيق من سجلاتك، لكن يمكنك وضع أيامك الخاصة إن فضّلتِ.",
+    "Duración de la regla": "مدة الدورة الشهرية",
     "Un bebé": "طفل واحد",
     "Gemelos o mellizos": "توأم",
     "Aún no lo sé": "لا أعرف بعد",
@@ -381,6 +389,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} أيام",
   },
   "az": {
+    "Ajustar mi ciclo y mi regla": "Dövrümü və aybaşımı tənzimlə",
+    "Mi ciclo y mi regla": "Dövrüm və aybaşım",
+    "Calcular con mis registros": "Qeydlərimdən hesabla",
     "Un bebé": "Bir körpə",
     "Gemelos o mellizos": "Əkizlər",
     "Aún no lo sé": "Hələ bilmirəm",
@@ -539,6 +550,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rəng seç",
   },
   "bn": {
+    "Ajustar mi ciclo y mi regla": "আমার চক্র ও পিরিয়ড ঠিক করো",
+    "Mi ciclo y mi regla": "আমার চক্র ও পিরিয়ড",
+    "Calcular con mis registros": "আমার রেকর্ড থেকে হিসাব করো",
+    "Cada mujer es distinta: la app aprende de tus registros, pero si lo prefieres puedes poner tus propios días.": "প্রত্যেক নারী আলাদা: অ্যাপ তোমার রেকর্ড থেকে শেখে, চাইলে নিজের দিন বসাতে পারো।",
+    "Duración de la regla": "পিরিয়ডের সময়কাল",
     "Un bebé": "একটি শিশু",
     "Gemelos o mellizos": "যমজ",
     "Aún no lo sé": "এখনো জানি না",
@@ -759,6 +775,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} দিন",
   },
   "cs": {
+    "Ajustar mi ciclo y mi regla": "Upravit můj cyklus a menstruaci",
+    "Mi ciclo y mi regla": "Můj cyklus a menstruace",
+    "Calcular con mis registros": "Počítat z mých záznamů",
     "Un bebé": "Jedno miminko",
     "Gemelos o mellizos": "Dvojčata",
     "Aún no lo sé": "Ještě nevím",
@@ -917,6 +936,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber barvu",
   },
   "da": {
+    "Ajustar mi ciclo y mi regla": "Juster min cyklus og menstruation",
+    "Mi ciclo y mi regla": "Min cyklus og menstruation",
+    "Calcular con mis registros": "Beregn ud fra mine registreringer",
     "Un bebé": "Én baby",
     "Gemelos o mellizos": "Tvillinger",
     "Aún no lo sé": "Ved det ikke endnu",
@@ -1075,6 +1097,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vælg en farve",
   },
   "de": {
+    "Ajustar mi ciclo y mi regla": "Zyklus und Periode anpassen",
+    "Mi ciclo y mi regla": "Mein Zyklus und meine Periode",
+    "Calcular con mis registros": "Aus meinen Einträgen berechnen",
+    "Cada mujer es distinta: la app aprende de tus registros, pero si lo prefieres puedes poner tus propios días.": "Jede Frau ist anders: Die App lernt aus deinen Einträgen, aber du kannst auch eigene Tage eintragen.",
+    "Duración de la regla": "Periodendauer",
     "Un bebé": "Ein Baby",
     "Gemelos o mellizos": "Zwillinge",
     "Aún no lo sé": "Weiß ich noch nicht",
@@ -1295,6 +1322,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} Tage",
   },
   "el": {
+    "Ajustar mi ciclo y mi regla": "Ρύθμιση κύκλου και περιόδου",
+    "Mi ciclo y mi regla": "Ο κύκλος και η περίοδός μου",
+    "Calcular con mis registros": "Υπολογισμός από τις καταγραφές μου",
     "Un bebé": "Ένα μωρό",
     "Gemelos o mellizos": "Δίδυμα",
     "Aún no lo sé": "Δεν ξέρω ακόμα",
@@ -1453,6 +1483,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Διάλεξε χρώμα",
   },
   "fa": {
+    "Ajustar mi ciclo y mi regla": "تنظیم چرخه و پریودم",
+    "Mi ciclo y mi regla": "چرخه و پریود من",
+    "Calcular con mis registros": "محاسبه با ثبت‌های من",
     "Un bebé": "یک نوزاد",
     "Gemelos o mellizos": "دوقلو",
     "Aún no lo sé": "هنوز نمی‌دانم",
@@ -1611,6 +1644,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "یک رنگ انتخاب کن",
   },
   "fi": {
+    "Ajustar mi ciclo y mi regla": "Säädä kiertoani ja kuukautisiani",
+    "Mi ciclo y mi regla": "Kiertoni ja kuukautiseni",
+    "Calcular con mis registros": "Laske merkinnöistäni",
     "Un bebé": "Yksi vauva",
     "Gemelos o mellizos": "Kaksoset",
     "Aún no lo sé": "En tiedä vielä",
@@ -1769,6 +1805,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Valitse väri",
   },
   "fil": {
+    "Ajustar mi ciclo y mi regla": "Ayusin ang cycle at regla ko",
+    "Mi ciclo y mi regla": "Ang cycle at regla ko",
+    "Calcular con mis registros": "Kalkulahin mula sa mga tala ko",
     "Un bebé": "Isang sanggol",
     "Gemelos o mellizos": "Kambal",
     "Aún no lo sé": "Hindi ko pa alam",
@@ -1927,6 +1966,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pumili ng kulay",
   },
   "fr": {
+    "Ajustar mi ciclo y mi regla": "Ajuster mon cycle et mes règles",
+    "Mi ciclo y mi regla": "Mon cycle et mes règles",
+    "Calcular con mis registros": "Calculer avec mes données",
+    "Cada mujer es distinta: la app aprende de tus registros, pero si lo prefieres puedes poner tus propios días.": "Chaque femme est différente : l’app apprend de tes données, mais tu peux mettre tes propres jours.",
+    "Duración de la regla": "Durée des règles",
     "Un bebé": "Un bébé",
     "Gemelos o mellizos": "Jumeaux",
     "Aún no lo sé": "Je ne sais pas encore",
@@ -2147,6 +2191,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} jours",
   },
   "gu": {
+    "Ajustar mi ciclo y mi regla": "મારું ચક્ર અને માસિક ગોઠવો",
+    "Mi ciclo y mi regla": "મારું ચક્ર અને માસિક",
+    "Calcular con mis registros": "મારી નોંધો પરથી ગણો",
     "Un bebé": "એક બાળક",
     "Gemelos o mellizos": "જોડિયા",
     "Aún no lo sé": "હજુ ખબર નથી",
@@ -2305,6 +2352,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "એક રંગ પસંદ કરો",
   },
   "ha": {
+    "Ajustar mi ciclo y mi regla": "Daidaita zagayowa da haila ta",
+    "Mi ciclo y mi regla": "Zagayowa da haila ta",
+    "Calcular con mis registros": "Ƙididdige daga bayanai na",
     "Un bebé": "Jariri ɗaya",
     "Gemelos o mellizos": "Tagwaye",
     "Aún no lo sé": "Ban sani ba tukuna",
@@ -2463,6 +2513,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Zaɓi launi",
   },
   "he": {
+    "Ajustar mi ciclo y mi regla": "התאמת המחזור והווסת שלי",
+    "Mi ciclo y mi regla": "המחזור והווסת שלי",
+    "Calcular con mis registros": "חישוב לפי הרישומים שלי",
     "Un bebé": "תינוק אחד",
     "Gemelos o mellizos": "תאומים",
     "Aún no lo sé": "עוד לא יודעת",
@@ -2621,6 +2674,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "בחרי צבע",
   },
   "hi": {
+    "Ajustar mi ciclo y mi regla": "मेरा चक्र और पीरियड समायोजित करें",
+    "Mi ciclo y mi regla": "मेरा चक्र और पीरियड",
+    "Calcular con mis registros": "मेरे रिकॉर्ड से गणना करें",
+    "Cada mujer es distinta: la app aprende de tus registros, pero si lo prefieres puedes poner tus propios días.": "हर महिला अलग है: ऐप आपके रिकॉर्ड से सीखता है, पर चाहें तो अपने दिन खुद डाल सकती हैं।",
+    "Duración de la regla": "पीरियड की अवधि",
     "Un bebé": "एक बच्चा",
     "Gemelos o mellizos": "जुड़वाँ",
     "Aún no lo sé": "अभी नहीं पता",
@@ -2841,6 +2899,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} दिन",
   },
   "hu": {
+    "Ajustar mi ciclo y mi regla": "Ciklus és menstruáció beállítása",
+    "Mi ciclo y mi regla": "A ciklusom és a menstruációm",
+    "Calcular con mis registros": "Számolás a bejegyzéseimből",
     "Un bebé": "Egy baba",
     "Gemelos o mellizos": "Ikrek",
     "Aún no lo sé": "Még nem tudom",
@@ -2999,6 +3060,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Válassz színt",
   },
   "id": {
+    "Ajustar mi ciclo y mi regla": "Atur siklus dan haidku",
+    "Mi ciclo y mi regla": "Siklus dan haidku",
+    "Calcular con mis registros": "Hitung dari catatanku",
     "Un bebé": "Satu bayi",
     "Gemelos o mellizos": "Kembar",
     "Aún no lo sé": "Belum tahu",
@@ -3157,6 +3221,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "it": {
+    "Ajustar mi ciclo y mi regla": "Regola il mio ciclo e le mestruazioni",
+    "Mi ciclo y mi regla": "Il mio ciclo e le mestruazioni",
+    "Calcular con mis registros": "Calcola dai miei dati",
     "Un bebé": "Un bambino",
     "Gemelos o mellizos": "Gemelli",
     "Aún no lo sé": "Non lo so ancora",
@@ -3315,6 +3382,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Scegli un colore",
   },
   "ja": {
+    "Ajustar mi ciclo y mi regla": "周期と生理を調整",
+    "Mi ciclo y mi regla": "私の周期と生理",
+    "Calcular con mis registros": "記録から計算する",
     "Un bebé": "1人",
     "Gemelos o mellizos": "双子",
     "Aún no lo sé": "まだわからない",
@@ -3473,6 +3543,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "色を選ぶ",
   },
   "kk": {
+    "Ajustar mi ciclo y mi regla": "Циклім мен етеккірімді баптау",
+    "Mi ciclo y mi regla": "Циклім мен етеккірім",
+    "Calcular con mis registros": "Жазбаларым бойынша есептеу",
     "Un bebé": "Бір сәби",
     "Gemelos o mellizos": "Егіздер",
     "Aún no lo sé": "Әлі білмеймін",
@@ -3631,6 +3704,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Түс таңдаңыз",
   },
   "kn": {
+    "Ajustar mi ciclo y mi regla": "ನನ್ನ ಚಕ್ರ ಮತ್ತು ಮುಟ್ಟು ಹೊಂದಿಸಿ",
+    "Mi ciclo y mi regla": "ನನ್ನ ಚಕ್ರ ಮತ್ತು ಮುಟ್ಟು",
+    "Calcular con mis registros": "ನನ್ನ ದಾಖಲೆಗಳಿಂದ ಲೆಕ್ಕಹಾಕಿ",
     "Un bebé": "ಒಂದು ಮಗು",
     "Gemelos o mellizos": "ಅವಳಿ",
     "Aún no lo sé": "ಇನ್ನೂ ಗೊತ್ತಿಲ್ಲ",
@@ -3789,6 +3865,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ಒಂದು ಬಣ್ಣ ಆರಿಸಿ",
   },
   "ko": {
+    "Ajustar mi ciclo y mi regla": "내 주기와 생리 조정",
+    "Mi ciclo y mi regla": "내 주기와 생리",
+    "Calcular con mis registros": "내 기록으로 계산",
     "Un bebé": "한 명",
     "Gemelos o mellizos": "쌍둥이",
     "Aún no lo sé": "아직 몰라요",
@@ -3947,6 +4026,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "색상 선택",
   },
   "ln": {
+    "Ajustar mi ciclo y mi regla": "Bongisa cycle mpe sanza na ngai",
+    "Mi ciclo y mi regla": "Cycle mpe sanza na ngai",
+    "Calcular con mis registros": "Kotánga na makomi na ngai",
     "Un bebé": "Mwana moko",
     "Gemelos o mellizos": "Mapasa",
     "Aún no lo sé": "Nayebi naino te",
@@ -4105,6 +4187,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pona langi",
   },
   "ml": {
+    "Ajustar mi ciclo y mi regla": "എന്റെ ചക്രവും ആർത്തവവും ക്രമീകരിക്കുക",
+    "Mi ciclo y mi regla": "എന്റെ ചക്രവും ആർത്തവവും",
+    "Calcular con mis registros": "എന്റെ രേഖകളിൽ നിന്ന് കണക്കാക്കുക",
     "Un bebé": "ഒരു കുഞ്ഞ്",
     "Gemelos o mellizos": "ഇരട്ടകൾ",
     "Aún no lo sé": "ഇതുവരെ അറിയില്ല",
@@ -4263,6 +4348,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ഒരു നിറം തിരഞ്ഞെടുക്കൂ",
   },
   "mr": {
+    "Ajustar mi ciclo y mi regla": "माझे चक्र आणि पाळी समायोजित करा",
+    "Mi ciclo y mi regla": "माझे चक्र आणि पाळी",
+    "Calcular con mis registros": "माझ्या नोंदींवरून मोजा",
     "Un bebé": "एक बाळ",
     "Gemelos o mellizos": "जुळी",
     "Aún no lo sé": "अजून माहीत नाही",
@@ -4421,6 +4509,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एक रंग निवडा",
   },
   "ms": {
+    "Ajustar mi ciclo y mi regla": "Laraskan kitaran dan haid saya",
+    "Mi ciclo y mi regla": "Kitaran dan haid saya",
+    "Calcular con mis registros": "Kira daripada rekod saya",
     "Un bebé": "Seorang bayi",
     "Gemelos o mellizos": "Kembar",
     "Aún no lo sé": "Belum tahu",
@@ -4579,6 +4670,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "my": {
+    "Ajustar mi ciclo y mi regla": "ကျွန်ုပ်၏ စက်ဝန်းနှင့် ရာသီကို ချိန်ညှိရန်",
+    "Mi ciclo y mi regla": "ကျွန်ုပ်၏ စက်ဝန်းနှင့် ရာသီ",
+    "Calcular con mis registros": "ကျွန်ုပ်၏ မှတ်တမ်းမှ တွက်ရန်",
     "Un bebé": "ကလေးတစ်ယောက်",
     "Gemelos o mellizos": "အမွှာ",
     "Aún no lo sé": "မသိသေးပါ",
@@ -4737,6 +4831,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "အရောင်ရွေးပါ",
   },
   "ne": {
+    "Ajustar mi ciclo y mi regla": "मेरो चक्र र महिनावारी मिलाउनुहोस्",
+    "Mi ciclo y mi regla": "मेरो चक्र र महिनावारी",
+    "Calcular con mis registros": "मेरा अभिलेखबाट गणना",
     "Un bebé": "एउटा बच्चा",
     "Gemelos o mellizos": "जुम्ल्याहा",
     "Aún no lo sé": "अझै थाहा छैन",
@@ -4895,6 +4992,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एउटा रङ छान्नुहोस्",
   },
   "nl": {
+    "Ajustar mi ciclo y mi regla": "Mijn cyclus en menstruatie aanpassen",
+    "Mi ciclo y mi regla": "Mijn cyclus en menstruatie",
+    "Calcular con mis registros": "Berekenen met mijn registraties",
     "Un bebé": "Eén baby",
     "Gemelos o mellizos": "Tweeling",
     "Aún no lo sé": "Weet ik nog niet",
@@ -5053,6 +5153,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Kies een kleur",
   },
   "om": {
+    "Ajustar mi ciclo y mi regla": "Marsaa fi laguu koo sirreessi",
+    "Mi ciclo y mi regla": "Marsaa fi laguu koo",
+    "Calcular con mis registros": "Galmee koo irraa shallagi",
     "Un bebé": "Daa’ima tokko",
     "Gemelos o mellizos": "Lakkuu",
     "Aún no lo sé": "Ammallee hin beeku",
@@ -5211,6 +5314,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Halluu filadhu",
   },
   "pa": {
+    "Ajustar mi ciclo y mi regla": "ਮੇਰਾ ਚੱਕਰ ਅਤੇ ਮਾਹਵਾਰੀ ਸੈੱਟ ਕਰੋ",
+    "Mi ciclo y mi regla": "ਮੇਰਾ ਚੱਕਰ ਅਤੇ ਮਾਹਵਾਰੀ",
+    "Calcular con mis registros": "ਮੇਰੇ ਰਿਕਾਰਡ ਤੋਂ ਗਿਣੋ",
     "Un bebé": "ਇੱਕ ਬੱਚਾ",
     "Gemelos o mellizos": "ਜੁੜਵਾਂ",
     "Aún no lo sé": "ਹਾਲੇ ਨਹੀਂ ਪਤਾ",
@@ -5369,6 +5475,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ਇੱਕ ਰੰਗ ਚੁਣੋ",
   },
   "pl": {
+    "Ajustar mi ciclo y mi regla": "Dostosuj cykl i okres",
+    "Mi ciclo y mi regla": "Mój cykl i okres",
+    "Calcular con mis registros": "Licz z moich wpisów",
     "Un bebé": "Jedno dziecko",
     "Gemelos o mellizos": "Bliźnięta",
     "Aún no lo sé": "Jeszcze nie wiem",
@@ -5527,6 +5636,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Wybierz kolor",
   },
   "pt": {
+    "Ajustar mi ciclo y mi regla": "Ajustar meu ciclo e minha menstruação",
+    "Mi ciclo y mi regla": "Meu ciclo e minha menstruação",
+    "Calcular con mis registros": "Calcular com meus registros",
+    "Cada mujer es distinta: la app aprende de tus registros, pero si lo prefieres puedes poner tus propios días.": "Cada mulher é diferente: o app aprende com seus registros, mas você pode colocar seus próprios dias.",
+    "Duración de la regla": "Duração da menstruação",
     "Un bebé": "Um bebê",
     "Gemelos o mellizos": "Gêmeos",
     "Aún no lo sé": "Ainda não sei",
@@ -5747,6 +5861,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} dias",
   },
   "ro": {
+    "Ajustar mi ciclo y mi regla": "Ajustează ciclul și menstruația",
+    "Mi ciclo y mi regla": "Ciclul și menstruația mea",
+    "Calcular con mis registros": "Calculează din înregistrările mele",
     "Un bebé": "Un bebeluș",
     "Gemelos o mellizos": "Gemeni",
     "Aún no lo sé": "Încă nu știu",
@@ -5905,6 +6022,11 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Alege o culoare",
   },
   "ru": {
+    "Ajustar mi ciclo y mi regla": "Настроить цикл и месячные",
+    "Mi ciclo y mi regla": "Мой цикл и месячные",
+    "Calcular con mis registros": "Считать по моим записям",
+    "Cada mujer es distinta: la app aprende de tus registros, pero si lo prefieres puedes poner tus propios días.": "Каждая женщина разная: приложение учится по твоим записям, но можно указать свои дни.",
+    "Duración de la regla": "Длительность месячных",
     "Un bebé": "Один малыш",
     "Gemelos o mellizos": "Двойня",
     "Aún no lo sé": "Пока не знаю",
@@ -6125,6 +6247,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} дн.",
   },
   "si": {
+    "Ajustar mi ciclo y mi regla": "මගේ චක්‍රය සහ ඔසප් සකසන්න",
+    "Mi ciclo y mi regla": "මගේ චක්‍රය සහ ඔසප්",
+    "Calcular con mis registros": "මගේ සටහන් අනුව ගණනය",
     "Un bebé": "එක් දරුවෙක්",
     "Gemelos o mellizos": "නිවුන් දරුවන්",
     "Aún no lo sé": "තවම දන්නේ නැහැ",
@@ -6283,6 +6408,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "වර්ණයක් තෝරන්න",
   },
   "sk": {
+    "Ajustar mi ciclo y mi regla": "Upraviť môj cyklus a menštruáciu",
+    "Mi ciclo y mi regla": "Môj cyklus a menštruácia",
+    "Calcular con mis registros": "Počítať z mojich záznamov",
     "Un bebé": "Jedno bábätko",
     "Gemelos o mellizos": "Dvojčatá",
     "Aún no lo sé": "Ešte neviem",
@@ -6441,6 +6569,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber farbu",
   },
   "sv": {
+    "Ajustar mi ciclo y mi regla": "Justera min cykel och mens",
+    "Mi ciclo y mi regla": "Min cykel och mens",
+    "Calcular con mis registros": "Beräkna från mina registreringar",
     "Un bebé": "En bebis",
     "Gemelos o mellizos": "Tvillingar",
     "Aún no lo sé": "Vet inte än",
@@ -6599,6 +6730,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Välj en färg",
   },
   "sw": {
+    "Ajustar mi ciclo y mi regla": "Rekebisha mzunguko na hedhi yangu",
+    "Mi ciclo y mi regla": "Mzunguko na hedhi yangu",
+    "Calcular con mis registros": "Hesabu kutoka kwa rekodi zangu",
     "Un bebé": "Mtoto mmoja",
     "Gemelos o mellizos": "Mapacha",
     "Aún no lo sé": "Bado sijui",
@@ -6757,6 +6891,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chagua rangi",
   },
   "ta": {
+    "Ajustar mi ciclo y mi regla": "என் சுழற்சி மற்றும் மாதவிடாயை அமை",
+    "Mi ciclo y mi regla": "என் சுழற்சி மற்றும் மாதவிடாய்",
+    "Calcular con mis registros": "என் பதிவுகளிலிருந்து கணக்கிடு",
     "Un bebé": "ஒரு குழந்தை",
     "Gemelos o mellizos": "இரட்டையர்",
     "Aún no lo sé": "இன்னும் தெரியாது",
@@ -6915,6 +7052,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ஒரு நிறத்தைத் தேர்வுசெய்யுங்கள்",
   },
   "te": {
+    "Ajustar mi ciclo y mi regla": "నా చక్రం, పీరియడ్ సర్దుబాటు",
+    "Mi ciclo y mi regla": "నా చక్రం మరియు పీరియడ్",
+    "Calcular con mis registros": "నా నమోదుల నుండి లెక్కించు",
     "Un bebé": "ఒక బిడ్డ",
     "Gemelos o mellizos": "కవలలు",
     "Aún no lo sé": "ఇంకా తెలియదు",
@@ -7073,6 +7213,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ఒక రంగును ఎంచుకోండి",
   },
   "th": {
+    "Ajustar mi ciclo y mi regla": "ปรับรอบเดือนและประจำเดือน",
+    "Mi ciclo y mi regla": "รอบเดือนและประจำเดือนของฉัน",
+    "Calcular con mis registros": "คำนวณจากบันทึกของฉัน",
     "Un bebé": "ลูกหนึ่งคน",
     "Gemelos o mellizos": "ลูกแฝด",
     "Aún no lo sé": "ยังไม่ทราบ",
@@ -7231,6 +7374,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "เลือกสี",
   },
   "tr": {
+    "Ajustar mi ciclo y mi regla": "Döngümü ve reglimi ayarla",
+    "Mi ciclo y mi regla": "Döngüm ve reglim",
+    "Calcular con mis registros": "Kayıtlarımdan hesapla",
     "Un bebé": "Bir bebek",
     "Gemelos o mellizos": "İkiz",
     "Aún no lo sé": "Henüz bilmiyorum",
@@ -7389,6 +7535,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Bir renk seç",
   },
   "uk": {
+    "Ajustar mi ciclo y mi regla": "Налаштувати цикл і місячні",
+    "Mi ciclo y mi regla": "Мій цикл і місячні",
+    "Calcular con mis registros": "Рахувати за моїми записами",
     "Un bebé": "Один малюк",
     "Gemelos o mellizos": "Двійня",
     "Aún no lo sé": "Поки не знаю",
@@ -7547,6 +7696,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Обери колір",
   },
   "ur": {
+    "Ajustar mi ciclo y mi regla": "اپنا سائیکل اور ماہواری ترتیب دیں",
+    "Mi ciclo y mi regla": "میرا سائیکل اور ماہواری",
+    "Calcular con mis registros": "میرے ریکارڈ سے حساب کریں",
     "Un bebé": "ایک بچہ",
     "Gemelos o mellizos": "جڑواں",
     "Aún no lo sé": "ابھی معلوم نہیں",
@@ -7705,6 +7857,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ایک رنگ چنیں",
   },
   "uz": {
+    "Ajustar mi ciclo y mi regla": "Siklim va hayzimni sozlash",
+    "Mi ciclo y mi regla": "Siklim va hayzim",
+    "Calcular con mis registros": "Yozuvlarim bo‘yicha hisoblash",
     "Un bebé": "Bitta chaqaloq",
     "Gemelos o mellizos": "Egizaklar",
     "Aún no lo sé": "Hali bilmayman",
@@ -7863,6 +8018,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rang tanlang",
   },
   "vi": {
+    "Ajustar mi ciclo y mi regla": "Điều chỉnh chu kỳ và kỳ kinh",
+    "Mi ciclo y mi regla": "Chu kỳ và kỳ kinh của tôi",
+    "Calcular con mis registros": "Tính theo dữ liệu của tôi",
     "Un bebé": "Một bé",
     "Gemelos o mellizos": "Song thai",
     "Aún no lo sé": "Chưa biết",
@@ -8021,6 +8179,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chọn màu",
   },
   "wo": {
+    "Ajustar mi ciclo y mi regla": "Defar sama wër ak sama baax",
+    "Mi ciclo y mi regla": "Sama wër ak sama baax",
+    "Calcular con mis registros": "Waññi ci sama bind yi",
     "Un bebé": "Benn doom",
     "Gemelos o mellizos": "Seex",
     "Aún no lo sé": "Xamaguma ba leegi",
@@ -8179,6 +8340,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Tànnal benn melo",
   },
   "yo": {
+    "Ajustar mi ciclo y mi regla": "Ṣàtúnṣe àyíká àti nǹkan oṣù mi",
+    "Mi ciclo y mi regla": "Àyíká àti nǹkan oṣù mi",
+    "Calcular con mis registros": "Ṣírò láti inú àkọsílẹ̀ mi",
     "Un bebé": "Ọmọ kan",
     "Gemelos o mellizos": "Ìbejì",
     "Aún no lo sé": "Mi ò tíì mọ̀",
@@ -8337,6 +8501,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Yan àwọ̀ kan",
   },
   "zh": {
+    "Ajustar mi ciclo y mi regla": "调整我的周期和经期",
+    "Mi ciclo y mi regla": "我的周期和经期",
+    "Calcular con mis registros": "根据我的记录计算",
     "Un bebé": "一个宝宝",
     "Gemelos o mellizos": "双胞胎",
     "Aún no lo sé": "还不知道",
@@ -8495,6 +8662,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "选择颜色",
   },
   "zh-TW": {
+    "Ajustar mi ciclo y mi regla": "調整我的週期和經期",
+    "Mi ciclo y mi regla": "我的週期和經期",
+    "Calcular con mis registros": "根據我的記錄計算",
     "Un bebé": "一個寶寶",
     "Gemelos o mellizos": "雙胞胎",
     "Aún no lo sé": "還不知道",
@@ -8653,6 +8823,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "選擇顏色",
   },
   "zu": {
+    "Ajustar mi ciclo y mi regla": "Lungisa umjikelezo nesikhathi sami",
+    "Mi ciclo y mi regla": "Umjikelezo nesikhathi sami",
+    "Calcular con mis registros": "Bala ngokwamarekhodi ami",
     "Un bebé": "Ingane eyodwa",
     "Gemelos o mellizos": "Amawele",
     "Aún no lo sé": "Angikazi",

@@ -120,7 +120,15 @@ class SubscriptionService {
   /// llamarlo tras `configure()` y tras volver de la pantalla de paywall
   /// (por si la persona acaba de comprar).
   Future<void> refreshCachedStatus() async {
-    _cachedHasActiveSubscription = await hasActiveSubscriptionAsync();
+    if (!_configured) return;
+    try {
+      final info = await Purchases.getCustomerInfo();
+      _cachedHasActiveSubscription = info.entitlements.active.containsKey(entitlementId);
+    } catch (e) {
+      // Sin conexión o error puntual: se mantiene el último estado conocido
+      // (no se le quita Premium a quien ya pagó).
+      debugPrint('SubscriptionService: error al refrescar: $e');
+    }
   }
 
   /// True si el usuario puede seguir usando la app con todas sus funciones
