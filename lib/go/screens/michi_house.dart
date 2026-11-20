@@ -391,7 +391,9 @@ class _MichiHouseScreenState extends State<MichiHouseScreen> with TickerProvider
       ),
       const SizedBox(width: 8),
       // Cambiar al mundo de las nubes (el mapa de aventura).
-      _round(const Text('☁️', style: TextStyle(fontSize: 18)), () {
+      _round(Text(Premium.active ? '☁️' : '☁️👑', style: const TextStyle(fontSize: 18)), () async {
+        // El mundo de las nubes es Premium.
+        if (!await Premium.require(context) || !mounted) return;
         final s = AppStore.instance;
         s.michiScene = 'map';
         s.commit();

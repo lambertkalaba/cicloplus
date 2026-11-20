@@ -13,6 +13,7 @@ import '../screens/traditions.dart' show TraditionsScreen;
 import '../screens/michi_more.dart' show MichiCounters;
 import 'michi_sound.dart';
 import 'ui.dart';
+import 'premium.dart' show Premium;
 
 /// Un momento especial de Michi hoy (fiesta, santo, aniversario…).
 class MichiEvent {
@@ -668,7 +669,7 @@ class _HomeScenePicker extends StatelessWidget {
   const _HomeScenePicker({required this.s});
   final AppStore s;
 
-  String get _value => s.showMichi ? (s.michiScene == 'map' ? 'map' : 'house') : (s.showGarden ? 'flower' : 'none');
+  String get _value => s.showMichi ? (s.michiScene == 'map' && Premium.active ? 'map' : 'house') : (s.showGarden ? 'flower' : 'none');
 
   @override
   Widget build(BuildContext context) {
@@ -695,12 +696,14 @@ class _HomeScenePicker extends StatelessWidget {
             showSelectedIcon: false,
             segments: const [
               ButtonSegment(value: 'house', label: Text('🏠', style: TextStyle(fontSize: 18))),
-              ButtonSegment(value: 'map', label: Text('☁️', style: TextStyle(fontSize: 18))),
+              ButtonSegment(value: 'map', label: Text('☁️👑', style: TextStyle(fontSize: 16))),
               ButtonSegment(value: 'flower', label: Text('🌸', style: TextStyle(fontSize: 18))),
               ButtonSegment(value: 'none', label: Text('🚫', style: TextStyle(fontSize: 18))),
             ],
             selected: {v},
-            onSelectionChanged: (sel) {
+            onSelectionChanged: (sel) async {
+              // Las nubes son Premium.
+              if (sel.first == 'map' && !await Premium.require(context)) return;
               switch (sel.first) {
                 case 'house':
                 case 'map':

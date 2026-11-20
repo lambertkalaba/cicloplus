@@ -11,6 +11,7 @@ import '../screens/michi_stories.dart';
 import '../screens/michi_house.dart';
 import '../screens/michi_world.dart';
 import '../data/store.dart';
+import 'premium.dart' show Premium;
 import '../strings.dart';
 import 'ui.dart';
 import 'dart:async';
@@ -423,7 +424,7 @@ class _CatCardState extends State<CatCard> with TickerProviderStateMixin {
               behavior: HitTestBehavior.opaque,
               onTap: () => Navigator.of(context)
                   .push(MaterialPageRoute(
-                      builder: (_) => AppStore.instance.michiScene == 'map' ? MichiWorldScreen(onFeed: widget.onFeed) : MichiHouseScreen(onFeed: widget.onFeed)))
+                      builder: (_) => AppStore.instance.michiScene == 'map' && Premium.active ? MichiWorldScreen(onFeed: widget.onFeed) : MichiHouseScreen(onFeed: widget.onFeed)))
                   .then((_) {
                 if (mounted) setState(() {});
               }),
@@ -479,7 +480,7 @@ class _CatCardState extends State<CatCard> with TickerProviderStateMixin {
                 const SizedBox(height: 4),
                 Text(_nextPrize, style: const TextStyle(fontSize: 11, color: C.muted, fontWeight: FontWeight.w700)),
                 const SizedBox(height: 4),
-                Text('${AppStore.instance.michiScene == 'map' ? '🗺️' : '🏠'} ${tr('Ver a Michi', 'See Michi')} ›', style: TextStyle(fontSize: 12.5, color: C.pink, fontWeight: FontWeight.w900)),
+                Text('${AppStore.instance.michiScene == 'map' && Premium.active ? '🗺️' : '🏠'} ${tr('Ver a Michi', 'See Michi')} ›', style: TextStyle(fontSize: 12.5, color: C.pink, fontWeight: FontWeight.w900)),
                 if (michiKitToday())
                   GestureDetector(
                     onTap: () => showMichiPeriodKit(context),
