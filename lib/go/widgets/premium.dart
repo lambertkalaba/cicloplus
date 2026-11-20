@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../cicloplus_links.dart';
 import '../go_root.dart' show GoSession;
@@ -124,4 +126,88 @@ class PremiumTeaser extends StatelessWidget {
           ),
         ),
       );
+}
+
+
+/// Pantalla para quien ya tiene Premium: confirma que está activo, muestra
+/// lo que tiene desbloqueado y permite gestionar o cancelar la suscripción
+/// en la tienda.
+class PremiumActiveScreen extends StatelessWidget {
+  const PremiumActiveScreen({super.key});
+
+  Future<void> _manage() async {
+    final ios = !kIsWeb && defaultTargetPlatform == TargetPlatform.iOS;
+    final url = ios
+        ? 'https://apps.apple.com/account/subscriptions'
+        : 'https://play.google.com/store/account/subscriptions?package=com.cicloplus.cicloplus_app';
+    await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final perks = [
+      ('📊', tr('Análisis del ciclo y tendencias', 'Cycle analysis and trends')),
+      ('📄', tr('Informe completo para tu médico', 'Full report for your doctor')),
+      ('🌱', tr('Avisos de fertilidad: temperatura y test de ovulación', 'Fertility alerts: temperature and ovulation test')),
+      ('👗', tr('Armario, retos y logros de Michi', "Michi's wardrobe, challenges and badges")),
+    ];
+    return SubPage(
+      title: tr('CicloPlus Premium', 'CicloPlus Premium'),
+      child: ListView(
+        padding: const EdgeInsets.fromLTRB(18, 18, 18, 28),
+        children: [
+          Container(
+            padding: const EdgeInsets.fromLTRB(20, 22, 20, 22),
+            decoration: card(radius: 24),
+            child: Column(children: [
+              Container(
+                width: 110,
+                height: 110,
+                decoration: const BoxDecoration(color: Color(0xFFFFF4D6), shape: BoxShape.circle),
+                alignment: Alignment.center,
+                child: const Img('michi_crown', size: 92, fallback: Icons.workspace_premium_rounded),
+              ),
+              const SizedBox(height: 14),
+              Text(tr('¡Ya eres Premium! 👑', "You're Premium! 👑"),
+                  textAlign: TextAlign.center, style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: C.pinkDark)),
+              const SizedBox(height: 6),
+              Text(tr('Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:', 'Thank you for supporting CicloPlus 💗 Everything is unlocked:'),
+                  textAlign: TextAlign.center, style: const TextStyle(fontSize: 14, height: 1.4, color: C.muted)),
+              const SizedBox(height: 14),
+              for (final p in perks)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: Row(children: [
+                    Container(
+                      width: 34,
+                      height: 34,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(color: C.pinkSoft, shape: BoxShape.circle),
+                      child: Text(p.$1, style: const TextStyle(fontSize: 16)),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(child: Text(p.$2, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: C.text))),
+                    const Icon(Icons.check_circle_rounded, color: Color(0xFF2FB45A), size: 22),
+                  ]),
+                ),
+              const SizedBox(height: 18),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: OutlinedButton(
+                  onPressed: _manage,
+                  style: OutlinedButton.styleFrom(shape: const StadiumBorder(), side: BorderSide(color: C.pink, width: 1.5)),
+                  child: Text(tr('Gestionar suscripción', 'Manage subscription'),
+                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: C.pinkDark)),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(tr('Puedes cambiar de plan o cancelar cuando quieras desde la tienda.', 'You can change plan or cancel anytime from the store.'),
+                  textAlign: TextAlign.center, style: const TextStyle(fontSize: 12, color: C.muted)),
+            ]),
+          ),
+        ],
+      ),
+    );
+  }
 }

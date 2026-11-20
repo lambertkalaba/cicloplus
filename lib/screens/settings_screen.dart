@@ -1399,6 +1399,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ],
                 );
               }),
+                    // Embarazada: sin predicciones de regla.
+                    if (!gostore.AppStore.instance.pregnant) ...[
                     _cardDivider(),
                     _groupedNavRow(
                       icon: Icons.calendar_month_rounded,
@@ -1407,6 +1409,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       subtitle: s.settingsPredictionConfigHint,
                       onTap: _openPredictionConfigSheet,
                     ),
+                    ],
                     _cardDivider(),
                     _iconCollapsible(Icons.people_alt_rounded, const Color(0xFFF0884F), _CollapsibleSection(
               title: s.settingsCoupleAppearanceTitle,
@@ -1455,67 +1458,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
               )),
-                    _cardDivider(),
-                    _iconCollapsible(Icons.pregnant_woman_rounded, const Color(0xFF9B6BD6), _CollapsibleSection(
-              title: s.settingsPregnancyTitle,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _switchRow(
-                    title: s.settingsPregnancyToggle,
-                    subtitle: _pregnancy.enabled ? s.on_ : s.off_,
-                    value: _pregnancy.enabled,
-                    onChanged: _togglePregnancy,
-                  ),
-                  if (_pregnancy.enabled) ...[
-                    const SizedBox(height: 10),
-                    _dateRow(
-                      label: s.settingsLmpLabel,
-                      value: _pregnancy.lmp,
-                      chooseLabel: s.settingsChooseDate,
-                      onTap: _pickLmpDate,
-                    ),
-                  ],
-                  if (_pregnancy.enabled) ...[
-                    const SizedBox(height: 10),
-                    _switchRow(
-                      title: tr('¿Esperas mellizos, gemelos o más de un bebé?', 'Expecting twins or more than one baby?'),
-                      subtitle: _pregnancy.isTwins
-                          ? tr('Fecha de parto y semanas ajustadas a embarazo múltiple', 'Due date and weeks adjusted for a multiple pregnancy')
-                          : tr('Activa esto si tu embarazo es de mellizos, gemelos o más', 'Turn this on if you are expecting twins or more'),
-                      value: _pregnancy.isTwins,
-                      onChanged: _toggleTwins,
-                    ),
-                  ],
-                  if (_pregnancy.enabled && _pregnancy.lmp != null) ...[
-                    const SizedBox(height: 10),
-                    _groupedNavRow(
-                      icon: Icons.pregnant_woman,
-                      iconColor: Color(themeById(_themeId).primary),
-                      label: s.pregnancyTrackingTitle,
-                      onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => PregnancyTrackingScreen(
-                            lmp: _pregnancy.lmp!,
-                            themeId: _themeId,
-                            isTwins: _pregnancy.isTwins,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    _switchRow(
-                      title: tr('Compartir fotos del bebé con mi pareja', 'Share baby photos with my partner'),
-                      subtitle: _shareBabyPhotos
-                          ? tr('Tu socio vinculado también verá las fotos', 'Your linked partner will also see the photos')
-                          : tr('Tu socio vinculado ve las fechas, pero no las fotos', 'Your linked partner sees the dates, but not the photos'),
-                      value: _shareBabyPhotos,
-                      onChanged: _toggleShareBabyPhotos,
-                    ),
-                  ],
-                ],
-              ),
-              )),
+                    // «Modo embarazo» ya está en Yo > Mi objetivo.
                   ]),
 
                   _groupHeader(Icons.face_3_rounded, tr('Tu avatar', 'Your avatar')),

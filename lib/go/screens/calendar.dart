@@ -63,8 +63,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 rightSelected: _year,
                 onChanged: (v) => setState(() => _year = v),
               ),
-              const SizedBox(width: 8),
-              InkWell(
+              if (!AppStore.instance.pregnant) const SizedBox(width: 8),
+              if (!AppStore.instance.pregnant) InkWell(
                 onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const AnalysisScreen()),
                 ),
@@ -88,8 +88,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
               day: _selected,
               onEdit: () => widget.onRegister(_selected),
             ),
-            const SizedBox(height: 14),
-            PinkButton(
+            if (!AppStore.instance.pregnant) const SizedBox(height: 14),
+            if (!AppStore.instance.pregnant) PinkButton(
               label: tr('Ver análisis del ciclo', 'See cycle analysis'),
               icon: Icons.bar_chart_rounded,
               outlined: true,
@@ -219,6 +219,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               spacing: 14,
               runSpacing: 8,
               children: [
+                if (!AppStore.instance.pregnant) ...[
                 _legend(
                   const Img(
                     'drop',
@@ -247,6 +248,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   ),
                   tr('Ovulación', 'Ovulation'),
                 ),
+                ],
                 _legend(
                   _blob(CalColors.normal),
                   tr('Día\nnormal', 'Normal\nday'),
@@ -269,9 +271,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 ],
               ],
             ),
-            Divider(height: 26, color: C.pinkLine),
+            if (!AppStore.instance.pregnant) Divider(height: 26, color: C.pinkLine),
             // Atajo: el mismo ajuste que Configuración > Configuración de predicción.
-            Row(children: [
+            if (!AppStore.instance.pregnant) Row(children: [
               const Text('🔀', style: TextStyle(fontSize: 20)),
               const SizedBox(width: 10),
               Expanded(
@@ -1012,7 +1014,9 @@ class _DayCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      info.cycleDay != null
+                      s.pregnant && s.pregnancyWeekOn(day) != null
+                          ? tr('Semana {} de embarazo', 'Pregnancy week {}').replaceFirst('{}', '${s.pregnancyWeekOn(day)}')
+                          : info.cycleDay != null
                           ? tr(
                               'Día ${info.cycleDay} del ciclo',
                               'Cycle day ${info.cycleDay}',

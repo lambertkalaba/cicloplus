@@ -40,7 +40,10 @@ class _PaywallScreenState extends State<PaywallScreen> {
   }
 
   Future<void> _loadPackages() async {
-    final packages = await _subscriptionService.getAvailablePackages();
+    // Solo plan mensual y anual (sin semanal ni de por vida).
+    final packages = (await _subscriptionService.getAvailablePackages())
+        .where((p) => !_isWeekly(p) && !_isLifetime(p))
+        .toList();
     if (!mounted) return;
     setState(() {
       _packages = packages;

@@ -132,7 +132,10 @@ class _MonthSummaryScreenState extends State<MonthSummaryScreen> {
             const SizedBox(height: 14),
             Row(
               children: [
-                stat('🩸', '$periodDays', tr('Días de regla', 'Period days')),
+                if (AppStore.instance.pregnant && AppStore.instance.pregnancyWeek != null)
+                  stat('🤰', '${AppStore.instance.pregnancyWeek}', tr('Semana de embarazo', 'Pregnancy week'))
+                else
+                  stat('🩸', '$periodDays', tr('Días de regla', 'Period days')),
                 const SizedBox(width: 8),
                 stat('📝', '$logged', tr('Días registrados', 'Days logged')),
               ],

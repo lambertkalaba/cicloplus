@@ -242,6 +242,14 @@ class AppStore extends ChangeNotifier {
   String? get photoPath => photoName == null || docsPath.isEmpty ? null : '$docsPath/$photoName';
   String goal = 'track'; // track | conceive | pregnancy
 
+  /// Objetivo «Seguir mi embarazo»: no se muestra nada de regla, fertilidad
+  /// ni predicciones del ciclo.
+  bool get pregnant => goal == 'pregnancy';
+
+  /// Objetivo «Intento concebir»: se muestran test de ovulación, temperatura
+  /// basal y moco cervical.
+  bool get conceiving => goal == 'conceive';
+
   /// Primer día de la última regla antes del embarazo (para calcular la semana).
   DateTime? pregnancyStart;
   String partnerName = '';
@@ -758,6 +766,11 @@ class AppStore extends ChangeNotifier {
     final day = dateOnly(d);
     final today = dateOnly(DateTime.now());
     final period = isPeriodDay(day);
+    // Embarazada: desde la última regla no hay predicciones, días fértiles
+    // ni fases del ciclo.
+    if (pregnant && (pregnancyStart == null || !day.isBefore(dateOnly(pregnancyStart!)))) {
+      return DayInfo(period: period);
+    }
     var predicted = false;
     if (!period && !day.isBefore(today)) {
       for (final s in predictedStarts()) {
@@ -827,6 +840,15 @@ class AppStore extends ChangeNotifier {
     if (st == null) return null;
     final d = daysBetween(st, dateOnly(DateTime.now()));
     if (d < 0) return 1;
+    return (d ~/ 7 + 1).clamp(1, 42).toInt();
+  }
+
+  /// Semana de embarazo de un día concreto (o null si es antes de la última regla).
+  int? pregnancyWeekOn(DateTime day) {
+    final st = pregnancyStart;
+    if (st == null) return null;
+    final d = daysBetween(st, dateOnly(day));
+    if (d < 0) return null;
     return (d ~/ 7 + 1).clamp(1, 42).toInt();
   }
 

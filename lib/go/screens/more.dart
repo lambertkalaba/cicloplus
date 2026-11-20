@@ -42,7 +42,9 @@ class LinkRow extends StatelessWidget {
   final Widget? trailing;
   final VoidCallback onTap;
   final bool divider;
-  const LinkRow({super.key, required this.icon, required this.title, this.subtitle, this.trailing, required this.onTap, this.divider = true});
+  /// Muestra la etiqueta dorada «👑 Premium» si la usuaria no es Premium.
+  final bool premium;
+  const LinkRow({super.key, required this.icon, required this.title, this.subtitle, this.trailing, required this.onTap, this.divider = true, this.premium = false});
 
   @override
   Widget build(BuildContext context) => InkWell(
@@ -64,6 +66,17 @@ class LinkRow extends StatelessWidget {
                 ),
               ),
               if (trailing != null) trailing!,
+              if (premium && !Premium.active)
+                Container(
+                  margin: const EdgeInsets.only(left: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFF4D6),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: const Color(0xFFF5DE9E)),
+                  ),
+                  child: const Text('👑 Premium', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Color(0xFF8A6512))),
+                ),
               const Icon(Icons.chevron_right_rounded, color: C.text),
             ],
           ),
@@ -79,8 +92,8 @@ class MyHealthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = <List<Object>>[
-      ['q_period', tr('Periodo\ny ciclo', 'Period\n& cycle'), const PeriodCycleScreen()],
-      ['q_symptoms', tr('Síntomas y\npredicciones', 'Symptoms &\npredictions'), const ReportScreen()],
+      if (!AppStore.instance.pregnant) ['q_period', tr('Periodo\ny ciclo', 'Period\n& cycle'), const PeriodCycleScreen()],
+      if (!AppStore.instance.pregnant) ['q_symptoms', tr('Síntomas y\npredicciones', 'Symptoms &\npredictions'), const ReportScreen()],
       if (AppStore.instance.showSex) ['q_sex', tr('Vida\nsexual', 'Sex\nlife'), const SexLifeScreen()],
       ['q_weight', tr('Peso', 'Weight'), const MetricScreen(kind: Metric.weight)],
       ['q_sleep', tr('Sueño', 'Sleep'), const MetricScreen(kind: Metric.sleep)],
@@ -169,12 +182,14 @@ class ReportsHubScreen extends StatelessWidget {
                     icon: Icon(Icons.bar_chart_rounded, color: C.pink, size: 26),
                     title: tr('Análisis del ciclo', 'Cycle analysis'),
                     subtitle: tr('Ciclo, síntomas y estado de ánimo', 'Cycle, symptoms and mood'),
+                    premium: true,
                     onTap: () => _push(context, const AnalysisScreen()),
                   ),
                   LinkRow(
                     icon: Icon(Icons.show_chart_rounded, color: C.pink, size: 26),
                     title: tr('Tendencias y bienestar', 'Trends & wellbeing'),
                     subtitle: tr('Energía, ánimo, sueño y dolor', 'Energy, mood, sleep and pain'),
+                    premium: true,
                     onTap: () => _push(context, const TrendsScreen()),
                   ),
                   if (AppStore.instance.goal != 'pregnancy') LinkRow(
@@ -182,6 +197,7 @@ class ReportsHubScreen extends StatelessWidget {
                     title: tr('Informe del ciclo', 'Cycle report'),
                     subtitle: tr('Resumen completo y predicciones', 'Full summary and predictions'),
                     divider: false,
+                    premium: true,
                     onTap: () => _push(context, const ReportScreen()),
                   ),
                 ],

@@ -12,6 +12,7 @@ import 'data/store.dart';
 import 'go_root.dart';
 import 'screens/more.dart' show PregnancyScreen;
 import 'strings.dart';
+import 'widgets/premium.dart' show PremiumActiveScreen;
 
 /// Accesos desde el diseño nuevo a las funciones que solo tenía CicloPlus
 /// (cuenta, premium, pareja conectada, embarazo, test de ovulación, foro y
@@ -30,6 +31,11 @@ class CP {
   }
 
   static Future<void> openPremium(BuildContext context) async {
+    if (GoSession.premium.value) {
+      await _push(context, const PremiumActiveScreen());
+      await GoSession.refreshPremium();
+      return;
+    }
     await _push(context, const PaywallScreen());
     await GoSession.refreshPremium();
   }

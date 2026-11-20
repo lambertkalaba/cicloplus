@@ -218,7 +218,7 @@ class CycleExtraSettings extends StatelessWidget {
     return ListenableBuilder(
       listenable: s,
       builder: (context, _) => Column(children: [
-        SwitchListTile(
+        if (!s.pregnant) SwitchListTile(
           contentPadding: EdgeInsets.zero,
           secondary: const Text('🌗', style: TextStyle(fontSize: 22)),
           title: Text(tr('Modo perimenopausia', 'Perimenopause mode'), style: const TextStyle(fontWeight: FontWeight.w800)),

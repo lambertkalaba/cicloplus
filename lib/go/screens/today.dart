@@ -43,7 +43,7 @@ class TodayScreen extends StatelessWidget {
             _Greeting(name: s.name),
             const SizedBox(height: 10),
             if (pregnant) _PregnancyCard(key: ValueKey(L.lang)) else _RingCard(onTap: onCalendar, onLogPeriod: () => onRegister()),
-            if (s.reminders.pill) ...[
+            if (s.reminders.pill && s.goal == 'track') ...[
               const SizedBox(height: 12),
               _PillCard(today: today),
             ],

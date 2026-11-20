@@ -145,12 +145,12 @@ class ExtraDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _group('🌡️', const Color(0xFFFFE4EC), tr('Temperatura basal', 'Basal temperature'),
+        if (AppStore.instance.conceiving) _group('🌡️', const Color(0xFFFFE4EC), tr('Temperatura basal', 'Basal temperature'),
             Align(
               alignment: Alignment.centerLeft,
               child: _chip('', temp == null ? tr('Añadir', 'Add') : '${temp.toStringAsFixed(2)} °C', temp != null, () => _editTemp(context)),
             )),
-        _group('💧', const Color(0xFFE3F1FF), tr('Moco cervical', 'Cervical mucus'),
+        if (AppStore.instance.conceiving) _group('💧', const Color(0xFFE3F1FF), tr('Moco cervical', 'Cervical mucus'),
             _wrap([for (final o in _mucus) _chip(o[1], o[2], x['cervicalMucus'] == o[0], () => _single('cervicalMucus', o[0]))])),
         _group('🩸', const Color(0xFFFFE6E6), tr('Manchado', 'Spotting'),
             _wrap([for (final o in _spotting) _chip(o[1], o[2], x['spotting'] == o[0], () => _single('spotting', o[0]))])),
@@ -271,7 +271,7 @@ class _MoreDetailsCardState extends State<MoreDetailsCard> {
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(tr('Más detalles', 'More details'), style: const TextStyle(fontSize: 15.5, fontWeight: FontWeight.w800, color: C.text)),
                   const SizedBox(height: 2),
-                  Text(tr('Temperatura, flujo, energía, medicación…', 'Temperature, discharge, energy, medication…'),
+                  Text(AppStore.instance.conceiving ? tr('Temperatura, flujo, energía, medicación…', 'Temperature, discharge, energy, medication…') : tr('Energía, manchado, medicación, piel…', 'Energy, spotting, medication, skin…'),
                       maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 12, color: C.muted)),
                 ]),
               ),

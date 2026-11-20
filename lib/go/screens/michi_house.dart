@@ -8,6 +8,7 @@ import '../data/store.dart';
 import '../strings.dart';
 import '../widgets/michi_jokes.dart';
 import '../widgets/michi_logic.dart';
+import '../widgets/premium.dart' show Premium;
 import '../widgets/michi_sound.dart';
 import '../widgets/michi_sprite.dart';
 import '../widgets/michi_voice.dart';
@@ -656,9 +657,14 @@ class _MichiHouseScreenState extends State<MichiHouseScreen> with TickerProvider
       'salon' => [('💃', tr('¡Baila, Michi!', 'Dance, Michi!'), _dance)],
       'cocina' => [if (!_fed) feed, ('💃', tr('¡Baila, Michi!', 'Dance, Michi!'), _dance)],
       'dormitorio' => [('💌', tr('Cartas de Michi', "Michi's letters"), () => push(const MichiLetterScreen()))],
-      'bano' => [('🫖', tr('Mi kit para cuidarte', 'My self-care kit'), () => showMichiPeriodKit(context))],
+      'bano' => [
+        if (AppStore.instance.pregnant)
+          ('🌬️', tr('Respira conmigo', 'Breathe with me'), () => push(const MichiBreatheScreen()))
+        else
+          ('🫖', tr('Mi kit para cuidarte', 'My self-care kit'), () => showMichiPeriodKit(context)),
+      ],
       'terraza' => [('🌬️', tr('Respira conmigo', 'Breathe with me'), () => push(const MichiBreatheScreen()))],
-      'juegos' => [('🎯', tr('Retos', 'Challenges'), () => push(const MichiChallengeScreen())), ('🏅', tr('Logros', 'Badges'), () => push(const MichiBadgesScreen()))],
+      'juegos' => [('🎯', '${tr('Retos', 'Challenges')}${Premium.active ? '' : ' 👑'}', () => push(const MichiChallengeScreen())), ('🏅', '${tr('Logros', 'Badges')}${Premium.active ? '' : ' 👑'}', () => push(const MichiBadgesScreen()))],
       'estudio' => [('📔', tr('Diario con Michi', 'Diary with Michi'), () => push(const MichiDiaryScreen()))],
       'rincon' => [('👗', tr('Armario', 'Wardrobe'), () => push(const MichiWardrobeScreen()))],
       'gimnasio' => [('💪', tr('Haz ejercicio conmigo', 'Work out with me'), _workout)],

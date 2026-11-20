@@ -182,7 +182,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  _section(
+                  if (!AppStore.instance.pregnant) _section(
                     SectionTitle(Icons.water_drop_rounded, tr('Flujo menstrual', 'Menstrual flow')),
                     Row(
                       children: [

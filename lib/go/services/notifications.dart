@@ -223,7 +223,7 @@ class Notifier {
             repeat: DateTimeComponents.time);
       }
       id = 10;
-      if (r.pill) {
+      if (r.pill && s.goal == 'track') {
         await _at(id++, tr('Hora de tu píldora 💊', 'Pill time 💊'), tr('No olvides tomar tu píldora de hoy.', "Don't forget today's pill."),
             _nextTime(r.pillMinutes),
             repeat: DateTimeComponents.time,
@@ -266,7 +266,8 @@ class Notifier {
             repeat: DateTimeComponents.dayOfMonthAndTime);
       }
       id = 100;
-      final starts = s.predictedStarts(4);
+      // Embarazada: sin avisos de regla, días fértiles ni ovulación.
+      final starts = s.pregnant ? <DateTime>[] : s.predictedStarts(4);
       for (final st in starts) {
         if (r.period) {
           final d = addDays(st, -r.periodDaysBefore);
