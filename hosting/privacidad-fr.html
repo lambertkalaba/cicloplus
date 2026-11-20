@@ -75,15 +75,20 @@
 <p><strong>Préférences de l'application.</strong> La langue choisie, la couleur du thème, le code PIN (si vous activez le verrouillage par PIN) et d'autres préférences sont enregistrés localement sur votre appareil.</p>
 <p>Nous ne collectons ni localisation, ni contacts, ni identifiants publicitaires, ni données de réseaux sociaux. Nous n'affichons pas de publicités et n'utilisons aucun outil d'analyse ou de suivi publicitaire tiers.</p>
 
+<p><strong>Abonnement Premium (facultatif).</strong> Si vous vous abonnez à CicloPlus Premium, le paiement est géré par Google Play (ou l'App Store d'Apple sur iPhone). Nous ne voyons ni ne conservons vos données bancaires. Pour vérifier que votre abonnement est actif, nous utilisons RevenueCat, qui reçoit l'historique d'achat de l'abonnement et un identifiant utilisateur anonyme.</p>
+
 <h2>3. Comment vos données sont stockées</h2>
 <p><strong>Stockage dans le cloud (Firebase).</strong> Vos données de cycle sont stockées dans Cloud Firestore, une base de données de Google Firebase, associées uniquement à votre compte (identifiant utilisateur). Cela permet à vos données de persister si vous changez d'appareil ou réinstallez l'application.</p>
 <p><strong>Copie locale sur l'appareil.</strong> L'application conserve également une copie locale (cache) sur votre téléphone afin que vous puissiez continuer à consulter vos données sans connexion internet. Cette copie se synchronise automatiquement avec le cloud dès que la connexion est rétablie.</p>
 <p><strong>Chiffrement.</strong> Les communications entre l'application et Firebase transitent de manière chiffrée (HTTPS/TLS). Firebase applique un chiffrement au repos sur ses serveurs conformément aux normes de Google Cloud.</p>
 
+<p><strong>Sauvegarde de vos réglages.</strong> Pour ne rien perdre en changeant de téléphone, nous enregistrons aussi vos réglages de l'app et la progression de Michi dans votre compte Firebase. Votre code PIN et vos photos ne sont pas enregistrés.</p>
+
 <h2>4. Avec qui nous partageons des données</h2>
 <p>CicloPlus ne vend pas vos données et ne les partage pas avec des annonceurs. Nous partageons des informations uniquement avec :</p>
 <ul>
   <li>Google Firebase (Firebase Authentication et Cloud Firestore) : agit comme notre fournisseur d'infrastructure pour l'authentification et le stockage des données. Google traite ces données en notre nom, selon ses propres engagements de sécurité et de protection des données en tant que sous-traitant.</li>
+  <li>RevenueCat et Google Play / App Store d'Apple : uniquement si vous vous abonnez à Premium, pour gérer le paiement et vérifier que l'abonnement est actif. Ils reçoivent l'historique d'achat et un identifiant anonyme, jamais vos données de santé.</li>
   <li>Apple Santé / Google Health Connect : uniquement si vous activez volontairement la synchronisation décrite à la section 2, et uniquement pour les types de données que vous autorisez.</li>
 </ul>
 <p>Nous ne partageons pas vos données avec des assureurs, des employeurs, des réseaux sociaux ni avec aucun tiers à des fins commerciales ou publicitaires. Nous ne divulguerons pas vos données de santé à des tiers, sauf si la loi nous y oblige (par exemple, une décision de justice valable).</p>

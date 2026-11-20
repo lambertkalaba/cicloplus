@@ -75,15 +75,20 @@
 <p><strong>App-Einstellungen.</strong> Gewählte Sprache, Themenfarbe, PIN-Code (falls du die PIN-Sperre aktivierst) und weitere Einstellungen werden lokal auf deinem Gerät gespeichert.</p>
 <p>Wir erheben weder Standort, Kontakte, Werbe-IDs noch Daten aus sozialen Netzwerken. Wir zeigen keine Werbung an und verwenden keine Analyse- oder Werbe-Tracking-Tools von Drittanbietern.</p>
 
+<p><strong>Premium-Abo (optional).</strong> Wenn du CicloPlus Premium abonnierst, wird die Zahlung über Google Play (oder den Apple App Store auf dem iPhone) abgewickelt. Wir sehen und speichern deine Kartendaten nicht. Um zu prüfen, ob dein Abo aktiv ist, nutzen wir RevenueCat; dorthin werden der Kaufverlauf des Abos und eine anonyme Nutzer-ID übermittelt.</p>
+
 <h2>3. Wie deine Daten gespeichert werden</h2>
 <p><strong>Cloud-Speicherung (Firebase).</strong> Deine Zyklusdaten werden in Cloud Firestore gespeichert, einer Datenbank von Google Firebase, ausschließlich verknüpft mit deinem Konto (Benutzerkennung). Dadurch bleiben deine Daten erhalten, wenn du das Gerät wechselst oder die App neu installierst.</p>
 <p><strong>Lokale Kopie auf dem Gerät.</strong> Die App führt zusätzlich eine lokale Kopie (Cache) auf deinem eigenen Telefon, damit du deine Daten auch ohne Internetverbindung weiter ansehen kannst. Diese Kopie wird automatisch mit der Cloud synchronisiert, sobald die Verbindung wiederhergestellt ist.</p>
 <p><strong>Verschlüsselung.</strong> Die Kommunikation zwischen der App und Firebase erfolgt verschlüsselt (HTTPS/TLS). Firebase wendet auf seinen Servern eine Verschlüsselung im Ruhezustand gemäß den Standards von Google Cloud an.</p>
 
+<p><strong>Sicherung deiner Einstellungen.</strong> Damit beim Handywechsel nichts verloren geht, speichern wir auch deine App-Einstellungen und Michis Fortschritt in deinem Firebase-Konto. Deine PIN und deine Fotos werden nicht gespeichert.</p>
+
 <h2>4. Mit wem wir Daten teilen</h2>
 <p>CicloPlus verkauft deine Daten nicht und teilt sie nicht mit Werbetreibenden. Wir teilen Informationen ausschließlich mit:</p>
 <ul>
   <li>Google Firebase (Firebase Authentication und Cloud Firestore): fungiert als unser Infrastrukturanbieter für Authentifizierung und Datenspeicherung. Google verarbeitet diese Daten in unserem Auftrag, gemäß seinen eigenen Sicherheits- und Datenschutzverpflichtungen als Auftragsverarbeiter.</li>
+  <li>RevenueCat und Google Play / Apple App Store: nur wenn du Premium abonnierst, zur Zahlungsabwicklung und Prüfung, ob das Abo aktiv ist. Sie erhalten den Kaufverlauf und eine anonyme Nutzer-ID, niemals deine Gesundheitsdaten.</li>
   <li>Apple Health / Google Health Connect: nur, wenn du die in Abschnitt 2 beschriebene Synchronisierung freiwillig aktivierst, und nur für die von dir autorisierten Datentypen.</li>
 </ul>
 <p>Wir teilen deine Daten nicht mit Versicherern, Arbeitgebern, sozialen Netzwerken oder Dritten zu kommerziellen oder werblichen Zwecken. Wir geben deine Gesundheitsdaten nicht an Dritte weiter, es sei denn, dies ist gesetzlich vorgeschrieben (zum Beispiel durch einen gültigen Gerichtsbeschluss).</p>

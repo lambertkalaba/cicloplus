@@ -56,7 +56,7 @@
 
 <div class="lang-switcher"><span class="lang-select-wrap"><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language / Idioma"><option value="privacidad-es.html" selected>Español</option><option value="privacidad.html">English</option><option value="privacidad-fr.html">Français</option><option value="privacidad-de.html">Deutsch</option><option value="privacidad-pt.html">Português</option><option value="privacidad-ru.html">Русский</option><option value="privacidad-ar.html">العربية</option><option value="privacidad-hi.html">हिन्दी</option><option value="privacidad-bn.html">বাংলা</option></select></span></div>
 <h1>Política de Privacidad de CicloPlus</h1>
-<p class="updated">Última actualización: 9 de agosto de 2026</p>
+<p class="updated">Última actualización: 20 de noviembre de 2026</p>
 
 <p>Esta Política de Privacidad explica qué datos recoge CicloPlus ("la app", "nosotros"), cómo se usan, dónde se almacenan y qué control tiene la persona usuaria sobre ellos. CicloPlus es una aplicación de seguimiento del ciclo menstrual y la fertilidad, y trata la información de salud que introduces con el nivel de cuidado que ese tipo de datos requiere.</p>
 <p>Al usar CicloPlus aceptas las prácticas descritas en este documento. Si no estás de acuerdo, por favor no uses la app.</p>
@@ -73,15 +73,20 @@
 <p><strong>Preferencias de la app.</strong> Idioma elegido, color del tema, código PIN (si activas el bloqueo con PIN) y otras preferencias se guardan localmente en tu dispositivo.</p>
 <p>No recogemos ubicación, contactos, identificadores publicitarios, ni datos de redes sociales. No mostramos anuncios y no usamos herramientas de analítica de terceros ni de seguimiento publicitario.</p>
 
+<p><strong>Suscripción Premium (opcional).</strong> Si te suscribes a CicloPlus Premium, el pago lo gestiona Google Play (o Apple App Store en iPhone). Nosotros no vemos ni guardamos los datos de tu tarjeta. Para saber si tu suscripción está activa usamos RevenueCat, que recibe el historial de compras de la suscripción y un identificador de usuario anónimo.</p>
+
 <h2>3. Cómo se almacenan tus datos</h2>
 <p><strong>Almacenamiento en la nube (Firebase).</strong> Tus registros de ciclo se guardan en Cloud Firestore, una base de datos de Google Firebase, asociados únicamente a tu cuenta (identificador de usuario). Esto permite que tus datos persistan si cambias de dispositivo o reinstalas la app.</p>
 <p><strong>Copia local en el dispositivo.</strong> La app mantiene además una copia local (caché) en tu propio teléfono para que puedas seguir viendo tus datos sin conexión a internet. Esta copia se sincroniza automáticamente con la nube cuando recuperas la conexión.</p>
 <p><strong>Cifrado.</strong> Las comunicaciones entre la app y Firebase viajan cifradas (HTTPS/TLS). Firebase aplica cifrado en reposo en sus servidores según los estándares de Google Cloud.</p>
 
+<p><strong>Copia de tus ajustes.</strong> Para que no pierdas nada al cambiar de móvil, también guardamos en tu cuenta de Firebase tus ajustes de la app y el progreso de Michi. No se guardan tu PIN ni tus fotos.</p>
+
 <h2>4. Con quién compartimos datos</h2>
 <p>CicloPlus no vende tus datos ni los comparte con anunciantes. Compartimos información únicamente con:</p>
 <ul>
   <li>Google Firebase (Firebase Authentication y Cloud Firestore): actúa como nuestro proveedor de infraestructura para autenticación y almacenamiento de datos. Google procesa estos datos en nuestro nombre, bajo sus propios compromisos de seguridad y protección de datos como encargado del tratamiento.</li>
+  <li>RevenueCat y Google Play / Apple App Store: solo si te suscribes a Premium, para gestionar el pago y comprobar que la suscripción está activa. Reciben el historial de compras y un identificador de usuario anónimo, nunca tus datos de salud.</li>
   <li>Apple Salud / Google Health Connect: solo si tú activas voluntariamente la sincronización descrita en la sección 2, y únicamente los tipos de dato que autorices.</li>
 </ul>
 <p>No compartimos tus datos con aseguradoras, empleadores, redes sociales ni con ningún tercero con fines comerciales o publicitarios. No divulgaremos tus datos de salud a terceros salvo que la ley nos obligue a ello (por ejemplo, una orden judicial válida).</p>

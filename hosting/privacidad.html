@@ -57,7 +57,7 @@
 
 <div class="lang-switcher"><span class="lang-select-wrap"><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language / Idioma"><option value="privacidad-es.html">Español</option><option value="privacidad.html" selected>English</option><option value="privacidad-fr.html">Français</option><option value="privacidad-de.html">Deutsch</option><option value="privacidad-pt.html">Português</option><option value="privacidad-ru.html">Русский</option><option value="privacidad-ar.html">العربية</option><option value="privacidad-hi.html">हिन्दी</option><option value="privacidad-bn.html">বাংলা</option></select></span></div>
 <h1>CicloPlus Privacy Policy</h1>
-<p class="updated">Last updated: August 9, 2026</p>
+<p class="updated">Last updated: 20 November 2026</p>
 <p class="translation-note">This is a translation provided for your convenience. The original Spanish version is authoritative in case of any discrepancy.</p>
 
 <p>This Privacy Policy explains what data CicloPlus ("the app", "we") collects, how it is used, where it is stored, and what control you have over it. CicloPlus is a menstrual cycle and fertility tracking application, and it handles the health information you enter with the level of care that this type of data requires.</p>
@@ -75,15 +75,20 @@
 <p><strong>App preferences.</strong> Your chosen language, theme color, PIN code (if you enable PIN lock), and other preferences are stored locally on your device.</p>
 <p>We do not collect location, contacts, advertising identifiers, or social media data. We do not show ads and we do not use third-party analytics or advertising tracking tools.</p>
 
+<p><strong>Premium subscription (optional).</strong> If you subscribe to CicloPlus Premium, payment is handled by Google Play (or the Apple App Store on iPhone). We never see or store your card details. To check whether your subscription is active we use RevenueCat, which receives the subscription purchase history and an anonymous user identifier.</p>
+
 <h2>3. How your data is stored</h2>
 <p><strong>Cloud storage (Firebase).</strong> Your cycle records are stored in Cloud Firestore, a Google Firebase database, linked only to your account (user identifier). This allows your data to persist if you change devices or reinstall the app.</p>
 <p><strong>Local copy on your device.</strong> The app also keeps a local copy (cache) on your own phone so you can keep viewing your data without an internet connection. This copy is automatically synced with the cloud once your connection is restored.</p>
 <p><strong>Encryption.</strong> Communications between the app and Firebase travel encrypted (HTTPS/TLS). Firebase applies encryption at rest on its servers according to Google Cloud standards.</p>
 
+<p><strong>Backup of your settings.</strong> So you lose nothing when you change phones, we also store your app settings and Michi's progress in your Firebase account. Your PIN and your photos are not stored.</p>
+
 <h2>4. Who we share data with</h2>
 <p>CicloPlus does not sell your data or share it with advertisers. We share information only with:</p>
 <ul>
   <li>Google Firebase (Firebase Authentication and Cloud Firestore): acts as our infrastructure provider for authentication and data storage. Google processes this data on our behalf, under its own security and data-protection commitments as a data processor.</li>
+  <li>RevenueCat and Google Play / Apple App Store: only if you subscribe to Premium, to process payment and check that your subscription is active. They receive purchase history and an anonymous user identifier, never your health data.</li>
   <li>Apple Health / Google Health Connect: only if you voluntarily enable the sync described in section 2, and only for the data types you authorize.</li>
 </ul>
 <p>We do not share your data with insurers, employers, social networks, or any third party for commercial or advertising purposes. We will not disclose your health data to third parties unless required by law (for example, a valid court order).</p>
