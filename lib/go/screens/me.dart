@@ -181,6 +181,7 @@ class MeScreen extends StatelessWidget {
                     title: tr('Informes y tendencias', 'Reports & trends'),
                     onTap: () => _push(context, const ReportsHubScreen()),
                   ),
+                  // Solo con el objetivo «Seguir mi embarazo».
                   if (s.goal == 'pregnancy')
                     LinkRow(
                       icon: const Img('g_feet', size: 24),
@@ -289,6 +290,8 @@ class MeScreen extends StatelessWidget {
         final ok = await PregnancyScreen.setup(context);
         if (!ok || !context.mounted) return;
       }
+      // ¿Uno, gemelos o mellizos? Se puede dejar para más adelante.
+      if (context.mounted) await PregnancyScreen.askBabies(context);
       if (context.mounted) await CP.openPregnancy(context);
       return;
     }

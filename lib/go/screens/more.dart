@@ -1118,6 +1118,50 @@ class PregnancyScreen extends StatelessWidget {
     return true;
   }
 
+  static String babiesName(int n) => switch (n) {
+        1 => tr('Un bebé', 'One baby'),
+        2 => tr('Gemelos o mellizos', 'Twins'),
+        _ => tr('Aún no lo sé', "I don't know yet"),
+      };
+
+  /// Pregunta cuántos bebés espera. «Aún no lo sé» se puede cambiar luego
+  /// desde Mi embarazo.
+  static Future<void> askBabies(BuildContext context) async {
+    final s = AppStore.instance;
+    final r = await showModalBottomSheet<int>(
+      context: context,
+      showDragHandle: true,
+      backgroundColor: C.t(0xFFFFF4F8),
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+          child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            Text(tr('¿Cuántos bebés esperas?', 'How many babies are you expecting?'),
+                textAlign: TextAlign.center, style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w900, color: C.text)),
+            const SizedBox(height: 6),
+            Text(tr('Si aún no lo sabes, puedes ponerlo más adelante en Mi embarazo.', "If you don't know yet, you can add it later in My pregnancy."),
+                textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, color: C.muted)),
+            const SizedBox(height: 14),
+            for (final o in const [(1, '👶'), (2, '👶👶'), (0, '🤔')]) ...[
+              Choice(
+                selected: s.pregnancyBabies == o.$1,
+                onTap: () => Navigator.pop(ctx, o.$1),
+                child: Row(children: [
+                  SizedBox(width: 56, child: Text(o.$2, style: const TextStyle(fontSize: 24))),
+                  Expanded(child: Text(babiesName(o.$1), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: C.text))),
+                ]),
+              ),
+              const SizedBox(height: 8),
+            ],
+          ]),
+        ),
+      ),
+    );
+    if (r == null) return;
+    s.pregnancyBabies = r;
+    await s.commit();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
@@ -1187,8 +1231,23 @@ class PregnancyScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text('${tr('Fecha prevista de parto', 'Due date')}: ${L.dateLong(due)}', style: const TextStyle(fontWeight: FontWeight.w800, color: C.text)),
                     Text(left > 0 ? tr('Faltan $left días', '$left days to go') : tr('¡Ya ha llegado la fecha!', 'Your due date is here!'), style: _muted),
+                    if (s.pregnancyBabies == 2)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 6),
+                        child: Text(tr('Con gemelos o mellizos el parto suele adelantarse, hacia la semana 37.', 'With twins, birth often comes earlier, around week 37.'), style: _muted),
+                      ),
                   ],
                 ),
+              ),
+              _box(
+                LinkRow(
+                  icon: Text(s.pregnancyBabies == 2 ? '👶👶' : s.pregnancyBabies == 1 ? '👶' : '🤔', style: const TextStyle(fontSize: 20)),
+                  title: tr('Bebés', 'Babies'),
+                  subtitle: babiesName(s.pregnancyBabies),
+                  divider: false,
+                  onTap: () => askBabies(context),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
               ),
               Row(
                 children: [

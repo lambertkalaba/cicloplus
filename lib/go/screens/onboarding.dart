@@ -54,7 +54,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     s.goal = _goal == 'pregnancy' ? 'track' : _goal;
     if (_goal == 'pregnancy' && mounted) {
       // Sin la fecha no se puede saber cómo está el bebé: se pregunta aquí.
-      await PregnancyScreen.setup(context);
+      if (await PregnancyScreen.setup(context) && mounted) await PregnancyScreen.askBabies(context);
     }
     s.onboarded = true;
     await s.commit();

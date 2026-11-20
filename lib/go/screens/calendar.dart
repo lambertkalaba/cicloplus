@@ -7,6 +7,7 @@ import '../cicloplus_host.dart' show CicloData;
 import '../data/store.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
+import '../widgets/cycle_plus.dart' show CyclePlus;
 import 'extras.dart';
 import 'more.dart';
 
@@ -226,7 +227,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     size: 18,
                     fallback: Icons.water_drop_rounded,
                   ),
-                  tr('Periodo\n(regla)', 'Period'),
+                  tr('Regla', 'Period'),
                 ),
                 _legend(
                   _blob(
@@ -234,11 +235,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     dashed: true,
                     child: const Img('drop_empty', size: 10),
                   ),
-                  tr('Periodo\nprevisto', 'Predicted\nperiod'),
+                  tr('Prevista', 'Predicted'),
                 ),
                 _legend(
                   _blob(CalColors.fertile),
-                  tr('Días\nfértiles', 'Fertile\ndays'),
+                  tr('Fértil', 'Fertile'),
                 ),
                 _legend(
                   const Icon(
@@ -249,9 +250,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   tr('Ovulación', 'Ovulation'),
                 ),
                 ],
+                if (!AppStore.instance.pregnant && CyclePlus.spread() != null)
+                  _legend(_blob(const Color(0xFFFFF0F5), dashed: true), tr('Margen', 'Range')),
                 _legend(
                   _blob(CalColors.normal),
-                  tr('Día\nnormal', 'Normal\nday'),
+                  tr('Normal', 'Normal'),
                 ),
                 _legend(
                   Container(
@@ -266,8 +269,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   tr('Hoy', 'Today'),
                 ),
                 if (AppStore.instance.showSex) ...[
-                  _legend(const SexMark(sex: 1, size: 18), tr('Con protección', 'Protected')),
-                  _legend(const SexMark(sex: 2, size: 18), tr('Sin protección', 'Unprotected')),
+                  _legend(const SexMark(sex: 1, size: 18), tr('Protegido', 'Protected')),
+                  _legend(const SexMark(sex: 2, size: 18), tr('Sin proteger', 'Unprotected')),
                 ],
               ],
             ),
@@ -555,6 +558,19 @@ class MonthGrid extends StatelessWidget {
     return null;
   }
 
+  /// Ciclo irregular o perimenopausia: días del margen alrededor de la
+  /// próxima regla prevista.
+  static bool _inIrregularRange(DateTime d) {
+    final s = AppStore.instance;
+    if (s.pregnant) return false;
+    final sp = CyclePlus.spread();
+    final next = s.nextPeriod;
+    if (sp == null || next == null) return false;
+    final day = dateOnly(d);
+    if (day.isBefore(dateOnly(DateTime.now()))) return false;
+    return !day.isBefore(addDays(next, -sp)) && !day.isAfter(addDays(next, sp));
+  }
+
   Widget _cell(DateTime d, DayInfo info, bool isToday, bool isSel) {
     const h = 46.0;
     final log = AppStore.instance.logs[dayKey(d)];
@@ -582,6 +598,11 @@ class MonthGrid extends StatelessWidget {
     } else if (info.fertile) {
       fill = CalColors.fertile;
       textColor = const Color(0xFF2C5A2E);
+    } else if (_inIrregularRange(d)) {
+      // Ciclo irregular: margen de días en los que puede llegar la regla.
+      fill = const Color(0xFFFFF0F5);
+      textColor = C.t(0xFFC2185B);
+      dashed = true;
     }
     final sex = log?.sex ?? 0;
     final hasOther = log != null && !log.isEmpty && log.flow == 0 && sex == 0;

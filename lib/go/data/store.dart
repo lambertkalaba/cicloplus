@@ -252,6 +252,8 @@ class AppStore extends ChangeNotifier {
 
   /// Primer día de la última regla antes del embarazo (para calcular la semana).
   DateTime? pregnancyStart;
+  /// Bebés que espera: 0 = aún no lo sabe, 1 = uno, 2 = gemelos o mellizos.
+  int pregnancyBabies = 0;
   String partnerName = '';
   int defaultCycle = 28;
   int defaultPeriod = 5;
@@ -413,6 +415,7 @@ class AppStore extends ChangeNotifier {
     goal = p.getString('goal') ?? 'track';
     final ps = p.getString('pregnancyStart');
     pregnancyStart = ps == null ? null : DateTime.tryParse(ps);
+    pregnancyBabies = p.getInt('pregnancyBabies') ?? 0;
     partnerName = p.getString('partnerName') ?? '';
     defaultCycle = p.getInt('defaultCycle') ?? 28;
     defaultPeriod = p.getInt('defaultPeriod') ?? 5;
@@ -464,6 +467,7 @@ class AppStore extends ChangeNotifier {
       await p.setString('photoName', photoName!);
     }
     await p.setString('goal', goal);
+    await p.setInt('pregnancyBabies', pregnancyBabies);
     if (pregnancyStart == null) {
       await p.remove('pregnancyStart');
     } else {
@@ -551,6 +555,7 @@ class AppStore extends ChangeNotifier {
     avatarId = '';
     goal = 'track';
     pregnancyStart = null;
+    pregnancyBabies = 0;
     partnerName = '';
     defaultCycle = 28;
     defaultPeriod = 5;
