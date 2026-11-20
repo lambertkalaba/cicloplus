@@ -148,14 +148,22 @@ String michiReply(DayLog? l, String text) {
   ][i];
 }
 
-class MichiDiaryScreen extends StatefulWidget {
+/// Diario con Michi: Premium («Mi diario» normal es gratis).
+class MichiDiaryScreen extends StatelessWidget {
   const MichiDiaryScreen({super.key});
 
   @override
-  State<MichiDiaryScreen> createState() => _MichiDiaryScreenState();
+  Widget build(BuildContext context) => PremiumGate(title: tr('Diario con Michi', 'Diary with Michi'), child: const _MichiDiaryScreenBody());
 }
 
-class _MichiDiaryScreenState extends State<MichiDiaryScreen> {
+class _MichiDiaryScreenBody extends StatefulWidget {
+  const _MichiDiaryScreenBody();
+
+  @override
+  State<_MichiDiaryScreenBody> createState() => _MichiDiaryScreenState();
+}
+
+class _MichiDiaryScreenState extends State<_MichiDiaryScreenBody> {
   late final TextEditingController _t = TextEditingController(text: AppStore.instance.logs[dayKey(DateTime.now())]?.note ?? '');
   String? _reply;
   String _replyImg = 'michi_heart';

@@ -3,6 +3,9 @@
 
 const Map<String, Map<String, String>> goI18nTrad = {
   "am": {
+    "👑 Premium · 7 días gratis": "👑 ፕሪሚየም · 7 ቀን ነፃ",
+    "Modos «Intento concebir» y «Embarazo»": "«ለማርገዝ መሞከር» እና «እርግዝና» ሁነታዎች",
+    "Ahorra un {} % frente al mensual": "ከወርሃዊ ጋር ሲነጻጸር {}% ይቆጥቡ",
     "Energía, manchado, medicación, piel…": "ጉልበት፣ ነጠብጣብ፣ መድኃኒት፣ ቆዳ…",
     "¡Ya eres Premium! 👑": "አሁን ፕሪሚየም ነሽ! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlusን ስለደገፍሽ እናመሰግናለን 💗 ሁሉም ተከፍቷል፦",
@@ -146,6 +149,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ቀለም ምረጪ",
   },
   "ar": {
+    "👑 Premium · 7 días gratis": "👑 بريميوم · 7 أيام مجانًا",
+    "Modos «Intento concebir» y «Embarazo»": "وضعا «أحاول الحمل» و«الحمل»",
+    "Ahorra un {} % frente al mensual": "وفّري {}% مقارنةً بالشهري",
     "Energía, manchado, medicación, piel…": "الطاقة، التبقيع، الأدوية، البشرة…",
     "Semana de embarazo": "أسبوع الحمل",
     "Semana {} de embarazo": "الأسبوع {} من الحمل",
@@ -350,6 +356,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} أيام",
   },
   "az": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 gün pulsuz",
+    "Modos «Intento concebir» y «Embarazo»": "“Hamilə qalmağa çalışıram” və “Hamiləlik” rejimləri",
+    "Ahorra un {} % frente al mensual": "Aylıqla müqayisədə {}% qənaət",
     "Energía, manchado, medicación, piel…": "Enerji, ləkələnmə, dərman, dəri…",
     "¡Ya eres Premium! 👑": "Artıq Premiumsan! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus-ı dəstəklədiyin üçün təşəkkürlər 💗 Hər şey açıqdır:",
@@ -493,6 +502,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rəng seç",
   },
   "bn": {
+    "👑 Premium · 7 días gratis": "👑 প্রিমিয়াম · ৭ দিন ফ্রি",
+    "Modos «Intento concebir» y «Embarazo»": "«গর্ভধারণের চেষ্টা» ও «গর্ভাবস্থা» মোড",
+    "Ahorra un {} % frente al mensual": "মাসিকের তুলনায় {}% সাশ্রয়",
     "Energía, manchado, medicación, piel…": "শক্তি, দাগ, ওষুধ, ত্বক…",
     "Semana de embarazo": "গর্ভাবস্থার সপ্তাহ",
     "Semana {} de embarazo": "গর্ভাবস্থার {} সপ্তাহ",
@@ -697,6 +709,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} দিন",
   },
   "cs": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 dní zdarma",
+    "Modos «Intento concebir» y «Embarazo»": "Režimy „Snažím se otěhotnět“ a „Těhotenství“",
+    "Ahorra un {} % frente al mensual": "Ušetříš {} % oproti měsíčnímu",
     "Energía, manchado, medicación, piel…": "Energie, špinění, léky, pleť…",
     "¡Ya eres Premium! 👑": "Už máš Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Díky, že podporuješ CicloPlus 💗 Vše je odemčeno:",
@@ -840,6 +855,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber barvu",
   },
   "da": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 dage gratis",
+    "Modos «Intento concebir» y «Embarazo»": "Tilstandene “Prøver at blive gravid” og “Graviditet”",
+    "Ahorra un {} % frente al mensual": "Spar {} % i forhold til månedlig",
     "Energía, manchado, medicación, piel…": "Energi, pletblødning, medicin, hud…",
     "¡Ya eres Premium! 👑": "Du er Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Tak fordi du støtter CicloPlus 💗 Alt er låst op:",
@@ -983,6 +1001,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vælg en farve",
   },
   "de": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 Tage gratis",
+    "Modos «Intento concebir» y «Embarazo»": "Modi „Kinderwunsch“ und „Schwangerschaft“",
+    "Ahorra un {} % frente al mensual": "Spare {} % gegenüber monatlich",
     "Energía, manchado, medicación, piel…": "Energie, Schmierblutung, Medikamente, Haut…",
     "Semana de embarazo": "Schwangerschaftswoche",
     "Semana {} de embarazo": "Schwangerschaftswoche {}",
@@ -1187,6 +1208,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} Tage",
   },
   "el": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 μέρες δωρεάν",
+    "Modos «Intento concebir» y «Embarazo»": "Λειτουργίες «Προσπαθώ να συλλάβω» και «Εγκυμοσύνη»",
+    "Ahorra un {} % frente al mensual": "Εξοικονόμησε {}% σε σχέση με το μηνιαίο",
     "Energía, manchado, medicación, piel…": "Ενέργεια, κηλίδες αίματος, φάρμακα, δέρμα…",
     "¡Ya eres Premium! 👑": "Είσαι Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Ευχαριστούμε που στηρίζεις το CicloPlus 💗 Όλα είναι ξεκλείδωτα:",
@@ -1330,6 +1354,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Διάλεξε χρώμα",
   },
   "fa": {
+    "👑 Premium · 7 días gratis": "👑 پریمیوم · ۷ روز رایگان",
+    "Modos «Intento concebir» y «Embarazo»": "حالت‌های «تلاش برای بارداری» و «بارداری»",
+    "Ahorra un {} % frente al mensual": "{}٪ صرفه‌جویی نسبت به ماهانه",
     "Energía, manchado, medicación, piel…": "انرژی، لکه‌بینی، دارو، پوست…",
     "¡Ya eres Premium! 👑": "تو پریمیوم هستی! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "ممنون که از CicloPlus حمایت می‌کنی 💗 همه چیز باز است:",
@@ -1473,6 +1500,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "یک رنگ انتخاب کن",
   },
   "fi": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 päivää ilmaiseksi",
+    "Modos «Intento concebir» y «Embarazo»": "Tilat ”Yritän raskautta” ja ”Raskaus”",
+    "Ahorra un {} % frente al mensual": "Säästä {} % kuukausitilaukseen verrattuna",
     "Energía, manchado, medicación, piel…": "Energia, tiputtelu, lääkkeet, iho…",
     "¡Ya eres Premium! 👑": "Olet Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Kiitos, että tuet CicloPlusia 💗 Kaikki on avattu:",
@@ -1616,6 +1646,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Valitse väri",
   },
   "fil": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 araw na libre",
+    "Modos «Intento concebir» y «Embarazo»": "Mga mode na «Sinusubukang magbuntis» at «Pagbubuntis»",
+    "Ahorra un {} % frente al mensual": "Makatipid ng {}% kumpara sa buwanan",
     "Energía, manchado, medicación, piel…": "Enerhiya, spotting, gamot, balat…",
     "¡Ya eres Premium! 👑": "Premium ka na! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Salamat sa pagsuporta sa CicloPlus 💗 Bukas na ang lahat:",
@@ -1759,6 +1792,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pumili ng kulay",
   },
   "fr": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 jours gratuits",
+    "Modos «Intento concebir» y «Embarazo»": "Modes « Essayer de concevoir » et « Grossesse »",
+    "Ahorra un {} % frente al mensual": "Économise {} % par rapport au mensuel",
     "Energía, manchado, medicación, piel…": "Énergie, spotting, médicaments, peau…",
     "Semana de embarazo": "Semaine de grossesse",
     "Semana {} de embarazo": "Semaine {} de grossesse",
@@ -1963,6 +1999,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} jours",
   },
   "gu": {
+    "👑 Premium · 7 días gratis": "👑 પ્રીમિયમ · 7 દિવસ મફત",
+    "Modos «Intento concebir» y «Embarazo»": "«ગર્ભધારણનો પ્રયાસ» અને «ગર્ભાવસ્થા» મોડ",
+    "Ahorra un {} % frente al mensual": "માસિકની સરખામણીએ {}% બચત",
     "Energía, manchado, medicación, piel…": "ઊર્જા, ડાઘ, દવા, ત્વચા…",
     "¡Ya eres Premium! 👑": "તમે પ્રીમિયમ છો! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus ને ટેકો આપવા બદલ આભાર 💗 બધું ખુલ્લું છે:",
@@ -2106,6 +2145,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "એક રંગ પસંદ કરો",
   },
   "ha": {
+    "👑 Premium · 7 días gratis": "👑 Premium · kwana 7 kyauta",
+    "Modos «Intento concebir» y «Embarazo»": "Yanayin «Neman ciki» da «Ciki»",
+    "Ahorra un {} % frente al mensual": "Ajiye {}% idan aka kwatanta da na wata",
     "Energía, manchado, medicación, piel…": "Kuzari, ɗigon jini, magani, fata…",
     "¡Ya eres Premium! 👑": "Yanzu kina Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Na gode da tallafa wa CicloPlus 💗 An buɗe komai:",
@@ -2249,6 +2291,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Zaɓi launi",
   },
   "he": {
+    "👑 Premium · 7 días gratis": "👑 פרימיום · 7 ימים חינם",
+    "Modos «Intento concebir» y «Embarazo»": "מצבי «מנסה להרות» ו«היריון»",
+    "Ahorra un {} % frente al mensual": "חיסכון של {}% לעומת חודשי",
     "Energía, manchado, medicación, piel…": "אנרגיה, הכתמה, תרופות, עור…",
     "¡Ya eres Premium! 👑": "את פרימיום! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "תודה שאת תומכת ב-CicloPlus 💗 הכול פתוח:",
@@ -2392,6 +2437,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "בחרי צבע",
   },
   "hi": {
+    "👑 Premium · 7 días gratis": "👑 प्रीमियम · 7 दिन मुफ़्त",
+    "Modos «Intento concebir» y «Embarazo»": "«गर्भधारण की कोशिश» और «गर्भावस्था» मोड",
+    "Ahorra un {} % frente al mensual": "मासिक की तुलना में {}% बचत",
     "Energía, manchado, medicación, piel…": "ऊर्जा, स्पॉटिंग, दवा, त्वचा…",
     "Semana de embarazo": "गर्भावस्था सप्ताह",
     "Semana {} de embarazo": "गर्भावस्था का {} सप्ताह",
@@ -2596,6 +2644,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} दिन",
   },
   "hu": {
+    "👑 Premium · 7 días gratis": "👑 Prémium · 7 nap ingyen",
+    "Modos «Intento concebir» y «Embarazo»": "„Babát tervezek” és „Terhesség” mód",
+    "Ahorra un {} % frente al mensual": "{}% megtakarítás a havihoz képest",
     "Energía, manchado, medicación, piel…": "Energia, pecsételő vérzés, gyógyszer, bőr…",
     "¡Ya eres Premium! 👑": "Prémium vagy! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Köszönjük, hogy támogatod a CicloPlust 💗 Minden fel van oldva:",
@@ -2739,6 +2790,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Válassz színt",
   },
   "id": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 hari gratis",
+    "Modos «Intento concebir» y «Embarazo»": "Mode «Program hamil» dan «Kehamilan»",
+    "Ahorra un {} % frente al mensual": "Hemat {}% dibanding bulanan",
     "Energía, manchado, medicación, piel…": "Energi, flek, obat, kulit…",
     "¡Ya eres Premium! 👑": "Kamu sudah Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Terima kasih sudah mendukung CicloPlus 💗 Semua sudah terbuka:",
@@ -2882,6 +2936,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "it": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 giorni gratis",
+    "Modos «Intento concebir» y «Embarazo»": "Modalità «Cerco una gravidanza» e «Gravidanza»",
+    "Ahorra un {} % frente al mensual": "Risparmi il {}% rispetto al mensile",
     "Energía, manchado, medicación, piel…": "Energia, spotting, farmaci, pelle…",
     "¡Ya eres Premium! 👑": "Sei Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Grazie per sostenere CicloPlus 💗 Hai tutto sbloccato:",
@@ -3025,6 +3082,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Scegli un colore",
   },
   "ja": {
+    "👑 Premium · 7 días gratis": "👑 プレミアム・7日間無料",
+    "Modos «Intento concebir» y «Embarazo»": "「妊活」と「妊娠」モード",
+    "Ahorra un {} % frente al mensual": "月額より{}%お得",
     "Energía, manchado, medicación, piel…": "元気度・少量出血・薬・肌…",
     "¡Ya eres Premium! 👑": "プレミアム会員です！👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlusを応援してくれてありがとう💗 すべて使えます：",
@@ -3168,6 +3228,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "色を選ぶ",
   },
   "kk": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 күн тегін",
+    "Modos «Intento concebir» y «Embarazo»": "«Жүкті болуға тырысамын» және «Жүктілік» режимдері",
+    "Ahorra un {} % frente al mensual": "Айлықпен салыстырғанда {}% үнем",
     "Energía, manchado, medicación, piel…": "Қуат, дақ, дәрі, тері…",
     "¡Ya eres Premium! 👑": "Сен Premium-сың! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus-ты қолдағаның үшін рақмет 💗 Бәрі ашық:",
@@ -3311,6 +3374,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Түс таңдаңыз",
   },
   "kn": {
+    "👑 Premium · 7 días gratis": "👑 ಪ್ರೀಮಿಯಂ · 7 ದಿನ ಉಚಿತ",
+    "Modos «Intento concebir» y «Embarazo»": "«ಗರ್ಭಧಾರಣೆ ಪ್ರಯತ್ನ» ಮತ್ತು «ಗರ್ಭಾವಸ್ಥೆ» ಮೋಡ್‌ಗಳು",
+    "Ahorra un {} % frente al mensual": "ಮಾಸಿಕಕ್ಕಿಂತ {}% ಉಳಿತಾಯ",
     "Energía, manchado, medicación, piel…": "ಶಕ್ತಿ, ಕಲೆ ಸ್ರಾವ, ಔಷಧ, ಚರ್ಮ…",
     "¡Ya eres Premium! 👑": "ನೀವು ಪ್ರೀಮಿಯಂ! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus ಬೆಂಬಲಿಸಿದ್ದಕ್ಕೆ ಧನ್ಯವಾದ 💗 ಎಲ್ಲವೂ ತೆರೆದಿದೆ:",
@@ -3454,6 +3520,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ಒಂದು ಬಣ್ಣ ಆರಿಸಿ",
   },
   "ko": {
+    "👑 Premium · 7 días gratis": "👑 프리미엄 · 7일 무료",
+    "Modos «Intento concebir» y «Embarazo»": "‘임신 준비’와 ‘임신’ 모드",
+    "Ahorra un {} % frente al mensual": "월간보다 {}% 절약",
     "Energía, manchado, medicación, piel…": "에너지, 소량 출혈, 약, 피부…",
     "¡Ya eres Premium! 👑": "프리미엄 회원이에요! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus를 응원해 줘서 고마워요 💗 모든 기능이 열렸어요:",
@@ -3597,6 +3666,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "색상 선택",
   },
   "ln": {
+    "👑 Premium · 7 días gratis": "👑 Premium · mikolo 7 ofele",
+    "Modos «Intento concebir» y «Embarazo»": "Mitindo «Nazali koluka zemi» mpe «Zemi»",
+    "Ahorra un {} % frente al mensual": "Bomba {}% soki ekokani na ya sanza",
     "Energía, manchado, medicación, piel…": "Makasi, makila moke, nkisi, loposo…",
     "¡Ya eres Premium! 👑": "Ozali sikoyo Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Matondi mpo osungi CicloPlus 💗 Nyonso efungwami:",
@@ -3740,6 +3812,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pona langi",
   },
   "ml": {
+    "👑 Premium · 7 días gratis": "👑 പ്രീമിയം · 7 ദിവസം സൗജന്യം",
+    "Modos «Intento concebir» y «Embarazo»": "«ഗർഭധാരണ ശ്രമം», «ഗർഭകാലം» മോഡുകൾ",
+    "Ahorra un {} % frente al mensual": "പ്രതിമാസത്തെക്കാൾ {}% ലാഭം",
     "Energía, manchado, medicación, piel…": "ഊർജം, പാടുകൾ, മരുന്ന്, ചർമം…",
     "¡Ya eres Premium! 👑": "നീ ഇപ്പോൾ പ്രീമിയം! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus-നെ പിന്തുണച്ചതിന് നന്ദി 💗 എല്ലാം തുറന്നു:",
@@ -3883,6 +3958,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ഒരു നിറം തിരഞ്ഞെടുക്കൂ",
   },
   "mr": {
+    "👑 Premium · 7 días gratis": "👑 प्रीमियम · 7 दिवस मोफत",
+    "Modos «Intento concebir» y «Embarazo»": "«गर्भधारणेचा प्रयत्न» आणि «गर्भावस्था» मोड",
+    "Ahorra un {} % frente al mensual": "मासिकपेक्षा {}% बचत",
     "Energía, manchado, medicación, piel…": "ऊर्जा, डाग, औषध, त्वचा…",
     "¡Ya eres Premium! 👑": "तुम्ही प्रीमियम आहात! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus ला साथ दिल्याबद्दल धन्यवाद 💗 सर्व काही खुले आहे:",
@@ -4026,6 +4104,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एक रंग निवडा",
   },
   "ms": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 hari percuma",
+    "Modos «Intento concebir» y «Embarazo»": "Mod «Cuba hamil» dan «Kehamilan»",
+    "Ahorra un {} % frente al mensual": "Jimat {}% berbanding bulanan",
     "Energía, manchado, medicación, piel…": "Tenaga, tompok darah, ubat, kulit…",
     "¡Ya eres Premium! 👑": "Anda kini Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Terima kasih kerana menyokong CicloPlus 💗 Semua dibuka:",
@@ -4169,6 +4250,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Pilih warna",
   },
   "my": {
+    "👑 Premium · 7 días gratis": "👑 ပရီမီယံ · ၇ ရက် အခမဲ့",
+    "Modos «Intento concebir» y «Embarazo»": "«ကိုယ်ဝန်ရရန်ကြိုးစား» နှင့် «ကိုယ်ဝန်» မုဒ်များ",
+    "Ahorra un {} % frente al mensual": "လစဉ်ထက် {}% ချွေတာ",
     "Energía, manchado, medicación, piel…": "စွမ်းအင်, သွေးစက်, ဆေး, အသားအရေ…",
     "¡Ya eres Premium! 👑": "သင် ပရီမီယံ ဖြစ်ပြီ! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus ကို ထောက်ပံ့ပေးသည့်အတွက် ကျေးဇူးတင်ပါသည် 💗 အားလုံး ဖွင့်ပြီးပါပြီ:",
@@ -4312,6 +4396,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "အရောင်ရွေးပါ",
   },
   "ne": {
+    "👑 Premium · 7 días gratis": "👑 प्रिमियम · ७ दिन निःशुल्क",
+    "Modos «Intento concebir» y «Embarazo»": "«गर्भधारणको प्रयास» र «गर्भावस्था» मोड",
+    "Ahorra un {} % frente al mensual": "मासिकको तुलनामा {}% बचत",
     "Energía, manchado, medicación, piel…": "ऊर्जा, थोपा, औषधि, छाला…",
     "¡Ya eres Premium! 👑": "तपाईं प्रिमियम हुनुहुन्छ! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus लाई साथ दिनुभएकोमा धन्यवाद 💗 सबै खुला छ:",
@@ -4455,6 +4542,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "एउटा रङ छान्नुहोस्",
   },
   "nl": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 dagen gratis",
+    "Modos «Intento concebir» y «Embarazo»": "Modi ‘Zwanger worden’ en ‘Zwangerschap’",
+    "Ahorra un {} % frente al mensual": "Bespaar {}% t.o.v. maandelijks",
     "Energía, manchado, medicación, piel…": "Energie, spotting, medicatie, huid…",
     "¡Ya eres Premium! 👑": "Je bent Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Bedankt voor je steun aan CicloPlus 💗 Alles is ontgrendeld:",
@@ -4598,6 +4688,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Kies een kleur",
   },
   "om": {
+    "👑 Premium · 7 días gratis": "👑 Premium · guyyaa 7 bilisaan",
+    "Modos «Intento concebir» y «Embarazo»": "Haalota «Ulfaa’uuf yaalaa jira» fi «Ulfa»",
+    "Ahorra un {} % frente al mensual": "Ji’aa waliin yoo wal bira qabamu {}% qusadhu",
     "Energía, manchado, medicación, piel…": "Humna, dhangala’uu, qoricha, gogaa…",
     "¡Ya eres Premium! 👑": "Amma Premium dha! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus deeggaruu keetiif galatoomi 💗 Hundi banameera:",
@@ -4741,6 +4834,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Halluu filadhu",
   },
   "pa": {
+    "👑 Premium · 7 días gratis": "👑 ਪ੍ਰੀਮੀਅਮ · 7 ਦਿਨ ਮੁਫ਼ਤ",
+    "Modos «Intento concebir» y «Embarazo»": "«ਗਰਭ ਧਾਰਨ ਦੀ ਕੋਸ਼ਿਸ਼» ਅਤੇ «ਗਰਭ ਅਵਸਥਾ» ਮੋਡ",
+    "Ahorra un {} % frente al mensual": "ਮਾਸਿਕ ਦੇ ਮੁਕਾਬਲੇ {}% ਬਚਤ",
     "Energía, manchado, medicación, piel…": "ਊਰਜਾ, ਦਾਗ, ਦਵਾਈ, ਚਮੜੀ…",
     "¡Ya eres Premium! 👑": "ਤੁਸੀਂ ਪ੍ਰੀਮੀਅਮ ਹੋ! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus ਦਾ ਸਾਥ ਦੇਣ ਲਈ ਧੰਨਵਾਦ 💗 ਸਭ ਕੁਝ ਖੁੱਲ੍ਹਾ ਹੈ:",
@@ -4884,6 +4980,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ਇੱਕ ਰੰਗ ਚੁਣੋ",
   },
   "pl": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 dni za darmo",
+    "Modos «Intento concebir» y «Embarazo»": "Tryby „Staram się o dziecko” i „Ciąża”",
+    "Ahorra un {} % frente al mensual": "Oszczędzasz {}% względem miesięcznego",
     "Energía, manchado, medicación, piel…": "Energia, plamienie, leki, skóra…",
     "¡Ya eres Premium! 👑": "Masz już Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Dziękujemy za wspieranie CicloPlus 💗 Wszystko odblokowane:",
@@ -5027,6 +5126,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Wybierz kolor",
   },
   "pt": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 dias grátis",
+    "Modos «Intento concebir» y «Embarazo»": "Modos «Tentando engravidar» e «Gravidez»",
+    "Ahorra un {} % frente al mensual": "Economize {}% em relação ao mensal",
     "Energía, manchado, medicación, piel…": "Energia, escape, medicação, pele…",
     "Semana de embarazo": "Semana de gravidez",
     "Semana {} de embarazo": "Semana {} de gravidez",
@@ -5231,6 +5333,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} dias",
   },
   "ro": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 zile gratuit",
+    "Modos «Intento concebir» y «Embarazo»": "Modurile „Încerc să rămân însărcinată” și „Sarcină”",
+    "Ahorra un {} % frente al mensual": "Economisești {}% față de lunar",
     "Energía, manchado, medicación, piel…": "Energie, spotting, medicație, piele…",
     "¡Ya eres Premium! 👑": "Ești Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Mulțumim că susții CicloPlus 💗 Totul este deblocat:",
@@ -5374,6 +5479,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Alege o culoare",
   },
   "ru": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 дней бесплатно",
+    "Modos «Intento concebir» y «Embarazo»": "Режимы «Планирую беременность» и «Беременность»",
+    "Ahorra un {} % frente al mensual": "Экономия {}% по сравнению с ежемесячной",
     "Energía, manchado, medicación, piel…": "Энергия, мажущие выделения, лекарства, кожа…",
     "Semana de embarazo": "Неделя беременности",
     "Semana {} de embarazo": "{}-я неделя беременности",
@@ -5578,6 +5686,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "{} días": "{} дн.",
   },
   "si": {
+    "👑 Premium · 7 días gratis": "👑 ප්‍රිමියම් · දින 7ක් නොමිලේ",
+    "Modos «Intento concebir» y «Embarazo»": "«ගැබ් ගැනීමට උත්සාහය» සහ «ගැබ්ගැනීම» ප්‍රකාර",
+    "Ahorra un {} % frente al mensual": "මාසිකයට වඩා {}% ඉතිරියක්",
     "Energía, manchado, medicación, piel…": "ශක්තිය, ලප, ඖෂධ, සම…",
     "¡Ya eres Premium! 👑": "ඔබ ප්‍රිමියම්! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus ට සහාය දීමට ස්තූතියි 💗 සියල්ල විවෘතයි:",
@@ -5721,6 +5832,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "වර්ණයක් තෝරන්න",
   },
   "sk": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 dní zadarmo",
+    "Modos «Intento concebir» y «Embarazo»": "Režimy „Snažím sa otehotnieť“ a „Tehotenstvo“",
+    "Ahorra un {} % frente al mensual": "Ušetríš {} % oproti mesačnému",
     "Energía, manchado, medicación, piel…": "Energia, špinenie, lieky, pleť…",
     "¡Ya eres Premium! 👑": "Už máš Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Ďakujeme, že podporuješ CicloPlus 💗 Všetko je odomknuté:",
@@ -5864,6 +5978,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Vyber farbu",
   },
   "sv": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 dagar gratis",
+    "Modos «Intento concebir» y «Embarazo»": "Lägena ”Försöker bli gravid” och ”Graviditet”",
+    "Ahorra un {} % frente al mensual": "Spara {} % jämfört med månadsvis",
     "Energía, manchado, medicación, piel…": "Energi, stänkblödning, medicin, hud…",
     "¡Ya eres Premium! 👑": "Du är Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Tack för att du stöttar CicloPlus 💗 Allt är upplåst:",
@@ -6007,6 +6124,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Välj en färg",
   },
   "sw": {
+    "👑 Premium · 7 días gratis": "👑 Premium · siku 7 bure",
+    "Modos «Intento concebir» y «Embarazo»": "Hali za «Najaribu kushika mimba» na «Ujauzito»",
+    "Ahorra un {} % frente al mensual": "Okoa {}% ukilinganisha na kila mwezi",
     "Energía, manchado, medicación, piel…": "Nguvu, madoa ya damu, dawa, ngozi…",
     "¡Ya eres Premium! 👑": "Sasa wewe ni Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Asante kwa kuunga mkono CicloPlus 💗 Kila kitu kimefunguliwa:",
@@ -6150,6 +6270,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chagua rangi",
   },
   "ta": {
+    "👑 Premium · 7 días gratis": "👑 பிரீமியம் · 7 நாள் இலவசம்",
+    "Modos «Intento concebir» y «Embarazo»": "«கருத்தரிக்க முயற்சி» மற்றும் «கர்ப்பம்» முறைகள்",
+    "Ahorra un {} % frente al mensual": "மாதாந்திரத்தை விட {}% சேமிப்பு",
     "Energía, manchado, medicación, piel…": "ஆற்றல், புள்ளிக் கசிவு, மருந்து, சருமம்…",
     "¡Ya eres Premium! 👑": "நீங்கள் பிரீமியம்! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus-ஐ ஆதரித்ததற்கு நன்றி 💗 அனைத்தும் திறக்கப்பட்டுள்ளது:",
@@ -6293,6 +6416,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ஒரு நிறத்தைத் தேர்வுசெய்யுங்கள்",
   },
   "te": {
+    "👑 Premium · 7 días gratis": "👑 ప్రీమియం · 7 రోజులు ఉచితం",
+    "Modos «Intento concebir» y «Embarazo»": "«గర్భధారణ ప్రయత్నం» మరియు «గర్భం» మోడ్‌లు",
+    "Ahorra un {} % frente al mensual": "నెలవారీతో పోలిస్తే {}% ఆదా",
     "Energía, manchado, medicación, piel…": "శక్తి, మచ్చలు, మందులు, చర్మం…",
     "¡Ya eres Premium! 👑": "మీరు ప్రీమియం! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus కు మద్దతు ఇచ్చినందుకు ధన్యవాదాలు 💗 అన్నీ అన్‌లాక్ అయ్యాయి:",
@@ -6436,6 +6562,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ఒక రంగును ఎంచుకోండి",
   },
   "th": {
+    "👑 Premium · 7 días gratis": "👑 พรีเมียม · ฟรี 7 วัน",
+    "Modos «Intento concebir» y «Embarazo»": "โหมด «พยายามตั้งครรภ์» และ «ตั้งครรภ์»",
+    "Ahorra un {} % frente al mensual": "ประหยัด {}% เมื่อเทียบกับรายเดือน",
     "Energía, manchado, medicación, piel…": "พลังงาน, เลือดออกกะปริดกะปรอย, ยา, ผิว…",
     "¡Ya eres Premium! 👑": "คุณเป็นพรีเมียมแล้ว! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "ขอบคุณที่สนับสนุน CicloPlus 💗 ปลดล็อกทุกอย่างแล้ว:",
@@ -6579,6 +6708,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "เลือกสี",
   },
   "tr": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 gün ücretsiz",
+    "Modos «Intento concebir» y «Embarazo»": "“Gebe kalmaya çalışıyorum” ve “Hamilelik” modları",
+    "Ahorra un {} % frente al mensual": "Aylığa göre %{} tasarruf",
     "Energía, manchado, medicación, piel…": "Enerji, lekelenme, ilaç, cilt…",
     "¡Ya eres Premium! 👑": "Artık Premium’sun! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus’ı desteklediğin için teşekkürler 💗 Her şey açık:",
@@ -6722,6 +6854,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Bir renk seç",
   },
   "uk": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 днів безкоштовно",
+    "Modos «Intento concebir» y «Embarazo»": "Режими «Планую вагітність» і «Вагітність»",
+    "Ahorra un {} % frente al mensual": "Економія {}% порівняно з щомісячною",
     "Energía, manchado, medicación, piel…": "Енергія, мазання, ліки, шкіра…",
     "¡Ya eres Premium! 👑": "Ти вже Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Дякуємо, що підтримуєш CicloPlus 💗 Усе відкрито:",
@@ -6865,6 +7000,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Обери колір",
   },
   "ur": {
+    "👑 Premium · 7 días gratis": "👑 پریمیم · 7 دن مفت",
+    "Modos «Intento concebir» y «Embarazo»": "«حمل کی کوشش» اور «حمل» موڈ",
+    "Ahorra un {} % frente al mensual": "ماہانہ کے مقابلے میں {}% بچت",
     "Energía, manchado, medicación, piel…": "توانائی، دھبے، دوائی، جلد…",
     "¡Ya eres Premium! 👑": "آپ پریمیم ہیں! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus کی حمایت کا شکریہ 💗 سب کچھ کھلا ہے:",
@@ -7008,6 +7146,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "ایک رنگ چنیں",
   },
   "uz": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 kun bepul",
+    "Modos «Intento concebir» y «Embarazo»": "“Homilador bo‘lishga urinyapman” va “Homiladorlik” rejimlari",
+    "Ahorra un {} % frente al mensual": "Oylikka nisbatan {}% tejash",
     "Energía, manchado, medicación, piel…": "Energiya, dog‘lanish, dori, teri…",
     "¡Ya eres Premium! 👑": "Siz endi Premiumsiz! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "CicloPlus’ni qo‘llaganingiz uchun rahmat 💗 Hammasi ochiq:",
@@ -7151,6 +7292,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Rang tanlang",
   },
   "vi": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 ngày miễn phí",
+    "Modos «Intento concebir» y «Embarazo»": "Chế độ «Đang cố có thai» và «Mang thai»",
+    "Ahorra un {} % frente al mensual": "Tiết kiệm {}% so với gói tháng",
     "Energía, manchado, medicación, piel…": "Năng lượng, ra máu lấm tấm, thuốc, da…",
     "¡Ya eres Premium! 👑": "Bạn đã là Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Cảm ơn bạn đã ủng hộ CicloPlus 💗 Mọi thứ đã được mở khóa:",
@@ -7294,6 +7438,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Chọn màu",
   },
   "wo": {
+    "👑 Premium · 7 días gratis": "👑 Premium · 7 fan ci dara",
+    "Modos «Intento concebir» y «Embarazo»": "Anam «Maa ngi wut ëmb» ak «Ëmb»",
+    "Ahorra un {} % frente al mensual": "Denc {}% su ko méngaleek ak weer wi",
     "Energía, manchado, medicación, piel…": "Kàttan, tooñ yu ndaw, garab, der…",
     "¡Ya eres Premium! 👑": "Léegi Premium nga! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Jërëjëf ci li nga dimbali CicloPlus 💗 Lépp ubbi na:",
@@ -7437,6 +7584,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Tànnal benn melo",
   },
   "yo": {
+    "👑 Premium · 7 días gratis": "👑 Premium · ọjọ́ 7 lọ́fẹ̀ẹ́",
+    "Modos «Intento concebir» y «Embarazo»": "Ipò «Ń gbìyànjú láti lóyún» àti «Oyún»",
+    "Ahorra un {} % frente al mensual": "Fi {}% pamọ́ ju ti oṣooṣù lọ",
     "Energía, manchado, medicación, piel…": "Agbára, ẹ̀jẹ̀ díẹ̀, oògùn, awọ…",
     "¡Ya eres Premium! 👑": "O ti di Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "O ṣé fún àtìlẹ́yìn CicloPlus 💗 Gbogbo rẹ̀ ti ṣí:",
@@ -7580,6 +7730,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "Yan àwọ̀ kan",
   },
   "zh": {
+    "👑 Premium · 7 días gratis": "👑 高级版 · 免费7天",
+    "Modos «Intento concebir» y «Embarazo»": "「备孕」和「怀孕」模式",
+    "Ahorra un {} % frente al mensual": "比月付节省{}%",
     "Energía, manchado, medicación, piel…": "精力、点滴出血、用药、皮肤…",
     "¡Ya eres Premium! 👑": "你已是高级版会员！👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "感谢支持CicloPlus 💗 全部功能已解锁：",
@@ -7723,6 +7876,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "选择颜色",
   },
   "zh-TW": {
+    "👑 Premium · 7 días gratis": "👑 進階版 · 免費7天",
+    "Modos «Intento concebir» y «Embarazo»": "「備孕」和「懷孕」模式",
+    "Ahorra un {} % frente al mensual": "比月付節省{}%",
     "Energía, manchado, medicación, piel…": "精力、點狀出血、用藥、皮膚…",
     "¡Ya eres Premium! 👑": "你已是進階版會員！👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "感謝支持CicloPlus 💗 全部功能已解鎖：",
@@ -7866,6 +8022,9 @@ const Map<String, Map<String, String>> goI18nTrad = {
     "Elige un color": "選擇顏色",
   },
   "zu": {
+    "👑 Premium · 7 días gratis": "👑 I-Premium · izinsuku ezi-7 mahhala",
+    "Modos «Intento concebir» y «Embarazo»": "Izimodi «Ngizama ukukhulelwa» ne-«Ukukhulelwa»",
+    "Ahorra un {} % frente al mensual": "Onga u-{}% uma kuqhathaniswa nenyanga",
     "Energía, manchado, medicación, piel…": "Amandla, amabala egazi, umuthi, isikhumba…",
     "¡Ya eres Premium! 👑": "Manje uyi-Premium! 👑",
     "Gracias por apoyar CicloPlus 💗 Tienes todo desbloqueado:": "Siyabonga ngokusekela i-CicloPlus 💗 Konke kuvuliwe:",

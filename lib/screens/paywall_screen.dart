@@ -5,6 +5,7 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 import '../l10n/app_strings.dart';
 import '../services/subscription_service.dart';
 import '../theme/app_theme.dart';
+import '../go/strings.dart' show tr;
 
 /// Pantalla de suscripción (paywall): muestra los planes de pago
 /// (semanal, mensual, anual y de por vida) con precios reales obtenidos
@@ -213,7 +214,15 @@ class _PaywallScreenState extends State<PaywallScreen> {
   }
 
   Widget _buildFeatures(AppStrings s) {
-    final features = [s.paywallFeature1, s.paywallFeature2, s.paywallFeature3, s.paywallFeature4];
+    // Lo que de verdad incluye Premium (igual que la pantalla de candado).
+    final features = [
+      tr('Análisis del ciclo y tendencias', 'Cycle analysis and trends'),
+      tr('Informe completo para tu médico', 'Full report for your doctor'),
+      tr('Avisos de fertilidad: temperatura y test de ovulación', 'Fertility alerts: temperature and ovulation test'),
+      tr('Armario, retos y logros de Michi', "Michi's wardrobe, challenges and badges"),
+      tr('Modos «Intento concebir» y «Embarazo»', 'Trying to conceive and Pregnancy modes'),
+      tr('Diario con Michi', 'Diary with Michi'),
+    ];
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
@@ -255,6 +264,20 @@ class _PaywallScreenState extends State<PaywallScreen> {
     );
   }
 
+  /// % que se ahorra con el anual frente a 12 meses del mensual.
+  int? _annualSaving() {
+    Package? m, a;
+    for (final p in _packages) {
+      if (_isAnnual(p)) a = p;
+      if (p.packageType == PackageType.monthly || p.storeProduct.identifier == SubscriptionService.monthlyProductId) m = p;
+    }
+    if (m == null || a == null) return null;
+    final year = m.storeProduct.price * 12;
+    if (year <= 0) return null;
+    final pct = ((1 - a.storeProduct.price / year) * 100).round();
+    return pct > 0 ? pct : null;
+  }
+
   Widget _buildPlanCard(AppStrings s, Package package) {
     final selected = _selectedPackage?.identifier == package.identifier;
     final isAnnual = _isAnnual(package);
@@ -271,7 +294,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
     final String desc = isLifetime
         ? s.paywallPlanLifetimeDesc
         : isAnnual
-            ? s.paywallPlanAnnualDesc
+            ? (_annualSaving() != null
+                ? tr('Ahorra un {} % frente al mensual', 'Save {}% vs monthly').replaceFirst('{}', '${_annualSaving()}')
+                : s.paywallPlanAnnualDesc)
             : isWeekly
                 ? s.paywallPlanWeeklyDesc
                 : s.paywallPlanMonthlyDesc;

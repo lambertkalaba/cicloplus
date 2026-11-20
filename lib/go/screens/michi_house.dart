@@ -665,7 +665,7 @@ class _MichiHouseScreenState extends State<MichiHouseScreen> with TickerProvider
       ],
       'terraza' => [('🌬️', tr('Respira conmigo', 'Breathe with me'), () => push(const MichiBreatheScreen()))],
       'juegos' => [('🎯', '${tr('Retos', 'Challenges')}${Premium.active ? '' : ' 👑'}', () => push(const MichiChallengeScreen())), ('🏅', '${tr('Logros', 'Badges')}${Premium.active ? '' : ' 👑'}', () => push(const MichiBadgesScreen()))],
-      'estudio' => [('📔', tr('Diario con Michi', 'Diary with Michi'), () => push(const MichiDiaryScreen()))],
+      'estudio' => [('📔', '${tr('Diario con Michi', 'Diary with Michi')}${Premium.active ? '' : ' 👑'}', () => push(const MichiDiaryScreen()))],
       'rincon' => [('👗', tr('Armario', 'Wardrobe'), () => push(const MichiWardrobeScreen()))],
       'gimnasio' => [('💪', tr('Haz ejercicio conmigo', 'Work out with me'), _workout)],
       _ => const [],

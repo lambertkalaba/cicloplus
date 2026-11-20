@@ -14,6 +14,14 @@ import 'ui.dart';
 class Premium {
   Premium._();
   static bool get active => GoSession.premium.value;
+
+  /// Si no tiene Premium abre la pantalla de pago. Devuelve true si ya lo
+  /// tenía o si lo acaba de activar.
+  static Future<bool> require(BuildContext context) async {
+    if (active) return true;
+    await CP.openPremium(context);
+    return active;
+  }
 }
 
 /// Muestra [child] si tiene Premium; si no, una pantalla bonita que explica
@@ -41,6 +49,8 @@ class _PremiumLocked extends StatelessWidget {
       ('📄', tr('Informe completo para tu médico', 'Full report for your doctor')),
       ('🌱', tr('Avisos de fertilidad: temperatura y test de ovulación', 'Fertility alerts: temperature and ovulation test')),
       ('👗', tr('Armario, retos y logros de Michi', "Michi's wardrobe, challenges and badges")),
+      ('🤰', tr('Modos «Intento concebir» y «Embarazo»', 'Trying to conceive and Pregnancy modes')),
+      ('💌', tr('Diario con Michi', 'Diary with Michi')),
     ];
     return SubPage(
       title: title,
@@ -150,6 +160,8 @@ class PremiumActiveScreen extends StatelessWidget {
       ('📄', tr('Informe completo para tu médico', 'Full report for your doctor')),
       ('🌱', tr('Avisos de fertilidad: temperatura y test de ovulación', 'Fertility alerts: temperature and ovulation test')),
       ('👗', tr('Armario, retos y logros de Michi', "Michi's wardrobe, challenges and badges")),
+      ('🤰', tr('Modos «Intento concebir» y «Embarazo»', 'Trying to conceive and Pregnancy modes')),
+      ('💌', tr('Diario con Michi', 'Diary with Michi')),
     ];
     return SubPage(
       title: tr('CicloPlus Premium', 'CicloPlus Premium'),

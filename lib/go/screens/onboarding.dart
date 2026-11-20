@@ -6,6 +6,7 @@ import '../strings.dart';
 import '../widgets/ui.dart';
 import 'more.dart';
 import '../widgets/ciclo_date_picker.dart';
+import '../widgets/premium.dart' show Premium;
 
 /// Primera vez, en 3 pasos cortos: último periodo, duraciones y objetivo
 /// (con el nombre opcional). Todo se puede saltar.
@@ -47,6 +48,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     if (_last != null) {
       await s.addPeriod(dateOnly(_last!), length: _period);
     }
+    // «Intento concebir» y «Embarazo» son Premium: si no lo activa, empieza
+    // con «Seguir mi período» (puede cambiarlo luego en Yo).
+    if (_goal != 'track' && mounted && !await Premium.require(context)) _goal = 'track';
     s.goal = _goal == 'pregnancy' ? 'track' : _goal;
     if (_goal == 'pregnancy' && mounted) {
       // Sin la fecha no se puede saber cómo está el bebé: se pregunta aquí.
@@ -255,6 +259,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Img(g[1], size: 30, fallback: Icons.favorite_rounded),
                   const SizedBox(width: 10),
                   Expanded(child: Text(goalName(g[0]), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: C.text))),
+                  if (g[0] != 'track' && !Premium.active)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 6),
+                      child: Text(tr('👑 Premium · 7 días gratis', '👑 Premium · 7 days free'),
+                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Color(0xFF8A6512))),
+                    ),
                   if (_goal == g[0]) Icon(Icons.check_circle_rounded, color: C.pink),
                 ],
               ),
