@@ -4,6 +4,7 @@ import '../data/store.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
 import 'extra_details.dart';
+import '../services/review_ask.dart';
 import '../widgets/ciclo_date_picker.dart';
 
 /// Registrar mi día: flujo, síntomas, dolor, ánimo y notas.
@@ -51,6 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (!mounted) return;
     toast(context, tr('Registro guardado 💗', 'Saved 💗'));
     Navigator.of(context).pop();
+    ReviewAsk.afterSave();
   }
 
   Future<void> _customize() async {

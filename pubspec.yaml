@@ -137,6 +137,7 @@ dependencies:
   audioplayers: ^6.1.0
   # Voz de Michi (lee sus frases y chistes en el idioma de la app).
   flutter_tts: ^4.2.0
+  in_app_review: ^2.0.12
 
 dev_dependencies:
   flutter_test:
