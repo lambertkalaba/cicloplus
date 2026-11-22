@@ -329,9 +329,6 @@ class MeScreen extends StatelessWidget {
 
   Future<void> _setGoal(BuildContext context, String g) async {
     final s = AppStore.instance;
-    // «Intento concebir» y «Embarazo» son Premium.
-    if (g != 'track' && g != s.goal && !await Premium.require(context)) return;
-    if (!context.mounted) return;
     if (g == 'pregnancy') {
       // Siempre se confirma la fecha: sin ella no se puede saber cómo está
       // el bebé. Si ya había una (y no es de hace más de 42 semanas), se
@@ -429,7 +426,7 @@ class MeScreen extends StatelessWidget {
               else
                 Img(img, size: 26, fallback: g == 'conceive' ? Icons.spa_rounded : Icons.child_friendly_rounded),
               const SizedBox(height: 4),
-              Text(g != 'track' && !Premium.active ? '${goalName(g)} 👑' : goalName(g),
+              Text(goalName(g),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w800, color: sel ? Colors.white : C.text, height: 1.1)),

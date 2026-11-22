@@ -49,7 +49,6 @@ class _PremiumLocked extends StatelessWidget {
       ('📄', tr('Informe completo para tu médico', 'Full report for your doctor')),
       ('🌱', tr('Avisos de fertilidad: temperatura y test de ovulación', 'Fertility alerts: temperature and ovulation test')),
       ('👗', tr('Armario, retos y logros de Michi', "Michi's wardrobe, challenges and badges")),
-      ('🤰', tr('Modos «Intento concebir» y «Embarazo»', 'Trying to conceive and Pregnancy modes')),
       ('💌', tr('Diario con Michi', 'Diary with Michi')),
     ];
     return SubPage(
@@ -160,7 +159,6 @@ class PremiumActiveScreen extends StatelessWidget {
       ('📄', tr('Informe completo para tu médico', 'Full report for your doctor')),
       ('🌱', tr('Avisos de fertilidad: temperatura y test de ovulación', 'Fertility alerts: temperature and ovulation test')),
       ('👗', tr('Armario, retos y logros de Michi', "Michi's wardrobe, challenges and badges")),
-      ('🤰', tr('Modos «Intento concebir» y «Embarazo»', 'Trying to conceive and Pregnancy modes')),
       ('💌', tr('Diario con Michi', 'Diary with Michi')),
     ];
     return SubPage(

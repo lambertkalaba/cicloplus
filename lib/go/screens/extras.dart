@@ -120,6 +120,9 @@ Future<void> pickPhoto(BuildContext context) async {
 
 // ───────────────────────────── Periodo y ciclo ─────────────────────────────
 
+/// Cuántos periodos se ven en el historial (de 30 en 30; no se borra nada).
+final ValueNotifier<int> _historyShown = ValueNotifier(30);
+
 class PeriodCycleScreen extends StatelessWidget {
   const PeriodCycleScreen({super.key});
 
@@ -142,7 +145,7 @@ class PeriodCycleScreen extends StatelessWidget {
     return SubPage(
       title: tr('Periodo y ciclo', 'Period & cycle'),
       child: ListenableBuilder(
-        listenable: AppStore.instance,
+        listenable: Listenable.merge([AppStore.instance, _historyShown]),
         builder: (context, _) {
           final s = AppStore.instance;
           final today = dateOnly(DateTime.now());
@@ -236,7 +239,7 @@ class PeriodCycleScreen extends StatelessWidget {
               ),
               if (starts.isEmpty)
                 _box(Text(tr('Todavía no hay periodos registrados.', 'No periods logged yet.'), style: _b)),
-              for (final st in starts)
+              for (final st in starts.take(_historyShown.value))
                 Builder(builder: (context) {
                   final i = all.indexOf(st);
                   final len = lengths[i];
@@ -282,6 +285,16 @@ class PeriodCycleScreen extends StatelessWidget {
                     ),
                   );
                 }),
+              if (starts.length > _historyShown.value)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: PinkButton(
+                    label: tr('Ver más ({})', 'See more ({})').replaceFirst('{}', '${starts.length - _historyShown.value}'),
+                    icon: Icons.expand_more_rounded,
+                    outlined: true,
+                    onTap: () => _historyShown.value += 30,
+                  ),
+                ),
             ],
           );
         },

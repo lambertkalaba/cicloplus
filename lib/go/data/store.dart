@@ -289,6 +289,11 @@ class AppStore extends ChangeNotifier {
   bool perimenopause = false;
   bool discreetNotifs = false;
   List<String> customSymptoms = [];
+  /// Respuestas de la bienvenida: síntomas habituales (salen primero al
+  /// registrar), anticonceptivo y año de nacimiento (0 = no lo dijo).
+  List<String> favSymptoms = [];
+  String contraception = '';
+  int birthYear = 0;
   ReminderSettings reminders = ReminderSettings();
 
   SharedPreferences? _prefs;
@@ -442,6 +447,9 @@ class AppStore extends ChangeNotifier {
     perimenopause = p.getBool('perimenopause') ?? false;
     discreetNotifs = p.getBool('discreetNotifs') ?? false;
     customSymptoms = p.getStringList('customSymptoms') ?? [];
+    favSymptoms = p.getStringList('favSymptoms') ?? [];
+    contraception = p.getString('contraception') ?? '';
+    birthYear = p.getInt('birthYear') ?? 0;
     final r = p.getString('reminders');
     if (r != null) {
       try {
@@ -501,6 +509,9 @@ class AppStore extends ChangeNotifier {
     await p.setBool('perimenopause', perimenopause);
     await p.setBool('discreetNotifs', discreetNotifs);
     await p.setStringList('customSymptoms', customSymptoms);
+    await p.setStringList('favSymptoms', favSymptoms);
+    await p.setString('contraception', contraception);
+    await p.setInt('birthYear', birthYear);
     await p.setString('reminders', jsonEncode(reminders.toJson()));
     SettingsSync.schedule();
   }
@@ -586,6 +597,9 @@ class AppStore extends ChangeNotifier {
     perimenopause = false;
     discreetNotifs = false;
     customSymptoms = [];
+    favSymptoms = [];
+    contraception = '';
+    birthYear = 0;
     reminders = ReminderSettings();
     await commit();
   }

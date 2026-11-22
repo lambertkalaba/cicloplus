@@ -130,7 +130,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final s = AppStore.instance;
-    final symptoms = [...symptomKeys, ...s.customSymptoms];
+    // Los habituales (elegidos en la bienvenida) salen primero.
+    final symptoms = [
+      ...symptomKeys.where(s.favSymptoms.contains),
+      ...symptomKeys.where((k) => !s.favSymptoms.contains(k)),
+      ...s.customSymptoms,
+    ];
     final isToday = _day == dateOnly(DateTime.now());
     return Scaffold(
       body: PinkBackground(

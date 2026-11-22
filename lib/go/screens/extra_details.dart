@@ -146,10 +146,7 @@ class ExtraDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (AppStore.instance.conceiving) _group('🌡️', const Color(0xFFFFE4EC), tr('Temperatura basal', 'Basal temperature'),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: _chip('', temp == null ? tr('Añadir', 'Add') : '${temp.toStringAsFixed(2)} °C', temp != null, () => _editTemp(context)),
-            )),
+            _wrap([_chip('🌡️', temp == null ? tr('Añadir', 'Add') : '${temp.toStringAsFixed(2)} °C', temp != null, () => _editTemp(context))])),
         if (AppStore.instance.conceiving) _group('💧', const Color(0xFFE3F1FF), tr('Moco cervical', 'Cervical mucus'),
             _wrap([for (final o in _mucus) _chip(o[1], o[2], x['cervicalMucus'] == o[0], () => _single('cervicalMucus', o[0]))])),
         _group('🩸', const Color(0xFFFFE6E6), tr('Manchado', 'Spotting'),
@@ -174,20 +171,20 @@ class ExtraDetails extends StatelessWidget {
   }
 
   Widget _group(String emoji, Color bg, String title, Widget body) => Padding(
-        padding: const EdgeInsets.only(top: 14),
+        padding: const EdgeInsets.only(top: 12),
         child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
-            width: 36,
-            height: 36,
+            width: 40,
+            height: 40,
             alignment: Alignment.center,
             decoration: BoxDecoration(color: bg, shape: BoxShape.circle),
-            child: Text(emoji, style: const TextStyle(fontSize: 17)),
+            child: Text(emoji, style: const TextStyle(fontSize: 19)),
           ),
           const SizedBox(width: 10),
           Expanded(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
-                padding: const EdgeInsets.only(top: 1, bottom: 7),
+                padding: const EdgeInsets.only(top: 2, bottom: 6),
                 child: Text(title, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w800, color: C.text)),
               ),
               body,
@@ -196,20 +193,38 @@ class ExtraDetails extends StatelessWidget {
         ]),
       );
 
-  Widget _wrap(List<Widget> c) => Wrap(spacing: 6, runSpacing: 6, children: c);
+  /// Opciones en filas de 3 iguales, como en el diseño de "Más detalles".
+  Widget _wrap(List<Widget> c) => Column(children: [
+        for (var i = 0; i < c.length; i += 3)
+          Padding(
+            padding: EdgeInsets.only(top: i == 0 ? 0 : 6),
+            child: Row(children: [
+              for (var j = i; j < i + 3; j++) ...[
+                if (j > i) const SizedBox(width: 6),
+                Expanded(child: j < c.length ? c[j] : const SizedBox()),
+              ],
+            ]),
+          ),
+      ]);
 
   Widget _chip(String emoji, String label, bool on, VoidCallback onTap) => GestureDetector(
         onTap: onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 160),
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+          height: 34,
+          alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(horizontal: 6),
           decoration: BoxDecoration(
-            color: on ? C.pinkSoft : const Color(0xFFFFFBFC),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: on ? C.pink : const Color(0xFFF3DCE5), width: on ? 1.5 : 1),
+            color: on ? C.pinkSoft : Colors.white,
+            borderRadius: BorderRadius.circular(17),
+            border: Border.all(color: on ? C.pink : const Color(0xFFF0D3DE), width: on ? 1.6 : 1),
           ),
-          child: Text(emoji.isEmpty ? label : '$emoji $label',
-              style: TextStyle(fontSize: 12.5, fontWeight: on ? FontWeight.w800 : FontWeight.w600, color: on ? C.pinkDark : C.text)),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(emoji.isEmpty ? label : '$emoji $label',
+                maxLines: 1,
+                style: TextStyle(fontSize: 12, fontWeight: on ? FontWeight.w800 : FontWeight.w600, color: on ? C.pinkDark : C.text)),
+          ),
         ),
       );
 }
