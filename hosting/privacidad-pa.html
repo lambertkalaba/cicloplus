@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CicloPlus ਨਿੱਜਤਾ ਨੀਤੀ</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+    color: #2b2530;
+    line-height: 1.6;
+    background: #fffafc;
+  }
+  h1 { font-size: 1.9rem; margin-bottom: 4px; color: #1f1a24; }
+  .updated { color: #8a7f8e; font-style: italic; margin-bottom: 8px; font-size: 0.95rem; }
+  .translation-note { color: #8a7f8e; font-size: 0.85rem; margin-bottom: 32px; }
+  h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; color: #9c4dcc; border-bottom: 2px solid #f3d9f7; padding-bottom: 6px; }
+  p { margin: 0 0 14px; text-align: justify; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { color: #1f1a24; }
+  a { color: #9c4dcc; }
+  .contact-box {
+    background: #fbeafd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 8px 0 20px;
+  }
+  footer { margin-top: 56px; font-size: 0.85rem; color: #a89aae; text-align: center; }
+
+  .lang-switcher { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f0e4f2; }
+  .lang-select-wrap { position: relative; display: inline-block; }
+  .lang-select-wrap::after {
+    content: "\25BE";
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #9c4dcc; font-size: 0.8rem; pointer-events: none;
+  }
+  select.lang-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    font-family: inherit; font-size: 0.9rem; font-weight: 600; color: #2b2530;
+    background: #fbeafd; border: 1px solid #f0d9f4; border-radius: 10px;
+    padding: 8px 32px 8px 14px; cursor: pointer;
+  }
+  select.lang-select:hover { background: #f6dcfa; }
+  select.lang-select:focus { outline: 2px solid #9c4dcc; outline-offset: 1px; }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher"><span class="lang-select-wrap"><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language / Idioma"><option value="privacidad-es.html">Español</option><option value="privacidad.html">English</option><option value="privacidad-fr.html">Français</option><option value="privacidad-de.html">Deutsch</option><option value="privacidad-pt.html">Português</option><option value="privacidad-it.html">Italiano</option><option value="privacidad-nl.html">Nederlands</option><option value="privacidad-pl.html">Polski</option><option value="privacidad-ru.html">Русский</option><option value="privacidad-uk.html">Українська</option><option value="privacidad-ar.html">العربية</option><option value="privacidad-hi.html">हिन्दी</option><option value="privacidad-bn.html">বাংলা</option><option value="privacidad-am.html">አማርኛ</option><option value="privacidad-az.html">Azərbaycan</option><option value="privacidad-cs.html">Čeština</option><option value="privacidad-da.html">Dansk</option><option value="privacidad-el.html">Ελληνικά</option><option value="privacidad-fa.html">فارسی</option><option value="privacidad-fi.html">Suomi</option><option value="privacidad-fil.html">Filipino</option><option value="privacidad-gu.html">ગુજરાતી</option><option value="privacidad-ha.html">Hausa</option><option value="privacidad-he.html">עברית</option><option value="privacidad-hu.html">Magyar</option><option value="privacidad-id.html">Bahasa Indonesia</option><option value="privacidad-ja.html">日本語</option><option value="privacidad-kk.html">Қазақ</option><option value="privacidad-kn.html">ಕನ್ನಡ</option><option value="privacidad-ko.html">한국어</option><option value="privacidad-ln.html">Lingála</option><option value="privacidad-ml.html">മലയാളം</option><option value="privacidad-mr.html">मराठी</option><option value="privacidad-ms.html">Bahasa Melayu</option><option value="privacidad-my.html">မြန်မာ</option><option value="privacidad-ne.html">नेपाली</option><option value="privacidad-om.html">Afaan Oromoo</option><option value="privacidad-pa.html" selected>ਪੰਜਾਬੀ</option><option value="privacidad-ro.html">Română</option><option value="privacidad-si.html">සිංහල</option><option value="privacidad-sk.html">Slovenčina</option><option value="privacidad-sv.html">Svenska</option><option value="privacidad-sw.html">Kiswahili</option><option value="privacidad-ta.html">தமிழ்</option><option value="privacidad-te.html">తెలుగు</option><option value="privacidad-th.html">ไทย</option><option value="privacidad-tr.html">Türkçe</option><option value="privacidad-ur.html">اردو</option><option value="privacidad-uz.html">Oʻzbek</option><option value="privacidad-vi.html">Tiếng Việt</option><option value="privacidad-wo.html">Wolof</option><option value="privacidad-yo.html">Yorùbá</option><option value="privacidad-zh.html">简体中文</option><option value="privacidad-zh-TW.html">繁體中文</option><option value="privacidad-zu.html">isiZulu</option></select></span></div>
+<h1>CicloPlus ਨਿੱਜਤਾ ਨੀਤੀ</h1>
+<p class="updated">ਆਖਰੀ ਅੱਪਡੇਟ: 20 ਨਵੰਬਰ 2026</p>
+<p class="translation-note">ਇਹ ਅਨੁਵਾਦ ਤੁਹਾਡੀ ਸਹੂਲਤ ਲਈ ਹੈ। ਕਿਸੇ ਫ਼ਰਕ ਦੀ ਸੂਰਤ ਵਿੱਚ ਅਸਲ ਸਪੇਨੀ ਸੰਸਕਰਣ ਮੰਨਿਆ ਜਾਵੇਗਾ।</p>
+<p>ਇਹ ਨਿੱਜਤਾ ਨੀਤੀ ਦੱਸਦੀ ਹੈ ਕਿ CicloPlus («ਐਪ», «ਅਸੀਂ») ਕਿਹੜਾ ਡਾਟਾ ਇਕੱਠਾ ਕਰਦੀ ਹੈ, ਉਸ ਨੂੰ ਕਿਵੇਂ ਵਰਤਦੀ ਹੈ, ਕਿੱਥੇ ਰੱਖਦੀ ਹੈ ਅਤੇ ਤੁਹਾਡਾ ਉਸ ਉੱਤੇ ਕੀ ਕੰਟਰੋਲ ਹੈ। CicloPlus ਮਾਹਵਾਰੀ ਚੱਕਰ ਅਤੇ ਜਣਨ ਸਮਰੱਥਾ ਟਰੈਕ ਕਰਨ ਵਾਲੀ ਐਪ ਹੈ ਅਤੇ ਤੁਹਾਡੇ ਵੱਲੋਂ ਭਰੀ ਸਿਹਤ ਜਾਣਕਾਰੀ ਨੂੰ ਉਸ ਸਾਵਧਾਨੀ ਨਾਲ ਸੰਭਾਲਦੀ ਹੈ ਜਿਸ ਦੀ ਅਜਿਹੇ ਡਾਟੇ ਨੂੰ ਲੋੜ ਹੁੰਦੀ ਹੈ।</p>
+<p>CicloPlus ਵਰਤ ਕੇ ਤੁਸੀਂ ਇਸ ਦਸਤਾਵੇਜ਼ ਵਿੱਚ ਦੱਸੇ ਤਰੀਕੇ ਸਵੀਕਾਰ ਕਰਦੇ ਹੋ। ਜੇ ਤੁਸੀਂ ਸਹਿਮਤ ਨਹੀਂ ਹੋ ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਐਪ ਨਾ ਵਰਤੋ।</p>
+<h2>1. ਡਾਟਾ ਕੰਟਰੋਲਰ</h2>
+<p>CicloPlus ਇੱਕ ਸੁਤੰਤਰ ਡਿਵੈਲਪਰ ਨੇ ਬਣਾਈ ਹੈ ਅਤੇ ਉਹੀ ਇਸ ਨੂੰ ਚਲਾਉਂਦਾ ਹੈ। ਇਸ ਨੀਤੀ ਜਾਂ ਆਪਣੇ ਡਾਟੇ ਬਾਰੇ ਕਿਸੇ ਵੀ ਸਵਾਲ ਲਈ ਇੱਥੇ ਲਿਖੋ:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<h2>2. ਅਸੀਂ ਕਿਹੜਾ ਡਾਟਾ ਇਕੱਠਾ ਕਰਦੇ ਹਾਂ</h2>
+<p><strong>ਖਾਤੇ ਦਾ ਡਾਟਾ।</strong> CicloPlus ਵਰਤਣ ਲਈ ਤੁਸੀਂ ਈਮੇਲ ਅਤੇ ਪਾਸਵਰਡ ਨਾਲ ਖਾਤਾ ਬਣਾਉਂਦੇ ਹੋ, ਜੋ Firebase Authentication (Google ਦੀ ਸੇਵਾ) ਰਾਹੀਂ ਸੰਭਾਲਿਆ ਜਾਂਦਾ ਹੈ। ਅਸੀਂ ਤੁਹਾਡਾ ਈਮੇਲ ਪਤਾ ਅਤੇ ਖਾਤਾ ਬਣਨ ਦੀ ਤਾਰੀਖ ਰੱਖਦੇ ਹਾਂ।</p>
+<p><strong>ਤੁਹਾਡੇ ਵੱਲੋਂ ਭਰਿਆ ਚੱਕਰ ਅਤੇ ਸਿਹਤ ਡਾਟਾ।</strong> ਰੋਜ਼ਾਨਾ ਕੈਲੰਡਰ ਵਿੱਚ ਤੁਸੀਂ ਜੋ ਵੀ ਦਰਜ ਕਰਦੇ ਹੋ: ਮਾਹਵਾਰੀ ਦੀਆਂ ਤਾਰੀਖਾਂ, ਖੂਨ ਦਾ ਵਹਾਅ, ਬੱਚੇਦਾਨੀ ਦੇ ਮੂੰਹ ਦਾ ਰਿਸਾਵ, ਬੇਸਲ ਤਾਪਮਾਨ, ਲੱਛਣ, ਮੂਡ, ਭਾਰ, ਨੀਂਦ ਦੇ ਘੰਟੇ, ਪੀਤਾ ਪਾਣੀ, ਡਾਇਰੀ ਨੋਟ, ਜਿਨਸੀ ਗਤੀਵਿਧੀ, ਗਰਭ ਨਿਰੋਧਕ ਯਾਦ-ਦਹਾਨੀਆਂ, ਡਾਕਟਰ ਦੀਆਂ ਮੁਲਾਕਾਤਾਂ ਅਤੇ ਜੇ ਤੁਸੀਂ ਗਰਭ ਅਵਸਥਾ ਮੋਡ ਚਾਲੂ ਕਰੋ ਤਾਂ ਗਰਭ ਨਾਲ ਸਬੰਧਤ ਡਾਟਾ। ਇਹ ਸੰਵੇਦਨਸ਼ੀਲ ਸਿਹਤ ਡਾਟਾ ਹੈ ਅਤੇ ਸਿਰਫ਼ ਉਦੋਂ ਇਕੱਠਾ ਹੁੰਦਾ ਹੈ ਜਦੋਂ ਤੁਸੀਂ ਇਸ ਨੂੰ ਭਰਨਾ ਚੁਣਦੇ ਹੋ: ਕੈਲੰਡਰ ਚੱਲਣ ਲਈ ਜ਼ਰੂਰੀ ਤੋਂ ਇਲਾਵਾ ਕੋਈ ਖੇਤਰ ਲਾਜ਼ਮੀ ਨਹੀਂ।</p>
+<p><strong>ਜੋੜੀਆਂ ਫੋਟੋਆਂ।</strong> ਜੇ ਤੁਸੀਂ ਡਾਇਰੀ ਨੋਟ ਨਾਲ ਫੋਟੋ ਜੋੜਦੇ ਹੋ ਤਾਂ ਉਹ ਨੋਟ ਦੇ ਨਾਲ ਰੱਖੀ ਜਾਂਦੀ ਹੈ।</p>
+<p><strong>ਹੈਲਥ/Google Fit ਨਾਲ ਸਿੰਕ (ਵਿਕਲਪਿਕ)।</strong> ਜੇ ਤੁਸੀਂ ਸੈਟਿੰਗਾਂ ਤੋਂ ਖੁਦ Apple Health (HealthKit) ਜਾਂ Google Fit (Health Connect) ਨਾਲ ਸਿੰਕ ਚਾਲੂ ਕਰਦੇ ਹੋ, ਤਾਂ ਐਪ ਤੁਹਾਡੇ ਡਿਵਾਈਸ ਦੇ ਉਸ ਪਲੇਟਫਾਰਮ ਉੱਤੇ ਭਾਰ, ਨੀਂਦ, ਸਰੀਰ ਦਾ ਤਾਪਮਾਨ ਅਤੇ ਮਾਹਵਾਰੀ ਦਾ ਵਹਾਅ ਪੜ੍ਹ ਅਤੇ ਲਿਖ ਸਕਦੀ ਹੈ। ਇਹ ਸਹੂਲਤ ਮੂਲ ਰੂਪ ਵਿੱਚ ਬੰਦ ਹੁੰਦੀ ਹੈ ਅਤੇ ਸਿਰਫ਼ ਤੁਹਾਡੀ ਸਪਸ਼ਟ ਇਜਾਜ਼ਤ ਨਾਲ ਚਾਲੂ ਹੁੰਦੀ ਹੈ; ਤੁਸੀਂ ਇਸ ਨੂੰ ਕਦੇ ਵੀ ਸੈਟਿੰਗਾਂ ਤੋਂ ਬੰਦ ਕਰ ਸਕਦੇ ਹੋ ਜਾਂ ਡਿਵਾਈਸ ਦੀਆਂ ਸਿਹਤ ਸੈਟਿੰਗਾਂ ਤੋਂ ਇਜਾਜ਼ਤ ਵਾਪਸ ਲੈ ਸਕਦੇ ਹੋ।</p>
+<p><strong>ਐਪ ਦੀਆਂ ਤਰਜੀਹਾਂ।</strong> ਚੁਣੀ ਭਾਸ਼ਾ, ਥੀਮ ਦਾ ਰੰਗ, PIN ਕੋਡ (ਜੇ PIN ਲਾਕ ਚਾਲੂ ਹੋਵੇ) ਅਤੇ ਹੋਰ ਤਰਜੀਹਾਂ ਸਿਰਫ਼ ਤੁਹਾਡੇ ਡਿਵਾਈਸ ਉੱਤੇ ਰੱਖੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।</p>
+<p>ਅਸੀਂ ਟਿਕਾਣਾ, ਸੰਪਰਕ, ਇਸ਼ਤਿਹਾਰੀ ਪਛਾਣਕਰਤਾ ਜਾਂ ਸੋਸ਼ਲ ਮੀਡੀਆ ਡਾਟਾ ਇਕੱਠਾ ਨਹੀਂ ਕਰਦੇ। ਅਸੀਂ ਇਸ਼ਤਿਹਾਰ ਨਹੀਂ ਦਿਖਾਉਂਦੇ ਅਤੇ ਤੀਜੀ ਧਿਰ ਦੇ ਵਿਸ਼ਲੇਸ਼ਣ ਜਾਂ ਇਸ਼ਤਿਹਾਰੀ ਟਰੈਕਿੰਗ ਟੂਲ ਨਹੀਂ ਵਰਤਦੇ।</p>
+<p><strong>ਪ੍ਰੀਮੀਅਮ ਸਬਸਕ੍ਰਿਪਸ਼ਨ (ਵਿਕਲਪਿਕ)।</strong> ਜੇ ਤੁਸੀਂ CicloPlus Premium ਲੈਂਦੇ ਹੋ ਤਾਂ ਭੁਗਤਾਨ Google Play (iPhone ਉੱਤੇ Apple App Store) ਸੰਭਾਲਦਾ ਹੈ। ਅਸੀਂ ਕਦੇ ਵੀ ਤੁਹਾਡੇ ਕਾਰਡ ਦੇ ਵੇਰਵੇ ਨਹੀਂ ਦੇਖਦੇ ਨਾ ਰੱਖਦੇ ਹਾਂ। ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਚਾਲੂ ਹੈ ਜਾਂ ਨਹੀਂ, ਇਹ ਜਾਂਚਣ ਲਈ ਅਸੀਂ RevenueCat ਵਰਤਦੇ ਹਾਂ, ਜਿਸ ਨੂੰ ਖਰੀਦ ਦਾ ਇਤਿਹਾਸ ਅਤੇ ਇੱਕ ਗੁਮਨਾਮ ਵਰਤੋਂਕਾਰ ਪਛਾਣਕਰਤਾ ਮਿਲਦਾ ਹੈ।</p>
+<h2>3. ਤੁਹਾਡਾ ਡਾਟਾ ਕਿਵੇਂ ਰੱਖਿਆ ਜਾਂਦਾ ਹੈ</h2>
+<p><strong>ਕਲਾਊਡ ਸਟੋਰੇਜ (Firebase)।</strong> ਤੁਹਾਡੇ ਚੱਕਰ ਦੇ ਰਿਕਾਰਡ Google Firebase ਦੇ ਡਾਟਾਬੇਸ Cloud Firestore ਵਿੱਚ ਸਿਰਫ਼ ਤੁਹਾਡੇ ਖਾਤੇ (ਵਰਤੋਂਕਾਰ ਪਛਾਣਕਰਤਾ) ਨਾਲ ਜੋੜ ਕੇ ਰੱਖੇ ਜਾਂਦੇ ਹਨ। ਇਸ ਨਾਲ ਡਿਵਾਈਸ ਬਦਲਣ ਜਾਂ ਐਪ ਦੁਬਾਰਾ ਇੰਸਟਾਲ ਕਰਨ ਉੱਤੇ ਵੀ ਡਾਟਾ ਬਚਿਆ ਰਹਿੰਦਾ ਹੈ।</p>
+<p><strong>ਡਿਵਾਈਸ ਉੱਤੇ ਸਥਾਨਕ ਕਾਪੀ।</strong> ਇੰਟਰਨੈੱਟ ਤੋਂ ਬਿਨਾਂ ਵੀ ਡਾਟਾ ਦੇਖਣ ਲਈ ਐਪ ਤੁਹਾਡੇ ਫ਼ੋਨ ਉੱਤੇ ਸਥਾਨਕ ਕਾਪੀ (ਕੈਸ਼) ਵੀ ਰੱਖਦੀ ਹੈ। ਕਨੈਕਸ਼ਨ ਵਾਪਸ ਆਉਣ ਉੱਤੇ ਇਹ ਕਾਪੀ ਆਪਣੇ ਆਪ ਕਲਾਊਡ ਨਾਲ ਸਿੰਕ ਹੋ ਜਾਂਦੀ ਹੈ।</p>
+<p><strong>ਇਨਕ੍ਰਿਪਸ਼ਨ।</strong> ਐਪ ਅਤੇ Firebase ਵਿਚਕਾਰ ਸੰਚਾਰ ਇਨਕ੍ਰਿਪਟ (HTTPS/TLS) ਹੁੰਦਾ ਹੈ। Firebase ਆਪਣੇ ਸਰਵਰਾਂ ਉੱਤੇ ਰੱਖੇ ਡਾਟੇ ਨੂੰ Google Cloud ਦੇ ਮਿਆਰਾਂ ਅਨੁਸਾਰ ਇਨਕ੍ਰਿਪਟ ਕਰਦਾ ਹੈ।</p>
+<p><strong>ਸੈਟਿੰਗਾਂ ਦਾ ਬੈਕਅੱਪ।</strong> ਫ਼ੋਨ ਬਦਲਣ ਵੇਲੇ ਕੁਝ ਨਾ ਗੁਆਚੇ, ਇਸ ਲਈ ਅਸੀਂ ਐਪ ਦੀਆਂ ਸੈਟਿੰਗਾਂ ਅਤੇ ਮਿਚੀ ਦੀ ਤਰੱਕੀ ਵੀ ਤੁਹਾਡੇ Firebase ਖਾਤੇ ਵਿੱਚ ਰੱਖਦੇ ਹਾਂ। ਤੁਹਾਡਾ PIN ਅਤੇ ਫੋਟੋਆਂ ਨਹੀਂ ਰੱਖੀਆਂ ਜਾਂਦੀਆਂ।</p>
+<h2>4. ਅਸੀਂ ਡਾਟਾ ਕਿਸ ਨਾਲ ਸਾਂਝਾ ਕਰਦੇ ਹਾਂ</h2>
+<p>CicloPlus ਤੁਹਾਡਾ ਡਾਟਾ ਨਹੀਂ ਵੇਚਦੀ ਅਤੇ ਇਸ਼ਤਿਹਾਰ ਦੇਣ ਵਾਲਿਆਂ ਨਾਲ ਸਾਂਝਾ ਨਹੀਂ ਕਰਦੀ। ਅਸੀਂ ਜਾਣਕਾਰੀ ਸਿਰਫ਼ ਇਹਨਾਂ ਨਾਲ ਸਾਂਝੀ ਕਰਦੇ ਹਾਂ:</p>
+<ul>
+  <li>Google Firebase (Firebase Authentication ਅਤੇ Cloud Firestore): ਲੌਗਇਨ ਅਤੇ ਡਾਟਾ ਸਟੋਰੇਜ ਲਈ ਸਾਡਾ ਬੁਨਿਆਦੀ ਢਾਂਚਾ ਪ੍ਰਦਾਤਾ। Google ਇਹ ਡਾਟਾ ਸਾਡੀ ਤਰਫ਼ੋਂ, ਪ੍ਰੋਸੈਸਰ ਵਜੋਂ ਆਪਣੀਆਂ ਸੁਰੱਖਿਆ ਅਤੇ ਡਾਟਾ ਸੁਰੱਖਿਆ ਵਚਨਬੱਧਤਾਵਾਂ ਅਨੁਸਾਰ ਪ੍ਰੋਸੈਸ ਕਰਦਾ ਹੈ।</li>
+  <li>RevenueCat ਅਤੇ Google Play / Apple App Store: ਸਿਰਫ਼ ਜੇ ਤੁਸੀਂ ਪ੍ਰੀਮੀਅਮ ਲਓ, ਭੁਗਤਾਨ ਪ੍ਰੋਸੈਸ ਕਰਨ ਅਤੇ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਜਾਂਚਣ ਲਈ। ਉਹਨਾਂ ਨੂੰ ਖਰੀਦ ਇਤਿਹਾਸ ਅਤੇ ਗੁਮਨਾਮ ਵਰਤੋਂਕਾਰ ਪਛਾਣਕਰਤਾ ਮਿਲਦਾ ਹੈ, ਤੁਹਾਡਾ ਸਿਹਤ ਡਾਟਾ ਕਦੇ ਨਹੀਂ।</li>
+  <li>Apple Health / Google Health Connect: ਸਿਰਫ਼ ਜੇ ਤੁਸੀਂ ਆਪਣੀ ਮਰਜ਼ੀ ਨਾਲ ਭਾਗ 2 ਵਾਲਾ ਸਿੰਕ ਚਾਲੂ ਕਰੋ, ਅਤੇ ਸਿਰਫ਼ ਉਹਨਾਂ ਡਾਟਾ ਕਿਸਮਾਂ ਲਈ ਜਿਨ੍ਹਾਂ ਦੀ ਤੁਸੀਂ ਇਜਾਜ਼ਤ ਦਿਓ।</li>
+</ul>
+<p>ਅਸੀਂ ਤੁਹਾਡਾ ਡਾਟਾ ਵਪਾਰਕ ਜਾਂ ਇਸ਼ਤਿਹਾਰੀ ਮਕਸਦਾਂ ਲਈ ਬੀਮਾ ਕੰਪਨੀਆਂ, ਮਾਲਕਾਂ, ਸੋਸ਼ਲ ਨੈੱਟਵਰਕਾਂ ਜਾਂ ਕਿਸੇ ਤੀਜੀ ਧਿਰ ਨਾਲ ਸਾਂਝਾ ਨਹੀਂ ਕਰਦੇ। ਕਾਨੂੰਨ ਦੀ ਮੰਗ ਤੋਂ ਬਿਨਾਂ (ਜਿਵੇਂ ਜਾਇਜ਼ ਅਦਾਲਤੀ ਹੁਕਮ) ਅਸੀਂ ਤੁਹਾਡਾ ਸਿਹਤ ਡਾਟਾ ਤੀਜੀ ਧਿਰ ਨੂੰ ਨਹੀਂ ਦੱਸਾਂਗੇ।</p>
+<h2>5. ਸੂਚਨਾਵਾਂ</h2>
+<p>ਜੇ ਤੁਸੀਂ ਯਾਦ-ਦਹਾਨੀਆਂ ਚਾਲੂ ਕਰਦੇ ਹੋ (ਰੋਜ਼ਾਨਾ ਦਰਜ ਕਰਨ, ਗਰਭ ਨਿਰੋਧਕ ਜਾਂ ਡਾਕਟਰ ਦੀ ਮੁਲਾਕਾਤ ਲਈ), ਤਾਂ ਓਪਰੇਟਿੰਗ ਸਿਸਟਮ ਉਹਨਾਂ ਨੂੰ ਤੁਹਾਡੇ ਡਿਵਾਈਸ ਉੱਤੇ ਹੀ ਨਿਰਧਾਰਤ ਕਰਕੇ ਦਿਖਾਉਂਦਾ ਹੈ। ਉਹ ਸਾਡੇ ਸਰਵਰਾਂ ਰਾਹੀਂ ਨਹੀਂ ਜਾਂਦੀਆਂ ਅਤੇ ਤੁਹਾਡਾ ਡਾਟਾ ਤੀਜੀ ਧਿਰ ਨਾਲ ਸਾਂਝਾ ਨਹੀਂ ਹੁੰਦਾ।</p>
+<h2>6. ਤੁਹਾਡੇ ਅਧਿਕਾਰ ਅਤੇ ਡਾਟੇ ਉੱਤੇ ਕੰਟਰੋਲ</h2>
+<ul>
+  <li><strong>ਦੇਖਣਾ ਅਤੇ ਸੋਧਣਾ:</strong> ਤੁਸੀਂ ਭਰਿਆ ਸਾਰਾ ਡਾਟਾ ਸਿੱਧਾ ਐਪ ਵਿੱਚ ਦੇਖ ਅਤੇ ਬਦਲ ਸਕਦੇ ਹੋ।</li>
+  <li><strong>ਨਿਰਯਾਤ:</strong> ਤੁਸੀਂ ਆਪਣੇ ਰਿਕਾਰਡ PDF ਵਿੱਚ ਨਿਰਯਾਤ ਕਰ ਸਕਦੇ ਹੋ ਜਾਂ ਸੈਟਿੰਗਾਂ ਤੋਂ ਹੱਥੀਂ ਬੈਕਅੱਪ ਬਣਾ ਸਕਦੇ ਹੋ।</li>
+  <li><strong>ਰਿਕਾਰਡ ਮਿਟਾਉਣਾ:</strong> ਤੁਸੀਂ ਦਿਨ ਦੇ ਸੰਪਾਦਕ ਤੋਂ ਕੋਈ ਵੀ ਇਕੱਲਾ ਰਿਕਾਰਡ ਮਿਟਾ ਸਕਦੇ ਹੋ।</li>
+  <li><strong>ਖਾਤਾ ਅਤੇ ਸਾਰਾ ਡਾਟਾ ਮਿਟਾਉਣਾ:</strong> ਤੁਸੀਂ <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a> ਉੱਤੇ ਲਿਖ ਕੇ ਇਸ ਦੀ ਬੇਨਤੀ ਕਰ ਸਕਦੇ ਹੋ। ਅਸੀਂ ਵਾਜਬ ਸਮੇਂ ਵਿੱਚ ਤੁਹਾਡਾ Firebase Authentication ਖਾਤਾ ਅਤੇ Firestore ਦੇ ਸਾਰੇ ਰਿਕਾਰਡ ਮਿਟਾ ਦੇਵਾਂਗੇ।</li>
+  <li><strong>ਹੈਲਥ/Google Fit ਸਿੰਕ ਵਾਪਸ ਲੈਣਾ:</strong> ਇਸ ਨੂੰ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਬੰਦ ਕਰੋ ਜਾਂ ਕਦੇ ਵੀ ਓਪਰੇਟਿੰਗ ਸਿਸਟਮ ਦੀਆਂ ਸਿਹਤ ਸੈਟਿੰਗਾਂ ਤੋਂ ਇਜਾਜ਼ਤ ਵਾਪਸ ਲਓ।</li>
+</ul>
+<p>ਜੇ ਤੁਸੀਂ ਯੂਰਪੀ ਸੰਘ, ਯੂਰਪੀ ਆਰਥਿਕ ਖੇਤਰ ਜਾਂ ਬਰਾਬਰ ਡਾਟਾ ਸੁਰੱਖਿਆ ਕਾਨੂੰਨਾਂ (ਜਿਵੇਂ GDPR) ਵਾਲੇ ਖੇਤਰ ਵਿੱਚ ਰਹਿੰਦੇ ਹੋ, ਤਾਂ ਤੁਹਾਨੂੰ ਡਾਟਾ ਪੋਰਟੇਬਿਲਿਟੀ ਅਤੇ ਸਥਾਨਕ ਡਾਟਾ ਸੁਰੱਖਿਆ ਅਥਾਰਟੀ ਕੋਲ ਸ਼ਿਕਾਇਤ ਕਰਨ ਦਾ ਹੱਕ ਵੀ ਹੈ।</p>
+<h2>7. ਨਾਬਾਲਗ</h2>
+<p>CicloPlus 13 ਸਾਲ ਤੋਂ ਘੱਟ ਉਮਰ ਦੇ ਬੱਚਿਆਂ ਲਈ ਨਹੀਂ ਹੈ ਅਤੇ ਅਸੀਂ ਜਾਣ-ਬੁੱਝ ਕੇ ਇਸ ਉਮਰ ਤੋਂ ਛੋਟੇ ਕਿਸੇ ਦਾ ਡਾਟਾ ਇਕੱਠਾ ਨਹੀਂ ਕਰਦੇ। ਜੇ ਤੁਹਾਨੂੰ ਲੱਗਦਾ ਹੈ ਕਿ ਕਿਸੇ ਨਾਬਾਲਗ ਨੇ ਸਾਨੂੰ ਡਾਟਾ ਦਿੱਤਾ ਹੈ, ਤਾਂ ਮਿਟਾਉਣ ਲਈ <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a> ਉੱਤੇ ਸੰਪਰਕ ਕਰੋ।</p>
+<h2>8. ਡਾਟਾ ਰੱਖਣ ਦੀ ਮਿਆਦ</h2>
+<p>ਜਦੋਂ ਤੱਕ ਤੁਹਾਡਾ ਖਾਤਾ ਚਾਲੂ ਹੈ, ਅਸੀਂ ਤੁਹਾਡਾ ਡਾਟਾ ਰੱਖਦੇ ਹਾਂ। ਖਾਤਾ ਮਿਟਾਉਣ ਉੱਤੇ ਤੁਹਾਡਾ ਚੱਕਰ ਅਤੇ ਪ੍ਰੋਫਾਈਲ ਡਾਟਾ ਭਾਗ 6 ਅਨੁਸਾਰ ਸਾਡੇ ਸਰਵਰਾਂ ਤੋਂ ਹਟਾ ਦਿੱਤਾ ਜਾਂਦਾ ਹੈ। ਐਪ ਅਣਇੰਸਟਾਲ ਕਰਨ ਉੱਤੇ ਡਿਵਾਈਸ ਦੀ ਸਥਾਨਕ ਕਾਪੀ ਮਿਟ ਜਾਂਦੀ ਹੈ।</p>
+<h2>9. ਇਸ ਨੀਤੀ ਵਿੱਚ ਬਦਲਾਅ</h2>
+<p>ਅਸੀਂ ਸਮੇਂ-ਸਮੇਂ ਉੱਤੇ, ਜਿਵੇਂ ਨਵੀਆਂ ਸਹੂਲਤਾਂ ਜੋੜਨ ਵੇਲੇ, ਇਹ ਨਿੱਜਤਾ ਨੀਤੀ ਅੱਪਡੇਟ ਕਰ ਸਕਦੇ ਹਾਂ। ਬਦਲਾਅ ਇਸੇ ਪੰਨੇ ਉੱਤੇ ਨਵੀਂ «ਆਖਰੀ ਅੱਪਡੇਟ» ਤਾਰੀਖ ਨਾਲ ਪ੍ਰਕਾਸ਼ਿਤ ਹੋਣਗੇ। ਜੇ ਬਦਲਾਅ ਅਹਿਮ ਹੋਵੇ ਤਾਂ ਅਸੀਂ ਐਪ ਵਿੱਚ ਵੀ ਦੱਸਾਂਗੇ।</p>
+<h2>10. ਸੰਪਰਕ</h2>
+<p>ਇਸ ਨੀਤੀ, ਆਪਣੇ ਡਾਟੇ ਜਾਂ ਆਪਣੇ ਅਧਿਕਾਰ ਵਰਤਣ ਬਾਰੇ ਕਿਸੇ ਵੀ ਸਵਾਲ ਲਈ ਸਾਨੂੰ ਇੱਥੇ ਲਿਖੋ:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<footer>CicloPlus &middot; ਨਿੱਜਤਾ ਨੀਤੀ</footer>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CicloPlus தனியுரிமைக் கொள்கை</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+    color: #2b2530;
+    line-height: 1.6;
+    background: #fffafc;
+  }
+  h1 { font-size: 1.9rem; margin-bottom: 4px; color: #1f1a24; }
+  .updated { color: #8a7f8e; font-style: italic; margin-bottom: 8px; font-size: 0.95rem; }
+  .translation-note { color: #8a7f8e; font-size: 0.85rem; margin-bottom: 32px; }
+  h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; color: #9c4dcc; border-bottom: 2px solid #f3d9f7; padding-bottom: 6px; }
+  p { margin: 0 0 14px; text-align: justify; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { color: #1f1a24; }
+  a { color: #9c4dcc; }
+  .contact-box {
+    background: #fbeafd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 8px 0 20px;
+  }
+  footer { margin-top: 56px; font-size: 0.85rem; color: #a89aae; text-align: center; }
+
+  .lang-switcher { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f0e4f2; }
+  .lang-select-wrap { position: relative; display: inline-block; }
+  .lang-select-wrap::after {
+    content: "\25BE";
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #9c4dcc; font-size: 0.8rem; pointer-events: none;
+  }
+  select.lang-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    font-family: inherit; font-size: 0.9rem; font-weight: 600; color: #2b2530;
+    background: #fbeafd; border: 1px solid #f0d9f4; border-radius: 10px;
+    padding: 8px 32px 8px 14px; cursor: pointer;
+  }
+  select.lang-select:hover { background: #f6dcfa; }
+  select.lang-select:focus { outline: 2px solid #9c4dcc; outline-offset: 1px; }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher"><span class="lang-select-wrap"><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language / Idioma"><option value="privacidad-es.html">Español</option><option value="privacidad.html">English</option><option value="privacidad-fr.html">Français</option><option value="privacidad-de.html">Deutsch</option><option value="privacidad-pt.html">Português</option><option value="privacidad-it.html">Italiano</option><option value="privacidad-nl.html">Nederlands</option><option value="privacidad-pl.html">Polski</option><option value="privacidad-ru.html">Русский</option><option value="privacidad-uk.html">Українська</option><option value="privacidad-ar.html">العربية</option><option value="privacidad-hi.html">हिन्दी</option><option value="privacidad-bn.html">বাংলা</option><option value="privacidad-am.html">አማርኛ</option><option value="privacidad-az.html">Azərbaycan</option><option value="privacidad-cs.html">Čeština</option><option value="privacidad-da.html">Dansk</option><option value="privacidad-el.html">Ελληνικά</option><option value="privacidad-fa.html">فارسی</option><option value="privacidad-fi.html">Suomi</option><option value="privacidad-fil.html">Filipino</option><option value="privacidad-gu.html">ગુજરાતી</option><option value="privacidad-ha.html">Hausa</option><option value="privacidad-he.html">עברית</option><option value="privacidad-hu.html">Magyar</option><option value="privacidad-id.html">Bahasa Indonesia</option><option value="privacidad-ja.html">日本語</option><option value="privacidad-kk.html">Қазақ</option><option value="privacidad-kn.html">ಕನ್ನಡ</option><option value="privacidad-ko.html">한국어</option><option value="privacidad-ln.html">Lingála</option><option value="privacidad-ml.html">മലയാളം</option><option value="privacidad-mr.html">मराठी</option><option value="privacidad-ms.html">Bahasa Melayu</option><option value="privacidad-my.html">မြန်မာ</option><option value="privacidad-ne.html">नेपाली</option><option value="privacidad-om.html">Afaan Oromoo</option><option value="privacidad-pa.html">ਪੰਜਾਬੀ</option><option value="privacidad-ro.html">Română</option><option value="privacidad-si.html">සිංහල</option><option value="privacidad-sk.html">Slovenčina</option><option value="privacidad-sv.html">Svenska</option><option value="privacidad-sw.html">Kiswahili</option><option value="privacidad-ta.html" selected>தமிழ்</option><option value="privacidad-te.html">తెలుగు</option><option value="privacidad-th.html">ไทย</option><option value="privacidad-tr.html">Türkçe</option><option value="privacidad-ur.html">اردو</option><option value="privacidad-uz.html">Oʻzbek</option><option value="privacidad-vi.html">Tiếng Việt</option><option value="privacidad-wo.html">Wolof</option><option value="privacidad-yo.html">Yorùbá</option><option value="privacidad-zh.html">简体中文</option><option value="privacidad-zh-TW.html">繁體中文</option><option value="privacidad-zu.html">isiZulu</option></select></span></div>
+<h1>CicloPlus தனியுரிமைக் கொள்கை</h1>
+<p class="updated">கடைசியாகப் புதுப்பிக்கப்பட்டது: 20 நவம்பர் 2026</p>
+<p class="translation-note">இந்த மொழிபெயர்ப்பு உங்கள் வசதிக்காக வழங்கப்படுகிறது. ஏதேனும் வேறுபாடு இருந்தால், மூல ஸ்பானிஷ் பதிப்பே செல்லுபடியாகும்.</p>
+<p>CicloPlus («செயலி», «நாங்கள்») எந்தத் தரவைச் சேகரிக்கிறது, அதை எப்படிப் பயன்படுத்துகிறது, எங்கே சேமிக்கிறது, அதன் மீது உங்களுக்கு என்ன கட்டுப்பாடு உள்ளது என்பதை இந்தத் தனியுரிமைக் கொள்கை விளக்குகிறது. CicloPlus மாதவிடாய் சுழற்சி மற்றும் கருவுறுதலைக் கண்காணிக்கும் செயலி; நீங்கள் உள்ளிடும் உடல்நலத் தகவலை இத்தகைய தரவுக்குத் தேவையான கவனத்துடன் கையாள்கிறது.</p>
+<p>CicloPlus-ஐப் பயன்படுத்துவதன் மூலம் இந்த ஆவணத்தில் விவரிக்கப்பட்ட நடைமுறைகளை ஏற்கிறீர்கள். உடன்படவில்லை என்றால், செயலியைப் பயன்படுத்த வேண்டாம்.</p>
+<h2>1. தரவுக் கட்டுப்பாட்டாளர்</h2>
+<p>CicloPlus ஒரு சுயாதீன டெவலப்பரால் உருவாக்கப்பட்டு இயக்கப்படுகிறது. இந்தக் கொள்கை அல்லது உங்கள் தரவு குறித்த எந்தக் கேள்விக்கும் இங்கே எழுதுங்கள்:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<h2>2. நாங்கள் சேகரிக்கும் தரவு</h2>
+<p><strong>கணக்குத் தரவு.</strong> CicloPlus-ஐப் பயன்படுத்த, Firebase Authentication (Google சேவை) மூலம் நிர்வகிக்கப்படும் மின்னஞ்சல், கடவுச்சொல் கொண்ட கணக்கை உருவாக்குகிறீர்கள். உங்கள் மின்னஞ்சல் முகவரியையும் கணக்கு உருவான தேதியையும் சேமிக்கிறோம்.</p>
+<p><strong>நீங்கள் உள்ளிடும் சுழற்சி மற்றும் உடல்நலத் தரவு.</strong> தினசரி நாட்காட்டியில் நீங்கள் பதிவு செய்யும் அனைத்தும்: மாதவிடாய்த் தேதிகள், இரத்தப்போக்கு, கருப்பைவாய்ச் சளி, அடிப்படை உடல் வெப்பநிலை, அறிகுறிகள், மனநிலை, எடை, தூக்க நேரம், குடித்த தண்ணீர், நாட்குறிப்புக் குறிப்புகள், பாலியல் செயல்பாடு, கருத்தடை நினைவூட்டல்கள், மருத்துவர் சந்திப்புகள், கர்ப்பப் பயன்முறையை இயக்கினால் கர்ப்பம் தொடர்பான தரவு. இவை உணர்திறன் மிக்க உடல்நலத் தரவு; நீங்கள் உள்ளிடத் தேர்ந்தெடுத்தால் மட்டுமே சேகரிக்கப்படும்: நாட்காட்டி இயங்கத் தேவையானதைத் தவிர எந்தப் புலமும் கட்டாயமில்லை.</p>
+<p><strong>இணைக்கப்பட்ட புகைப்படங்கள்.</strong> நாட்குறிப்புப் பதிவில் புகைப்படத்தை இணைத்தால், அது அந்தப் பதிவுடன் சேமிக்கப்படும்.</p>
+<p><strong>Health/Google Fit உடன் ஒத்திசைவு (விருப்பத்தேர்வு).</strong> அமைப்புகளில் Apple Health (HealthKit) அல்லது Google Fit (Health Connect) உடன் ஒத்திசைவை நீங்களே இயக்கினால், உங்கள் சாதனத்தில் அந்தத் தளத்தில் எடை, தூக்கம், உடல் வெப்பநிலை, மாதவிடாய் இரத்தப்போக்கு ஆகியவற்றைச் செயலி படிக்கவும் எழுதவும் முடியும். இந்த அம்சம் இயல்பாக அணைக்கப்பட்டுள்ளது; உங்கள் வெளிப்படையான அனுமதியுடன் மட்டுமே இயங்கும். அமைப்புகளில் எப்போது வேண்டுமானாலும் அணைக்கலாம் அல்லது சாதனத்தின் உடல்நல அமைப்புகளில் அனுமதியைத் திரும்பப் பெறலாம்.</p>
+<p><strong>செயலி விருப்பங்கள்.</strong> தேர்ந்தெடுத்த மொழி, தீம் நிறம், PIN குறியீடு (PIN பூட்டை இயக்கினால்) மற்றும் பிற விருப்பங்கள் உங்கள் சாதனத்தில் மட்டுமே சேமிக்கப்படும்.</p>
+<p>இருப்பிடம், தொடர்புகள், விளம்பர அடையாளங்காட்டிகள் அல்லது சமூக ஊடகத் தரவை நாங்கள் சேகரிப்பதில்லை. விளம்பரங்களைக் காட்டுவதில்லை; மூன்றாம் தரப்புப் பகுப்பாய்வு அல்லது விளம்பரக் கண்காணிப்புக் கருவிகளைப் பயன்படுத்துவதில்லை.</p>
+<p><strong>பிரீமியம் சந்தா (விருப்பத்தேர்வு).</strong> CicloPlus Premium-க்குச் சந்தா செய்தால், கட்டணத்தை Google Play (iPhone-இல் Apple App Store) கையாளும். உங்கள் கார்டு விவரங்களை நாங்கள் ஒருபோதும் பார்ப்பதோ சேமிப்பதோ இல்லை. சந்தா செயலில் உள்ளதா என்று சரிபார்க்க RevenueCat-ஐப் பயன்படுத்துகிறோம்; அது சந்தா வாங்கிய வரலாற்றையும் அநாமதேயப் பயனர் அடையாளங்காட்டியையும் பெறுகிறது.</p>
+<h2>3. உங்கள் தரவு எப்படிச் சேமிக்கப்படுகிறது</h2>
+<p><strong>மேகச் சேமிப்பு (Firebase).</strong> உங்கள் சுழற்சிப் பதிவுகள் Google Firebase தரவுத்தளமான Cloud Firestore-இல் உங்கள் கணக்குடன் (பயனர் அடையாளங்காட்டி) மட்டுமே இணைத்துச் சேமிக்கப்படுகின்றன. இதனால் சாதனத்தை மாற்றினாலும் செயலியை மீண்டும் நிறுவினாலும் தரவு நிலைத்திருக்கும்.</p>
+<p><strong>சாதனத்தில் உள்ளூர் நகல்.</strong> இணையம் இல்லாமலும் தரவைப் பார்க்க, செயலி உங்கள் தொலைபேசியில் உள்ளூர் நகலையும் (கேஷ்) வைத்திருக்கிறது. இணைப்பு திரும்பியதும் இந்த நகல் தானாக மேகத்துடன் ஒத்திசைக்கப்படும்.</p>
+<p><strong>குறியாக்கம்.</strong> செயலிக்கும் Firebase-க்கும் இடையிலான தொடர்பு குறியாக்கம் செய்யப்பட்டது (HTTPS/TLS). Firebase தன் சேவையகங்களில் சேமிக்கப்பட்ட தரவை Google Cloud தரநிலைகளின்படி குறியாக்கம் செய்கிறது.</p>
+<p><strong>அமைப்புகளின் காப்புப்பிரதி.</strong> தொலைபேசியை மாற்றும்போது எதையும் இழக்காமல் இருக்க, செயலி அமைப்புகளையும் மிச்சியின் முன்னேற்றத்தையும் உங்கள் Firebase கணக்கில் சேமிக்கிறோம். உங்கள் PIN மற்றும் புகைப்படங்கள் சேமிக்கப்படுவதில்லை.</p>
+<h2>4. யாருடன் தரவைப் பகிர்கிறோம்</h2>
+<p>CicloPlus உங்கள் தரவை விற்பதில்லை, விளம்பரதாரர்களுடன் பகிர்வதில்லை. இவர்களுடன் மட்டுமே தகவலைப் பகிர்கிறோம்:</p>
+<ul>
+  <li>Google Firebase (Firebase Authentication மற்றும் Cloud Firestore): உள்நுழைவு மற்றும் தரவுச் சேமிப்புக்கான எங்கள் உள்கட்டமைப்பு வழங்குநர். Google இந்தத் தரவை எங்கள் சார்பாக, செயலாக்குநராகத் தன் பாதுகாப்பு மற்றும் தரவுப் பாதுகாப்பு உறுதிமொழிகளின்படி செயலாக்குகிறது.</li>
+  <li>RevenueCat மற்றும் Google Play / Apple App Store: நீங்கள் பிரீமியம் சந்தா செய்தால் மட்டும், கட்டணத்தைச் செயலாக்கவும் சந்தாவைச் சரிபார்க்கவும். அவை வாங்கிய வரலாற்றையும் அநாமதேயப் பயனர் அடையாளங்காட்டியையும் பெறுகின்றன, உங்கள் உடல்நலத் தரவை ஒருபோதும் இல்லை.</li>
+  <li>Apple Health / Google Health Connect: பிரிவு 2-இல் விவரித்த ஒத்திசைவை நீங்கள் தானாக முன்வந்து இயக்கினால் மட்டும், நீங்கள் அனுமதிக்கும் தரவு வகைகளுக்கு மட்டும்.</li>
+</ul>
+<p>வணிக அல்லது விளம்பர நோக்கங்களுக்காகக் காப்பீட்டு நிறுவனங்கள், முதலாளிகள், சமூக வலைதளங்கள் அல்லது எந்த மூன்றாம் தரப்புடனும் உங்கள் தரவைப் பகிர்வதில்லை. சட்டம் கோரினால் தவிர (எ.கா. செல்லுபடியான நீதிமன்ற உத்தரவு), உங்கள் உடல்நலத் தரவை மூன்றாம் தரப்புக்கு வெளிப்படுத்த மாட்டோம்.</p>
+<h2>5. அறிவிப்புகள்</h2>
+<p>நினைவூட்டல்களை (தினசரி பதிவு, கருத்தடை அல்லது மருத்துவர் சந்திப்பு) இயக்கினால், இயக்க முறைமை அவற்றை உங்கள் சாதனத்திலேயே திட்டமிட்டுக் காட்டும். அவை எங்கள் சேவையகங்கள் வழியாகச் செல்வதில்லை; உங்கள் தரவு மூன்றாம் தரப்புடன் பகிரப்படுவதில்லை.</p>
+<h2>6. உங்கள் உரிமைகள் மற்றும் தரவுக் கட்டுப்பாடு</h2>
+<ul>
+  <li><strong>அணுகல் மற்றும் திருத்தம்:</strong> நீங்கள் உள்ளிட்ட எல்லாத் தரவையும் செயலியிலேயே பார்க்கவும் மாற்றவும் முடியும்.</li>
+  <li><strong>ஏற்றுமதி:</strong> பதிவுகளை PDF-ஆக ஏற்றுமதி செய்யலாம் அல்லது அமைப்புகளில் கைமுறைக் காப்புப்பிரதி எடுக்கலாம்.</li>
+  <li><strong>பதிவை நீக்குதல்:</strong> நாள் திருத்தியில் எந்தத் தனிப் பதிவையும் நீக்கலாம்.</li>
+  <li><strong>கணக்கு மற்றும் எல்லாத் தரவையும் நீக்குதல்:</strong> <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a>-க்கு எழுதிக் கோரலாம். நியாயமான காலத்துக்குள் உங்கள் Firebase Authentication கணக்கையும் Firestore-இல் உள்ள எல்லாப் பதிவுகளையும் நீக்குவோம்.</li>
+  <li><strong>Health/Google Fit ஒத்திசைவைத் திரும்பப் பெறுதல்:</strong> அமைப்புகளில் அணைக்கவும் அல்லது எப்போது வேண்டுமானாலும் இயக்க முறைமையின் உடல்நல அமைப்புகளில் அனுமதியைத் திரும்பப் பெறவும்.</li>
+</ul>
+<p>நீங்கள் ஐரோப்பிய ஒன்றியம், ஐரோப்பியப் பொருளாதாரப் பகுதி அல்லது இணையான தரவுப் பாதுகாப்புச் சட்டங்கள் (GDPR போன்றவை) உள்ள பகுதியில் வசித்தால், தரவுப் பெயர்வுத்திறன் உரிமையும் உள்ளூர் தரவுப் பாதுகாப்பு அதிகாரியிடம் புகார் அளிக்கும் உரிமையும் உங்களுக்கு உண்டு.</p>
+<h2>7. சிறார்</h2>
+<p>CicloPlus 13 வயதுக்குட்பட்ட குழந்தைகளுக்கானது அல்ல; அந்த வயதுக்குட்பட்டவர்களின் தரவை நாங்கள் தெரிந்தே சேகரிப்பதில்லை. சிறார் ஒருவர் எங்களுக்குத் தரவு அளித்ததாக நினைத்தால், அதை நீக்க <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a>-இல் தொடர்புகொள்ளுங்கள்.</p>
+<h2>8. தரவு வைத்திருத்தல்</h2>
+<p>உங்கள் கணக்கு செயலில் இருக்கும் வரை தரவை வைத்திருக்கிறோம். கணக்கை நீக்கினால், சுழற்சி மற்றும் சுயவிவரத் தரவு பிரிவு 6-இல் விவரித்தபடி எங்கள் சேவையகங்களிலிருந்து நீக்கப்படும். செயலியை நீக்கும்போது சாதனத்தில் உள்ள உள்ளூர் நகல் அழியும்.</p>
+<h2>9. இந்தக் கொள்கையில் மாற்றங்கள்</h2>
+<p>புதிய அம்சங்களைச் சேர்க்கும்போது போன்ற சமயங்களில் இந்தத் தனியுரிமைக் கொள்கையை அவ்வப்போது புதுப்பிக்கலாம். மாற்றங்களை இதே பக்கத்தில் புதிய «கடைசியாகப் புதுப்பிக்கப்பட்டது» தேதியுடன் வெளியிடுவோம். மாற்றம் முக்கியமானதாக இருந்தால் செயலியிலும் தெரிவிப்போம்.</p>
+<h2>10. தொடர்பு</h2>
+<p>இந்தக் கொள்கை, உங்கள் தரவு அல்லது உங்கள் உரிமைகளைப் பயன்படுத்துவது குறித்த எந்தக் கேள்விக்கும் எங்களுக்கு இங்கே எழுதுங்கள்:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<footer>CicloPlus &middot; தனியுரிமைக் கொள்கை</footer>
+
+</body>
+</html>

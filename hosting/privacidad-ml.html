@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CicloPlus സ്വകാര്യതാ നയം</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+    color: #2b2530;
+    line-height: 1.6;
+    background: #fffafc;
+  }
+  h1 { font-size: 1.9rem; margin-bottom: 4px; color: #1f1a24; }
+  .updated { color: #8a7f8e; font-style: italic; margin-bottom: 8px; font-size: 0.95rem; }
+  .translation-note { color: #8a7f8e; font-size: 0.85rem; margin-bottom: 32px; }
+  h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; color: #9c4dcc; border-bottom: 2px solid #f3d9f7; padding-bottom: 6px; }
+  p { margin: 0 0 14px; text-align: justify; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { color: #1f1a24; }
+  a { color: #9c4dcc; }
+  .contact-box {
+    background: #fbeafd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 8px 0 20px;
+  }
+  footer { margin-top: 56px; font-size: 0.85rem; color: #a89aae; text-align: center; }
+
+  .lang-switcher { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f0e4f2; }
+  .lang-select-wrap { position: relative; display: inline-block; }
+  .lang-select-wrap::after {
+    content: "\25BE";
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #9c4dcc; font-size: 0.8rem; pointer-events: none;
+  }
+  select.lang-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    font-family: inherit; font-size: 0.9rem; font-weight: 600; color: #2b2530;
+    background: #fbeafd; border: 1px solid #f0d9f4; border-radius: 10px;
+    padding: 8px 32px 8px 14px; cursor: pointer;
+  }
+  select.lang-select:hover { background: #f6dcfa; }
+  select.lang-select:focus { outline: 2px solid #9c4dcc; outline-offset: 1px; }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher"><span class="lang-select-wrap"><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language / Idioma"><option value="privacidad-es.html">Español</option><option value="privacidad.html">English</option><option value="privacidad-fr.html">Français</option><option value="privacidad-de.html">Deutsch</option><option value="privacidad-pt.html">Português</option><option value="privacidad-it.html">Italiano</option><option value="privacidad-nl.html">Nederlands</option><option value="privacidad-pl.html">Polski</option><option value="privacidad-ru.html">Русский</option><option value="privacidad-uk.html">Українська</option><option value="privacidad-ar.html">العربية</option><option value="privacidad-hi.html">हिन्दी</option><option value="privacidad-bn.html">বাংলা</option><option value="privacidad-am.html">አማርኛ</option><option value="privacidad-az.html">Azərbaycan</option><option value="privacidad-cs.html">Čeština</option><option value="privacidad-da.html">Dansk</option><option value="privacidad-el.html">Ελληνικά</option><option value="privacidad-fa.html">فارسی</option><option value="privacidad-fi.html">Suomi</option><option value="privacidad-fil.html">Filipino</option><option value="privacidad-gu.html">ગુજરાતી</option><option value="privacidad-ha.html">Hausa</option><option value="privacidad-he.html">עברית</option><option value="privacidad-hu.html">Magyar</option><option value="privacidad-id.html">Bahasa Indonesia</option><option value="privacidad-ja.html">日本語</option><option value="privacidad-kk.html">Қазақ</option><option value="privacidad-kn.html">ಕನ್ನಡ</option><option value="privacidad-ko.html">한국어</option><option value="privacidad-ln.html">Lingála</option><option value="privacidad-ml.html" selected>മലയാളം</option><option value="privacidad-mr.html">मराठी</option><option value="privacidad-ms.html">Bahasa Melayu</option><option value="privacidad-my.html">မြန်မာ</option><option value="privacidad-ne.html">नेपाली</option><option value="privacidad-om.html">Afaan Oromoo</option><option value="privacidad-pa.html">ਪੰਜਾਬੀ</option><option value="privacidad-ro.html">Română</option><option value="privacidad-si.html">සිංහල</option><option value="privacidad-sk.html">Slovenčina</option><option value="privacidad-sv.html">Svenska</option><option value="privacidad-sw.html">Kiswahili</option><option value="privacidad-ta.html">தமிழ்</option><option value="privacidad-te.html">తెలుగు</option><option value="privacidad-th.html">ไทย</option><option value="privacidad-tr.html">Türkçe</option><option value="privacidad-ur.html">اردو</option><option value="privacidad-uz.html">Oʻzbek</option><option value="privacidad-vi.html">Tiếng Việt</option><option value="privacidad-wo.html">Wolof</option><option value="privacidad-yo.html">Yorùbá</option><option value="privacidad-zh.html">简体中文</option><option value="privacidad-zh-TW.html">繁體中文</option><option value="privacidad-zu.html">isiZulu</option></select></span></div>
+<h1>CicloPlus സ്വകാര്യതാ നയം</h1>
+<p class="updated">അവസാനം പുതുക്കിയത്: 2026 നവംബർ 20</p>
+<p class="translation-note">ഈ വിവർത്തനം നിങ്ങളുടെ സൗകര്യത്തിനായി നൽകിയതാണ്. എന്തെങ്കിലും വ്യത്യാസമുണ്ടെങ്കിൽ യഥാർത്ഥ സ്പാനിഷ് പതിപ്പിനാണ് പ്രാബല്യം.</p>
+<p>CicloPlus («ആപ്പ്», «ഞങ്ങൾ») ഏത് ഡാറ്റ ശേഖരിക്കുന്നു, അത് എങ്ങനെ ഉപയോഗിക്കുന്നു, എവിടെ സൂക്ഷിക്കുന്നു, അതിൽ നിങ്ങൾക്ക് എന്ത് നിയന്ത്രണമുണ്ട് എന്ന് ഈ സ്വകാര്യതാ നയം വിശദീകരിക്കുന്നു. CicloPlus ആർത്തവചക്രവും പ്രത്യുൽപാദനശേഷിയും രേഖപ്പെടുത്തുന്ന ആപ്പാണ്; നിങ്ങൾ നൽകുന്ന ആരോഗ്യ വിവരങ്ങൾ ഇത്തരം ഡാറ്റയ്ക്ക് ആവശ്യമായ ശ്രദ്ധയോടെ കൈകാര്യം ചെയ്യുന്നു.</p>
+<p>CicloPlus ഉപയോഗിക്കുന്നതിലൂടെ ഈ രേഖയിൽ വിവരിച്ച രീതികൾ നിങ്ങൾ അംഗീകരിക്കുന്നു. യോജിക്കുന്നില്ലെങ്കിൽ ദയവായി ആപ്പ് ഉപയോഗിക്കരുത്.</p>
+<h2>1. ഡാറ്റ നിയന്ത്രകൻ</h2>
+<p>CicloPlus ഒരു സ്വതന്ത്ര ഡെവലപ്പർ നിർമ്മിച്ച് പ്രവർത്തിപ്പിക്കുന്നു. ഈ നയത്തെക്കുറിച്ചോ നിങ്ങളുടെ ഡാറ്റയെക്കുറിച്ചോ ഉള്ള ഏത് ചോദ്യത്തിനും ഇവിടെ എഴുതുക:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<h2>2. ഞങ്ങൾ ശേഖരിക്കുന്ന ഡാറ്റ</h2>
+<p><strong>അക്കൗണ്ട് ഡാറ്റ.</strong> CicloPlus ഉപയോഗിക്കാൻ, Firebase Authentication (Google സേവനം) വഴി നിയന്ത്രിക്കുന്ന ഇമെയിലും പാസ്‌വേഡുമുള്ള അക്കൗണ്ട് സൃഷ്ടിക്കുന്നു. നിങ്ങളുടെ ഇമെയിൽ വിലാസവും അക്കൗണ്ട് സൃഷ്ടിച്ച തീയതിയും ഞങ്ങൾ സൂക്ഷിക്കുന്നു.</p>
+<p><strong>നിങ്ങൾ നൽകുന്ന ചക്ര, ആരോഗ്യ ഡാറ്റ.</strong> ദൈനംദിന കലണ്ടറിൽ നിങ്ങൾ രേഖപ്പെടുത്തുന്നതെല്ലാം: ആർത്തവ തീയതികൾ, രക്തസ്രാവം, ഗർഭാശയമുഖ സ്രവം, അടിസ്ഥാന ശരീര താപനില, ലക്ഷണങ്ങൾ, മാനസികാവസ്ഥ, ഭാരം, ഉറക്ക സമയം, കുടിച്ച വെള്ളം, ഡയറി കുറിപ്പുകൾ, ലൈംഗിക പ്രവർത്തനം, ഗർഭനിരോധന ഓർമ്മപ്പെടുത്തലുകൾ, ഡോക്ടർ അപ്പോയിന്റ്മെന്റുകൾ, ഗർഭാവസ്ഥ മോഡ് ഓണാക്കിയാൽ ഗർഭവുമായി ബന്ധപ്പെട്ട ഡാറ്റ. ഇവ സെൻസിറ്റീവ് ആരോഗ്യ ഡാറ്റയാണ്; നിങ്ങൾ നൽകാൻ തിരഞ്ഞെടുത്താൽ മാത്രമേ ശേഖരിക്കൂ: കലണ്ടർ പ്രവർത്തിക്കാൻ ആവശ്യമായതൊഴികെ ഒരു ഫീൽഡും നിർബന്ധമല്ല.</p>
+<p><strong>ചേർത്ത ഫോട്ടോകൾ.</strong> ഡയറി എൻട്രിയിൽ ഫോട്ടോ ചേർത്താൽ, അത് എൻട്രിയോടൊപ്പം സൂക്ഷിക്കും.</p>
+<p><strong>Health/Google Fit-മായി സമന്വയം (ഐച്ഛികം).</strong> ക്രമീകരണങ്ങളിൽ നിന്ന് നിങ്ങൾ തന്നെ Apple Health (HealthKit) അല്ലെങ്കിൽ Google Fit (Health Connect)-മായി സമന്വയം ഓണാക്കിയാൽ, നിങ്ങളുടെ ഉപകരണത്തിലെ ആ പ്ലാറ്റ്‌ഫോമിൽ ഭാരം, ഉറക്കം, ശരീര താപനില, ആർത്തവ രക്തസ്രാവം എന്നിവ ആപ്പിന് വായിക്കാനും എഴുതാനും കഴിയും. ഈ സവിശേഷത സ്ഥിരമായി ഓഫാണ്; നിങ്ങളുടെ വ്യക്തമായ അനുമതിയോടെ മാത്രമേ ഓണാകൂ. എപ്പോൾ വേണമെങ്കിലും ക്രമീകരണങ്ങളിൽ ഓഫാക്കാം അല്ലെങ്കിൽ ഉപകരണത്തിന്റെ ആരോഗ്യ ക്രമീകരണങ്ങളിൽ അനുമതി പിൻവലിക്കാം.</p>
+<p><strong>ആപ്പ് മുൻഗണനകൾ.</strong> തിരഞ്ഞെടുത്ത ഭാഷ, തീം നിറം, PIN കോഡ് (PIN ലോക്ക് ഓണാക്കിയാൽ), മറ്റ് മുൻഗണനകൾ എന്നിവ നിങ്ങളുടെ ഉപകരണത്തിൽ മാത്രം സൂക്ഷിക്കുന്നു.</p>
+<p>ലൊക്കേഷൻ, കോൺടാക്റ്റുകൾ, പരസ്യ ഐഡന്റിഫയറുകൾ, സോഷ്യൽ മീഡിയ ഡാറ്റ എന്നിവ ഞങ്ങൾ ശേഖരിക്കുന്നില്ല. പരസ്യങ്ങൾ കാണിക്കുന്നില്ല; മൂന്നാം കക്ഷി വിശകലന അല്ലെങ്കിൽ പരസ്യ ട്രാക്കിംഗ് ഉപകരണങ്ങൾ ഉപയോഗിക്കുന്നില്ല.</p>
+<p><strong>പ്രീമിയം സബ്‌സ്ക്രിപ്ഷൻ (ഐച്ഛികം).</strong> CicloPlus Premium എടുത്താൽ, പണമടവ് Google Play (iPhone-ൽ Apple App Store) കൈകാര്യം ചെയ്യുന്നു. നിങ്ങളുടെ കാർഡ് വിവരങ്ങൾ ഞങ്ങൾ ഒരിക്കലും കാണുകയോ സൂക്ഷിക്കുകയോ ഇല്ല. സബ്‌സ്ക്രിപ്ഷൻ സജീവമാണോ എന്ന് പരിശോധിക്കാൻ RevenueCat ഉപയോഗിക്കുന്നു; അതിന് വാങ്ങൽ ചരിത്രവും അജ്ഞാത ഉപയോക്തൃ ഐഡന്റിഫയറും ലഭിക്കുന്നു.</p>
+<h2>3. നിങ്ങളുടെ ഡാറ്റ എങ്ങനെ സൂക്ഷിക്കുന്നു</h2>
+<p><strong>ക്ലൗഡ് സംഭരണം (Firebase).</strong> നിങ്ങളുടെ ചക്ര രേഖകൾ Google Firebase ഡാറ്റാബേസായ Cloud Firestore-ൽ നിങ്ങളുടെ അക്കൗണ്ടുമായി (ഉപയോക്തൃ ഐഡന്റിഫയർ) മാത്രം ബന്ധിപ്പിച്ച് സൂക്ഷിക്കുന്നു. അതിനാൽ ഉപകരണം മാറ്റിയാലും ആപ്പ് വീണ്ടും ഇൻസ്റ്റാൾ ചെയ്താലും ഡാറ്റ നിലനിൽക്കും.</p>
+<p><strong>ഉപകരണത്തിലെ പ്രാദേശിക പകർപ്പ്.</strong> ഇന്റർനെറ്റില്ലാതെയും ഡാറ്റ കാണാൻ ആപ്പ് നിങ്ങളുടെ ഫോണിൽ പ്രാദേശിക പകർപ്പ് (കാഷെ) സൂക്ഷിക്കുന്നു. കണക്ഷൻ തിരികെ വരുമ്പോൾ ഈ പകർപ്പ് സ്വയമേവ ക്ലൗഡുമായി സമന്വയിക്കും.</p>
+<p><strong>എൻക്രിപ്ഷൻ.</strong> ആപ്പും Firebase-ഉം തമ്മിലുള്ള ആശയവിനിമയം എൻക്രിപ്റ്റ് ചെയ്തതാണ് (HTTPS/TLS). Firebase അതിന്റെ സെർവറുകളിൽ സൂക്ഷിക്കുന്ന ഡാറ്റ Google Cloud മാനദണ്ഡങ്ങൾ അനുസരിച്ച് എൻക്രിപ്റ്റ് ചെയ്യുന്നു.</p>
+<p><strong>ക്രമീകരണങ്ങളുടെ ബാക്കപ്പ്.</strong> ഫോൺ മാറുമ്പോൾ ഒന്നും നഷ്ടപ്പെടാതിരിക്കാൻ ആപ്പ് ക്രമീകരണങ്ങളും മിച്ചിയുടെ പുരോഗതിയും നിങ്ങളുടെ Firebase അക്കൗണ്ടിൽ സൂക്ഷിക്കുന്നു. നിങ്ങളുടെ PIN-ഉം ഫോട്ടോകളും സൂക്ഷിക്കുന്നില്ല.</p>
+<h2>4. ഞങ്ങൾ ഡാറ്റ ആരുമായി പങ്കിടുന്നു</h2>
+<p>CicloPlus നിങ്ങളുടെ ഡാറ്റ വിൽക്കുന്നില്ല, പരസ്യദാതാക്കളുമായി പങ്കിടുന്നില്ല. ഞങ്ങൾ വിവരങ്ങൾ ഇവരുമായി മാത്രം പങ്കിടുന്നു:</p>
+<ul>
+  <li>Google Firebase (Firebase Authentication, Cloud Firestore): ലോഗിനും ഡാറ്റ സംഭരണത്തിനുമുള്ള ഞങ്ങളുടെ അടിസ്ഥാനസൗകര്യ ദാതാവ്. Google ഈ ഡാറ്റ ഞങ്ങൾക്ക് വേണ്ടി, പ്രോസസർ എന്ന നിലയിൽ സ്വന്തം സുരക്ഷാ, ഡാറ്റ സംരക്ഷണ പ്രതിബദ്ധതകൾ അനുസരിച്ച് പ്രോസസ് ചെയ്യുന്നു.</li>
+  <li>RevenueCat, Google Play / Apple App Store: നിങ്ങൾ പ്രീമിയം എടുത്താൽ മാത്രം, പണമടവ് പ്രോസസ് ചെയ്യാനും സബ്‌സ്ക്രിപ്ഷൻ പരിശോധിക്കാനും. അവർക്ക് വാങ്ങൽ ചരിത്രവും അജ്ഞാത ഉപയോക്തൃ ഐഡന്റിഫയറും ലഭിക്കും, നിങ്ങളുടെ ആരോഗ്യ ഡാറ്റ ഒരിക്കലുമില്ല.</li>
+  <li>Apple Health / Google Health Connect: വിഭാഗം 2-ൽ വിവരിച്ച സമന്വയം നിങ്ങൾ സ്വമേധയാ ഓണാക്കിയാൽ മാത്രം, നിങ്ങൾ അനുവദിക്കുന്ന ഡാറ്റ തരങ്ങൾക്ക് മാത്രം.</li>
+</ul>
+<p>വാണിജ്യ അല്ലെങ്കിൽ പരസ്യ ആവശ്യങ്ങൾക്കായി ഇൻഷുറൻസ് കമ്പനികൾ, തൊഴിലുടമകൾ, സോഷ്യൽ നെറ്റ്‌വർക്കുകൾ അല്ലെങ്കിൽ ഏതെങ്കിലും മൂന്നാം കക്ഷിയുമായി നിങ്ങളുടെ ഡാറ്റ പങ്കിടുന്നില്ല. നിയമം ആവശ്യപ്പെട്ടാലല്ലാതെ (ഉദാ. സാധുവായ കോടതി ഉത്തരവ്) നിങ്ങളുടെ ആരോഗ്യ ഡാറ്റ മൂന്നാം കക്ഷികൾക്ക് വെളിപ്പെടുത്തില്ല.</p>
+<h2>5. അറിയിപ്പുകൾ</h2>
+<p>ഓർമ്മപ്പെടുത്തലുകൾ (ദൈനംദിന രേഖപ്പെടുത്തൽ, ഗർഭനിരോധനം അല്ലെങ്കിൽ ഡോക്ടർ അപ്പോയിന്റ്മെന്റ്) ഓണാക്കിയാൽ, ഓപ്പറേറ്റിംഗ് സിസ്റ്റം അവ നിങ്ങളുടെ ഉപകരണത്തിൽ തന്നെ ഷെഡ്യൂൾ ചെയ്ത് കാണിക്കുന്നു. അവ ഞങ്ങളുടെ സെർവറുകളിലൂടെ പോകുന്നില്ല; നിങ്ങളുടെ ഡാറ്റ മൂന്നാം കക്ഷികളുമായി പങ്കിടുന്നില്ല.</p>
+<h2>6. നിങ്ങളുടെ അവകാശങ്ങളും ഡാറ്റയിലെ നിയന്ത്രണവും</h2>
+<ul>
+  <li><strong>കാണലും തിരുത്തലും:</strong> നിങ്ങൾ നൽകിയ എല്ലാ ഡാറ്റയും നേരിട്ട് ആപ്പിൽ കാണാനും മാറ്റാനും കഴിയും.</li>
+  <li><strong>എക്സ്പോർട്ട്:</strong> നിങ്ങളുടെ രേഖകൾ PDF ആയി എക്സ്പോർട്ട് ചെയ്യാം അല്ലെങ്കിൽ ക്രമീകരണങ്ങളിൽ നിന്ന് മാനുവൽ ബാക്കപ്പ് എടുക്കാം.</li>
+  <li><strong>എൻട്രി ഇല്ലാതാക്കൽ:</strong> ദിവസ എഡിറ്ററിൽ നിന്ന് ഏത് വ്യക്തിഗത എൻട്രിയും ഇല്ലാതാക്കാം.</li>
+  <li><strong>അക്കൗണ്ടും എല്ലാ ഡാറ്റയും ഇല്ലാതാക്കൽ:</strong> <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a> എന്ന വിലാസത്തിൽ എഴുതി അഭ്യർത്ഥിക്കാം. ന്യായമായ സമയത്തിനുള്ളിൽ നിങ്ങളുടെ Firebase Authentication അക്കൗണ്ടും Firestore-ലെ എല്ലാ രേഖകളും ഇല്ലാതാക്കും.</li>
+  <li><strong>Health/Google Fit സമന്വയം പിൻവലിക്കൽ:</strong> ക്രമീകരണങ്ങളിൽ ഓഫാക്കുക അല്ലെങ്കിൽ എപ്പോൾ വേണമെങ്കിലും ഓപ്പറേറ്റിംഗ് സിസ്റ്റത്തിന്റെ ആരോഗ്യ ക്രമീകരണങ്ങളിൽ അനുമതി പിൻവലിക്കുക.</li>
+</ul>
+<p>നിങ്ങൾ യൂറോപ്യൻ യൂണിയൻ, യൂറോപ്യൻ സാമ്പത്തിക മേഖല അല്ലെങ്കിൽ തുല്യമായ ഡാറ്റ സംരക്ഷണ നിയമങ്ങളുള്ള (GDPR പോലുള്ള) പ്രദേശത്ത് താമസിക്കുന്നെങ്കിൽ, ഡാറ്റ പോർട്ടബിലിറ്റി അവകാശവും പ്രാദേശിക ഡാറ്റ സംരക്ഷണ അതോറിറ്റിയിൽ പരാതി നൽകാനുള്ള അവകാശവും നിങ്ങൾക്കുണ്ട്.</p>
+<h2>7. പ്രായപൂർത്തിയാകാത്തവർ</h2>
+<p>CicloPlus 13 വയസ്സിന് താഴെയുള്ള കുട്ടികൾക്കുള്ളതല്ല; ആ പ്രായത്തിൽ താഴെയുള്ളവരുടെ ഡാറ്റ ഞങ്ങൾ അറിഞ്ഞുകൊണ്ട് ശേഖരിക്കുന്നില്ല. പ്രായപൂർത്തിയാകാത്ത ആരെങ്കിലും ഞങ്ങൾക്ക് ഡാറ്റ നൽകിയെന്ന് കരുതുന്നെങ്കിൽ, ഇല്ലാതാക്കാൻ <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a>-ൽ ബന്ധപ്പെടുക.</p>
+<h2>8. ഡാറ്റ സൂക്ഷിക്കൽ</h2>
+<p>നിങ്ങളുടെ അക്കൗണ്ട് സജീവമായിരിക്കുന്നിടത്തോളം ഡാറ്റ സൂക്ഷിക്കുന്നു. അക്കൗണ്ട് ഇല്ലാതാക്കിയാൽ, ചക്ര, പ്രൊഫൈൽ ഡാറ്റ വിഭാഗം 6-ൽ വിവരിച്ചതുപോലെ ഞങ്ങളുടെ സെർവറുകളിൽ നിന്ന് നീക്കം ചെയ്യും. ആപ്പ് അൺഇൻസ്റ്റാൾ ചെയ്യുമ്പോൾ ഉപകരണത്തിലെ പ്രാദേശിക പകർപ്പ് ഇല്ലാതാകും.</p>
+<h2>9. ഈ നയത്തിലെ മാറ്റങ്ങൾ</h2>
+<p>പുതിയ സവിശേഷതകൾ ചേർക്കുമ്പോൾ പോലുള്ള സന്ദർഭങ്ങളിൽ ഈ സ്വകാര്യതാ നയം ഇടയ്ക്കിടെ പുതുക്കിയേക്കാം. മാറ്റങ്ങൾ ഇതേ പേജിൽ പുതിയ «അവസാനം പുതുക്കിയത്» തീയതിയോടെ പ്രസിദ്ധീകരിക്കും. മാറ്റം പ്രധാനപ്പെട്ടതാണെങ്കിൽ ആപ്പിലും അറിയിക്കും.</p>
+<h2>10. ബന്ധപ്പെടുക</h2>
+<p>ഈ നയം, നിങ്ങളുടെ ഡാറ്റ അല്ലെങ്കിൽ നിങ്ങളുടെ അവകാശങ്ങൾ ഉപയോഗിക്കൽ എന്നിവയെക്കുറിച്ചുള്ള ഏത് ചോദ്യത്തിനും ഞങ്ങൾക്ക് ഇവിടെ എഴുതുക:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<footer>CicloPlus &middot; സ്വകാര്യതാ നയം</footer>
+
+</body>
+</html>

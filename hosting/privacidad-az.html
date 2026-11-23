@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CicloPlus Məxfilik Siyasəti</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+    color: #2b2530;
+    line-height: 1.6;
+    background: #fffafc;
+  }
+  h1 { font-size: 1.9rem; margin-bottom: 4px; color: #1f1a24; }
+  .updated { color: #8a7f8e; font-style: italic; margin-bottom: 8px; font-size: 0.95rem; }
+  .translation-note { color: #8a7f8e; font-size: 0.85rem; margin-bottom: 32px; }
+  h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; color: #9c4dcc; border-bottom: 2px solid #f3d9f7; padding-bottom: 6px; }
+  p { margin: 0 0 14px; text-align: justify; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { color: #1f1a24; }
+  a { color: #9c4dcc; }
+  .contact-box {
+    background: #fbeafd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 8px 0 20px;
+  }
+  footer { margin-top: 56px; font-size: 0.85rem; color: #a89aae; text-align: center; }
+
+  .lang-switcher { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f0e4f2; }
+  .lang-select-wrap { position: relative; display: inline-block; }
+  .lang-select-wrap::after {
+    content: "\25BE";
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #9c4dcc; font-size: 0.8rem; pointer-events: none;
+  }
+  select.lang-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    font-family: inherit; font-size: 0.9rem; font-weight: 600; color: #2b2530;
+    background: #fbeafd; border: 1px solid #f0d9f4; border-radius: 10px;
+    padding: 8px 32px 8px 14px; cursor: pointer;
+  }
+  select.lang-select:hover { background: #f6dcfa; }
+  select.lang-select:focus { outline: 2px solid #9c4dcc; outline-offset: 1px; }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher"><span class="lang-select-wrap"><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language / Idioma"><option value="privacidad-es.html">Español</option><option value="privacidad.html">English</option><option value="privacidad-fr.html">Français</option><option value="privacidad-de.html">Deutsch</option><option value="privacidad-pt.html">Português</option><option value="privacidad-it.html">Italiano</option><option value="privacidad-nl.html">Nederlands</option><option value="privacidad-pl.html">Polski</option><option value="privacidad-ru.html">Русский</option><option value="privacidad-uk.html">Українська</option><option value="privacidad-ar.html">العربية</option><option value="privacidad-hi.html">हिन्दी</option><option value="privacidad-bn.html">বাংলা</option><option value="privacidad-am.html">አማርኛ</option><option value="privacidad-az.html" selected>Azərbaycan</option><option value="privacidad-cs.html">Čeština</option><option value="privacidad-da.html">Dansk</option><option value="privacidad-el.html">Ελληνικά</option><option value="privacidad-fa.html">فارسی</option><option value="privacidad-fi.html">Suomi</option><option value="privacidad-fil.html">Filipino</option><option value="privacidad-gu.html">ગુજરાતી</option><option value="privacidad-ha.html">Hausa</option><option value="privacidad-he.html">עברית</option><option value="privacidad-hu.html">Magyar</option><option value="privacidad-id.html">Bahasa Indonesia</option><option value="privacidad-ja.html">日本語</option><option value="privacidad-kk.html">Қазақ</option><option value="privacidad-kn.html">ಕನ್ನಡ</option><option value="privacidad-ko.html">한국어</option><option value="privacidad-ln.html">Lingála</option><option value="privacidad-ml.html">മലയാളം</option><option value="privacidad-mr.html">मराठी</option><option value="privacidad-ms.html">Bahasa Melayu</option><option value="privacidad-my.html">မြန်မာ</option><option value="privacidad-ne.html">नेपाली</option><option value="privacidad-om.html">Afaan Oromoo</option><option value="privacidad-pa.html">ਪੰਜਾਬੀ</option><option value="privacidad-ro.html">Română</option><option value="privacidad-si.html">සිංහල</option><option value="privacidad-sk.html">Slovenčina</option><option value="privacidad-sv.html">Svenska</option><option value="privacidad-sw.html">Kiswahili</option><option value="privacidad-ta.html">தமிழ்</option><option value="privacidad-te.html">తెలుగు</option><option value="privacidad-th.html">ไทย</option><option value="privacidad-tr.html">Türkçe</option><option value="privacidad-ur.html">اردو</option><option value="privacidad-uz.html">Oʻzbek</option><option value="privacidad-vi.html">Tiếng Việt</option><option value="privacidad-wo.html">Wolof</option><option value="privacidad-yo.html">Yorùbá</option><option value="privacidad-zh.html">简体中文</option><option value="privacidad-zh-TW.html">繁體中文</option><option value="privacidad-zu.html">isiZulu</option></select></span></div>
+<h1>CicloPlus Məxfilik Siyasəti</h1>
+<p class="updated">Son yenilənmə: 20 noyabr 2026</p>
+<p class="translation-note">Bu tərcümə rahatlığınız üçün təqdim olunur. Hər hansı uyğunsuzluq olduqda orijinal ispan versiyası əsas götürülür.</p>
+<p>Bu Məxfilik Siyasəti CicloPlus-ın («tətbiq», «biz») hansı məlumatları topladığını, onlardan necə istifadə etdiyini, harada saxladığını və onlar üzərində hansı nəzarətə malik olduğunuzu izah edir. CicloPlus aybaşı dövrünü və məhsuldarlığı izləmək üçün tətbiqdir və daxil etdiyiniz sağlamlıq məlumatlarına bu cür məlumatların tələb etdiyi diqqətlə yanaşır.</p>
+<p>CicloPlus-dan istifadə etməklə bu sənəddə təsvir olunan qaydaları qəbul edirsiniz. Razı deyilsinizsə, lütfən tətbiqdən istifadə etməyin.</p>
+<h2>1. Məlumatlara cavabdeh şəxs</h2>
+<p>CicloPlus müstəqil tərtibatçı tərəfindən hazırlanır və idarə olunur. Bu siyasət və ya məlumatlarınızla bağlı hər hansı sual üçün yaza bilərsiniz:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<h2>2. Hansı məlumatları toplayırıq</h2>
+<p><strong>Hesab məlumatları.</strong> CicloPlus-dan istifadə etmək üçün Firebase Authentication (Google xidməti) vasitəsilə idarə olunan e-poçt və şifrəli hesab yaradırsınız. E-poçt ünvanınızı və hesabın yaradılma tarixini saxlayırıq.</p>
+<p><strong>Daxil etdiyiniz dövr və sağlamlıq məlumatları.</strong> Gündəlik təqvimdə qeyd etdiyiniz hər şey: aybaşı tarixləri, axıntı, servikal selik, bazal temperatur, simptomlar, əhval, çəki, yuxu saatları, içilən su, gündəlik qeydləri, cinsi fəaliyyət, kontrasepsiya xatırlatmaları, həkim görüşləri və hamiləlik rejimini aktivləşdirsəniz, hamiləliklə bağlı məlumatlar. Bunlar həssas sağlamlıq məlumatlarıdır və yalnız siz daxil etməyi seçsəniz toplanır: təqvimin işləməsi üçün zəruri olandan başqa heç bir sahə məcburi deyil.</p>
+<p><strong>Əlavə edilmiş fotolar.</strong> Gündəlik qeydinə foto əlavə etsəniz, şəkil qeydlə birlikdə saxlanılır.</p>
+<p><strong>Sağlamlıq/Google Fit ilə sinxronizasiya (istəyə bağlı).</strong> Ayarlardan Apple Sağlamlıq (HealthKit) və ya Google Fit (Health Connect) ilə sinxronizasiyanı əl ilə aktivləşdirsəniz, tətbiq cihazınızdakı həmin platformada çəki, yuxu, bədən temperaturu və aybaşı axıntısını oxuya və yaza bilər. Bu funksiya standart olaraq söndürülüb və yalnız açıq icazənizlə aktivləşir; onu istənilən vaxt Ayarlardan söndürə və ya cihazın sağlamlıq ayarlarından icazəni geri ala bilərsiniz.</p>
+<p><strong>Tətbiq seçimləri.</strong> Seçdiyiniz dil, mövzu rəngi, PIN kod (PIN kilidini aktivləşdirsəniz) və digər seçimlər cihazınızda yerli olaraq saxlanılır.</p>
+<p>Biz məkan, kontaktlar, reklam identifikatorları və ya sosial şəbəkə məlumatları toplamırıq. Reklam göstərmirik və üçüncü tərəf analitika və ya reklam izləmə alətlərindən istifadə etmirik.</p>
+<p><strong>Premium abunə (istəyə bağlı).</strong> CicloPlus Premium-a abunə olsanız, ödənişi Google Play (iPhone-da Apple App Store) həyata keçirir. Kart məlumatlarınızı heç vaxt görmürük və saxlamırıq. Abunənin aktiv olub-olmadığını yoxlamaq üçün abunə alış tarixçəsini və anonim istifadəçi identifikatorunu alan RevenueCat-dən istifadə edirik.</p>
+<h2>3. Məlumatlarınız necə saxlanılır</h2>
+<p><strong>Bulud yaddaşı (Firebase).</strong> Dövr qeydləriniz yalnız hesabınıza (istifadəçi identifikatoruna) bağlı olaraq Google Firebase verilənlər bazası olan Cloud Firestore-da saxlanılır. Bu, cihazı dəyişsəniz və ya tətbiqi yenidən quraşdırsanız məlumatların qorunmasına imkan verir.</p>
+<p><strong>Cihazınızda yerli surət.</strong> Tətbiq internet olmadan da məlumatlarınızı görə bilməniz üçün telefonunuzda yerli surət (keş) də saxlayır. Bu surət bağlantı bərpa olunanda avtomatik olaraq buludla sinxronlaşır.</p>
+<p><strong>Şifrələmə.</strong> Tətbiq ilə Firebase arasında rabitə şifrələnir (HTTPS/TLS). Firebase serverlərində saxlanılan məlumatları Google Cloud standartlarına uyğun şifrələyir.</p>
+<p><strong>Ayarlarınızın ehtiyat nüsxəsi.</strong> Telefonu dəyişəndə heç nə itirməməyiniz üçün tətbiq ayarlarınızı və Miçinin irəliləyişini də Firebase hesabınızda saxlayırıq. PIN kodunuz və fotolarınız saxlanılmır.</p>
+<h2>4. Məlumatları kimlərlə paylaşırıq</h2>
+<p>CicloPlus məlumatlarınızı satmır və reklamçılarla paylaşmır. Məlumatı yalnız bunlarla paylaşırıq:</p>
+<ul>
+  <li>Google Firebase (Firebase Authentication və Cloud Firestore): giriş və məlumat saxlanması üçün infrastruktur təminatçımız. Google bu məlumatları bizim adımızdan, emalçı kimi öz təhlükəsizlik və məlumat qorunması öhdəliklərinə uyğun emal edir.</li>
+  <li>RevenueCat və Google Play / Apple App Store: yalnız Premium-a abunə olsanız, ödənişi emal etmək və abunənin aktiv olduğunu yoxlamaq üçün. Onlar alış tarixçəsini və anonim istifadəçi identifikatorunu alır, sağlamlıq məlumatlarınızı isə heç vaxt.</li>
+  <li>Apple Sağlamlıq / Google Health Connect: yalnız 2-ci bölmədə təsvir olunan sinxronizasiyanı könüllü aktivləşdirsəniz və yalnız icazə verdiyiniz məlumat növləri üçün.</li>
+</ul>
+<p>Məlumatlarınızı kommersiya və ya reklam məqsədləri üçün sığortaçılar, işəgötürənlər, sosial şəbəkələr və ya digər üçüncü tərəflərlə paylaşmırıq. Qanun tələb etmədikcə (məsələn, etibarlı məhkəmə qərarı) sağlamlıq məlumatlarınızı üçüncü tərəflərə açıqlamayacağıq.</p>
+<h2>5. Bildirişlər</h2>
+<p>Xatırlatmaları aktivləşdirsəniz (gündəlik qeyd, kontrasepsiya və ya həkim görüşləri üçün), onlar əməliyyat sistemi tərəfindən cihazınızda yerli olaraq planlaşdırılır və göstərilir. Serverlərimizdən keçmir və məlumatlarınızın üçüncü tərəflərlə paylaşılmasını tələb etmir.</p>
+<h2>6. Hüquqlarınız və məlumatlarınıza nəzarət</h2>
+<ul>
+  <li><strong>Giriş və redaktə:</strong> daxil etdiyiniz bütün məlumatlara birbaşa tətbiqdən baxa və onları dəyişə bilərsiniz.</li>
+  <li><strong>İxrac:</strong> qeydlərinizi PDF formatında ixrac edə və ya Ayarlardan əl ilə ehtiyat nüsxə yarada bilərsiniz.</li>
+  <li><strong>Qeydi silmək:</strong> gün redaktorundan istənilən ayrıca qeydi silə bilərsiniz.</li>
+  <li><strong>Hesabınızı və bütün məlumatlarınızı silmək:</strong> bunu <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a> ünvanına yazaraq tələb edə bilərsiniz. Firebase Authentication hesabınızı və Firestore-dakı bütün qeydlərinizi ağlabatan müddətdə siləcəyik.</li>
+  <li><strong>Sağlamlıq/Google Fit sinxronizasiyasını ləğv etmək:</strong> onu Ayarlarda söndürün və ya istənilən vaxt əməliyyat sisteminin sağlamlıq ayarlarından icazəni geri alın.</li>
+</ul>
+<p>Avropa İttifaqında, Avropa İqtisadi Zonasında və ya ekvivalent məlumat qorunması qanunları (GDPR kimi) olan yurisdiksiyada yaşayırsınızsa, həmçinin məlumatların daşınması hüququnuz və yerli məlumat qorunması orqanına şikayət etmək hüququnuz var.</p>
+<h2>7. Yetkinlik yaşına çatmayanlar</h2>
+<p>CicloPlus 13 yaşından kiçik uşaqlar üçün nəzərdə tutulmayıb və biz bu yaşdan kiçik şəxslərdən bilərəkdən məlumat toplamırıq. Yetkinlik yaşına çatmayan birinin bizə məlumat verdiyini düşünürsünüzsə, silməyimiz üçün <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a> ünvanı ilə əlaqə saxlayın.</p>
+<h2>8. Məlumatların saxlanması</h2>
+<p>Məlumatlarınızı hesabınız aktiv olduğu müddətdə saxlayırıq. Hesabınızı silsəniz, dövr və profil məlumatlarınız 6-cı bölmədə təsvir olunduğu kimi serverlərimizdən silinir. Cihazınızdakı yerli surət tətbiqi siləndə silinir.</p>
+<h2>9. Bu siyasətdə dəyişikliklər</h2>
+<p>Bu Məxfilik Siyasətini vaxtaşırı, məsələn yeni funksiyalar əlavə edəndə yeniləyə bilərik. Dəyişiklikləri bu səhifədə yeni «son yenilənmə» tarixi ilə dərc edəcəyik. Dəyişiklik əhəmiyyətlidirsə, sizi tətbiqdə də xəbərdar edəcəyik.</p>
+<h2>10. Əlaqə</h2>
+<p>Bu siyasət, məlumatlarınız və ya hüquqlarınızdan istifadə ilə bağlı hər hansı sual üçün bizə yazın:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<footer>CicloPlus &middot; Məxfilik Siyasəti</footer>
+
+</body>
+</html>

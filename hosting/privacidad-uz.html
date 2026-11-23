@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CicloPlus maxfiylik siyosati</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+    color: #2b2530;
+    line-height: 1.6;
+    background: #fffafc;
+  }
+  h1 { font-size: 1.9rem; margin-bottom: 4px; color: #1f1a24; }
+  .updated { color: #8a7f8e; font-style: italic; margin-bottom: 8px; font-size: 0.95rem; }
+  .translation-note { color: #8a7f8e; font-size: 0.85rem; margin-bottom: 32px; }
+  h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; color: #9c4dcc; border-bottom: 2px solid #f3d9f7; padding-bottom: 6px; }
+  p { margin: 0 0 14px; text-align: justify; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { color: #1f1a24; }
+  a { color: #9c4dcc; }
+  .contact-box {
+    background: #fbeafd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 8px 0 20px;
+  }
+  footer { margin-top: 56px; font-size: 0.85rem; color: #a89aae; text-align: center; }
+
+  .lang-switcher { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f0e4f2; }
+  .lang-select-wrap { position: relative; display: inline-block; }
+  .lang-select-wrap::after {
+    content: "\25BE";
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #9c4dcc; font-size: 0.8rem; pointer-events: none;
+  }
+  select.lang-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    font-family: inherit; font-size: 0.9rem; font-weight: 600; color: #2b2530;
+    background: #fbeafd; border: 1px solid #f0d9f4; border-radius: 10px;
+    padding: 8px 32px 8px 14px; cursor: pointer;
+  }
+  select.lang-select:hover { background: #f6dcfa; }
+  select.lang-select:focus { outline: 2px solid #9c4dcc; outline-offset: 1px; }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher"><span class="lang-select-wrap"><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language / Idioma"><option value="privacidad-es.html">Español</option><option value="privacidad.html">English</option><option value="privacidad-fr.html">Français</option><option value="privacidad-de.html">Deutsch</option><option value="privacidad-pt.html">Português</option><option value="privacidad-it.html">Italiano</option><option value="privacidad-nl.html">Nederlands</option><option value="privacidad-pl.html">Polski</option><option value="privacidad-ru.html">Русский</option><option value="privacidad-uk.html">Українська</option><option value="privacidad-ar.html">العربية</option><option value="privacidad-hi.html">हिन्दी</option><option value="privacidad-bn.html">বাংলা</option><option value="privacidad-am.html">አማርኛ</option><option value="privacidad-az.html">Azərbaycan</option><option value="privacidad-cs.html">Čeština</option><option value="privacidad-da.html">Dansk</option><option value="privacidad-el.html">Ελληνικά</option><option value="privacidad-fa.html">فارسی</option><option value="privacidad-fi.html">Suomi</option><option value="privacidad-fil.html">Filipino</option><option value="privacidad-gu.html">ગુજરાતી</option><option value="privacidad-ha.html">Hausa</option><option value="privacidad-he.html">עברית</option><option value="privacidad-hu.html">Magyar</option><option value="privacidad-id.html">Bahasa Indonesia</option><option value="privacidad-ja.html">日本語</option><option value="privacidad-kk.html">Қазақ</option><option value="privacidad-kn.html">ಕನ್ನಡ</option><option value="privacidad-ko.html">한국어</option><option value="privacidad-ln.html">Lingála</option><option value="privacidad-ml.html">മലയാളം</option><option value="privacidad-mr.html">मराठी</option><option value="privacidad-ms.html">Bahasa Melayu</option><option value="privacidad-my.html">မြန်မာ</option><option value="privacidad-ne.html">नेपाली</option><option value="privacidad-om.html">Afaan Oromoo</option><option value="privacidad-pa.html">ਪੰਜਾਬੀ</option><option value="privacidad-ro.html">Română</option><option value="privacidad-si.html">සිංහල</option><option value="privacidad-sk.html">Slovenčina</option><option value="privacidad-sv.html">Svenska</option><option value="privacidad-sw.html">Kiswahili</option><option value="privacidad-ta.html">தமிழ்</option><option value="privacidad-te.html">తెలుగు</option><option value="privacidad-th.html">ไทย</option><option value="privacidad-tr.html">Türkçe</option><option value="privacidad-ur.html">اردو</option><option value="privacidad-uz.html" selected>Oʻzbek</option><option value="privacidad-vi.html">Tiếng Việt</option><option value="privacidad-wo.html">Wolof</option><option value="privacidad-yo.html">Yorùbá</option><option value="privacidad-zh.html">简体中文</option><option value="privacidad-zh-TW.html">繁體中文</option><option value="privacidad-zu.html">isiZulu</option></select></span></div>
+<h1>CicloPlus maxfiylik siyosati</h1>
+<p class="updated">Oxirgi yangilanish: 2026-yil 20-noyabr</p>
+<p class="translation-note">Bu tarjima qulaylik uchun berilgan. Nomuvofiqlik bo‘lsa, asl ispancha matn ustun hisoblanadi.</p>
+<p>Ushbu Maxfiylik siyosati CicloPlus («ilova», «biz») qanday ma’lumotlarni yig‘ishi, ulardan qanday foydalanishi, qayerda saqlashi va siz ular ustidan qanday nazoratga ega ekaningizni tushuntiradi. CicloPlus hayz sikli va homiladorlik qobiliyatini kuzatish ilovasidir va siz kiritgan sog‘liq ma’lumotlariga bunday ma’lumotlar talab qiladigan ehtiyotkorlik bilan yondashadi.</p>
+<p>CicloPlus’dan foydalanib, siz ushbu hujjatda tavsiflangan tartibni qabul qilasiz. Rozi bo‘lmasangiz, iltimos, ilovadan foydalanmang.</p>
+<h2>1. Ma’lumotlar uchun mas’ul shaxs</h2>
+<p>CicloPlus mustaqil dasturchi tomonidan ishlab chiqilgan va boshqariladi. Ushbu siyosat yoki ma’lumotlaringiz bo‘yicha har qanday savol bilan quyidagi manzilga yozing:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<h2>2. Qanday ma’lumotlarni yig‘amiz</h2>
+<p><strong>Hisob ma’lumotlari.</strong> CicloPlus’dan foydalanish uchun Firebase Authentication (Google xizmati) orqali boshqariladigan elektron pochta va parolli hisob yaratasiz. Biz elektron pochta manzilingizni va hisob yaratilgan sanani saqlaymiz.</p>
+<p><strong>Siz kiritadigan sikl va sog‘liq ma’lumotlari.</strong> Kundalik taqvimga yozgan hamma narsa: hayz sanalari, qon miqdori, bachadon bo‘yni shilliq ajralmasi, bazal harorat, belgilar, kayfiyat, vazn, uyqu soatlari, ichilgan suv, kundalik yozuvlari, jinsiy faollik, kontratsepsiya eslatmalari, shifokor qabullari va homiladorlik rejimini yoqsangiz, homiladorlikka oid ma’lumotlar. Bular nozik sog‘liq ma’lumotlari bo‘lib, faqat o‘zingiz kiritishni tanlasangiz yig‘iladi: taqvim ishlashi uchun zarur bo‘lgandan tashqari hech bir maydon majburiy emas.</p>
+<p><strong>Biriktirilgan rasmlar.</strong> Kundalik yozuviga rasm biriktirsangiz, u yozuv bilan birga saqlanadi.</p>
+<p><strong>Salomatlik/Google Fit bilan sinxronlash (ixtiyoriy).</strong> Sozlamalardan Apple Salomatlik (HealthKit) yoki Google Fit (Health Connect) bilan sinxronlashni qo‘lda yoqsangiz, ilova qurilmangizdagi o‘sha platformada vazn, uyqu, tana harorati va hayz miqdorini o‘qiy va yoza oladi. Bu funksiya sukut bo‘yicha o‘chiq va faqat aniq ruxsatingiz bilan yoqiladi; uni istalgan vaqtda Sozlamalardan o‘chirishingiz yoki qurilmaning salomatlik sozlamalaridan ruxsatni bekor qilishingiz mumkin.</p>
+<p><strong>Ilova sozlamalari.</strong> Tanlangan til, mavzu rangi, PIN-kod (PIN qulfini yoqsangiz) va boshqa sozlamalar faqat qurilmangizda saqlanadi.</p>
+<p>Biz joylashuv, kontaktlar, reklama identifikatorlari yoki ijtimoiy tarmoq ma’lumotlarini yig‘maymiz. Reklama ko‘rsatmaymiz va uchinchi tomon tahlil yoki reklama kuzatuv vositalaridan foydalanmaymiz.</p>
+<p><strong>Premium obuna (ixtiyoriy).</strong> CicloPlus Premium’ga obuna bo‘lsangiz, to‘lovni Google Play (iPhone’da Apple App Store) amalga oshiradi. Biz hech qachon karta ma’lumotlaringizni ko‘rmaymiz va saqlamaymiz. Obuna faolligini tekshirish uchun obuna xaridlari tarixi va anonim foydalanuvchi identifikatorini oladigan RevenueCat’dan foydalanamiz.</p>
+<h2>3. Ma’lumotlaringiz qanday saqlanadi</h2>
+<p><strong>Bulutli saqlash (Firebase).</strong> Sikl yozuvlaringiz Google Firebase ma’lumotlar bazasi Cloud Firestore’da faqat hisobingizga (foydalanuvchi identifikatoriga) bog‘langan holda saqlanadi. Shu tufayli qurilmani almashtirsangiz yoki ilovani qayta o‘rnatsangiz ham ma’lumotlar saqlanib qoladi.</p>
+<p><strong>Qurilmadagi mahalliy nusxa.</strong> Ilova internetsiz ham ma’lumotlarni ko‘rishingiz uchun telefoningizda mahalliy nusxa (kesh) saqlaydi. Aloqa tiklanganda nusxa bulut bilan avtomatik sinxronlanadi.</p>
+<p><strong>Shifrlash.</strong> Ilova va Firebase o‘rtasidagi aloqa shifrlangan (HTTPS/TLS). Firebase o‘z serverlaridagi ma’lumotlarni Google Cloud standartlariga ko‘ra shifrlaydi.</p>
+<p><strong>Sozlamalarning zaxira nusxasi.</strong> Telefonni almashtirganda hech narsa yo‘qolmasligi uchun ilova sozlamalari va Michining yutuqlarini ham Firebase hisobingizda saqlaymiz. PIN-kod va rasmlaringiz saqlanmaydi.</p>
+<h2>4. Ma’lumotlarni kim bilan ulashamiz</h2>
+<p>CicloPlus ma’lumotlaringizni sotmaydi va reklama beruvchilar bilan ulashmaydi. Ma’lumotni faqat quyidagilar bilan ulashamiz:</p>
+<ul>
+  <li>Google Firebase (Firebase Authentication va Cloud Firestore): kirish va ma’lumot saqlash uchun infratuzilma provayderimiz. Google bu ma’lumotlarni bizning nomimizdan, qayta ishlovchi sifatida o‘zining xavfsizlik va ma’lumotlarni himoya qilish majburiyatlariga muvofiq qayta ishlaydi.</li>
+  <li>RevenueCat va Google Play / Apple App Store: faqat Premium’ga obuna bo‘lsangiz, to‘lovni qayta ishlash va obunani tekshirish uchun. Ular xaridlar tarixi va anonim foydalanuvchi identifikatorini oladi, sog‘liq ma’lumotlaringizni hech qachon olmaydi.</li>
+  <li>Apple Salomatlik / Google Health Connect: faqat 2-bo‘limda tavsiflangan sinxronlashni ixtiyoriy yoqsangiz va faqat ruxsat bergan ma’lumot turlari uchun.</li>
+</ul>
+<p>Biz ma’lumotlaringizni tijorat yoki reklama maqsadida sug‘urtachilar, ish beruvchilar, ijtimoiy tarmoqlar yoki boshqa uchinchi tomonlar bilan ulashmaymiz. Qonun talab qilmasa (masalan, haqiqiy sud qarori), sog‘liq ma’lumotlaringizni uchinchi tomonlarga oshkor qilmaymiz.</p>
+<h2>5. Bildirishnomalar</h2>
+<p>Eslatmalarni yoqsangiz (kundalik yozuv, kontratsepsiya yoki shifokor qabuli uchun), ularni operatsion tizim qurilmangizda mahalliy rejalashtiradi va ko‘rsatadi. Ular serverlarimiz orqali o‘tmaydi va ma’lumotlaringizni uchinchi tomonlar bilan ulashishni talab qilmaydi.</p>
+<h2>6. Huquqlaringiz va ma’lumotlar ustidan nazorat</h2>
+<ul>
+  <li><strong>Ko‘rish va tahrirlash:</strong> kiritgan barcha ma’lumotlarni bevosita ilovada ko‘rishingiz va o‘zgartirishingiz mumkin.</li>
+  <li><strong>Eksport:</strong> yozuvlaringizni PDF’ga eksport qilishingiz yoki Sozlamalardan qo‘lda zaxira nusxa yaratishingiz mumkin.</li>
+  <li><strong>Yozuvni o‘chirish:</strong> kun tahrirlovchisidan istalgan alohida yozuvni o‘chirishingiz mumkin.</li>
+  <li><strong>Hisobni va barcha ma’lumotlarni o‘chirish:</strong> buni <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a> manziliga yozib so‘rashingiz mumkin. Firebase Authentication hisobingiz va Firestore’dagi barcha yozuvlaringizni oqilona muddatda o‘chiramiz.</li>
+  <li><strong>Salomatlik/Google Fit sinxronlashini bekor qilish:</strong> uni Sozlamalarda o‘chiring yoki istalgan vaqtda tizimning salomatlik sozlamalaridan ruxsatni bekor qiling.</li>
+</ul>
+<p>Agar Yevropa Ittifoqi, Yevropa iqtisodiy hududi yoki ma’lumotlarni himoya qilish bo‘yicha teng qonunlarga (masalan, GDPR) ega yurisdiksiyada yashasangiz, ma’lumotlarni ko‘chirish va mahalliy ma’lumotlarni himoya qilish organiga shikoyat qilish huquqingiz ham bor.</p>
+<h2>7. Voyaga yetmaganlar</h2>
+<p>CicloPlus 13 yoshdan kichik bolalarga mo‘ljallanmagan va biz bu yoshdan kichik shaxslardan ataylab ma’lumot yig‘maymiz. Voyaga yetmagan kimdir bizga ma’lumot bergan deb hisoblasangiz, o‘chirishimiz uchun <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a> orqali bog‘laning.</p>
+<h2>8. Ma’lumotlarni saqlash muddati</h2>
+<p>Hisobingiz faol bo‘lgan vaqt davomida ma’lumotlaringizni saqlaymiz. Hisobni o‘chirsangiz, sikl va profil ma’lumotlari 6-bo‘limda tavsiflanganidek serverlarimizdan o‘chiriladi. Qurilmadagi mahalliy nusxa ilovani o‘chirganda o‘chadi.</p>
+<h2>9. Ushbu siyosatdagi o‘zgarishlar</h2>
+<p>Ushbu Maxfiylik siyosatini vaqti-vaqti bilan, masalan yangi funksiyalar qo‘shganda yangilashimiz mumkin. O‘zgarishlarni shu sahifada yangi «oxirgi yangilanish» sanasi bilan e’lon qilamiz. O‘zgarish muhim bo‘lsa, ilovada ham xabar beramiz.</p>
+<h2>10. Aloqa</h2>
+<p>Ushbu siyosat, ma’lumotlaringiz yoki huquqlaringizdan foydalanish bo‘yicha har qanday savol bilan bizga yozing:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<footer>CicloPlus &middot; Maxfiylik siyosati</footer>
+
+</body>
+</html>

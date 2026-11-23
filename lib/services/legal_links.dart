@@ -16,12 +16,28 @@ const Set<String> _kLegalDocLanguages = {'es', 'fr', 'de', 'ru', 'ar', 'hi', 'bn
 /// Devuelve la URL de la política de privacidad en el idioma indicado.
 /// Si ese idioma es inglés o no tiene traducción publicada, cae a la
 /// versión en inglés (idioma por defecto del sitio).
+/// Idiomas con política de privacidad publicada (privacidad-XX.html).
+const Set<String> _kPrivacyLanguages = {
+  'am', 'ar', 'az', 'bn', 'cs', 'da', 'de', 'el', 'es', 'fa', 'fi', 'fil', 'fr', 'gu', 'ha', 'he', 'hi', 'hu',
+  'id', 'it', 'ja', 'kk', 'kn', 'ko', 'ln', 'ml', 'mr', 'ms', 'my', 'ne', 'nl', 'om', 'pa', 'pl', 'pt', 'ro',
+  'ru', 'si', 'sk', 'sv', 'sw', 'ta', 'te', 'th', 'tr', 'uk', 'ur', 'uz', 'vi', 'wo', 'yo', 'zh', 'zh-TW', 'zu',
+};
+
 String privacyPolicyUrlFor(String languageCode) {
-  if (_kLegalDocLanguages.contains(languageCode)) {
-    return 'https://cicloplus-9a957.web.app/privacidad-$languageCode.html';
+  final c = languageCode.replaceAll('_', '-');
+  if (_kPrivacyLanguages.contains(c)) {
+    return 'https://cicloplus-9a957.web.app/privacidad-$c.html';
+  }
+  if (c.startsWith('zh-') && (c.contains('TW') || c.contains('HK') || c.contains('Hant'))) {
+    return 'https://cicloplus-9a957.web.app/privacidad-zh-TW.html';
+  }
+  final base = c.split('-').first;
+  if (_kPrivacyLanguages.contains(base)) {
+    return 'https://cicloplus-9a957.web.app/privacidad-$base.html';
   }
   return kPrivacyPolicyUrl;
 }
+
 
 /// Igual que [privacyPolicyUrlFor] pero para los términos de uso.
 String termsOfUseUrlFor(String languageCode) {

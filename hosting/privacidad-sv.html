@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CicloPlus integritetspolicy</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+    color: #2b2530;
+    line-height: 1.6;
+    background: #fffafc;
+  }
+  h1 { font-size: 1.9rem; margin-bottom: 4px; color: #1f1a24; }
+  .updated { color: #8a7f8e; font-style: italic; margin-bottom: 8px; font-size: 0.95rem; }
+  .translation-note { color: #8a7f8e; font-size: 0.85rem; margin-bottom: 32px; }
+  h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; color: #9c4dcc; border-bottom: 2px solid #f3d9f7; padding-bottom: 6px; }
+  p { margin: 0 0 14px; text-align: justify; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { color: #1f1a24; }
+  a { color: #9c4dcc; }
+  .contact-box {
+    background: #fbeafd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 8px 0 20px;
+  }
+  footer { margin-top: 56px; font-size: 0.85rem; color: #a89aae; text-align: center; }
+
+  .lang-switcher { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f0e4f2; }
+  .lang-select-wrap { position: relative; display: inline-block; }
+  .lang-select-wrap::after {
+    content: "\25BE";
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #9c4dcc; font-size: 0.8rem; pointer-events: none;
+  }
+  select.lang-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    font-family: inherit; font-size: 0.9rem; font-weight: 600; color: #2b2530;
+    background: #fbeafd; border: 1px solid #f0d9f4; border-radius: 10px;
+    padding: 8px 32px 8px 14px; cursor: pointer;
+  }
+  select.lang-select:hover { background: #f6dcfa; }
+  select.lang-select:focus { outline: 2px solid #9c4dcc; outline-offset: 1px; }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher"><span class="lang-select-wrap"><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language / Idioma"><option value="privacidad-es.html">Español</option><option value="privacidad.html">English</option><option value="privacidad-fr.html">Français</option><option value="privacidad-de.html">Deutsch</option><option value="privacidad-pt.html">Português</option><option value="privacidad-it.html">Italiano</option><option value="privacidad-nl.html">Nederlands</option><option value="privacidad-pl.html">Polski</option><option value="privacidad-ru.html">Русский</option><option value="privacidad-uk.html">Українська</option><option value="privacidad-ar.html">العربية</option><option value="privacidad-hi.html">हिन्दी</option><option value="privacidad-bn.html">বাংলা</option><option value="privacidad-am.html">አማርኛ</option><option value="privacidad-az.html">Azərbaycan</option><option value="privacidad-cs.html">Čeština</option><option value="privacidad-da.html">Dansk</option><option value="privacidad-el.html">Ελληνικά</option><option value="privacidad-fa.html">فارسی</option><option value="privacidad-fi.html">Suomi</option><option value="privacidad-fil.html">Filipino</option><option value="privacidad-gu.html">ગુજરાતી</option><option value="privacidad-ha.html">Hausa</option><option value="privacidad-he.html">עברית</option><option value="privacidad-hu.html">Magyar</option><option value="privacidad-id.html">Bahasa Indonesia</option><option value="privacidad-ja.html">日本語</option><option value="privacidad-kk.html">Қазақ</option><option value="privacidad-kn.html">ಕನ್ನಡ</option><option value="privacidad-ko.html">한국어</option><option value="privacidad-ln.html">Lingála</option><option value="privacidad-ml.html">മലയാളം</option><option value="privacidad-mr.html">मराठी</option><option value="privacidad-ms.html">Bahasa Melayu</option><option value="privacidad-my.html">မြန်မာ</option><option value="privacidad-ne.html">नेपाली</option><option value="privacidad-om.html">Afaan Oromoo</option><option value="privacidad-pa.html">ਪੰਜਾਬੀ</option><option value="privacidad-ro.html">Română</option><option value="privacidad-si.html">සිංහල</option><option value="privacidad-sk.html">Slovenčina</option><option value="privacidad-sv.html" selected>Svenska</option><option value="privacidad-sw.html">Kiswahili</option><option value="privacidad-ta.html">தமிழ்</option><option value="privacidad-te.html">తెలుగు</option><option value="privacidad-th.html">ไทย</option><option value="privacidad-tr.html">Türkçe</option><option value="privacidad-ur.html">اردو</option><option value="privacidad-uz.html">Oʻzbek</option><option value="privacidad-vi.html">Tiếng Việt</option><option value="privacidad-wo.html">Wolof</option><option value="privacidad-yo.html">Yorùbá</option><option value="privacidad-zh.html">简体中文</option><option value="privacidad-zh-TW.html">繁體中文</option><option value="privacidad-zu.html">isiZulu</option></select></span></div>
+<h1>CicloPlus integritetspolicy</h1>
+<p class="updated">Senast uppdaterad: 20 november 2026</p>
+<p class="translation-note">Detta är en översättning för din bekvämlighet. Vid skillnader gäller den ursprungliga spanska versionen.</p>
+<p>Denna integritetspolicy förklarar vilka uppgifter CicloPlus (”appen”, ”vi”) samlar in, hur de används, var de lagras och vilken kontroll du har över dem. CicloPlus är en app för att följa menstruationscykel och fertilitet och hanterar de hälsouppgifter du anger med den omsorg som den här typen av uppgifter kräver.</p>
+<p>Genom att använda CicloPlus godkänner du det som beskrivs i detta dokument. Om du inte håller med, använd inte appen.</p>
+<h2>1. Personuppgiftsansvarig</h2>
+<p>CicloPlus utvecklas och drivs av en oberoende utvecklare. Har du frågor om denna policy eller dina uppgifter kan du skriva till:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<h2>2. Vilka uppgifter vi samlar in</h2>
+<p><strong>Kontouppgifter.</strong> För att använda CicloPlus skapar du ett konto med e-postadress och lösenord, som hanteras via Firebase Authentication (en Google-tjänst). Vi sparar din e-postadress och datumet då kontot skapades.</p>
+<p><strong>Cykel- och hälsouppgifter som du anger.</strong> Allt du loggar i dagskalendern: mensdatum, blödning, cervixsekret, basaltemperatur, symtom, humör, vikt, sömntimmar, vattenintag, dagboksanteckningar, sexuell aktivitet, påminnelser om preventivmedel, läkarbesök och, om du aktiverar graviditetsläget, graviditetsuppgifter. Det är känsliga hälsouppgifter som bara samlas in om du själv väljer att ange dem: inget fält är obligatoriskt utöver det som krävs för att kalendern ska fungera.</p>
+<p><strong>Bifogade foton.</strong> Om du bifogar ett foto till en dagboksanteckning sparas bilden tillsammans med anteckningen.</p>
+<p><strong>Synk med Hälsa/Google Fit (valfritt).</strong> Om du manuellt aktiverar synk med Apple Hälsa (HealthKit) eller Google Fit (Health Connect) i Inställningar kan appen läsa och skriva vikt, sömn, kroppstemperatur och mensblödning på den plattformen i din enhet. Funktionen är avstängd som standard och aktiveras bara med ditt uttryckliga tillstånd; du kan när som helst stänga av den i Inställningar eller återkalla tillståndet i enhetens hälsoinställningar.</p>
+<p><strong>Appinställningar.</strong> Valt språk, temafärg, pinkod (om du använder pinlås) och andra inställningar sparas lokalt i din enhet.</p>
+<p>Vi samlar inte in plats, kontakter, annons-ID:n eller uppgifter från sociala medier. Vi visar inga annonser och använder inga analys- eller annonsspårningsverktyg från tredje part.</p>
+<p><strong>Premiumprenumeration (valfri).</strong> Om du prenumererar på CicloPlus Premium hanteras betalningen av Google Play (eller Apple App Store på iPhone). Vi ser eller sparar aldrig dina kortuppgifter. För att kontrollera om prenumerationen är aktiv använder vi RevenueCat, som får prenumerationens köphistorik och ett anonymt användar-ID.</p>
+<h2>3. Hur dina uppgifter lagras</h2>
+<p><strong>Molnlagring (Firebase).</strong> Dina cykeluppgifter lagras i Cloud Firestore, en Google Firebase-databas, och kopplas bara till ditt konto (användar-ID). På så sätt finns uppgifterna kvar om du byter enhet eller installerar om appen.</p>
+<p><strong>Lokal kopia i din enhet.</strong> Appen sparar också en lokal kopia (cache) i din telefon så att du kan se dina uppgifter utan internet. Kopian synkas automatiskt med molnet när anslutningen är tillbaka.</p>
+<p><strong>Kryptering.</strong> Kommunikationen mellan appen och Firebase är krypterad (HTTPS/TLS). Firebase krypterar lagrade uppgifter på sina servrar enligt Google Clouds standarder.</p>
+<p><strong>Säkerhetskopia av dina inställningar.</strong> För att du inte ska förlora något när du byter telefon sparar vi även dina appinställningar och Michis framsteg i ditt Firebase-konto. Din pinkod och dina foton sparas inte.</p>
+<h2>4. Vilka vi delar uppgifter med</h2>
+<p>CicloPlus säljer inte dina uppgifter och delar dem inte med annonsörer. Vi delar bara information med:</p>
+<ul>
+  <li>Google Firebase (Firebase Authentication och Cloud Firestore): vår infrastrukturleverantör för inloggning och datalagring. Google behandlar dessa uppgifter för vår räkning enligt sina egna åtaganden om säkerhet och dataskydd som personuppgiftsbiträde.</li>
+  <li>RevenueCat och Google Play / Apple App Store: bara om du prenumererar på Premium, för att hantera betalningen och kontrollera att prenumerationen är aktiv. De får köphistorik och ett anonymt användar-ID, aldrig dina hälsouppgifter.</li>
+  <li>Apple Hälsa / Google Health Connect: bara om du frivilligt aktiverar synken i avsnitt 2, och bara för de datatyper du godkänner.</li>
+</ul>
+<p>Vi delar inte dina uppgifter med försäkringsbolag, arbetsgivare, sociala nätverk eller andra tredje parter i kommersiellt syfte eller reklamsyfte. Vi lämnar inte ut dina hälsouppgifter till tredje part om inte lagen kräver det (till exempel ett giltigt domstolsbeslut).</p>
+<h2>5. Aviseringar</h2>
+<p>Om du aktiverar påminnelser (för daglig loggning, preventivmedel eller läkarbesök) schemaläggs och visas de lokalt i din enhet av operativsystemet. De skickas inte via våra servrar och innebär inte att dina uppgifter delas med tredje part.</p>
+<h2>6. Dina rättigheter och kontroll över dina uppgifter</h2>
+<ul>
+  <li><strong>Tillgång och ändring:</strong> du kan se och ändra alla uppgifter du angett direkt i appen.</li>
+  <li><strong>Export:</strong> du kan exportera dina uppgifter till PDF eller göra en manuell säkerhetskopia i Inställningar.</li>
+  <li><strong>Radera en post:</strong> du kan radera vilken enskild post som helst i dagsredigeraren.</li>
+  <li><strong>Radera ditt konto och alla dina uppgifter:</strong> det kan du begära genom att skriva till <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a>. Vi raderar ditt Firebase Authentication-konto och alla dina uppgifter i Firestore inom rimlig tid.</li>
+  <li><strong>Återkalla synk med Hälsa/Google Fit:</strong> stäng av den i Inställningar eller återkalla tillståndet när som helst i operativsystemets hälsoinställningar.</li>
+</ul>
+<p>Om du bor i Europeiska unionen, Europeiska ekonomiska samarbetsområdet eller en jurisdiktion med motsvarande dataskyddslagar (som GDPR) har du även rätt till dataportabilitet och att klaga hos din lokala dataskyddsmyndighet.</p>
+<h2>7. Minderåriga</h2>
+<p>CicloPlus riktar sig inte till barn under 13 år och vi samlar inte medvetet in uppgifter från personer under den åldern. Om du tror att en minderårig har lämnat uppgifter till oss, kontakta oss på <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a> så raderar vi dem.</p>
+<h2>8. Lagringstid</h2>
+<p>Vi sparar dina uppgifter så länge ditt konto är aktivt. Om du raderar ditt konto tas dina cykel- och profiluppgifter bort från våra servrar enligt avsnitt 6. Den lokala kopian i din enhet raderas när du avinstallerar appen.</p>
+<h2>9. Ändringar av denna policy</h2>
+<p>Vi kan uppdatera denna integritetspolicy ibland, till exempel när vi lägger till nya funktioner. Ändringar publiceras på denna sida med ett nytt datum för ”senast uppdaterad”. Om ändringen är betydande meddelar vi dig även i appen.</p>
+<h2>10. Kontakt</h2>
+<p>Har du frågor om denna policy, dina uppgifter eller vill utöva dina rättigheter, skriv till oss på:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<footer>CicloPlus &middot; Integritetspolicy</footer>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CicloPlus ကိုယ်ရေးအချက်အလက် မူဝါဒ</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+    color: #2b2530;
+    line-height: 1.6;
+    background: #fffafc;
+  }
+  h1 { font-size: 1.9rem; margin-bottom: 4px; color: #1f1a24; }
+  .updated { color: #8a7f8e; font-style: italic; margin-bottom: 8px; font-size: 0.95rem; }
+  .translation-note { color: #8a7f8e; font-size: 0.85rem; margin-bottom: 32px; }
+  h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; color: #9c4dcc; border-bottom: 2px solid #f3d9f7; padding-bottom: 6px; }
+  p { margin: 0 0 14px; text-align: justify; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { color: #1f1a24; }
+  a { color: #9c4dcc; }
+  .contact-box {
+    background: #fbeafd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 8px 0 20px;
+  }
+  footer { margin-top: 56px; font-size: 0.85rem; color: #a89aae; text-align: center; }
+
+  .lang-switcher { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f0e4f2; }
+  .lang-select-wrap { position: relative; display: inline-block; }
+  .lang-select-wrap::after {
+    content: "\25BE";
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #9c4dcc; font-size: 0.8rem; pointer-events: none;
+  }
+  select.lang-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    font-family: inherit; font-size: 0.9rem; font-weight: 600; color: #2b2530;
+    background: #fbeafd; border: 1px solid #f0d9f4; border-radius: 10px;
+    padding: 8px 32px 8px 14px; cursor: pointer;
+  }
+  select.lang-select:hover { background: #f6dcfa; }
+  select.lang-select:focus { outline: 2px solid #9c4dcc; outline-offset: 1px; }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher"><span class="lang-select-wrap"><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language / Idioma"><option value="privacidad-es.html">Español</option><option value="privacidad.html">English</option><option value="privacidad-fr.html">Français</option><option value="privacidad-de.html">Deutsch</option><option value="privacidad-pt.html">Português</option><option value="privacidad-it.html">Italiano</option><option value="privacidad-nl.html">Nederlands</option><option value="privacidad-pl.html">Polski</option><option value="privacidad-ru.html">Русский</option><option value="privacidad-uk.html">Українська</option><option value="privacidad-ar.html">العربية</option><option value="privacidad-hi.html">हिन्दी</option><option value="privacidad-bn.html">বাংলা</option><option value="privacidad-am.html">አማርኛ</option><option value="privacidad-az.html">Azərbaycan</option><option value="privacidad-cs.html">Čeština</option><option value="privacidad-da.html">Dansk</option><option value="privacidad-el.html">Ελληνικά</option><option value="privacidad-fa.html">فارسی</option><option value="privacidad-fi.html">Suomi</option><option value="privacidad-fil.html">Filipino</option><option value="privacidad-gu.html">ગુજરાતી</option><option value="privacidad-ha.html">Hausa</option><option value="privacidad-he.html">עברית</option><option value="privacidad-hu.html">Magyar</option><option value="privacidad-id.html">Bahasa Indonesia</option><option value="privacidad-ja.html">日本語</option><option value="privacidad-kk.html">Қазақ</option><option value="privacidad-kn.html">ಕನ್ನಡ</option><option value="privacidad-ko.html">한국어</option><option value="privacidad-ln.html">Lingála</option><option value="privacidad-ml.html">മലയാളം</option><option value="privacidad-mr.html">मराठी</option><option value="privacidad-ms.html">Bahasa Melayu</option><option value="privacidad-my.html" selected>မြန်မာ</option><option value="privacidad-ne.html">नेपाली</option><option value="privacidad-om.html">Afaan Oromoo</option><option value="privacidad-pa.html">ਪੰਜਾਬੀ</option><option value="privacidad-ro.html">Română</option><option value="privacidad-si.html">සිංහල</option><option value="privacidad-sk.html">Slovenčina</option><option value="privacidad-sv.html">Svenska</option><option value="privacidad-sw.html">Kiswahili</option><option value="privacidad-ta.html">தமிழ்</option><option value="privacidad-te.html">తెలుగు</option><option value="privacidad-th.html">ไทย</option><option value="privacidad-tr.html">Türkçe</option><option value="privacidad-ur.html">اردو</option><option value="privacidad-uz.html">Oʻzbek</option><option value="privacidad-vi.html">Tiếng Việt</option><option value="privacidad-wo.html">Wolof</option><option value="privacidad-yo.html">Yorùbá</option><option value="privacidad-zh.html">简体中文</option><option value="privacidad-zh-TW.html">繁體中文</option><option value="privacidad-zu.html">isiZulu</option></select></span></div>
+<h1>CicloPlus ကိုယ်ရေးအချက်အလက် မူဝါဒ</h1>
+<p class="updated">နောက်ဆုံး ပြင်ဆင်ချိန်: ၂၀၂၆ ခုနှစ် နိုဝင်ဘာ ၂၀</p>
+<p class="translation-note">ဤဘာသာပြန်ချက်ကို သင့်အဆင်ပြေစေရန် ပေးထားခြင်း ဖြစ်သည်။ ကွဲလွဲမှုရှိပါက မူရင်း စပိန်ဘာသာ မူကို အတည်ယူမည်။</p>
+<p>ဤမူဝါဒသည် CicloPlus («အက်ပ်», «ကျွန်ုပ်တို့») က မည်သည့်ဒေတာများကို စုဆောင်းသည်၊ မည်သို့ အသုံးပြုသည်၊ မည်သည့်နေရာတွင် သိမ်းဆည်းသည်နှင့် ၎င်းအပေါ် သင့်တွင် မည်သည့်ထိန်းချုပ်ခွင့်ရှိသည်ကို ရှင်းပြသည်။ CicloPlus သည် ရာသီစက်ဝန်းနှင့် သန္ဓေတည်နိုင်စွမ်းကို မှတ်တမ်းတင်သည့် အက်ပ်ဖြစ်ပြီး သင်ထည့်သွင်းသော ကျန်းမာရေးအချက်အလက်များကို ထိုကဲ့သို့ ဒေတာအတွက် လိုအပ်သည့် ဂရုစိုက်မှုဖြင့် ကိုင်တွယ်သည်။</p>
+<p>CicloPlus ကို အသုံးပြုခြင်းဖြင့် ဤစာတမ်းတွင် ဖော်ပြထားသော လုပ်ထုံးလုပ်နည်းများကို သင်လက်ခံသည်။ သဘောမတူပါက အက်ပ်ကို မသုံးပါနှင့်။</p>
+<h2>၁။ ဒေတာ ထိန်းချုပ်သူ</h2>
+<p>CicloPlus ကို လွတ်လပ်သော ဆော့ဖ်ဝဲရေးသူတစ်ဦးက ဖန်တီး၍ လည်ပတ်စေသည်။ ဤမူဝါဒ သို့မဟုတ် သင့်ဒေတာနှင့် ပတ်သက်သည့် မေးခွန်းမှန်သမျှအတွက် ဤနေရာသို့ ရေးပါ:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<h2>၂။ ကျွန်ုပ်တို့ စုဆောင်းသော ဒေတာ</h2>
+<p><strong>အကောင့် ဒေတာ။</strong> CicloPlus ကို သုံးရန် Firebase Authentication (Google ဝန်ဆောင်မှု) မှ စီမံသော အီးမေးလ်နှင့် စကားဝှက်ပါ အကောင့်ကို ဖန်တီးရသည်။ သင့်အီးမေးလ်လိပ်စာနှင့် အကောင့်ဖန်တီးသည့်ရက်ကို သိမ်းထားသည်။</p>
+<p><strong>သင်ထည့်သွင်းသော စက်ဝန်းနှင့် ကျန်းမာရေး ဒေတာ။</strong> နေ့စဉ်ပြက္ခဒိန်တွင် သင်မှတ်သမျှ: ရာသီရက်များ၊ သွေးဆင်းပမာဏ၊ သားအိမ်ခေါင်း အရည်၊ အခြေခံ ကိုယ်အပူချိန်၊ လက္ခဏာများ၊ စိတ်ခံစားမှု၊ ကိုယ်အလေးချိန်၊ အိပ်ချိန်၊ သောက်ခဲ့သော ရေ၊ ဒိုင်ယာရီ မှတ်စုများ၊ လိင်ဆက်ဆံမှု၊ သန္ဓေတားဆေး သတိပေးချက်များ၊ ဆရာဝန် ချိန်းဆိုမှုများနှင့် ကိုယ်ဝန်မုဒ်ကို ဖွင့်ပါက ကိုယ်ဝန်ဆိုင်ရာ ဒေတာ။ ဤအရာများသည် အထိခိုက်လွယ်သော ကျန်းမာရေးဒေတာ ဖြစ်ပြီး သင်ထည့်ရန် ရွေးချယ်မှသာ စုဆောင်းသည်: ပြက္ခဒိန် အလုပ်လုပ်ရန် မရှိမဖြစ် လိုအပ်သည်မှအပ မည်သည့်အကွက်မျှ မဖြစ်မနေ မဟုတ်ပါ။</p>
+<p><strong>တွဲထားသော ဓာတ်ပုံများ။</strong> ဒိုင်ယာရီ မှတ်စုတွင် ဓာတ်ပုံတွဲပါက ထိုပုံကို မှတ်စုနှင့်အတူ သိမ်းသည်။</p>
+<p><strong>Health/Google Fit နှင့် ချိတ်ဆက်ခြင်း (ရွေးချယ်နိုင်)။</strong> ဆက်တင်များမှ Apple Health (HealthKit) သို့မဟုတ် Google Fit (Health Connect) နှင့် ချိတ်ဆက်ခြင်းကို ကိုယ်တိုင်ဖွင့်ပါက အက်ပ်သည် သင့်စက်ပေါ်ရှိ ထိုပလက်ဖောင်းတွင် ကိုယ်အလေးချိန်၊ အိပ်စက်မှု၊ ကိုယ်အပူချိန်နှင့် ရာသီသွေးကို ဖတ်ခြင်း ရေးခြင်း ပြုနိုင်သည်။ ဤလုပ်ဆောင်ချက်ကို မူလအားဖြင့် ပိတ်ထားပြီး သင်၏ ရှင်းလင်းသော ခွင့်ပြုချက်ဖြင့်သာ ဖွင့်သည်။ ဆက်တင်များမှ အချိန်မရွေး ပိတ်နိုင်သလို စက်၏ ကျန်းမာရေး ဆက်တင်များမှ ခွင့်ပြုချက်ကို ရုပ်သိမ်းနိုင်သည်။</p>
+<p><strong>အက်ပ် နှစ်သက်ရာ ဆက်တင်များ။</strong> ရွေးထားသော ဘာသာစကား၊ အပြင်အဆင် အရောင်၊ PIN ကုဒ် (PIN လော့ခ်ဖွင့်ပါက) နှင့် အခြားဆက်တင်များကို သင့်စက်ပေါ်တွင်သာ သိမ်းသည်။</p>
+<p>ကျွန်ုပ်တို့သည် တည်နေရာ၊ အဆက်အသွယ်များ၊ ကြော်ငြာ အမှတ်အသားများ သို့မဟုတ် လူမှုကွန်ရက် ဒေတာများကို မစုဆောင်းပါ။ ကြော်ငြာ မပြပါ၊ ပြင်ပ ခွဲခြမ်းစိတ်ဖြာမှု သို့မဟုတ် ကြော်ငြာ ခြေရာခံ ကိရိယာများကိုလည်း မသုံးပါ။</p>
+<p><strong>Premium စာရင်းသွင်းမှု (ရွေးချယ်နိုင်)။</strong> CicloPlus Premium ကို စာရင်းသွင်းပါက ငွေပေးချေမှုကို Google Play (iPhone တွင် Apple App Store) က ကိုင်တွယ်သည်။ သင့်ကတ်အချက်အလက်ကို ကျွန်ုပ်တို့ ဘယ်တော့မှ မမြင်၊ မသိမ်းပါ။ စာရင်းသွင်းမှု အသက်ဝင်နေမနေ စစ်ဆေးရန် RevenueCat ကို သုံးပြီး ၎င်းသည် ဝယ်ယူမှုမှတ်တမ်းနှင့် အမည်မသိ အသုံးပြုသူ အမှတ်အသားကို ရရှိသည်။</p>
+<h2>၃။ သင့်ဒေတာကို မည်သို့ သိမ်းဆည်းသနည်း</h2>
+<p><strong>Cloud သိုလှောင်မှု (Firebase)။</strong> သင့်စက်ဝန်း မှတ်တမ်းများကို Google Firebase ဒေတာဘေ့စ် Cloud Firestore တွင် သင့်အကောင့် (အသုံးပြုသူ အမှတ်အသား) နှင့်သာ ချိတ်၍ သိမ်းသည်။ ထို့ကြောင့် စက်ပြောင်းသော်လည်းကောင်း အက်ပ်ကို ပြန်ထည့်သော်လည်းကောင်း ဒေတာ ကျန်နေမည်။</p>
+<p><strong>စက်ပေါ်ရှိ ဒေသတွင်း မိတ္တူ။</strong> အင်တာနက်မရှိဘဲ ဒေတာကြည့်နိုင်ရန် အက်ပ်သည် သင့်ဖုန်းပေါ်တွင် မိတ္တူ (cache) ကိုလည်း သိမ်းထားသည်။ ချိတ်ဆက်မှု ပြန်ရလာသည်နှင့် ဤမိတ္တူသည် cloud နှင့် အလိုအလျောက် ချိန်ကိုက်သည်။</p>
+<p><strong>ကုဒ်ဝှက်ခြင်း။</strong> အက်ပ်နှင့် Firebase ကြား ဆက်သွယ်မှုကို ကုဒ်ဝှက်ထားသည် (HTTPS/TLS)။ Firebase သည် ၎င်း၏ ဆာဗာများပေါ်ရှိ ဒေတာကို Google Cloud စံနှုန်းများအတိုင်း ကုဒ်ဝှက်သည်။</p>
+<p><strong>ဆက်တင်များ၏ အရန်။</strong> ဖုန်းပြောင်းချိန်တွင် ဘာမှမပျောက်စေရန် အက်ပ်ဆက်တင်များနှင့် မီချီ၏ တိုးတက်မှုကိုလည်း သင့် Firebase အကောင့်တွင် သိမ်းသည်။ သင့် PIN နှင့် ဓာတ်ပုံများကို မသိမ်းပါ။</p>
+<h2>၄။ ကျွန်ုပ်တို့ ဒေတာကို မည်သူနှင့် မျှဝေသနည်း</h2>
+<p>CicloPlus သည် သင့်ဒေတာကို မရောင်း၊ ကြော်ငြာရှင်များနှင့်လည်း မမျှဝေပါ။ အချက်အလက်ကို ဤသူတို့နှင့်သာ မျှဝေသည်:</p>
+<ul>
+  <li>Google Firebase (Firebase Authentication နှင့် Cloud Firestore): ဝင်ရောက်ခြင်းနှင့် ဒေတာ သိုလှောင်ခြင်းအတွက် ကျွန်ုပ်တို့၏ အခြေခံအဆောက်အအုံ ပံ့ပိုးသူ။ Google သည် ဤဒေတာကို ကျွန်ုပ်တို့ကိုယ်စား၊ ဒေတာ စီမံဆောင်ရွက်သူအဖြစ် ၎င်း၏ လုံခြုံရေးနှင့် ဒေတာကာကွယ်ရေး ကတိကဝတ်များအတိုင်း ဆောင်ရွက်သည်။</li>
+  <li>RevenueCat နှင့် Google Play / Apple App Store: Premium စာရင်းသွင်းမှသာ၊ ငွေပေးချေမှု ဆောင်ရွက်ရန်နှင့် စာရင်းသွင်းမှု စစ်ဆေးရန်။ ၎င်းတို့သည် ဝယ်ယူမှုမှတ်တမ်းနှင့် အမည်မသိ အသုံးပြုသူ အမှတ်အသားကို ရရှိပြီး သင့်ကျန်းမာရေးဒေတာကို ဘယ်တော့မှ မရပါ။</li>
+  <li>Apple Health / Google Health Connect: အပိုင်း ၂ တွင် ဖော်ပြထားသော ချိတ်ဆက်မှုကို သင်ဆန္ဒအလျောက် ဖွင့်မှသာ၊ သင်ခွင့်ပြုသော ဒေတာအမျိုးအစားများအတွက်သာ။</li>
+</ul>
+<p>ကျွန်ုပ်တို့သည် သင့်ဒေတာကို စီးပွားရေး သို့မဟုတ် ကြော်ငြာ ရည်ရွယ်ချက်ဖြင့် အာမခံကုမ္ပဏီများ၊ အလုပ်ရှင်များ၊ လူမှုကွန်ရက်များ သို့မဟုတ် မည်သည့် ပြင်ပအဖွဲ့နှင့်မျှ မမျှဝေပါ။ ဥပဒေက မတောင်းဆိုလျှင် (ဥပမာ တရားဝင် တရားရုံးအမိန့်) သင့်ကျန်းမာရေးဒေတာကို ပြင်ပအဖွဲ့များထံ ထုတ်မပြပါ။</p>
+<h2>၅။ အကြောင်းကြားချက်များ</h2>
+<p>သတိပေးချက်များ (နေ့စဉ် မှတ်တမ်း၊ သန္ဓေတားခြင်း သို့မဟုတ် ဆရာဝန် ချိန်းဆိုမှု) ကို ဖွင့်ပါက လည်ပတ်မှုစနစ်က ၎င်းတို့ကို သင့်စက်ပေါ်တွင်ပင် အချိန်ဇယားဆွဲ၍ ပြသည်။ ကျွန်ုပ်တို့၏ ဆာဗာများကို မဖြတ်သွားပါ၊ သင့်ဒေတာကို ပြင်ပအဖွဲ့နှင့် မမျှဝေပါ။</p>
+<h2>၆။ သင့်အခွင့်အရေးများနှင့် ဒေတာအပေါ် ထိန်းချုပ်မှု</h2>
+<ul>
+  <li><strong>ကြည့်ရှုခြင်းနှင့် ပြင်ဆင်ခြင်း:</strong> သင်ထည့်သွင်းခဲ့သော ဒေတာအားလုံးကို အက်ပ်တွင် တိုက်ရိုက် ကြည့်ရှု ပြင်ဆင်နိုင်သည်။</li>
+  <li><strong>ထုတ်ယူခြင်း:</strong> သင့်မှတ်တမ်းများကို PDF အဖြစ် ထုတ်ယူနိုင်သလို ဆက်တင်များမှ ကိုယ်တိုင် အရန်ကူးယူနိုင်သည်။</li>
+  <li><strong>မှတ်တမ်း ဖျက်ခြင်း:</strong> နေ့ တည်းဖြတ်ကိရိယာမှ မည်သည့် မှတ်တမ်းကိုမဆို ဖျက်နိုင်သည်။</li>
+  <li><strong>အကောင့်နှင့် ဒေတာအားလုံး ဖျက်ခြင်း:</strong> <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a> သို့ ရေးသား၍ တောင်းဆိုနိုင်သည်။ သင့် Firebase Authentication အကောင့်နှင့် Firestore ရှိ မှတ်တမ်းအားလုံးကို သင့်လျော်သော အချိန်အတွင်း ဖျက်ပေးမည်။</li>
+  <li><strong>Health/Google Fit ချိတ်ဆက်မှုကို ရုပ်သိမ်းခြင်း:</strong> ဆက်တင်များတွင် ပိတ်ပါ သို့မဟုတ် လည်ပတ်မှုစနစ်၏ ကျန်းမာရေး ဆက်တင်များမှ ခွင့်ပြုချက်ကို အချိန်မရွေး ရုပ်သိမ်းပါ။</li>
+</ul>
+<p>သင်သည် ဥရောပသမဂ္ဂ၊ ဥရောပ စီးပွားရေးဒေသ သို့မဟုတ် တူညီသော ဒေတာကာကွယ်ရေး ဥပဒေ (GDPR ကဲ့သို့) ရှိသော နေရာတွင် နေထိုင်ပါက ဒေတာ ရွှေ့ပြောင်းခွင့်နှင့် ဒေသတွင်း ဒေတာကာကွယ်ရေး အာဏာပိုင်ထံ တိုင်ကြားခွင့်လည်း ရှိသည်။</p>
+<h2>၇။ အရွယ်မရောက်သေးသူများ</h2>
+<p>CicloPlus ကို အသက် ၁၃ နှစ်အောက် ကလေးများအတွက် ရည်ရွယ်ထားခြင်း မဟုတ်ပါ၊ ထိုအသက်အောက်ရှိသူများ၏ ဒေတာကို ကျွန်ုပ်တို့ သိလျက်နှင့် မစုဆောင်းပါ။ အရွယ်မရောက်သေးသူ တစ်ဦးက ဒေတာပေးခဲ့သည်ဟု ယူဆပါက ဖျက်နိုင်ရန် <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a> တွင် ဆက်သွယ်ပါ။</p>
+<h2>၈။ ဒေတာ ထိန်းသိမ်းထားမှု</h2>
+<p>သင့်အကောင့် အသက်ဝင်နေသရွေ့ ဒေတာကို ထိန်းသိမ်းထားသည်။ အကောင့်ကို ဖျက်ပါက စက်ဝန်းနှင့် ပရိုဖိုင် ဒေတာကို အပိုင်း ၆ တွင် ဖော်ပြသည့်အတိုင်း ဆာဗာများမှ ဖယ်ရှားမည်။ အက်ပ်ကို ဖြုတ်လိုက်သည့်အခါ စက်ပေါ်ရှိ မိတ္တူ ပျက်သွားမည်။</p>
+<h2>၉။ ဤမူဝါဒ ပြောင်းလဲမှုများ</h2>
+<p>လုပ်ဆောင်ချက်အသစ်များ ထည့်သည့်အခါကဲ့သို့ ဤမူဝါဒကို အခါအားလျော်စွာ ပြင်ဆင်နိုင်သည်။ ပြောင်းလဲမှုများကို ဤစာမျက်နှာတွင် «နောက်ဆုံး ပြင်ဆင်ချိန်» ရက်အသစ်ဖြင့် ထုတ်ပြန်မည်။ အရေးကြီးသော ပြောင်းလဲမှုဖြစ်ပါက အက်ပ်ထဲတွင်လည်း အသိပေးမည်။</p>
+<h2>၁၀။ ဆက်သွယ်ရန်</h2>
+<p>ဤမူဝါဒ၊ သင့်ဒေတာ သို့မဟုတ် သင့်အခွင့်အရေးများ အသုံးပြုခြင်းနှင့် ပတ်သက်သည့် မေးခွန်းမှန်သမျှအတွက် ဤနေရာသို့ ရေးပါ:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<footer>CicloPlus &middot; ကိုယ်ရေးအချက်အလက် မူဝါဒ</footer>
+
+</body>
+</html>

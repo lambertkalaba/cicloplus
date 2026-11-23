@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Πολιτική απορρήτου του CicloPlus</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+    color: #2b2530;
+    line-height: 1.6;
+    background: #fffafc;
+  }
+  h1 { font-size: 1.9rem; margin-bottom: 4px; color: #1f1a24; }
+  .updated { color: #8a7f8e; font-style: italic; margin-bottom: 8px; font-size: 0.95rem; }
+  .translation-note { color: #8a7f8e; font-size: 0.85rem; margin-bottom: 32px; }
+  h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; color: #9c4dcc; border-bottom: 2px solid #f3d9f7; padding-bottom: 6px; }
+  p { margin: 0 0 14px; text-align: justify; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { color: #1f1a24; }
+  a { color: #9c4dcc; }
+  .contact-box {
+    background: #fbeafd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 8px 0 20px;
+  }
+  footer { margin-top: 56px; font-size: 0.85rem; color: #a89aae; text-align: center; }
+
+  .lang-switcher { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f0e4f2; }
+  .lang-select-wrap { position: relative; display: inline-block; }
+  .lang-select-wrap::after {
+    content: "\25BE";
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #9c4dcc; font-size: 0.8rem; pointer-events: none;
+  }
+  select.lang-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    font-family: inherit; font-size: 0.9rem; font-weight: 600; color: #2b2530;
+    background: #fbeafd; border: 1px solid #f0d9f4; border-radius: 10px;
+    padding: 8px 32px 8px 14px; cursor: pointer;
+  }
+  select.lang-select:hover { background: #f6dcfa; }
+  select.lang-select:focus { outline: 2px solid #9c4dcc; outline-offset: 1px; }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher"><span class="lang-select-wrap"><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language / Idioma"><option value="privacidad-es.html">Español</option><option value="privacidad.html">English</option><option value="privacidad-fr.html">Français</option><option value="privacidad-de.html">Deutsch</option><option value="privacidad-pt.html">Português</option><option value="privacidad-it.html">Italiano</option><option value="privacidad-nl.html">Nederlands</option><option value="privacidad-pl.html">Polski</option><option value="privacidad-ru.html">Русский</option><option value="privacidad-uk.html">Українська</option><option value="privacidad-ar.html">العربية</option><option value="privacidad-hi.html">हिन्दी</option><option value="privacidad-bn.html">বাংলা</option><option value="privacidad-am.html">አማርኛ</option><option value="privacidad-az.html">Azərbaycan</option><option value="privacidad-cs.html">Čeština</option><option value="privacidad-da.html">Dansk</option><option value="privacidad-el.html" selected>Ελληνικά</option><option value="privacidad-fa.html">فارسی</option><option value="privacidad-fi.html">Suomi</option><option value="privacidad-fil.html">Filipino</option><option value="privacidad-gu.html">ગુજરાતી</option><option value="privacidad-ha.html">Hausa</option><option value="privacidad-he.html">עברית</option><option value="privacidad-hu.html">Magyar</option><option value="privacidad-id.html">Bahasa Indonesia</option><option value="privacidad-ja.html">日本語</option><option value="privacidad-kk.html">Қазақ</option><option value="privacidad-kn.html">ಕನ್ನಡ</option><option value="privacidad-ko.html">한국어</option><option value="privacidad-ln.html">Lingála</option><option value="privacidad-ml.html">മലയാളം</option><option value="privacidad-mr.html">मराठी</option><option value="privacidad-ms.html">Bahasa Melayu</option><option value="privacidad-my.html">မြန်မာ</option><option value="privacidad-ne.html">नेपाली</option><option value="privacidad-om.html">Afaan Oromoo</option><option value="privacidad-pa.html">ਪੰਜਾਬੀ</option><option value="privacidad-ro.html">Română</option><option value="privacidad-si.html">සිංහල</option><option value="privacidad-sk.html">Slovenčina</option><option value="privacidad-sv.html">Svenska</option><option value="privacidad-sw.html">Kiswahili</option><option value="privacidad-ta.html">தமிழ்</option><option value="privacidad-te.html">తెలుగు</option><option value="privacidad-th.html">ไทย</option><option value="privacidad-tr.html">Türkçe</option><option value="privacidad-ur.html">اردو</option><option value="privacidad-uz.html">Oʻzbek</option><option value="privacidad-vi.html">Tiếng Việt</option><option value="privacidad-wo.html">Wolof</option><option value="privacidad-yo.html">Yorùbá</option><option value="privacidad-zh.html">简体中文</option><option value="privacidad-zh-TW.html">繁體中文</option><option value="privacidad-zu.html">isiZulu</option></select></span></div>
+<h1>Πολιτική απορρήτου του CicloPlus</h1>
+<p class="updated">Τελευταία ενημέρωση: 20 Νοεμβρίου 2026</p>
+<p class="translation-note">Αυτή είναι μια μετάφραση για τη διευκόλυνσή σας. Σε περίπτωση διαφοράς, υπερισχύει η αρχική ισπανική έκδοση.</p>
+<p>Αυτή η Πολιτική απορρήτου εξηγεί ποια δεδομένα συλλέγει το CicloPlus («η εφαρμογή», «εμείς»), πώς χρησιμοποιούνται, πού αποθηκεύονται και τι έλεγχο έχετε σε αυτά. Το CicloPlus είναι εφαρμογή παρακολούθησης εμμηνορρυσιακού κύκλου και γονιμότητας και χειρίζεται τις πληροφορίες υγείας που εισάγετε με τη φροντίδα που απαιτεί αυτό το είδος δεδομένων.</p>
+<p>Χρησιμοποιώντας το CicloPlus αποδέχεστε τις πρακτικές που περιγράφονται σε αυτό το έγγραφο. Αν δεν συμφωνείτε, μη χρησιμοποιείτε την εφαρμογή.</p>
+<h2>1. Υπεύθυνος επεξεργασίας</h2>
+<p>Το CicloPlus αναπτύσσεται και λειτουργεί από ανεξάρτητο προγραμματιστή. Για οποιαδήποτε ερώτηση σχετικά με αυτή την πολιτική ή τα δεδομένα σας, γράψτε στο:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<h2>2. Ποια δεδομένα συλλέγουμε</h2>
+<p><strong>Δεδομένα λογαριασμού.</strong> Για να χρησιμοποιήσετε το CicloPlus δημιουργείτε λογαριασμό με email και κωδικό, που διαχειρίζεται το Firebase Authentication (υπηρεσία της Google). Αποθηκεύουμε το email σας και την ημερομηνία δημιουργίας του λογαριασμού.</p>
+<p><strong>Δεδομένα κύκλου και υγείας που εισάγετε.</strong> Ό,τι καταγράφετε στο ημερήσιο ημερολόγιο: ημερομηνίες περιόδου, ροή, τραχηλική βλέννα, βασική θερμοκρασία, συμπτώματα, διάθεση, βάρος, ώρες ύπνου, νερό, σημειώσεις ημερολογίου, σεξουαλική δραστηριότητα, υπενθυμίσεις αντισύλληψης, ιατρικά ραντεβού και, αν ενεργοποιήσετε τη λειτουργία εγκυμοσύνης, δεδομένα εγκυμοσύνης. Πρόκειται για ευαίσθητα δεδομένα υγείας που συλλέγονται μόνο αν επιλέξετε να τα εισαγάγετε: κανένα πεδίο δεν είναι υποχρεωτικό πέρα από τα απολύτως απαραίτητα για τη λειτουργία του ημερολογίου.</p>
+<p><strong>Συνημμένες φωτογραφίες.</strong> Αν επισυνάψετε φωτογραφία σε καταχώριση ημερολογίου, αποθηκεύεται μαζί με την καταχώριση.</p>
+<p><strong>Συγχρονισμός με Υγεία/Google Fit (προαιρετικός).</strong> Αν ενεργοποιήσετε χειροκίνητα από τις Ρυθμίσεις τον συγχρονισμό με Apple Υγεία (HealthKit) ή Google Fit (Health Connect), η εφαρμογή μπορεί να διαβάζει και να γράφει βάρος, ύπνο, θερμοκρασία σώματος και εμμηνορρυσιακή ροή στην πλατφόρμα αυτή της συσκευής σας. Η λειτουργία είναι απενεργοποιημένη από προεπιλογή και ενεργοποιείται μόνο με τη ρητή άδειά σας· μπορείτε να την απενεργοποιήσετε ανά πάσα στιγμή από τις Ρυθμίσεις ή να ανακαλέσετε την άδεια από τις ρυθμίσεις υγείας της συσκευής.</p>
+<p><strong>Προτιμήσεις εφαρμογής.</strong> Η γλώσσα, το χρώμα θέματος, ο κωδικός PIN (αν ενεργοποιήσετε το κλείδωμα PIN) και άλλες προτιμήσεις αποθηκεύονται τοπικά στη συσκευή σας.</p>
+<p>Δεν συλλέγουμε τοποθεσία, επαφές, διαφημιστικά αναγνωριστικά ή δεδομένα κοινωνικών δικτύων. Δεν εμφανίζουμε διαφημίσεις και δεν χρησιμοποιούμε εργαλεία ανάλυσης ή διαφημιστικής παρακολούθησης τρίτων.</p>
+<p><strong>Συνδρομή Premium (προαιρετική).</strong> Αν εγγραφείτε στο CicloPlus Premium, την πληρωμή διαχειρίζεται το Google Play (ή το Apple App Store στο iPhone). Δεν βλέπουμε ούτε αποθηκεύουμε ποτέ τα στοιχεία της κάρτας σας. Για να ελέγξουμε αν η συνδρομή είναι ενεργή χρησιμοποιούμε το RevenueCat, που λαμβάνει το ιστορικό αγορών της συνδρομής και ένα ανώνυμο αναγνωριστικό χρήστη.</p>
+<h2>3. Πώς αποθηκεύονται τα δεδομένα σας</h2>
+<p><strong>Αποθήκευση στο cloud (Firebase).</strong> Τα δεδομένα του κύκλου σας αποθηκεύονται στο Cloud Firestore, βάση δεδομένων του Google Firebase, συνδεδεμένα μόνο με τον λογαριασμό σας (αναγνωριστικό χρήστη). Έτσι διατηρούνται αν αλλάξετε συσκευή ή επανεγκαταστήσετε την εφαρμογή.</p>
+<p><strong>Τοπικό αντίγραφο στη συσκευή.</strong> Η εφαρμογή κρατά επίσης τοπικό αντίγραφο (cache) στο τηλέφωνό σας, ώστε να βλέπετε τα δεδομένα σας χωρίς internet. Το αντίγραφο συγχρονίζεται αυτόματα με το cloud μόλις επανέλθει η σύνδεση.</p>
+<p><strong>Κρυπτογράφηση.</strong> Η επικοινωνία μεταξύ εφαρμογής και Firebase είναι κρυπτογραφημένη (HTTPS/TLS). Το Firebase κρυπτογραφεί τα αποθηκευμένα δεδομένα στους διακομιστές του σύμφωνα με τα πρότυπα του Google Cloud.</p>
+<p><strong>Αντίγραφο ασφαλείας ρυθμίσεων.</strong> Για να μη χάσετε τίποτα όταν αλλάζετε τηλέφωνο, αποθηκεύουμε επίσης στον λογαριασμό σας Firebase τις ρυθμίσεις της εφαρμογής και την πρόοδο του Μίτσι. Ο κωδικός PIN και οι φωτογραφίες σας δεν αποθηκεύονται.</p>
+<h2>4. Με ποιους μοιραζόμαστε δεδομένα</h2>
+<p>Το CicloPlus δεν πουλά τα δεδομένα σας ούτε τα μοιράζεται με διαφημιστές. Μοιραζόμαστε πληροφορίες μόνο με:</p>
+<ul>
+  <li>Google Firebase (Firebase Authentication και Cloud Firestore): ο πάροχος υποδομής μας για σύνδεση και αποθήκευση δεδομένων. Η Google επεξεργάζεται αυτά τα δεδομένα για λογαριασμό μας, σύμφωνα με τις δικές της δεσμεύσεις ασφάλειας και προστασίας δεδομένων ως εκτελούσα την επεξεργασία.</li>
+  <li>RevenueCat και Google Play / Apple App Store: μόνο αν εγγραφείτε στο Premium, για την επεξεργασία της πληρωμής και τον έλεγχο της συνδρομής. Λαμβάνουν το ιστορικό αγορών και ένα ανώνυμο αναγνωριστικό χρήστη, ποτέ τα δεδομένα υγείας σας.</li>
+  <li>Apple Υγεία / Google Health Connect: μόνο αν ενεργοποιήσετε οικειοθελώς τον συγχρονισμό της ενότητας 2 και μόνο για τους τύπους δεδομένων που εγκρίνετε.</li>
+</ul>
+<p>Δεν μοιραζόμαστε τα δεδομένα σας με ασφαλιστικές, εργοδότες, κοινωνικά δίκτυα ή άλλους τρίτους για εμπορικούς ή διαφημιστικούς σκοπούς. Δεν θα αποκαλύψουμε τα δεδομένα υγείας σας σε τρίτους, εκτός αν το απαιτεί ο νόμος (π.χ. έγκυρη δικαστική απόφαση).</p>
+<h2>5. Ειδοποιήσεις</h2>
+<p>Αν ενεργοποιήσετε υπενθυμίσεις (για καθημερινή καταγραφή, αντισύλληψη ή ιατρικά ραντεβού), το λειτουργικό σύστημα τις προγραμματίζει και τις εμφανίζει τοπικά στη συσκευή σας. Δεν περνούν από τους διακομιστές μας και δεν συνεπάγονται κοινοποίηση δεδομένων σε τρίτους.</p>
+<h2>6. Τα δικαιώματά σας και ο έλεγχος των δεδομένων σας</h2>
+<ul>
+  <li><strong>Πρόσβαση και επεξεργασία:</strong> μπορείτε να δείτε και να αλλάξετε όλα τα δεδομένα που εισαγάγατε απευθείας στην εφαρμογή.</li>
+  <li><strong>Εξαγωγή:</strong> μπορείτε να εξαγάγετε τα δεδομένα σας σε PDF ή να κάνετε χειροκίνητο αντίγραφο ασφαλείας από τις Ρυθμίσεις.</li>
+  <li><strong>Διαγραφή καταχώρισης:</strong> μπορείτε να διαγράψετε οποιαδήποτε μεμονωμένη καταχώριση από τον επεξεργαστή ημέρας.</li>
+  <li><strong>Διαγραφή λογαριασμού και όλων των δεδομένων:</strong> μπορείτε να το ζητήσετε γράφοντας στο <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a>. Θα διαγράψουμε τον λογαριασμό σας Firebase Authentication και όλα τα δεδομένα σας στο Firestore σε εύλογο χρονικό διάστημα.</li>
+  <li><strong>Ανάκληση συγχρονισμού Υγεία/Google Fit:</strong> απενεργοποιήστε τον στις Ρυθμίσεις ή ανακαλέστε την άδεια οποτεδήποτε από τις ρυθμίσεις υγείας του συστήματος.</li>
+</ul>
+<p>Αν διαμένετε στην Ευρωπαϊκή Ένωση, στον Ευρωπαϊκό Οικονομικό Χώρο ή σε δικαιοδοσία με αντίστοιχους νόμους προστασίας δεδομένων (όπως ο ΓΚΠΔ), έχετε επίσης δικαίωμα φορητότητας δεδομένων και υποβολής καταγγελίας στην τοπική αρχή προστασίας δεδομένων.</p>
+<h2>7. Ανήλικοι</h2>
+<p>Το CicloPlus δεν απευθύνεται σε παιδιά κάτω των 13 ετών και δεν συλλέγουμε εν γνώσει μας δεδομένα ατόμων κάτω από αυτή την ηλικία. Αν πιστεύετε ότι ανήλικος μας έδωσε δεδομένα, επικοινωνήστε στο <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a> για να τα διαγράψουμε.</p>
+<h2>8. Διατήρηση δεδομένων</h2>
+<p>Διατηρούμε τα δεδομένα σας όσο ο λογαριασμός σας είναι ενεργός. Αν διαγράψετε τον λογαριασμό σας, τα δεδομένα κύκλου και προφίλ αφαιρούνται από τους διακομιστές μας όπως περιγράφεται στην ενότητα 6. Το τοπικό αντίγραφο στη συσκευή διαγράφεται όταν απεγκαταστήσετε την εφαρμογή.</p>
+<h2>9. Αλλαγές σε αυτή την πολιτική</h2>
+<p>Μπορεί να ενημερώνουμε κατά καιρούς αυτή την Πολιτική απορρήτου, για παράδειγμα όταν προσθέτουμε νέες λειτουργίες. Θα δημοσιεύουμε τις αλλαγές σε αυτή τη σελίδα με νέα ημερομηνία «τελευταίας ενημέρωσης». Αν η αλλαγή είναι σημαντική, θα σας ενημερώσουμε και μέσα στην εφαρμογή.</p>
+<h2>10. Επικοινωνία</h2>
+<p>Για οποιαδήποτε ερώτηση σχετικά με αυτή την πολιτική, τα δεδομένα σας ή για την άσκηση των δικαιωμάτων σας, γράψτε μας στο:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<footer>CicloPlus &middot; Πολιτική απορρήτου</footer>
+
+</body>
+</html>

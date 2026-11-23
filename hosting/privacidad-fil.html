@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patakaran sa Privacy ng CicloPlus</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+    color: #2b2530;
+    line-height: 1.6;
+    background: #fffafc;
+  }
+  h1 { font-size: 1.9rem; margin-bottom: 4px; color: #1f1a24; }
+  .updated { color: #8a7f8e; font-style: italic; margin-bottom: 8px; font-size: 0.95rem; }
+  .translation-note { color: #8a7f8e; font-size: 0.85rem; margin-bottom: 32px; }
+  h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; color: #9c4dcc; border-bottom: 2px solid #f3d9f7; padding-bottom: 6px; }
+  p { margin: 0 0 14px; text-align: justify; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { color: #1f1a24; }
+  a { color: #9c4dcc; }
+  .contact-box {
+    background: #fbeafd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 8px 0 20px;
+  }
+  footer { margin-top: 56px; font-size: 0.85rem; color: #a89aae; text-align: center; }
+
+  .lang-switcher { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f0e4f2; }
+  .lang-select-wrap { position: relative; display: inline-block; }
+  .lang-select-wrap::after {
+    content: "\25BE";
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #9c4dcc; font-size: 0.8rem; pointer-events: none;
+  }
+  select.lang-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    font-family: inherit; font-size: 0.9rem; font-weight: 600; color: #2b2530;
+    background: #fbeafd; border: 1px solid #f0d9f4; border-radius: 10px;
+    padding: 8px 32px 8px 14px; cursor: pointer;
+  }
+  select.lang-select:hover { background: #f6dcfa; }
+  select.lang-select:focus { outline: 2px solid #9c4dcc; outline-offset: 1px; }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher"><span class="lang-select-wrap"><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language / Idioma"><option value="privacidad-es.html">Español</option><option value="privacidad.html">English</option><option value="privacidad-fr.html">Français</option><option value="privacidad-de.html">Deutsch</option><option value="privacidad-pt.html">Português</option><option value="privacidad-it.html">Italiano</option><option value="privacidad-nl.html">Nederlands</option><option value="privacidad-pl.html">Polski</option><option value="privacidad-ru.html">Русский</option><option value="privacidad-uk.html">Українська</option><option value="privacidad-ar.html">العربية</option><option value="privacidad-hi.html">हिन्दी</option><option value="privacidad-bn.html">বাংলা</option><option value="privacidad-am.html">አማርኛ</option><option value="privacidad-az.html">Azərbaycan</option><option value="privacidad-cs.html">Čeština</option><option value="privacidad-da.html">Dansk</option><option value="privacidad-el.html">Ελληνικά</option><option value="privacidad-fa.html">فارسی</option><option value="privacidad-fi.html">Suomi</option><option value="privacidad-fil.html" selected>Filipino</option><option value="privacidad-gu.html">ગુજરાતી</option><option value="privacidad-ha.html">Hausa</option><option value="privacidad-he.html">עברית</option><option value="privacidad-hu.html">Magyar</option><option value="privacidad-id.html">Bahasa Indonesia</option><option value="privacidad-ja.html">日本語</option><option value="privacidad-kk.html">Қазақ</option><option value="privacidad-kn.html">ಕನ್ನಡ</option><option value="privacidad-ko.html">한국어</option><option value="privacidad-ln.html">Lingála</option><option value="privacidad-ml.html">മലയാളം</option><option value="privacidad-mr.html">मराठी</option><option value="privacidad-ms.html">Bahasa Melayu</option><option value="privacidad-my.html">မြန်မာ</option><option value="privacidad-ne.html">नेपाली</option><option value="privacidad-om.html">Afaan Oromoo</option><option value="privacidad-pa.html">ਪੰਜਾਬੀ</option><option value="privacidad-ro.html">Română</option><option value="privacidad-si.html">සිංහල</option><option value="privacidad-sk.html">Slovenčina</option><option value="privacidad-sv.html">Svenska</option><option value="privacidad-sw.html">Kiswahili</option><option value="privacidad-ta.html">தமிழ்</option><option value="privacidad-te.html">తెలుగు</option><option value="privacidad-th.html">ไทย</option><option value="privacidad-tr.html">Türkçe</option><option value="privacidad-ur.html">اردو</option><option value="privacidad-uz.html">Oʻzbek</option><option value="privacidad-vi.html">Tiếng Việt</option><option value="privacidad-wo.html">Wolof</option><option value="privacidad-yo.html">Yorùbá</option><option value="privacidad-zh.html">简体中文</option><option value="privacidad-zh-TW.html">繁體中文</option><option value="privacidad-zu.html">isiZulu</option></select></span></div>
+<h1>Patakaran sa Privacy ng CicloPlus</h1>
+<p class="updated">Huling na-update: Nobyembre 20, 2026</p>
+<p class="translation-note">Ito ay salin para sa iyong kaginhawahan. Kung may pagkakaiba, ang orihinal na bersyon sa Espanyol ang masusunod.</p>
+<p>Ipinapaliwanag ng Patakaran sa Privacy na ito kung anong data ang kinokolekta ng CicloPlus («ang app», «kami»), paano ito ginagamit, saan ito iniimbak, at anong kontrol ang mayroon ka rito. Ang CicloPlus ay app para subaybayan ang regla at fertility, at inaalagaan nito ang impormasyong pangkalusugan na inilalagay mo ayon sa ingat na kailangan ng ganitong uri ng data.</p>
+<p>Sa paggamit ng CicloPlus, tinatanggap mo ang mga gawaing inilarawan sa dokumentong ito. Kung hindi ka sang-ayon, huwag gamitin ang app.</p>
+<h2>1. Tagakontrol ng data</h2>
+<p>Ang CicloPlus ay binuo at pinapatakbo ng isang independiyenteng developer. Para sa anumang tanong tungkol sa patakarang ito o sa iyong data, sumulat sa:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<h2>2. Anong data ang kinokolekta namin</h2>
+<p><strong>Data ng account.</strong> Para magamit ang CicloPlus, gagawa ka ng account gamit ang email at password, na pinamamahalaan ng Firebase Authentication (serbisyo ng Google). Iniimbak namin ang iyong email at ang petsa ng paggawa ng account.</p>
+<p><strong>Data ng cycle at kalusugan na inilalagay mo.</strong> Lahat ng itinatala mo sa pang-araw-araw na kalendaryo: petsa ng regla, daloy, cervical mucus, basal na temperatura, sintomas, mood, timbang, oras ng tulog, iniinom na tubig, tala sa diary, sekswal na aktibidad, paalala sa kontraseptibo, appointment sa doktor at, kung bubuksan mo ang pregnancy mode, data tungkol sa pagbubuntis. Ito ay sensitibong data pangkalusugan at kinokolekta lamang kung pipiliin mong ilagay ito: walang field na sapilitan maliban sa talagang kailangan para gumana ang kalendaryo.</p>
+<p><strong>Mga naka-attach na larawan.</strong> Kung mag-a-attach ka ng larawan sa isang tala sa diary, iniimbak ang larawan kasama ng tala.</p>
+<p><strong>Pag-sync sa Health/Google Fit (opsyonal).</strong> Kung mano-mano mong bubuksan sa Settings ang pag-sync sa Apple Health (HealthKit) o Google Fit (Health Connect), maaaring basahin at isulat ng app ang timbang, tulog, temperatura ng katawan at daloy ng regla sa platform na iyon sa iyong device. Naka-off ito bilang default at bubuksan lamang kung malinaw kang nagbigay ng pahintulot; maaari mo itong i-off anumang oras sa Settings o bawiin ang pahintulot sa health settings ng iyong device.</p>
+<p><strong>Mga kagustuhan sa app.</strong> Ang napili mong wika, kulay ng tema, PIN code (kung bubuksan mo ang PIN lock) at iba pang kagustuhan ay iniimbak nang lokal sa iyong device.</p>
+<p>Hindi kami nangongolekta ng lokasyon, contact, advertising ID o data ng social media. Hindi kami nagpapakita ng ads at hindi gumagamit ng analytics o ad tracking tools ng third party.</p>
+<p><strong>Premium na subscription (opsyonal).</strong> Kung mag-subscribe ka sa CicloPlus Premium, ang bayad ay pinoproseso ng Google Play (o Apple App Store sa iPhone). Hindi namin kailanman nakikita o iniimbak ang detalye ng iyong card. Para malaman kung aktibo ang subscription mo, gumagamit kami ng RevenueCat, na tumatanggap ng kasaysayan ng pagbili ng subscription at isang anonymous na user ID.</p>
+<h2>3. Paano iniimbak ang iyong data</h2>
+<p><strong>Imbakan sa cloud (Firebase).</strong> Ang mga tala ng iyong cycle ay iniimbak sa Cloud Firestore, isang database ng Google Firebase, na naka-link lamang sa iyong account (user ID). Dahil dito, nananatili ang data kahit magpalit ka ng device o mag-install muli ng app.</p>
+<p><strong>Lokal na kopya sa iyong device.</strong> Nagtatabi rin ang app ng lokal na kopya (cache) sa iyong telepono para makita mo ang data kahit walang internet. Awtomatiko itong nagsi-sync sa cloud kapag bumalik ang koneksyon.</p>
+<p><strong>Encryption.</strong> Naka-encrypt ang komunikasyon ng app at Firebase (HTTPS/TLS). Ine-encrypt ng Firebase ang naka-imbak na data sa mga server nito ayon sa pamantayan ng Google Cloud.</p>
+<p><strong>Backup ng iyong settings.</strong> Para wala kang mawala kapag nagpalit ka ng telepono, iniimbak din namin sa iyong Firebase account ang settings ng app at ang progreso ni Michi. Hindi iniimbak ang iyong PIN at mga larawan.</p>
+<h2>4. Kanino namin ibinabahagi ang data</h2>
+<p>Hindi ibinebenta ng CicloPlus ang iyong data at hindi ito ibinabahagi sa mga advertiser. Nagbabahagi lamang kami ng impormasyon sa:</p>
+<ul>
+  <li>Google Firebase (Firebase Authentication at Cloud Firestore): ang aming infrastructure provider para sa pag-login at pag-iimbak ng data. Pinoproseso ng Google ang data na ito para sa amin, ayon sa sarili nitong mga pangako sa seguridad at proteksyon ng data bilang data processor.</li>
+  <li>RevenueCat at Google Play / Apple App Store: kung mag-subscribe ka lamang sa Premium, para iproseso ang bayad at tiyaking aktibo ang subscription. Tumatanggap sila ng kasaysayan ng pagbili at anonymous na user ID, hindi kailanman ang iyong data pangkalusugan.</li>
+  <li>Apple Health / Google Health Connect: kung kusa mong bubuksan lamang ang pag-sync sa seksyon 2, at para lamang sa mga uri ng data na pinahintulutan mo.</li>
+</ul>
+<p>Hindi namin ibinabahagi ang iyong data sa mga insurer, employer, social network o anumang third party para sa layuning pangkomersyo o advertising. Hindi namin ibubunyag ang iyong data pangkalusugan sa third party maliban kung hinihingi ng batas (halimbawa, isang balidong utos ng korte).</p>
+<h2>5. Mga notification</h2>
+<p>Kung bubuksan mo ang mga paalala (pang-araw-araw na pagtatala, kontraseptibo o appointment sa doktor), iniiskedyul at ipinapakita ang mga ito nang lokal sa iyong device ng operating system. Hindi dumaraan ang mga ito sa aming mga server at walang ibinabahaging data sa third party.</p>
+<h2>6. Iyong mga karapatan at kontrol sa data</h2>
+<ul>
+  <li><strong>Pag-access at pag-edit:</strong> maaari mong tingnan at baguhin ang lahat ng data na inilagay mo direkta sa app.</li>
+  <li><strong>Pag-export:</strong> maaari mong i-export ang mga tala sa PDF o gumawa ng manu-manong backup sa Settings.</li>
+  <li><strong>Pagbura ng tala:</strong> maaari mong burahin ang anumang tala sa editor ng araw.</li>
+  <li><strong>Pagbura ng account at lahat ng data:</strong> maaari mo itong hilingin sa pagsulat sa <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a>. Buburahin namin ang iyong Firebase Authentication account at lahat ng iyong tala sa Firestore sa makatwirang panahon.</li>
+  <li><strong>Pagbawi sa pag-sync sa Health/Google Fit:</strong> i-off ito sa Settings o bawiin ang pahintulot anumang oras sa health settings ng operating system.</li>
+</ul>
+<p>Kung nakatira ka sa European Union, European Economic Area o lugar na may katumbas na batas sa proteksyon ng data (gaya ng GDPR), may karapatan ka rin sa data portability at maghain ng reklamo sa lokal na awtoridad sa proteksyon ng data.</p>
+<h2>7. Mga menor de edad</h2>
+<p>Ang CicloPlus ay hindi para sa mga batang wala pang 13 taong gulang at hindi kami sadyang nangongolekta ng data mula sa sinumang mas bata roon. Kung sa tingin mo ay may menor de edad na nagbigay sa amin ng data, makipag-ugnayan sa <a href="mailto:soportelambert@gmail.com">soportelambert@gmail.com</a> para mabura namin ito.</p>
+<h2>8. Pagtatago ng data</h2>
+<p>Itinatago namin ang iyong data hangga’t aktibo ang iyong account. Kung buburahin mo ang account, aalisin sa aming mga server ang data ng cycle at profile gaya ng inilarawan sa seksyon 6. Nabubura ang lokal na kopya sa device kapag in-uninstall mo ang app.</p>
+<h2>9. Mga pagbabago sa patakarang ito</h2>
+<p>Maaari naming i-update ang Patakaran sa Privacy na ito paminsan-minsan, halimbawa kapag nagdagdag ng bagong feature. Ipapaskil namin ang mga pagbabago sa pahinang ito na may bagong petsang «huling na-update». Kung mahalaga ang pagbabago, aabisuhan ka rin namin sa app.</p>
+<h2>10. Makipag-ugnayan</h2>
+<p>Para sa anumang tanong tungkol sa patakarang ito, sa iyong data o para gamitin ang iyong mga karapatan, sumulat sa amin sa:</p>
+<div class="contact-box">soportelambert@gmail.com</div>
+<footer>CicloPlus &middot; Patakaran sa Privacy</footer>
+
+</body>
+</html>
