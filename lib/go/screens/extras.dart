@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -96,16 +98,50 @@ Future<void> pickPhoto(BuildContext context) async {
     }
     return;
   }
+  // Solo se avisa si algo falla (foto enorme, formato raro, sin permiso…).
+  void fail(String es, String en) {
+    if (context.mounted) toast(context, tr(es, en));
+  }
+
+  XFile? x;
   try {
-    final x = await ImagePicker().pickImage(
+    x = await ImagePicker().pickImage(
       source: choice == 'camera' ? ImageSource.camera : ImageSource.gallery,
       maxWidth: 800,
       maxHeight: 800,
       imageQuality: 85,
     );
-    if (x == null || s.docsPath.isEmpty) return;
+  } on PlatformException catch (e) {
+    final denied = e.code.contains('access_denied') || e.code.contains('permission');
+    if (denied) {
+      fail(choice == 'camera' ? 'Sin permiso para usar la cámara. Actívalo en los ajustes del móvil.' : 'Sin permiso para ver tus fotos. Actívalo en los ajustes del móvil.',
+          choice == 'camera' ? 'No permission to use the camera. Turn it on in your phone settings.' : 'No permission to see your photos. Turn it on in your phone settings.');
+    } else {
+      fail('No se pudo abrir la foto. Prueba con otra.', 'Could not open the photo. Try another one.');
+    }
+    return;
+  } catch (_) {
+    fail('Error: la foto es demasiado grande o no se puede leer. Prueba con otra.', 'Error: the photo is too large or cannot be read. Try another one.');
+    return;
+  }
+  if (x == null) return; // canceló: no es un error
+  if (s.docsPath.isEmpty) {
+    fail('No se pudo guardar la foto. Inténtalo de nuevo.', 'Could not save the photo. Please try again.');
+    return;
+  }
+  try {
+    final bytes = await x.readAsBytes();
+    // Más de 15 MB después de reducirla: algo raro (foto enorme o vídeo).
+    if (bytes.length > 15 * 1024 * 1024) {
+      fail('Error: la foto es demasiado grande. Prueba con otra más pequeña.', 'Error: the photo is too large. Try a smaller one.');
+      return;
+    }
+    // Comprobamos que de verdad es una imagen que se puede mostrar.
+    final codec = await ui.instantiateImageCodec(bytes, targetWidth: 64);
+    await codec.getNextFrame();
+    codec.dispose();
     final name = 'perfil_${DateTime.now().millisecondsSinceEpoch}.jpg';
-    await File(x.path).copy('${s.docsPath}/$name');
+    await File('${s.docsPath}/$name').writeAsBytes(bytes, flush: true);
     s.photoName = name;
     await s.commit();
     if (old != null) {
@@ -113,8 +149,9 @@ Future<void> pickPhoto(BuildContext context) async {
         await File(old).delete();
       } catch (_) {}
     }
-  } catch (e) {
-    if (context.mounted) toast(context, tr('No se pudo cargar la foto', 'Could not load the photo'));
+  } catch (_) {
+    fail('Error: la foto es demasiado grande o tiene un formato que no se puede usar. Prueba con otra.',
+        'Error: the photo is too large or in a format that cannot be used. Try another one.');
   }
 }
 
@@ -181,6 +218,7 @@ class PeriodCycleScreen extends StatelessWidget {
                       label: tr('Se me ha terminado hoy', 'It ended today'),
                       icon: Icons.check_rounded,
                       onTap: () async {
+                        await s.markPeriodEnded();
                         var d = addDays(today, 1);
                         while (s.isPeriodDay(d)) {
                           final l = s.logFor(d)..flow = 0;
@@ -204,8 +242,26 @@ class PeriodCycleScreen extends StatelessWidget {
                 children: [
                   Text(tr('Mis duraciones habituales', 'My usual lengths'), style: _h),
                   const SizedBox(height: 4),
-                  Text(tr('Se usan hasta que tengamos suficientes registros tuyos.', 'Used until we have enough of your logs.'), style: _b),
-                  const SizedBox(height: 10),
+                  Text(tr('La app aprende de ti: con cada ciclo que registras se fía más de tus registros y menos de este ajuste (del todo a partir de 3).',
+                      'The app learns from you: with each cycle you log it trusts your logs more and this setting less (fully from 3).'), style: _b),
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    dense: true,
+                    title: Text(tr('Aprender de mis registros', 'Learn from my logs'), style: const TextStyle(fontWeight: FontWeight.w800)),
+                    subtitle: Text(
+                        s.learnFromLogs
+                            ? tr('Activado: la app se adapta a tus ciclos reales.', 'On: the app adapts to your real cycles.')
+                            : tr('Desactivado: siempre usa los días que pongas aquí.', 'Off: always uses the days you set here.'),
+                        style: const TextStyle(fontSize: 12)),
+                    value: s.learnFromLogs,
+                    activeColor: Colors.white,
+                    activeTrackColor: const Color(0xFF2FB45A),
+                    onChanged: (v) {
+                      s.learnFromLogs = v;
+                      s.commit();
+                    },
+                  ),
+                  const SizedBox(height: 6),
                   Row(children: [
                     Expanded(child: Text(tr('Ciclo', 'Cycle'), style: const TextStyle(fontWeight: FontWeight.w700))),
                     Stepper2(
@@ -231,6 +287,15 @@ class PeriodCycleScreen extends StatelessWidget {
                           s.commit();
                         }),
                   ]),
+                  const SizedBox(height: 10),
+                  Text(
+                    '${tr('Ahora la app usa', 'The app now uses')}: '
+                    '${tr('ciclo', 'cycle')} ${s.avgCycle} d '
+                    '(${s.manualCycle > 0 ? tr('ajuste manual en Yo', 'manual setting in Me') : s.cycleFromLogs ? tr('de tus registros', 'from your logs') : s.learnedCycles > 0 ? tr('aprendiendo: ', 'learning: ') + '${s.learnedCycles}/3' : tr('este ajuste', 'this setting')}) · '
+                    '${tr('regla', 'period')} ${s.avgPeriod} d '
+                    '(${s.manualPeriod > 0 ? tr('ajuste manual en Yo', 'manual setting in Me') : s.periodFromLogs ? tr('de tus registros', 'from your logs') : s.learnedPeriods > 0 ? tr('aprendiendo: ', 'learning: ') + '${s.learnedPeriods}/3' : tr('este ajuste', 'this setting')})',
+                    style: TextStyle(fontSize: 12, color: C.pinkDark, fontWeight: FontWeight.w700),
+                  ),
                 ],
               )),
               Padding(
@@ -353,8 +418,8 @@ class _ReportScreenBody extends StatelessWidget {
               for (final p in preds) ...[
                 _predRow('🩸', tr('Periodo', 'Period'), '${L.dateShort(p)} – ${L.dateShort(addDays(p, s.avgPeriod - 1))}'),
                 _predRow('🌱', tr('Días fértiles', 'Fertile days'),
-                    '${L.dateShort(addDays(p, s.avgCycle - 14 - 5))} – ${L.dateShort(addDays(p, s.avgCycle - 14 + 1))}'),
-                _predRow('🥚', tr('Ovulación', 'Ovulation'), L.dateShort(addDays(p, s.avgCycle - 14))),
+                    '${L.dateShort(addDays(p, s.ovulationOffset - 5))} – ${L.dateShort(addDays(p, s.ovulationOffset + 1))}'),
+                _predRow('🥚', tr('Ovulación', 'Ovulation'), L.dateShort(addDays(p, s.ovulationOffset))),
                 Divider(color: C.pinkLine),
               ],
             ],

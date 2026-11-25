@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../l10n/app_strings.dart';
 import '../services/locale_controller.dart';
-import '../theme/app_theme.dart';
 
 /// Bottom sheet reutilizable para TODOS los interruptores de recordatorio
 /// de ReminderScreen: al activarse un switch, en vez de guardar solo un

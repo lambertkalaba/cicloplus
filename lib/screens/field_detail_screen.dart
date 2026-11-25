@@ -232,23 +232,6 @@ class _FieldDetailScreenState extends State<FieldDetailScreen> {
     return v.toStringAsFixed(1);
   }
 
-  /// Descripción de texto para vida sexual: lista los toggles activos ese
-  /// día, mismo vocabulario que usa RegisterScreen/day_editor.
-  String _sexLifeDescription(AppStrings s, DayEntry entry) {
-    final parts = <String>[];
-    if (entry.unprotected) parts.add(s.sexUnprotectedFullLabel);
-    if (entry.sex && !entry.unprotected) parts.add(s.sexProtectedLabel);
-    if (entry.sexMasturbation) parts.add(s.sexMasturbationLabel);
-    if (entry.sexNoOrgasm) parts.add(s.sexNoOrgasmLabel);
-    if (entry.sexOrgasm) parts.add(s.sexOrgasmLabel);
-    if (entry.sexDesire) parts.add(s.sexDesireLabel);
-    if (entry.sexTimes != null && entry.sexTimes! > 0) {
-      parts.add(s.sexTimesLabel(entry.sexTimes!));
-    }
-    if (parts.isEmpty) return s.sexNoneLabel;
-    return parts.join(' · ');
-  }
-
   String _breastSelfExamDescription(AppStrings s, DayEntry entry) {
     final id = entry.breastSelfExam;
     if (id == null) return '';

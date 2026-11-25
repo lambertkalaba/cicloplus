@@ -11,12 +11,9 @@ import '../widgets/michi_sound.dart';
 import '../widgets/michi_sprite.dart';
 import '../widgets/michi_jokes.dart';
 import '../widgets/ui.dart';
-import 'michi_album.dart';
-import 'michi_game.dart';
 import 'michi_advent.dart';
 import 'michi_extras.dart';
 import 'michi_more.dart';
-import 'michi_stories.dart';
 import 'michi_house.dart';
 import 'michi_wardrobe.dart';
 

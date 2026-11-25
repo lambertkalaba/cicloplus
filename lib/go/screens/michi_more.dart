@@ -10,7 +10,7 @@ import '../widgets/ui.dart';
 import 'michi_advent.dart';
 import 'more.dart' show DiaryScreen;
 import 'michi_extras.dart';
-import 'michi_stories.dart' show MichiStories, StoryParticles, StoryFx;
+import 'michi_stories.dart' show StoryParticles, StoryFx;
 import '../widgets/premium.dart';
 
 /// Contadores pequeños que usan los logros.

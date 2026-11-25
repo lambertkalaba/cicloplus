@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import '../go/data/store.dart' show AppStore;
-import '../go/strings.dart' show L, tr;
+import '../go/strings.dart' show tr;
 import '../go/widgets/cycle_plus.dart' show CycleExtraSettings;
 import '../go/widgets/michi_events.dart' show MichiSettings;
 import '../go/widgets/avatar_picker.dart' show AvatarSettings;
@@ -25,20 +25,15 @@ import '../services/partner_service.dart';
 import '../services/pdf_report_service.dart';
 import '../services/reminder_service.dart';
 import '../services/calendar_palette_controller.dart';
-import '../services/calendar_style_controller.dart';
 import '../services/couple_illustration_controller.dart';
 import '../services/settings_service.dart';
 import '../services/storage_service.dart';
-import '../services/subscription_service.dart' show kPaywallEnabled;
 import '../services/theme_controller.dart';
 import '../theme/app_theme.dart';
-import '../widgets/coming_soon_sheet.dart';
 import '../widgets/conceive_intake_sheet.dart';
 import 'apple_watch_screen.dart';
 import 'lock_screen.dart';
-import 'register_card_order_screen.dart';
 import 'paywall_screen.dart';
-import 'pregnancy_tracking_screen.dart';
 import 'reminder_screen.dart';
 import 'widget_placeholder_screen.dart';
 import '../go/data/store.dart' as gostore;
@@ -372,150 +367,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  /// Hoja "Personalizar colores" — deja elegir los 7 colores de la paleta
-  /// 'custom' uno a uno (Período, Previsto relleno/borde, Fértil
-  /// relleno/borde, Hoy, Ovulación), con vista previa en vivo, y los
-  /// guarda de golpe en CalendarPaletteController al pulsar "Guardar".
-  /// Mismo patrón visual que `_openPredictionConfigSheet` (hoja blanca,
-  /// esquinas redondeadas, tirador arriba) para que se sienta parte de
-  /// la misma pantalla.
-  Future<void> _openCustomPaletteSheet() async {
-    final s = AppStrings.of(context);
-    var draft = CalendarPaletteController.instance.customPalette;
-
-    Future<void> pickFor(
-      StateSetter setSheetState,
-      int current,
-      void Function(int) apply,
-    ) async {
-      final picked = await _showColorSwatchPicker(context, s, current);
-      if (picked != null) {
-        apply(picked);
-        setSheetState(() {});
-      }
-    }
-
-    await showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (sheetContext) {
-        return StatefulBuilder(
-          builder: (sheetContext, setSheetState) {
-            Widget row(String label, int color, void Function(int) apply) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 6),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary)),
-                    ),
-                    _ColorSwatchButton(
-                      color: color,
-                      onTap: () => pickFor(setSheetState, color, apply),
-                    ),
-                  ],
-                ),
-              );
-            }
-
-            return Padding(
-              padding: EdgeInsets.fromLTRB(
-                20,
-                20,
-                20,
-                20 + MediaQuery.of(sheetContext).viewInsets.bottom,
-              ),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Container(
-                        width: 40,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          color: AppColors.border,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 18),
-                    Text(
-                      s.settingsCustomPaletteTitle,
-                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      s.settingsCustomPaletteHint,
-                      style: const TextStyle(fontSize: 12.5, color: AppColors.textMuted),
-                    ),
-                    const SizedBox(height: 8),
-                    _PaletteSwatchDots(palette: draft),
-                    const SizedBox(height: 6),
-                    _cardDivider(),
-                    row(s.settingsCustomPaletteLabelPeriod, draft.periodFill,
-                        (c) => draft = _withColors(draft, periodFill: c)),
-                    row(s.settingsCustomPaletteLabelPredictedFill, draft.predictedFill,
-                        (c) => draft = _withColors(draft, predictedFill: c)),
-                    row(s.settingsCustomPaletteLabelPredictedBorder, draft.predictedBorder,
-                        (c) => draft = _withColors(draft, predictedBorder: c)),
-                    row(s.settingsCustomPaletteLabelFertileFill, draft.fertileFill,
-                        (c) => draft = _withColors(draft, fertileFill: c)),
-                    row(s.settingsCustomPaletteLabelFertileBorder, draft.fertileBorder,
-                        (c) => draft = _withColors(draft, fertileBorder: c)),
-                    row(s.settingsCustomPaletteLabelToday, draft.todayRing,
-                        (c) => draft = _withColors(draft, todayRing: c)),
-                    row(s.settingsCustomPaletteLabelOvulation, draft.ovulationFill,
-                        (c) => draft = _withColors(draft, ovulationFill: c)),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: OutlinedButton(
-                            onPressed: () => Navigator.of(sheetContext).pop(),
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: AppColors.textPrimary,
-                              side: const BorderSide(color: AppColors.border),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                              padding: const EdgeInsets.symmetric(vertical: 13),
-                            ),
-                            child: Text(s.settingsCustomPaletteCancel, style: const TextStyle(fontWeight: FontWeight.w600)),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              await CalendarPaletteController.instance.setCustomPalette(draft);
-                              if (sheetContext.mounted) Navigator.of(sheetContext).pop();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(themeById(_themeId).primary),
-                              foregroundColor: Colors.white,
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                              padding: const EdgeInsets.symmetric(vertical: 13),
-                            ),
-                            child: Text(s.settingsCustomPaletteSave, style: const TextStyle(fontWeight: FontWeight.w600)),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
   /// Copia `base` sustituyendo solo los campos indicados — pequeño helper
   /// para ir construyendo el borrador de la paleta 'custom' color a color
   /// dentro de `_openCustomPaletteSheet` sin repetir los 7 campos cada vez.
@@ -598,11 +449,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Future<void> _toggleWellnessEnabled(bool value) async {
-    setState(() => _wellnessEnabled = value);
-    await _settings.saveWellnessEnabled(value);
-  }
-
   // Devuelve `Future<bool>` (en vez de `Future<void>`) para que
   // AppleWatchScreen pueda conocer el resultado real del intento de
   // activación y actualizar su propio interruptor local; sigue siendo
@@ -631,69 +477,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return granted;
   }
 
-  Future<void> _toggleSexAlwaysVisible(bool value) async {
-    setState(() => _sexAlwaysVisible = value);
-    await _settings.saveSexAlwaysVisible(value);
-  }
-
   Future<void> _selectLanguage(String code) async {
     await LocaleController.instance.setLanguage(code);
     if (mounted) setState(() {});
-  }
-
-  Future<void> _selectTheme(String id) async {
-    setState(() => _themeId = id);
-    // ThemeController notifica a MaterialApp (en main.dart) para que
-    // reconstruya el ThemeData global — así el AppBar de esta misma
-    // pantalla y la barra de estado del sistema Android (que hereda el
-    // mismo color) cambian al instante, sin esperar a reabrir la app.
-    // ThemeController.setThemeId ya guarda el valor, así que no hace
-    // falta llamar también a _settings.saveThemeId aquí.
-    await ThemeController.instance.setThemeId(id);
-    widget.onThemeChanged(id);
-  }
-
-  Future<void> _togglePin(bool value) async {
-    if (value) {
-      final created = await Navigator.of(context).push<bool>(
-        MaterialPageRoute(
-          builder: (_) => LockScreen(
-            mode: LockScreenMode.create,
-            onSuccess: () => Navigator.of(context).pop(true),
-            onCancel: () => Navigator.of(context).pop(false),
-          ),
-          fullscreenDialog: true,
-        ),
-      );
-      if (created == true) {
-        setState(() => _pinEnabled = true);
-        if (mounted) _showSnack(AppStrings.of(context).settingsFaceIdEnabledConfirm);
-      }
-    } else {
-      await _settings.clearPin();
-      setState(() => _pinEnabled = false);
-      if (mounted) _showSnack(AppStrings.of(context).settingsFaceIdDisabledConfirm);
-    }
-  }
-
-  Future<void> _toggleDailyReminder(bool value) async {
-    final updated = _dailyReminder.copyWith(enabled: value);
-    setState(() => _dailyReminder = updated);
-    await _settings.saveDailyReminderSettings(updated);
-    if (value) await _dailyNotifications.requestPermissions();
-    await _dailyNotifications.rescheduleDailyReminder(updated);
-  }
-
-  Future<void> _pickDailyReminderTime() async {
-    final parts = _dailyReminder.time.split(':');
-    final initial = TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
-    final picked = await showTimePicker(context: context, initialTime: initial);
-    if (picked == null) return;
-    final time = '${picked.hour.toString().padLeft(2, '0')}:${picked.minute.toString().padLeft(2, '0')}';
-    final updated = _dailyReminder.copyWith(time: time);
-    setState(() => _dailyReminder = updated);
-    await _settings.saveDailyReminderSettings(updated);
-    await _dailyNotifications.rescheduleDailyReminder(updated);
   }
 
   Future<void> _exportBackup() async {
@@ -774,48 +560,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  Future<void> _openPaywall() async {
-    await Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => const PaywallScreen()),
-    );
-  }
-
   Future<void> _openPrivacyPolicy() async {
     final uri = Uri.parse(privacyPolicyUrlFor(LocaleController.instance.languageCode));
     final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
     if (!opened && mounted) {
       final s = AppStrings.of(context);
       _showSnack(s.settingsPrivacyPolicyError);
-    }
-  }
-
-  /// "Mi objetivo": mismo campo que MeScreen (SettingsService.
-  /// saveUserGoal), y "Seguir mi embarazo" activa el modo embarazo real
-  /// igual que allí, para no crear un estado paralelo que los contradiga.
-  Future<void> _selectGoal(String goal) async {
-    setState(() => _userGoal = goal);
-    await _settings.saveUserGoal(goal);
-    if (goal == 'pregnancy' && !_pregnancy.enabled) {
-      await _togglePregnancy(true);
-    } else if (goal != 'pregnancy' && _pregnancy.enabled) {
-      await _togglePregnancy(false);
-    }
-    // Primera vez que se elige "Intentar concebir": un par de preguntas
-    // rápidas (fecha objetivo, tiempo intentándolo, etc.) para orientar
-    // mejor desde el principio — ver widgets/conceive_intake_sheet.dart.
-    if (goal == 'conceive') {
-      await maybeShowConceiveIntake(context, _settings);
-      // Recarga la duración de ciclo/periodo autoinformadas por si se
-      // respondieron/cambiaron en el cuestionario recién cerrado, para que
-      // "Configuración de predicción" (y el resto de esta pantalla) las
-      // reflejen sin tener que salir y volver a entrar.
-      final selfReportedCycleLen = await _settings.loadConceiveAvgCycleLength();
-      final selfReportedPeriodLen = await _settings.loadConceiveAvgPeriodLength();
-      if (!mounted) return;
-      setState(() {
-        _selfReportedCycleLen = selfReportedCycleLen;
-        _selfReportedPeriodLen = selfReportedPeriodLen;
-      });
     }
   }
 
@@ -871,27 +621,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final updated = _pregnancy.copyWith(lmp: picked);
     setState(() => _pregnancy = updated);
     await _settings.savePregnancySettings(updated);
-    PartnerService().syncPregnancyData(widget.userId);
-  }
-
-  /// Interruptor "¿Esperas mellizos o más de un bebé?": ajusta la fecha
-  /// probable de parto y el resto de los cálculos de semanas a un embarazo
-  /// múltiple (37 semanas en vez de 40) en toda la app — ver
-  /// PregnancyTrackingScreen/PartnerPregnancyScreen/today_screen.
-  Future<void> _toggleTwins(bool value) async {
-    final updated = _pregnancy.copyWith(isTwins: value);
-    setState(() => _pregnancy = updated);
-    await _settings.savePregnancySettings(updated);
-    PartnerService().syncPregnancyData(widget.userId);
-  }
-
-  /// Interruptor "Compartir fotos del bebé con mi pareja": ver
-  /// PartnerPregnancyScreen.hideBabyPhoto. Solo afecta a las imágenes —
-  /// el resto del seguimiento (semana, fechas, consejos) ya se comparte
-  /// en cuanto hay un socio vinculado, independientemente de este ajuste.
-  Future<void> _toggleShareBabyPhotos(bool value) async {
-    setState(() => _shareBabyPhotos = value);
-    await _settings.saveShareBabyPhotos(value);
     PartnerService().syncPregnancyData(widget.userId);
   }
 
@@ -1130,63 +859,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final nextPeriod = predictor.predictNextPeriod();
     final ovulation = predictor.predictOvulation(nextPeriod);
     _reminderService.reschedule(settings, nextPeriod, ovulationDate: ovulation);
-  }
-
-  /// Acceso adicional desde Configuración a la pantalla "Recordatorio" (ya
-  /// existe como 4ª pestaña de MainTabScreen) — carga los mismos
-  /// ReminderSettings reales desde ReminderService (no un valor por
-  /// defecto decorativo) y guarda/reprograma de verdad si se cambia algo
-  /// desde aquí, igual que MainTabScreen._onReminderToggle y afines, para
-  /// que este acceso secundario no quede roto en silencio.
-  Future<void> _openReminderFromSettings() async {
-    final settings = await _reminderService.loadSettings();
-    if (!mounted) return;
-    final predictor = CyclePredictor(
-      widget.data,
-      forceIrregular: _irregularCycleMode,
-      selfReportedCycleLen: _selfReportedCycleLen,
-      selfReportedPeriodLen: _selfReportedPeriodLen,
-    );
-    final hasPrediction = predictor.predictNextPeriod() != null;
-
-    Future<void> persist(ReminderSettings updated) async {
-      await _reminderService.saveSettings(updated);
-      _syncPeriodReminder(updated);
-    }
-
-    await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => ReminderScreen(
-          settings: settings,
-          hasPrediction: hasPrediction,
-          onPeriodToggle: (value) async {
-            final updated = settings.copyWith(enabled: value);
-            if (value) await _reminderService.requestPermissions();
-            await persist(updated);
-          },
-          onDaysChanged: (days) async {
-            final updated = settings.copyWith(daysBefore: days);
-            await persist(updated);
-          },
-          onOvulationToggle: (value) async {
-            final updated = settings.copyWith(ovulationEnabled: value);
-            if (value) await _reminderService.requestPermissions();
-            await persist(updated);
-          },
-          onFertileToggle: (value) async {
-            final updated = settings.copyWith(fertileEnabled: value);
-            if (value) await _reminderService.requestPermissions();
-            await persist(updated);
-          },
-          themeId: _themeId,
-          data: widget.data,
-          irregularCycleMode: _irregularCycleMode,
-          selfReportedCycleLen: _selfReportedCycleLen,
-          selfReportedPeriodLen: _selfReportedPeriodLen,
-          userGoal: _userGoal,
-        ),
-      ),
-    );
   }
 
   Future<void> _openAppleWatch() async {
@@ -1883,9 +1555,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _sectionTitle(String text) =>
-      Text(text, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.textPrimary));
-
   /// Círculo de color suave con un icono dentro — mismo lenguaje visual
   /// que el mockup generado con ChatGPT y aprobado por la usuaria (icono
   /// en un badge circular junto a cada título/fila, en vez de un icono
@@ -1924,66 +1593,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       decoration: BoxDecoration(color: color.withOpacity(0.14), shape: BoxShape.circle),
       alignment: Alignment.center,
       child: Icon(icon, color: color, size: 20),
-    );
-  }
-
-  /// Tarjeta blanca de esquinas muy redondeadas y sombra suave que agrupa
-  /// una sección completa de Configuración — rediseño de toda la pantalla
-  /// (antes: título de texto + filas sueltas cada una con su propia
-  /// sombra) aprobado por la usuaria a partir de un mockup generado con
-  /// ChatGPT para la sección Suscripción/Backup/Borrar y extendido aquí a
-  /// TODAS las secciones. Ninguna función/handler cambia: cada `child` es
-  /// el mismo contenido/lógica que ya existía, solo cambia el envoltorio
-  /// visual (más aire entre bloques, jerarquía por tarjetas).
-  Widget _sectionCard({
-    String? title,
-    String? subtitle,
-    IconData? titleIcon,
-    required Widget child,
-  }) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.textPrimary.withOpacity(0.07),
-            blurRadius: 24,
-            offset: const Offset(0, 10),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (title != null) ...[
-            Row(
-              children: [
-                if (titleIcon != null) ...[
-                  _iconBadge(titleIcon, Color(themeById(_themeId).primary)),
-                  const SizedBox(width: 10),
-                ],
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
-                      if (subtitle != null) ...[
-                        const SizedBox(height: 2),
-                        Text(subtitle, style: const TextStyle(fontSize: 11.5, color: AppColors.textMuted)),
-                      ],
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 14),
-          ],
-          child,
-        ],
-      ),
     );
   }
 
@@ -2035,30 +1644,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Divider(height: 1, color: AppColors.border.withOpacity(0.6)),
       );
 
-  /// Nombre traducido de cada paleta de calendario (kCalendarPalettes usa
-  /// nombres fijos en español en el catálogo, pensados solo como
-  /// referencia de código — este mapeo los conecta con los strings i18n
-  /// reales que sí respetan el idioma elegido en Configuración).
-  String _calendarPaletteName(AppStrings s, String paletteId) {
-    switch (paletteId) {
-      case 'vivid':
-        return s.calendarPaletteNameVivid;
-      case 'highContrast':
-        return s.calendarPaletteNameHighContrast;
-      case 'suave':
-        return s.calendarPaletteNameSuave;
-      case 'calido':
-        return s.calendarPaletteNameCalido;
-      case 'joya':
-        return s.calendarPaletteNameJoya;
-      case 'custom':
-        return s.calendarPaletteNameCustom;
-      case 'pastel':
-      default:
-        return s.calendarPaletteNamePastel;
-    }
-  }
-
   Widget _switchRow({
     required String title,
     required String subtitle,
@@ -2082,112 +1667,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  /// Fila de fecha (LMP para el modo embarazo), mismo patrón visual que
-  /// `_timeRow` justo debajo — muestra `chooseLabel` como placeholder
-  /// mientras no haya fecha elegida.
-  Widget _dateRow({
-    required String label,
-    required DateTime? value,
-    required String chooseLabel,
-    required VoidCallback onTap,
-  }) {
-    final text = value == null ? chooseLabel : '${value.day}/${value.month}/${value.year}';
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        // Antes llevaba borde plano; ahora sombra suave, mismo lenguaje de
-        // tarjeta elevada del rediseño aplicado en Inicio/Calendario.
-        decoration: BoxDecoration(
-          color: AppColors.background,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.textPrimary.withOpacity(0.16),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(label, style: const TextStyle(fontSize: 12, color: AppColors.textMuted)),
-            Text(text, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _timeRow({required String label, required String time, required VoidCallback onTap}) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        // Antes llevaba borde plano; ahora sombra suave, mismo lenguaje de
-        // tarjeta elevada del rediseño aplicado en Inicio/Calendario.
-        decoration: BoxDecoration(
-          color: AppColors.background,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.textPrimary.withOpacity(0.16),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(label, style: const TextStyle(fontSize: 12, color: AppColors.textMuted)),
-            Text(time, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// Fila de navegación (icono + texto + chevron), mismo patrón que
-  /// `_buildReminderSection` de HealthMenuScreen — usada para todos los
-  /// accesos/placeholders nuevos de esta reorganización (Invitar pareja,
-  /// Recordatorio, Apple Watch, Widget, anuncios, informe de errores,
-  /// puntúanos). "Seguir ciclos de otros", "Foro" y "Ayúdanos con la
-  /// traducción" se quitaron (eran solo placeholders de "próximamente",
-  /// sin función real).
-  Widget _navRow({required IconData icon, required String label, required VoidCallback onTap}) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(12),
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-        // Antes llevaba borde plano; ahora sombra suave, mismo lenguaje de
-        // tarjeta elevada del rediseño aplicado en Inicio/Calendario.
-        decoration: BoxDecoration(
-          color: AppColors.background,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.textPrimary.withOpacity(0.16),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Icon(icon, color: Color(themeById(_themeId).primary)),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
-            ),
-            const Icon(Icons.chevron_right, color: AppColors.textMuted),
-          ],
-        ),
-      ),
-    );
-  }
 }
 
 /// 3 puntos de color (Periodo / borde de Previsto / borde de Fértil) que

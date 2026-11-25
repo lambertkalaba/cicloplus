@@ -19,7 +19,7 @@ class AppColors {
   // sobre fondos ya rosados; el verde no se usa en ningún otro estado
   // (período/predicción/fértil/ovulación), así que siempre destaca.
   static const today = Color(0xFF2F9E44);
-  static const background = Color(0xFFFFF5F7);
+  static const background = Color(0xFFFFFAFB);
   static const cardBackground = Color(0xFFFFFFFF);
   static const textPrimary = Color(0xFF3D2436);
   static const textMuted = Color(0xFF9B8290);

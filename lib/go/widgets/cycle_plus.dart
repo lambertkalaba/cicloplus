@@ -25,14 +25,15 @@ class CyclePlus {
     // "Mi ciclo es irregular" (Configuración > Configuración de predicción)
     // también da un margen de fechas, como el modo perimenopausia.
     if (s.perimenopause || CicloData.instance.irregular) {
+      // Siempre algo más amplio que el margen "normal", para que activar
+      // el interruptor se note aunque los ciclos ya varíen un poco.
       if (recent.length < 2) return 5;
       final r = recent.reduce(math.max) - recent.reduce(math.min);
-      return (r ~/ 2).clamp(4, 10);
+      return (r ~/ 2 + 1).clamp(4, 10);
     }
-    if (recent.length < 3) return null;
-    final r = recent.reduce(math.max) - recent.reduce(math.min);
-    if (r <= 6) return null;
-    return (r ~/ 2).clamp(2, 8);
+    // Interruptor apagado: fecha exacta, como promete el texto del ajuste
+    // ("Te mostramos un margen de fechas en vez de un día exacto").
+    return null;
   }
 
   /// Texto "Periodo entre el X y el Y" si el ciclo es irregular.
@@ -154,7 +155,7 @@ class QuickLogRow extends StatelessWidget {
         Row(children: [
           btn('🩸', inPeriod ? tr('Con regla', 'On period') : tr('Me vino', 'Started'), inPeriod, () {
             if (inPeriod) {
-              s.updateLog(today, (l) => l.flow = 0);
+              s.markPeriodEnded().then((_) => s.updateLog(today, (l) => l.flow = 0));
             } else if (s.infoFor(addDays(today, -1)).period) {
               s.updateLog(today, (l) => l.flow = 2);
             } else {

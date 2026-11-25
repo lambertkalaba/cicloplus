@@ -119,8 +119,6 @@ class _ReminderScreenState extends State<ReminderScreen> {
 
   bool _extrasLoading = true;
 
-  bool get _anyEnabled => _settings.enabled || _settings.ovulationEnabled || _settings.fertileEnabled;
-
   CyclePredictor get _predictor => CyclePredictor(
         widget.data,
         forceIrregular: widget.irregularCycleMode,

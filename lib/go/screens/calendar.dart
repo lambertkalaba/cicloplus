@@ -8,7 +8,6 @@ import '../data/store.dart';
 import '../strings.dart';
 import '../widgets/ui.dart';
 import '../widgets/cycle_plus.dart' show CyclePlus;
-import 'extras.dart';
 import 'more.dart';
 
 /// Pestaña Calendario (vista Mes / Año).
@@ -288,14 +287,30 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 ]),
               ),
               Switch(
-                value: CicloData.instance.irregular,
+                // El modo perimenopausia también da margen de fechas: el
+                // interruptor lo refleja para que nunca parezca "no hacer nada".
+                value: CicloData.instance.irregular || AppStore.instance.perimenopause,
                 activeColor: Colors.white,
                 activeTrackColor: const Color(0xFF2FB45A),
                 onChanged: (v) async {
                   CicloData.instance.irregular = v;
+                  final periOff = !v && AppStore.instance.perimenopause;
+                  if (periOff) AppStore.instance.perimenopause = false;
                   setState(() {});
+                  final messenger = ScaffoldMessenger.maybeOf(context);
                   await SettingsService().saveIrregularCycleMode(v);
                   await AppStore.instance.commit();
+                  final label = CyclePlus.rangeLabel();
+                  messenger?.hideCurrentSnackBar();
+                  messenger?.showSnackBar(SnackBar(
+                    content: Text(v
+                        ? (label ?? tr('Ciclo irregular activado', 'Irregular cycle on'))
+                        : periOff
+                            ? tr('Modo perimenopausia desactivado: predicción con fecha exacta',
+                                'Perimenopause mode off: prediction with exact date')
+                            : tr('Predicción con fecha exacta', 'Prediction with exact date')),
+                    duration: const Duration(seconds: 2),
+                  ));
                 },
               ),
             ]),
@@ -547,15 +562,6 @@ class MonthGrid extends StatelessWidget {
           ),
       ],
     );
-  }
-
-  /// Tipo de banda del día: periodo, previsto, fértil o nada.
-  static String? _kind(AppStore s, DateTime d) {
-    final i = s.infoFor(d);
-    if (i.period) return 'period';
-    if (i.predictedPeriod) return 'pred';
-    if (i.fertile || i.ovulation) return 'fertile';
-    return null;
   }
 
   /// Ciclo irregular o perimenopausia: días del margen alrededor de la
@@ -812,35 +818,6 @@ class _MiniMonth extends StatelessWidget {
           MonthGrid(month: month, mini: true),
         ],
       ),
-    );
-  }
-}
-
-class _Dot extends StatelessWidget {
-  final Color? fill;
-  final Color? ring;
-  final bool dashed;
-  const _Dot({this.fill, this.ring, this.dashed = false});
-
-  @override
-  Widget build(BuildContext context) {
-    final c = Container(
-      width: 12,
-      height: 12,
-      decoration: BoxDecoration(
-        color: fill,
-        shape: BoxShape.circle,
-        border: ring != null ? Border.all(color: ring!, width: 2) : null,
-      ),
-    );
-    if (!dashed) return c;
-    return CustomPaint(
-      foregroundPainter: DashedBorderPainter(
-        color: C.red,
-        radius: 6,
-        dash: 2.5,
-      ),
-      child: c,
     );
   }
 }

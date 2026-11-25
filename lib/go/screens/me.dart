@@ -11,7 +11,6 @@ import 'more.dart';
 import 'fertility.dart';
 import 'traditions.dart';
 import '../widgets/ciclo_dialog.dart';
-import '../widgets/premium.dart' show Premium;
 
 /// Pestaña Yo (igual que la maqueta).
 class MeScreen extends StatelessWidget {

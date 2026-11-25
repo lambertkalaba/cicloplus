@@ -7,6 +7,7 @@ import '../screens/review_screen.dart';
 import '../screens/settings_screen.dart';
 import '../screens/stats_screen.dart';
 import '../screens/today_screen.dart';
+import '../services/cycle_predictor.dart';
 import '../services/settings_service.dart';
 import 'cicloplus_links.dart';
 import 'data/store.dart';
@@ -34,6 +35,8 @@ class CicloData extends ChangeNotifier {
       };
 
   Future<void> load() async {
+    CyclePredictor.overrideCycleLen = () => AppStore.instance.avgCycle;
+    CyclePredictor.overridePeriodLen = () => AppStore.instance.avgPeriod;
     final s = SettingsService();
     try {
       pregnancy = await s.loadPregnancySettings();

@@ -75,21 +75,6 @@ class QuickSummaryScreen extends StatelessWidget {
     }
   }
 
-  IconData _icon() {
-    switch (summaryKey) {
-      case 'periodCycle':
-        return Icons.calendar_month;
-      case 'symptoms':
-        return Icons.insights;
-      case 'ovulationTest':
-        return Icons.science_outlined;
-      case 'fertility':
-        return Icons.spa_outlined;
-      default:
-        return Icons.info_outline;
-    }
-  }
-
   String _buttonLabel(AppStrings s) {
     switch (summaryKey) {
       case 'periodCycle':

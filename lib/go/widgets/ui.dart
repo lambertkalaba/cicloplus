@@ -157,7 +157,7 @@ class PinkBackground extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     decoration: BoxDecoration(
       gradient: LinearGradient(
-        colors: [C.t(0xFFFCE6F0), C.t(0xFFF9D9E7), C.t(0xFFFBE3EE)],
+        colors: [C.t(0xFFFFFAFC), C.t(0xFFFEF4F8), C.t(0xFFFFF8FB)],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
       ),

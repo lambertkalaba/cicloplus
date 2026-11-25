@@ -4,17 +4,14 @@ import 'package:flutter/services.dart';
 import '../data/store.dart';
 import '../strings.dart';
 import '../cicloplus_host.dart';
-import '../cicloplus_links.dart';
 import '../widgets/avatar_maker.dart';
 import '../widgets/ui.dart';
 import 'calendar.dart';
 import 'extras.dart';
 import 'me.dart';
-import 'more.dart';
 import 'register.dart';
 import 'michi_search.dart';
 import 'reminders.dart';
-import 'today.dart';
 
 /// Estructura principal: cabecera verde, pestañas y botón + central.
 class Shell extends StatefulWidget {

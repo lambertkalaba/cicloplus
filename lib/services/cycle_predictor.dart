@@ -177,7 +177,14 @@ class CyclePredictor {
     return _rawCycleLengths().where((d) => d > 15 && d < 60).toList();
   }
 
+  /// Si el diseño nuevo (AppStore) está activo, sus duraciones mandan en
+  /// todas las pantallas, para que Hoy, Calendario e informes coincidan.
+  static int Function()? overrideCycleLen;
+  static int Function()? overridePeriodLen;
+
   int getAvgCycleLength() {
+    final o = overrideCycleLen?.call();
+    if (o != null && o > 0) return o;
     final cycles = getCycles();
     // Sin al menos 2 ciclos registrados no hay forma de promediar nada
     // real todavía — en vez de asumir el genérico de 28 días, se usa la
@@ -239,6 +246,8 @@ class CyclePredictor {
   }
 
   int getAvgPeriodLength() {
+    final o = overridePeriodLen?.call();
+    if (o != null && o > 0) return o;
     final cycles = getCycles();
     // Igual que en getAvgCycleLength(): sin ningún periodo registrado
     // todavía, se prioriza lo autoreportado por la usuaria sobre el

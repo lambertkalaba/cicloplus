@@ -8,7 +8,6 @@ import '../strings.dart';
 import '../widgets/ui.dart';
 import 'more.dart';
 import '../widgets/ciclo_date_picker.dart';
-import '../widgets/premium.dart' show Premium;
 
 /// Bienvenida: una pregunta por pantalla (diseño hecho con ChatGPT).
 /// Las preguntas dependen del objetivo y casi todas se pueden saltar con

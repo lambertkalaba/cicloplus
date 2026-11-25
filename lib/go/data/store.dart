@@ -262,6 +262,9 @@ class AppStore extends ChangeNotifier {
   int defaultPeriod = 5;
   /// Días que pone la usuaria a mano (0 = la app aprende de sus registros).
   int manualCycle = 0;
+  /// "Aprender de mis registros": si está apagado, siempre se usan las
+  /// duraciones habituales que puso la usuaria.
+  bool learnFromLogs = true;
   int manualPeriod = 0;
   int waterGoal = 8;
   bool onboarded = false;
@@ -432,6 +435,7 @@ class AppStore extends ChangeNotifier {
     defaultPeriod = p.getInt('defaultPeriod') ?? 5;
     manualCycle = p.getInt('manualCycle') ?? 0;
     manualPeriod = p.getInt('manualPeriod') ?? 0;
+    learnFromLogs = p.getBool('learnFromLogs') ?? true;
     waterGoal = p.getInt('waterGoal') ?? 8;
     onboarded = p.getBool('onboarded') ?? false;
     showSex = p.getBool('showSex') ?? true;
@@ -456,8 +460,46 @@ class AppStore extends ChangeNotifier {
         reminders = ReminderSettings.fromJson(jsonDecode(r) as Map<String, dynamic>);
       } catch (_) {}
     }
+    _endedStarts = (p.getStringList('periodEndedStarts') ?? []).toSet();
     _recompute();
+    await ensureOpenPeriod();
     notifyListeners();
+  }
+
+  /// Inicios de regla que la usuaria cerró a mano ("Se me ha terminado").
+  Set<String> _endedStarts = {};
+
+  /// Marca como terminada la regla en curso (o la que empieza en [start]).
+  Future<void> markPeriodEnded([DateTime? start]) async {
+    final st = start ?? lastStart;
+    if (st == null) return;
+    _endedStarts.add(dayKey(st));
+    await (_prefs ?? await SharedPreferences.getInstance()).setStringList('periodEndedStarts', _endedStarts.toList());
+  }
+
+  /// Con "Me vino" solo se apunta el primer día. Como en otras apps de
+  /// ciclo, mientras no diga "Se me ha terminado", la regla en curso sigue
+  /// sumando días hasta su duración habitual (así la duración media no se
+  /// queda en 1–2 días por no apuntar cada día).
+  Future<void> ensureOpenPeriod() async {
+    final st = lastStart;
+    if (st == null || pregnant) return;
+    if (_endedStarts.contains(dayKey(st))) return;
+    final today = dateOnly(DateTime.now());
+    final len = avgPeriod;
+    if (daysBetween(st, today) >= len) return; // ya pasó: no tocamos el pasado
+    var changed = false;
+    for (var i = 1; i < len; i++) {
+      final d = addDays(st, i);
+      if (d.isAfter(today)) break;
+      final l = logFor(d);
+      if (l.flow == 0) {
+        l.flow = i < 2 ? 3 : (i < len - 1 ? 2 : 1);
+        logs[dayKey(d)] = l;
+        changed = true;
+      }
+    }
+    if (changed) await commit();
   }
 
   Future<void> _save() async {
@@ -494,6 +536,7 @@ class AppStore extends ChangeNotifier {
     await p.setInt('defaultPeriod', defaultPeriod);
     await p.setInt('manualCycle', manualCycle);
     await p.setInt('manualPeriod', manualPeriod);
+    await p.setBool('learnFromLogs', learnFromLogs);
     await p.setInt('waterGoal', waterGoal);
     await p.setBool('onboarded', onboarded);
     await p.setBool('showSex', showSex);
@@ -527,6 +570,15 @@ class AppStore extends ChangeNotifier {
 
   Future<void> setLog(DateTime d, DayLog log) async {
     final k = dayKey(d);
+    // Si quita la regla de un día de la regla en curso, es que ya terminó:
+    // no la volvemos a alargar sola.
+    if ((logs[k]?.flow ?? 0) > 0 && log.flow == 0) {
+      final st = lastStart;
+      if (st != null && !dateOnly(d).isBefore(st)) {
+        _endedStarts.add(dayKey(st));
+        await (_prefs ?? await SharedPreferences.getInstance()).setStringList('periodEndedStarts', _endedStarts.toList());
+      }
+    }
     if (log.isEmpty) {
       logs.remove(k);
     } else {
@@ -544,6 +596,7 @@ class AppStore extends ChangeNotifier {
   /// Marca un periodo completo empezando en [start].
   Future<void> addPeriod(DateTime start, {int? length}) async {
     final len = length ?? avgPeriod;
+    _endedStarts.remove(dayKey(dateOnly(start)));
     for (var i = 0; i < len; i++) {
       final d = addDays(start, i);
       if (d.isAfter(dateOnly(DateTime.now()))) break;
@@ -571,6 +624,8 @@ class AppStore extends ChangeNotifier {
 
   Future<void> resetAll() async {
     logs.clear();
+    _endedStarts = {};
+    await (_prefs ?? await SharedPreferences.getInstance()).remove('periodEndedStarts');
     name = '';
     photoName = null;
     avatarId = '';
@@ -582,6 +637,7 @@ class AppStore extends ChangeNotifier {
     defaultPeriod = 5;
     manualCycle = 0;
     manualPeriod = 0;
+    learnFromLogs = true;
     waterGoal = 8;
     onboarded = false;
     showSex = true;
@@ -635,25 +691,67 @@ class AppStore extends ChangeNotifier {
     final out = <int>[];
     for (var i = 1; i < _starts.length; i++) {
       final len = daysBetween(_starts[i - 1], _starts[i]);
-      if (len >= 15 && len <= 60) out.add(len);
+      // Menos de 20 días casi siempre es un manchado entre reglas o un
+      // registro de prueba, no un ciclo real: no debe cambiar la media.
+      if (len >= 20 && len <= 60) out.add(len);
     }
     return out;
   }
 
   List<int> get periodLengths => _starts.map((s) => _periodLengths[s] ?? 1).toList();
 
+  /// Ciclos/periodos registrados que hacen falta para dejar de usar las
+  /// "duraciones habituales" que la usuaria puso a mano.
+  static const int minLogsToLearn = 3;
+
+  /// Duraciones de regla ya terminadas (la que sigue en curso no cuenta:
+  /// si hoy es el día 2, aún no sabemos cuánto durará).
+  List<int> get _finishedPeriodLengths {
+    final today = dateOnly(DateTime.now());
+    final out = <int>[];
+    for (final st in _starts) {
+      final len = _periodLengths[st] ?? 1;
+      final lastDay = addDays(st, len - 1);
+      if (daysBetween(lastDay, today) <= 1) continue; // en curso
+      // 1–2 días suele ser manchado o una regla sin apuntar entera.
+      if (len >= 3 && len <= 12) out.add(len);
+    }
+    return out;
+  }
+
+  /// La app va aprendiendo poco a poco: sin registros usa tu ajuste; con 1
+  /// y 2 registros mezcla tu ajuste con lo registrado (cada vez pesa más
+  /// lo registrado) y desde el 3.º usa solo tus registros.
+  static int _blend(int setting, List<int> values, {required int outlierDays}) {
+    if (values.isEmpty) return setting;
+    final learned = _learned(values, outlierDays: outlierDays);
+    final n = values.length;
+    if (n >= minLogsToLearn) return learned;
+    return ((setting * (minLogsToLearn - n) + learned * n) / minLogsToLearn).round();
+  }
+
+  /// Cuántos ciclos/reglas válidos lleva aprendidos (para enseñarlo).
+  int get learnedCycles => learnFromLogs ? cycleLengths.length : 0;
+  int get learnedPeriods => learnFromLogs ? _finishedPeriodLengths.length : 0;
+
+  /// true si la duración del ciclo sale de los registros (y no del ajuste).
+  bool get cycleFromLogs => manualCycle == 0 && learnFromLogs && cycleLengths.length >= minLogsToLearn;
+  bool get periodFromLogs => manualPeriod == 0 && learnFromLogs && _finishedPeriodLengths.length >= minLogsToLearn;
+
   int get avgCycle {
     if (manualCycle > 0) return manualCycle;
     final c = cycleLengths;
-    if (c.isEmpty) return defaultCycle;
-    return _learned(c, outlierDays: 10);
+    // Con pocos registros manda lo que la usuaria puso en "Mis duraciones
+    // habituales" (un solo mes raro no debe cambiarle todo el calendario).
+    if (!learnFromLogs) return defaultCycle;
+    return _blend(defaultCycle, c, outlierDays: 10);
   }
 
   int get avgPeriod {
     if (manualPeriod > 0) return manualPeriod;
-    final p = periodLengths.where((l) => l >= 2 && l <= 12).toList();
-    if (p.isEmpty) return defaultPeriod;
-    return _learned(p, outlierDays: 4);
+    final p = _finishedPeriodLengths;
+    if (!learnFromLogs) return defaultPeriod;
+    return _blend(defaultPeriod, p, outlierDays: 4);
   }
 
   /// Aprende de la propia usuaria: usa sus últimos 6 valores, da más peso a
@@ -755,7 +853,17 @@ class AppStore extends ChangeNotifier {
 
   /// Día de ovulación del ciclo que empieza en [start]: el del test de LH
   /// si lo hay, si no ciclo medio − 14.
-  DateTime ovulationFor(DateTime start) => lhOvulationFor(start) ?? addDays(start, avgCycle - 14);
+  DateTime ovulationFor(DateTime start) => lhOvulationFor(start) ?? addDays(start, ovulationOffset);
+
+  /// Días desde el inicio de la regla hasta la ovulación estimada: ciclo − 14
+  /// (fase lútea típica), pero nunca dentro de la regla en ciclos muy cortos.
+  int get ovulationOffset {
+    final o = avgCycle - 14;
+    final minO = avgPeriod + 1;
+    final maxO = avgCycle - 3;
+    if (maxO <= minO) return math.max(o, 0);
+    return o.clamp(minO, maxO).toInt();
+  }
 
   DateTime? get nextOvulation {
     final today = dateOnly(DateTime.now());
@@ -765,7 +873,7 @@ class AppStore extends ChangeNotifier {
     if (!cur.isBefore(today)) return cur;
     final p = predictedStarts(2);
     for (final s in p) {
-      final o = addDays(s, avgCycle - 14);
+      final o = addDays(s, ovulationOffset);
       if (!o.isBefore(today)) return o;
     }
     return null;
@@ -805,7 +913,13 @@ class AppStore extends ChangeNotifier {
       return DayInfo(period: period);
     }
     var predicted = false;
-    if (!period && !day.isBefore(today)) {
+    // Días que faltan de la regla en curso (aún sin "Se me ha terminado").
+    final ls = lastStart;
+    if (!period && day.isAfter(today) && ls != null && !_endedStarts.contains(dayKey(ls)) && isPeriodDay(today)) {
+      final diff = daysBetween(ls, day);
+      if (diff >= 0 && diff < avgPeriod) predicted = true;
+    }
+    if (!predicted && !period && !day.isBefore(today)) {
       for (final s in predictedStarts()) {
         final diff = daysBetween(s, day);
         if (diff >= 0 && diff < avgPeriod) {

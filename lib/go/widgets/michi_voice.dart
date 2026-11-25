@@ -34,8 +34,10 @@ class MichiVoice {
     if (_ready) return;
     _ready = true;
     try {
-      await _tts.setPitch(1.75);
-      await _tts.setSpeechRate(0.47);
+      // Antes 1.75: tan agudo sonaba a robot. Un poco más agudo que una voz
+      // normal queda simpático sin distorsionarse.
+      await _tts.setPitch(1.25);
+      await _tts.setSpeechRate(0.5);
       await _tts.setVolume(1.0);
       await _tts.awaitSpeakCompletion(false);
     } catch (_) {}
@@ -66,9 +68,44 @@ class MichiVoice {
         try {
           await _tts.setLanguage(loc);
         } catch (_) {}
+        await _pickBestVoice(loc);
       }
       await _tts.stop();
       await _tts.speak(t);
+    } catch (_) {}
+  }
+
+  /// Elige la voz más natural instalada para ese idioma (las "network" y de
+  /// calidad alta de Google suenan mucho menos robóticas que la básica).
+  static Future<void> _pickBestVoice(String loc) async {
+    try {
+      final raw = await _tts.getVoices;
+      if (raw is! List) return;
+      final want = loc.toLowerCase().replaceAll('_', '-');
+      final lang = want.split('-').first;
+      Map<String, String>? best;
+      var bestScore = -1;
+      for (final v in raw) {
+        if (v is! Map) continue;
+        final name = '${v['name'] ?? ''}';
+        final locale = '${v['locale'] ?? ''}'.toLowerCase().replaceAll('_', '-');
+        if (name.isEmpty || !locale.startsWith(lang)) continue;
+        var score = 0;
+        if (locale == want) score += 100;
+        final q = int.tryParse('${v['quality'] ?? ''}') ?? 300;
+        score += q ~/ 10; // 500 = muy alta
+        final n = name.toLowerCase();
+        if (n.contains('network')) score += 20;
+        if (n.contains('enhanced') || n.contains('premium') || n.contains('neural')) score += 30;
+        if (n.contains('female') || n.contains('mujer')) score += 10;
+        if (n.contains('male') && !n.contains('female')) score -= 10;
+        if ('${v['network_required']}' == '1' || '${v['network_required']}' == 'true') score -= 5;
+        if (score > bestScore) {
+          bestScore = score;
+          best = {'name': name, 'locale': '${v['locale']}'};
+        }
+      }
+      if (best != null) await _tts.setVoice(best);
     } catch (_) {}
   }
 
