@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_tts/flutter_tts.dart';
 
 import '../data/store.dart';
+import 'michi_sound.dart';
 import '../strings.dart';
 
 /// La voz de Michi: lee en voz alta sus frases y chistes en el idioma de la
@@ -28,7 +29,11 @@ class MichiVoice {
     'wo': 'fr-FR',
   };
 
-  static bool get enabled => AppStore.instance.showMichi && AppStore.instance.michiVoice;
+  /// Voz desactivada de momento (sonaba mal): Michi solo maúlla. Para
+  /// volver a activarla, poner esto a true.
+  static const bool kVoiceAvailable = false;
+
+  static bool get enabled => kVoiceAvailable && AppStore.instance.showMichi && AppStore.instance.michiVoice;
 
   static Future<void> _init() async {
     if (_ready) return;
@@ -56,6 +61,11 @@ class MichiVoice {
 
   /// Michi dice [text] (si la voz está activada).
   static Future<void> say(String text) async {
+    if (!kVoiceAvailable) {
+      // En vez de hablar, un "miau".
+      MichiSound.meow();
+      return;
+    }
     if (!enabled) return;
     final t = _clean(text);
     if (t.isEmpty) return;

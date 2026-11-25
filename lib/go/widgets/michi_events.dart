@@ -12,6 +12,7 @@ import '../services/traditions.dart';
 import '../screens/traditions.dart' show TraditionsScreen;
 import '../screens/michi_more.dart' show MichiCounters;
 import 'michi_sound.dart';
+import 'michi_voice.dart';
 import 'ui.dart';
 import 'premium.dart' show Premium;
 
@@ -594,7 +595,7 @@ class MichiSettings extends StatelessWidget {
                 s.commit();
               },
             ),
-            SwitchListTile(
+            if (MichiVoice.kVoiceAvailable) SwitchListTile(
               contentPadding: EdgeInsets.zero,
               secondary: const Text('🗣️', style: TextStyle(fontSize: 22)),
               title: Text(tr('Voz de Michi', "Michi's voice"), style: const TextStyle(fontWeight: FontWeight.w800)),
