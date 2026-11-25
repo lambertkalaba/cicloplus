@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../widgets/ciclo_header.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
@@ -42,9 +43,15 @@ class _PaywallScreenState extends State<PaywallScreen> {
 
   Future<void> _loadPackages() async {
     // Solo plan mensual y anual (sin semanal ni de por vida).
-    final packages = (await _subscriptionService.getAvailablePackages())
-        .where((p) => !_isWeekly(p) && !_isLifetime(p))
-        .toList();
+    // Si se abre justo al arrancar la app, RevenueCat puede estar aún
+    // conectándose en segundo plano: se reintenta unos segundos antes de
+    // decir que no hay planes.
+    var all = await _subscriptionService.getAvailablePackages();
+    for (var i = 0; i < 4 && all.isEmpty && mounted; i++) {
+      await Future<void>.delayed(const Duration(milliseconds: 1500));
+      all = await _subscriptionService.getAvailablePackages();
+    }
+    final packages = all.where((p) => !_isWeekly(p) && !_isLifetime(p)).toList();
     if (!mounted) return;
     setState(() {
       _packages = packages;
@@ -91,6 +98,12 @@ class _PaywallScreenState extends State<PaywallScreen> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(s.paywallPurchaseSuccess)));
         Navigator.of(context).pop(true);
       }
+    } on PlatformException catch (e) {
+      if (!mounted) return;
+      // Si la persona cierra la ventana de Google Play, no es un error.
+      if (PurchasesErrorHelper.getErrorCode(e) == PurchasesErrorCode.purchaseCancelledError) return;
+      final s = AppStrings.of(context);
+      setState(() => _errorMessage = s.paywallPurchaseError);
     } catch (_) {
       if (!mounted) return;
       final s = AppStrings.of(context);
